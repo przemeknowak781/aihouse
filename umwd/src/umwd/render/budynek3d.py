@@ -1097,6 +1097,27 @@ class Materialy:
         nb.l(nb.math('SUBTRACT', 1.0, wn), b.inputs['Metallic'])
         nb.output(b)
 
+    def m_wn_tynk(self, m):
+        """Tynk wapienny zacierany (Hala Obywatelska): ciepła złamana biel, plamistość i drobna faktura."""
+        nb = NodeBuilder(m)
+        pos = nb.n('ShaderNodeNewGeometry').outputs['Position']
+        n1 = nb.n('ShaderNodeTexNoise', Scale=1.6, Detail=5.0, Roughness=0.6)
+        nb.l(pos, n1.inputs['Vector'])
+        n2 = nb.n('ShaderNodeTexNoise', Scale=38.0, Detail=6.0, Roughness=0.7)
+        nb.l(pos, n2.inputs['Vector'])
+        col = nb.mix(n1.outputs['Fac'], (0.66, 0.62, 0.55), (0.78, 0.74, 0.67))
+        col = nb.mix(1.0, col, nb.math('ADD', 0.93, nb.math('MULTIPLY', n2.outputs['Fac'], 0.12)), blend='MULTIPLY')
+        b = nb.n('ShaderNodeBsdfPrincipled', Roughness=0.9)
+        nb.l(col, b.inputs['Base Color'])
+        bm = nb.n('ShaderNodeBump', Strength=0.18, Distance=0.004)
+        nb.l(n2.outputs['Fac'], bm.inputs['Height'])
+        nb.l(bm.outputs[0], b.inputs['Normal'])
+        nb.output(b)
+
+    def m_mosiadz(self, m):
+        """Mosiądz szczotkowany – litery systemu informacji, listwy."""
+        self._proste(m, (0.62, 0.43, 0.19), 0.32, metal=1.0)
+
     def m_wn_dotyk(self, m):
         """Ścieżka dotykowa: pasy prowadzące z ryflami (granit ciemny płomieniowany, kontrast luminancji ≥ 0,5)."""
         nb = NodeBuilder(m)
@@ -1288,16 +1309,17 @@ class Materialy:
         nb.output(mx)
 
     def m_ludzie(self, m, wariant='0'):
-        """Sylwetki ludzi: strefy wg wysokości względnej ``fv`` (buty, spodnie, okrycie od progu ``fu``, skóra,
-        włosy); barwy okryć jesiennych losowane per obiekt (Object Info → Random)."""
+        """Sylwetki ludzi: strefy wg wysokości względnej ``fv`` (buty, spodnie, okrycie od progu ``fu``, szal,
+        skóra, włosy), dłonie ``sk``; barwy okryć stonowane (czerń, granat, grafit, wielbłądzi, oliwka, bordo,
+        złamana biel, rdza) losowane per obiekt (Object Info → Random); szum tkaniny łamie jednolite plamy."""
         nb = NodeBuilder(m)
         oi = nb.n('ShaderNodeObjectInfo')
         rnd = oi.outputs['Random']
         r1 = nb.n('ShaderNodeValToRGB')
         r1.color_ramp.interpolation = 'CONSTANT'
-        pal = [(0.0, (0.030, 0.034, 0.050)), (0.12, (0.20, 0.035, 0.03)), (0.24, (0.36, 0.22, 0.09)),
-               (0.36, (0.035, 0.05, 0.10)), (0.48, (0.09, 0.10, 0.05)), (0.58, (0.40, 0.27, 0.05)),
-               (0.68, (0.13, 0.13, 0.14)), (0.78, (0.25, 0.10, 0.06)), (0.88, (0.50, 0.46, 0.40))]
+        pal = [(0.0, (0.022, 0.023, 0.027)), (0.13, (0.024, 0.030, 0.055)), (0.25, (0.070, 0.068, 0.066)),
+               (0.37, (0.24, 0.15, 0.075)), (0.49, (0.060, 0.065, 0.040)), (0.60, (0.13, 0.030, 0.030)),
+               (0.70, (0.36, 0.34, 0.30)), (0.80, (0.20, 0.085, 0.040)), (0.90, (0.11, 0.12, 0.13))]
         els = r1.color_ramp.elements
         els[0].position, els[0].color = pal[0][0], (*pal[0][1], 1)
         els[1].position, els[1].color = pal[-1][0], (*pal[-1][1], 1)
@@ -1305,23 +1327,38 @@ class Materialy:
             e = els.new(pp)
             e.color = (*c, 1)
         nb.l(rnd, r1.inputs['Fac'])
-        okr = r1.outputs['Color'] if wariant != 'okrycie_jasne' else self._rgb(nb, (0.52, 0.31, 0.08))
+        okr = r1.outputs['Color'] if wariant != 'okrycie_jasne' else self._rgb(nb, (0.30, 0.075, 0.045))
         f7 = nb.math('FRACT', nb.math('MULTIPLY', rnd, 7.31))
         f13 = nb.math('FRACT', nb.math('MULTIPLY', rnd, 13.7))
         f5 = nb.math('FRACT', nb.math('MULTIPLY', rnd, 5.13))
-        spodnie = nb.mix(f7, (0.02, 0.022, 0.03), (0.06, 0.08, 0.13))
-        skora = nb.mix(f13, (0.30, 0.17, 0.11), (0.62, 0.43, 0.32))
-        wlosy = nb.mix(f5, (0.018, 0.014, 0.012), (0.33, 0.24, 0.14))
+        f3 = nb.math('FRACT', nb.math('MULTIPLY', rnd, 3.71))
+        spodnie = nb.mix(f7, (0.018, 0.019, 0.024), (0.07, 0.075, 0.09))
+        skora = nb.mix(f13, (0.28, 0.16, 0.10), (0.58, 0.40, 0.30))
+        wlosy = nb.mix(f5, (0.016, 0.012, 0.010), (0.30, 0.21, 0.12))
+        szal = nb.mix(f3, (0.30, 0.20, 0.13), (0.12, 0.03, 0.03))
         hz = self._attr(nb, 'fv')
         prog = self._attr(nb, 'fu')
+        sk = self._attr(nb, 'sk')
         c = nb.mix(nb.math('GREATER_THAN', hz, 0.035), (0.02, 0.018, 0.017), spodnie)
         c = nb.mix(nb.math('GREATER_THAN', hz, prog), c, okr)
+        ma_szal = nb.math('MULTIPLY', nb.math('GREATER_THAN', f3, 0.45),
+                          nb.math('MULTIPLY', nb.math('GREATER_THAN', hz, 0.80), nb.math('LESS_THAN', hz, 0.845)))
+        c = nb.mix(ma_szal, c, szal)
         c = nb.mix(nb.math('GREATER_THAN', hz, 0.862), c, skora)
         c = nb.mix(nb.math('GREATER_THAN', hz, 0.935), c, wlosy)
-        b = nb.n('ShaderNodeBsdfPrincipled', Roughness=0.8)
+        c = nb.mix(nb.math('GREATER_THAN', sk, 0.5), c, skora)
+        # szum tkaniny (fałdy, cienie) – ±12 %
+        pos = nb.n('ShaderNodeTexCoord').outputs['Object']
+        nz = nb.n('ShaderNodeTexNoise', Scale=9.0, Detail=3.0)
+        nb.l(pos, nz.inputs['Vector'])
+        c = nb.mix(1.0, c, nb.math('ADD', 0.88, nb.math('MULTIPLY', nz.outputs['Fac'], 0.24)), blend='MULTIPLY')
+        b = nb.n('ShaderNodeBsdfPrincipled', Roughness=0.82)
         nb.l(c, b.inputs['Base Color'])
-        b.inputs['Sheen Weight'].default_value = 0.4
+        b.inputs['Sheen Weight'].default_value = 0.35
         b.inputs['Sheen Roughness'].default_value = 0.5
+        bm = nb.n('ShaderNodeBump', Strength=0.25, Distance=0.01)
+        nb.l(nz.outputs['Fac'], bm.inputs['Height'])
+        nb.l(bm.outputs[0], b.inputs['Normal'])
         nb.output(b)
 
 

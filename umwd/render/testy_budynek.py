@@ -65,8 +65,8 @@ KOREKTY = {
     # Z punktu koncepcji (na osi) przeszklenie ogrodowe widać tylko przez szczelinę – stanowisko przesunięto
     # o 3 m w prawo od osi (a = 3 m od drzwi Bramy Mostowej), kadr na środek ściany ogrodowej holu (x 87,3–94,9):
     # całe przeszklenie ogrodowe i drzewa ogrodu widoczne przez przejście.
-    'W6': dict(kamera_e_n_z=(97.73, 70.59, 1.60), cel_e_n_z=(91.10, 45.30, 1.75), wnetrze=True, preset='wnetrze',
-               ekspozycja=-0.9, plik='W6_hol_test.jpg'),
+    'W6': dict(kamera_e_n_z=(97.73, 70.59, 1.60), cel_e_n_z=(91.10, 45.30, 1.60), lens_mm=20, shift_y=0.05,
+               wnetrze=True, preset='wnetrze', ekspozycja=-0.35, plik='W6_hol_test.jpg'),
     # W10 – widok ogrodowy (decyzja koordynatora 17.11, zamiast kadru z koncepcja.json: punkt (78; 17) stoi pod
     # koronami zachowanych drzew). Stanowisko przy wsch. krawędzi placu zabaw (97,0; −6,0), w obszarze inwestycji,
     # ok. 50 m od lica pd. wieży: przeszukanie promieni (85 punktów lica pd. wieży) – brak roślinności w pierwszych

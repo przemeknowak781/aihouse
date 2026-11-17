@@ -17,14 +17,220 @@
   {
    "id": "plac_mostowy",
    "opis": "TEST skryptu – kamera 'plac_mostowy' z render/testy_budynek.py: Plac Mostowy (skwer 9/2) od pn.-zach.: elewacja pn. z podcieniem, łuk, lipy, dziób skrzydła",
-   "cam": {"e": 68.0, "n": 99.0, "z": 1.62},
-   "target": {"e": 88.0, "n": 72.0, "z": 12.0},
+   "cam": {
+    "e": 68.0,
+    "n": 99.0,
+    "z": 1.62
+   },
+   "target": {
+    "e": 88.0,
+    "n": 72.0,
+    "z": 12.0
+   },
    "lens_mm": 24,
    "shift_x": 0.0,
    "shift_y": 0.28,
    "aspect": 1.5,
    "czas": "2026-10-23 14:30 CEST",
    "ludzie": true,
+   "preset": "dzien"
+  },
+  {
+   "id": "ulica-1",
+   "opis": "Brama Mostowa od strony mostu – z bulwaru u stóp schodów z Mostu Grunwaldzkiego, przy parapecie nabrzeża (oko 1,65 m nad chodnikiem). Łuk R 14 z napisem nad podcieniem, korona za lamelami, oświetlona elewacja wsch. i segment po lewej, Plac Mostowy ze śladem 1934 po prawej. Poranne słońce z pd.-wsch. – terminator na łuku (modelowanie walca).",
+   "cam": {
+    "e": 109.4,
+    "n": 104.0,
+    "z": 1.65,
+    "z_od": "teren"
+   },
+   "target": {
+    "e": 97.0,
+    "n": 45.3,
+    "z": 12.0
+   },
+   "lens_mm": 24,
+   "shift_x": 0.0,
+   "shift_y": 0.32,
+   "aspect": "4:5",
+   "czas": "2026-10-21 09:15 CEST",
+   "ludzie": true,
+   "preset": "dzien"
+  },
+  {
+   "id": "ulica-2",
+   "opis": "Pierzeja Mazowieckiej od pd. – z zach. chodnika: Maz. 19 (repoussoir po prawej), skrzydło M1–M4 z gzymsem w linii Maz. 19, wieża zamykająca oś ulicy na lewej linii trójpodziału; bruk i krawężniki zbiegają się do punktu zbiegu. Popołudniowe słońce z pd.-zach. (skośne na elewacji zach. 282°).",
+   "cam": {
+    "e": 27.5,
+    "n": -12.0,
+    "z": 1.65,
+    "z_od": "teren"
+   },
+   "target": {
+    "e": 62.77,
+    "n": 36.54,
+    "z": 10.0
+   },
+   "lens_mm": 28,
+   "shift_x": 0.0,
+   "shift_y": 0.15,
+   "aspect": "3:2",
+   "czas": "2026-10-21 16:10 CEST",
+   "ludzie": true,
+   "preset": "dzien"
+  },
+  {
+   "id": "ulica-3",
+   "opis": "Wybrzeże i wieża nad rzeką – z zewnętrznej krawędzi pomostu Mostu Grunwaldzkiego, 25 m od pylonu pd. (poza płaszczyzną kratownicy; oko 1,65 m nad chodnikiem mostu = 4,9 m nad ±0). Odra i barki w pierwszym planie, nabrzeże z WS 6, WS 5 i segmentem zbiegające się w lewo, wieża z łukiem i koroną na prawej linii trójpodziału. Poranne słońce z pd.-wsch. (boczne).",
+   "cam": {
+    "e": 120.91,
+    "n": 135.26,
+    "z": 4.93,
+    "z_od": "scena"
+   },
+   "target": {
+    "e": 106.36,
+    "n": 66.79,
+    "z": 10.0
+   },
+   "lens_mm": 28,
+   "shift_x": 0.0,
+   "shift_y": 0.13,
+   "aspect": "3:2",
+   "czas": "2026-10-21 10:00 CEST",
+   "ludzie": true,
+   "preset": "dzien"
+  },
+  {
+   "id": "ulica-4",
+   "opis": "Ogród Województwa od pd. – z placu zabaw, wzdłuż pergoli przy murze kamienic (linia prowadząca); jesienne korony drzew ogródków jako rama, elewacja pd. wieży z koroną i lamelami w prześwicie koron. Wczesne popołudnie – słońce z pd.-zach. na elewacji pd. (166°) i w ogrodzie.",
+   "cam": {
+    "e": 96.5,
+    "n": -1.5,
+    "z": 1.65,
+    "z_od": "teren"
+   },
+   "target": {
+    "e": 93.4,
+    "n": 58.4,
+    "z": 10.0
+   },
+   "lens_mm": 28,
+   "shift_x": 0.0,
+   "shift_y": 0.2,
+   "aspect": "4:5",
+   "czas": "2026-10-21 14:45 CEST",
+   "ludzie": true,
+   "preset": "dzien"
+  },
+  {
+   "id": "zlota-godzina-1",
+   "opis": "ZŁOTA GODZINA 1 – sylweta z osi Mostu Grunwaldzkiego od strony pl. Grunwaldzkiego: kamera na pomoście tuż za portalem pn. (s 123 m od portalu pd., 3 m na lewo od osi), obiektyw w osi mostu przesunięty w lewo (shift_x) – perspektywa jednozbieżna: tory i kratownice zbiegają do portalu pd., wieża z koroną zamyka widok po lewej. Poranek, słońce z lewej z tyłu.",
+   "cam": {
+    "e": 211.01,
+    "n": 175.09,
+    "z": 1.65,
+    "z_od": "teren"
+   },
+   "target": {
+    "e": 116.8,
+    "n": 141.54,
+    "z": 10.0
+   },
+   "lens_mm": 40,
+   "shift_x": -0.33,
+   "shift_y": 0.1,
+   "aspect": "3:2",
+   "czas": "2026-10-20 08:40 CEST",
+   "ludzie": true,
+   "preset": "dzien"
+  },
+  {
+   "id": "zlota-godzina-2",
+   "opis": "ZŁOTA GODZINA 2 – „Brama i Latarnia” znad Odry od pn.-wsch.: z 12 m nad prawym brzegiem (taras / okno przy pl. Grunwaldzkim albo dron), 187 m od wieży; łańcuchy i kratownica mostu biegną pod podstawą wieży, portal pd. z hełmami 6° na prawo od wieży, woda na pierwszym planie. Poranek, światło boczne z lewej.",
+   "cam": {
+    "e": 202.0,
+    "n": 216.0,
+    "z": 12.0,
+    "z_od": "teren"
+   },
+   "target": {
+    "e": 133.8,
+    "n": 142.86,
+    "z": 10.0
+   },
+   "lens_mm": 55,
+   "shift_x": 0.0,
+   "shift_y": -0.03,
+   "aspect": "3:2",
+   "czas": "2026-10-20 08:35 CEST",
+   "ludzie": false,
+   "preset": "dzien"
+  },
+  {
+   "id": "zlota-godzina-3",
+   "opis": "ZŁOTA GODZINA 3 – znad wody (łódź na Odrze, 1,8 m nad lustrem), 130 m na wsch. od wieży; kadr pionowy: lustro wody z odbiciami, nabrzeże z balustradą i barką-restauracją, szpaler bulwaru, wieża z łukiem i koroną nad koronami drzew. Poranek, słońce z lewej z tyłu.",
+   "cam": {
+    "e": 238.0,
+    "n": 88.0,
+    "z": -1.95,
+    "z_od": "scena"
+   },
+   "target": {
+    "e": 139.52,
+    "n": 70.64,
+    "z": 10.0
+   },
+   "lens_mm": 60,
+   "shift_x": 0.0,
+   "shift_y": 0.12,
+   "aspect": "4:5",
+   "czas": "2026-10-20 08:45 CEST",
+   "ludzie": false,
+   "preset": "dzien"
+  },
+  {
+   "id": "zlota-godzina-4",
+   "opis": "ZŁOTA GODZINA 4 – elewacja nadrzeczna z przeciwległego brzegu (Wybrzeże Wyspiańskiego), 155 m, niemal na wprost elewacji wsch. wieży: panorama 2:1 – Wybrzeże Słowackiego 5, segment z tarasem, wieża (wielki porządek, kordon, pas cienia, korona), łuk; Odra na pierwszym planie. Poranek, słońce zza lewego ramienia.",
+   "cam": {
+    "e": 265.0,
+    "n": 40.0,
+    "z": 1.65,
+    "z_od": "teren"
+   },
+   "target": {
+    "e": 111.6,
+    "n": 57.9,
+    "z": 15.0
+   },
+   "lens_mm": 55,
+   "shift_x": 0.0,
+   "shift_y": 0.15,
+   "aspect": "2:1",
+   "czas": "2026-10-20 08:50 CEST",
+   "ludzie": false,
+   "preset": "dzien"
+  },
+  {
+   "id": "zlota-godzina-5",
+   "opis": "ZŁOTA GODZINA 5 – teleobiektyw z prawego brzegu od pd.-wsch. (230 m): wieża i Most Grunwaldzki w spłaszczonej perspektywie, szeroka tafla Odry z odbiciami. Pierwsze 45 min po wschodzie – słońce 6° nad horyzontem, elewacje wsch. i pd. w pełnym, pomarańczowym świetle.",
+   "cam": {
+    "e": 301.0,
+    "n": -40.0,
+    "z": 1.65,
+    "z_od": "teren"
+   },
+   "target": {
+    "e": 214.4,
+    "n": 10.0,
+    "z": 10.0
+   },
+   "lens_mm": 70,
+   "shift_x": 0.0,
+   "shift_y": 0.05,
+   "aspect": "3:2",
+   "czas": "2026-10-20 08:07 CEST",
+   "ludzie": false,
    "preset": "dzien"
   }
  ]

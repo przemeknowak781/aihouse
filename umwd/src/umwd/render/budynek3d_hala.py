@@ -131,6 +131,7 @@ class Hala:
         self.informacja(G)
         self.lapidarium(G)
         self.poczekalnia(G)
+        self.informacja_mosiezna(G)
         self.rosliny()
         if B.o.get('ludzie', True):
             self.ludzie()
@@ -140,7 +141,11 @@ class Hala:
         H = self.H
         pas = LineString([self.od - self.d * 2, self.do]).buffer(self.szer_osi / 2, cap_style=2).intersection(H)
         reszta = H.difference(pas)
-        self.plyta(G, pas, 0.0, 'granit')
+        linia = LineString([self.od - self.d * 2, self.do])
+        obr = pas.difference(linia.buffer(self.szer_osi / 2 - 0.30, cap_style=2))
+        srodek = pas.difference(obr)
+        self.plyta(G, srodek, 0.0, 'granit')
+        self.plyta(G, obr, 0.0, 'granit:ciemny')
         self.plyta(G, reszta, 0.0, 'wn_terrazzo')
         self.info['posadzka_m2'] = {'granit_os': round(pas.area, 1), 'lastryko': round(reszta.area, 1)}
         # ścieżka dotykowa: wejście → oś → skręt do drzwi ogrodowych; odgałęzienia: informacja, tyflomapa
@@ -177,7 +182,7 @@ class Hala:
         sc = self.P['sciany']
         Wp = B.poly['W'].buffer(-0.3)
         n = 0
-        for klucz, mat in (('wewnetrzne', 'wn_sciana'), ('trzony', 'wn_drewno:jasne')):
+        for klucz, mat in (('wewnetrzne', 'wn_tynk'), ('trzony', 'wn_drewno:jasne')):
             for w in sc.get(klucz, []):
                 g = _mp(w).intersection(Wp)
                 for P in _czesci(g):
@@ -289,7 +294,7 @@ class Hala:
             p = c + k * a
             G.pryzma(Point(p).buffer(0.13, 24), 2.55, 2.85, 'wn_lampa:cieple', gora=True, dno=True)
             G.pryzma(Point(p).buffer(0.006, 6), 2.85, self.suf - 0.26, 'metal', gora=False, dno=False)
-        self.lampy_punktowe([c + k * a for a in (-0.9, 0.2, 1.3)], 2.5, moc=18.0, kat=120.0, nazwa='lada')
+        self.lampy_punktowe([c + k * a for a in (-0.9, 0.2, 1.3)], 2.5, moc=30.0, kat=120.0, nazwa='lada')
         # tyflomapa
         t = self.p_tyflo
         G.pryzma(Point(t).buffer(0.04, 12), 0.0, 0.85, 'metal', gora=True, dno=False)
@@ -415,7 +420,7 @@ class Hala:
         # oświetlenie akcentowe (spoty z sufitu, odsunięte od ściany 1,4 m)
         zrod = [P(float((p - a) @ k), 1.6) for p, _ in akcent]
         cele = [(p[0], p[1], h) for p, h in akcent]
-        self.lampy_punktowe(zrod, self.suf - 0.3, moc=22.0, kat=36.0, nazwa='lapidarium', cel=cele, promien=0.02)
+        self.lampy_punktowe(zrod, self.suf - 0.3, moc=45.0, kat=36.0, nazwa='lapidarium', cel=cele, promien=0.02)
         self.info['lapidarium'] = {'eksponaty': len(akcent), 'sciana': 'SW.02 (zach.)'}
 
     def poczekalnia(self, G):
@@ -429,6 +434,72 @@ class Hala:
             for e in (-1.1, 1.1):
                 G.pryzma(self.prostokat(c + t * e, t, 0.08, 0.44), 0.0, 0.40, 'metal')
         self.info['poczekalnia'] = 'ławy przy przeszkleniu ogrodowym'
+
+    def napis_scienny(self, G, tekst, p0, kier, nrm, z, h=0.16, mat='mosiadz', odstep=1.25):
+        """Litery z mosiądzu (gr. 12 mm, 8 mm od ściany) – tekst od p0 wzdłuż ``kier``, lico ściany ``nrm``."""
+        from pathlib import Path
+        cu = bpy.data.curves.new('napis_sc', 'FONT')
+        cu.body = tekst
+        f = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
+        if Path(f).exists():
+            cu.font = bpy.data.fonts.load(f, check_existing=True)
+        cu.size = h / 0.73
+        cu.space_character = odstep
+        cu.extrude = 0.006
+        cu.resolution_u = 4
+        ob = bpy.data.objects.new('napis_sc_tmp', cu)
+        self.B.sc.collection.objects.link(ob)
+        me = bpy.data.meshes.new_from_object(ob.evaluated_get(bpy.context.evaluated_depsgraph_get()))
+        bpy.data.objects.remove(ob)
+        bpy.data.curves.remove(cu)
+        k = np.asarray(kier, float) / np.linalg.norm(kier)
+        n = np.asarray(nrm, float)
+        V = []
+        for v in me.vertices:
+            q = np.asarray(p0, float) + k * v.co.x + n * (0.014 + v.co.z)
+            V.append((q[0], q[1], z + v.co.y))
+        for pl in me.polygons:
+            G.face([V[i] for i in pl.vertices], [(0, 0)] * len(pl.vertices), mat)
+        bpy.data.meshes.remove(me)
+
+    def informacja_mosiezna(self, G):
+        """System informacji: litery mosiężne na ścianie pn. bloku kancelarii (widocznej od Bramy Mostowej) i pas
+        z nazwą hali nad przejściem; tablica kierunkowa przy przejściu."""
+        sw02 = self.pom.get('SW.02')
+        dk02 = self.pom.get('DK.02')
+        blok = unary_union([g for g in (sw02, dk02) if g is not None and not g.is_empty])
+        if blok.is_empty:
+            return
+        # krawędź bloku zwrócona ku drzwiom Bramy Mostowej (najbliższa od, długość ≥ 3 m)
+        best = None
+        for P in _czesci(blok.buffer(0.15, join_style=2)):
+            c = list(P.exterior.coords)
+            for a, b in zip(c[:-1], c[1:]):
+                a, b = np.array(a), np.array(b)
+                L = float(np.linalg.norm(b - a))
+                if L < 3.0:
+                    continue
+                mid = (a + b) / 2
+                k = (b - a) / L
+                n = np.array([k[1], -k[0]])
+                if not self.H.contains(Point(mid + n * 0.5)):
+                    n = -n
+                if not self.H.contains(Point(mid + n * 0.5)):
+                    continue
+                d = float(np.linalg.norm(mid - self.od))
+                if best is None or d < best[0]:
+                    best = (d, a, b, k, n, L)
+        if best is None:
+            return
+        _, a, b, k, n, L = best
+        # tekst czytany od lewej patrząc na ścianę: kierunek k tak, by (k, n) był prawoskrętny względem patrzącego
+        if k[0] * n[1] - k[1] * n[0] > 0:
+            a, b, k = b, a, -k
+        a = a - n * 0.15                              # z bufora 0,15 z powrotem na lico
+        self.napis_scienny(G, 'HALA OBYWATELSKA', a + k * 0.6, k, n, 2.55, h=0.22)
+        self.napis_scienny(G, 'INFORMACJA  ·  KANCELARIA  ·  LAPIDARIUM  ·  OGRÓD', a + k * 0.6, k, n, 2.18, h=0.10,
+                           odstep=1.15)
+        self.info['informacja_mosiezna'] = 'litery mosiężne na ścianie bloku SW.02/DK.02 (h 0,22 / 0,10 m)'
 
     # ------------------------------------------------------------------ rośliny i ludzie
     def _fikus(self, nazwa, H=2.6, R=0.75, n=1400, seed=0):
@@ -497,36 +568,33 @@ class Hala:
         k, n = self.d, self.lewo
         c = self.p_info
         # (pozycja, kierunek patrzenia/ruchu, wariant prototypu (H, chód, płaszcz, kobieta, torba), ruch)
+        t_ogr = np.array([self.n_wew[1], -self.n_wew[0]])
         osoby = [
-            (c + k * 0.55 - n * 0.75, n, (1.72, 0.0, 0.50, True, False), False),           # pracownik informacji
-            (c + k * 0.9 + n * 0.85, -n, (1.80, 0.0, 0.36, False, True), False),           # interesant przy wysokiej
-            (self.a_l(12.0, -2.4), k, (1.68, 0.30, 0.40, True, True), True),               # idąca ku ogrodowi
-            (self.a_l(17.5, 0.9), k, (1.83, 0.30, 0.50, False, False), True),
-            (self.a_l(22.5, 3.2), -k, (1.70, 0.28, 0.36, True, False), True),              # z ogrodu
-            (self.a_l(10.6, 2.0), None, (1.76, 0.0, 0.42, False, False), False),           # lapidarium
-            (self.a_l(11.3, 1.6), None, (1.62, 0.0, 0.36, True, True), False),
-            (self.drzwi_ogr + self.n_wew * 3.6 + np.array([self.n_wew[1], -self.n_wew[0]]) * 0.6, None,
-             (1.74, 0.0, 0.40, True, False), False),
-            (self.drzwi_ogr + self.n_wew * 3.3 + np.array([self.n_wew[1], -self.n_wew[0]]) * 1.1, None,
-             (1.15, 0.30, 0.50, False, False), False),                                     # dziecko
+            (c + k * 0.55 - n * 0.75, n, (1.72, 0.0, 0.50, True, False, 'kieszen'), False),  # pracownik informacji
+            (c + k * 0.9 + n * 0.85, -n, (1.80, 0.0, 0.36, False, True, ''), False),         # interesant
+            (self.a_l(17.5, 0.9), k, (1.83, 0.30, 0.50, False, False, ''), True),            # idący ku ogrodowi
+            (self.a_l(10.6, 2.0), None, (1.76, 0.0, 0.42, False, False, 'kieszen'), False),  # lapidarium
+            (self.a_l(11.3, 1.6), None, (1.62, 0.0, 0.36, True, True, 'telefon'), False),
+            (self.drzwi_ogr + self.n_wew * 3.6 + t_ogr * 0.6, None, (1.74, 0.0, 0.40, True, False, ''), False),
+            (self.drzwi_ogr + self.n_wew * 3.3 + t_ogr * 1.1, None, (1.15, 0.30, 0.50, False, False, ''), False),
         ]
         rng = np.random.default_rng(B.o['seed'] + 7)
         n_ok = 0
-        for i, (p, kier, (H, chod, pl, kob, tb), ruch) in enumerate(osoby):
+        for i, (p, kier, (H, chod, pl, kob, tb, poza), ruch) in enumerate(osoby):
             if not self.H.buffer(-0.3).contains(Point(p)):
                 continue
-            me = oto._prototyp_czlowieka('hala_czlowiek_%d' % i, H, chod, pl, kob, seed=40 + i, torba=tb)
+            me = oto._prototyp_czlowieka('hala_czlowiek_%d' % i, H, chod, pl, kob, seed=40 + i, torba=tb, poza=poza)
             me.materials.append(mat)
             ob = bpy.data.objects.new('hala_czlowiek_%02d' % i, me)
             self.coll.objects.link(ob)
             if kier is None:
                 # zwiedzający: przodem do najbliższego eksponatu / przeszklenia
-                kier = (np.array(self.drzwi_ogr) - p) if i >= 7 else n
+                kier = (np.array(self.drzwi_ogr) - p) if i >= 5 else n
             kat = math.atan2(kier[1], kier[0]) + rng.normal(0, 0.15)
             ob.rotation_euler = (0, 0, kat - math.pi / 2)
             ob.location = (p[0], p[1], B.DZ)
             if ruch and B.o.get('ruch_ludzi', True):
-                v = np.array([math.cos(kat), math.sin(kat)]) * B.o.get('ruch_ludzi_m', 0.07)
+                v = np.array([math.cos(kat), math.sin(kat)]) * 0.5 * B.o.get('ruch_ludzi_m', 0.07)
                 for f in (0, 1, 2):
                     ob.location = (p[0] + v[0] * (f - 1), p[1] + v[1] * (f - 1), B.DZ)
                     ob.keyframe_insert('location', frame=f)

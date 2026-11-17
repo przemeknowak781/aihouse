@@ -434,13 +434,16 @@ def _drzewa(B, ctx, coll, foot, skwer, plac):
 
 
 # ============================================================================================== ludzie
-def _prototyp_czlowieka(nazwa, H=1.75, chod=0.0, plaszcz=0.36, kobieta=False, seed=0, torba=False):
+def _prototyp_czlowieka(nazwa, H=1.75, chod=0.0, plaszcz=0.36, kobieta=False, seed=0, torba=False, poza=''):
     """Sylwetka człowieka w jesiennym okryciu, z metaballi (gładka bryła), skonwertowana do siatki.
 
     Proporcje wg kanonu 7,5 głowy; płaszcz/kurtka w kształcie litery A do wysokości ``plaszcz``·H (0,36 – płaszcz
     do kolan, 0,50 – kurtka do bioder), nogi widoczne poniżej, ręce przy tułowiu (lekki wymach w chodzie).
-    Atrybut ``fv`` = wysokość / H (strefy materiału: buty, spodnie, okrycie, skóra, włosy)."""
+    Atrybut ``fv`` = wysokość / H (strefy materiału: buty, spodnie, okrycie, skóra, włosy), ``sk`` = 1 dla dłoni
+    (skóra). ``poza``: '' (ręce wzdłuż tułowia), 'telefon' (prawe przedramię uniesione – telefon/ulotka),
+    'kieszen' (lewa dłoń w kieszeni – łokieć odwiedziony), 'oba' (obie)."""
     from mathutils import Quaternion, Vector
+    dlonie = []
     rng = np.random.default_rng(seed)
     mb = bpy.data.metaballs.new(nazwa)
     mb.resolution = 0.018
@@ -506,9 +509,22 @@ def _prototyp_czlowieka(nazwa, H=1.75, chod=0.0, plaszcz=0.36, kobieta=False, se
         ram = Vector((side * (bark + 0.02) * s, 0.0, 1.40 * s))
         lok = ram + Vector((side * 0.02 * s, math.sin(a) * 0.29 * s, -math.cos(a) * 0.29 * s))
         dl = lok + Vector((side * 0.005 * s, math.sin(a * 1.4 + 0.12) * 0.26 * s, -math.cos(a * 1.4 + 0.12) * 0.26 * s))
+        if side > 0 and poza in ('telefon', 'oba'):
+            # przedramię uniesione przed tułów, dłoń na wys. ~1,15 H
+            lok = ram + Vector((side * 0.05 * s, 0.06 * s, -0.27 * s))
+            dl = lok + Vector((-side * 0.10 * s, 0.20 * s, 0.10 * s))
+        if side < 0 and poza in ('kieszen', 'oba'):
+            # dłoń w kieszeni płaszcza: łokieć odwiedziony, dłoń przy biodrze (schowana w okryciu)
+            lok = ram + Vector((side * 0.10 * s, -0.03 * s, -0.27 * s))
+            dl = Vector((side * (bark + 0.01) * s, 0.04 * s, 0.98 * s))
         kapsula(ram, lok, 0.058 * s)
         kapsula(lok, dl, 0.05 * s)
-        el('BALL', (dl + Vector((0, 0, -0.04 * s)))[:], 0.045 * s)
+        pd = dl + Vector((0, 0, -0.04 * s)) if not (side > 0 and poza in ('telefon', 'oba')) else dl + Vector((0, 0.02 * s, 0))
+        el('BALL', pd[:], 0.045 * s)
+        if not (side < 0 and poza in ('kieszen', 'oba')):
+            dlonie.append((np.array(pd[:]), 0.075 * s))
+        if side > 0 and poza in ('telefon', 'oba'):
+            el('ELLIPSOID', (pd + Vector((0, 0.03 * s, 0.03 * s)))[:], 0.05 * s, sx=0.5, sy=0.18, sz=1.0, stiff=3.0)
     if torba:
         el('ELLIPSOID', ((bark + 0.06) * s, 0.04 * s, 0.98 * s), 0.12 * s, sx=0.45, sy=1.0, sz=0.9)
     ob = bpy.data.objects.new(nazwa + '_mb', mb)
@@ -526,6 +542,11 @@ def _prototyp_czlowieka(nazwa, H=1.75, chod=0.0, plaszcz=0.36, kobieta=False, se
         a.data.foreach_set('value', fv.astype(np.float32))
         b = me.attributes.new('fu', 'FLOAT', 'POINT')
         b.data.foreach_set('value', np.full(len(V), plaszcz - 0.01, np.float32))
+        sk = np.zeros(len(V), np.float32)
+        for c, r in dlonie:
+            sk = np.maximum(sk, (np.linalg.norm(V - c, axis=1) < r).astype(np.float32))
+        c_ = me.attributes.new('sk', 'FLOAT', 'POINT')
+        c_.data.foreach_set('value', sk)
     for p in me.polygons:
         p.use_smooth = True
     return me
@@ -581,7 +602,7 @@ def wozek(B, coll, zf, poz=None, kier=None, nazwa=''):
         p = np.asarray(poz, float)
         kier_ruchu = np.asarray(kier, float) / np.linalg.norm(kier)
     z = float(zf([p[0]], [p[1]])[0])
-    mat = B.mat('ludzie:okrycie_jasne')      # jasne okrycie – czytelne na tle ciemnego szklenia podcienia
+    mat = B.mat('ludzie:okrycie_jasne')      # kontrastowe okrycie (rdzawa kurtka) – czytelne na tle szklenia
     # wózek – lokalnie: przód +y, koła po bokach x = ±0,30
     Vt, Ft = _torus(0.30, 0.018)
     Vo, Fo = _torus(0.27, 0.008)
@@ -657,6 +678,11 @@ def wozek(B, coll, zf, poz=None, kier=None, nazwa=''):
     a_.data.foreach_set('value', fv.astype(np.float32))
     b_ = me.attributes.new('fu', 'FLOAT', 'POINT')
     b_.data.foreach_set('value', np.full(len(V), 0.45, np.float32))
+    sk = np.zeros(len(V), np.float32)
+    for sx in (-1, 1):
+        sk = np.maximum(sk, (np.linalg.norm(V - np.array([sx * 0.31, 0.12, 0.62]), axis=1) < 0.075).astype(np.float32))
+    c_ = me.attributes.new('sk', 'FLOAT', 'POINT')
+    c_.data.foreach_set('value', sk)
     for pl in me.polygons:
         pl.use_smooth = True
     me.materials.append(mat)
@@ -679,8 +705,10 @@ def ludzie(B, ctx, coll, plac, zf):
                 (1.64, 0.0, 0.36, True, False), (1.85, 0.30, 0.50, False, True), (1.70, 0.30, 0.34, True, False),
                 (1.30, 0.30, 0.50, False, False), (1.73, 0.0, 0.38, True, True), (1.79, 0.26, 0.42, False, False),
                 (1.62, 0.31, 0.46, True, False))
+    pozy = ('', 'kieszen', 'telefon', '', 'kieszen', '', '', 'oba', '', 'telefon')
     for i, (H, chod, pl, kob, tb) in enumerate(warianty):
-        me = _prototyp_czlowieka('czlowiek_%d' % i, H, chod, pl, kob, seed=i, torba=tb)
+        poza = pozy[i] if (chod == 0 or pozy[i] == 'kieszen') else ''
+        me = _prototyp_czlowieka('czlowiek_%d' % i, H, chod, pl, kob, seed=i, torba=tb, poza=poza)
         me.materials.append(mat)
         proto.append((me, chod > 0))
     # strefy ruchu: chodniki kontekstu + posadzki projektu w promieniu 45 m od budynku

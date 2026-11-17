@@ -1,0 +1,141 @@
+{
+ "id": "ulica-1",
+ "opis": "Brama Mostowa od strony mostu – z bulwaru u stóp schodów z Mostu Grunwaldzkiego, przy parapecie nabrzeża (oko 1,65 m nad chodnikiem). Łuk R 14 z napisem nad podcieniem, korona za lamelami, oświetlona elewacja wsch. i segment po lewej, Plac Mostowy ze śladem 1934 po prawej. Poranne słońce z pd.-wsch. – terminator na łuku (modelowanie walca).",
+ "preset": "dzien",
+ "czas": "2026-10-21 09:15 CEST",
+ "slonce": {
+  "az": 128.64,
+  "el": 14.46,
+  "ekspozycja": -4.3,
+  "czas": "2026-10-21T09:15:00+02:00",
+  "udzial_opraw": 1.0,
+  "latarnie": 0
+ },
+ "kamera": {
+  "loc": [
+   109.4,
+   104.0,
+   2.361
+  ],
+  "cel": [
+   97.0,
+   45.3,
+   12.05
+  ],
+  "z_wzgl_kamery": 2.311,
+  "lens_mm": 24.0,
+  "shift_x": 0.0,
+  "shift_y": 0.32,
+  "poziom": true,
+  "rozdzielczosc": [
+   480,
+   600
+  ],
+  "sensor_fit": "AUTO (36 mm na dłuższym boku)"
+ },
+ "ludzie": false,
+ "probki": 16,
+ "czasy_s": {
+  "kontekst_s": 9.1,
+  "budynek_s": 8.7,
+  "zrodlo_sceny": "budowa od zera",
+  "zapis_blend": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/scena2.blend",
+  "scena_s": 18.2,
+  "kontrola_s": 0.6,
+  "render_s": 32.2,
+  "postprodukcja_s": 0.5
+ },
+ "uwagi": [],
+ "info": [],
+ "promienie": [
+  "oś: wieza_elewacje 33.7 m",
+  "L-dół: male_31_liscie 129.9 m",
+  "P-dół: wieza_elewacje 35.4 m",
+  "L-góra: niebo",
+  "P-góra: wieza_elewacje 46.6 m",
+  "dół: wieza_elewacje 30.6 m"
+ ],
+ "udzialy_kadru": {
+  "budynek": 0.573,
+  "niebo": 0.258,
+  "teren": 0.128,
+  "drzewa": 0.031,
+  "zabudowa_kontekstu": 0.008,
+  "ulica": 0.003
+ },
+ "zaslona_pierwszego_planu": 0.003,
+ "najblizsza_przeszkoda": {
+  "obiekt": "nabrzeze",
+  "odl_m": 1.6
+ },
+ "oko_nad_podlozem_m": 1.65,
+ "podloze": "teren_chodnik_bt",
+ "budynek_w_kadrze": {
+  "wieża": {
+   "x0": 0.257,
+   "x1": 1.166,
+   "y0": 0.128,
+   "y1": 0.964,
+   "rzut_w_kadrze": true,
+   "uciete": [
+    "prawo"
+   ]
+  },
+  "skrzydło": {
+   "x0": 0.697,
+   "x1": 1.214,
+   "y0": 0.144,
+   "y1": 0.472,
+   "rzut_w_kadrze": true,
+   "uciete": [
+    "prawo"
+   ]
+  },
+  "segment": {
+   "x0": 0.233,
+   "x1": 0.528,
+   "y0": 0.15,
+   "y1": 0.419,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  }
+ },
+ "punkty_kluczowe": {
+  "Brama Mostowa – napis (+5,2)": {
+   "w_kadrze": true,
+   "x": 0.488,
+   "y": 0.244,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 30.3
+  },
+  "korona – lamele łuku (+31,7)": {
+   "w_kadrze": true,
+   "x": 0.488,
+   "y": 0.83,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 42.1
+  },
+  "attyka wieży (+37,2)": {
+   "w_kadrze": true,
+   "x": 0.488,
+   "y": 0.952,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 46.1
+  },
+  "cel kamery": {
+   "w_kadrze": true,
+   "x": 0.5,
+   "y": 0.288,
+   "widoczny": false,
+   "zaslania": "wieza_szklo",
+   "odl_m": 60.8
+  }
+ },
+ "horyzont_y": 0.18,
+ "pochylenie_deg": 0.0,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/podglad_ulica-1.png",
+ "jpg": "/home/user/aihouse/umwd/docs/60_wizualizacje/img/extra/podglad_ulica-1.jpg"
+}

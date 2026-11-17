@@ -59,11 +59,11 @@ chk("Plansze", "Liczba plansz ≤ 8", len(boards) <= 8 and len(boards) > 0, f"{l
 T = B / "tabele"
 for f, ref in (("F.15.A.xlsx", "R-118"), ("F.15.B.xlsx", "R-118"), ("F.15.C.xlsx", "R-118"), ("F.14.B.xlsx", "R-119 (brak = brak oceny)")):
     chk("Część opisowa", f"Tabela {f}", (T / f).exists(), "", ref)
-chk("Część opisowa", "Tekst ≤ 5 stron A3, czcionka ≥ 11 pt (PDF)", (B / "opis" / "opis_A3.pdf").exists(), "", "R-116, S-04")
+chk("Część opisowa", "Tekst ≤ 5 stron A3, czcionka ≥ 11 pt (PDF)", ((B / "opis" / "opis_etap2_A3.pdf").exists() or (B / "opis" / "opis_A3.pdf").exists()), "", "R-116, S-04")
 chk("Część opisowa", "Plansze pomniejszone A3 300 dpi", bool(list((B / "eksport").glob("*A3*"))) if (B / "eksport").exists() else False, "", "R-120")
 # ---------------- 5 electronic export
 exp = B / "eksport"
-tifs = sorted(exp.glob("P*_100x70*.jpg")) + sorted(exp.glob("P*_100x70*.tif")) if exp.exists() else []
+tifs = [f for f in sorted(exp.glob("PLANSZA_*.jpg")) + sorted(exp.glob("PLANSZA_*.tif")) if "_A3" not in f.name] if exp.exists() else []
 chk("Eksport", "Plansze JPG/TIFF 100×70 cm, 300 dpi (11 811 × 8 268 px)", len(tifs) >= len(boards) and bool(boards), f"{len(tifs)} plików", "R-129")
 # ---------------- substantive numbers
 bl = K.get("bilans", {})

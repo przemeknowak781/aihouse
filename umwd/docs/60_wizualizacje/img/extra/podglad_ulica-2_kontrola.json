@@ -1,0 +1,134 @@
+{
+ "id": "ulica-2",
+ "opis": "Pierzeja Mazowieckiej od pd. – z zach. chodnika: Maz. 19 (repoussoir po prawej), skrzydło M1–M4 z gzymsem w linii Maz. 19, wieża zamykająca oś ulicy na lewej linii trójpodziału; bruk i krawężniki zbiegają się do punktu zbiegu. Popołudniowe słońce z pd.-zach. (skośne na elewacji zach. 282°).",
+ "preset": "dzien",
+ "czas": "2026-10-21 16:10 CEST",
+ "slonce": {
+  "az": 233.96,
+  "el": 12.86,
+  "ekspozycja": -4.3,
+  "czas": "2026-10-21T16:10:00+02:00",
+  "udzial_opraw": 1.0,
+  "latarnie": 0
+ },
+ "kamera": {
+  "loc": [
+   27.5,
+   -12.0,
+   1.029
+  ],
+  "cel": [
+   62.77,
+   36.54,
+   10.05
+  ],
+  "z_wzgl_kamery": 0.979,
+  "lens_mm": 28.0,
+  "shift_x": 0.0,
+  "shift_y": 0.15,
+  "poziom": true,
+  "rozdzielczosc": [
+   480,
+   320
+  ],
+  "sensor_fit": "AUTO (36 mm na dłuższym boku)"
+ },
+ "ludzie": false,
+ "probki": 16,
+ "czasy_s": {
+  "wczytanie_blend_s": 0.4,
+  "zrodlo_sceny": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/scena2.blend",
+  "scena_s": 0.4,
+  "kontrola_s": 0.8
+ },
+ "uwagi": [],
+ "info": [],
+ "promienie": [
+  "oś: skrzydlo_elewacje 41.2 m",
+  "L-dół: teren_chodnik_zw 27.7 m",
+  "P-dół: Mazowiecka_19_LOD3 21.7 m",
+  "L-góra: niebo",
+  "P-góra: Mazowiecka_19_LOD3 23.3 m",
+  "dół: teren_jezdnia_kb 17.8 m"
+ ],
+ "udzialy_kadru": {
+  "zabudowa_kontekstu": 0.305,
+  "niebo": 0.24,
+  "teren": 0.229,
+  "budynek": 0.172,
+  "drzewa": 0.031,
+  "ulica": 0.013,
+  "dalsze_otoczenie": 0.01
+ },
+ "zaslona_pierwszego_planu": 0.0,
+ "najblizsza_przeszkoda": {
+  "obiekt": "teren_chodnik_zw",
+  "odl_m": 1.65
+ },
+ "oko_nad_podlozem_m": 1.65,
+ "podloze": "teren_chodnik_zw",
+ "budynek_w_kadrze": {
+  "wieża": {
+   "x0": 0.365,
+   "x1": 0.754,
+   "y0": 0.259,
+   "y1": 0.876,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  },
+  "skrzydło": {
+   "x0": 0.325,
+   "x1": 0.893,
+   "y0": 0.237,
+   "y1": 1.046,
+   "rzut_w_kadrze": true,
+   "uciete": [
+    "góra"
+   ]
+  },
+  "segment": {
+   "x0": 0.687,
+   "x1": 0.84,
+   "y0": 0.261,
+   "y1": 0.558,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  }
+ },
+ "punkty_kluczowe": {
+  "Brama Mostowa – napis (+5,2)": {
+   "w_kadrze": true,
+   "x": 0.573,
+   "y": 0.318,
+   "widoczny": false,
+   "zaslania": "skrzydlo_elewacje",
+   "odl_m": 115.2
+  },
+  "korona – lamele łuku (+31,7)": {
+   "w_kadrze": true,
+   "x": 0.573,
+   "y": 0.588,
+   "widoczny": false,
+   "zaslania": "skrzydlo_elewacje",
+   "odl_m": 119.2
+  },
+  "attyka wieży (+37,2)": {
+   "w_kadrze": true,
+   "x": 0.573,
+   "y": 0.644,
+   "widoczny": false,
+   "zaslania": "skrzydlo_elewacje",
+   "odl_m": 120.7
+  },
+  "cel kamery": {
+   "w_kadrze": true,
+   "x": 0.5,
+   "y": 0.45,
+   "widoczny": false,
+   "zaslania": "skrzydlo_elewacje",
+   "odl_m": 60.7
+  }
+ },
+ "horyzont_y": 0.275,
+ "pochylenie_deg": 0.0
+}

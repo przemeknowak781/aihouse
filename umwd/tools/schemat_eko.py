@@ -7,7 +7,7 @@ deszczowego (przecięcie z obrysem z tools/zagospodarowanie.py), sondy GPC pod p
 Schematycznie (poza płaszczyzną): zbiornik deszczówki 50 m³ na −2 przy łuku, skrzynki rozsączające w pasie pd. od segmentu.
 Wynik: build/rysunki/schemat_eko_1-{UMWD_SCALE}.svg + docs/70_rysunki/podglady/schemat_eko.html (.png)
 """
-import sys, json, math
+import sys, json, math, copy
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -18,6 +18,40 @@ from umwd.svg import halo_extra
 import przekroje as PR
 
 K = PR.K
+
+
+# ------------------------------------------------------------------ podziemie v1.1 w przekroju bazowym
+# Rejestr G-I-2: pas −1/−2 pod dziedzińcem 7,0 → 5,0 m (lico v = −5,0). Model pomieszczeń budynek.json jest jeszcze w układzie
+# v1.0 (płyty i ściany zewnętrzne −1/−2 do v = −7,0), a przekroje.section rysuje z niego płyty kondygnacji podziemnych, zaś ściany
+# szczelinowe z obrysu koncepcja.json – na rysunku powstawały dwie ściany 2 m od siebie. Doraźnie (do czasu przeliczenia modelu
+# pomieszczeń / przycięcia w przekroje.section) geometrię kondygnacji −1 i −2 przycinamy w pamięci do obrysów podziemia v1.1
+# (koncepcja.json podziemie[−1], podziemie[−2]); pliki modelu nie są zmieniane. Operacja jest idempotentna.
+def _rings(geom):
+    """shapely → format budynek.json [[pierścień, otwory...], ...]."""
+    out = []
+    for g in getattr(geom, "geoms", [geom]):
+        if g.geom_type == "Polygon" and not g.is_empty and g.area > 1e-4:
+            out.append([[list(c) for c in g.exterior.coords]] + [[list(c) for c in r.coords] for r in g.interiors])
+    return out
+
+
+def _bm_podziemie_v11(bm):
+    pod = K.get("podziemie", {})
+    out = copy.deepcopy(bm)
+    for lv in out["kondygnacje"]:
+        lid = lv["id"]
+        if lid not in ("-1", "-2") or not isinstance(pod.get(lid), dict) or "obrys_ccw" not in pod[lid]:
+            continue
+        obrys = Polygon(pod[lid]["obrys_ccw"]).buffer(0)
+        lv["plyta"] = _rings(PR.mp(lv.get("plyta")).intersection(obrys))
+        sc = lv.get("sciany") or {}
+        for key in ("zewnetrzne", "wewnetrzne", "trzony"):
+            if sc.get(key):
+                sc[key] = _rings(PR.mp(sc[key]).intersection(obrys))
+    return out
+
+
+PR.BM = _bm_podziemie_v11(PR.BM)
 Z = K["zagospodarowanie"]
 EL = K["elewacje"]["PV"]
 BIL = K["bilans"]
@@ -65,6 +99,21 @@ def note(xy, t, col=INK, anchor="start", size=1.7, w=400):
 def cut(geom):
     """Przedziały przekroju (u przekroju) dla geometrii w układzie (e, n)."""
     return PR.intervals(geom, LINE, svg.U)
+
+
+# ------------------------------------------------------------------ strop nad −1 w pasie dziedzińca (pod tarasem ogrodowym)
+# Przekrój bazowy rysuje stropy tylko pod obrysem parteru z modelu pomieszczeń; w pasie −1 poza parterem (v −5,0 … lico parteru)
+# brakowało stropu, na którym leży taras. Wierzch −0,15 wg koncepcja.json kondygnacje[−1].strop_nad; spód jak pod wieżą (−0,55),
+# bo koncepcja.json nie podaje osobnej grubości dla pasa dziedzińca; na nim oczep ścian szczelinowych (Z_DW_TOP).
+_SN = getattr(PR, "KOND", {}).get("-1", {}).get("strop_nad")
+if _SN and getattr(PR, "UG_K", None) is not None:
+    z_sn_top = float(_SN["wierzch"])
+    z_sn_bot = float(_SN.get("spod_dziedziniec", _SN.get("spod_wieza", z_sn_top - 0.40)))
+    _lvP = next((lv for lv in PR.BM["kondygnacje"] if lv["id"] == "P"), None)
+    _parter = PR.mp(_lvP.get("plyta")) if _lvP else Polygon()
+    for a, b in cut(PR.UG_K.difference(_parter)):
+        if b - a > 0.3:
+            svg.poly([P(a, z_sn_bot), P(b, z_sn_bot), P(b, z_sn_top), P(a, z_sn_top)], fill=PR.POCHE, stroke="none")
 
 
 # ------------------------------------------------------------------ 1 słońce + BIPV dachów
