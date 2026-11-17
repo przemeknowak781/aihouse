@@ -26,7 +26,7 @@
    "done"
   ],
   [
-   "Concept v1.1 ✔ (all critical items closed: parking 110 ≥ 106, cost 149.18 M incl. 5 %, PV 415 kWp, EP 28, trees 36/44 by M.06); Sejmik S-2 ►",
+   "Concept v1.1 ✔ + Sejmik storey S-3 ✔ → merge into v1.2 with stair-A fix and cost check (workflow ►)",
    "running"
   ],
   [
@@ -43,11 +43,11 @@
   ]
  ],
  "notes": [
-  "Revision v1.1 closed every critical finding with numerical proof: garage redesigned (−2 under the whole footprint except the bay at Maz. 19, −1 raised to 4.20 m, 16 two-level stackers) → 110 spaces vs 106 required; tower column lines moved out of the corridors (v 0 / 8.70 / 16.00 / 23.15).",
-  "Cost 142.08 M + 5 % contingency = 149.18 M PLN net (0.82 M below the cap — tight, honest). PV 415 kWp only with modules η ≥ 22.5 % (BIPV roofs 351 + segment wall 41 + canopy 13 + spandrels 11). Crown lamellas now tone-on-tone with a Fibonacci rhythm (no moiré from the bridge).",
-  "Decisions flagged for the structural/fire audit: sprinklers dropped (not mandatory), 0.60 m diaphragm walls with a deeper −2, generator and dry-cooler inside the segment, 0.60 m sills in the wing with fixed safety glass to 0.90.",
-  "Photomatch on the organiser's drone photos F.17.A/B works geometrically; the building still reads too bright and flat → tonal match, shadows and materials in the finals.",
-  "At the user's request a separate workflow composes 8 extra showcase views (4 photographer strategies → judges → render → critique → refine)."
+  "Sejmik storey redesigned ('S-3') and verified by scripts: 47 councillor desks (43 + 4 wheelchair places, one per row) on 4 rows with 5 % side ramps; public gallery 31 + 3 wheelchair places with ≥ 77 mm sightline clearance to all presidium seats and the speaker; councillors' upper hall and the public gallery on separate mezzanines; two escape routes from hall, gallery and mezzanine.",
+  "Price of S-3: mezzanine 298 m² (≈ +118 m² vs the allowance) → ≈ +0.4–0.5 M PLN, which would eat most of the 0.82 M cost margin → the merge workflow must restore ≥ 1.0 M margin with documented levers.",
+  "Structural/functional issue carried into the merge: stair A flight is 5.15 m long where ≈ 5.9 m is needed for the 3.75 / 4.80 / 8.90 m storey heights — the merge must solve it geometrically for cores A, B and C.",
+  "Drawings are being updated to v1.1 (shown: east and south elevations with the lowered segment attic and glass balustrade, BIPV south wall of the segment with climbers at ground level, BIPV canopy over the garden terrace, tone-on-tone crown lamellas in a Fibonacci rhythm).",
+  "Still running: structural & functional audit, extra showcase renders, 3D (photomatch, reflections, Citizens' Hall interior)."
  ],
  "images": [
   {

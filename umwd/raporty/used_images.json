@@ -198,5 +198,21 @@
  "bed0d2b52e6fe7e60ece": {
   "path": "umwd/raporty/img/budynek_test_W3_v3.jpg",
   "board": "spec_27"
+ },
+ "fd3ddb91d5f8f3778d88": {
+  "path": "umwd/raporty/img/s2_plan.png",
+  "board": "spec_28"
+ },
+ "6010b3f0eaa9cee3f0e4": {
+  "path": "umwd/raporty/img/s2_przekroj.png",
+  "board": "spec_28"
+ },
+ "6b850535bd466892bcdc": {
+  "path": "umwd/raporty/img/elewacja_S_v11.png",
+  "board": "spec_28"
+ },
+ "ba6409cdcf8df197205a": {
+  "path": "umwd/raporty/img/elewacja_E_v11.png",
+  "board": "spec_28"
  }
 }

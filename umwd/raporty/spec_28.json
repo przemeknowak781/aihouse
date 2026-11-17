@@ -1,0 +1,71 @@
+{
+ "nr": 28,
+ "title": "Sejmik storey S-3: 47 desks, public gallery with proven sightlines; drawings moving to v1.1",
+ "stages": [
+  [
+   "Organiser materials ✔ (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register ✔ (184 requirements) + checklists",
+   "done"
+  ],
+  [
+   "Site ✔ (zoning, heritage, survey, geotech, trees, neighbours)",
+   "done"
+  ],
+  [
+   "Law ✔ (WT bridge, fire, accessibility, zero-emission)",
+   "done"
+  ],
+  [
+   "Design research ✔ (trends, visuals, boards, façades, costs)",
+   "done"
+  ],
+  [
+   "Programme ✔ (187 offices, PU ≈ 8,600 m²)",
+   "done"
+  ],
+  [
+   "Concept v1.1 ✔ + Sejmik storey S-3 ✔ → merge into v1.2 with stair-A fix and cost check (workflow ►)",
+   "running"
+  ],
+  [
+   "Production ►: drawings → v1.1 (workflow ►); plans re-run after S-2; photomatch tests ✔; extra showcase renders (workflow ►)",
+   "running"
+  ],
+  [
+   "Boards ►: Stage II 8/8 skeletons with true-scale drawings (vis pending); Stage I 2/2; tables F.15/F.14.B ✔ (draft)",
+   "running"
+  ],
+  [
+   "Audit ►: completeness 25/44; structural & functional audit ►; jury later",
+   "running"
+  ]
+ ],
+ "notes": [
+  "Sejmik storey redesigned ('S-3') and verified by scripts: 47 councillor desks (43 + 4 wheelchair places, one per row) on 4 rows with 5 % side ramps; public gallery 31 + 3 wheelchair places with ≥ 77 mm sightline clearance to all presidium seats and the speaker; councillors' upper hall and the public gallery on separate mezzanines; two escape routes from hall, gallery and mezzanine.",
+  "Price of S-3: mezzanine 298 m² (≈ +118 m² vs the allowance) → ≈ +0.4–0.5 M PLN, which would eat most of the 0.82 M cost margin → the merge workflow must restore ≥ 1.0 M margin with documented levers.",
+  "Structural/functional issue carried into the merge: stair A flight is 5.15 m long where ≈ 5.9 m is needed for the 3.75 / 4.80 / 8.90 m storey heights — the merge must solve it geometrically for cores A, B and C.",
+  "Drawings are being updated to v1.1 (shown: east and south elevations with the lowered segment attic and glass balustrade, BIPV south wall of the segment with climbers at ground level, BIPV canopy over the garden terrace, tone-on-tone crown lamellas in a Fibonacci rhythm).",
+  "Still running: structural & functional audit, extra showcase renders, 3D (photomatch, reflections, Citizens' Hall interior)."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/s2_plan.png",
+   "caption": "Storey S +27.30 and mezzanine +30.90 (S-3)"
+  },
+  {
+   "path": "umwd/raporty/img/s2_przekroj.png",
+   "caption": "Gallery sightlines to presidium and speaker (≥ 77 mm)"
+  },
+  {
+   "path": "umwd/raporty/img/elewacja_S_v11.png",
+   "caption": "South elevation v1.1: BIPV segment wall, terrace canopy"
+  },
+  {
+   "path": "umwd/raporty/img/elewacja_E_v11.png",
+   "caption": "East elevation v1.1: lowered segment attic, new crown rhythm"
+  }
+ ]
+}

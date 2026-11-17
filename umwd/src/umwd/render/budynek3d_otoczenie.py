@@ -576,8 +576,7 @@ def wozek(B, coll, zf):
     p = np.array([cx, cy]) + kier_n * (R11 + 1.4)
     kier_ruchu = np.array([-kier_n[1], kier_n[0]]) * (1.0 if kat < 45.0 else -1.0)   # stycznie, ku osi 45°
     z = float(zf([p[0]], [p[1]])[0])
-    mat = B.mat('ludzie')
-    mm = B.mat('metal')
+    mat = B.mat('ludzie:okrycie_jasne')      # jasne okrycie – czytelne na tle ciemnego szklenia podcienia
     # wózek – lokalnie: przód +y, koła po bokach x = ±0,30
     Vt, Ft = _torus(0.30, 0.018)
     Vo, Fo = _torus(0.27, 0.008)
@@ -586,8 +585,9 @@ def wozek(B, coll, zf):
     for sx in (-0.31, 0.31):
         for V, F, (oy, oz), mt in ((Vt, Ft, (0.0, 0.30), 'wn_ciemne'), (Vo, Fo, (0.0, 0.30), 'metal'),
                                    (Vk, Fk, (0.42, 0.09), 'wn_ciemne')):
+            # torus z _torus leży w XZ – obrót do płaszczyzny YZ (koło toczy się wzdłuż +y, oś wzdłuż x)
             Vs = [(x + sx + (0.025 if mt == 'metal' else 0) * np.sign(sx), y + oy, zz + oz) for x, y, zz in
-                  [(vx, vz, vy) for vx, vy, vz in V]]
+                  [(vy, vx, vz) for vx, vy, vz in V]]
             for f in F:
                 G.face([Vs[i] for i in f], [(0, 0)] * len(f), mt)
     # rama i siedzisko
@@ -743,8 +743,8 @@ def ludzie(B, ctx, coll, plac, zf):
         kier += rng.normal(0, 0.35)
         ob.rotation_euler = (0, 0, kier - math.pi / 2)
         if idzie and B.o.get('ruch_ludzi', True):
-            # lekkie rozmycie ruchu (ok. 1/8 s przy 1,3 m/s): klatki 0–2, migawka 1 klatka
-            v = np.array([math.cos(kier), math.sin(kier)]) * 0.16
+            # subtelne rozmycie ruchu (ok. 1/20 s przy 1,3 m/s ≈ 7 cm): klatki 0–2, migawka 1 klatka
+            v = np.array([math.cos(kier), math.sin(kier)]) * B.o.get('ruch_ludzi_m', 0.07)
             for f in (0, 1, 2):
                 ob.location = (p[0] + v[0] * (f - 1), p[1] + v[1] * (f - 1), z + B.DZ)
                 ob.keyframe_insert('location', frame=f)

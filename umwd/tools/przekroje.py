@@ -8,7 +8,7 @@ B-B: wzdłuż v = 19 m (zach.→wsch.): ul. Mazowiecka – skrzydło – wieża 
      bulwaru. Widok na północ.
 Wynik: build/rysunki/przekroj_{AA,BB}_1-200.svg + docs/70_rysunki/podglady/przekroje_1-200.png
 """
-import sys, json, math
+import sys, json, math, re
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -33,6 +33,74 @@ B = {b["id"]: b for b in K["bryly"]}
 TOWER = Polygon(B["W"]["obrys_ccw"]).buffer(0)
 WING = Polygon(B["M"]["obrys_ccw"]).buffer(0)
 SEG = Polygon(B["S"]["obrys_ccw"]).buffer(0)
+SEG_S_FACE = LineString(B["S"]["obrys_ccw"][:2])           # lico pd. segmentu (od dz. 10/2)
+
+# ---- rzędne i przegrody z koncepcja.json (v1.1) – bez wartości zakodowanych na sztywno
+KOND = {kd["kondygnacja"]: kd for kd in K["kondygnacje"]}
+K_IDS = [kd["kondygnacja"] for kd in K["kondygnacje"]]    # od dołu: −2, −1, P, 1 … 6, S
+Z_K = {kid: float(kd["posadzka_wzgl"]) for kid, kd in KOND.items()}
+Z_K["ANT"] = float(KOND["S"]["antresola_posadzka"])
+DW_, DM_, DS_ = B["W"]["dach"], B["M"]["dach"], B["S"]["dach"]
+Z_ROOF_W = float(DW_["najnizszy_pkt_pokrycia"]["wzgl"])                # +36,20
+Z_ROOF_W_MAX = float(DW_["najwyzszy_pkt_pokrycia"]["wzgl"])            # +36,45
+Z_ATT_W = float(DW_["attyka"]["wzgl"])                                 # +37,20
+Z_SUF_S = float(KOND["S"]["dach"]["rusz_spod"])                        # +34,15 – spód rusztu / sufit sali
+H_TRUSS = 1.60                                                         # kratownice 1,60 m (siatka.wieza.dach_S)
+Z_DECK_W = Z_SUF_S + 0.05 + H_TRUSS                                    # +35,80 – płyta zespolona dachu
+STR4 = KOND["4"]["strop_nad"]
+Z_ROOF_M, Z_ROOF_M_SP = float(DM_["strop_wierzch"]), float(STR4["dach_skrzydla_spod"])          # +19,80 / +19,40
+Z_ROOF_M_MAX, Z_GZ = float(DM_["najwyzszy_pkt_pokrycia"]["wzgl"]), float(DM_["gzyms_attyka"]["wzgl"])   # +20,40 / +20,85
+Z_ROOF_S, Z_ROOF_S_SP = float(DS_["strop_wierzch"]), float(STR4["dach_segmentu_spod"])          # +19,10 / +18,82
+Z_TARAS = float(DS_["taras_wykonczenie"]["wzgl"])                                               # +19,80 (139,10)
+Z_ATT_S = float(DS_["attyka"]["wzgl"])                                                          # +20,85 (lica wsch., zach.)
+Z_ATT_SPD = float(DS_["attyka"]["sciana_pd_npm"]) - Z0                                          # 139,10 – attyka ściany pd.
+BAL_H, BAL_COF = 1.10, 1.5                                 # balustrada szklana 1,10 m cofnięta 1,5 m od lica pd. (140,20)
+PD = KOND["-2"]["plyta_denna"]                             # płyta denna: wierzch −7,30, spód −8,40 (wieża 1,10 / poza 0,90)
+POS = K["siatka"]["posadowienie"]
+
+
+def _num(txt, pat, dflt):
+    m = re.search(pat, txt or "")
+    return float(m.group(1).replace(",", ".")) if m else dflt
+
+
+T_DW = _num(POS.get("obudowa"), r"ściany szczelinowe\s+(\d+[,.]\d+)\s*m", 0.60)    # grubość ścian szczelinowych
+H_DW = _num(POS.get("obudowa"), r"×\s*(\d+(?:[,.]\d+)?)\s*m\b", 19.0)             # wysokość (głębokość) ścian
+L_PAL = _num(POS.get("wieza"), r"L\s*≈\s*(\d+(?:[,.]\d+)?)\s*m", 14.0)           # pale CFA pod wieżą
+D_PAL = _num(POS.get("wieza"), r"Ø\s*(\d+[,.]\d+)\s*m", 0.8)
+Z_DW_TOP = float(KOND["-1"]["strop_nad"]["spod_wieza"])    # oczep ścian szczelinowych pod stropem nad −1
+UG_K = unary_union([Polygon(K["podziemie"][i]["obrys_ccw"]).buffer(0) for i in ("-1", "-2") if i in K["podziemie"]])
+EWI, ESK = K["elewacje"]["wieza"], K["elewacje"]["skrzydlo"]
+Z_KORDON = float(ESK["linie"]["attyka_npm"]) - Z0          # kordon wieży do +20,85 (parapet kond. 5)
+# nazwy kondygnacji „następnej” – wierzch ścian / tło białe kondygnacji
+NXT = {K_IDS[i]: Z_K[K_IDS[i + 1]] for i in range(len(K_IDS) - 1)}
+NXT["S"] = Z_ROOF_W
+NXT["ANT"] = Z_ROOF_W
+
+
+def fz(z):
+    if abs(z) < 0.005:
+        return "±0,00"
+    return ("+" if z > 0 else "−") + f"{abs(z):.2f}".replace(".", ",")
+
+
+def slab_under(lid, e, n):
+    """Strop (konstrukcja + warstwy) pod posadzką kondygnacji lid: posadzka − spód stropu nad kondygnacją niższą
+    (wieża / segment – płyta 0,28 + podłoga; skrzydło – płyta 0,40 + podłoga; garaż – bez warstw; nad kond. 4 skrzydła
+    i segmentu – dach / taras: spód +19,40 / +18,82)."""
+    if lid not in K_IDS or K_IDS.index(lid) == 0:
+        return 0.43
+    sn = KOND[K_IDS[K_IDS.index(lid) - 1]]["strop_nad"]
+    tw = sn.get("spod_wieza", sn.get("wieza_spod"))
+    pt = Point(e, n)
+    in_tw = TOWER.buffer(0.3).contains(pt)
+    if not in_tw and WING.contains(pt):
+        sp = sn.get("spod_skrzydlo", sn.get("dach_skrzydla_spod", tw))
+    elif not in_tw and SEG.contains(pt):
+        sp = sn.get("dach_segmentu_spod", tw)
+    else:
+        sp = tw
+    return Z_K[lid] - float(sp)
 
 
 def uv(u, v):
@@ -64,11 +132,9 @@ def intervals(geom, line, U):
     return sorted(segs)
 
 
-def slab_t(e, n):
-    p = Point(e, n)
-    if TOWER.buffer(0.3).contains(p):
-        return 0.43
-    return 0.55
+def slab_t(e, n, lid="1"):
+    """Zachowane API: grubość stropu pod posadzką kondygnacji (domyślnie typowej) w punkcie (e, n)."""
+    return slab_under(lid, e, n)
 
 
 def person(svg, P, u, z, h=1.75, flip=False):
@@ -136,8 +202,15 @@ def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=()
     # ---- the building cut
     levels = BM["kondygnacje"]
     ids = [lv["id"] for lv in levels]
-    z_of = {lv["id"]: (float(lv["rzedna"]) if lv.get("rzedna") not in (None, "None") else None) for lv in levels}
-    nxt = {"-2": -3.75, "-1": 0.0, "P": 4.8, "1": 8.55, "2": 12.3, "3": 16.05, "4": 19.8, "5": 23.55, "6": 27.3, "S": 36.2, "ANT": 36.2}
+    z_bm = {lv["id"]: (float(lv["rzedna"]) if lv.get("rzedna") not in (None, "None") else None) for lv in levels}
+    # rzędne z koncepcja.json (v1.1); budynek.json dostarcza tylko geometrię rzutów
+    z_of = {lid: Z_K.get(lid, z_bm[lid]) for lid in ids}
+    for lid in ids:
+        if lid in Z_K and z_bm[lid] is not None and abs(z_bm[lid] - Z_K[lid]) > 0.01 and not _WARNED:
+            print(f"  [przekroje] uwaga: budynek.json kond. {lid} rzędna {z_bm[lid]:+.2f} ≠ koncepcja.json {Z_K[lid]:+.2f} "
+                  f"– rysuję wg koncepcja.json (model pomieszczeń do przeliczenia)", file=sys.stderr)
+    _WARNED.add(name)
+    ug_bm2 = mp(next((lv.get("plyta") for lv in levels if lv["id"] == "-2"), None))
     room_labels = []
     for lv in levels:
         lid = lv["id"]
@@ -147,21 +220,23 @@ def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=()
         plate = mp(lv.get("plyta"))
         if lid == "ANT":
             plate = plate.difference(mp((lv.get("extra") or {}).get("void", [])))
-        top0 = {"-2": -3.75, "-1": 0.0, "P": 4.8, "1": 8.55, "2": 12.3, "3": 16.05, "4": 19.8, "5": 23.55, "6": 27.3, "S": 36.2, "ANT": 36.2}.get(lid, z + 3.75)
+        top0 = NXT.get(lid, z + 3.75)
         if lid != "ANT":
             for a, b in intervals(plate, line, U):
                 svg.poly([P(a, z), P(b, z), P(b, top0), P(a, top0)], fill="#ffffff", stroke="none")
         for a, b in intervals(plate, line, U):
             mid = (a + b) / 2
             e, n = p0[0] + r[0] * mid, p0[1] + r[1] * mid
-            t = slab_t(e, n)
-            if lid in ("-2",):
-                svg.poly([P(a, z - 1.2), P(b, z - 1.2), P(b, z), P(a, z)], fill=POCHE, stroke="none")      # płyta fund. 1,10 + posadzka
-            elif lid == "-1" and not TOWER.contains(Point(e, n)) and not SEG.contains(Point(e, n)):
-                svg.poly([P(a, z - 1.0), P(b, z - 1.0), P(b, z), P(a, z)], fill=POCHE, stroke="none")
+            t = slab_under(lid, e, n)
+            if lid in ("-2",):          # płyta denna: wieża 1,10 (spód −8,40), poza wieżą 0,90; + posadzka
+                spod = float(PD["spod"]) if TOWER.contains(Point(e, n)) else float(PD["wierzch"]) - float(PD["grubosc_poza_wieza_m"])
+                svg.poly([P(a, spod), P(b, spod), P(b, z), P(a, z)], fill=POCHE, stroke="none")
+            elif lid == "-1" and not ug_bm2.buffer(0.05).contains(Point(e, n)):     # −1 bez −2 pod spodem (M1) – płyta denna
+                t_pd = (Z_K["-2"] - float(PD["wierzch"])) + float(PD["grubosc_poza_wieza_m"])
+                svg.poly([P(a, z - t_pd), P(b, z - t_pd), P(b, z), P(a, z)], fill=POCHE, stroke="none")
             else:
                 svg.poly([P(a, z - t), P(b, z - t), P(b, z), P(a, z)], fill=POCHE, stroke="none")
-        top = nxt.get(lid, z + 3.75)
+        top = NXT.get(lid, z + 3.75)
         sc = lv.get("sciany", {})
         wall_top = top
         # walls: external (poché with windows), cores (poché), internal partitions (grey)
@@ -177,7 +252,8 @@ def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=()
             mid = (a + b) / 2
             e, n = p0[0] + r[0] * mid, p0[1] + r[1] * mid
             pt = Point(e, n)
-            t = slab_t(e, n)
+            nx_id = K_IDS[K_IDS.index(lid) + 1] if lid in K_IDS[:-1] else None
+            t = slab_under(nx_id, e, n) if nx_id else 0.3
             ztop = wall_top - (t if lid not in ("S",) else 0.3)
             hits = [kd for o, kd in okna if o.distance(pt) < max(0.35, (b - a))]
             is_win = bool(hits)
@@ -186,11 +262,17 @@ def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=()
                 svg.poly([P(a, z - 1.1), P(b, z - 1.1), P(b, ztop), P(a, ztop)], fill=POCHE, stroke="none")
                 continue
             if is_win:
+                in_tw = TOWER.buffer(0.3).contains(pt)
                 if ribbon:
                     sill, head = ((0.3, 8.55) if lid == "S" else (1.30, ztop - z - 0.02))
-                else:
-                    sill = 0.0 if lid == "P" else (0.7 if lid == "S" else 0.9)
-                    head = (4.4 if lid == "P" else (5.7 if lid == "S" else sill + 2.45))
+                elif lid == "P":
+                    sill, head = 0.0, 4.4
+                elif lid == "S":
+                    sill, head = 0.7, 5.7
+                elif in_tw:             # wieża: parapet 0,55 / nadproże 3,00; kond. 5 nad kordonem (+20,85)
+                    sill, head = (Z_KORDON - z if lid == "5" else float(EWI["parapet_m"])), float(EWI["nadproze_m"])
+                else:                   # skrzydło i segment: parapet 0,60 / nadproże 2,95
+                    sill, head = float(ESK["parapet_m"]), float(ESK["nadproze_m"])
                 svg.poly([P(a, z), P(b, z), P(b, z + sill), P(a, z + sill)], fill=POCHE, stroke="none")
                 svg.poly([P(a, z + head), P(b, z + head), P(b, ztop), P(a, ztop)], fill=POCHE, stroke="none")
                 gx = P((a + b) / 2, 0)[0]
@@ -230,13 +312,14 @@ def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=()
                 rr = math.hypot(e - fe, n - fn)
                 lift = 0.45 if rr >= 9.0 else 0.30 if rr >= 6.9 else 0.15 if rr >= 4.8 else 0.0
                 if lift:
-                    svg.poly([P(uu, 27.3), P(min(b, uu + 0.25), 27.3), P(min(b, uu + 0.25), 27.3 + lift), P(uu, 27.3 + lift)], fill=POCHE, stroke="none")
+                    zS = Z_K["S"]
+                    svg.poly([P(uu, zS), P(min(b, uu + 0.25), zS), P(min(b, uu + 0.25), zS + lift), P(uu, zS + lift)], fill=POCHE, stroke="none")
                 uu += 0.25
             # people seated + presidium figure
             for q in range(1, int((b - a) / 2.2)):
-                person(svg, P, a + q * 2.2, 27.75, h=1.25)
-            # roof truss 1,60 m over the hall
-            zt, zb = 36.0, 34.4
+                person(svg, P, a + q * 2.2, Z_K["S"] + 0.45, h=1.25)
+            # kratownice dachu 1,60 m nad salą (spód rusztu +34,15 → płyta +35,80)
+            zt, zb = Z_DECK_W, Z_DECK_W - H_TRUSS
             svg.line(P(a, zt), P(b, zt), stroke=POCHE, sw=0.35)
             svg.line(P(a, zb), P(b, zb), stroke=POCHE, sw=0.35)
             nseg = max(2, int((b - a) / 2.7))
@@ -245,24 +328,35 @@ def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=()
                 svg.line(P(x0, zb), P((x0 + x1) / 2, zt), stroke=POCHE, sw=0.18)
                 svg.line(P((x0 + x1) / 2, zt), P(x1, zb), stroke=POCHE, sw=0.18)
     # roof slabs + attics
-    roofs = [(TOWER, 36.2, 36.45, 37.2), (WING, 19.8, 20.4, 20.85), (SEG, 19.5, 19.8, 20.85)]
+    # (bryła, spód płyty dachu, wierzch pokrycia/tarasu, attyka) z koncepcja.json
+    roofs = [(TOWER, Z_DECK_W, Z_ROOF_W_MAX, Z_ATT_W), (WING, Z_ROOF_M_SP, Z_ROOF_M_MAX, Z_GZ), (SEG, Z_ROOF_S_SP, Z_TARAS, Z_ATT_S)]
     for g, zs, zr, za in roofs:
         for a, b in intervals(g, line, U):
-            svg.poly([P(a, zs - 0.3), P(b, zs - 0.3), P(b, zr), P(a, zr)], fill=POCHE, stroke="none")
-            for x in (a, b - 0.5):
-                svg.poly([P(x, zr), P(x + 0.5, zr), P(x + 0.5, za), P(x, za)], fill=POCHE, stroke="none")
-            if g is SEG:   # set-back glass balustrade 1,10 m (D.03)
-                for x in (a + 1.5, b - 1.5):
-                    svg.line(P(x, zr), P(x, zr + 1.1), stroke="#4a6a85", sw=0.25)
-    # diaphragm walls 0,80 to ≈ −18 m and tower piles
-    ug = unary_union([mp(lv.get("plyta")) for lv in levels if lv["id"] in ("-1", "-2")])
-    for a, b in intervals(ug, line, U):
-        for x in (a, b - 0.8):
-            svg.poly([P(x, -1.0), P(x + 0.8, -1.0), P(x + 0.8, -18.0), P(x, -18.0)], fill="#3a3632", stroke="none")
+            svg.poly([P(a, zs), P(b, zs), P(b, zr), P(a, zr)], fill=POCHE, stroke="none")
+            for x, inward in ((a, 1.0), (b - 0.5, -1.0)):
+                xe = x + (0.0 if inward > 0 else 0.5)                 # krawędź zewnętrzna na licu
+                ee, nn = p0[0] + r[0] * xe, p0[1] + r[1] * xe
+                pt = Point(ee, nn)
+                if g is not TOWER and TOWER.buffer(0.4).contains(pt):
+                    continue                                           # styk z wieżą – bez attyki (obróbka, G-D-3)
+                if g is SEG and SEG_S_FACE.distance(pt) < 0.6:         # ściana pd. segmentu: attyka 139,10 = taras
+                    za_ = Z_ATT_SPD
+                else:
+                    za_ = za
+                if za_ > zr + 0.01:
+                    svg.poly([P(x, zr), P(x + 0.5, zr), P(x + 0.5, za_), P(x, za_)], fill=POCHE, stroke="none")
+                if g is SEG:   # balustrada szklana 1,10 m cofnięta 1,5 m od lica (WT § 298)
+                    xb = xe + inward * BAL_COF
+                    svg.line(P(xb, zr), P(xb, zr + BAL_H), stroke="#4a6a85", sw=0.25)
+    # ściany szczelinowe (v1.1: grubość i głębokość z siatka.posadowienie, obrys −1/−2 z koncepcja.json) i pale pod wieżą
+    for a, b in intervals(UG_K, line, U):
+        for x in (a, b - T_DW):
+            svg.poly([P(x, Z_DW_TOP), P(x + T_DW, Z_DW_TOP), P(x + T_DW, Z_DW_TOP - H_DW), P(x, Z_DW_TOP - H_DW)], fill="#3a3632", stroke="none")
+    z_pal = float(PD["spod"])
     for a, b in intervals(TOWER, line, U):
         x = a + 2.0
         while x < b - 1.5:
-            svg.poly([P(x, -8.2), P(x + 0.8, -8.2), P(x + 0.8, -22.2), P(x, -22.2)], fill="#ffffff", stroke="#3a3632", sw=0.15, extra='stroke-dasharray="0.8,0.5"')
+            svg.poly([P(x, z_pal), P(x + D_PAL, z_pal), P(x + D_PAL, z_pal - L_PAL), P(x, z_pal - L_PAL)], fill="#ffffff", stroke="#3a3632", sw=0.15, extra='stroke-dasharray="0.8,0.5"')
             x += 4.05
     # groundwater
     for zabs, lab, col in ((117.0, "poziom obliczeniowy wód 117,00", "#3f74a0"), (116.45, "ZWG maks. 116,45", "#5b8db5"), (115.5, "ZWG średnie 115,50", "#8fb3cf")):
@@ -299,8 +393,16 @@ def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=()
         svg.text(P(pu, pz), lab, size=2.0, anchor="middle", fill="#4d4842", weight=600)
     # level marks (left)
     x = pad_l - 8
-    for z, lab in [(37.2, "+37,20"), (36.2, "+36,20"), (30.9, "+30,90 galeria"), (27.3, "+27,30 S"), (23.55, "+23,55 (6)"), (19.8, "+19,80 (5)"),
-                   (16.05, "+16,05 (4)"), (12.3, "+12,30 (3)"), (8.55, "+8,55 (2)"), (4.8, "+4,80 (1)"), (0.0, "±0,00 = 119,30 (P)"), (-3.75, "−3,75 (−1)"), (-7.0, "−7,00 (−2)")]:
+    marks = [(Z_ATT_W, fz(Z_ATT_W)), (Z_ROOF_W, fz(Z_ROOF_W)), (Z_K["ANT"], f"{fz(Z_K['ANT'])} galeria")]
+    for kid in reversed(K_IDS):
+        zk = Z_K[kid]
+        if kid == "P":
+            marks.append((zk, f"±0,00 = {Z0:.2f} (P)".replace(".", ",")))
+        elif kid == "S":
+            marks.append((zk, f"{fz(zk)} S"))
+        else:
+            marks.append((zk, f"{fz(zk)} ({kid.replace('-', '−')})"))
+    for z, lab in marks:
         y = P(0, z)[1]
         svg.poly([(x, y), (x - 1.2, y - 1.4), (x + 1.2, y - 1.4)], fill=INK, stroke="none")
         svg.line((x - 2, y), (pad_l - 2, y), stroke=INK, sw=0.1)
@@ -340,6 +442,7 @@ def maz19():
 
 
 SAS = json.loads((ROOT / "model" / "sasiedzi.json").read_text(encoding="utf-8"))
+_WARNED = set()
 SAS_WS5 = SAS["budynki"][1]
 
 
@@ -356,13 +459,14 @@ def main():
                               "najniższy punkt pokrycia +36,20 (MPZP strefa A: 35–45 m).",
                               "Sala obrad 6,85 m w świetle, amfiteatr 3 rzędy +0,15/0,30/0,45,",
                               "galeria publiczności +30,90, kratownice stalowe 1,60 m / 19,5 m.",
-                              "Segment P+4 z tarasem zielonym +19,80, balustrada szklana",
-                              "1,10 m cofnięta 1,5 m od attyki (WT § 298).",
+                              f"Segment P+4 z tarasem zielonym {fz(Z_TARAS)} (attyka pd. {Z_ATT_SPD + Z0:.2f}),".replace(".", ",", 1),
+                              "balustrada szklana 1,10 m cofnięta 1,5 m od lica pd. (WT § 298).",
                               "Odległość segment – szczyt WS 5: 10,58 m; okno w szczycie",
                               "zachowane (§ 13 WT – analiza nasłonecznienia na planszy 2).",
-                              "Podziemie: −1 / −2 w ścianach szczelinowych 0,80 m (≈ 18 m,",
-                              "wcięte w gliny QpB), biała wanna, płyta 1,10 m na palach CFA",
-                              "Ø 0,8 m L ≈ 14 m; poziom obliczeniowy wód 117,00 m n.p.m."]))
+                              f"Podziemie: −1 ({fz(Z_K['-1'])}) / −2 ({fz(Z_K['-2'])}) w ścianach szczelinowych",
+                              f"{T_DW:.2f} m × {H_DW:.0f} m (wcięte w gliny QpB), biała wanna, płyta".replace(".", ",", 1),
+                              f"{float(PD['grubosc_wieza_m']):.2f} m na palach CFA Ø {D_PAL:.1f} m L ≈ {L_PAL:.0f} m; poziom".replace(".", ","),
+                              "obliczeniowy wód 117,00 m n.p.m."]))
     VB = 19.6
     pB0, pB1 = uv(-24.0, VB), uv(52.0, VB)
     res.append(section("BB", "PRZEKRÓJ B-B", "v = 19,6 m: ul. Mazowiecka – skrzydło – Hala Obywatelska i sala obrad – ul. Wybrzeże J. Słowackiego · widok na północ",
@@ -371,8 +475,8 @@ def main():
                        places=[(5.0, -1.4, "ul. Mazowiecka"), (69.0, -1.4, "ul. Wybrzeże J. Słowackiego")],
                        neighbours=[], beyond_names=(),
                        notes=["Skrzydło P+4: gzyms +20,85 = 140,15 m n.p.m. w linii attyki",
-                              "kamienicy Mazowiecka 19 (140,24); biura 3,20 m w świetle.",
-                              "Wieża: biura 3,32 m w świetle (TABS, płyta 0,28 m),",
+                              f"kamienicy Mazowiecka 19 (140,24); biura {K['wysokosci_w_swietle']['biura_skrzydlo']:.2f} m w świetle.".replace(".", ",", 1),
+                              f"Wieża: biura {K['wysokosci_w_swietle']['biura_wieza']:.2f} m w świetle (TABS, płyta 0,28 m),".replace(".", ","),
                               "parter 4,37 m; kondygnacja cienia (6) cofnięta 0,40 m.",
                               "Hala Obywatelska na osi most – ogród (przejście publiczne)."]))
     total_h = sum(s.h_mm for s in res) + 12

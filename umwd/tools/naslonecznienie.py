@@ -11,7 +11,7 @@ import sys, json, math, datetime
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from shapely.geometry import Polygon, Point
+from shapely.geometry import Polygon, Point, LineString
 from shapely.ops import unary_union
 from umwd import shadow as SH
 from umwd.sun import TZ
@@ -23,9 +23,22 @@ K = json.loads((ROOT / "model" / "koncepcja.json").read_text(encoding="utf-8"))
 SAS = json.loads((ROOT / "model" / "sasiedzi.json").read_text(encoding="utf-8"))
 Z0 = 119.30
 B = {b["id"]: b for b in K["bryly"]}
-OURS = [(Polygon(B["W"]["obrys_ccw"]).buffer(0), 0.0, B["W"]["dach"]["attyka"]["wzgl"]),
-        (Polygon(B["M"]["obrys_ccw"]).buffer(0), 0.0, B["M"]["dach"]["gzyms_attyka"]["wzgl"]),
-        (Polygon(B["S"]["obrys_ccw"]).buffer(0), 0.0, B["S"]["dach"]["attyka"]["wzgl"])]
+# segment v1.1 (G-D-1): taras w attyce, attyka ściany pd. obniżona do poziomu tarasu (sciana_pd_npm = 139,10 → +19,80),
+# pozostałe lica (wsch., zach., pn.) z attyką +20,85 (140,15) – pasy 0,50 m; balustrada szklana 1,10 m cofnięta 1,5 m
+# pominięta jako przezierna. Bryła segmentu = pryzmat do +19,80 + attyki trzech lic.
+SEGP = Polygon(B["S"]["obrys_ccw"]).buffer(0)
+SDACH = B["S"]["dach"]
+Z_S_PD = SDACH["attyka"]["sciana_pd_npm"] - Z0          # +19,80
+Z_S_ATT = SDACH["attyka"]["wzgl"]                         # +20,85
+_sc = list(SEGP.exterior.coords)
+_edges = [(_sc[i], _sc[i + 1]) for i in range(len(_sc) - 1)]
+S_FACE = LineString(min(_edges, key=lambda e: (e[0][1] + e[1][1]) / 2))      # lico pd. (od dz. 10/2 i WS 5)
+_att = SEGP.difference(SEGP.buffer(-0.5, join_style=2)).difference(S_FACE.buffer(0.55, cap_style=2))
+SEG_ATT = [g for g in getattr(_att, "geoms", [_att]) if g.geom_type == "Polygon" and g.area > 0.2]
+FOOT = [Polygon(B["W"]["obrys_ccw"]).buffer(0), Polygon(B["M"]["obrys_ccw"]).buffer(0), SEGP]
+OURS = [(FOOT[0], 0.0, B["W"]["dach"]["attyka"]["wzgl"]),
+        (FOOT[1], 0.0, B["M"]["dach"]["gzyms_attyka"]["wzgl"]),
+        (SEGP, 0.0, Z_S_PD)] + [(g, Z_S_PD, Z_S_ATT) for g in SEG_ATT]
 NB = []
 for b in S["budynki"]["items"]:
     pg = poly_of(b)
@@ -93,7 +106,7 @@ def draw(rows, days):
     xs_ = np.arange(E0 + STEP / 2, E1, STEP); ys_ = np.arange(N0 + STEP / 2, N1, STEP)
     gx, gy = np.meshgrid(xs_, ys_)
     cnt = np.zeros(gx.shape)
-    foot = unary_union([p for p, _, _ in OURS])
+    foot = unary_union(FOOT)
     nsteps = 0
     for t in SH.times(d0, "07:00", "17:00", 10):
         az, el = SH.sun_grid(t)
@@ -128,8 +141,9 @@ def draw(rows, days):
     self_legend = [(0.5, (233, 238, 244), "0,5–1,5 h"), (1.5, (205, 219, 233), "1,5–3 h"), (3.0, (164, 189, 214), "3–5 h"), (5.0, (113, 148, 186), "5–7 h"), (7.0, (66, 103, 150), "> 7 h")]
     for pg, z0, z1, name in NB:
         model_rings(svg, v, pg, fill="#dcd8d1", stroke="#6f6a63", sw=0.2)
-    for fp, z0, z1 in OURS:
+    for fp in FOOT:
         model_rings(svg, v, fp, fill="#ffffff", stroke="#1f1d1a", sw=0.45)
+    svg.line(v.p(*S_FACE.coords[0]), v.p(*S_FACE.coords[1]), stroke="#a8483a", sw=0.5)      # obniżona attyka ściany pd. segmentu
     # protected windows markers (ground floor only to keep it legible)
     for r in rows:
         if "parter" in r["okno"]:
@@ -144,7 +158,12 @@ def draw(rows, days):
     y = 9
     svg.text((lx, y), "ZACIENIENIE W DNIU RÓWNONOCY", size=3.6, weight=600); y += 5
     svg.text((lx, y), "20 marca 2027 — mapa czasu zacienienia przez zabudowę projektowaną (krok 10 min), czas urzędowy", size=2.1, fill="#4d4842"); y += 3.4
-    svg.text((lx, y), "kontury cienia o 9, 12, 15; 23.09 (CEST) – wynik w tabeli. Słońce: algorytm NOAA, 51,11° N / 17,05° E.", size=2.1, fill="#4d4842"); y += 6
+    svg.text((lx, y), "kontury cienia o 9, 12, 15; 23.09 (CEST) – wynik w tabeli. Słońce: algorytm NOAA, 51,11° N / 17,05° E.", size=2.1, fill="#4d4842"); y += 3.4
+    f2 = lambda x: f"{x:.2f}".replace(".", ",")
+    svg.text((lx, y), f"Zabudowa projektowana v1.1: wieża attyka +{f2(B['W']['dach']['attyka']['wzgl'])}, skrzydło gzyms +{f2(B['M']['dach']['gzyms_attyka']['wzgl'])}, "
+             f"segment: attyka ściany pd. {f2(SDACH['attyka']['sciana_pd_npm'])} (+{f2(Z_S_PD)})", size=2.1, fill="#4d4842"); y += 3.4
+    svg.text((lx, y), f"= poziom tarasu (czerwona linia), pozostałe lica +{f2(Z_S_ATT)}; balustrada szklana cofnięta 1,5 m pominięta (przezierna).",
+             size=2.1, fill="#4d4842"); y += 6
     svg.text((lx, y), "CZAS NASŁONECZNIENIA OKIEN CHRONIONYCH (7:00–17:00, krok 5 min)", size=2.4, weight=600); y += 4.2
     hdr = ["okno", "20.03 suma / ciągły", "23.09 suma / ciągły", "bez projektu (20.03)"]
     xs = [lx, lx + 60, lx + 88, lx + 116]
@@ -168,6 +187,10 @@ def draw(rows, days):
               "Podstawa prawna: § 60 i § 13 rozporządzenia w sprawie warunków technicznych (przepisy",
               "przejściowe – art. 102a Prawa budowlanego); weryfikacja w części opisowej."]:
         svg.text((lx, y), t, size=1.8, fill="#3a3632"); y += 2.9
+    wr = min(rows, key=lambda r: min(r[d.isoformat()]["suma_min"] for d in days))
+    wm = min(wr[d.isoformat()]["suma_min"] for d in days)
+    svg.text((lx, y), f"Przeliczenie v1.1 (segment z attyką ściany pd. na poziomie tarasu): najmniej {f"{wm / 60:.1f}".replace(".", ",")} h – {wr['okno']} – ≥ 1,5 h.",
+             size=1.8, fill="#1f6b3d", weight=600); y += 2.9
     y += 3
     svg.text((lx, y), "Liczba godzin w cieniu projektowanej zabudowy (20.03, 7:00–17:00):", size=2.0, weight=600); y += 3.6
     for th, col, lab in self_legend:

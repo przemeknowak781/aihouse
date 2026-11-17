@@ -4,6 +4,10 @@ A Face is a polyline (in CCW building order → s grows left→right for a viewe
 2D elements (rects / lines) in (s, z). draw_faces() projects all faces onto the plane perpendicular to the
 viewing azimuth, clips curved faces to the part that faces the viewer and paints far→near (painter).
 Pure python + Svg (no bpy).
+
+Element „fin” (v1.1): lamela głęboka prostopadła do lica (np. lamele korony łuku 0,35 × 0,60 m, R 13,40–14,00) –
+rysowana zależnie od kierunku patrzenia: czoło w licu + widoczny bok (rzut głębokości), dzięki czemu przy widoku
+skośnym lamele zasłaniają szkło tak jak w rzeczywistości. Kolejne lamele jednej ściany malowane od najdalszej.
 """
 from __future__ import annotations
 import math
@@ -54,6 +58,12 @@ class Face:
     def text(self, s, z, txt, size=1.6, fill=INK, weight=600, ls=0.6):
         self.els.append(("text", s, s, z, z, fill, txt, size, weight, ls))
 
+    def fin(self, s, w, depth, z0, z1, fill="#99928a", side=("#aaa399", "#6f6961"), stroke=INK, sw=0.03):
+        """Lamela o szerokości w (wzdłuż lica) i głębokości depth (do wnętrza obrysu, czoło w licu = obrysie).
+        side = (bok oświetlony, bok w cieniu) – światło z lewej."""
+        if 0 <= s <= self.L and z1 > z0:
+            self.els.append(("fin", s, w, z0, z1, fill, stroke, sw, side, depth))
+
 
 def _samples(face, s0, s1, step):
     n = max(1, int(math.ceil((s1 - s0) / step)))
@@ -83,10 +93,53 @@ def draw_faces(svg, faces, view_az, P, facing_tol=0.03, cut=None, debug=False):
 
     vis_faces = [f for f in faces if any(facing(f, s) for s in _samples(f, 0, f.L, 0.5))]
     vis_faces.sort(key=lambda f: -depth(f))
+    def pdepth(face, s):
+        (x, y), _ = face.run.at(s)
+        return x * d[0] + y * d[1]
+
+    def ordered(face):
+        """Elementy w kolejności zapisu; ciągi lamel („fin”) posortowane od najdalszej (malarz)."""
+        els, out, i = face.els, [], 0
+        while i < len(els):
+            if els[i][0] == "fin":
+                j = i
+                while j < len(els) and els[j][0] == "fin":
+                    j += 1
+                out += sorted(els[i:j], key=lambda e: -pdepth(face, e[1]))
+                i = j
+            else:
+                out.append(els[i])
+                i += 1
+        return out
+
+    def draw_fin(face, el):
+        _, s, w, z0, z1, fill, stroke, sw, side, depth = el
+        if not facing(face, s):
+            return
+        (x, y), (tx, ty) = face.run.at(s)
+        nx, ny = ty, -tx                                   # normalna zewnętrzna
+        pa = (x - tx * w / 2, y - ty * w / 2)
+        pb = (x + tx * w / 2, y + ty * w / 2)
+        qa = (pa[0] - nx * depth, pa[1] - ny * depth)      # krawędzie tylne (w głębi, przy szkle)
+        qb = (pb[0] - nx * depth, pb[1] - ny * depth)
+        Uq = lambda p: p[0] * r[0] + p[1] * r[1]
+        ua, ub, uqa, uqb = Uq(pa), Uq(pb), Uq(qa), Uq(qb)
+        # bok widoczny: ten, którego normalna (±t) jest zwrócona do patrzącego
+        for (u_f, u_b, sgn) in ((ub, uqb, 1.0), (ua, uqa, -1.0)):
+            if sgn * (tx * d[0] + ty * d[1]) < -1e-6 and abs(u_b - u_f) > 1e-4:
+                col = side[1] if u_b > u_f else side[0]        # bok zwrócony w prawo – w cieniu
+                svg.poly([P(u_f, z0), P(u_b, z0), P(u_b, z1), P(u_f, z1)], fill=col, stroke=stroke, sw=sw * 0.6)
+        u0_, u1_ = min(ua, ub), max(ua, ub)
+        if u1_ - u0_ > 1e-4:
+            svg.poly([P(u0_, z0), P(u1_, z0), P(u1_, z1), P(u0_, z1)], fill=fill, stroke=stroke, sw=sw)
+
     umin, umax = 1e9, -1e9
     for f in vis_faces:
-        for el in f.els:
+        for el in ordered(f):
             kind, s0, s1, z0, z1, fill, stroke, sw, op, extra = el
+            if kind == "fin":
+                draw_fin(f, el)
+                continue
             if kind == "text":
                 if facing(f, s0):
                     x, y = P(U(f, s0), z0)

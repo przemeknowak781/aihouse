@@ -59,9 +59,12 @@ KOREKTY = {
     # (±9,6 m), oś widzenia przechodzi przez górny trójkąt krzyżulców. Oko 1,6 m nad chodnikiem (+4,05).
     # Przesunięcie obiektywu tak, by cel (+26 m) był w środku kadru (kamera pozioma, piony zachowane).
     'W9': dict(kamera_e_n_z=(132.82, 140.57, 4.05), shift_y=0.351, ekspozycja=0.6),
-    # W10: punkt (78; 17) stoi w ogródkach pod koronami zachowanych drzew (widok zasłonięty w ~90 %). Wariant
-    # zastępczy z pasa od bulwaru (poniżej) był ciasny – W10 jest poza domyślną listą, kadr do ponownego wyboru.
-    'W10': dict(kamera_e_n_z=(115.5, 37.5, 1.62), cel_e_n_z=(75.6, 35.2, 7.0), lens_mm=24, shift_y=0.12),
+    # W10 – widok ogrodowy (decyzja koordynatora 17.11, zamiast kadru z koncepcja.json: punkt (78; 17) stoi pod
+    # koronami zachowanych drzew). Stanowisko przy wsch. krawędzi placu zabaw (97,0; −6,0), w obszarze inwestycji,
+    # ok. 50 m od lica pd. wieży: przeszukanie promieni (85 punktów lica pd. wieży) – brak roślinności w pierwszych
+    # metrach przed obiektywem; korony zachowanych drzew ogrodu (D776, D778, D708…) w planie środkowym, wieża ponad
+    # nimi. W pierwszym planie plac zabaw i ogród deszczowy. 24 mm, shift 0,17 (attyka z zapasem, posadzka od ~6 m).
+    'W10': dict(kamera_e_n_z=(97.0, -6.0, 1.01), cel_e_n_z=(93.5, 45.0, 18.0), lens_mm=24, shift_y=0.17),
 }
 
 

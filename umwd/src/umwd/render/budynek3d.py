@@ -103,6 +103,7 @@ ZALOZENIA = dict(
     drzwi_segmentu_h=2.40,
     napis='SEJMIK WOJEWÓDZTWA DOLNOŚLĄSKIEGO',   # napis w granitowym nadprożu Bramy Mostowej (§3 p.10)
     napis_h=0.40,
+    napis_glebokosc=0.025,      # litery wykute (wgłębne) w licu granitu – nie nakładane (uzgodnienie koordynatora)
     glebokosc_pokoju=6.10,      # głębokość pokoi (trakt) – tylna ściana wnętrz (§6)
     brama_garazu_h=4.00,        # wysokość bramy garażu (tools/elewacje.py)
     nos_wejscie_szer=3.60,      # wejście konferencyjne w dziobie NW – szerokość wnęki (dobór)
@@ -1205,7 +1206,7 @@ class Materialy:
             e = els.new(pp)
             e.color = (*c, 1)
         nb.l(rnd, r1.inputs['Fac'])
-        okr = r1.outputs['Color']
+        okr = r1.outputs['Color'] if wariant != 'okrycie_jasne' else self._rgb(nb, (0.52, 0.31, 0.08))
         f7 = nb.math('FRACT', nb.math('MULTIPLY', rnd, 7.31))
         f13 = nb.math('FRACT', nb.math('MULTIPLY', rnd, 13.7))
         f5 = nb.math('FRACT', nb.math('MULTIPLY', rnd, 5.13))
@@ -1700,8 +1701,13 @@ class Budynek:
             F = k['F']
             zo0, zo1 = F + pas, (Fk[nazwy[i + 1]]['F'] if i + 1 < len(nazwy) else F6)
             if i == 0:
-                self.el(G, b, 0.0, b.L, -g - 0.02, 0.0, z_l0, zo0, 'granit', maks=0.3)
-                self.napis(b, (z_l0 + zo0) / 2)
+                # pas granitowy nadproża: bryła do −h (głębokość liter), lico z wykutymi literami w napis()
+                h_lit = Z['napis_glebokosc'] if Z['napis'] else 0.0
+                # układ płyt: warstwa 0,75 m wyśrodkowana na napisie (spoiny poziome nie przecinają liter)
+                self.el(G, b, 0.0, b.L, -g - 0.02, -h_lit - (0.003 if h_lit else 0.0), z_l0, zo0, 'granit', maks=0.3,
+                        rz=(z_l0 + zo0) / 2 - 0.375)
+                if h_lit > 0:
+                    self.napis(G, b, z_l0, zo0)
             else:
                 self.el(G, b, 0.0, b.L, -g - 0.02, 0.0, F, zo0, m_c, maks=0.3, rz=F)
             self.el(G, b, 0.0, b.L, -g, 0.0, zo0 - 0.02, zo0, 'metal', maks=0.3)          # obróbka parapetu
@@ -1750,13 +1756,19 @@ class Budynek:
         # attyka granitowa (ciągła z attyką elewacji prostych)
         self.el(G, b, 0.0, b.L, -g - 0.02, 0.0, z_att0, zt, 'granit', maks=0.3)
 
-    def napis(self, b, zc):
-        """Napis w granitowym nadprożu Bramy Mostowej – litery wzdłuż łuku (od lewej do prawej patrząc z zewnątrz)."""
-        txt = self.Z['napis']
-        if not txt:
-            return
+    def napis(self, G, b, z0, z1):
+        """Napis w granitowym nadprożu Bramy Mostowej – litery WYKUTE w licu pasa granitu (wgłębne, ``napis_glebokosc``),
+        nie nakładane. Kontury liter z fontu (DejaVu Sans) → wielokąty w układzie (s, z) biegu łuku; lico pasa =
+        prostokąt minus litery (triangulacja z ograniczeniami, komórki 0,3 m – lico dokładnie na łuku), dna liter
+        z granitu ciemniejszego (szlif dna + cień), ścianki boczne. Litery od lewej do prawej patrząc z zewnątrz."""
+        from umwd.render.context import triangulacja
+        from shapely.geometry import box as sbox
+        from shapely.geometry.polygon import orient
+        Z = self.Z
+        h = Z['napis_glebokosc']
+        zc = (z0 + z1) / 2
         cu = bpy.data.curves.new('napis', 'FONT')
-        cu.body = txt
+        cu.body = Z['napis']
         for f in ('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',
                   '/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf'):
             if Path(f).exists():
@@ -1765,9 +1777,9 @@ class Budynek:
                     break
                 except Exception:
                     pass
-        cu.size = self.Z['napis_h'] / 0.73
+        cu.size = Z['napis_h'] / 0.73
         cu.space_character = 1.35
-        cu.extrude = 0.004
+        cu.resolution_u = 6
         cu.align_x = 'CENTER'
         cu.align_y = 'CENTER'
         ob = bpy.data.objects.new('napis_tmp', cu)
@@ -1776,18 +1788,54 @@ class Budynek:
         me = bpy.data.meshes.new_from_object(ob.evaluated_get(dg))
         bpy.data.objects.remove(ob)
         bpy.data.curves.remove(cu)
-        V = np.array([v.co[:] for v in me.vertices])
-        Gn = Geo()
         smid = b.L / 2
-        Vn = []
-        for x, y, z in V:
-            p = b.pt(smid + x, 0.002 + z)
-            Vn.append((p[0], p[1], zc + y))
-        for poly in me.polygons:
-            ids = list(poly.vertices)
-            Gn.face([Vn[i] for i in ids], [(0, 0)] * len(ids), 'litery')
+        V = [(smid + v.co.x, zc + v.co.y) for v in me.vertices]
+        tr = [Polygon([V[i] for i in pl.vertices]) for pl in me.polygons]
         bpy.data.meshes.remove(me)
-        Gn.obiekt('napis_brama_mostowa', self.kol['wieza'], self.mat, self.DZ)
+        litery = unary_union([t.buffer(1e-5) for t in tr if t.area > 1e-9]).buffer(-1e-5).simplify(0.0008)
+        rs, rz = 0.0, zc - 0.375                     # układ okładziny jak w el() pasa (warstwa 0,75 m na napisie)
+
+        def p3(s_, z_, t):
+            q = b.pt(s_, t)
+            return (q[0], q[1], z_)
+
+        def tri(V2, F, t, mat):
+            for f in F:
+                a_, b_, c_ = (V2[k] for k in f)
+                if (b_[0] - a_[0]) * (c_[1] - a_[1]) - (b_[1] - a_[1]) * (c_[0] - a_[0]) < 0:
+                    b_, c_ = c_, b_                   # CCW w (s, z) = normalna na zewnątrz biegu
+                G.face([p3(*a_, t), p3(*b_, t), p3(*c_, t)],
+                       [(a_[0] - rs, a_[1] - rz), (b_[0] - rs, b_[1] - rz), (c_[0] - rs, c_[1] - rz)], mat)
+        for s0, s1, za, zb in self.przytnij(b, 0.0, b.L, z0, z1):
+            pr = sbox(s0, za, s1, zb)
+            lit = litery.intersection(pr)
+            lico = pr.difference(litery)
+            V2, F = triangulacja(lico, 0.3)
+            tri(V2, F, 0.0, 'granit')
+            if not lit.is_empty:
+                V2, F = triangulacja(lit, 0.3)
+                tri(V2, F, -h, 'granit:ciemny')
+                for P in (lit.geoms if hasattr(lit, 'geoms') else [lit]):
+                    if P.geom_type != 'Polygon':
+                        continue
+                    P = orient(P, 1.0)
+                    for ring in [P.exterior] + list(P.interiors):
+                        c = list(ring.coords)
+                        for (sa, za_), (sb, zb_) in zip(c[:-1], c[1:]):
+                            if abs(sa - sb) + abs(za_ - zb_) < 1e-5:
+                                continue
+                            G.face([p3(sa, za_, 0.0), p3(sa, za_, -h), p3(sb, zb_, -h), p3(sb, zb_, 0.0)],
+                                   [(sa - rs, 0.0), (sa - rs, h), (sb - rs, h), (sb - rs, 0.0)], 'granit')
+            # domknięcie warstwy liter (bryła pasa kończy się na −h − 3 mm – bez z-fightingu z dnem liter):
+            # spód nad podcieniem, góra, czoła
+            h3 = h + 0.003
+            G.poziom(b, s0, s1, -h3, 0.0, za, 'granit', gora=False, maks=0.3)
+            G.poziom(b, s0, s1, -h3, 0.0, zb, 'granit', gora=True, maks=0.3)
+            for s_ in (s0, s1):
+                G.face([p3(s_, za, -h3), p3(s_, za, 0.0), p3(s_, zb, 0.0), p3(s_, zb, -h3)],
+                       [(0, za - rz), (h3, za - rz), (h3, zb - rz), (0, zb - rz)], 'granit')
+        self.info['napis'] = dict(tekst=Z['napis'], wysokosc_m=Z['napis_h'], glebokosc_m=h, sposob='wykuty (wgłębny)',
+                                  liter_m2=round(litery.area, 3))
 
     # ================================================================ SKRZYDŁO i SEGMENT (porządek kamieniczny)
     def kamieniczny(self, bryla):
