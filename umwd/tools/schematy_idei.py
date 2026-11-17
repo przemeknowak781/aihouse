@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Schematy idei (plansza 1): cztery aksonometrie bryły w kontekście – 1 pamięć kwartału (ślad 1934), 2 pierzeje
 (gzyms w linii kamienic), 3 latarnia (dominanta w strefie A nad przyczółkiem), 4 brama i ogród (oś publiczna most → Hala → ogród).
-Rzut aksonometryczny od pn.-wsch. (az. 31,3°, skrót planu 0,5), wysokości rzeczywiste. Dane: koncepcja.json, site.json.
+Rzut aksonometryczny: panele 1, 2, 4 z widokiem od pd.-pd.-wsch. (az. 152°, od ogrodu), panel 3 od mostu (az. 31,3°);
+skrót planu 0,70, wysokości × 0,75. Rzut nieodbity (prawoskrętny): wektor rgt = prawa ręka obserwatora patrzącego w −f,
+więc w widoku od SSE skrzydło M (zach.) jest po lewej, segment S i Odra (wsch.) po prawej. Dane: koncepcja.json, site.json.
 Wynik: build/rysunki/schematy_idei.svg + docs/70_rysunki/podglady/schematy_idei.png
 """
 import sys, json, math
@@ -19,17 +21,31 @@ K = json.loads((ROOT / "model" / "koncepcja.json").read_text(encoding="utf-8"))
 Z0 = 119.30
 INK, ACC = "#1f1d1a", "#a8483a"
 B = {b["id"]: b for b in K["bryly"]}
+# segment v1.1: taras w attyce, attyka ściany pd. obniżona do poziomu tarasu (139,10 → +19,80), pozostałe lica +20,85
+_SEG = Polygon(B["S"]["obrys_ccw"]).buffer(0)
+_Z_S_PD = B["S"]["dach"]["attyka"]["sciana_pd_npm"] - Z0
+_sc = list(_SEG.exterior.coords)
+_SFACE = LineString(min(((_sc[i], _sc[i + 1]) for i in range(len(_sc) - 1)), key=lambda e: (e[0][1] + e[1][1]) / 2))
+_att = _SEG.difference(_SEG.buffer(-0.5, join_style=2)).difference(_SFACE.buffer(0.55, cap_style=2))
+SEG_ATT = [(g, B["S"]["dach"]["attyka"]["wzgl"], _Z_S_PD) for g in getattr(_att, "geoms", [_att]) if g.geom_type == "Polygon" and g.area > 0.2]
 OURS = [(Polygon(B["W"]["obrys_ccw"]).buffer(0), B["W"]["dach"]["attyka"]["wzgl"], "W"),
         (Polygon(B["M"]["obrys_ccw"]).buffer(0), B["M"]["dach"]["gzyms_attyka"]["wzgl"], "M"),
-        (Polygon(B["S"]["obrys_ccw"]).buffer(0), B["S"]["dach"]["attyka"]["wzgl"], "S")]
+        (_SEG, _Z_S_PD, "S")]
 NB = []
 for b in S["budynki"]["items"]:
     pg = poly_of(b)
     if pg is not None and pg.area > 5 and not b.get("czesciowy_przyciety_ramka"):
         NB.append((pg.buffer(0), b.get("gora_szac_H", 120 + b.get("wysokosc_szac_m", 6)) - Z0, b.get("nazwa")))
-AZ = 152.0       # viewer from SSE: garden, Wybrzeże frontage and tower visible; arc seen from behind
-f = (math.sin(math.radians(AZ)), math.cos(math.radians(AZ)))
-rgt = (f[1], -f[0])
+AZ = 152.0       # obserwator od SSE: widać ogród, pierzeję Wybrzeża i wieżę; łuk od tyłu
+f = (math.sin(math.radians(AZ)), math.cos(math.radians(AZ)))   # wersor od środka sceny ku obserwatorowi (az. AZ)
+
+
+def right_of(f):
+    """Prawa strona obserwatora patrzącego w −f (wyznacznik rzutu planu > 0 na ekranie: rzut nieodbity)."""
+    return (-f[1], f[0])
+
+
+rgt = right_of(f)
 CE, CN = 86.0, 40.0
 KSQ, KZ, SC = 0.70, 0.75, 0.92   # steep axonometry (≈ 57°): plan squash, height factor, mm/m
 PW, PH = 128.0, 118.0        # panel size
@@ -60,7 +76,7 @@ def prism(svg, P, pg, z1, top="#ffffff", side="#e7e2d9", side2="#d6d0c6", stroke
     faces.sort(key=lambda t: t[0])
     ex = f'fill-opacity="{op}"' if op < 1 else ""
     for depth, a, b, light in faces:
-        col = side if light < 0 else side2
+        col = side if light < 0 else side2      # światło z lewej strony ekranu (rgt = prawo ekranu): lica w lewo jaśniejsze
         svg.poly([P(*a, z0), P(*b, z0), P(*b, z1), P(*a, z1)], fill=col, stroke=stroke, sw=sw * 0.7, extra=ex)
     svg.poly([P(x, y, z1) for x, y in pts], fill=top, stroke=stroke, sw=sw, extra=ex)
 
@@ -96,18 +112,26 @@ def ours(svg, P, hl=None, ghost=False):
             prism(svg, P, pg, h, top=hl[k][0], side=hl[k][1], side2=hl[k][2], stroke=INK, sw=0.22)
         else:
             prism(svg, P, pg, h)
+        if k == "S":                             # attyki lic wsch., zach. i pn. segmentu nad tarasem
+            for ga, za, z0a in SEG_ATT:
+                if hl and k in hl:
+                    prism(svg, P, ga, za, top=hl[k][0], side=hl[k][1], side2=hl[k][2], stroke=INK, sw=0.15, z0=z0a)
+                else:
+                    prism(svg, P, ga, za, z0=z0a, sw=0.14)
 
 
 W_MM = 4 * PW + 3 * 6 + 20
 svg = Svg(W_MM, PH + 40)
-titles = [("1", "PAMIĘĆ KWARTAŁU", "Kwartał kamienic zniszczony w 1945 r. i rozebrany po wojnie wraca w swoich liniach: pierzeje Mazowieckiej i Wybrzeża, zaokrąglony narożnik przy moście; ślad pierzei północnej z 1934 r. w posadzce Placu Mostowego."),
+titles = [("1", "PAMIĘĆ KWARTAŁU", "Kwartał kamienic zniszczony w 1945\u00a0r. i rozebrany po wojnie wraca w swoich liniach: pierzeje Mazowieckiej i Wybrzeża, zaokrąglony narożnik przy moście. Ślad pierzei z 1934\u00a0r. w posadzce Placu Mostowego, wzdłuż niego szpaler 4\u00a0lip."),
           ("2", "PIERZEJE", "Skrzydło i segment domykają ulice w skali kamienic: gzyms 140,15 w linii attyki Mazowieckiej 19, rytm czterech posesji."),
           ("3", "LATARNIA", "Widok od mostu: wieża Sejmiku w strefie A (37,2 m) – jedyna dominanta, zwrócona łukiem do Mostu Grunwaldzkiego; w koronie sala obrad."),
-          ("4", "BRAMA I OGRÓD", "Podcień Bramy Mostowej prowadzi przez Halę Obywatelską do otwartego, nieogrodzonego Ogrodu Województwa; drzewa ogródków zostają.")]
+          ("4", "BRAMA I OGRÓD", "Podcień Bramy Mostowej prowadzi przez Halę Obywatelską do otwartego, nieogrodzonego Ogrodu Województwa. "
+                                 "Ogródki: 19 drzew w miejscu, 1 przesadzane, 8 martwych do decyzji arborysty; "
+                                 f"{K['zagospodarowanie']['nowe_nasadzenia']} nowych drzew.")]
 for i, (num, t, txt) in enumerate(titles):
-    _az = 31.3 if i == 2 else 152.0          # panel 3: view from the bridge (NNE); others from SSE (garden)
+    _az = 31.3 if i == 2 else 152.0          # panel 3: widok od mostu (NNE); pozostałe od SSE (od ogrodu)
     f = (math.sin(math.radians(_az)), math.cos(math.radians(_az)))
-    rgt = (f[1], -f[0])
+    rgt = right_of(f)
     ox = 10 + i * (PW + 6) + PW * 0.52
     oy = 22 + PH * 0.62
     P = make_P(ox, oy)
@@ -137,7 +161,8 @@ for i, (num, t, txt) in enumerate(titles):
         for x, y in arc[::2]:
             svg.line(P(x, y, 27.3), P(x, y, 36.2), stroke="#c99a3e", sw=0.12)
     else:
-        axis = [(112.0, 92.0), (103.4, 74.0), (101.86, 71.57), (84.32, 43.12), (80.0, 28.0), (78.0, 12.0)]
+        # oś publiczna most → Hala → próg ogrodu (taras); dalej ścieżki obrzeżem ogródków (v1.1, KOORD-3)
+        axis = [(112.0, 92.0), (103.4, 74.0), (101.86, 71.57), (84.32, 43.12), (82.4, 37.0)]
         gard = Polygon([(66.0, -2.0), (96.0, -2.0), (96.0, 38.0), (72.0, 33.0), (66.0, 30.0)])
         svg.poly([P(x, y, 0) for x, y in gard.exterior.coords], fill="#d7e3c6", stroke="none")
         svg.poly([P(x, y, 0.3) for x, y in axis], fill="none", stroke=ACC, sw=1.0, close=False, extra='stroke-linecap="round"')
@@ -156,7 +181,7 @@ for i, (num, t, txt) in enumerate(titles):
     tx = 10 + i * (PW + 6)
     svg.text((tx, 10), num, size=7.0, weight=300, fill=ACC)
     svg.text((tx + 7, 9.2), t, size=3.4, weight=600)
-    words, line, lines = txt.split(), "", []
+    words, line, lines = txt.split(" "), "", []          # spacja zwykła – \u00a0 wiąże „1934 r.”
     for w in words:
         if len(line) + len(w) > 62:
             lines.append(line); line = w

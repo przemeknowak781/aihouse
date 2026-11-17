@@ -1,8 +1,8 @@
 # Rejestr poprawek – specyfikacja „BRAMA I LATARNIA” v1.0 → v1.1 (po weryfikacji)
 
-**Stan:** 17.11.2026 · **zakończona** (wszystkie pozycje KRYTYCZNE i ISTOTNE z zakresu rozstrzygnięte; P-I8 częściowo – opis w wierszu) · Przedmiot: `koncepcja_wybrana.md`, `model/koncepcja.json`.
+**Stan:** 17.11.2026 · v1.1 **zakończona**; **v1.2 (scalenie S-3) – sekcja na końcu** (wszystkie pozycje KRYTYCZNE i ISTOTNE z zakresu rozstrzygnięte; P-I8 częściowo – opis w wierszu) · Przedmiot: `koncepcja_wybrana.md`, `model/koncepcja.json`.
 **Źródła zadań:** `weryfikacja_geometria.md` (G-), `weryfikacja_koszt_eko.md` (E-), `weryfikacja_program.md` (P-).
-**Wyłączone:** kondygnacja Sejmiku (P-K1, P-K2, P-K3, P-I1, P-I4) – osobne opracowanie `kondygnacja_S2.md` + `kondygnacja_S2.json`; klucz `kondygnacja_sejmiku` w JSON i rozdz. 7 MD bez zmian (tylko odsyłacz).
+**Wyłączone w v1.1:** kondygnacja Sejmiku (P-K1, P-K2, P-K3, P-I1, P-I4) – osobne opracowanie `kondygnacja_S2.md` + `kondygnacja_S2.json`; **scalone w v1.2** (sekcja „v1.2 – scalenie S-3” na końcu rejestru).
 **Zasada wyłączenia:** nie korzystano z informacji o rzeczywistych pracach ani wynikach konkursu.
 **Uwagi koordynatora (17.11):** PU = 8 850,37 m² z modelu pomieszczeń (PN-ISO 9836) przyjęte w bilansie, garażu i F.15.C; rezerwa ≥ 4 % utrzymana; ścieżki ogrodu poza zachowanymi ogródkami; dach zielony (taras segmentu) ujednolicony do 135,3 m² – patrz pozycje KOORD-1…4 na końcu tabeli.
 **Dowody:** skrypty `docs/20_koncepcja/_rewizja_*.py` (uruchomienie z katalogu `umwd/`, interpreter `/home/user/aihouse/.venv-render/bin/python -I`).
@@ -95,7 +95,7 @@
 * Tryskacze nieprojektowane – dojścia i przejścia na S bez zwiększeń za tryskacze (ZL I: 10 / 40 m).
 * Szkło korony R 13,40, lamele R 13,40–14,00 (0,35 × 0,60 m, rozstawy 1,35 / 0,675 m).
 * Centrala S na −1 przy trzonie B (piony w szachcie trzonu B).
-* Koszt v1.1 zawiera rezerwę na antresolę S do ≈ 180 m² PC (A_nad +110 m²); większa zmiana S wymaga ponownego `_rewizja_koszt.py`.
+* Koszt v1.1 zawiera rezerwę na antresolę S do ≈ 180 m² PC (A_nad +110 m²); większa zmiana S wymaga ponownego `_rewizja_koszt.py` → wykonane w v1.2 (`_v12_koszt.py`, antresola 297,9 m²).
 
 ## Skrypty i uruchomienie
 
@@ -108,5 +108,47 @@ $PY -I docs/20_koncepcja/_rewizja_pv_ep.py                # PV 415 kWp, EP 28,0 
 $PY -I docs/20_koncepcja/_rewizja_koszt.py                # koszt 149,18 mln
 $PY -I docs/20_koncepcja/_rewizja_geometria.py            # MPZP, rampa, obudowa, otwory, szyb MDS, retencja
 $PY -I docs/20_koncepcja/_rewizja_elewacje.py             # okna/ZIP, U, lamele, trakt
-$PY -I -W ignore docs/20_koncepcja/_rewizja_json.py [--zapisz]   # koncepcja.json v1.1 + walidacja
+$PY -I -W ignore docs/20_koncepcja/_rewizja_json.py [--zapisz]   # koncepcja.json v1.1 + walidacja (po v1.2 NIE uruchamiać z --zapisz – nadpisałby meta i rdzenie)
+```
+
+---
+
+# v1.2 – scalenie S-3 (17.11.2026)
+
+**Przedmiot:** scalenie kondygnacji Sejmiku S-3 „hol z galerią” (`kondygnacja_S2.md`, `kondygnacja_S2.json`, `_s2_*.py`) z v1.1; poprawka I5 (trzony, klatki, dźwigi); bilans, parking, koszt. Wynik: `model/koncepcja.json` meta.wersja **„1.2 (S-3)”**, `koncepcja_wybrana.md` (rozdz. 7 zastąpiony; rozdz. 2, 4.2, 5, 6, 10–12, 14–16 zaktualizowane).
+**Zasada wyłączenia:** nie korzystano z informacji o rzeczywistych pracach ani wynikach konkursu. `model/budynek.json` nie był zmieniany (przelicza go inny agent – pozycja V12-OPEN).
+
+| ID | Waga | Decyzja v1.2 | Dowód liczbowy (skrypt) | Pliki / tabele | Status |
+|---|---|---|---|---|---|
+| V12-S3 | KRYT. | `koncepcja.json["kondygnacja_sejmiku"]` = S-3: posadzka +27,30, antresola +30,90 **297,88 m²** (26,0 %; radni 161,39 + publiczność 136,50), sala (płyta 232,01 m², z galerią 297,33; 4 rzędy R 4,50–9,90 m, +0,00…+0,27, 47 stanowisk = 43 + 4 dla wózków; galeria 31 + 3), 27 pomieszczeń S (z C-A, C-B) i 8 antresoli z `obrys_uv`/`obrys_en`, pustka holu, `trzony_uklad`, drzwi, bilans, nowy klucz `ewakuacja`; klucz `antresola_strefy` usunięty (zastąpiony `antresola_pomieszczenia`). Hol SWD.02 (otwór schodów) zapisany jako 2 pierścienie bez otworu (34,06 + 40,76 = 74,83 m²) | `_s2_geometria.py` [G1]–[G8]; `_v12_scalenie.py` [W1]–[W5] | JSON, rozdz. 7 | ✅ |
+| V12-MD7 | KRYT. | Rozdz. 7 MD zastąpiony treścią S-3: zasada (wszystkie pomieszczenia zamknięte na S), tabela 25 pozycji programu (+88,2 m² nad sumą minimów), bilans S (wnętrze 1 080,2 = 789,8 + 123,7 + 123,6 + 43,1), rzędy, galeria (C ≥ 77 mm, kąt 34°–91°), poufność 38,7°, światło 51,1°, strefy publiczności i radnych (P1 bez przystanku na S), ewakuacja (strefa ZL I 1 443,7 m²), dźwigi, dostępność | `_s2_sala.py` [S1]–[S7], `_s2_ewakuacja.py` [E1]–[E6] | rozdz. 7, 2 (1, 2, 12), 11, 14 (W7, W8) | ✅ |
+| V12-I5A | KRYT. | **Trzon A wydłużony o 0,60 m na pd.** (u 8,30–15,50 × v 11,85–20,85 = 64,80 m², ściana pd. 0,20 m): klatka A **3,40 × 5,80 m** (kond. 3,75 m: 2 × 11 st. 17,05 × 28 cm + spoczniki 1,50 = 5,80 m; v1.1 5,15 m – brak 0,65), przedsionek A 3,10 × 5,80 m z MOE 1,5 × 1,5; kond. −1/P (4,20) i P/1 (4,80) – **3 biegi** (8 + 8 + 8 st. 17,50 cm, 4,96 m; 10 + 9 + 9 st. 17,14 cm, 5,52 m; prześwit ≥ 2,45 m), spocznik parteru na końcu pn.; S → +30,90: 11 + 10 st. 17,14 cm. Kosztem: holu strefy środkowej kond. 1–6 (pozostaje 3,35 m), Hali P (naroże 4,57 m od osi, było 4,99), kuluaru S (2,20 → **1,75 m** przy trzonie, przepustowość 292 os. > ≈ 84 os.). **Jednostki elewacyjne naruszone: 0** (43/43/43/43/22/20 + P 4 bez zmian). Garaż: 110 m.p. bez zmian | `_v12_trzony.py` [T1], [T2], [T5], [T6]; `_s2_ewakuacja.py` [E2] | JSON `rdzenie.A` (obrys, `uklad_uv`, `klatka`), rozdz. 5, 7.2, 7.5 | ✅ |
+| V12-I5B | IST. | **Klatka B 3,40 × 6,64 m** (ściana klatka/przedsionek przesunięta o 0,29 m; obrys trzonu bez zmian), przedsionek B 3,40 × 2,06 m (MOE 1,5 × 1,5 + przejście 1,90 m): **2 biegi na każdej kondygnacji**, także P/1 (2 × 14 st. 17,14 cm = 6,64 m) – przy 6,35 m parter wymagałby 4 biegów z prześwitem 2,05 m < 2,20 (M.13); spocznik zawsze przy przedsionku. P2 przelotowy – drzwi zach. do przedsionka B na −2/−1 | `_v12_trzony.py` [T3] | JSON `rdzenie.B`, rozdz. 5 | ✅ |
+| V12-I5C | IST. | **Klatka C – nowy układ w obrysie trzonu C:** klatka 5,80 × 3,40 m (biegi 1,60; v1.1/model pomieszczeń 6,00 × 3,05 = biegi 1,425 m < M.13 1,60, a MDS 260 os. na −1 wymaga 1,56 m), przedsionek 5,80 × 2,00 m z MOE, szachty 1,60 × 5,60 m; −1/P i P/1 – 3 biegi. **Rezygnacja z szybu rezerwowego C1** (2,20 × 2,35 m nie mieści się obok klatki 3,40 m; ściana przy Maz. 19 REI 120 bez otworów) | `_v12_trzony.py` [T4] | JSON `rdzenie.C` (`uklad_sd`, `uklad_en`, `klatka`), rozdz. 5 | ✅ |
+| V12-DZW | IST. | Kierunki drzwi wg S-3: A1/A2 – **pn. na wszystkich kondygnacjach** (hol S/ANT 5,95 m; łącznik P; korytarz pn. kond. 1–6 **2,15 m**; −1/−2 przedsionek ppoż. dźwigów w ślepym końcu drogi A2, 7,20 × 1,75 m, bez kolizji ze stanowiskami); R – pd. do przedsionka A; P1/P2 – wsch. (korytarz wsch. kond. 1–6 2,20 m); P1 bez przystanku na S, P2 na S tylko służbowo. v1.1 „przed A1/A2 ≥ 3,6 m” nieaktualne na kond. 1–6 (WT § 195 ✔, M.13 – odstępstwo) | `_v12_trzony.py` [T5], [T6]; `_s2_ewakuacja.py` [E5] | rozdz. 5, JSON `rdzenie.*.drzwi_dzwigow` | ✅ (odstępstwo M.13 opisane) |
+| V12-PPOZ | IST. | Korekta S-3: ewakuacja liczona **bez tryskaczy** (v1.1 E-I-4); dojścia ZL I 10 / 40 m; kuluar i korytarz publiczny z samoczynnym oddymianiem (SSP) → +50 % (15 / 60 m, § 256 ust. 3). Dojścia jednokierunkowe 10,2 (SWD.11b) / 13,9 (PP.06) / 14,1 m (toaleta publiczności) ≤ 15 m – wykładnia do potwierdzenia | `_s2_ewakuacja.py` [E2] | rozdz. 7.5, 16 (15), `kondygnacja_S2.md` rozdz. 6 | ⚠ wykładnia |
+| V12-BIL | IST. | PC nadziemna **14 392,7 m²** (14 164,5 − 69,7 + 297,9); PC razem 18 757,9; **PU 8 871,47 m²** (8 850,37 + 21,10: SWD +8,39, WC +7,25, PP.06 +5,46); PC nadz./PU 1,62; wymagane m.p. 12/1000 × (8 871,47 − 88,47) + 6/1000 × 88,47 = **105,93 → 106** (ostrożnie 108) wobec **110** – zapas 4 (rezerwa PU 339 m²); strefa S + antresola 1 443,7 m² ≤ 2 500 | `_v12_koszt.py` [K0]; `_v12_scalenie.py` [W5] | JSON `bilans`, `podziemie.wymagane_MPZP`, `kondygnacje[S].antresola`; tabela 12 | ✅ |
+| V12-KOSZT | KRYT. | Antresola 297,9 m² zamiast rezerwy ≈ 180 m² (+0,49 mln), klatka A do +30,90 i balustrady 130 mb (+0,09), trzony I5 (+0,12: ściany trzonu A, biegi trójbiegowe A i C, bez szybu C1) → 149,87 mln (zapas 0,13 < 1,0). **Dźwignie v1.2 (niewidoczne na planszach):** biura z odsłoniętym TABS – wyspy akustyczne zamiast sufitu modułowego w pokojach 4 794 m² (korekta spójności z rozdz. 4.2) −0,46; ścianki szklane 10 → 8 % A (pokoje od korytarza GK z naświetlem) −0,31; BESS 100 kWh (rezerwowa v1.1) −0,12. **Wynik: roboty + KS 141,89; rezerwa 5 % 7,09; razem 148,98 mln; zapas 1,02 mln** (rezerwa 4 %: 147,56, zapas 2,44); 7 942 zł/m² PC, 16 793 zł/m² PU; low/high 109,4 / 207,4; waloryzacja 156,4. Rezerwowa niewykorzystana: filary pd. wieży w ceramice −0,23 | `_v12_koszt.py` [K1]–[K4]; wejście `_rewizja_koszt_wejscie_v1_2.json` (odtwarzalne `tools/koszty_model.py`) | tabela 12, rozdz. 2 (17), 10, 15, 16, JSON `bilans` | ✅ |
+| V12-MPZP | KRYT. | Rzędne kondygnacji, dachy brył i obrysy brył **bez zmian** (antresola i ruszt w kubaturze S 8,90 m): pokrycie wieży 155,50 (36,06 m ≥ 35, zapas 1,06), attyka 156,50 (37,62 m ≤ 45) | `_v12_scalenie.py` [W6] | – | ✅ |
+| V12-VAL | – | Walidacja JSON: wszystkie wielokąty S-3 poprawne, w obrysie wieży i strefie A (site.json); nakładania w uv: brak (w en ≤ 0,0036 m² – zaokrąglenie do 1 mm); sumy: S 1 080,19 = wnętrze, antresola 297,87 ≈ 297,88, program 1 016,22; rdzenie A, B w wieży i strefie A, C w skrzydle, T w segmencie; komórki trzonów bez nakładania; zapis idempotentny | `_v12_scalenie.py` [W1]–[W7] | – | ✅ |
+
+**Pozycje otwarte po v1.2 (V12-OPEN):**
+1. `model/budynek.json` i `tools/model_pomieszczen.py` do przeliczenia: trzon A (v 11,85; dźwigi w pasie pn. z drzwiami pn., klatka i przedsionek w pasie pd. – odwrotnie niż w modelu), klatka B 6,64 m, układ trzonu C bez C1; S i antresola z `kondygnacja_sejmiku.pomieszczenia` / `antresola_pomieszczenia` (kod czyta jeszcze `antresola_strefy` i tylko pierwszy pierścień `obrys_en[0]` – SWD.02 ma 2 pierścienie); potem F.15.A–C, PU w modelu (oczekiwane ≈ 8 871 m²), rzuty 1:200 (P3–P5), przekroje, model 3D (galeria zach. zamiast pd.).
+2. M.13 pkt 6 – bieg 1,60 m mierzony między poręczami: klatki 3,40 m dają ≈ 1,46 m w świetle; pełna zgodność ≈ 3,69 m (`_v12_trzony.py` [T7]) – decyzja: poszerzenie A kosztem przedsionka / pochwyty we wnękach / uzgodnienie.
+3. MDS: pojemność 560 os. z PU 8 400 (v1.0); przy PU 8 871 – 592 os. (+32); ukrycie −2: klatki A–B 19,8 m między środkami, 13,95 m między obudowami – sposób pomiaru „≥ 15 m” do potwierdzenia.
+4. Wykładnia +50 % za samoczynne oddymianie (V12-PPOZ) albo tryskacze w strefie S.
+5. Odstępstwa M.13: holy windowe kond. 1–6 (A1/A2 2,15 m, P1/P2 2,20 m), kuluar przy trzonie A 1,75 m, łącznik 1,40, dojście SWD.11b 1,60, przystanek P2 1,60.
+6. Kadr W8 – kamera bez zmian (za 4. rzędem, ≈ 11 m od mównicy); sprawdzić w renderze widoczność galerii zach. (po prawej) przy 20 mm.
+
+**Skrypty v1.2** (kolejność):
+```
+cd umwd
+PY=/home/user/aihouse/.venv-render/bin/python
+$PY -I docs/20_koncepcja/_s2_geometria.py              # S-3 + trzony v1.2 → kondygnacja_S2.json [G1]–[G8]
+$PY -I docs/20_koncepcja/_s2_sala.py                   # rzędy, linie wzroku [S1]–[S7]
+$PY -I docs/20_koncepcja/_s2_ewakuacja.py              # ewakuacja bez tryskaczy, kuluar 1,75 m [E1]–[E6]
+$PY -I docs/20_koncepcja/_s2_rzut.py                   # img/s2_plan.png, img/s2_przekroj.png
+$PY -I -W ignore docs/20_koncepcja/_v12_trzony.py      # I5: klatki A, B, C, wpływ na kondygnacje, garaż [T1]–[T7]
+$PY -I -W ignore docs/20_koncepcja/_v12_koszt.py       # PU, parking, koszt 148,98 mln [K0]–[K4]
+$PY -I -W ignore docs/20_koncepcja/_v12_scalenie.py [--zapisz]   # koncepcja.json 1.2 (S-3) + walidacja [W1]–[W7]
 ```

@@ -69,12 +69,12 @@ def base(ax, title):
 
 fig, axs = plt.subplots(2, 1, figsize=(11.0, 17.0))
 ax = axs[0]
-base(ax, "Kondygnacja S (+27,30) – wariant S-3 „hol z galerią” (S-2 po weryfikacji)")
+base(ax, "Kondygnacja S (+27,30) – wariant S-3 „hol z galerią” – v1.2 (trzon A wydłużony na pd. wg I5)")
 for k, g in S.items():
     draw(ax, g, COL[cat(k)], z=4)
     if k == "SWD.01":
         continue
-    nm = {"KUL": "KUL – kuluar 2,2 m (EI 30)", "KW.S.01": "pasaż", "KW.S.03": "łącznik", "KW.S.02": "doj.",
+    nm = {"KUL": "KUL – kuluar 2,2 m (przy trzonie A 1,75 m; EI 30)", "KW.S.01": "pasaż", "KW.S.03": "łącznik", "KW.S.02": "doj.",
           "KW.S.04": "schody", "SWD.02": "SWD.02 hol\n(2 kond. NW)"}.get(k, k)
     label(ax, g, f"{nm}\n{g.area:.1f}")
 # sala

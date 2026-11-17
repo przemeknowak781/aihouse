@@ -1,7 +1,7 @@
 {
  "meta": {
   "nazwa": "BRAMA I LATARNIA – siedziba UMWD i Sejmiku Województwa Dolnośląskiego (synteza panelu: K5 + przeszczepy)",
-  "wersja": "1.1 (po weryfikacji)",
+  "wersja": "1.2 (S-3)",
   "uklad": "lokalny e,n wg model/site.json (e = Y2000 − 6 433 500; n = X2000 − 5 664 100), H PL-EVRF2007-NH",
   "zero": {
    "wzgl_0_00_m_npm": 119.3,
@@ -19,14 +19,15 @@
   },
   "zrodla": [
    "docs/20_koncepcja/koncepcja_wybrana.md",
+   "docs/20_koncepcja/kondygnacja_S2.md",
    "docs/20_koncepcja/panel/werdykt_panelu.md",
    "docs/20_koncepcja/rejestr_poprawek_v1_1.md",
    "docs/30_lokalizacja/dendrologia.md",
    "model/site.json"
   ],
   "data_wersji": "17.11.2026",
-  "rejestr_poprawek": "docs/20_koncepcja/rejestr_poprawek_v1_1.md (dowody: docs/20_koncepcja/_rewizja_*.py)",
-  "kondygnacja_S_v1_1": "kondygnacja S – patrz docs/20_koncepcja/kondygnacja_S2.md i kondygnacja_S2.json (v1.1); klucz kondygnacja_sejmiku = stan 1.0"
+  "rejestr_poprawek": "docs/20_koncepcja/rejestr_poprawek_v1_1.md – sekcje v1.0→v1.1 i „v1.2 – scalenie S-3” (dowody: docs/20_koncepcja/_rewizja_*.py, _s2_*.py, _v12_*.py)",
+  "kondygnacja_S_v1_2": "kondygnacja_sejmiku = S-3 „hol z galerią” (docs/20_koncepcja/kondygnacja_S2.md, kondygnacja_S2.json, skrypty _s2_*.py) scalona w v1.2; trzony A, B, C wg poprawki I5 (_v12_trzony.py)"
  },
  "teren": {
   "wieza_2m": [
@@ -878,19 +879,24 @@
     "attyka": 37.2
    },
    "wys_w_swietle_sali": 6.85,
-   "antresola_posadzka": 30.9
+   "antresola_posadzka": 30.9,
+   "antresola": {
+    "posadzka_wzgl": 30.9,
+    "posadzka_npm": 150.2,
+    "pow_m2": 297.88,
+    "udzial_rzutu_proc": 26.0,
+    "wys_w_swietle_pod_m": 3.3,
+    "wys_w_swietle_nad_m": 3.25,
+    "zakres": "wieża – antresola radnych (hol górny, bar, strefa multimedialna) i publiczności (galeria, hol P1/P2, korytarz EI 30)"
+   }
   }
  ],
  "rdzenie": {
   "A": {
    "obrys_uv": [
     [
-     8.3,
-     12.45
-    ],
-    [
      15.5,
-     12.45
+     11.85
     ],
     [
      15.5,
@@ -899,34 +905,374 @@
     [
      8.3,
      20.85
+    ],
+    [
+     8.3,
+     11.85
     ]
    ],
    "obrys_en": [
+    [
+     86.858,
+     55.94
+    ],
+    [
+     84.727,
+     64.684
+    ],
     [
      77.732,
      62.979
     ],
     [
-     79.721,
-     54.818
-    ],
-    [
-     86.716,
-     56.523
-    ],
-    [
-     84.727,
-     64.684
+     79.863,
+     54.235
     ]
    ],
-   "zakres": "−2…S",
+   "zakres": "−2…S + antresola +30,90",
    "sklad": [
-    "klatka A obudowana REI 60, biegi 1,60 m, z przedsionkiem ppoż. 2,4×3,0 m (MOE 0,9×1,4 m + krzesło ewakuacyjne + interkom), nadciśnienie",
-    "dźwig A1 1 600 kg (os.), kabina 1,5 × 2,1 m, przelotowa",
-    "dźwig A2 1 600 kg (os.), kabina 1,5 × 2,1 m, przelotowa",
-    "dźwig R dla ekip ratowniczych PN-EN 81-72 i ewakuacyjny PN-EN 81-76, 1 000 kg, kabina 1,1×2,1 m, szyb REI 60, nadciśnienie",
-    "szachty: nadciśnienie klatki/przedsionka, oddymianie korytarzy, piony instalacyjne"
-   ]
+    "klatka A obudowana REI 60, 3,40 × 5,80 m w świetle: 2 biegi 1,60 m (M.13), stopnie ≤ 17,5 × 28 cm, spoczniki ≥ 1,50 m; kond. −1/P i P/1 – 3 biegi (spocznik kondygnacyjny parteru na końcu pn.); do antresoli +30,90",
+    "przedsionek ppoż. A 3,10 × 5,80 m z MOE 1,5 × 1,5 m, krzesłem ewakuacyjnym i interkomem, nadciśnienie; drzwi pd. (kuluar S, hol strefy środkowej 1–6, Hala P), wsch. (łącznik S, garaż), na +30,90 wsch. na galerię; przedsionek A' (antresola radnych) przy ścianie zach. klatki",
+    "dźwigi A1, A2 1 600 kg, kabiny 1,5 × 2,1 m, szyby 2,25 × 2,55 m, drzwi pn. na wszystkich kondygnacjach (S-3): hol S/ANT 5,95 m, łącznik pn. P, korytarz pn. kond. 1–6 2,15 m, przedsionek dźwigów −1/−2 (pas 7,20 × 1,75 m)",
+    "dźwig R dla ekip ratowniczych PN-EN 81-72 i ewakuacyjny PN-EN 81-76, 1 000 kg, kabina 1,1 × 2,1 m, szyb 1,80 × 2,55 m REI 60, drzwi pd. do przedsionka A",
+    "v1.2 (I5): trzon wydłużony o 0,60 m na pd. (v 12,45 → 11,85; ściana pd. 0,20 m) – kosztem holu strefy środkowej (kond. 1–6), Hali (P) i kuluaru S (2,20 → 1,75 m przy trzonie)"
+   ],
+   "pow_m2": 64.8,
+   "uklad_uv": {
+    "A1": [
+     [
+      10.8,
+      18.05
+     ],
+     [
+      10.8,
+      20.6
+     ],
+     [
+      8.55,
+      20.6
+     ],
+     [
+      8.55,
+      18.05
+     ]
+    ],
+    "A2": [
+     [
+      13.25,
+      18.05
+     ],
+     [
+      13.25,
+      20.6
+     ],
+     [
+      11.0,
+      20.6
+     ],
+     [
+      11.0,
+      18.05
+     ]
+    ],
+    "R": [
+     [
+      15.25,
+      18.05
+     ],
+     [
+      15.25,
+      20.6
+     ],
+     [
+      13.45,
+      20.6
+     ],
+     [
+      13.45,
+      18.05
+     ]
+    ],
+    "klatka_A": [
+     [
+      11.95,
+      12.05
+     ],
+     [
+      11.95,
+      17.85
+     ],
+     [
+      8.55,
+      17.85
+     ],
+     [
+      8.55,
+      12.05
+     ]
+    ],
+    "przedsionek_A": [
+     [
+      15.25,
+      12.05
+     ],
+     [
+      15.25,
+      17.85
+     ],
+     [
+      12.15,
+      17.85
+     ],
+     [
+      12.15,
+      12.05
+     ]
+    ]
+   },
+   "drzwi_dzwigow": [
+    {
+     "dzwig": "A1",
+     "uv": [
+      9.6,
+      20.85
+     ],
+     "kierunek": [
+      0,
+      1
+     ],
+     "przystanki": [
+      "S",
+      "ANT"
+     ]
+    },
+    {
+     "dzwig": "A2",
+     "uv": [
+      11.85,
+      20.85
+     ],
+     "kierunek": [
+      0,
+      1
+     ],
+     "przystanki": [
+      "S",
+      "ANT"
+     ]
+    },
+    {
+     "dzwig": "R",
+     "uv": [
+      14.35,
+      18.05
+     ],
+     "kierunek": [
+      0,
+      -1
+     ],
+     "przystanki": "−2…S, ANT (do przedsionka A)"
+    }
+   ],
+   "klatka": {
+    "kondygnacje": [
+     {
+      "z": "-2",
+      "do": "-1",
+      "H_m": 3.0,
+      "biegi": 2,
+      "stopnie": 18,
+      "h_cm": 16.67,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       9,
+       9
+      ],
+      "dl_biegow_m": [
+       2.24,
+       2.24
+      ],
+      "wymagana_dl_klatki_m": 5.24,
+      "przeswit_m": 2.66
+     },
+     {
+      "z": "-1",
+      "do": "P",
+      "H_m": 4.2,
+      "biegi": 3,
+      "stopnie": 24,
+      "h_cm": 17.5,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       8,
+       8,
+       8
+      ],
+      "dl_biegow_m": [
+       1.96,
+       1.96,
+       1.96
+      ],
+      "wymagana_dl_klatki_m": 4.96,
+      "przeswit_m": 2.45
+     },
+     {
+      "z": "P",
+      "do": "1",
+      "H_m": 4.8,
+      "biegi": 3,
+      "stopnie": 28,
+      "h_cm": 17.14,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       10,
+       9,
+       9
+      ],
+      "dl_biegow_m": [
+       2.52,
+       2.24,
+       2.24
+      ],
+      "wymagana_dl_klatki_m": 5.52,
+      "przeswit_m": 2.74
+     },
+     {
+      "z": "1",
+      "do": "2",
+      "H_m": 3.75,
+      "biegi": 2,
+      "stopnie": 22,
+      "h_cm": 17.05,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       11,
+       11
+      ],
+      "dl_biegow_m": [
+       2.8,
+       2.8
+      ],
+      "wymagana_dl_klatki_m": 5.8,
+      "przeswit_m": 3.4
+     },
+     {
+      "z": "2",
+      "do": "3",
+      "H_m": 3.75,
+      "biegi": 2,
+      "stopnie": 22,
+      "h_cm": 17.05,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       11,
+       11
+      ],
+      "dl_biegow_m": [
+       2.8,
+       2.8
+      ],
+      "wymagana_dl_klatki_m": 5.8,
+      "przeswit_m": 3.4
+     },
+     {
+      "z": "3",
+      "do": "4",
+      "H_m": 3.75,
+      "biegi": 2,
+      "stopnie": 22,
+      "h_cm": 17.05,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       11,
+       11
+      ],
+      "dl_biegow_m": [
+       2.8,
+       2.8
+      ],
+      "wymagana_dl_klatki_m": 5.8,
+      "przeswit_m": 3.4
+     },
+     {
+      "z": "4",
+      "do": "5",
+      "H_m": 3.75,
+      "biegi": 2,
+      "stopnie": 22,
+      "h_cm": 17.05,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       11,
+       11
+      ],
+      "dl_biegow_m": [
+       2.8,
+       2.8
+      ],
+      "wymagana_dl_klatki_m": 5.8,
+      "przeswit_m": 3.4
+     },
+     {
+      "z": "5",
+      "do": "6",
+      "H_m": 3.75,
+      "biegi": 2,
+      "stopnie": 22,
+      "h_cm": 17.05,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       11,
+       11
+      ],
+      "dl_biegow_m": [
+       2.8,
+       2.8
+      ],
+      "wymagana_dl_klatki_m": 5.8,
+      "przeswit_m": 3.4
+     },
+     {
+      "z": "6",
+      "do": "S",
+      "H_m": 3.75,
+      "biegi": 2,
+      "stopnie": 22,
+      "h_cm": 17.05,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       11,
+       11
+      ],
+      "dl_biegow_m": [
+       2.8,
+       2.8
+      ],
+      "wymagana_dl_klatki_m": 5.8,
+      "przeswit_m": 3.4
+     },
+     {
+      "z": "S",
+      "do": "ANT",
+      "H_m": 3.6,
+      "biegi": 2,
+      "stopnie": 21,
+      "h_cm": 17.14,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       11,
+       10
+      ],
+      "dl_biegow_m": [
+       2.8,
+       2.52
+      ],
+      "wymagana_dl_klatki_m": 5.8,
+      "przeswit_m": 3.25
+     }
+    ],
+    "uwaga": "spocznik kondygnacyjny na końcu pd. (v 12,05–13,55) na wszystkich kondygnacjach poza P (koniec pn.)"
+   }
   },
   "B": {
    "obrys_uv": [
@@ -965,13 +1311,332 @@
      57.74
     ]
    ],
-   "zakres": "−2…S (+ przystanek antresoli +30,90)",
+   "zakres": "−2…S + antresola +30,90",
    "sklad": [
-    "klatka B obudowana REI 60, biegi 1,60 m, przedsionek ppoż. z MOE i interkomem, nadciśnienie",
-    "dźwigi publiczne P1, P2 1 600 kg, kabiny 1,5 × 2,1 m (przystanki −2…6, S, antresola)",
-    "szacht (≈ 4 m², po dźwigu T): przewód spalin agregatu, wyrzut wentylacji i oddymiania garażu, piony centrali S → lamele korony od pd.",
-    "szachty"
-   ]
+    "klatka B obudowana REI 60, 3,40 × 6,64 m w świetle: 2 biegi 1,60 m na każdej kondygnacji (P: 2 × 14 stopni 17,14 × 28 cm), spoczniki ≥ 1,50 m; do antresoli +30,90",
+    "przedsionek ppoż. B 3,40 × 2,06 m z MOE 1,5 × 1,5 m i interkomem, nadciśnienie (v1.2: ściana klatka/przedsionek przesunięta o 0,29 m)",
+    "dźwigi publiczne P1, P2 1 600 kg, kabiny 1,5 × 2,1 m, szyby 2,15 × 2,65 m, drzwi wsch.; P1 – przystanki P, 1–6, ANT; P2 przelotowy – −2, −1 (drzwi zach. do przedsionka B), P, 1–6, S (służbowy, na klucz), ANT",
+    "szacht 2,15 × 3,20 m (po dźwigu T): przewód spalin agregatu, wyrzut wentylacji i oddymiania garażu, piony centrali S → lamele korony od pd."
+   ],
+   "pow_m2": 58.75,
+   "uklad_uv": {
+    "klatka_B": [
+     [
+      28.5,
+      0.75
+     ],
+     [
+      28.5,
+      7.39
+     ],
+     [
+      25.1,
+      7.39
+     ],
+     [
+      25.1,
+      0.75
+     ]
+    ],
+    "przedsionek_B": [
+     [
+      28.5,
+      7.59
+     ],
+     [
+      28.5,
+      9.65
+     ],
+     [
+      25.1,
+      9.65
+     ],
+     [
+      25.1,
+      7.59
+     ]
+    ],
+    "szachty_B": [
+     [
+      30.85,
+      0.75
+     ],
+     [
+      30.85,
+      3.95
+     ],
+     [
+      28.7,
+      3.95
+     ],
+     [
+      28.7,
+      0.75
+     ]
+    ],
+    "P1": [
+     [
+      30.85,
+      4.15
+     ],
+     [
+      30.85,
+      6.8
+     ],
+     [
+      28.7,
+      6.8
+     ],
+     [
+      28.7,
+      4.15
+     ]
+    ],
+    "P2": [
+     [
+      30.85,
+      7.0
+     ],
+     [
+      30.85,
+      9.65
+     ],
+     [
+      28.7,
+      9.65
+     ],
+     [
+      28.7,
+      7.0
+     ]
+    ]
+   },
+   "drzwi_dzwigow": [
+    {
+     "dzwig": "P1",
+     "uv": [
+      31.1,
+      5.475
+     ],
+     "kierunek": [
+      1,
+      0
+     ],
+     "przystanki": [
+      "ANT"
+     ]
+    },
+    {
+     "dzwig": "P2",
+     "uv": [
+      31.1,
+      8.325
+     ],
+     "kierunek": [
+      1,
+      0
+     ],
+     "przystanki": [
+      "S*",
+      "ANT"
+     ]
+    }
+   ],
+   "klatka": {
+    "kondygnacje": [
+     {
+      "z": "-2",
+      "do": "-1",
+      "H_m": 3.0,
+      "biegi": 2,
+      "stopnie": 18,
+      "h_cm": 16.67,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       9,
+       9
+      ],
+      "dl_biegow_m": [
+       2.24,
+       2.24
+      ],
+      "wymagana_dl_klatki_m": 5.24,
+      "przeswit_m": 2.66
+     },
+     {
+      "z": "-1",
+      "do": "P",
+      "H_m": 4.2,
+      "biegi": 2,
+      "stopnie": 24,
+      "h_cm": 17.5,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       12,
+       12
+      ],
+      "dl_biegow_m": [
+       3.08,
+       3.08
+      ],
+      "wymagana_dl_klatki_m": 6.08,
+      "przeswit_m": 3.85
+     },
+     {
+      "z": "P",
+      "do": "1",
+      "H_m": 4.8,
+      "biegi": 2,
+      "stopnie": 28,
+      "h_cm": 17.14,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       14,
+       14
+      ],
+      "dl_biegow_m": [
+       3.64,
+       3.64
+      ],
+      "wymagana_dl_klatki_m": 6.64,
+      "przeswit_m": 4.45
+     },
+     {
+      "z": "1",
+      "do": "2",
+      "H_m": 3.75,
+      "biegi": 2,
+      "stopnie": 22,
+      "h_cm": 17.05,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       11,
+       11
+      ],
+      "dl_biegow_m": [
+       2.8,
+       2.8
+      ],
+      "wymagana_dl_klatki_m": 5.8,
+      "przeswit_m": 3.4
+     },
+     {
+      "z": "2",
+      "do": "3",
+      "H_m": 3.75,
+      "biegi": 2,
+      "stopnie": 22,
+      "h_cm": 17.05,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       11,
+       11
+      ],
+      "dl_biegow_m": [
+       2.8,
+       2.8
+      ],
+      "wymagana_dl_klatki_m": 5.8,
+      "przeswit_m": 3.4
+     },
+     {
+      "z": "3",
+      "do": "4",
+      "H_m": 3.75,
+      "biegi": 2,
+      "stopnie": 22,
+      "h_cm": 17.05,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       11,
+       11
+      ],
+      "dl_biegow_m": [
+       2.8,
+       2.8
+      ],
+      "wymagana_dl_klatki_m": 5.8,
+      "przeswit_m": 3.4
+     },
+     {
+      "z": "4",
+      "do": "5",
+      "H_m": 3.75,
+      "biegi": 2,
+      "stopnie": 22,
+      "h_cm": 17.05,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       11,
+       11
+      ],
+      "dl_biegow_m": [
+       2.8,
+       2.8
+      ],
+      "wymagana_dl_klatki_m": 5.8,
+      "przeswit_m": 3.4
+     },
+     {
+      "z": "5",
+      "do": "6",
+      "H_m": 3.75,
+      "biegi": 2,
+      "stopnie": 22,
+      "h_cm": 17.05,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       11,
+       11
+      ],
+      "dl_biegow_m": [
+       2.8,
+       2.8
+      ],
+      "wymagana_dl_klatki_m": 5.8,
+      "przeswit_m": 3.4
+     },
+     {
+      "z": "6",
+      "do": "S",
+      "H_m": 3.75,
+      "biegi": 2,
+      "stopnie": 22,
+      "h_cm": 17.05,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       11,
+       11
+      ],
+      "dl_biegow_m": [
+       2.8,
+       2.8
+      ],
+      "wymagana_dl_klatki_m": 5.8,
+      "przeswit_m": 3.4
+     },
+     {
+      "z": "S",
+      "do": "ANT",
+      "H_m": 3.6,
+      "biegi": 2,
+      "stopnie": 21,
+      "h_cm": 17.14,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       11,
+       10
+      ],
+      "dl_biegow_m": [
+       2.8,
+       2.52
+      ],
+      "wymagana_dl_klatki_m": 5.8,
+      "przeswit_m": 3.25
+     }
+    ],
+    "uwaga": "spocznik kondygnacyjny zawsze na końcu pn. (przy przedsionku B)"
+   }
   },
   "C": {
    "obrys_wing_sd": [
@@ -1012,11 +1677,229 @@
    ],
    "zakres": "−1…4",
    "sklad": [
-    "klatka C obudowana z przedsionkiem ppoż. i MOE",
-    "szyb C1 w stanie surowym – rezerwa (przyszłe połączenie z Mazowiecką 19), bez urządzenia dźwigowego"
-   ]
+    "klatka C obudowana REI 60, 5,80 × 3,40 m w świetle (biegi wzdłuż s): 2 biegi 1,60 m (M.13; MDS 260 os. → 1,56 m), kond. −1/P i P/1 – 3 biegi",
+    "przedsionek ppoż. C 5,80 × 2,00 m z MOE 1,5 × 1,5 m (koniec przeciwny do drzwi klatki) i interkomem, nadciśnienie; drzwi z korytarza (lico d 8,40)",
+    "szachty 1,60 × 5,60 m (nadciśnienie, piony)",
+    "v1.2 (I5): rezygnacja z szybu rezerwowego C1 (nie mieścił się obok klatki 3,40 m; ściana przy Maz. 19 REI 120 bez otworów) – skrzydło obsługują A1/A2 przez ciągłe korytarze kond. 1–4"
+   ],
+   "uklad_sd": {
+    "klatka_C": [
+     [
+      6.55,
+      10.85
+     ],
+     [
+      6.55,
+      14.25
+     ],
+     [
+      0.75,
+      14.25
+     ],
+     [
+      0.75,
+      10.85
+     ]
+    ],
+    "przedsionek_C": [
+     [
+      6.55,
+      8.65
+     ],
+     [
+      6.55,
+      10.65
+     ],
+     [
+      0.75,
+      10.65
+     ],
+     [
+      0.75,
+      8.65
+     ]
+    ],
+    "szachty_C": [
+     [
+      8.35,
+      8.65
+     ],
+     [
+      8.35,
+      14.25
+     ],
+     [
+      6.75,
+      14.25
+     ],
+     [
+      6.75,
+      8.65
+     ]
+    ]
+   },
+   "uklad_en": {
+    "klatka_C": [
+     [
+      59.6,
+      8.083
+     ],
+     [
+      62.92,
+      7.352
+     ],
+     [
+      64.167,
+      13.016
+     ],
+     [
+      60.846,
+      13.747
+     ]
+    ],
+    "przedsionek_C": [
+     [
+      57.451,
+      8.556
+     ],
+     [
+      59.404,
+      8.126
+     ],
+     [
+      60.651,
+      13.79
+     ],
+     [
+      58.698,
+      14.22
+     ]
+    ],
+    "szachty_C": [
+     [
+      58.741,
+      14.416
+     ],
+     [
+      64.21,
+      13.212
+     ],
+     [
+      64.554,
+      14.774
+     ],
+     [
+      59.085,
+      15.978
+     ]
+    ]
+   },
+   "klatka": {
+    "kondygnacje": [
+     {
+      "z": "-1",
+      "do": "P",
+      "H_m": 4.2,
+      "biegi": 3,
+      "stopnie": 24,
+      "h_cm": 17.5,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       8,
+       8,
+       8
+      ],
+      "dl_biegow_m": [
+       1.96,
+       1.96,
+       1.96
+      ],
+      "wymagana_dl_klatki_m": 4.96,
+      "przeswit_m": 2.45
+     },
+     {
+      "z": "P",
+      "do": "1",
+      "H_m": 4.8,
+      "biegi": 3,
+      "stopnie": 28,
+      "h_cm": 17.14,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       10,
+       9,
+       9
+      ],
+      "dl_biegow_m": [
+       2.52,
+       2.24,
+       2.24
+      ],
+      "wymagana_dl_klatki_m": 5.52,
+      "przeswit_m": 2.74
+     },
+     {
+      "z": "1",
+      "do": "2",
+      "H_m": 3.75,
+      "biegi": 2,
+      "stopnie": 22,
+      "h_cm": 17.05,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       11,
+       11
+      ],
+      "dl_biegow_m": [
+       2.8,
+       2.8
+      ],
+      "wymagana_dl_klatki_m": 5.8,
+      "przeswit_m": 3.4
+     },
+     {
+      "z": "2",
+      "do": "3",
+      "H_m": 3.75,
+      "biegi": 2,
+      "stopnie": 22,
+      "h_cm": 17.05,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       11,
+       11
+      ],
+      "dl_biegow_m": [
+       2.8,
+       2.8
+      ],
+      "wymagana_dl_klatki_m": 5.8,
+      "przeswit_m": 3.4
+     },
+     {
+      "z": "3",
+      "do": "4",
+      "H_m": 3.75,
+      "biegi": 2,
+      "stopnie": 22,
+      "h_cm": 17.05,
+      "s_cm": 28,
+      "stopnie_w_biegach": [
+       11,
+       11
+      ],
+      "dl_biegow_m": [
+       2.8,
+       2.8
+      ],
+      "wymagana_dl_klatki_m": 5.8,
+      "przeswit_m": 3.4
+     }
+    ],
+    "uwaga": "spocznik kondygnacyjny parteru na końcu przeciwnym niż na −1 i 1–4 (przedsionek wzdłuż całej klatki)"
+   }
   },
-  "odleglosc_klatek_A_B_m": 20.0,
+  "odleglosc_klatek_A_B_m": 19.8,
   "T": {
    "obrys_uv": [
     [
@@ -1058,7 +1941,8 @@
    "sklad": [
     "dźwig T osobowo-towarowy 2 000 kg, kabina 1,5 × 2,7 m – narożnik SE segmentu (P-I5); parter: drzwi od Wybrzeża, punkt wystawienia odpadów"
    ]
-  }
+  },
+  "odleglosc_klatek_A_B_uwaga": "między środkami klatek 19.8 m (v1.1: 20,0); najmniejsza między obudowami 13.95 m – sposób pomiaru „2 klatki ≥ 15 m” (MDS −2, rozp. 2025 poz. 932 § 6) do potwierdzenia"
  },
  "siatka": {
   "wieza": {
@@ -1111,6 +1995,8 @@
   }
  },
  "kondygnacja_sejmiku": {
+  "wersja": "S-3 / wariant „hol z galerią” – v1.2 (scalona z koncepcja.json; trzony wg I5: _v12_trzony.py) – 17.11.2026",
+  "zrodlo": "docs/20_koncepcja/kondygnacja_S2.json (_s2_model.py → _s2_geometria.py); sala: _s2_sala.py; ewakuacja: _s2_ewakuacja.py; trzony: _v12_trzony.py",
   "posadzka": {
    "wzgl": 27.3,
    "npm": 146.6
@@ -1119,107 +2005,1788 @@
   "antresola": {
    "wzgl": 30.9,
    "npm": 150.2,
-   "pow_m2": 69.66
+   "pow_m2": 297.88,
+   "udzial_rzutu_proc": 26.0,
+   "czesc_radnych_m2": 161.39,
+   "czesc_publiczna_m2": 136.5,
+   "wycofanie_od_elewacji_m": 1.35,
+   "wys_w_swietle_pod_m": 3.3,
+   "wys_w_swietle_nad_m": 3.25
   },
   "sala": {
-   "pow_m2": 287.41,
+   "pow_m2": 232.01,
+   "pow_z_galeria_m2": 297.33,
    "wys_w_swietle_m": 6.85,
-   "wymiary": "19,5 × 16,75 m minus łuk R 13,5",
+   "wymiary": "u 22,0–39,5 × v 12,6–29,2 minus łuk R 13,5 i reżyserka SWD.04 (naroże SE)",
    "ognisko_rzedow_uv": [
-    30.0,
-    13.4
+    27.5,
+    15.2
    ],
+   "rozstaw_rzedow_m": 1.8,
+   "przewyzszenie_rzedu_m": 0.09,
    "rzedy": [
     {
-     "R": 4.8,
-     "miejsc": 10,
-     "rzedna": 0.15
+     "R": 4.5,
+     "miejsc": 8,
+     "w_tym_dla_wozka": 1,
+     "rzedna": 0.0,
+     "sektor_deg": [
+      23.8,
+      121.3
+     ],
+     "linia_siedzisk_R": 5.4,
+     "obrys_uv": [
+      [
+       [
+        31.572,
+        16.996
+       ],
+       [
+        31.505,
+        17.139
+       ],
+       [
+        31.434,
+        17.28
+       ],
+       [
+        31.358,
+        17.418
+       ],
+       [
+        31.277,
+        17.553
+       ],
+       [
+        31.191,
+        17.686
+       ],
+       [
+        31.101,
+        17.815
+       ],
+       [
+        31.006,
+        17.941
+       ],
+       [
+        30.906,
+        18.063
+       ],
+       [
+        30.803,
+        18.182
+       ],
+       [
+        30.695,
+        18.298
+       ],
+       [
+        30.583,
+        18.409
+       ],
+       [
+        30.468,
+        18.516
+       ],
+       [
+        30.348,
+        18.619
+       ],
+       [
+        30.225,
+        18.718
+       ],
+       [
+        30.099,
+        18.812
+       ],
+       [
+        29.969,
+        18.902
+       ],
+       [
+        29.836,
+        18.987
+       ],
+       [
+        29.701,
+        19.068
+       ],
+       [
+        29.562,
+        19.143
+       ],
+       [
+        29.421,
+        19.214
+       ],
+       [
+        29.278,
+        19.28
+       ],
+       [
+        29.132,
+        19.34
+       ],
+       [
+        28.984,
+        19.395
+       ],
+       [
+        28.834,
+        19.445
+       ],
+       [
+        28.683,
+        19.49
+       ],
+       [
+        28.53,
+        19.529
+       ],
+       [
+        28.376,
+        19.563
+       ],
+       [
+        28.221,
+        19.591
+       ],
+       [
+        28.065,
+        19.614
+       ],
+       [
+        27.908,
+        19.631
+       ],
+       [
+        27.751,
+        19.643
+       ],
+       [
+        27.593,
+        19.649
+       ],
+       [
+        27.435,
+        19.65
+       ],
+       [
+        27.278,
+        19.644
+       ],
+       [
+        27.12,
+        19.634
+       ],
+       [
+        26.963,
+        19.618
+       ],
+       [
+        26.807,
+        19.596
+       ],
+       [
+        26.652,
+        19.568
+       ],
+       [
+        26.498,
+        19.536
+       ],
+       [
+        26.345,
+        19.497
+       ],
+       [
+        26.193,
+        19.454
+       ],
+       [
+        26.043,
+        19.405
+       ],
+       [
+        25.895,
+        19.35
+       ],
+       [
+        25.749,
+        19.291
+       ],
+       [
+        25.605,
+        19.226
+       ],
+       [
+        25.463,
+        19.157
+       ],
+       [
+        25.324,
+        19.082
+       ],
+       [
+        25.188,
+        19.002
+       ],
+       [
+        24.409,
+        20.284
+       ],
+       [
+        24.591,
+        20.39
+       ],
+       [
+        24.777,
+        20.49
+       ],
+       [
+        24.966,
+        20.583
+       ],
+       [
+        25.158,
+        20.67
+       ],
+       [
+        25.354,
+        20.749
+       ],
+       [
+        25.552,
+        20.822
+       ],
+       [
+        25.752,
+        20.888
+       ],
+       [
+        25.955,
+        20.946
+       ],
+       [
+        26.16,
+        20.997
+       ],
+       [
+        26.366,
+        21.041
+       ],
+       [
+        26.574,
+        21.077
+       ],
+       [
+        26.783,
+        21.107
+       ],
+       [
+        26.992,
+        21.128
+       ],
+       [
+        27.203,
+        21.143
+       ],
+       [
+        27.414,
+        21.149
+       ],
+       [
+        27.625,
+        21.149
+       ],
+       [
+        27.835,
+        21.141
+       ],
+       [
+        28.046,
+        21.125
+       ],
+       [
+        28.255,
+        21.102
+       ],
+       [
+        28.464,
+        21.071
+       ],
+       [
+        28.672,
+        21.034
+       ],
+       [
+        28.878,
+        20.988
+       ],
+       [
+        29.082,
+        20.936
+       ],
+       [
+        29.284,
+        20.876
+       ],
+       [
+        29.484,
+        20.809
+       ],
+       [
+        29.682,
+        20.736
+       ],
+       [
+        29.877,
+        20.655
+       ],
+       [
+        30.069,
+        20.567
+       ],
+       [
+        30.257,
+        20.473
+       ],
+       [
+        30.442,
+        20.372
+       ],
+       [
+        30.624,
+        20.264
+       ],
+       [
+        30.801,
+        20.15
+       ],
+       [
+        30.975,
+        20.03
+       ],
+       [
+        31.144,
+        19.904
+       ],
+       [
+        31.308,
+        19.772
+       ],
+       [
+        31.468,
+        19.634
+       ],
+       [
+        31.622,
+        19.49
+       ],
+       [
+        31.772,
+        19.342
+       ],
+       [
+        31.916,
+        19.188
+       ],
+       [
+        32.055,
+        19.029
+       ],
+       [
+        32.187,
+        18.865
+       ],
+       [
+        32.314,
+        18.696
+       ],
+       [
+        32.435,
+        18.523
+       ],
+       [
+        32.55,
+        18.346
+       ],
+       [
+        32.658,
+        18.165
+       ],
+       [
+        32.76,
+        17.981
+       ],
+       [
+        32.855,
+        17.793
+       ],
+       [
+        32.944,
+        17.601
+       ]
+      ]
+     ]
     },
     {
-     "R": 6.9,
+     "R": 6.3,
+     "miejsc": 11,
+     "w_tym_dla_wozka": 1,
+     "rzedna": 0.09,
+     "sektor_deg": [
+      21.4,
+      113.5
+     ],
+     "linia_siedzisk_R": 7.2,
+     "obrys_uv": [
+      [
+       [
+        33.319,
+        17.48
+       ],
+       [
+        33.239,
+        17.674
+       ],
+       [
+        33.153,
+        17.865
+       ],
+       [
+        33.061,
+        18.053
+       ],
+       [
+        32.962,
+        18.237
+       ],
+       [
+        32.858,
+        18.418
+       ],
+       [
+        32.747,
+        18.596
+       ],
+       [
+        32.63,
+        18.77
+       ],
+       [
+        32.508,
+        18.94
+       ],
+       [
+        32.38,
+        19.105
+       ],
+       [
+        32.246,
+        19.266
+       ],
+       [
+        32.108,
+        19.423
+       ],
+       [
+        31.964,
+        19.575
+       ],
+       [
+        31.815,
+        19.722
+       ],
+       [
+        31.661,
+        19.864
+       ],
+       [
+        31.502,
+        20.0
+       ],
+       [
+        31.339,
+        20.132
+       ],
+       [
+        31.172,
+        20.258
+       ],
+       [
+        31.001,
+        20.378
+       ],
+       [
+        30.825,
+        20.492
+       ],
+       [
+        30.646,
+        20.6
+       ],
+       [
+        30.464,
+        20.703
+       ],
+       [
+        30.278,
+        20.799
+       ],
+       [
+        30.089,
+        20.889
+       ],
+       [
+        29.897,
+        20.972
+       ],
+       [
+        29.702,
+        21.049
+       ],
+       [
+        29.505,
+        21.12
+       ],
+       [
+        29.306,
+        21.183
+       ],
+       [
+        29.104,
+        21.241
+       ],
+       [
+        28.901,
+        21.291
+       ],
+       [
+        28.697,
+        21.334
+       ],
+       [
+        28.491,
+        21.371
+       ],
+       [
+        28.283,
+        21.401
+       ],
+       [
+        28.075,
+        21.423
+       ],
+       [
+        27.867,
+        21.439
+       ],
+       [
+        27.657,
+        21.448
+       ],
+       [
+        27.448,
+        21.45
+       ],
+       [
+        27.239,
+        21.445
+       ],
+       [
+        27.03,
+        21.432
+       ],
+       [
+        26.822,
+        21.413
+       ],
+       [
+        26.614,
+        21.387
+       ],
+       [
+        26.407,
+        21.354
+       ],
+       [
+        26.202,
+        21.314
+       ],
+       [
+        25.998,
+        21.267
+       ],
+       [
+        25.796,
+        21.213
+       ],
+       [
+        25.595,
+        21.153
+       ],
+       [
+        25.397,
+        21.086
+       ],
+       [
+        25.201,
+        21.012
+       ],
+       [
+        25.008,
+        20.932
+       ],
+       [
+        24.41,
+        22.307
+       ],
+       [
+        24.649,
+        22.407
+       ],
+       [
+        24.892,
+        22.498
+       ],
+       [
+        25.138,
+        22.581
+       ],
+       [
+        25.387,
+        22.656
+       ],
+       [
+        25.637,
+        22.723
+       ],
+       [
+        25.89,
+        22.781
+       ],
+       [
+        26.145,
+        22.831
+       ],
+       [
+        26.401,
+        22.872
+       ],
+       [
+        26.659,
+        22.904
+       ],
+       [
+        26.917,
+        22.928
+       ],
+       [
+        27.176,
+        22.943
+       ],
+       [
+        27.436,
+        22.95
+       ],
+       [
+        27.695,
+        22.948
+       ],
+       [
+        27.955,
+        22.937
+       ],
+       [
+        28.213,
+        22.917
+       ],
+       [
+        28.471,
+        22.889
+       ],
+       [
+        28.728,
+        22.852
+       ],
+       [
+        28.984,
+        22.807
+       ],
+       [
+        29.238,
+        22.753
+       ],
+       [
+        29.49,
+        22.69
+       ],
+       [
+        29.739,
+        22.619
+       ],
+       [
+        29.986,
+        22.54
+       ],
+       [
+        30.231,
+        22.453
+       ],
+       [
+        30.472,
+        22.357
+       ],
+       [
+        30.71,
+        22.254
+       ],
+       [
+        30.944,
+        22.143
+       ],
+       [
+        31.175,
+        22.023
+       ],
+       [
+        31.401,
+        21.896
+       ],
+       [
+        31.623,
+        21.762
+       ],
+       [
+        31.841,
+        21.62
+       ],
+       [
+        32.053,
+        21.471
+       ],
+       [
+        32.261,
+        21.315
+       ],
+       [
+        32.463,
+        21.153
+       ],
+       [
+        32.659,
+        20.983
+       ],
+       [
+        32.85,
+        20.807
+       ],
+       [
+        33.035,
+        20.625
+       ],
+       [
+        33.213,
+        20.436
+       ],
+       [
+        33.385,
+        20.242
+       ],
+       [
+        33.551,
+        20.042
+       ],
+       [
+        33.71,
+        19.837
+       ],
+       [
+        33.861,
+        19.627
+       ],
+       [
+        34.006,
+        19.411
+       ],
+       [
+        34.143,
+        19.191
+       ],
+       [
+        34.273,
+        18.966
+       ],
+       [
+        34.396,
+        18.737
+       ],
+       [
+        34.51,
+        18.504
+       ],
+       [
+        34.617,
+        18.268
+       ],
+       [
+        34.716,
+        18.028
+       ]
+      ]
+     ]
+    },
+    {
+     "R": 8.1,
+     "miejsc": 13,
+     "w_tym_dla_wozka": 1,
+     "rzedna": 0.18,
+     "sektor_deg": [
+      20.1,
+      108.9
+     ],
+     "linia_siedzisk_R": 9.0,
+     "obrys_uv": [
+      [
+       [
+        35.06,
+        17.966
+       ],
+       [
+        34.966,
+        18.209
+       ],
+       [
+        34.865,
+        18.449
+       ],
+       [
+        34.757,
+        18.685
+       ],
+       [
+        34.64,
+        18.917
+       ],
+       [
+        34.517,
+        19.146
+       ],
+       [
+        34.386,
+        19.37
+       ],
+       [
+        34.247,
+        19.59
+       ],
+       [
+        34.102,
+        19.806
+       ],
+       [
+        33.95,
+        20.017
+       ],
+       [
+        33.791,
+        20.222
+       ],
+       [
+        33.626,
+        20.423
+       ],
+       [
+        33.454,
+        20.618
+       ],
+       [
+        33.276,
+        20.807
+       ],
+       [
+        33.092,
+        20.991
+       ],
+       [
+        32.902,
+        21.168
+       ],
+       [
+        32.707,
+        21.339
+       ],
+       [
+        32.506,
+        21.504
+       ],
+       [
+        32.3,
+        21.663
+       ],
+       [
+        32.088,
+        21.814
+       ],
+       [
+        31.873,
+        21.959
+       ],
+       [
+        31.652,
+        22.097
+       ],
+       [
+        31.427,
+        22.227
+       ],
+       [
+        31.198,
+        22.35
+       ],
+       [
+        30.966,
+        22.466
+       ],
+       [
+        30.729,
+        22.574
+       ],
+       [
+        30.49,
+        22.674
+       ],
+       [
+        30.247,
+        22.767
+       ],
+       [
+        30.001,
+        22.852
+       ],
+       [
+        29.753,
+        22.928
+       ],
+       [
+        29.502,
+        22.997
+       ],
+       [
+        29.249,
+        23.058
+       ],
+       [
+        28.995,
+        23.11
+       ],
+       [
+        28.738,
+        23.154
+       ],
+       [
+        28.481,
+        23.19
+       ],
+       [
+        28.223,
+        23.218
+       ],
+       [
+        27.963,
+        23.237
+       ],
+       [
+        27.704,
+        23.247
+       ],
+       [
+        27.444,
+        23.25
+       ],
+       [
+        27.184,
+        23.244
+       ],
+       [
+        26.924,
+        23.229
+       ],
+       [
+        26.666,
+        23.207
+       ],
+       [
+        26.407,
+        23.176
+       ],
+       [
+        26.151,
+        23.136
+       ],
+       [
+        25.895,
+        23.088
+       ],
+       [
+        25.641,
+        23.032
+       ],
+       [
+        25.389,
+        22.968
+       ],
+       [
+        25.14,
+        22.896
+       ],
+       [
+        24.892,
+        22.816
+       ],
+       [
+        24.407,
+        24.235
+       ],
+       [
+        24.7,
+        24.33
+       ],
+       [
+        24.996,
+        24.416
+       ],
+       [
+        25.295,
+        24.492
+       ],
+       [
+        25.596,
+        24.558
+       ],
+       [
+        25.899,
+        24.615
+       ],
+       [
+        26.204,
+        24.662
+       ],
+       [
+        26.51,
+        24.699
+       ],
+       [
+        26.817,
+        24.726
+       ],
+       [
+        27.125,
+        24.743
+       ],
+       [
+        27.433,
+        24.75
+       ],
+       [
+        27.742,
+        24.747
+       ],
+       [
+        28.05,
+        24.734
+       ],
+       [
+        28.357,
+        24.711
+       ],
+       [
+        28.664,
+        24.679
+       ],
+       [
+        28.969,
+        24.636
+       ],
+       [
+        29.273,
+        24.584
+       ],
+       [
+        29.575,
+        24.522
+       ],
+       [
+        29.875,
+        24.45
+       ],
+       [
+        30.172,
+        24.368
+       ],
+       [
+        30.467,
+        24.277
+       ],
+       [
+        30.758,
+        24.177
+       ],
+       [
+        31.047,
+        24.067
+       ],
+       [
+        31.331,
+        23.948
+       ],
+       [
+        31.611,
+        23.82
+       ],
+       [
+        31.888,
+        23.682
+       ],
+       [
+        32.159,
+        23.536
+       ],
+       [
+        32.426,
+        23.382
+       ],
+       [
+        32.687,
+        23.218
+       ],
+       [
+        32.943,
+        23.047
+       ],
+       [
+        33.194,
+        22.867
+       ],
+       [
+        33.438,
+        22.679
+       ],
+       [
+        33.677,
+        22.483
+       ],
+       [
+        33.909,
+        22.28
+       ],
+       [
+        34.134,
+        22.07
+       ],
+       [
+        34.352,
+        21.852
+       ],
+       [
+        34.563,
+        21.627
+       ],
+       [
+        34.767,
+        21.396
+       ],
+       [
+        34.964,
+        21.158
+       ],
+       [
+        35.152,
+        20.914
+       ],
+       [
+        35.332,
+        20.664
+       ],
+       [
+        35.505,
+        20.408
+       ],
+       [
+        35.669,
+        20.147
+       ],
+       [
+        35.824,
+        19.881
+       ],
+       [
+        35.971,
+        19.61
+       ],
+       [
+        36.109,
+        19.334
+       ],
+       [
+        36.238,
+        19.054
+       ],
+       [
+        36.358,
+        18.77
+       ],
+       [
+        36.468,
+        18.482
+       ]
+      ]
+     ]
+    },
+    {
+     "R": 9.9,
      "miejsc": 15,
-     "rzedna": 0.3
-    },
-    {
-     "R": 9.0,
-     "miejsc": 19,
-     "rzedna": 0.45
+     "w_tym_dla_wozka": 1,
+     "rzedna": 0.27,
+     "sektor_deg": [
+      19.2,
+      105.8
+     ],
+     "linia_siedzisk_R": 10.8,
+     "obrys_uv": [
+      [
+       [
+        36.802,
+        18.439
+       ],
+       [
+        36.696,
+        18.731
+       ],
+       [
+        36.58,
+        19.018
+       ],
+       [
+        36.455,
+        19.302
+       ],
+       [
+        36.321,
+        19.582
+       ],
+       [
+        36.179,
+        19.858
+       ],
+       [
+        36.028,
+        20.129
+       ],
+       [
+        35.869,
+        20.395
+       ],
+       [
+        35.701,
+        20.656
+       ],
+       [
+        35.525,
+        20.911
+       ],
+       [
+        35.341,
+        21.161
+       ],
+       [
+        35.15,
+        21.405
+       ],
+       [
+        34.951,
+        21.643
+       ],
+       [
+        34.744,
+        21.874
+       ],
+       [
+        34.531,
+        22.099
+       ],
+       [
+        34.31,
+        22.317
+       ],
+       [
+        34.082,
+        22.528
+       ],
+       [
+        33.848,
+        22.731
+       ],
+       [
+        33.608,
+        22.927
+       ],
+       [
+        33.362,
+        23.116
+       ],
+       [
+        33.11,
+        23.296
+       ],
+       [
+        32.852,
+        23.469
+       ],
+       [
+        32.589,
+        23.633
+       ],
+       [
+        32.321,
+        23.79
+       ],
+       [
+        32.048,
+        23.937
+       ],
+       [
+        31.771,
+        24.076
+       ],
+       [
+        31.489,
+        24.206
+       ],
+       [
+        31.204,
+        24.327
+       ],
+       [
+        30.915,
+        24.439
+       ],
+       [
+        30.622,
+        24.542
+       ],
+       [
+        30.326,
+        24.636
+       ],
+       [
+        30.028,
+        24.72
+       ],
+       [
+        29.727,
+        24.795
+       ],
+       [
+        29.424,
+        24.86
+       ],
+       [
+        29.119,
+        24.916
+       ],
+       [
+        28.812,
+        24.962
+       ],
+       [
+        28.504,
+        24.999
+       ],
+       [
+        28.195,
+        25.025
+       ],
+       [
+        27.885,
+        25.042
+       ],
+       [
+        27.575,
+        25.05
+       ],
+       [
+        27.265,
+        25.047
+       ],
+       [
+        26.955,
+        25.035
+       ],
+       [
+        26.646,
+        25.013
+       ],
+       [
+        26.337,
+        24.981
+       ],
+       [
+        26.03,
+        24.94
+       ],
+       [
+        25.724,
+        24.889
+       ],
+       [
+        25.42,
+        24.828
+       ],
+       [
+        25.118,
+        24.758
+       ],
+       [
+        24.818,
+        24.678
+       ],
+       [
+        24.41,
+        26.121
+       ],
+       [
+        24.755,
+        26.213
+       ],
+       [
+        25.103,
+        26.294
+       ],
+       [
+        25.454,
+        26.364
+       ],
+       [
+        25.806,
+        26.423
+       ],
+       [
+        26.16,
+        26.471
+       ],
+       [
+        26.516,
+        26.507
+       ],
+       [
+        26.872,
+        26.533
+       ],
+       [
+        27.229,
+        26.547
+       ],
+       [
+        27.587,
+        26.55
+       ],
+       [
+        27.944,
+        26.541
+       ],
+       [
+        28.301,
+        26.522
+       ],
+       [
+        28.657,
+        26.491
+       ],
+       [
+        29.012,
+        26.449
+       ],
+       [
+        29.365,
+        26.396
+       ],
+       [
+        29.717,
+        26.331
+       ],
+       [
+        30.066,
+        26.256
+       ],
+       [
+        30.413,
+        26.17
+       ],
+       [
+        30.757,
+        26.073
+       ],
+       [
+        31.097,
+        25.965
+       ],
+       [
+        31.435,
+        25.846
+       ],
+       [
+        31.768,
+        25.717
+       ],
+       [
+        32.097,
+        25.577
+       ],
+       [
+        32.421,
+        25.428
+       ],
+       [
+        32.741,
+        25.268
+       ],
+       [
+        33.055,
+        25.098
+       ],
+       [
+        33.364,
+        24.918
+       ],
+       [
+        33.667,
+        24.728
+       ],
+       [
+        33.964,
+        24.529
+       ],
+       [
+        34.255,
+        24.321
+       ],
+       [
+        34.538,
+        24.104
+       ],
+       [
+        34.815,
+        23.878
+       ],
+       [
+        35.085,
+        23.644
+       ],
+       [
+        35.347,
+        23.401
+       ],
+       [
+        35.601,
+        23.149
+       ],
+       [
+        35.847,
+        22.89
+       ],
+       [
+        36.085,
+        22.624
+       ],
+       [
+        36.315,
+        22.35
+       ],
+       [
+        36.536,
+        22.069
+       ],
+       [
+        36.747,
+        21.781
+       ],
+       [
+        36.95,
+        21.486
+       ],
+       [
+        37.143,
+        21.186
+       ],
+       [
+        37.327,
+        20.879
+       ],
+       [
+        37.501,
+        20.567
+       ],
+       [
+        37.665,
+        20.25
+       ],
+       [
+        37.819,
+        19.927
+       ],
+       [
+        37.963,
+        19.6
+       ],
+       [
+        38.096,
+        19.268
+       ],
+       [
+        38.219,
+        18.933
+       ]
+      ]
+     ]
     }
    ],
-   "stale_stanowiska": 44,
+   "stale_stanowiska": 47,
+   "wymagane_stanowiska": 44,
+   "modul_stanowiska_m": 1.0,
    "plyta_razem": 70,
-   "galeria": 30,
-   "wozki": "po 1 stanowisku na wózek w każdym rzędzie (rząd 1: 2) + 3 na galerii",
-   "pochylnie": "boczne ≤ 5 %, 3,0 m na każdy uskok 0,15 m",
-   "prezydium": "przy pełnej ścianie pd. (godło na balustradzie galerii), światło z łuku od pn. i pn.-wsch. z przodu"
+   "galeria": 31,
+   "galeria_wozki": 3,
+   "wozki": "w każdym rzędzie stanowisko dla wózka 1,5 m na końcu zach. przy pochylni (4) + 3 na galerii",
+   "pochylnie": "przejście wsch. promieniowe i zach. wzdłuż ściany sali – nachylenie ≤ 5,0 % (0,09 m na 1,80 m), poręcze 0,75/0,90",
+   "prezydium": "stół 6,0 m (4 os.) przy pełnej ścianie pd., posadzka +0,00; za nim drzwi z kuluaru",
+   "mownica": "przed prezydium w ognisku F, blat regulowany 0,75–1,20 m (D6), pętla indukcyjna",
+   "galeria_publicznosci": {
+    "poziom": 30.9,
+    "obrys_uv": [
+     [
+      [
+       22.0,
+       12.6
+      ],
+      [
+       22.0,
+       22.65
+      ],
+      [
+       15.5,
+       22.65
+      ],
+      [
+       15.5,
+       12.6
+      ]
+     ]
+    ],
+    "rzedy": [
+     {
+      "nr": 1,
+      "u_oka": 21.45,
+      "podest_m": 0.0,
+      "v": [
+       12.85,
+       22.45
+      ],
+      "uklad": "3 miejsca dla wózków 0,90 × 1,40 + 3 opiekunów + 10 miejsc; kolano przy balustradzie"
+     },
+     {
+      "nr": 2,
+      "u_oka": 20.6,
+      "podest_m": 0.9,
+      "v": [
+       12.85,
+       22.45
+      ],
+      "uklad": "18 miejsc × 0,52 m na podeście +0,90 (głęb. rzędu 0,85; 6 stopni 0,15 × 0,30 przy końcach)"
+     }
+    ],
+    "balustrada": "część pionowa 0,70 m + pozioma 0,50 m (WT § 298 ust. 7)"
+   },
+   "miejsca_poza_rzedami": {
+    "gosc": 12,
+    "media": 8,
+    "obsluga": 4,
+    "PJM": 2,
+    "prezydium": 4
+   }
   },
   "pomieszczenia": {
    "C-A": {
-    "nazwa": "Trzon A: klatka A z przedsionkiem ppoż. i MOE, dźwigi A1/A2 1 600 kg, dźwig R dla ekip ratowniczych i ewakuacyjny (1 000 kg, 1,1×2,1), szachty",
+    "nazwa": "Trzon A (v1.2: wydłużony na pd. do v 11,85 wg I5; klatka A 3,40×5,80 + przedsionek 3,10×5,80 z MOE, A1/A2 1 600 kg kab. 1,5×2,1 drzwi pn., R 1 000 kg drzwi pd.)",
     "kategoria": "trzon",
-    "pow_m2": 60.48,
+    "poziom": "S+ANT",
+    "pow_m2": 64.8,
     "program_m2": null,
     "zakres_m2": null,
     "obrys_uv": [
      [
       [
-       8.3,
-       12.45
-      ],
-      [
-       8.3,
-       20.85
+       15.5,
+       11.85
       ],
       [
        15.5,
        20.85
       ],
       [
-       15.5,
-       12.45
+       8.3,
+       20.85
+      ],
+      [
+       8.3,
+       11.85
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       79.721,
-       54.818
-      ],
-      [
-       77.732,
-       62.979
+       86.858,
+       55.94
       ],
       [
        84.727,
        64.684
       ],
       [
-       86.716,
-       56.523
+       77.732,
+       62.979
+      ],
+      [
+       79.863,
+       54.235
       ]
      ]
     ]
    },
    "C-B": {
-    "nazwa": "Trzon B: klatka B z przedsionkiem ppoż. i MOE, dźwigi publiczne P1/P2 1 275 kg (kab. 1,4×2,4; P2 przelotowy do PHS.05c), dźwig T 2 000 kg os.-tow., szachty",
+    "nazwa": "Trzon B (obrys bez zmian; klatka B 3,40×6,64 + przedsionek 3,40×2,06 z MOE, P1/P2 1 600 kg kab. 1,5×2,1 drzwi wsch., szachty po dźwigu T)",
     "kategoria": "trzon",
+    "poziom": "S+ANT",
     "pow_m2": 58.75,
     "program_m2": null,
     "zakres_m2": null,
     "obrys_uv": [
      [
       [
-       24.85,
-       9.9
-      ],
-      [
-       31.1,
-       9.9
-      ],
-      [
        31.1,
        0.5
+      ],
+      [
+       31.1,
+       9.9
+      ],
+      [
+       24.85,
+       9.9
       ],
       [
        24.85,
@@ -1230,16 +3797,16 @@
     "obrys_en": [
      [
       [
-       96.404,
-       56.26
+       104.703,
+       48.607
       ],
       [
        102.476,
        57.74
       ],
       [
-       104.703,
-       48.607
+       96.404,
+       56.26
       ],
       [
        98.631,
@@ -1251,7 +3818,8 @@
    "SWD.08": {
     "nazwa": "Sala komisji 50 os.",
     "kategoria": "zamk",
-    "pow_m2": 95.41,
+    "poziom": "S",
+    "pow_m2": 90.5,
     "program_m2": 100,
     "zakres_m2": [
      90,
@@ -1260,11 +3828,7 @@
     "obrys_uv": [
      [
       [
-       10.65,
-       9.9
-      ],
-      [
-       10.65,
+       11.2,
        0.5
       ],
       [
@@ -1274,18 +3838,26 @@
       [
        0.5,
        9.9
+      ],
+      [
+       9.1,
+       9.9
+      ],
+      [
+       9.1,
+       5.1
+      ],
+      [
+       11.2,
+       5.1
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       82.608,
-       52.897
-      ],
-      [
-       84.835,
-       43.764
+       85.369,
+       43.894
       ],
       [
        74.973,
@@ -1294,14 +3866,27 @@
       [
        72.747,
        50.493
+      ],
+      [
+       81.102,
+       52.53
+      ],
+      [
+       82.239,
+       47.866
+      ],
+      [
+       84.279,
+       48.364
       ]
      ]
     ]
    },
    "SWD.10a": {
-    "nazwa": "Zaplecze nagrań komisji 50 os.",
+    "nazwa": "Zaplecze nagrań komisji 50 os. (okno do SWD.08)",
     "kategoria": "zamk",
-    "pow_m2": 9.02,
+    "poziom": "S",
+    "pow_m2": 8.74,
     "program_m2": 10,
     "zakres_m2": [
      8,
@@ -1310,48 +3895,49 @@
     "obrys_uv": [
      [
       [
-       10.8,
-       5.125
+       11.2,
+       5.3
       ],
       [
-       12.75,
-       5.125
+       11.2,
+       9.9
       ],
       [
-       12.75,
-       0.5
+       9.3,
+       9.9
       ],
       [
-       10.8,
-       0.5
+       9.3,
+       5.3
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       83.885,
-       48.293
+       84.232,
+       48.558
       ],
       [
-       85.779,
-       48.755
+       83.143,
+       53.027
       ],
       [
-       86.875,
-       44.261
+       81.297,
+       52.577
       ],
       [
-       84.98,
-       43.8
+       82.386,
+       48.108
       ]
      ]
     ]
    },
    "SWD.10b": {
-    "nazwa": "Zaplecze nagrań komisji 30 os.",
+    "nazwa": "Zaplecze nagrań komisji 30 os. (okno do SWD.09)",
     "kategoria": "zamk",
-    "pow_m2": 9.02,
+    "poziom": "S",
+    "pow_m2": 8.74,
     "program_m2": 10,
     "zakres_m2": [
      8,
@@ -1360,40 +3946,91 @@
     "obrys_uv": [
      [
       [
-       10.8,
-       5.275
+       13.3,
+       5.3
       ],
       [
-       10.8,
+       13.3,
        9.9
       ],
       [
-       12.75,
+       11.4,
        9.9
       ],
       [
-       12.75,
-       5.275
+       11.4,
+       5.3
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       83.849,
-       48.439
+       86.272,
+       49.055
       ],
       [
-       82.754,
-       52.932
+       85.183,
+       53.524
       ],
       [
-       84.649,
-       53.394
+       83.337,
+       53.074
       ],
       [
-       85.744,
-       48.901
+       84.426,
+       48.605
+      ]
+     ]
+    ]
+   },
+   "IT.02": {
+    "nazwa": "Punkt dystrybucyjny IT (PD) – przy zapleczach nagrań",
+    "kategoria": "zamk",
+    "poziom": "S",
+    "pow_m2": 4.75,
+    "program_m2": 6,
+    "zakres_m2": [
+     4,
+     10
+    ],
+    "obrys_uv": [
+     [
+      [
+       15.4,
+       7.4
+      ],
+      [
+       15.4,
+       9.9
+      ],
+      [
+       13.5,
+       9.9
+      ],
+      [
+       13.5,
+       7.4
+      ]
+     ]
+    ],
+    "obrys_en": [
+     [
+      [
+       87.815,
+       51.593
+      ],
+      [
+       87.223,
+       54.022
+      ],
+      [
+       85.377,
+       53.572
+      ],
+      [
+       85.969,
+       51.143
       ]
      ]
     ]
@@ -1401,7 +4038,8 @@
    "SWD.09": {
     "nazwa": "Sala komisji 30 os.",
     "kategoria": "zamk",
-    "pow_m2": 55.46,
+    "poziom": "S",
+    "pow_m2": 54.28,
     "program_m2": 60,
     "zakres_m2": [
      54,
@@ -1410,40 +4048,72 @@
     "obrys_uv": [
      [
       [
-       12.9,
-       9.9
-      ],
-      [
-       18.8,
-       9.9
-      ],
-      [
-       18.8,
+       18.85,
        0.5
       ],
       [
-       12.9,
+       11.4,
        0.5
+      ],
+      [
+       11.4,
+       5.1
+      ],
+      [
+       13.5,
+       5.1
+      ],
+      [
+       13.5,
+       7.2
+      ],
+      [
+       15.6,
+       7.2
+      ],
+      [
+       15.6,
+       9.9
+      ],
+      [
+       18.85,
+       9.9
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       84.794,
-       53.43
+       92.801,
+       45.706
       ],
       [
-       90.526,
-       54.827
+       85.563,
+       43.942
       ],
       [
-       92.753,
-       45.694
+       84.474,
+       48.411
       ],
       [
-       87.021,
-       44.297
+       86.514,
+       48.908
+      ],
+      [
+       86.017,
+       50.948
+      ],
+      [
+       88.057,
+       51.446
+      ],
+      [
+       87.417,
+       54.069
+      ],
+      [
+       90.575,
+       54.839
       ]
      ]
     ]
@@ -1451,7 +4121,8 @@
    "SWD.11a": {
     "nazwa": "Sala klubu radnych 30 os. (1)",
     "kategoria": "zamk",
-    "pow_m2": 54.05,
+    "poziom": "S",
+    "pow_m2": 54.52,
     "program_m2": 60,
     "zakres_m2": [
      54,
@@ -1460,19 +4131,19 @@
     "obrys_uv": [
      [
       [
-       18.95,
-       9.9
-      ],
-      [
-       24.7,
-       9.9
-      ],
-      [
-       24.7,
+       24.85,
        0.5
       ],
       [
-       18.95,
+       24.85,
+       9.9
+      ],
+      [
+       19.05,
+       9.9
+      ],
+      [
+       19.05,
        0.5
       ]
      ]
@@ -1480,20 +4151,20 @@
     "obrys_en": [
      [
       [
-       90.672,
-       54.862
+       98.631,
+       47.127
       ],
       [
-       96.259,
-       56.224
+       96.404,
+       56.26
       ],
       [
-       98.485,
-       47.092
+       90.769,
+       54.886
       ],
       [
-       92.898,
-       45.73
+       92.996,
+       45.754
       ]
      ]
     ]
@@ -1501,7 +4172,8 @@
    "SWD.11b": {
     "nazwa": "Sala klubu radnych 30 os. (2)",
     "kategoria": "zamk",
-    "pow_m2": 54.45,
+    "poziom": "S",
+    "pow_m2": 55.44,
     "program_m2": 60,
     "zakres_m2": [
      54,
@@ -1514,16 +4186,16 @@
        0.5
       ],
       [
-       31.25,
-       0.5
-      ],
-      [
-       31.25,
-       7.1
-      ],
-      [
        39.5,
        7.1
+      ],
+      [
+       31.1,
+       7.1
+      ],
+      [
+       31.1,
+       0.5
       ]
      ]
     ],
@@ -1534,63 +4206,64 @@
        50.597
       ],
       [
-       104.848,
-       48.643
-      ],
-      [
-       103.285,
-       55.055
-      ],
-      [
        111.301,
        57.009
+      ],
+      [
+       103.14,
+       55.02
+      ],
+      [
+       104.703,
+       48.607
       ]
      ]
     ]
    },
-   "PHS.05c": {
-    "nazwa": "Przedsionek publiczny przy dźwigu P2 z toaletą dostępną (dla publiczności galerii)",
-    "kategoria": "zamk",
-    "pow_m2": 9.94,
+   "KW.S.02": {
+    "nazwa": "Dojście do SWD.11b, przystanek służbowy P2",
+    "kategoria": "kom",
+    "poziom": "S",
+    "pow_m2": 4.16,
     "program_m2": null,
     "zakres_m2": null,
     "obrys_uv": [
      [
       [
-       31.25,
-       7.25
+       32.7,
+       7.3
       ],
       [
-       31.25,
+       32.7,
        9.9
       ],
       [
-       35.0,
+       31.1,
        9.9
       ],
       [
-       35.0,
-       7.25
+       31.1,
+       7.3
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       103.25,
-       55.201
+       104.647,
+       55.593
       ],
       [
-       102.622,
-       57.776
+       104.031,
+       58.119
       ],
       [
-       106.266,
-       58.664
+       102.476,
+       57.74
       ],
       [
-       106.893,
-       56.089
+       103.092,
+       55.214
       ]
      ]
     ]
@@ -1598,7 +4271,8 @@
    "SWD.07": {
     "nazwa": "Pokój matki z dzieckiem",
     "kategoria": "zamk",
-    "pow_m2": 11.53,
+    "poziom": "S",
+    "pow_m2": 11.18,
     "program_m2": 10,
     "zakres_m2": [
      8,
@@ -1607,534 +4281,506 @@
     "obrys_uv": [
      [
       [
-       39.5,
-       7.25
+       37.2,
+       7.3
       ],
       [
-       35.15,
-       7.25
-      ],
-      [
-       35.15,
+       37.2,
        9.9
       ],
       [
-       39.5,
+       32.9,
        9.9
+      ],
+      [
+       32.9,
+       7.3
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       111.265,
-       57.155
+       109.019,
+       56.659
       ],
       [
-       107.039,
-       56.125
+       108.403,
+       59.185
       ],
       [
-       106.411,
-       58.699
+       104.225,
+       58.166
       ],
       [
-       110.637,
-       59.729
+       104.841,
+       55.64
+      ]
+     ]
+    ]
+   },
+   "PP.06": {
+    "nazwa": "Pomieszczenie porządkowe (woda, zlew)",
+    "kategoria": "zamk",
+    "poziom": "S",
+    "pow_m2": 5.46,
+    "program_m2": 6,
+    "zakres_m2": [
+     4,
+     8
+    ],
+    "obrys_uv": [
+     [
+      [
+       39.5,
+       7.3
+      ],
+      [
+       39.5,
+       9.9
+      ],
+      [
+       37.4,
+       9.9
+      ],
+      [
+       37.4,
+       7.3
+      ]
+     ]
+    ],
+    "obrys_en": [
+     [
+      [
+       111.253,
+       57.203
+      ],
+      [
+       110.638,
+       59.73
+      ],
+      [
+       108.597,
+       59.232
+      ],
+      [
+       109.213,
+       56.706
       ]
      ]
     ]
    },
    "KUL": {
-    "nazwa": "Galeria kuluarowa (korytarz Sejmiku, okna na W i E)",
+    "nazwa": "Kuluar – korytarz Sejmiku (droga ewakuacyjna EI 30, oddymiany; okna W i E)",
     "kategoria": "kom",
-    "pow_m2": 87.75,
+    "poziom": "S",
+    "pow_m2": 83.81,
     "program_m2": null,
     "zakres_m2": null,
     "obrys_uv": [
      [
       [
-       39.5,
-       10.05
+       31.1,
+       9.9
+      ],
+      [
+       24.85,
+       9.9
+      ],
+      [
+       24.85,
+       10.1
       ],
       [
        0.5,
-       10.05
+       10.1
       ],
       [
        0.5,
        12.3
       ],
       [
+       8.3,
+       12.3
+      ],
+      [
+       8.3,
+       11.85
+      ],
+      [
+       15.5,
+       11.85
+      ],
+      [
+       15.5,
+       12.3
+      ],
+      [
        39.5,
        12.3
+      ],
+      [
+       39.5,
+       10.1
+      ],
+      [
+       31.1,
+       10.1
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       110.602,
-       59.875
+       102.476,
+       57.74
       ],
       [
-       72.712,
-       50.638
+       96.404,
+       56.26
+      ],
+      [
+       96.357,
+       56.454
+      ],
+      [
+       72.7,
+       50.687
       ],
       [
        72.179,
        52.824
       ],
       [
+       79.757,
+       54.672
+      ],
+      [
+       79.863,
+       54.235
+      ],
+      [
+       86.858,
+       55.94
+      ],
+      [
+       86.752,
+       56.377
+      ],
+      [
        110.069,
        62.061
+      ],
+      [
+       110.59,
+       59.924
+      ],
+      [
+       102.429,
+       57.934
       ]
      ]
     ]
    },
-   "SWD.01": {
-    "nazwa": "Sala obrad (płyta)",
-    "kategoria": "sala",
-    "pow_m2": 287.41,
-    "program_m2": 320,
+   "SWD.12a": {
+    "nazwa": "Sala klubu radnych 15 os. (1)",
+    "kategoria": "zamk",
+    "poziom": "S",
+    "pow_m2": 30.16,
+    "program_m2": 36,
     "zakres_m2": [
-     280,
-     380
+     30,
+     40
     ],
     "obrys_uv": [
      [
       [
-       39.5,
-       12.45
+       6.3,
+       12.5
       ],
       [
-       20.0,
-       12.45
+       6.3,
+       17.7
       ],
       [
-       20.0,
-       29.2
+       0.5,
+       17.7
       ],
       [
-       26.0,
-       29.2
-      ],
-      [
-       26.883,
-       29.171
-      ],
-      [
-       27.762,
-       29.085
-      ],
-      [
-       28.634,
-       28.941
-      ],
-      [
-       29.494,
-       28.74
-      ],
-      [
-       30.339,
-       28.484
-      ],
-      [
-       31.166,
-       28.172
-      ],
-      [
-       31.971,
-       27.808
-      ],
-      [
-       32.75,
-       27.391
-      ],
-      [
-       33.5,
-       26.925
-      ],
-      [
-       34.218,
-       26.41
-      ],
-      [
-       34.901,
-       25.85
-      ],
-      [
-       35.546,
-       25.246
-      ],
-      [
-       36.15,
-       24.601
-      ],
-      [
-       36.71,
-       23.918
-      ],
-      [
-       37.225,
-       23.2
-      ],
-      [
-       37.691,
-       22.45
-      ],
-      [
-       38.108,
-       21.671
-      ],
-      [
-       38.472,
-       20.866
-      ],
-      [
-       38.784,
-       20.039
-      ],
-      [
-       39.04,
-       19.194
-      ],
-      [
-       39.241,
-       18.334
-      ],
-      [
-       39.385,
-       17.462
-      ],
-      [
-       39.471,
-       16.583
-      ],
-      [
-       39.5,
-       15.7
+       0.5,
+       12.5
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       110.034,
-       62.207
+       77.766,
+       54.392
       ],
       [
-       91.088,
-       57.589
+       76.535,
+       59.445
       ],
       [
-       87.121,
-       73.862
+       70.9,
+       58.071
       ],
       [
-       92.951,
-       75.283
-      ],
-      [
-       93.815,
-       75.464
-      ],
-      [
-       94.69,
-       75.589
-      ],
-      [
-       95.571,
-       75.655
-      ],
-      [
-       96.454,
-       75.664
-      ],
-      [
-       97.336,
-       75.615
-      ],
-      [
-       98.213,
-       75.508
-      ],
-      [
-       99.081,
-       75.345
-      ],
-      [
-       99.937,
-       75.124
-      ],
-      [
-       100.776,
-       74.849
-      ],
-      [
-       101.596,
-       74.519
-      ],
-      [
-       102.392,
-       74.136
-      ],
-      [
-       103.161,
-       73.702
-      ],
-      [
-       103.901,
-       73.219
-      ],
-      [
-       104.607,
-       72.688
-      ],
-      [
-       105.277,
-       72.112
-      ],
-      [
-       105.908,
-       71.494
-      ],
-      [
-       106.497,
-       70.836
-      ],
-      [
-       107.042,
-       70.14
-      ],
-      [
-       107.541,
-       69.41
-      ],
-      [
-       107.989,
-       68.65
-      ],
-      [
-       108.388,
-       67.862
-      ],
-      [
-       108.735,
-       67.049
-      ],
-      [
-       109.027,
-       66.215
-      ],
-      [
-       109.264,
-       65.364
+       72.131,
+       53.019
       ]
      ]
     ]
    },
-   "SWD.04": {
-    "nazwa": "Reżyserka – nagrywanie i transmisja (okno do sali)",
+   "SWD.12b": {
+    "nazwa": "Sala klubu radnych 15 os. (2)",
     "kategoria": "zamk",
-    "pow_m2": 16.17,
-    "program_m2": 20,
+    "poziom": "S",
+    "pow_m2": 30.16,
+    "program_m2": 36,
     "zakres_m2": [
-     15,
-     30
+     30,
+     40
     ],
     "obrys_uv": [
      [
       [
-       15.65,
-       12.45
+       6.3,
+       17.9
       ],
       [
-       15.65,
-       16.3
+       6.3,
+       23.1
       ],
       [
-       19.85,
-       16.3
+       0.5,
+       23.1
       ],
       [
-       19.85,
-       12.45
+       0.5,
+       17.9
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       86.862,
-       56.558
+       76.487,
+       59.639
       ],
       [
-       85.95,
-       60.299
+       75.256,
+       64.691
       ],
       [
-       90.031,
-       61.293
+       69.621,
+       63.317
       ],
       [
-       90.943,
-       57.553
+       70.852,
+       58.265
       ]
      ]
     ]
    },
-   "PHS.05a": {
-    "nazwa": "WC męskie z toaletą dostępną",
-    "kategoria": "zamk",
+   "KW.S.01": {
+    "nazwa": "Pasaż zachodni: kuluar ↔ hol",
+    "kategoria": "kom",
+    "poziom": "S",
+    "pow_m2": 15.39,
+    "program_m2": null,
+    "zakres_m2": null,
+    "obrys_uv": [
+     [
+      [
+       8.3,
+       12.3
+      ],
+      [
+       8.3,
+       20.85
+      ],
+      [
+       6.5,
+       20.85
+      ],
+      [
+       6.5,
+       12.3
+      ]
+     ]
+    ],
+    "obrys_en": [
+     [
+      [
+       79.757,
+       54.672
+      ],
+      [
+       77.732,
+       62.979
+      ],
+      [
+       75.983,
+       62.552
+      ],
+      [
+       78.008,
+       54.246
+      ]
+     ]
+    ]
+   },
+   "KW.S.03": {
+    "nazwa": "Łącznik wschodni: kuluar ↔ hol, drzwi przedsionka A",
+    "kategoria": "kom",
+    "poziom": "S",
     "pow_m2": 11.97,
     "program_m2": null,
     "zakres_m2": null,
     "obrys_uv": [
      [
       [
-       15.65,
-       16.45
+       16.9,
+       12.3
       ],
       [
-       15.65,
-       19.3
+       16.9,
+       20.85
       ],
       [
-       19.85,
-       19.3
+       15.5,
+       20.85
       ],
       [
-       19.85,
-       16.45
+       15.5,
+       12.3
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       85.915,
-       60.445
+       88.112,
+       56.709
       ],
       [
-       85.24,
-       63.213
+       86.087,
+       65.015
       ],
       [
-       89.32,
-       64.208
+       84.727,
+       64.684
       ],
       [
-       89.995,
-       61.439
+       86.752,
+       56.377
       ]
      ]
     ]
    },
-   "SWD.15": {
-    "nazwa": "Magazyn podręczny sali",
+   "PHS.05a": {
+    "nazwa": "WC damskie: kabina dostępna 2,2 × 2,5 m + 2 kabiny + umywalki",
     "kategoria": "zamk",
-    "pow_m2": 5.88,
-    "program_m2": 10,
-    "zakres_m2": [
-     6,
-     15
-    ],
+    "poziom": "S",
+    "pow_m2": 18.37,
+    "program_m2": null,
+    "zakres_m2": null,
     "obrys_uv": [
      [
       [
-       15.65,
-       19.45
+       19.3,
+       12.5
       ],
       [
-       15.65,
+       19.3,
        20.85
       ],
       [
-       19.85,
+       17.1,
        20.85
       ],
       [
-       19.85,
-       19.45
+       17.1,
+       12.5
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       85.204,
-       63.359
+       90.396,
+       57.471
       ],
       [
-       84.873,
-       64.719
+       88.419,
+       65.584
       ],
       [
-       88.953,
-       65.714
+       86.281,
+       65.063
       ],
       [
-       89.285,
-       64.354
+       88.259,
+       56.95
       ]
      ]
     ]
    },
-   "SWD.13": {
-    "nazwa": "Wspólna sala radnych",
+   "PHS.05b": {
+    "nazwa": "WC męskie: kabina dostępna 2,2 × 2,5 m + kabina + 2 pisuary + umywalki",
     "kategoria": "zamk",
-    "pow_m2": 40.23,
-    "program_m2": 48,
-    "zakres_m2": [
-     36,
-     60
-    ],
+    "poziom": "S",
+    "pow_m2": 18.37,
+    "program_m2": null,
+    "zakres_m2": null,
     "obrys_uv": [
      [
       [
-       14.35,
-       22.55
+       21.7,
+       12.5
       ],
       [
-       8.3,
-       22.55
+       21.7,
+       20.85
       ],
       [
-       8.3,
-       29.2
+       19.5,
+       20.85
       ],
       [
-       14.35,
-       29.2
+       19.5,
+       12.5
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       83.207,
-       66.063
+       92.728,
+       58.04
       ],
       [
-       77.329,
-       64.63
+       90.751,
+       66.152
       ],
       [
-       75.754,
-       71.091
+       88.613,
+       65.631
       ],
       [
-       81.632,
-       72.524
+       90.591,
+       57.519
       ]
      ]
     ]
    },
    "SWD.14": {
-    "nazwa": "Pokój socjalny radnych",
+    "nazwa": "Pokój socjalny radnych (aneks kuchenny)",
     "kategoria": "zamk",
-    "pow_m2": 21.28,
+    "poziom": "S",
+    "pow_m2": 20.0,
     "program_m2": 24,
     "zakres_m2": [
      20,
@@ -2143,195 +4789,250 @@
     "obrys_uv": [
      [
       [
-       17.7,
-       22.55
+       15.8,
+       22.85
       ],
       [
-       14.5,
-       22.55
-      ],
-      [
-       14.5,
+       15.8,
        29.2
       ],
       [
-       17.7,
+       12.65,
        29.2
+      ],
+      [
+       12.65,
+       22.85
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       86.462,
-       66.856
+       84.545,
+       66.698
       ],
       [
-       83.353,
-       66.099
+       83.041,
+       72.867
       ],
       [
-       81.778,
-       72.559
+       79.98,
+       72.121
       ],
       [
-       84.887,
-       73.317
+       81.484,
+       65.952
       ]
      ]
     ]
    },
-   "PHS.05b": {
-    "nazwa": "WC damskie z toaletą dostępną",
+   "SWD.13": {
+    "nazwa": "Wspólna sala radnych (okno pn. – Ostrów Tumski)",
     "kategoria": "zamk",
-    "pow_m2": 13.3,
+    "poziom": "S",
+    "pow_m2": 36.19,
+    "program_m2": 48,
+    "zakres_m2": [
+     36,
+     60
+    ],
+    "obrys_uv": [
+     [
+      [
+       21.7,
+       22.85
+      ],
+      [
+       21.7,
+       29.2
+      ],
+      [
+       16.0,
+       29.2
+      ],
+      [
+       16.0,
+       22.85
+      ]
+     ]
+    ],
+    "obrys_en": [
+     [
+      [
+       90.277,
+       68.095
+      ],
+      [
+       88.773,
+       74.265
+      ],
+      [
+       83.235,
+       72.915
+      ],
+      [
+       84.739,
+       66.745
+      ]
+     ]
+    ]
+   },
+   "SWD.06": {
+    "nazwa": "Szatnia strefy Sejmiku – lada 4,1 m + wieszaki (otwarta na hol)",
+    "kategoria": "hol",
+    "poziom": "S",
+    "pow_m2": 12.5,
+    "program_m2": 15,
+    "zakres_m2": [
+     12,
+     20
+    ],
+    "obrys_uv": [
+     [
+      [
+       4.9,
+       23.3
+      ],
+      [
+       4.9,
+       27.4
+      ],
+      [
+       1.85,
+       27.4
+      ],
+      [
+       1.85,
+       23.3
+      ]
+     ]
+    ],
+    "obrys_en": [
+     [
+      [
+       73.848,
+       64.554
+      ],
+      [
+       72.877,
+       68.537
+      ],
+      [
+       69.914,
+       67.815
+      ],
+      [
+       70.885,
+       63.831
+      ]
+     ]
+    ]
+   },
+   "SWD.15": {
+    "nazwa": "Magazyn podręczny strefy Sejmiku (pod biegiem schodów)",
+    "kategoria": "zamk",
+    "poziom": "S",
+    "pow_m2": 6.0,
+    "program_m2": 10,
+    "zakres_m2": [
+     6,
+     15
+    ],
+    "obrys_uv": [
+     [
+      [
+       8.1,
+       24.6
+      ],
+      [
+       8.1,
+       26.6
+      ],
+      [
+       5.1,
+       26.6
+      ],
+      [
+       5.1,
+       24.6
+      ]
+     ]
+    ],
+    "obrys_en": [
+     [
+      [
+       76.649,
+       66.575
+      ],
+      [
+       76.176,
+       68.518
+      ],
+      [
+       73.261,
+       67.807
+      ],
+      [
+       73.735,
+       65.864
+      ]
+     ]
+    ]
+   },
+   "KW.S.04": {
+    "nazwa": "Schody reprezentacyjne S → antresola (niższa część biegu)",
+    "kategoria": "kom",
+    "poziom": "S",
+    "pow_m2": 8.4,
     "program_m2": null,
     "zakres_m2": null,
     "obrys_uv": [
      [
       [
-       19.85,
-       22.55
+       12.3,
+       24.6
       ],
       [
-       17.85,
-       22.55
+       12.3,
+       26.6
       ],
       [
-       17.85,
-       29.2
+       8.1,
+       26.6
       ],
       [
-       19.85,
-       29.2
+       8.1,
+       24.6
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       88.551,
-       67.366
+       80.73,
+       67.569
       ],
       [
-       86.607,
-       66.892
+       80.256,
+       69.512
       ],
       [
-       85.032,
-       73.353
+       76.176,
+       68.518
       ],
       [
-       86.976,
-       73.826
-      ]
-     ]
-    ]
-   },
-   "SWD.12a": {
-    "nazwa": "Sala klubu radnych 15 os. (1)",
-    "kategoria": "zamk",
-    "pow_m2": 30.6,
-    "program_m2": 36,
-    "zakres_m2": [
-     30,
-     40
-    ],
-    "obrys_uv": [
-     [
-      [
-       6.5,
-       17.55
-      ],
-      [
-       6.5,
-       12.45
-      ],
-      [
-       0.5,
-       12.45
-      ],
-      [
-       0.5,
-       17.55
-      ]
-     ]
-    ],
-    "obrys_en": [
-     [
-      [
-       76.765,
-       59.346
-      ],
-      [
-       77.972,
-       54.391
-      ],
-      [
-       72.143,
-       52.97
-      ],
-      [
-       70.935,
-       57.925
-      ]
-     ]
-    ]
-   },
-   "SWD.12b": {
-    "nazwa": "Sala klubu radnych 15 os. (2)",
-    "kategoria": "zamk",
-    "pow_m2": 30.6,
-    "program_m2": 36,
-    "zakres_m2": [
-     30,
-     40
-    ],
-    "obrys_uv": [
-     [
-      [
-       6.5,
-       22.8
-      ],
-      [
-       6.5,
-       17.7
-      ],
-      [
-       0.5,
-       17.7
-      ],
-      [
-       0.5,
-       22.8
-      ]
-     ]
-    ],
-    "obrys_en": [
-     [
-      [
-       75.521,
-       64.447
-      ],
-      [
-       76.729,
-       59.492
-      ],
-      [
-       70.9,
-       58.071
-      ],
-      [
-       69.692,
-       63.026
+       76.649,
+       66.575
       ]
      ]
     ]
    },
    "SWD.02": {
-    "nazwa": "Hol reprezentacyjny (2 kond., narożnik NW) z barem SWD.05 (30 m²) i szatnią SWD.06 (12 m²) jako otwartymi ladami",
+    "nazwa": "Hol reprezentacyjny – poziom dolny (pustka 2-kond. NW, okna pn. i zach., hol dźwigów A1/A2)",
     "kategoria": "hol",
-    "pow_m2": 79.94,
+    "poziom": "S",
+    "pow_m2": 74.83,
     "program_m2": 150,
     "zakres_m2": [
      120,
@@ -2340,661 +5041,2506 @@
     "obrys_uv": [
      [
       [
-       0.5,
-       22.95
+       6.5,
+       20.85
+      ],
+      [
+       6.5,
+       23.3
+      ],
+      [
+       4.9,
+       23.3
+      ],
+      [
+       4.9,
+       27.4
+      ],
+      [
+       1.85,
+       27.4
+      ],
+      [
+       1.85,
+       23.3
       ],
       [
        0.5,
-       22.95
+       23.3
       ],
       [
        0.5,
        29.2
       ],
       [
-       0.5,
+       8.7,
        29.2
       ],
       [
-       0.5,
+       8.7,
+       26.6
+      ],
+      [
+       5.1,
+       26.6
+      ],
+      [
+       5.1,
+       24.6
+      ],
+      [
+       8.7,
+       24.6
+      ],
+      [
+       8.7,
+       20.85
+      ]
+     ],
+     [
+      [
+       8.7,
        29.2
       ],
       [
-       8.15,
+       12.45,
        29.2
       ],
       [
-       8.15,
-       29.2
+       12.45,
+       22.65
       ],
       [
-       8.15,
-       29.2
+       21.7,
+       22.65
       ],
       [
-       8.15,
-       22.401
+       21.7,
+       20.85
       ],
       [
-       8.15,
-       22.401
+       8.7,
+       20.85
       ],
       [
-       8.15,
-       22.401
+       8.7,
+       24.6
       ],
       [
-       8.15,
-       22.401
+       12.3,
+       24.6
       ],
       [
-       8.15,
-       22.401
+       12.3,
+       26.6
       ],
       [
-       8.15,
-       22.401
-      ],
-      [
-       8.15,
-       22.4
-      ],
-      [
-       8.15,
-       22.4
-      ],
-      [
-       8.15,
-       22.4
-      ],
-      [
-       8.15,
-       22.4
-      ],
-      [
-       8.15,
-       22.4
-      ],
-      [
-       8.151,
-       22.4
-      ],
-      [
-       8.151,
-       22.4
-      ],
-      [
-       8.151,
-       22.4
-      ],
-      [
-       8.151,
-       22.4
-      ],
-      [
-       8.151,
-       22.4
-      ],
-      [
-       8.151,
-       22.4
-      ],
-      [
-       19.85,
-       22.4
-      ],
-      [
-       19.85,
-       22.4
-      ],
-      [
-       19.85,
-       22.4
-      ],
-      [
-       19.85,
-       21.0
-      ],
-      [
-       19.85,
-       21.0
-      ],
-      [
-       19.85,
-       21.0
-      ],
-      [
-       8.151,
-       21.0
-      ],
-      [
-       8.151,
-       21.0
-      ],
-      [
-       8.151,
-       21.0
-      ],
-      [
-       8.151,
-       21.0
-      ],
-      [
-       8.151,
-       21.0
-      ],
-      [
-       8.151,
-       21.0
-      ],
-      [
-       8.15,
-       21.0
-      ],
-      [
-       8.15,
-       21.0
-      ],
-      [
-       8.15,
-       21.0
-      ],
-      [
-       8.15,
-       21.0
-      ],
-      [
-       8.15,
-       21.0
-      ],
-      [
-       8.15,
-       20.999
-      ],
-      [
-       8.15,
-       20.999
-      ],
-      [
-       8.15,
-       20.999
-      ],
-      [
-       8.15,
-       20.999
-      ],
-      [
-       8.15,
-       20.999
-      ],
-      [
-       8.15,
-       20.999
-      ],
-      [
-       8.15,
-       12.45
-      ],
-      [
-       8.15,
-       12.45
-      ],
-      [
-       8.15,
-       12.45
-      ],
-      [
-       6.65,
-       12.45
-      ],
-      [
-       6.65,
-       12.45
-      ],
-      [
-       6.65,
-       12.45
-      ],
-      [
-       6.65,
-       22.949
-      ],
-      [
-       6.65,
-       22.949
-      ],
-      [
-       6.65,
-       22.949
-      ],
-      [
-       6.65,
-       22.949
-      ],
-      [
-       6.65,
-       22.949
-      ],
-      [
-       6.65,
-       22.949
-      ],
-      [
-       6.65,
-       22.95
-      ],
-      [
-       6.65,
-       22.95
-      ],
-      [
-       6.65,
-       22.95
-      ],
-      [
-       6.65,
-       22.95
-      ],
-      [
-       6.65,
-       22.95
-      ],
-      [
-       6.649,
-       22.95
-      ],
-      [
-       6.649,
-       22.95
-      ],
-      [
-       6.649,
-       22.95
-      ],
-      [
-       6.649,
-       22.95
-      ],
-      [
-       6.649,
-       22.95
-      ],
-      [
-       6.649,
-       22.95
-      ],
-      [
-       0.5,
-       22.95
+       8.7,
+       26.6
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       69.656,
-       63.171
+       75.983,
+       62.552
       ],
       [
-       69.656,
-       63.171
+       75.403,
+       64.933
+      ],
+      [
+       73.848,
+       64.554
+      ],
+      [
+       72.877,
+       68.537
+      ],
+      [
+       69.914,
+       67.815
+      ],
+      [
+       70.885,
+       63.831
+      ],
+      [
+       69.573,
+       63.512
       ],
       [
        68.176,
        69.244
       ],
       [
-       68.176,
-       69.244
+       76.143,
+       71.186
       ],
       [
-       68.176,
-       69.244
+       76.759,
+       68.66
       ],
       [
-       75.608,
-       71.055
+       73.261,
+       67.807
       ],
       [
-       75.608,
-       71.055
+       73.735,
+       65.864
       ],
       [
-       75.608,
-       71.055
+       77.232,
+       66.717
       ],
       [
-       77.219,
-       64.45
+       78.12,
+       63.073
+      ]
+     ],
+     [
+      [
+       76.143,
+       71.186
+      ],
+      [
+       79.786,
+       72.074
+      ],
+      [
+       81.337,
+       65.71
+      ],
+      [
+       90.324,
+       67.901
+      ],
+      [
+       90.751,
+       66.152
+      ],
+      [
+       78.12,
+       63.073
+      ],
+      [
+       77.232,
+       66.717
+      ],
+      [
+       80.73,
+       67.569
+      ],
+      [
+       80.256,
+       69.512
+      ],
+      [
+       76.759,
+       68.66
+      ]
+     ]
+    ]
+   },
+   "SWD.04": {
+    "nazwa": "Reżyserka – nagrywanie i transmisja (przeszklenie na prezydium i rzędy)",
+    "kategoria": "zamk",
+    "poziom": "S",
+    "pow_m2": 17.6,
+    "program_m2": 20,
+    "zakres_m2": [
+     15,
+     30
+    ],
+    "obrys_uv": [
+     [
+      [
+       39.5,
+       12.6
+      ],
+      [
+       39.5,
+       15.8
+      ],
+      [
+       34.0,
+       15.8
+      ],
+      [
+       34.0,
+       12.6
+      ]
+     ]
+    ],
+    "obrys_en": [
+     [
+      [
+       109.998,
+       62.353
+      ],
+      [
+       109.24,
+       65.462
+      ],
+      [
+       103.897,
+       64.159
+      ],
+      [
+       104.655,
+       61.05
+      ]
+     ]
+    ]
+   },
+   "SWD.01": {
+    "nazwa": "Sala obrad – płyta (44 stałe stanowiska + prezydium + mównica, media, goście, obsługa, PJM)",
+    "kategoria": "sala",
+    "poziom": "S",
+    "pow_m2": 232.01,
+    "program_m2": 320,
+    "zakres_m2": [
+     280,
+     380
+    ],
+    "obrys_uv": [
+     [
+      [
+       26.083,
+       29.2
+      ],
+      [
+       26.248,
+       29.198
+      ],
+      [
+       26.414,
+       29.194
+      ],
+      [
+       26.58,
+       29.188
+      ],
+      [
+       26.745,
+       29.179
+      ],
+      [
+       26.91,
+       29.169
+      ],
+      [
+       27.076,
+       29.157
+      ],
+      [
+       27.241,
+       29.143
+      ],
+      [
+       27.406,
+       29.127
+      ],
+      [
+       27.57,
+       29.108
+      ],
+      [
+       27.735,
+       29.088
+      ],
+      [
+       27.899,
+       29.066
+      ],
+      [
+       28.063,
+       29.041
+      ],
+      [
+       28.226,
+       29.015
+      ],
+      [
+       28.39,
+       28.987
+      ],
+      [
+       28.552,
+       28.957
+      ],
+      [
+       28.715,
+       28.924
+      ],
+      [
+       28.877,
+       28.89
+      ],
+      [
+       29.039,
+       28.854
+      ],
+      [
+       29.119,
+       28.835
+      ],
+      [
+       29.28,
+       28.795
+      ],
+      [
+       29.441,
+       28.754
+      ],
+      [
+       29.601,
+       28.711
+      ],
+      [
+       29.76,
+       28.666
+      ],
+      [
+       29.919,
+       28.619
+      ],
+      [
+       30.077,
+       28.57
+      ],
+      [
+       30.235,
+       28.519
+      ],
+      [
+       30.392,
+       28.466
+      ],
+      [
+       30.548,
+       28.411
+      ],
+      [
+       30.704,
+       28.354
+      ],
+      [
+       30.859,
+       28.295
+      ],
+      [
+       31.013,
+       28.235
+      ],
+      [
+       31.166,
+       28.172
+      ],
+      [
+       31.319,
+       28.108
+      ],
+      [
+       31.471,
+       28.042
+      ],
+      [
+       31.622,
+       27.974
+      ],
+      [
+       31.772,
+       27.904
+      ],
+      [
+       31.921,
+       27.832
+      ],
+      [
+       32.07,
+       27.759
+      ],
+      [
+       32.144,
+       27.721
+      ],
+      [
+       32.291,
+       27.645
+      ],
+      [
+       32.437,
+       27.567
+      ],
+      [
+       32.582,
+       27.487
+      ],
+      [
+       32.726,
+       27.405
+      ],
+      [
+       32.869,
+       27.322
+      ],
+      [
+       33.011,
+       27.237
+      ],
+      [
+       33.152,
+       27.15
+      ],
+      [
+       33.292,
+       27.061
+      ],
+      [
+       33.431,
+       26.971
+      ],
+      [
+       33.569,
+       26.879
+      ],
+      [
+       33.706,
+       26.785
+      ],
+      [
+       33.841,
+       26.689
+      ],
+      [
+       33.975,
+       26.592
+      ],
+      [
+       34.108,
+       26.494
+      ],
+      [
+       34.24,
+       26.393
+      ],
+      [
+       34.371,
+       26.292
+      ],
+      [
+       34.5,
+       26.188
+      ],
+      [
+       34.628,
+       26.083
+      ],
+      [
+       34.755,
+       25.976
+      ],
+      [
+       34.88,
+       25.868
+      ],
+      [
+       35.004,
+       25.758
+      ],
+      [
+       35.127,
+       25.647
+      ],
+      [
+       35.249,
+       25.534
+      ],
+      [
+       35.369,
+       25.42
+      ],
+      [
+       35.487,
+       25.304
+      ],
+      [
+       35.604,
+       25.187
+      ],
+      [
+       35.72,
+       25.069
+      ],
+      [
+       35.834,
+       24.949
+      ],
+      [
+       35.947,
+       24.827
+      ],
+      [
+       36.058,
+       24.704
+      ],
+      [
+       36.168,
+       24.58
+      ],
+      [
+       36.276,
+       24.455
+      ],
+      [
+       36.383,
+       24.328
+      ],
+      [
+       36.488,
+       24.2
+      ],
+      [
+       36.592,
+       24.071
+      ],
+      [
+       36.693,
+       23.94
+      ],
+      [
+       36.794,
+       23.808
+      ],
+      [
+       36.892,
+       23.675
+      ],
+      [
+       36.989,
+       23.541
+      ],
+      [
+       37.037,
+       23.473
+      ],
+      [
+       37.132,
+       23.337
+      ],
+      [
+       37.225,
+       23.2
+      ],
+      [
+       37.316,
+       23.062
+      ],
+      [
+       37.406,
+       22.922
+      ],
+      [
+       37.493,
+       22.782
+      ],
+      [
+       37.579,
+       22.64
+      ],
+      [
+       37.664,
+       22.498
+      ],
+      [
+       37.746,
+       22.354
+      ],
+      [
+       37.827,
+       22.209
+      ],
+      [
+       37.906,
+       22.064
+      ],
+      [
+       37.983,
+       21.917
+      ],
+      [
+       38.059,
+       21.77
+      ],
+      [
+       38.132,
+       21.621
+      ],
+      [
+       38.204,
+       21.472
+      ],
+      [
+       38.274,
+       21.322
+      ],
+      [
+       38.342,
+       21.171
+      ],
+      [
+       38.408,
+       21.019
+      ],
+      [
+       38.472,
+       20.866
+      ],
+      [
+       38.535,
+       20.713
+      ],
+      [
+       38.595,
+       20.559
+      ],
+      [
+       38.654,
+       20.404
+      ],
+      [
+       38.683,
+       20.326
+      ],
+      [
+       38.739,
+       20.17
+      ],
+      [
+       38.792,
+       20.013
+      ],
+      [
+       38.844,
+       19.856
+      ],
+      [
+       38.894,
+       19.698
+      ],
+      [
+       38.942,
+       19.54
+      ],
+      [
+       38.989,
+       19.38
+      ],
+      [
+       39.033,
+       19.221
+      ],
+      [
+       39.075,
+       19.061
+      ],
+      [
+       39.115,
+       18.9
+      ],
+      [
+       39.154,
+       18.739
+      ],
+      [
+       39.19,
+       18.577
+      ],
+      [
+       39.224,
+       18.415
+      ],
+      [
+       39.257,
+       18.252
+      ],
+      [
+       39.287,
+       18.09
+      ],
+      [
+       39.315,
+       17.926
+      ],
+      [
+       39.341,
+       17.763
+      ],
+      [
+       39.366,
+       17.599
+      ],
+      [
+       39.388,
+       17.435
+      ],
+      [
+       39.408,
+       17.27
+      ],
+      [
+       39.427,
+       17.106
+      ],
+      [
+       39.443,
+       16.941
+      ],
+      [
+       39.457,
+       16.776
+      ],
+      [
+       39.469,
+       16.61
+      ],
+      [
+       39.479,
+       16.445
+      ],
+      [
+       39.488,
+       16.28
+      ],
+      [
+       39.494,
+       16.114
+      ],
+      [
+       39.497,
+       16.0
+      ],
+      [
+       33.8,
+       16.0
+      ],
+      [
+       33.8,
+       12.6
+      ],
+      [
+       22.0,
+       12.6
+      ],
+      [
+       22.0,
+       29.2
+      ]
+     ]
+    ],
+    "obrys_en": [
+     [
+      [
+       93.031,
+       75.302
+      ],
+      [
+       93.193,
+       75.34
+      ],
+      [
+       93.354,
+       75.375
+      ],
+      [
+       93.517,
+       75.408
+      ],
+      [
+       93.679,
+       75.44
+      ],
+      [
+       93.842,
+       75.469
+      ],
+      [
+       94.006,
+       75.496
+      ],
+      [
+       94.17,
+       75.521
+      ],
+      [
+       94.334,
+       75.545
+      ],
+      [
+       94.498,
+       75.566
+      ],
+      [
+       94.662,
+       75.585
+      ],
+      [
+       94.827,
+       75.602
+      ],
+      [
+       94.992,
+       75.618
+      ],
+      [
+       95.157,
+       75.631
+      ],
+      [
+       95.323,
+       75.642
+      ],
+      [
+       95.488,
+       75.651
+      ],
+      [
+       95.654,
+       75.658
+      ],
+      [
+       95.819,
+       75.663
+      ],
+      [
+       95.985,
+       75.666
+      ],
+      [
+       96.068,
+       75.667
+      ],
+      [
+       96.233,
+       75.667
+      ],
+      [
+       96.399,
+       75.665
+      ],
+      [
+       96.565,
+       75.661
+      ],
+      [
+       96.73,
+       75.655
+      ],
+      [
+       96.896,
+       75.646
+      ],
+      [
+       97.061,
+       75.636
+      ],
+      [
+       97.226,
+       75.624
+      ],
+      [
+       97.391,
+       75.61
+      ],
+      [
+       97.556,
+       75.594
+      ],
+      [
+       97.721,
+       75.575
+      ],
+      [
+       97.885,
+       75.555
+      ],
+      [
+       98.049,
+       75.533
+      ],
+      [
+       98.213,
+       75.508
+      ],
+      [
+       98.377,
+       75.482
+      ],
+      [
+       98.54,
+       75.454
+      ],
+      [
+       98.703,
+       75.423
+      ],
+      [
+       98.865,
+       75.391
+      ],
+      [
+       99.027,
+       75.357
+      ],
+      [
+       99.189,
+       75.32
+      ],
+      [
+       99.27,
+       75.301
+      ],
+      [
+       99.431,
+       75.262
+      ],
+      [
+       99.591,
+       75.221
+      ],
+      [
+       99.751,
+       75.177
+      ],
+      [
+       99.91,
+       75.132
+      ],
+      [
+       100.069,
+       75.085
+      ],
+      [
+       100.227,
+       75.036
+      ],
+      [
+       100.385,
+       74.985
+      ],
+      [
+       100.542,
+       74.932
+      ],
+      [
+       100.698,
+       74.877
+      ],
+      [
+       100.854,
+       74.82
+      ],
+      [
+       101.009,
+       74.762
+      ],
+      [
+       101.163,
+       74.701
+      ],
+      [
+       101.317,
+       74.639
+      ],
+      [
+       101.469,
+       74.574
+      ],
+      [
+       101.621,
+       74.508
+      ],
+      [
+       101.772,
+       74.44
+      ],
+      [
+       101.922,
+       74.37
+      ],
+      [
+       102.072,
+       74.298
+      ],
+      [
+       102.22,
+       74.225
+      ],
+      [
+       102.367,
+       74.149
+      ],
+      [
+       102.514,
+       74.072
+      ],
+      [
+       102.66,
+       73.993
+      ],
+      [
+       102.804,
+       73.912
+      ],
+      [
+       102.948,
+       73.83
+      ],
+      [
+       103.09,
+       73.745
+      ],
+      [
+       103.232,
+       73.659
+      ],
+      [
+       103.373,
+       73.571
+      ],
+      [
+       103.512,
+       73.482
+      ],
+      [
+       103.65,
+       73.391
+      ],
+      [
+       103.787,
+       73.298
       ],
       [
-       77.219,
-       64.45
+       103.923,
+       73.203
       ],
       [
-       77.219,
-       64.45
+       104.058,
+       73.107
       ],
       [
-       77.219,
-       64.45
+       104.192,
+       73.009
       ],
       [
-       77.219,
-       64.45
+       104.324,
+       72.909
       ],
       [
-       77.219,
-       64.45
+       104.456,
+       72.808
       ],
       [
-       77.219,
-       64.449
+       104.586,
+       72.706
       ],
       [
-       77.219,
-       64.449
+       104.714,
+       72.601
       ],
       [
-       77.219,
-       64.449
+       104.842,
+       72.495
       ],
       [
-       77.219,
-       64.449
+       104.968,
+       72.388
       ],
       [
-       77.219,
-       64.449
+       105.03,
+       72.334
       ],
       [
-       77.22,
-       64.449
+       105.154,
+       72.224
       ],
       [
-       77.22,
-       64.449
+       105.277,
+       72.112
       ],
       [
-       77.22,
-       64.449
+       105.398,
+       72.0
       ],
       [
-       77.22,
-       64.449
+       105.518,
+       71.885
       ],
       [
-       77.22,
-       64.449
+       105.637,
+       71.77
       ],
       [
-       77.22,
-       64.449
+       105.754,
+       71.653
       ],
       [
-       88.586,
-       67.22
+       105.87,
+       71.534
       ],
       [
-       88.586,
-       67.22
+       105.984,
+       71.414
       ],
       [
-       88.586,
-       67.22
+       106.097,
+       71.293
       ],
       [
-       88.918,
-       65.86
+       106.208,
+       71.17
       ],
       [
-       88.918,
-       65.86
+       106.318,
+       71.046
       ],
       [
-       88.918,
-       65.86
+       106.426,
+       70.92
       ],
       [
-       77.551,
-       63.089
+       106.532,
+       70.793
       ],
       [
-       77.551,
-       63.089
+       106.638,
+       70.665
       ],
       [
-       77.551,
-       63.089
+       106.741,
+       70.536
       ],
       [
-       77.551,
-       63.089
+       106.843,
+       70.405
       ],
       [
-       77.551,
-       63.089
+       106.943,
+       70.273
       ],
       [
-       77.551,
-       63.089
+       107.042,
+       70.14
       ],
       [
-       77.551,
-       63.089
+       107.139,
+       70.006
       ],
       [
-       77.551,
-       63.089
+       107.234,
+       69.871
       ],
       [
-       77.551,
-       63.089
+       107.328,
+       69.734
       ],
       [
-       77.551,
-       63.089
+       107.374,
+       69.665
       ],
       [
-       77.551,
-       63.089
+       107.465,
+       69.527
       ],
       [
-       77.551,
-       63.088
+       107.555,
+       69.387
       ],
       [
-       77.551,
-       63.088
+       107.643,
+       69.247
       ],
       [
-       77.551,
-       63.088
+       107.729,
+       69.105
       ],
       [
-       77.551,
-       63.088
+       107.813,
+       68.963
       ],
       [
-       77.551,
-       63.088
+       107.895,
+       68.819
       ],
       [
-       77.551,
-       63.088
+       107.976,
+       68.674
       ],
       [
-       79.575,
-       54.782
+       108.055,
+       68.529
       ],
       [
-       79.575,
-       54.782
+       108.132,
+       68.382
       ],
       [
-       79.575,
-       54.782
+       108.208,
+       68.235
       ],
       [
-       78.118,
-       54.427
+       108.281,
+       68.086
       ],
       [
-       78.118,
-       54.427
+       108.353,
+       67.937
       ],
       [
-       78.118,
-       54.427
+       108.423,
+       67.787
       ],
       [
-       75.632,
-       64.627
+       108.491,
+       67.636
       ],
       [
-       75.632,
-       64.627
+       108.557,
+       67.484
       ],
       [
-       75.632,
-       64.627
+       108.621,
+       67.331
       ],
       [
-       75.632,
-       64.627
+       108.684,
+       67.178
       ],
       [
-       75.632,
-       64.627
+       108.744,
+       67.023
       ],
       [
-       75.632,
-       64.627
+       108.803,
+       66.868
       ],
       [
-       75.631,
-       64.628
+       108.86,
+       66.713
       ],
       [
-       75.631,
-       64.628
+       108.914,
+       66.556
       ],
       [
-       75.631,
-       64.628
+       108.967,
+       66.399
       ],
       [
-       75.631,
-       64.628
+       109.018,
+       66.242
       ],
       [
-       75.631,
-       64.628
+       109.067,
+       66.084
       ],
       [
-       75.63,
-       64.628
+       109.114,
+       65.925
       ],
       [
-       75.63,
-       64.628
+       109.16,
+       65.765
       ],
       [
-       75.63,
-       64.628
+       109.189,
+       65.655
       ],
       [
-       75.63,
-       64.628
+       103.655,
+       64.306
       ],
       [
-       75.63,
-       64.628
+       104.46,
+       61.003
       ],
       [
-       75.63,
-       64.628
+       92.996,
+       58.208
       ],
       [
-       69.656,
-       63.171
+       89.064,
+       74.336
       ]
      ]
     ]
    }
   },
-  "antresola_strefy": {
-   "ANT-G": {
-    "nazwa": "Galeria publiczności: 2 rzędy, 30 miejsc, w tym 3 dla wózków w 1. rzędzie (balustrada szklana 1,10 m)",
-    "pow_m2": 32.0,
+  "antresola_pomieszczenia": {
+   "KW.A.01": {
+    "nazwa": "Hol dźwigów publicznych P1/P2 (antresola)",
+    "kategoria": "kom",
+    "poziom": "ANT",
+    "pow_m2": 21.96,
+    "program_m2": null,
+    "zakres_m2": null,
     "obrys_uv": [
      [
       [
-       21.0,
-       11.45
+       34.7,
+       4.0
       ],
       [
-       21.0,
-       13.45
+       34.7,
+       10.1
       ],
       [
-       37.0,
-       13.45
+       31.1,
+       10.1
       ],
       [
-       37.0,
-       11.45
+       31.1,
+       4.0
+      ]
+     ]
+    ],
+    "obrys_en": [
+     [
+      [
+       107.371,
+       52.861
+      ],
+      [
+       105.927,
+       58.787
+      ],
+      [
+       102.429,
+       57.934
+      ],
+      [
+       103.874,
+       52.008
       ]
      ]
     ]
    },
-   "ANT-F": {
-    "nazwa": "Foyer publiczne z ekranami = sala multimedialna/poczekalnia gości SWD.03 (otwarte na kuluar i salę)",
-    "pow_m2": 37.66,
+   "PHS.05c": {
+    "nazwa": "Toaleta dostępna publiczności galerii (antresola, przy dźwigach P1/P2)",
+    "kategoria": "zamk",
+    "poziom": "ANT",
+    "pow_m2": 5.72,
+    "program_m2": null,
+    "zakres_m2": null,
     "obrys_uv": [
      [
       [
-       15.65,
-       10.05
+       37.1,
+       4.0
       ],
       [
-       15.65,
-       11.3
+       37.1,
+       6.6
       ],
       [
-       15.65,
-       12.3
+       34.9,
+       6.6
       ],
       [
-       21.0,
-       12.3
+       34.9,
+       4.0
+      ]
+     ]
+    ],
+    "obrys_en": [
+     [
+      [
+       109.703,
+       53.429
       ],
       [
-       21.0,
-       11.3
+       109.087,
+       55.955
       ],
       [
-       37.0,
-       11.3
+       106.95,
+       55.434
       ],
       [
-       37.0,
-       12.3
-      ],
-      [
-       39.5,
-       12.3
-      ],
-      [
-       39.5,
-       11.3
-      ],
-      [
-       39.5,
-       10.05
+       107.566,
+       52.908
       ]
      ]
     ]
+   },
+   "KW.A.02": {
+    "nazwa": "Korytarz publiczny nad kuluarem (EI 30) – dojście z P1/P2 na galerię, do klatek A i B",
+    "kategoria": "kom",
+    "poziom": "ANT",
+    "pow_m2": 43.49,
+    "program_m2": null,
+    "zakres_m2": null,
+    "obrys_uv": [
+     [
+      [
+       31.1,
+       9.9
+      ],
+      [
+       24.85,
+       9.9
+      ],
+      [
+       24.85,
+       10.1
+      ],
+      [
+       15.5,
+       10.1
+      ],
+      [
+       15.5,
+       12.3
+      ],
+      [
+       34.7,
+       12.3
+      ],
+      [
+       34.7,
+       10.1
+      ],
+      [
+       31.1,
+       10.1
+      ]
+     ]
+    ],
+    "obrys_en": [
+     [
+      [
+       102.476,
+       57.74
+      ],
+      [
+       96.404,
+       56.26
+      ],
+      [
+       96.357,
+       56.454
+      ],
+      [
+       87.273,
+       54.24
+      ],
+      [
+       86.752,
+       56.377
+      ],
+      [
+       105.406,
+       60.924
+      ],
+      [
+       105.927,
+       58.787
+      ],
+      [
+       102.429,
+       57.934
+      ]
+     ]
+    ]
+   },
+   "SWD.01g": {
+    "nazwa": "Galeria publiczności (część SWD.01): 2 rzędy (+0,00 / +0,90), 31 miejsc + 3 dla wózków",
+    "kategoria": "sala",
+    "poziom": "ANT",
+    "pow_m2": 65.32,
+    "program_m2": null,
+    "zakres_m2": null,
+    "obrys_uv": [
+     [
+      [
+       22.0,
+       12.6
+      ],
+      [
+       22.0,
+       22.65
+      ],
+      [
+       15.5,
+       22.65
+      ],
+      [
+       15.5,
+       12.6
+      ]
+     ]
+    ],
+    "obrys_en": [
+     [
+      [
+       92.996,
+       58.208
+      ],
+      [
+       90.616,
+       67.972
+      ],
+      [
+       84.301,
+       66.433
+      ],
+      [
+       86.681,
+       56.669
+      ]
+     ]
+    ]
+   },
+   "SWD.05": {
+    "nazwa": "Przestrzeń socjalno-gastronomiczna (bar z przyłączami) na antresoli holu",
+    "kategoria": "antresola",
+    "poziom": "ANT",
+    "pow_m2": 32.0,
+    "program_m2": 40,
+    "zakres_m2": [
+     30,
+     60
+    ],
+    "obrys_uv": [
+     [
+      [
+       21.7,
+       22.85
+      ],
+      [
+       21.7,
+       27.85
+      ],
+      [
+       15.3,
+       27.85
+      ],
+      [
+       15.3,
+       22.85
+      ]
+     ]
+    ],
+    "obrys_en": [
+     [
+      [
+       90.277,
+       68.095
+      ],
+      [
+       89.093,
+       72.953
+      ],
+      [
+       82.875,
+       71.437
+      ],
+      [
+       84.059,
+       66.58
+      ]
+     ]
+    ]
+   },
+   "SWD.03": {
+    "nazwa": "Sala multimedialna / poczekalnia gości – strefa otwarta na antresoli holu (ekran, głośniki kierunkowe, pętla)",
+    "kategoria": "antresola",
+    "poziom": "ANT",
+    "pow_m2": 33.82,
+    "program_m2": 40,
+    "zakres_m2": [
+     30,
+     60
+    ],
+    "obrys_uv": [
+     [
+      [
+       6.3,
+       12.5
+      ],
+      [
+       6.3,
+       20.1
+      ],
+      [
+       1.85,
+       20.1
+      ],
+      [
+       1.85,
+       12.5
+      ]
+     ]
+    ],
+    "obrys_en": [
+     [
+      [
+       77.766,
+       54.392
+      ],
+      [
+       75.966,
+       61.776
+      ],
+      [
+       71.643,
+       60.722
+      ],
+      [
+       73.443,
+       53.339
+      ]
+     ]
+    ]
+   },
+   "KW.A.03": {
+    "nazwa": "Przedsionek ppoż. A' klatki A (antresola zach.) z MOE 1,5 × 1,5",
+    "kategoria": "kom",
+    "poziom": "ANT",
+    "pow_m2": 6.0,
+    "program_m2": null,
+    "zakres_m2": null,
+    "obrys_uv": [
+     [
+      [
+       8.3,
+       12.5
+      ],
+      [
+       8.3,
+       15.5
+      ],
+      [
+       6.3,
+       15.5
+      ],
+      [
+       6.3,
+       12.5
+      ]
+     ]
+    ],
+    "obrys_en": [
+     [
+      [
+       79.709,
+       54.866
+      ],
+      [
+       78.999,
+       57.781
+      ],
+      [
+       77.056,
+       57.307
+      ],
+      [
+       77.766,
+       54.392
+      ]
+     ]
+    ]
+   },
+   "SWD.02g": {
+    "nazwa": "Hol reprezentacyjny – poziom górny (antresola holu nad klubami i pasem pn.)",
+    "kategoria": "hol",
+    "poziom": "ANT",
+    "pow_m2": 89.56,
+    "program_m2": null,
+    "zakres_m2": null,
+    "obrys_uv": [
+     [
+      [
+       5.1,
+       23.3
+      ],
+      [
+       8.3,
+       23.3
+      ],
+      [
+       8.3,
+       27.85
+      ],
+      [
+       15.3,
+       27.85
+      ],
+      [
+       15.3,
+       20.85
+      ],
+      [
+       8.3,
+       20.85
+      ],
+      [
+       8.3,
+       15.5
+      ],
+      [
+       6.3,
+       15.5
+      ],
+      [
+       6.3,
+       20.1
+      ],
+      [
+       1.85,
+       20.1
+      ],
+      [
+       1.85,
+       26.6
+      ],
+      [
+       5.1,
+       26.6
+      ]
+     ]
+    ],
+    "obrys_en": [
+     [
+      [
+       74.043,
+       64.601
+      ],
+      [
+       77.151,
+       65.359
+      ],
+      [
+       76.074,
+       69.779
+      ],
+      [
+       82.875,
+       71.437
+      ],
+      [
+       84.533,
+       64.636
+      ],
+      [
+       77.732,
+       62.979
+      ],
+      [
+       78.999,
+       57.781
+      ],
+      [
+       77.056,
+       57.307
+      ],
+      [
+       75.966,
+       61.776
+      ],
+      [
+       71.643,
+       60.722
+      ],
+      [
+       70.103,
+       67.037
+      ],
+      [
+       73.261,
+       67.807
+      ]
+     ]
+    ]
+   }
+  },
+  "pustka_holu": {
+   "pow_m2": 40.9,
+   "obrys_uv": [
+    [
+     [
+      5.1,
+      23.3
+     ],
+     [
+      5.1,
+      26.6
+     ],
+     [
+      1.85,
+      26.6
+     ],
+     [
+      1.85,
+      23.3
+     ],
+     [
+      0.5,
+      23.3
+     ],
+     [
+      0.5,
+      29.2
+     ],
+     [
+      12.45,
+      29.2
+     ],
+     [
+      12.45,
+      27.85
+     ],
+     [
+      8.3,
+      27.85
+     ],
+     [
+      8.3,
+      23.3
+     ]
+    ]
+   ]
+  },
+  "trzony_uklad": {
+   "zalozenie": "v1.2 – poprawka I5 (_v12_trzony.py): trzon A u 8,30–15,50 × v 11,85–20,85 (wydłużony o 0,60 m na pd.), klatka A 3,40 × 5,80 m; trzon B bez zmiany obrysu, klatka B 3,40 × 6,64 m, przedsionek B 3,40 × 2,06 m",
+   "A": {
+    "A1": [
+     [
+      10.8,
+      18.05
+     ],
+     [
+      10.8,
+      20.6
+     ],
+     [
+      8.55,
+      20.6
+     ],
+     [
+      8.55,
+      18.05
+     ]
+    ],
+    "A2": [
+     [
+      13.25,
+      18.05
+     ],
+     [
+      13.25,
+      20.6
+     ],
+     [
+      11.0,
+      20.6
+     ],
+     [
+      11.0,
+      18.05
+     ]
+    ],
+    "R": [
+     [
+      15.25,
+      18.05
+     ],
+     [
+      15.25,
+      20.6
+     ],
+     [
+      13.45,
+      20.6
+     ],
+     [
+      13.45,
+      18.05
+     ]
+    ],
+    "klatka_A": [
+     [
+      11.95,
+      12.05
+     ],
+     [
+      11.95,
+      17.85
+     ],
+     [
+      8.55,
+      17.85
+     ],
+     [
+      8.55,
+      12.05
+     ]
+    ],
+    "przedsionek_A": [
+     [
+      15.25,
+      12.05
+     ],
+     [
+      15.25,
+      17.85
+     ],
+     [
+      12.15,
+      17.85
+     ],
+     [
+      12.15,
+      12.05
+     ]
+    ]
+   },
+   "B": {
+    "klatka_B": [
+     [
+      28.5,
+      0.75
+     ],
+     [
+      28.5,
+      7.39
+     ],
+     [
+      25.1,
+      7.39
+     ],
+     [
+      25.1,
+      0.75
+     ]
+    ],
+    "przedsionek_B": [
+     [
+      28.5,
+      7.59
+     ],
+     [
+      28.5,
+      9.65
+     ],
+     [
+      25.1,
+      9.65
+     ],
+     [
+      25.1,
+      7.59
+     ]
+    ],
+    "szachty_B": [
+     [
+      30.85,
+      0.75
+     ],
+     [
+      30.85,
+      3.95
+     ],
+     [
+      28.7,
+      3.95
+     ],
+     [
+      28.7,
+      0.75
+     ]
+    ],
+    "P1": [
+     [
+      30.85,
+      4.15
+     ],
+     [
+      30.85,
+      6.8
+     ],
+     [
+      28.7,
+      6.8
+     ],
+     [
+      28.7,
+      4.15
+     ]
+    ],
+    "P2": [
+     [
+      30.85,
+      7.0
+     ],
+     [
+      30.85,
+      9.65
+     ],
+     [
+      28.7,
+      9.65
+     ],
+     [
+      28.7,
+      7.0
+     ]
+    ]
+   },
+   "drzwi_dzwigow": [
+    {
+     "dzwig": "A1",
+     "uv": [
+      9.6,
+      20.85
+     ],
+     "kierunek": [
+      0,
+      1
+     ],
+     "przystanki": [
+      "S",
+      "ANT"
+     ]
+    },
+    {
+     "dzwig": "A2",
+     "uv": [
+      11.85,
+      20.85
+     ],
+     "kierunek": [
+      0,
+      1
+     ],
+     "przystanki": [
+      "S",
+      "ANT"
+     ]
+    },
+    {
+     "dzwig": "P1",
+     "uv": [
+      31.1,
+      5.475
+     ],
+     "kierunek": [
+      1,
+      0
+     ],
+     "przystanki": [
+      "ANT"
+     ]
+    },
+    {
+     "dzwig": "P2",
+     "uv": [
+      31.1,
+      8.325
+     ],
+     "kierunek": [
+      1,
+      0
+     ],
+     "przystanki": [
+      "S*",
+      "ANT"
+     ]
+    }
+   ]
+  },
+  "drzwi": {
+   "S": [
+    {
+     "z": "SWD.08",
+     "do": "KUL",
+     "uv": [
+      4.0,
+      10.0
+     ],
+     "szer_m": 1.6
+    },
+    {
+     "z": "SWD.08",
+     "do": "KUL",
+     "uv": [
+      8.0,
+      10.0
+     ],
+     "szer_m": 1.0
+    },
+    {
+     "z": "SWD.10a",
+     "do": "KUL",
+     "uv": [
+      10.25,
+      10.0
+     ],
+     "szer_m": 0.9
+    },
+    {
+     "z": "SWD.10b",
+     "do": "KUL",
+     "uv": [
+      12.35,
+      10.0
+     ],
+     "szer_m": 0.9
+    },
+    {
+     "z": "IT.02",
+     "do": "KUL",
+     "uv": [
+      14.45,
+      10.0
+     ],
+     "szer_m": 0.9
+    },
+    {
+     "z": "SWD.09",
+     "do": "KUL",
+     "uv": [
+      17.0,
+      10.0
+     ],
+     "szer_m": 1.0
+    },
+    {
+     "z": "SWD.11a",
+     "do": "KUL",
+     "uv": [
+      21.0,
+      10.0
+     ],
+     "szer_m": 1.0
+    },
+    {
+     "z": "SWD.11a",
+     "do": "KUL",
+     "uv": [
+      24.0,
+      10.0
+     ],
+     "szer_m": 1.0
+    },
+    {
+     "z": "SWD.11b",
+     "do": "KW.S.02",
+     "uv": [
+      31.9,
+      7.2
+     ],
+     "szer_m": 1.0
+    },
+    {
+     "z": "KW.S.02",
+     "do": "KUL",
+     "uv": [
+      31.9,
+      10.0
+     ],
+     "szer_m": 1.2
+    },
+    {
+     "z": "SWD.07",
+     "do": "KUL",
+     "uv": [
+      35.0,
+      10.0
+     ],
+     "szer_m": 0.9
+    },
+    {
+     "z": "PP.06",
+     "do": "KUL",
+     "uv": [
+      38.4,
+      10.0
+     ],
+     "szer_m": 0.9
+    },
+    {
+     "z": "SWD.12a",
+     "do": "KUL",
+     "uv": [
+      3.4,
+      12.4
+     ],
+     "szer_m": 1.0
+    },
+    {
+     "z": "SWD.12b",
+     "do": "KW.S.01",
+     "uv": [
+      6.4,
+      20.3
+     ],
+     "szer_m": 1.0
+    },
+    {
+     "z": "KW.S.01",
+     "do": "KUL",
+     "uv": [
+      7.4,
+      12.3
+     ],
+     "szer_m": 1.6
+    },
+    {
+     "z": "KW.S.01",
+     "do": "SWD.02",
+     "uv": [
+      7.4,
+      20.85
+     ],
+     "szer_m": 1.6
+    },
+    {
+     "z": "KW.S.03",
+     "do": "KUL",
+     "uv": [
+      16.2,
+      12.3
+     ],
+     "szer_m": 1.2
+    },
+    {
+     "z": "KW.S.03",
+     "do": "SWD.02",
+     "uv": [
+      16.2,
+      20.85
+     ],
+     "szer_m": 1.2
+    },
+    {
+     "z": "PHS.05a",
+     "do": "SWD.02",
+     "uv": [
+      18.2,
+      20.85
+     ],
+     "szer_m": 1.0
+    },
+    {
+     "z": "PHS.05b",
+     "do": "SWD.02",
+     "uv": [
+      20.6,
+      20.85
+     ],
+     "szer_m": 1.0
+    },
+    {
+     "z": "SWD.14",
+     "do": "SWD.02",
+     "uv": [
+      14.2,
+      22.75
+     ],
+     "szer_m": 1.0
+    },
+    {
+     "z": "SWD.13",
+     "do": "SWD.02",
+     "uv": [
+      17.2,
+      22.75
+     ],
+     "szer_m": 1.0
+    },
+    {
+     "z": "SWD.04",
+     "do": "KUL",
+     "uv": [
+      35.0,
+      12.45
+     ],
+     "szer_m": 1.0
+    },
+    {
+     "z": "SWD.01",
+     "do": "SWD.02",
+     "uv": [
+      21.85,
+      21.75
+     ],
+     "szer_m": 1.6
+    },
+    {
+     "z": "SWD.01",
+     "do": "KUL",
+     "uv": [
+      22.7,
+      12.45
+     ],
+     "szer_m": 1.2
+    },
+    {
+     "z": "SWD.01",
+     "do": "KUL",
+     "uv": [
+      32.6,
+      12.45
+     ],
+     "szer_m": 1.6
+    },
+    {
+     "z": "SWD.01",
+     "do": "KUL",
+     "uv": [
+      28.0,
+      12.45
+     ],
+     "szer_m": 1.0
+    },
+    {
+     "z": "SWD.15",
+     "do": "SWD.02",
+     "uv": [
+      6.6,
+      24.6
+     ],
+     "szer_m": 0.9
+    },
+    {
+     "z": "przedsionek_A",
+     "do": "KUL",
+     "uv": [
+      13.7,
+      11.85
+     ],
+     "szer_m": 1.2
+    },
+    {
+     "z": "przedsionek_A",
+     "do": "KW.S.03",
+     "uv": [
+      15.5,
+      16.6
+     ],
+     "szer_m": 1.2
+    },
+    {
+     "z": "przedsionek_B",
+     "do": "KUL",
+     "uv": [
+      27.0,
+      9.9
+     ],
+     "szer_m": 1.2
+    }
+   ],
+   "ANT": [
+    {
+     "z": "KW.A.01",
+     "do": "KW.A.02",
+     "uv": [
+      32.9,
+      10.1
+     ],
+     "szer_m": 1.6
+    },
+    {
+     "z": "PHS.05c",
+     "do": "KW.A.01",
+     "uv": [
+      34.8,
+      5.3
+     ],
+     "szer_m": 1.0
+    },
+    {
+     "z": "SWD.01g",
+     "do": "KW.A.02",
+     "uv": [
+      17.5,
+      12.45
+     ],
+     "szer_m": 1.6
+    },
+    {
+     "z": "przedsionek_A",
+     "do": "SWD.01g",
+     "uv": [
+      15.5,
+      15.6
+     ],
+     "szer_m": 1.2
+    },
+    {
+     "z": "przedsionek_B",
+     "do": "KW.A.02",
+     "uv": [
+      27.0,
+      9.9
+     ],
+     "szer_m": 1.2
+    },
+    {
+     "z": "KW.A.03",
+     "do": "SWD.02g",
+     "uv": [
+      7.3,
+      15.5
+     ],
+     "szer_m": 1.2
+    },
+    {
+     "z": "klatka_A",
+     "do": "KW.A.03",
+     "uv": [
+      8.43,
+      12.8
+     ],
+     "szer_m": 1.2
+    }
+   ]
+  },
+  "bilans": {
+   "wnetrze_S_m2": 1080.19,
+   "pomieszczenia_S_m2": 789.81,
+   "komunikacja_S_m2": 123.73,
+   "trzony_m2": 123.55,
+   "sciany_wewn_m2": 43.1,
+   "antresola_m2": 297.88,
+   "program_suma_m2": 1106,
+   "projekt_suma_m2": 1016.24,
+   "hol_razem_m2": 164.39,
+   "PHS05_razem_m2": 42.46
+  },
+  "uklad_uv": "uv wieży: e = 74,606 + 0,97155·u − 0,23684·v; n = 40,756 + 0,23684·u + 0,97155·v",
+  "ewakuacja": {
+   "osoby_maks": 354,
+   "strefa_ZL_I_m2": 1443.7,
+   "kuluar_szer_m": 2.2,
+   "kuluar_przy_trzonie_A_m": 1.75,
+   "klatki_do_antresoli": [
+    "A",
+    "B"
+   ],
+   "przedsionki": [
+    "A",
+    "A'",
+    "B"
+   ],
+   "limity": "ZL I bez tryskaczy: przejście 40 m (+25 % h > 5 m), dojście 10 / 40 m; kuluar i korytarz publiczny z samoczynnym oddymianiem (SSP) → +50 % (15 / 60 m, § 256 ust. 3 – do potwierdzenia z rzeczoznawcą)",
+   "dojscia_jednokierunkowe_ponad_10m": {
+    "PHS.05c→B": 14.1,
+    "SWD.11b→B": 10.2,
+    "PP.06→B": 13.9
    }
   }
  },
@@ -3474,11 +8020,11 @@
    }
   },
   "wymagane_MPZP": {
-   "PU_m2": 8850.37,
+   "PU_m2": 8871.47,
    "PU_gastronomia_m2": 88.47,
    "wymagane": 106,
    "odczyt_ostrozny": 108,
-   "wzor": "12/1000 × (PU − PU_gastr.) + 6/1000 × PU_gastr. = 105,67 → 106"
+   "wzor": "12/1000 × (PU − PU_gastr,) + 6/1000 × PU_gastr, = 105,93 → 106"
   },
   "stackery": {
    "typ": "zależne 2-poziomowe bez zagłębienia, jednostki podwójne 5,0 m",
@@ -3491,7 +8037,7 @@
    "pojemnosc_os": 560,
    "ukrycie_-2_os": 300,
    "MDS_-1_os": 260,
-   "wyjscia": "−2: klatki A, B; −1: klatka C, rampa, szyb wyjścia zapasowego (91,75; 32,00) + tunel 7,6 m",
+   "wyjscia": "−2: klatki A, B (środki klatek 19,8 m; obudowy 13,95 m – pomiar do potwierdzenia); −1: klatka C (bieg 1,60 m), rampa, szyb wyjścia zapasowego (91,75; 32,00) + tunel 7,6 m",
    "sanitariaty": "−1 pn. od trzonu A 30 m² z WC dostępnym; −2 WC ukrycia 15 m²"
   },
   "technika": {
@@ -3677,22 +8223,28 @@
  },
  "bilans": {
   "PZ_m2": 2165.8,
-  "PC_nadziemna_m2": 14164.5,
+  "PC_nadziemna_m2": 14392.7,
   "PC_podziemna_m2": 4365.2,
-  "PU_m2": 8850.37,
-  "PU_definicja": "PN-ISO 9836 – pomieszczenia kategorii PU (model pomieszczeń, F.15.A); bez RU, US, PG",
+  "PU_m2": 8871.47,
+  "PU_definicja": "PN-ISO 9836 – pomieszczenia kategorii PU (model pomieszczeń, F.15.A: 8 850,37 m²) skorygowane o kondygnację S-3 (+21.10 m²: _v12_koszt.py [K0]); bez RU, US, PG",
   "KW_m3": 81408,
   "PBC_m2": 1185,
-  "koszt_mln_netto": 149.18,
-  "koszt_model_F14B_mid_mln": 142.8,
-  "koszt_roboty_KS_mln": 142.08,
+  "koszt_mln_netto": 148.98,
+  "koszt_model_F14B_mid_mln": 143.3,
+  "koszt_roboty_KS_mln": 141.89,
   "rezerwa_proc": 5,
-  "rezerwa_mln": 7.1,
-  "zapas_do_limitu_mln": 0.82,
-  "zl_m2_PC": 8003,
-  "zl_m2_PU": 16856,
+  "rezerwa_mln": 7.09,
+  "zapas_do_limitu_mln": 1.02,
+  "zl_m2_PC": 7942,
+  "zl_m2_PU": 16793,
   "EP_kWh_m2": 28.0,
-  "EPB_kWh_m2": 23.9
+  "EPB_kWh_m2": 23.9,
+  "koszt_wejscie_modelu": "docs/20_koncepcja/_rewizja_koszt_wejscie_v1_2.json",
+  "dzwignie_v1_2": [
+   "TABS",
+   "SZKLO",
+   "BESS"
+  ]
  },
  "par13": {
   "okna_WS5": "szczyt (101,93;28,52)–(118,16;29,46), normalna 356,7°, wierzchołek 0,55 m w głąb",
@@ -3853,7 +8405,7 @@
    "lens_mm": 20,
    "shift_y": 0.05,
    "czas": "2026-10-29 16:20 CET",
-   "nastroj": "początek błękitnej godziny, zachód nad pl. Społecznym, wieże katedry w oknie pn."
+   "nastroj": "początek błękitnej godziny; z holu dźwigów A1/A2 (drzwi pn.) ku pustce 2-kond. NW, schodom reprezentacyjnym i oknom na pl. Społeczny i wieże katedry"
   },
   {
    "id": "W8",
@@ -3871,7 +8423,7 @@
    "lens_mm": 20,
    "shift_y": 0.08,
    "czas": "2026-10-22 10:30 CEST, sesja",
-   "nastroj": "światło dzienne z łuku za kamerą, prezydium oświetlone z przodu, publiczność na galerii"
+   "nastroj": "światło dzienne z łuku za kamerą (za 4. rzędem, R ≈ 11 m od mównicy), prezydium przy pełnej ścianie pd.; 47 stanowisk w 4 rzędach (4 dla wózków), galeria zach. z balustradą szklaną i publicznością"
   },
   {
    "id": "W9",
@@ -3942,7 +8494,9 @@
   "sala_obrad": 6.85,
   "komisje_S": 4.9,
   "garaz_-1": 3.65,
-  "garaz_-2": 2.65
+  "garaz_-2": 2.65,
+  "antresola_pod": 3.3,
+  "antresola_nad": 3.25
  },
  "parter": {
   "wieza": [
@@ -4158,7 +8712,7 @@
     "strefa": "Trzon A",
     "uv": [
      8.3,
-     12.45,
+     11.85,
      15.5,
      20.85
     ]
@@ -4366,7 +8920,7 @@
     "strefa": "Rampa 1 × 3,50 m (≤ 18 %) przy ścianie pn., brama 4,0 m od Wybrzeża (v −0,40…−4,40), próg 119,10 + zapora samoczynna"
    },
    {
-    "strefa": "Pas pd.: trafo SN/nn 21 m² (drzwi od Wybrzeża, wentylacja do lica zach.), rozdzielnia nn z SZR 17, BESS 150 kWh 11 (EI 120), punkt odpadów 7, szyb T (narożnik SE)"
+    "strefa": "Pas pd.: trafo SN/nn 21 m² (drzwi od Wybrzeża, wentylacja do lica zach.), rozdzielnia nn z SZR 17, BESS 100 kWh 11 (EI 120), punkt odpadów 7, szyb T (narożnik SE)"
    },
    {
     "strefa": "Kond. 1: agregat HVO (pas zach.); kond. 2: falowniki PV 12 m²; kond. 4: dry-cooler 2 × 150 kW (żaluzje w licu zach.)"

@@ -97,8 +97,10 @@ for uu in (u_t0 + 5, u_t0 + 15, u_t0 + 25, 20.0, 30.0):
         a = P(uu - 1.0 + q * 1.0, zt - q * 0.8)
         svg.line(a, (a[0] - 0.8, a[1] + 2.4), stroke=RAIN, sw=0.3)
 LV = {lv["id"]: lv for lv in PR.BM["kondygnacje"]}
-z_m2 = float(LV["-2"]["rzedna"])                 # posadzka −2 w modelu pomieszczeń (przekrój bazowy)
-z_m1 = float(LV["-1"]["rzedna"])
+# rzędne jak w przekroju bazowym (przekroje.py v1.1: koncepcja.json; starsza wersja: model pomieszczeń)
+_ZK = getattr(PR, "Z_K", {})
+z_m2 = float(_ZK.get("-2", LV["-2"]["rzedna"]))     # posadzka −2 (v1.1: −7,20)
+z_m1 = float(_ZK.get("-1", LV["-1"]["rzedna"]))     # posadzka −1 (v1.1: −4,20)
 t0_, t1_ = u_t0 + 0.9, u_t0 + 6.4
 tz0, tz1 = z_m2 + 0.15, z_m1 - 0.75
 svg.line(P(u_t0 + 1.0, 36.2), P(u_t0 + 1.0, tz1 + 0.05), stroke=RAIN, sw=0.45, dash="1.2,0.6")
@@ -133,8 +135,11 @@ if rain_iv:
     arrow(P(u_t0 - 4.4, zg(u_t0 - 4.4) + 0.25), P(b2 - 0.3, zg(b2) - 0.15), RAIN, sw=0.35, dash="0.9,0.6")   # spływ z tarasu do niecki
 
 # ------------------------------------------------------------------ 5 GPC: sondy pod płytą −2, ściany szczelinowe i pale energetyczne
-z_slab = z_m2 - 1.2                                   # spód płyty fundamentowej w przekroju bazowym
-plate2 = PR.mp(LV["-2"].get("plyta"))
+_PD = getattr(PR, "PD", None)
+z_slab = float(_PD["spod"]) if _PD else z_m2 - 1.2    # spód płyty dennej (v1.1: −8,40 pod wieżą)
+plate2 = (Polygon(K["podziemie"]["-2"]["obrys_ccw"]).buffer(0) if "-2" in K.get("podziemie", {}) else PR.mp(LV["-2"].get("plyta")))
+D_PAL, L_PAL = getattr(PR, "D_PAL", 0.8), getattr(PR, "L_PAL", 14.0)
+T_DW, H_DW, Z_DW_TOP = getattr(PR, "T_DW", 0.8), getattr(PR, "H_DW", 17.0), getattr(PR, "Z_DW_TOP", -1.0)
 piles = []
 for a, b in cut(PR.TOWER):
     x = a + 2.0
@@ -161,22 +166,24 @@ if holes:
          "58 sond × 91 m pod płytą −2 (siatka 6 × 6 m) → dno 19,9 m n.p.m. (≤ 99,5 m p.p.t.)", anchor="end", size=1.7, w=600)
     tag(P((holes[len(holes) // 2] + holes[len(holes) // 2 - 1]) / 2 + 0.2 if len(holes) > 1 else holes[0] + 2, -14.0), 5, HEAT)
 # pale energetyczne (36 × CFA Ø 0,8, L ≈ 14 m) – absorbery w palach rysowanych w przekroju bazowym
+z_pb = max(z_slab - L_PAL, -24.0) + 0.4
 for x in piles:
-    svg.line(P(x + 0.25, -8.6), P(x + 0.25, -21.8), stroke=HEAT, sw=0.18)
-    svg.line(P(x + 0.55, -8.6), P(x + 0.55, -21.8), stroke=COOL, sw=0.18)
+    svg.line(P(x + D_PAL * 0.3, z_slab - 0.4), P(x + D_PAL * 0.3, z_pb), stroke=HEAT, sw=0.18)
+    svg.line(P(x + D_PAL * 0.7, z_slab - 0.4), P(x + D_PAL * 0.7, z_pb), stroke=COOL, sw=0.18)
 # ściany szczelinowe energetyczne (0,60 m, 19 m) – absorbery w ścianach obwodowych podziemia
-ug = unary_union([PR.mp(lv.get("plyta")) for lv in PR.BM["kondygnacje"] if lv["id"] in ("-1", "-2")])
+ug = getattr(PR, "UG_K", None) or unary_union([PR.mp(lv.get("plyta")) for lv in PR.BM["kondygnacje"] if lv["id"] in ("-1", "-2")])
 walls = []
 for a, b in cut(ug):
-    walls += [a, b - 0.8]
+    walls += [a, b - T_DW]
+z_wb = max(Z_DW_TOP - H_DW, -24.0) + 0.5
 for x in walls:
-    svg.line(P(x + 0.25, -1.5), P(x + 0.25, -17.5), stroke=HEAT, sw=0.18, dash="1.0,0.5")
-    svg.line(P(x + 0.55, -1.5), P(x + 0.55, -17.5), stroke=COOL, sw=0.18, dash="1.0,0.5")
+    svg.line(P(x + T_DW * 0.3, Z_DW_TOP - 0.5), P(x + T_DW * 0.3, z_wb), stroke=HEAT, sw=0.18, dash="1.0,0.5")
+    svg.line(P(x + T_DW * 0.7, Z_DW_TOP - 0.5), P(x + T_DW * 0.7, z_wb), stroke=COOL, sw=0.18, dash="1.0,0.5")
 if walls:
     note((P(walls[0] - 0.6, 0)[0], P(0, -10.5)[1]), "ściana szczelinowa", anchor="end", col=HEAT, size=1.6)
     note((P(walls[0] - 0.6, 0)[0], P(0, -10.5)[1] + 2.2), "energetyczna (63 kW)", anchor="end", col=HEAT, size=1.6)
 if piles:
-    note((P(piles[-1] + 1.4, 0)[0], P(0, -19.5)[1]), "pale energetyczne (20 kW)", anchor="start", col=HEAT, size=1.6)
+    note((P(piles[-1] + 1.4, 0)[0], P(0, max(z_slab - L_PAL, -23.0) + 2.0)[1]), "pale energetyczne (20 kW)", anchor="start", col=HEAT, size=1.6)
 
 # ------------------------------------------------------------------ 6 TABS w stropach
 for zf in (8.55, 12.3, 16.05):

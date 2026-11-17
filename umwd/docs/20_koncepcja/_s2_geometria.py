@@ -224,8 +224,8 @@ def entry(k, g, lvl):
 
 pom = {}
 for k, g in CORES.items():
-    pom[k] = {"nazwa": "Trzon A (obrys bez zmian; układ: klatka A + przedsionek z MOE, A1/A2 1 600 kg kab. 1,5×2,1 drzwi pn., R 1 000 kg)"
-              if k == "C-A" else "Trzon B (obrys bez zmian; układ: klatka B + przedsionek z MOE, P1/P2 1 600 kg kab. 1,5×2,1 drzwi wsch., szachty po dźwigu T)",
+    pom[k] = {"nazwa": "Trzon A (v1.2: wydłużony na pd. do v 11,85 wg I5; klatka A 3,40×5,80 + przedsionek 3,10×5,80 z MOE, A1/A2 1 600 kg kab. 1,5×2,1 drzwi pn., R 1 000 kg drzwi pd.)"
+              if k == "C-A" else "Trzon B (obrys bez zmian; klatka B 3,40×6,64 + przedsionek 3,40×2,06 z MOE, P1/P2 1 600 kg kab. 1,5×2,1 drzwi wsch., szachty po dźwigu T)",
               "kategoria": "trzon", "poziom": "S+ANT", "pow_m2": round(g.area, 2), "program_m2": None, "zakres_m2": None,
               "obrys_uv": M.poly_list_uv(g), "obrys_en": M.poly_list_en(g)}
 for k, g in S.items():
@@ -238,7 +238,7 @@ for r in rows:
                     "sektor_deg": [round(r["a0"], 1), round(r["a1"], 1)], "linia_siedzisk_R": round(r["rc"], 2),
                     "obrys_uv": M.poly_list_uv(r["band"])})
 J = {
-    "wersja": "S-2 / wariant „hol z galerią” – 17.11.2026 (opracowanie kondygnacji Sejmiku do scalenia z koncepcja.json)",
+    "wersja": "S-3 / wariant „hol z galerią” – v1.2 (scalona z koncepcja.json; trzony wg I5: _v12_trzony.py) – 17.11.2026",
     "zrodlo": "docs/20_koncepcja/_s2_model.py (geometria), _s2_geometria.py (kontrole i eksport), _s2_sala.py, _s2_ewakuacja.py",
     "uklad": "uv wieży: e = 74,606 + 0,97155·u − 0,23684·v; n = 40,756 + 0,23684·u + 0,97155·v",
     "posadzka": {"wzgl": M.Z_S, "npm": 146.6},
@@ -270,7 +270,7 @@ J = {
     "pomieszczenia": pom,
     "antresola_pomieszczenia": antp,
     "pustka_holu": {"pow_m2": round(M.VOID_HALL.area, 2), "obrys_uv": M.poly_list_uv(M.VOID_HALL)},
-    "trzony_uklad": {"zalozenie": "do scalenia z poprawką I5 (obrysy trzonów bez zmian)",
+    "trzony_uklad": {"zalozenie": "v1.2 – poprawka I5 (_v12_trzony.py): trzon A u 8,30–15,50 × v 11,85–20,85 (wydłużony o 0,60 m na pd.), klatka A 3,40 × 5,80 m; trzon B bez zmiany obrysu, klatka B 3,40 × 6,64 m, przedsionek B 3,40 × 2,06 m",
                      "A": {k: M.poly_list_uv(v)[0] for k, v in M.CORE_A_CELLS.items()},
                      "B": {k: M.poly_list_uv(v)[0] for k, v in M.CORE_B_CELLS.items()},
                      "drzwi_dzwigow": [{"dzwig": a, "uv": list(p), "kierunek": list(d), "przystanki": s}

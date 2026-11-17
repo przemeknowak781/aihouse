@@ -194,8 +194,9 @@ SD = B["S"]["dach"]
 tz = SD["taras_wykonczenie"]
 model_rings(svg, v, seg, fill="#ffffff", stroke=INK, sw=0.5)
 seg_in = seg.buffer(-0.8, join_style=2)
-model_rings(svg, v, seg_in, fill="#dfe8d2", stroke="none")
 s_face = LineString([(96.694, 38.813), (115.979, 39.930)])          # lico pd. segmentu (od dz. 10/2)
+_att_bands = seg.difference(seg_in).difference(s_face.buffer(0.85, cap_style=2))   # attyki lic pn., wsch., zach.
+model_rings(svg, v, seg.difference(_att_bands), fill="#dfe8d2", stroke="none")      # taras do lica pd. (attyka = poziom tarasu)
 _att = LineString(list(seg_in.exterior.coords)).difference(s_face.buffer(1.0, cap_style=2))
 for g in ([_att] if _att.geom_type == "LineString" else list(getattr(_att, "geoms", []))):
     svg.poly([v.p(*c) for c in g.coords], fill="none", stroke=INK, sw=0.12, close=False)
@@ -378,6 +379,10 @@ svg.poly([(x - 1.6, y - 1.6), (x + 1.6, y - 1.6), (x + 1.6, y + 1.6), (x - 1.6, 
 svg.line((x - 1.6, y - 1.6), (x + 1.6, y + 1.6), stroke=INK, sw=0.12)
 svg.line((x - 1.6, y + 1.6), (x + 1.6, y - 1.6), stroke=INK, sw=0.12)
 
+# ---------------- boundaries
+model_rings(svg, v, comp, fill="none", stroke="#2f6f8f", sw=0.35, extra='stroke-dasharray="3,1.2"')
+model_rings(svg, v, inv, fill="none", stroke=ACC, sw=0.45, extra='stroke-dasharray="4,1,0.8,1"')
+
 # ---------------- entrances (8) and service
 # wejścia: 3 – elewacja wsch. wieży (v ≈ 4,1; wnęka v 1,4–6,8), 8 – brama garażu w części pn. segmentu (v −0,40…−4,40)
 ENTR = [((103.2, 73.5), "1", "Brama Mostowa – wejście główne"), ((91.0, 76.6), "2", "wejście od skweru (podcień)"),
@@ -404,10 +409,6 @@ for it in S["dzialki"]["items"]:
         svg.line(v.p(c10.x + 8.5, c10.y), v.p(c10.x - 4.0, c10.y), stroke="#3a3632", sw=0.3)
         svg.poly([v.p(c10.x - 4.0, c10.y), v.p(c10.x - 2.6, c10.y + 0.8), v.p(c10.x - 2.6, c10.y - 0.8)], fill="#3a3632", stroke="none")
         svg.text(v.p(c10.x + 9.0, c10.y - 2.4), "dojazd do dz. 10/2 zachowany", size=1.8, anchor="end", fill="#3a3632")
-
-# ---------------- boundaries
-model_rings(svg, v, comp, fill="none", stroke="#2f6f8f", sw=0.35, extra='stroke-dasharray="3,1.2"')
-model_rings(svg, v, inv, fill="none", stroke=ACC, sw=0.45, extra='stroke-dasharray="4,1,0.8,1"')
 
 # ---------------- level spots (terrain, m n.p.m.)
 for (e, n, t) in [(104.5, 80.0, "119,30"), (80.0, 84.0, "119,45"), (120.5, 45.0, "119,10"), (45.5, 30.0, "118,55"), (82.0, 18.0, "118,95"), (101.0, 34.0, "119,00")]:

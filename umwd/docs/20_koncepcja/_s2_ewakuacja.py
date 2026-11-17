@@ -36,10 +36,11 @@ print("Sala (> 50 os., > 300 m² z galerią): wyjścia 3 + drzwi prezydium; odst
 
 # -------------------------------------------------------------------------------------------------
 hr("[E2] Długości przejść (w pomieszczeniu) i dojść (od drzwi pomieszczenia do drzwi przedsionka) – ZL I, budynek W")
-LIM = {"przejscie": 40.0, "przejscie_h5_tryskacze": 40.0 * (1 + 0.25 + 0.5), "dojscie_1": 10.0, "dojscie_1_tr": 15.0,
-       "dojscie_2": 40.0, "dojscie_2_tr": 60.0}
-print("Limity: przejście 40 m (sala/hol h > 5 m: +25 %, tryskacze +50 % → 70 m); dojście 1 kierunek 10 m (tryskacze 15 m),"
-      " ≥ 2 kierunki 40 m (60 m). Budynek w całości tryskaczowy (koncepcja rozdz. 15; ppoz.md D11).")
+LIM = {"przejscie": 40.0, "przejscie_h5": 40.0 * 1.25, "dojscie_1": 10.0, "dojscie_1_odd": 15.0,
+       "dojscie_2": 40.0, "dojscie_2_odd": 60.0}
+print("Limity (v1.1/v1.2: tryskacze NIEPROJEKTOWANE – rejestr v1.1 E-I-4): przejście 40 m (sala/hol h > 5 m: +25 % → 50 m);"
+      " dojście ZL I: 1 kierunek 10 m, ≥ 2 kierunki 40 m; kuluar i korytarz publiczny z samoczynnym oddymianiem"
+      " sterowanym SSP → +50 % (§ 256 ust. 3: 15 / 60 m; wykładnia do potwierdzenia z rzeczoznawcą ppoż., ppoz.md 5.3).")
 walk_S = unary_union([g for g in S.values()] + [CELLS["przedsionek_A"], CELLS["przedsionek_B"]])
 walk_A = unary_union([g for g in A.values()] + [CELLS["przedsionek_A"], CELLS["przedsionek_B"]])
 
@@ -58,7 +59,7 @@ ROUTES = [
     ("Sala: media NE → przejście wsch. → drzwi SE → kuluar → przedsionek B", "S",
      [(33.8, 25.3), (36.9, 19.4), (31.4, 16.4), (32.6, 13.0), (32.6, 12.45)], [(32.6, 12.45), (32.6, 11.2), (27.0, 11.2), (27.0, 9.9)], "B"),
     ("Sala: media NE → za rzędem 4 → przejście zach. → drzwi SW → kuluar → przedsionek A", "S",
-     [(33.8, 25.3), (27.5, 27.6), (22.55, 26.0), (22.55, 13.0), (22.7, 12.45)], [(22.7, 12.45), (22.7, 11.2), (13.7, 11.2), (13.7, 12.45)], "A"),
+     [(33.8, 25.3), (27.5, 27.6), (22.55, 26.0), (22.55, 13.0), (22.7, 12.45)], [(22.7, 12.45), (22.7, 11.2), (13.7, 11.2), (13.7, 11.85)], "A"),
     ("Sala: rząd 4 wsch. koniec → przejście wsch. → drzwi SE → przedsionek B", "S",
      [(38.0, 19.0), (31.4, 16.4), (32.6, 13.0), (32.6, 12.45)], [(32.6, 12.45), (32.6, 11.2), (27.0, 11.2), (27.0, 9.9)], "B"),
     ("Galeria: rząd 2 pn. koniec → foyer → przedsionek A (+30,90)", "ANT",
@@ -73,19 +74,19 @@ ROUTES = [
      [(21.4, 27.6), (13.0, 25.6), (5.4, 25.6), (12.3, 25.6), (13.0, 22.0), (16.2, 21.0), (16.2, 12.3)],
      [(16.2, 12.3), (16.2, 11.2), (27.0, 11.2), (27.0, 9.9)], "B"),
     ("Hol: naroże NW → pasaż zach. → kuluar → przedsionek A", "S",
-     [(0.9, 28.8), (7.4, 22.5), (7.4, 20.85)], [(7.4, 20.85), (7.4, 11.2), (13.7, 11.2), (13.7, 12.45)], "A"),
+     [(0.9, 28.8), (7.4, 22.5), (7.4, 20.85)], [(7.4, 20.85), (7.4, 11.2), (13.7, 11.2), (13.7, 11.85)], "A"),
     ("Hol: naroże NW → łącznik wsch. → przedsionek A (drzwi wsch.)", "S",
      [(0.9, 28.8), (11.0, 23.6), (16.2, 21.4), (16.2, 20.85)], [(16.2, 20.85), (16.2, 16.6), (15.5, 16.6)], "A"),
     ("SWD.13: naroże NE → drzwi → łącznik → przedsionek A", "S",
      [(21.4, 28.9), (17.2, 23.2), (17.2, 22.75)], [(17.2, 22.75), (16.2, 21.4), (16.2, 16.6), (15.5, 16.6)], "A"),
     ("SWD.08: naroże SW → drzwi → kuluar → przedsionek A", "S",
-     [(0.9, 0.9), (4.0, 9.7), (4.0, 10.0)], [(4.0, 10.0), (4.0, 11.2), (13.7, 11.2), (13.7, 12.45)], "A"),
+     [(0.9, 0.9), (4.0, 9.7), (4.0, 10.0)], [(4.0, 10.0), (4.0, 11.2), (13.7, 11.2), (13.7, 11.85)], "A"),
     ("SWD.08: naroże SW → drzwi → kuluar → przedsionek B", "S",
      [(0.9, 0.9), (8.0, 9.7), (8.0, 10.0)], [(8.0, 10.0), (8.0, 11.2), (27.0, 11.2), (27.0, 9.9)], "B"),
     ("SWD.11b: naroże SE → dojście → kuluar → przedsionek B", "S",
      [(39.2, 0.9), (31.9, 7.0), (31.9, 7.2)], [(31.9, 7.2), (31.9, 11.2), (27.0, 11.2), (27.0, 9.9)], "B"),
     ("SWD.11b: naroże SE → dojście → kuluar → przedsionek A", "S",
-     [(39.2, 0.9), (31.9, 7.0), (31.9, 7.2)], [(31.9, 7.2), (31.9, 11.2), (13.7, 11.2), (13.7, 12.45)], "A"),
+     [(39.2, 0.9), (31.9, 7.0), (31.9, 7.2)], [(31.9, 7.2), (31.9, 11.2), (13.7, 11.2), (13.7, 11.85)], "A"),
     ("PP.06 (koniec kuluaru wsch.) → przedsionek B", "S",
      [(39.2, 9.6), (38.4, 10.0)], [(38.4, 10.0), (38.4, 11.2), (27.0, 11.2), (27.0, 9.9)], "B"),
 ]
@@ -103,7 +104,7 @@ for nm, lvl, pr, dj, tgt in ROUTES:
     res[nm] = (lp, ld)
     print(f"  {nm}\n     przejście {lp:5.1f} m, dojście {ld:5.1f} m → klatka {tgt}" + (f"   (poza komunikacją {off:.2f} m)" if off > 0.01 else ""))
 print("Ocena:")
-print("  – sala: dwa kierunki (klatki A i B), przejście ≤ %.1f m (≤ 50 m dla h > 5 m bez tryskaczy), dojście ≤ %.1f m (≤ 40 m) ✔"
+print("  – sala: dwa kierunki (klatki A i B), przejście ≤ %.1f m (≤ 50 m dla h > 5 m, bez tryskaczy), dojście ≤ %.1f m (≤ 40 m) ✔"
       % (max(res[k][0] for k in res if k.startswith("Sala")), max(res[k][1] for k in res if k.startswith("Sala"))))
 print("  – galeria: dwie niezależne drogi – przedsionek A (%.1f m) i przedsionek B (%.1f m) ✔"
       % (sum(res["Galeria: rząd 2 pn. koniec → foyer → przedsionek A (+30,90)"]),
@@ -112,8 +113,20 @@ print("  – antresola radnych: przedsionek A' → klatka A (%.1f m) oraz schody
       " (%.1f m) ✔" % (sum(res["Antresola radnych: bar NE → hol górny → przedsionek A' (+30,90)"]),
                       sum(res["Antresola radnych: bar NE → schody reprezentacyjne → hol → łącznik → kuluar → przedsionek B"])))
 dead = 38.4 - 27.0
-print(f"  – ślepy odcinek kuluaru wsch. (od drzwi przedsionka B do PP.06): {dead:.1f} m > 10 m, ≤ 15 m przy tryskaczach ✔;"
-      " zach. część kuluaru ma drugi kierunek przez pasaż i hol do łącznika/przedsionka A ✔")
+print(f"  – ślepy odcinek kuluaru wsch. (od drzwi przedsionka B do PP.06): {dead:.1f} m > 10 m, ≤ 15 m przy samoczynnym"
+      " oddymianiu kuluaru (§ 256 ust. 3, bez tryskaczy) ✔*; zach. część kuluaru ma drugi kierunek przez pasaż i hol do"
+      " łącznika/przedsionka A ✔")
+one_dir = {k: v[1] for k, v in res.items() if k.startswith(("PP.06", "WC publiczności", "SWD.11b: naroże SE → dojście → kuluar → przedsionek B"))}
+print("  – dojścia jednokierunkowe > 10 m (wymagają +50 % za samoczynne oddymianie drogi; limit 15 m):",
+      {k[:40]: round(v, 1) for k, v in one_dir.items()}, "– wszystkie ≤ 15 m ✔*")
+# v1.2 (I5): zwężenie kuluaru przy wydłużonym trzonie A
+kul_a = S["KUL"].intersection(box(M.CORE_A.bounds[0], 9.0, M.CORE_A.bounds[2], 13.0))
+w_a = M.CORE_A.bounds[1] - 10.10
+west_occ = OCC["SWD.08"] + OCC["SWD.12a"] + OCC["SWD.12b"] + 4
+print(f"  – v1.2: kuluar przy trzonie A {w_a:.2f} m na długości {M.CORE_A.bounds[2] - M.CORE_A.bounds[0]:.2f} m"
+      f" (pole {kul_a.area:.1f} m²) ≥ 1,40 m (WT § 242) ✔; przepustowość 0,6 m/100 os. → {w_a / 0.006:.0f} os.;"
+      f" odcinek obsługuje osoby z części zach. (SWD.08 + SWD.12a/b + SWD.10a/IT.02 ≈ {west_occ} os.; hol i antresola radnych"
+      f" mają łącznik KW.S.03 do przedsionka A i przedsionek A') ✔; M.13 1,80 m – odstępstwo lokalne −{1.80 - w_a:.2f} m")
 print("  – żadne schody z antresoli nie prowadzą do kuluaru; schody reprezentacyjne leżą w holu (strefa dymowa hol +"
       " antresola radnych, oddymianie mechaniczne), oddzielonym od kuluaru drzwiami EI 30 S w pasażu i łączniku (I4) ✔")
 
@@ -168,7 +181,8 @@ for lift, pt, d, levels in M.LIFT_DOORS:
         dep = depth(p0, d, free)
         need = 3.6 if lv != "S*" else 1.6
         print(f"  {lift} na {lv:4s}: głębokość wolna {dep:.2f} m {'✔ M.13 3,6' if dep >= 3.6 else ('✔ WT 1,6 (przystanek służbowy)' if dep >= 1.6 else '✗')}")
-print("  R: drzwi do przedsionka A (S i +30,90) – pole 1,5 × 1,5 m (MOE) w przedsionku 3,1 × 5,15 m ✔")
+bA = M.CORE_A_CELLS["przedsionek_A"].bounds
+print(f"  R: drzwi do przedsionka A (S i +30,90) – pole 1,5 × 1,5 m (MOE) w przedsionku {bA[2] - bA[0]:.2f} × {bA[3] - bA[1]:.2f} m ✔")
 
 # -------------------------------------------------------------------------------------------------
 hr("[E6] Klatki i przedsionki na S i +30,90; MOE (dostepnosc.md pkt 8, D9)")
@@ -182,5 +196,7 @@ b = g.bounds
 print(f"  przedsionek A' (+30,90): {b[2] - b[0]:.2f} × {b[3] - b[1]:.2f} m = {g.area:.1f} m² (MOE 1,5 × 1,5 przy ścianie trzonu)")
 print("  Klatka A i klatka B przedłużone do +30,90 (podest antresoli); klatka A: przedsionek A (drzwi wsch. na galerię)"
       " i przedsionek A' (drzwi pn. z antresoli radnych) – drzwi z kontrolą dostępu, zwalniane przez SSP.")
-print("  Klatka A ma w obrysie trzonu bieg 3,40 × 5,15 m (jak w modelu v1.0) – do weryfikacji w I5 (wymagane ≈ 5,8–5,9 m"
-      " przy 22 stopniach 0,170 × 0,28 i spocznikach 1,5 m).")
+bk = M.CORE_A_CELLS["klatka_A"].bounds
+bkB = M.CORE_B_CELLS["klatka_B"].bounds
+print(f"  v1.2 (I5): klatka A {bk[2] - bk[0]:.2f} × {bk[3] - bk[1]:.2f} m (trzon A wydłużony o 0,60 m na pd.), klatka B"
+      f" {bkB[2] - bkB[0]:.2f} × {bkB[3] - bkB[1]:.2f} m – biegi, stopnie i spoczniki na każdej kondygnacji: _v12_trzony.py.")

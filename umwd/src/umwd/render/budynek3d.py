@@ -94,6 +94,8 @@ ZALOZENIA = dict(
     korona_lamele=(32.9, 35.8, 0.25, 0.42),   # pas lameli nad oknami komisji od dziedzińca: z0, z1, szer., rozstaw
     czerpnie_kond1_S=(2.0, 12.0),             # żaluzje czerpni zamiast okien kond. 1, elewacja pd., u 2–12 m
     wejscie_rowerowni_S=(3.0, 4.6),           # drzwi rowerowni w elewacji pd. (u)
+    wejscie_ogrodowe_hali_S=(15.9, 18.3),     # drzwi Hali Obywatelskiej do ogrodu (u; środek ściany ogrodowej
+                                              # SW.01c wg budynek.json: x 87,3–94,9 → u 13,2–21,0)
     gzyms_wysieg_ulica=0.0,     # rewizja 17.11: na elewacjach < 0,30 m od granicy gzyms bez wysięgu …
     fryz_cofniecie=0.15,        # … a cień daje fryz cofnięty o 0,15 m pod gzymsem
     gzyms_wysieg_pn=0.25,       # elewacja pn. skrzydła (dziób) – wysięg maks. 0,25 m
@@ -1044,6 +1046,103 @@ class Materialy:
     def m_wn_tkanina(self, m):
         self._proste(m, (0.16, 0.10, 0.07), 0.9)
 
+    # ---------------------------------------------------------------- Hala Obywatelska (W6)
+    def m_wn_terrazzo(self, m):
+        """Lastryko z kruszywa z gruzu rozbiórkowego (cegła, granit, beton) w jasnym spoiwie; szlif półpołysk,
+        pola 1,20 × 1,20 m z listwami dylatacyjnymi z mosiądzu (atrybuty fu/fv w metrach)."""
+        nb = NodeBuilder(m)
+        pos = nb.n('ShaderNodeNewGeometry').outputs['Position']
+        sk = nb.n('ShaderNodeVectorMath', {'operation': 'SCALE'})
+        nb.l(pos, sk.inputs[0])
+        sk.inputs['Scale'].default_value = 1.0
+        out_kol = None
+        mat_c = (0.58, 0.55, 0.50)
+        kol = self._rgb(nb, mat_c)
+        # trzy frakcje kruszywa (Voronoi F1 + losowa barwa komórki)
+        for skala, prog, paleta in ((38.0, 0.30, ((0.30, 0.11, 0.06), (0.42, 0.18, 0.09), (0.16, 0.15, 0.14),
+                                                  (0.70, 0.68, 0.64))),
+                                    (95.0, 0.36, ((0.36, 0.14, 0.07), (0.22, 0.21, 0.20), (0.62, 0.58, 0.52),
+                                                  (0.10, 0.10, 0.10))),
+                                    (210.0, 0.42, ((0.30, 0.28, 0.26), (0.48, 0.24, 0.12), (0.75, 0.73, 0.70),
+                                                   (0.20, 0.19, 0.18)))):
+            vor = nb.n('ShaderNodeTexVoronoi', Scale=skala, Randomness=0.9)
+            nb.l(sk.outputs[0], vor.inputs['Vector'])
+            r = nb.n('ShaderNodeValToRGB')
+            r.color_ramp.interpolation = 'CONSTANT'
+            els = r.color_ramp.elements
+            els[0].position, els[0].color = 0.0, (*paleta[0], 1)
+            els[1].position, els[1].color = 0.75, (*paleta[3], 1)
+            for pp, c in ((0.3, paleta[1]), (0.55, paleta[2])):
+                e = els.new(pp)
+                e.color = (*c, 1)
+            # barwa komórki: kanał R koloru Voronoi
+            sep = nb.n('ShaderNodeSeparateColor')
+            nb.l(vor.outputs['Color'], sep.inputs[0])
+            nb.l(sep.outputs[0], r.inputs['Fac'])
+            # ziarno = odległość do punktu komórki < próg (kształt nieregularny – szum)
+            nz = nb.n('ShaderNodeTexNoise', Scale=skala * 0.8, Detail=2.0)
+            nb.l(sk.outputs[0], nz.inputs['Vector'])
+            d = nb.math('ADD', vor.outputs['Distance'], nb.math('MULTIPLY', nz.outputs['Fac'], 0.18))
+            maska = nb.math('LESS_THAN', d, prog + 0.09)
+            kol = nb.mix(maska, kol, r.outputs['Color'])
+        # pola z listwami mosiężnymi (fu/fv – metry)
+        fu, fv = self._attr(nb, 'fu'), self._attr(nb, 'fv')
+        def pas(x):
+            return nb.math('LESS_THAN', nb.math('ABSOLUTE', nb.math('SUBTRACT', nb.math('FRACT', nb.math('DIVIDE', x, 1.2)), 0.5)), 0.4975)
+        wn = nb.math('MULTIPLY', pas(fu), pas(fv))            # 1 = pole, 0 = listwa
+        kol = nb.mix(wn, (0.42, 0.30, 0.12), kol)
+        b = nb.n('ShaderNodeBsdfPrincipled')
+        nb.l(kol, b.inputs['Base Color'])
+        nb.l(nb.mix(wn, 0.25, 0.16, dtype='FLOAT'), b.inputs['Roughness'])
+        nb.l(nb.math('SUBTRACT', 1.0, wn), b.inputs['Metallic'])
+        nb.output(b)
+
+    def m_wn_dotyk(self, m):
+        """Ścieżka dotykowa: pasy prowadzące z ryflami (granit ciemny płomieniowany, kontrast luminancji ≥ 0,5)."""
+        nb = NodeBuilder(m)
+        fu = self._attr(nb, 'fu')
+        ryf = nb.math('LESS_THAN', nb.math('FRACT', nb.math('DIVIDE', fu, 0.075)), 0.45)
+        b = nb.n('ShaderNodeBsdfPrincipled', Roughness=0.7)
+        nb.l(nb.mix(ryf, (0.035, 0.035, 0.037), (0.075, 0.074, 0.072)), b.inputs['Base Color'])
+        bm = nb.n('ShaderNodeBump', Strength=0.6, Distance=0.004)
+        nb.l(ryf, bm.inputs['Height'])
+        nb.l(bm.outputs[0], b.inputs['Normal'])
+        nb.output(b)
+
+    def m_wn_piaskowiec(self, m, wariant=''):
+        """Lapidarium: fragmenty kamieniarki (piaskowiec, wapień) – szorstkie, z patyną i ubytkami."""
+        nb = NodeBuilder(m)
+        pos = nb.n('ShaderNodeNewGeometry').outputs['Position']
+        nz = nb.n('ShaderNodeTexNoise', Scale=7.0, Detail=8.0, Roughness=0.65)
+        nb.l(pos, nz.inputs['Vector'])
+        nz2 = nb.n('ShaderNodeTexNoise', Scale=60.0, Detail=4.0)
+        nb.l(pos, nz2.inputs['Vector'])
+        c0, c1 = ((0.40, 0.35, 0.28), (0.50, 0.44, 0.35)) if wariant != 'szary' else ((0.38, 0.37, 0.35), (0.48, 0.47, 0.44))
+        col = nb.mix(nz.outputs['Fac'], c0, c1)
+        col = nb.mix(nb.math('MULTIPLY', nb.math('GREATER_THAN', nz.outputs['Fac'], 0.62), 0.6), col, (0.20, 0.18, 0.15))
+        b = nb.n('ShaderNodeBsdfPrincipled', Roughness=0.92)
+        nb.l(col, b.inputs['Base Color'])
+        bm = nb.n('ShaderNodeBump', Strength=0.35, Distance=0.01)
+        nb.l(nz2.outputs['Fac'], bm.inputs['Height'])
+        nb.l(bm.outputs[0], b.inputs['Normal'])
+        nb.output(b)
+
+    def m_wn_lisc(self, m):
+        """Liście roślin we wnętrzu (zielone, półprzeświecające; barwa losowana per wierzchołek z ``rnd``)."""
+        nb = NodeBuilder(m)
+        rn = self._attr(nb, 'rnd')
+        col = nb.mix(rn, (0.035, 0.085, 0.025), (0.10, 0.17, 0.045))
+        b = nb.n('ShaderNodeBsdfPrincipled', Roughness=0.45)
+        nb.l(col, b.inputs['Base Color'])
+        b.inputs['Subsurface Weight'].default_value = 0.0
+        tr = nb.n('ShaderNodeBsdfTranslucent')
+        nb.l(col, tr.inputs['Color'])
+        mx = nb.n('ShaderNodeMixShader')
+        mx.inputs['Fac'].default_value = 0.25
+        nb.l(b.outputs[0], mx.inputs[1])
+        nb.l(tr.outputs[0], mx.inputs[2])
+        nb.output(mx)
+
     def m_roleta(self, m):
         """Roleta ZIP (screen 5 %) – częściowo przezierna tkanina."""
         nb = NodeBuilder(m)
@@ -1553,6 +1652,9 @@ class Budynek:
                 wr = Z['wejscie_rowerowni_S']
                 if b.nazwa == 'S' and wr[0] <= q_of_s((s0 + s1) / 2) <= wr[1] + 0.6:
                     drz = [((s0 + s1) / 2, 1.30)]
+                wo = Z['wejscie_ogrodowe_hali_S']
+                if b.nazwa == 'S' and wo[0] <= q_of_s((s0 + s1) / 2) <= wo[1]:
+                    drz = [((s0 + s1) / 2, Z['drzwi_w'])]
                 self.witryna(G, b, s0, s1, -gp, 0.05, z_lintel0, naswietle=z_nasw, podzial=None, drzwi=drz)
             # ---- zakresy specjalne (podcień, wnęki): szklenie cofnięte, podsufitka, ściany czołowe
             for a, c, gl, typ in spec_z:
@@ -2144,41 +2246,49 @@ class Budynek:
         for pp in self.podcien_polys + self.wneki_polys:
             hall = hall.difference(pp.buffer(0.03, join_style=2))
         hall = hall.difference(self.poly['M'].buffer(0.1)).difference(self.poly['S'].buffer(0.1))
-        # parter wieży: posadzka holu, sufit, trzony A i B, słupy, lada informacji, lapidarium
-        G.pryzma(hall, -0.4, 0.0, 'wn_kamien', boki=False, dno=False)
         suf = kd[0]['sufit']
-        rdz = []
-        for k in ('A', 'B'):
-            r = sp.K['rdzenie'][k]
-            rp = Polygon(r['obrys_en']).buffer(0)
-            rdz.append(rp)
-            G.pryzma(rp, 0.0, suf, 'wn_drewno', gora=False, dno=False)
-        # słupy w siatce (u, v) wieży
-        osu = sp.K['siatka']['wieza']['osie_u']
-        osv = sp.K['siatka']['wieza']['osie_v']
-        for u in osu[1:-1]:
-            for v in osv[1:-1]:
-                e, n = sp.z_uv(u, v)
-                c = Point(e, n).buffer(0.25, 16)
-                if hall.contains(c) and not any(r.intersects(c) for r in rdz):
-                    G.pryzma(c, 0.0, suf, 'beton', gora=False, dno=False)
-        # sufit holu z oprawami (ciepłe) – siatka co 2,7 m w układzie (u, v)
-        for u in np.arange(1.35, 40, 2.7):
-            for v in np.arange(1.35, 29.7, 2.7):
-                e, n = sp.z_uv(u, v)
-                c = Point(e, n).buffer(0.22, 8)
-                if hall.contains(c):
-                    G.pryzma(c, suf - 0.03, suf - 0.005, 'wn_lampa:cieple', boki=True, dno=True, gora=False)
-        # lada informacji (niska) przy osi przekątnej
-        e, n = sp.z_uv(27.5, 19.5)
-        lada = Point(e, n).buffer(1.6, 24).difference(Point(e, n).buffer(0.9, 24))
-        lada = lada.intersection(Polygon([(e, n), (e + 5, n), (e + 5, n + 5), (e, n + 5)]))
-        G.pryzma(lada.buffer(0), 0.0, 0.90, 'wn_drewno:jasne')
-        # lapidarium – ściana witryn przy trzonie A (świecące gabloty)
-        A = rdz[0]
-        lp = A.buffer(0.6, join_style=2).difference(A.buffer(0.1, join_style=2))
-        G.pryzma(lp, 0.0, 0.9, 'wn_kamien')
-        G.pryzma(lp, 0.9, 2.3, 'wn_lampa:cieple', gora=False, dno=False)
+        if self.o.get('hala_szczegolowa'):
+            # Hala Obywatelska (SW.01c) wg model/budynek.json – szczegółowe wnętrze do W6 (budynek3d_hala.py)
+            from umwd.render import budynek3d_hala
+            hala = budynek3d_hala.Hala(self)
+            G.pryzma(hall.difference(hala.H.buffer(0.02)), -0.4, 0.0, 'wn_kamien', boki=False, dno=False)
+            hala.buduj(G)
+        else:
+            # parter wieży: posadzka holu, sufit, trzony A i B, słupy, lada informacji, lapidarium
+            G.pryzma(hall, -0.4, 0.0, 'wn_kamien', boki=False, dno=False)
+            suf = kd[0]['sufit']
+            rdz = []
+            for k in ('A', 'B'):
+                r = sp.K['rdzenie'][k]
+                rp = Polygon(r['obrys_en']).buffer(0)
+                rdz.append(rp)
+                G.pryzma(rp, 0.0, suf, 'wn_drewno', gora=False, dno=False)
+            # słupy w siatce (u, v) wieży
+            osu = sp.K['siatka']['wieza']['osie_u']
+            osv = sp.K['siatka']['wieza']['osie_v']
+            for u in osu[1:-1]:
+                for v in osv[1:-1]:
+                    e, n = sp.z_uv(u, v)
+                    c = Point(e, n).buffer(0.25, 16)
+                    if hall.contains(c) and not any(r.intersects(c) for r in rdz):
+                        G.pryzma(c, 0.0, suf, 'beton', gora=False, dno=False)
+            # sufit holu z oprawami (ciepłe) – siatka co 2,7 m w układzie (u, v)
+            for u in np.arange(1.35, 40, 2.7):
+                for v in np.arange(1.35, 29.7, 2.7):
+                    e, n = sp.z_uv(u, v)
+                    c = Point(e, n).buffer(0.22, 8)
+                    if hall.contains(c):
+                        G.pryzma(c, suf - 0.03, suf - 0.005, 'wn_lampa:cieple', boki=True, dno=True, gora=False)
+            # lada informacji (niska) przy osi przekątnej
+            e, n = sp.z_uv(27.5, 19.5)
+            lada = Point(e, n).buffer(1.6, 24).difference(Point(e, n).buffer(0.9, 24))
+            lada = lada.intersection(Polygon([(e, n), (e + 5, n), (e + 5, n + 5), (e, n + 5)]))
+            G.pryzma(lada.buffer(0), 0.0, 0.90, 'wn_drewno:jasne')
+            # lapidarium – ściana witryn przy trzonie A (świecące gabloty)
+            A = rdz[0]
+            lp = A.buffer(0.6, join_style=2).difference(A.buffer(0.1, join_style=2))
+            G.pryzma(lp, 0.0, 0.9, 'wn_kamien')
+            G.pryzma(lp, 0.9, 2.3, 'wn_lampa:cieple', gora=False, dno=False)
         # strop nad parterem (spód = sufit holu i podcienia)
         G.pryzma(Wp.buffer(-g - 0.03, join_style=2), suf, kd[1]['F'], 'wn_sufit', mat_gora='wn_podloga')
         self._ring(G, 'W', Wp, kd[1:], g, gd, rng)

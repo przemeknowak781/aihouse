@@ -43,11 +43,10 @@
   ]
  ],
  "notes": [
-  "Sejmik storey redesigned ('S-3') and verified by scripts: 47 councillor desks (43 + 4 wheelchair places, one per row) on 4 rows with 5 % side ramps; public gallery 31 + 3 wheelchair places with ≥ 77 mm sightline clearance to all presidium seats and the speaker; councillors' upper hall and the public gallery on separate mezzanines; two escape routes from hall, gallery and mezzanine.",
-  "Price of S-3: mezzanine 298 m² (≈ +118 m² vs the allowance) → ≈ +0.4–0.5 M PLN, which would eat most of the 0.82 M cost margin → the merge workflow must restore ≥ 1.0 M margin with documented levers.",
-  "Structural/functional issue carried into the merge: stair A flight is 5.15 m long where ≈ 5.9 m is needed for the 3.75 / 4.80 / 8.90 m storey heights — the merge must solve it geometrically for cores A, B and C.",
-  "Drawings are being updated to v1.1 (shown: east and south elevations with the lowered segment attic and glass balustrade, BIPV south wall of the segment with climbers at ground level, BIPV canopy over the garden terrace, tone-on-tone crown lamellas in a Fibonacci rhythm).",
-  "Still running: structural & functional audit, extra showcase renders, 3D (photomatch, reflections, Citizens' Hall interior)."
+  "Drawings updated to spec v1.1 by a two-implementer workflow with independent spec-consistency checks: site plan now uses the binding M.06 tree survey (25 kept in place, 1 transplanted, 8 removed for the building, 10 dead/dying left to the arborist, 26 new), BIPV canopy over the garden terrace, lowered segment terrace attic with set-back glass balustrade, retention 157 m³.",
+  "Eco scheme and 1:50 façade section carry the v1.1 numbers (PV 415 kWp, EP ≈ 28, 58 boreholes × 91 m + energy walls/piles, dry-cooler in the segment; 0.45 m aluminium reveals instead of granite).",
+  "Interior test of the Citizens' Hall (vis 6) is honest but weak (dark, blank wall, mannequin-like figures) → detailed art-direction critique sent to the 3D agent: axis view to the garden, daylight, terrazzo/granite floor, better people.",
+  "Running: merge of Sejmik storey S-3 into v1.2 (stair-A length, cost margin), structural & functional audit (verification stage), extra showcase renders (scouting stage)."
  ],
  "images": [
   {

@@ -59,12 +59,21 @@ KOREKTY = {
     # (±9,6 m), oś widzenia przechodzi przez górny trójkąt krzyżulców. Oko 1,6 m nad chodnikiem (+4,05).
     # Przesunięcie obiektywu tak, by cel (+26 m) był w środku kadru (kamera pozioma, piony zachowane).
     'W9': dict(kamera_e_n_z=(132.82, 140.57, 4.05), shift_y=0.351, ekspozycja=0.6),
+    # W6 – Hala Obywatelska (SW.01c wg model/budynek.json, szczegółowe wnętrze: budynek3d_hala.py). Oś 211,7°
+    # z koncepcja.json nie jest w budynek.json drożna na całej długości: narożnik SW.02 0,45 m od osi (a ≈ 8,7 m),
+    # przejście SW.06 / trzony 3,9 m (a ≈ 16–19 m), narożnik PHS.04 na osi (a = 25,5 m), koniec osi w PHS.04.
+    # Z punktu koncepcji (na osi) przeszklenie ogrodowe widać tylko przez szczelinę – stanowisko przesunięto
+    # o 3 m w prawo od osi (a = 3 m od drzwi Bramy Mostowej), kadr na środek ściany ogrodowej holu (x 87,3–94,9):
+    # całe przeszklenie ogrodowe i drzewa ogrodu widoczne przez przejście.
+    'W6': dict(kamera_e_n_z=(97.73, 70.59, 1.60), cel_e_n_z=(91.10, 45.30, 1.75), wnetrze=True, preset='wnetrze',
+               ekspozycja=-0.9, plik='W6_hol_test.jpg'),
     # W10 – widok ogrodowy (decyzja koordynatora 17.11, zamiast kadru z koncepcja.json: punkt (78; 17) stoi pod
     # koronami zachowanych drzew). Stanowisko przy wsch. krawędzi placu zabaw (97,0; −6,0), w obszarze inwestycji,
     # ok. 50 m od lica pd. wieży: przeszukanie promieni (85 punktów lica pd. wieży) – brak roślinności w pierwszych
     # metrach przed obiektywem; korony zachowanych drzew ogrodu (D776, D778, D708…) w planie środkowym, wieża ponad
     # nimi. W pierwszym planie plac zabaw i ogród deszczowy. 24 mm, shift 0,17 (attyka z zapasem, posadzka od ~6 m).
-    'W10': dict(kamera_e_n_z=(97.0, -6.0, 1.01), cel_e_n_z=(93.5, 45.0, 18.0), lens_mm=24, shift_y=0.17),
+    # Ogród w cieniu koron i kamienic przez większość dnia (22.10: ≤ 19 % placu zabaw w słońcu) – ekspozycja +0,7 EV.
+    'W10': dict(kamera_e_n_z=(97.0, -6.0, 1.01), cel_e_n_z=(93.5, 45.0, 18.0), lens_mm=24, shift_y=0.17, ekspozycja=-3.6),
 }
 
 
@@ -169,7 +178,9 @@ def main():
     kon = context.build_context(sc, {'pora_roku': 'jesien', 'obszar_inwestycji': 'pusty'})
     t_kon = time.time() - t0
     t1 = time.time()
-    bud = budynek3d.build_building(sc, {'kontekst': kon, 'ludzie': not a.bez_ludzi, 'wnetrza': not a.bez_wnetrz})
+    hala = any(KOREKTY.get(kid, {}).get('wnetrze') for kid in a.kamery)
+    bud = budynek3d.build_building(sc, {'kontekst': kon, 'ludzie': not a.bez_ludzi, 'wnetrza': not a.bez_wnetrz,
+                                        'hala_szczegolowa': hala})
     t_bud = time.time() - t1
     B = bud['budynek']
     print('[testy] kontekst %.1f s, budynek %.1f s' % (t_kon, t_bud))
@@ -207,6 +218,8 @@ def main():
             bpy.ops.render.render(write_still=True)
             dt = time.time() - t2
             jpg = out / ('%s%s%s.jpg' % (a.prefix, kid, '_wycinek' if a.wycinek else ''))
+            if k.get('plik'):
+                jpg = out / (k['plik'].replace('.jpg', '_wycinek.jpg') if a.wycinek else k['plik'])
             preset = None if a.bez_postprodukcji else preset_postprodukcji(k, sw)
             zapisz_jpg(png, jpg, preset=preset)
             wpis.update(render_s=round(dt, 1), plik=str(jpg), postprodukcja=preset)

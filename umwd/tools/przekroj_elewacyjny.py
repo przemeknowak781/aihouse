@@ -303,7 +303,9 @@ erect(0, Z_ROOF, 5.4, Z_ATT - 0.06, hg, sw=0.2)
 erect(0, Z_ATT - 0.06, 5.4, Z_ATT, MET, stroke=MET, sw=0.1)                  # obróbka attyki w licu (bez wysięgu)
 svg.text((E(2.7, 0)[0], E(0, ZT)[1] - 2), "FRAGMENT ELEWACJI PÓŁNOCNEJ (2 przęsła)", size=2.6, anchor="middle", weight=600)
 svg.text((P(-2.3, 0)[0], P(0, ZT)[1] - 2), "PRZEKRÓJ PRZEZ OŚ OKNA", size=2.6, anchor="middle", weight=600)
-# maska poniżej podstawy fragmentu (wariant korony) – biały pas od ZB w dół
+# wszystko narysowane dotąd przycięte do ZB (bez resztek poniżej linii urwania), dodatkowo maska poniżej podstawy
+svg.defs.append(f'<clipPath id="nad_zb"><rect x="0" y="0" width="{W_MM:.3f}" height="{OY + 0.3:.3f}"/></clipPath>')
+svg.parts = ['<g clip-path="url(#nad_zb)">'] + svg.parts + ['</g>']
 svg.poly([(0, OY + 0.3), (W_MM, OY + 0.3), (W_MM, H_MM + 120), (0, H_MM + 120)], fill="#ffffff", stroke="none")
 svg.line((OX + (X_IN - 0.2) * SC, OY + 0.3), (OX + 0.5 * SC, OY + 0.3), stroke=INK, sw=0.15, dash="1.5,0.8")
 # wymiary (pod fragmentem elewacji)

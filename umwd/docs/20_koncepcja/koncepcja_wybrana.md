@@ -1,8 +1,8 @@
 # Koncepcja wybrana – „BRAMA I LATARNIA” (synteza panelu: K5 + przeszczepy)
 
 **Siedziba UMWD i Sejmiku Województwa Dolnośląskiego, Wrocław, Mazowiecka / Wybrzeże J. Słowackiego, przy przyczółku Mostu Grunwaldzkiego**
-**Wersja 1.1 (po weryfikacji) · 17.11.2026** – poprawki wg `weryfikacja_geometria.md`, `weryfikacja_koszt_eko.md`, `weryfikacja_program.md` i uwag koordynatora; pełna lista decyzji z dowodami: `rejestr_poprawek_v1_1.md` (skrypty `_rewizja_*.py`). Kondygnacja S – patrz `kondygnacja_S2.md` (v1.1). Wersja 1.0 · podstawa: werdykt panelu (`panel/werdykt_panelu.md`: K5 – 5/5 pierwszych miejsc, średnia 42,8 pkt, Borda 20/20).
-Geometria z `model/site.json` (układ lokalny e, n; H w PL-EVRF2007-NH). Liczby geometryczne v1.1 policzono w shapely skryptami `docs/20_koncepcja/_rewizja_*.py` (wspólne dane: `_rewizja_wspolne.py`). Dane maszynowe: `model/koncepcja.json` (meta.wersja „1.1 (po weryfikacji)”).
+**Wersja 1.2 (S-3) · 17.11.2026** – scalenie kondygnacji Sejmiku S-3 „hol z galerią” (`kondygnacja_S2.md`, skrypty `_s2_*.py`; rozdz. 7), poprawka I5 trzonów A, B, C (`_v12_trzony.py`), PU, parking i koszt (`_v12_koszt.py`), zapis JSON z walidacją (`_v12_scalenie.py`); rejestr: `rejestr_poprawek_v1_1.md`, sekcja „v1.2 – scalenie S-3”. Wersja 1.1 (po weryfikacji) – poprawki wg `weryfikacja_geometria.md`, `weryfikacja_koszt_eko.md`, `weryfikacja_program.md` i uwag koordynatora (skrypty `_rewizja_*.py`). Wersja 1.0 · podstawa: werdykt panelu (`panel/werdykt_panelu.md`: K5 – 5/5 pierwszych miejsc, średnia 42,8 pkt, Borda 20/20).
+Geometria z `model/site.json` (układ lokalny e, n; H w PL-EVRF2007-NH). Liczby geometryczne v1.1 policzono w shapely skryptami `docs/20_koncepcja/_rewizja_*.py` (wspólne dane: `_rewizja_wspolne.py`). Dane maszynowe: `model/koncepcja.json` (meta.wersja „1.2 (S-3)”).
 **±0,00 = 119,30 m n.p.m.** (posadzka parteru; skwer 9/2 119,30–119,49, Wybrzeże 119,16–119,26).
 Zgodnie z decyzją Inwestora nie korzystano z żadnych informacji o rzeczywistych pracach ani wynikach tego konkursu.
 
@@ -24,8 +24,8 @@ Spis: 1 idea · 2 słabości i ich usunięcie · 3 przeszczepy i sprzeczności �
 
 | # | Słabość K5 (sędziowie) | Rozwiązanie w syntezie (liczby) |
 |---|---|---|
-| 1 | Prezydium przed panoramą 33 × 10,2 m, przeciwświatło (J1, J2, J4) | Sala odwrócona (przeszczep K3). **Prezydium i mównica przy pełnej ścianie pd.**, godło z brązu na balustradzie galerii nad prezydium. Panorama jest **za plecami radnych** i oświetla prezydium od przodu światłem z pn./pn.-wsch. Kamery na prezydium mają tło pełne. Ujęcia radnych pod okno łagodzą lamele 0,60 m, rolety screen 5 % i światło TV ≥ 800 lx w pionie. |
-| 2 | Bilans poziomu Sejmiku się nie zamyka; brak korytarza (J1, J2, J4) | Rzut rozpisany w shapely (rozdz. 7). Wnętrze 1 080,1 m² = pomieszczenia (z salą i holem) 836,3 + trzony 119,2 + galeria kuluarowa 87,8 + ściany wewn. 36,9 (+ ściany zewn. 65,7 do PC 1 145,8). **Kuluar 2,25 × 39,0 m** (przeszczep K4) łączy obie klatki, salę (wejście prezydium) i wszystkie komisje i kluby. Sala zmniejszona do 287,4 m² (zakres 280–380), hol 79,9 m² + kuluar 87,8 m² = 167,7 m² (program 150). |
+| 1 | Prezydium przed panoramą 33 × 10,2 m, przeciwświatło (J1, J2, J4) | Sala odwrócona (przeszczep K3). **Prezydium i mównica przy pełnej ścianie pd.**, godło z brązu na tej ścianie nad prezydium. Panorama jest **za plecami radnych** (najmniejszy kąt kierunek patrzenia – szkło 51,1°) i oświetla prezydium od przodu światłem z pn./pn.-wsch. Kamery na prezydium mają tło pełne. Ujęcia radnych pod okno łagodzą lamele 0,60 m, rolety screen 5 % i światło TV ≥ 800 lx w pionie. |
+| 2 | Bilans poziomu Sejmiku się nie zamyka; brak korytarza (J1, J2, J4) | Rzut S-3 rozpisany w shapely (rozdz. 7). Wnętrze 1 080,2 m² = pomieszczenia (z salą, holem i szatnią) 789,8 + komunikacja 123,7 (kuluar 83,8) + trzony 123,6 + ściany wewn. 43,1 (+ ściany zewn. 65,6 do PC 1 145,8). **Kuluar 2,20 × 39,0 m** (przy trzonie A 1,75 m; przeszczep K4) łączy obie klatki, salę (drzwi SW, SE i prezydium) i wszystkie komisje i kluby. Sala 232,0 + galeria 65,3 = 297,3 m² (zakres 280–380), hol 74,8 + 89,6 = 164,4 m² wolnej podłogi (program 150) + szatnia 12,5 + bar 32,0; program +88,2 m² nad sumą minimów. |
 | 3 | Pomost techniczny 6,6 m z 4 centralami = kondygnacja techniczna (J1, J2, J5) | Pomost usunięty. Centrale piętrowe 25 m² w strefie środkowej wieży (kond. 1–5; kond. 5 obsługuje także 6). Centrale parteru i Sejmiku na −1. Nad komisjami jest tylko przestrzeń sufitowa ≤ 1,95 m bez podłogi i bez urządzeń, czyli nie jest to kondygnacja (WT § 3 pkt 16). |
 | 4 | Kondygnacja Sejmiku 12 m – nadmiar kubatury (J2, J3, J4, J5) | **P+6+S** w tej samej bryle zewnętrznej. Sejmik ma **8,90 m** (sala 6,85 m w świetle, antresola +3,60 m). Dodatkowa kondygnacja biurowa (+1 145,8 m² PC) mieści w całości sale narad i magazynki przy elewacji (poz. 8, 18). Wieża ma 37,6 m (K5: 36,8 m). Dach podniesiono o 0,65 m wyłącznie dla zapasu MPZP 1,06 m. |
 | 5 | ≈ 650 m² pełnego szkła w koronie (J1, J3, J4, J5) | Przeszklenia korony **262 m²** (−60 %). Na łuku pionowe lamele ceramiczne **0,35 × 0,60 m (R 13,40–14,00) w rozstawach 1,35 / 0,675 m ułożonych w ciągu Fibonacciego** – bez regularnego rytmu, ton w ton ze szkłem (lamela S 4005-Y20R, sitodruk 30 %, ΔL* ≈ 8); przesłonięcie 32 % w osi, 100 % od **59°** (v1.0 podawała błędnie 34°; `_rewizja_elewacje.py`). Okno holu pn. podzielone filarami 1,05 m (kwatery 1,65 × 5,0 m). Szkło g = 0,27, R ≤ 12 %. Nocą korona świeci tylko światłem wnętrza podczas sesji (≤ 5 lx na elewacji, WT § 293). |
@@ -34,13 +34,13 @@ Spis: 1 idea · 2 słabości i ich usunięcie · 3 przeszczepy i sprzeczności �
 | 8 | 3 z 6 sal narad bez okien (wszyscy) | **6/6 sal narad przy elewacji** (P: brak; kond. 1, 2, 3 ×2, 4 ×2 – v1.1: sala z kond. 5 na kond. 4). Format głęboki 7,60 × 7,90 m = 60 m² w pierścieniu wieży. |
 | 9 | Brama ogrodowa 2,7 m (J1) | **4,05 m** (3 moduły) × 15,0 × wys. 4,80 m, w poziomie chodnika (118,70 → 118,90), granitowy portal na styku posesji M1/M2. |
 | 10 | Zapas dachu wieży 0,41 m (J1, J5) | Najniższy punkt pokrycia **155,50 m n.p.m.** = 36,06 m nad najwyższym terenem w A (119,44). Zapas **1,06 m**. Attyka 156,50 (37,62 m nad 118,88). |
-| 11 | Obie klatki w jednym trzonie (J2) | **Dwa trzony** w odległości 20,0 m. A (radni, pracownicy, dźwig ratowniczy) w środku-zachodzie, B (publiczność) przy pd.; dostawy – dźwig T w segmencie. MDS: ukrycie na −2 (≤ 300 os.) z klatkami A i B ≥ 15 m, MDS na −1 (260 os.) z klatką C, rampą i szybem wyjścia zapasowego. |
-| 12 | Podnośnik na rzędy (J2, J4, J5) | Rzędy +0,15 / +0,30 / +0,45 m z **pochylniami bocznymi ≤ 5 %** (3,0 m na uskok). **Stanowisko dla wózka w każdym rzędzie** (przeszczep K4). |
+| 11 | Obie klatki w jednym trzonie (J2) | **Dwa trzony** (środki klatek 19,8 m; v1.2 – klatki wg I5: A 3,40 × 5,80 m, B 3,40 × 6,64 m, obie do antresoli +30,90). A (radni, pracownicy, dźwig ratowniczy) w środku-zachodzie, B (publiczność) przy pd.; dostawy – dźwig T w segmencie. MDS: ukrycie na −2 (≤ 300 os.) z klatkami A i B (pomiar „≥ 15 m” – rozdz. 16), MDS na −1 (260 os.) z klatką C, rampą i szybem wyjścia zapasowego. |
+| 12 | Podnośnik na rzędy (J2, J4, J5) | 4 rzędy na +0,00 / +0,09 / +0,18 / +0,27 m – przewyższenie 0,09 m na rozstawie 1,80 m = **5,0 %**, więc oba przejścia są **pochylniami ≤ 5 %** bez spoczników. **Stanowisko dla wózka w każdym rzędzie** (4; przeszczep K4) + 3 na galerii. 47 stałych stanowisk (wymagane 44). |
 | 13 | Dostawy po dz. 10/2, rampa 20 % (J2) | **Jeden punkt obsługi w segmencie SE** od Wybrzeża (przeszczep K4). Dostawy samochodami ≤ 2,20 m rampą na −1, dalej korytarzem obsługi do dźwigu T 2 t w narożniku SE segmentu. Dz. 10/2 nie jest używana przez nasz ruch. Rampa **jednopasowa 3,50 m ≤ 18 %** z przejściami 9 % i sygnalizacją wahadłową, wzdłuż ściany pn. segmentu; w segmencie ok. 19 m, ogon (u 14,8–21,0) pod dziedzińcem, cały strop poniżej terenu. |
 | 14 | Brama garażu 9–11 m od WS 5, hałas (J3) | Brama **4,0 m** w elewacji wsch. segmentu (v −0,40…−4,40), **17,4 m od okna lok. 6/6A** (do krawędzi bramy), zwrócona na wsch. (okno patrzy na pn.). Zasłania ją bryła segmentu. Rampa obudowana, ściany chłonne, cicha brama rolowana. |
 | 15 | Pasaż w kształcie L (J3) | **Prosta oś przekątna** (azymut 211,7°, 33,4 m + podcień 3 m) od drzwi w łuku (101,86; 71,57) do drzwi ogrodowych (84,32; 43,12). Z progu widać drzewa ogródków (D795, D797). W najwęższym miejscu (między blokiem WC a trzonem B) ma 6,3 m (przeszczep K3). |
 | 16 | Ażurowa brama 2,5 m na dz. 10/2 (J3) | Usunięta. Nic nie stoi na dz. 10/2. Pas 4,6 m w obszarze inwestycji między segmentem a dz. 10/2 to otwarte wejście do ogrodu od bulwaru (ława granitowa, 2 drzewa, bez furty). |
-| 17 | Rezerwa budżetowa 2,3 % (J3) | Koszt v1.1 **149,2 mln zł netto** (mid, II kw. 2026, ilości weryfikatora z ościeżami, palami i uskokiem, garaż 110 m.p.) z **rezerwą 5 % (7,1 mln) w środku** (wymóg ≥ 4 %) i zapasem 0,8 mln do limitu (rozdz. 12). |
+| 17 | Rezerwa budżetowa 2,3 % (J3) | Koszt v1.2 **148,98 mln zł netto** (mid, II kw. 2026, ilości weryfikatora z ościeżami, palami i uskokiem, garaż 110 m.p., antresola S-3 297,9 m²) z **rezerwą 5 % (7,09 mln) w środku** (wymóg ≥ 4 %) i zapasem 1,02 mln do limitu (rozdz. 12). |
 | 18 | Magazynki „zamienne na biura” w środku (J4) | **20/20 magazynków przy elewacji** (typ standardowy 4,05 × 6,10 m lub głęboki 2,60 × 9,25 m dobierany do miejsca – v1.1 wg modelu pomieszczeń: 12 standardowych + 8 głębokich). Każdy ma okno ≥ 3,0 m² i 3 punkty. |
 | 19 | Naroże segmentu 2,96 m od dz. 10/2 (J4) | Ściana pd. segmentu **4,58 m** od granicy dz. 10/2 (≥ 3,0 m wg WT § 12 ust. 1). |
 | 20 | PV zawyżone (biosolar + zieleń na tych samych m²) (J5) | **BIPV jako pokrycie** za attyką (pola netto po attyce, pasie przy attyce, wyłazach, wpustach i przerwie): wieża 948 m² = 204 kWp, skrzydło 685 m² = 147 kWp (0,215 kWp/m², η ≥ 22,5 %; cień wieży na dachu skrzydła −11,6 % uzysku). Dachy dają 351 kWp < 400, więc dochodzą pola ≤ 25 m od dziedzińca i od dz. 10/2: płyciny wieży 82 m² = 11 kWp, **ściana pd. segmentu 295 m² = 41 kWp**, **zadaszenie tarasu ogrodowego** przy elewacji pd. wieży 80 m² = 13 kWp. **Razem 415 kWp** (≥ 0,4 MWp M.12; `_rewizja_pv_ep.py`). Dach zielony tylko na tarasie segmentu (135 m², osobno). Bez stelaży. |
@@ -49,7 +49,7 @@ Spis: 1 idea · 2 słabości i ich usunięcie · 3 przeszczepy i sprzeczności �
 | 23 | Jeden dźwig publiczny (J5) | **P1 i P2** 1 600 kg, kabiny 1,5 × 2,1 m (M.13), z lobby Wejścia Obywatelskiego wprost na antresolę (przeszczep K3). |
 | 24 | 22 punkty EV (J5) | **55 punktów** (1 na 2 miejsca, EPBD art. 14), okablowanie 100 %. |
 | 25 | § 13 segmentu – zapas 0,40 / 0,93 m (J5) | Ściana pd. równoległa do szczytu WS 5, 10,58 m od jego lica, z attyką obniżoną do poziomu tarasu 139,10. Wariant najostrożniejszy (okno w dowolnym miejscu szczytu, wierzchołek w licu wewn., H od najniższych okien 120,0): zapas **1,58 m** (balustrada cofnięta 1,5 m: 2,53 m). Okno pokoju lok. 6/6A: **3,58 m**. Wieża: **1,50 m** (wymagane 17,5 m). |
-| 26 | Podziemie 3 922 m² (J5) | v1.1: wymaganie MPZP § 13 przy PU 8 850 m² to **106 m.p.** (ostrożnie 108), a 109 m.p. z v1.0 nie mieściło się w obrysie (model pomieszczeń: 41). **−1 (2 264 m²) i −2 (2 101 m²: wieża, segment, pas 5 m, skrzydło bez M1)**, −1 podwyższona do 4,20 m; **110 m.p.** = 78 stanowisk na posadzce + 32 w stackerach zależnych na −1 (pracownicy), w tym 6 OzN (`_rewizja_parking.py`). Podziemie 4 365 m². Technika krytyczna nad terenem, tryskacze nieprojektowane (nieobowiązkowe). |
+| 26 | Podziemie 3 922 m² (J5) | v1.2: wymaganie MPZP § 13 przy PU 8 871 m² (po S-3) to **106 m.p.** (ostrożnie 108), a 109 m.p. z v1.0 nie mieściło się w obrysie (model pomieszczeń: 41). **−1 (2 264 m²) i −2 (2 101 m²: wieża, segment, pas 5 m, skrzydło bez M1)**, −1 podwyższona do 4,20 m; **110 m.p.** = 78 stanowisk na posadzce + 32 w stackerach zależnych na −1 (pracownicy), w tym 6 OzN (`_rewizja_parking.py`). Podziemie 4 365 m². Technika krytyczna nad terenem, tryskacze nieprojektowane (nieobowiązkowe). |
 
 **Korekty własne (błędy K5, których sędziowie nie wskazali):**
 (a) Pilastry K5 wystawały ok. 0,30 m poza granicę obszaru (ściana 0,25 m od granicy + pilaster 0,55 m), co narusza Wyj. 7 odp. 28. Teraz **lico zewnętrzne = lico filarów** (0,25 m od granicy), a okna są cofnięte o 0,45 m (ościeża z blachy Al). v1.1: na wszystkich licach < 0,30 m od granicy gzyms-attyka **bez wysięgu** (fryz wklęsły 0,15 m), relief jako cofnięcie wypełnień.
@@ -119,9 +119,9 @@ Kontrole (shapely, `_rewizja_geometria.py`): wieża 0,25 m od granicy pn. (1KDG)
 | 5 | +19,80 | 139,10 | 3,75 | +23,40 / +23,12 | wieża (= poziom tarasu segmentu) |
 | 6 | +23,55 | 142,85 | 3,75 | +27,15 / +26,87 | wieża |
 | **S** | **+27,30** | **146,60** | **8,90** | dach: ruszt 1,60 m, spód +34,15 | wieża |
-| antresola S | +30,90 | 150,20 | — | — | wieża |
+| antresola S | +30,90 | 150,20 | — | — (3,30 m pod / 3,25 m nad antresolą) | wieża, 297,9 m² (26 % rzutu) |
 
-Wysokości w świetle: biura w wieży 3,32 m (płyta 0,28 + podłoga 0,15; TABS odsłonięty, baffle); biura w skrzydle 3,20 m (płyta 0,40); parter wieży 4,37 m; sala 200 os. 4,25 m bez belek; sala obrad 6,85 m (kondygnacja S – `kondygnacja_S2.md`); garaż −1 3,65 m, −2 2,65 m.
+Wysokości w świetle: biura w wieży 3,32 m (płyta 0,28 + podłoga 0,15; TABS odsłonięty, baffle); biura w skrzydle 3,20 m (płyta 0,40); parter wieży 4,37 m; sala 200 os. 4,25 m bez belek; sala obrad 6,85 m (rozdz. 7); pod antresolą S 3,30 m; garaż −1 3,65 m, −2 2,65 m.
 
 ### 4.3 Dachy a MPZP (od najniekorzystniejszego terenu w pasie 2 m wokół bryły)
 
@@ -152,12 +152,22 @@ Gzyms 140,15 = attyka Maz. 19 (140,24) −0,09 m (E07 „wyrównaj”). Spód gz
 
 | Trzon | Obrys | Zakres | Skład |
 |---|---|---|---|
-| **A** | u 8,30–15,50 × v 12,45–20,85 (60,5 m²); (79,721; 54,818)–(86,716; 56,523)–(84,727; 64,684)–(77,732; 62,979) | −2…S | klatka A REI 60, biegi 1,60 m (M.13), przedsionek ppoż. 2,4 × 3,0 m z MOE 0,9 × 1,4 m, krzesłem ewakuacyjnym i interkomem, nadciśnienie; dźwigi A1, A2 po 1 600 kg; **R – dźwig dla ekip ratowniczych PN-EN 81-72 i ewakuacyjny PN-EN 81-76**, 1 000 kg, kabina 1,1 × 2,1 m, szyb REI 60; szachty nadciśnienia, oddymiania korytarzy, pionów |
-| **B** | u 24,85–31,10 × v 0,50–9,90 (58,8 m²); (98,631; 47,127)–(104,703; 48,607)–(102,476; 57,740)–(96,404; 56,260) | −2…S + antresola | klatka B jw. z przedsionkiem i MOE; **P1, P2** publiczne **1 600 kg, kabiny 1,5 × 2,1 m** (M.13), przystanki −2…6, S, antresola; szacht ≈ 4 m² (po dźwigu T): spaliny agregatu, wyrzut i oddymianie garażu, piony centrali S → lamele korony od pd. |
+| **A** | v1.2: u 8,30–15,50 × **v 11,85–20,85** (64,8 m²; wydłużony o 0,60 m na pd. – I5); (79,863; 54,235)–(86,858; 55,940)–(84,727; 64,684)–(77,732; 62,979) | −2…S + antresola | pas pn.: dźwigi A1, A2 po 1 600 kg (kabiny 1,5 × 2,1, szyby 2,25 × 2,55 m, **drzwi pn. na wszystkich kondygnacjach**) i **R – dźwig dla ekip ratowniczych PN-EN 81-72 i ewakuacyjny PN-EN 81-76**, 1 000 kg, kabina 1,1 × 2,1 m, szyb REI 60, drzwi pd. do przedsionka; pas pd.: **klatka A REI 60 3,40 × 5,80 m** (biegi 1,60 m, M.13) i **przedsionek ppoż. 3,10 × 5,80 m** z MOE 1,5 × 1,5 m, krzesłem ewakuacyjnym i interkomem, nadciśnienie; szachty nadciśnienia, oddymiania korytarzy, pionów |
+| **B** | u 24,85–31,10 × v 0,50–9,90 (58,8 m²); (98,631; 47,127)–(104,703; 48,607)–(102,476; 57,740)–(96,404; 56,260) | −2…S + antresola | **klatka B 3,40 × 6,64 m** (v1.2: ściana klatka/przedsionek przesunięta o 0,29 m) i przedsionek 3,40 × 2,06 m z MOE 1,5 × 1,5 m; **P1, P2** publiczne **1 600 kg, kabiny 1,5 × 2,1 m** (M.13), drzwi wsch.; P1: P, 1–6, antresola; P2 przelotowy: −2, −1 (drzwi zach. do przedsionka B), P, 1–6, S (służbowy), antresola; szacht 2,15 × 3,20 m (po dźwigu T): spaliny agregatu, wyrzut i oddymianie garażu, piony centrali S → lamele korony od pd. |
 | **T** (segment) | u 36,90–39,20 × v −9,70…−6,45, narożnik SE segmentu | −2…4 | dźwig osobowo-towarowy 2 000 kg, kabina 1,5 × 2,7 m; parter: drzwi od Wybrzeża (punkt odpadów, dostawy ręczne); −1: korytarz obsługi od stopy rampy (P-I5) |
-| **C** (skrzydło) | s 0,5–8,6 × d 8,4–14,5; (57,153; 8,365)–(58,894; 16,276)–(64,852; 14,965)–(63,110; 7,054) | −1…4 | klatka C z przedsionkiem i MOE; szyb C1 w stanie surowym – rezerwa pod dźwig z drzwiami przelotowymi (przyszłe połączenie z Maz. 19); skrzydło obsługują dźwigi A1/A2 przez ciągłe korytarze kond. 1–4 |
+| **C** (skrzydło) | s 0,5–8,6 × d 8,4–14,5; (57,153; 8,365)–(58,894; 16,276)–(64,852; 14,965)–(63,110; 7,054) | −1…4 | v1.2: **klatka C 5,80 × 3,40 m** (biegi 1,60 m; v1.1 – model pomieszczeń 6,00 × 3,05 m = biegi 1,425 m < M.13, a MDS 260 os. wymaga 1,56 m), przedsionek 5,80 × 2,00 m z MOE, szachty 1,60 × 5,60 m; **bez szybu rezerwowego C1** (nie mieści się obok klatki 3,40 m; ściana przy Maz. 19 REI 120 bez otworów); skrzydło obsługują dźwigi A1/A2 przez ciągłe korytarze kond. 1–4 |
 
-Odległość klatek A–B: **20,0 m**. Dojście z drogi pożarowej (dalszy pas Wybrzeża) do dźwigu R przez Bramę Mostową i halę: ok. 43 m (≤ 50 m). A1/A2: 1 600 kg, kabiny 1,5 × 2,1 m, przelotowe. Hol przed P1/P2 na kond. 1–6 ma 2,2 m (WT § 195 ≥ 1,6 m ✔; zalecenie M.13 3,6 m – świadome odstępstwo), przed A1/A2 ≥ 3,6 m.
+Odległość klatek A–B: **19,8 m** między środkami klatek (v1.1: 20,0 m; najmniejsza między obudowami 13,95 m – rozdz. 16). Dojście z drogi pożarowej (dalszy pas Wybrzeża) do dźwigu R przez Bramę Mostową i halę: ok. 43 m (≤ 50 m). Holy windowe (`_v12_trzony.py` [T5]): A1/A2 (drzwi pn.) – hol Sejmiku na S i +30,90 5,95 m, łącznik pn. na P ≥ 3,6 m, korytarz pn. na kond. 1–6 **2,15 m**, na −1/−2 przedsionek ppoż. dźwigów w ślepym końcu drogi A2 (7,20 × 1,75 m, bez utraty miejsc); P1/P2 (drzwi wsch.) – korytarz wsch. na kond. 1–6 2,20 m (WT § 195 ≥ 1,6 m ✔; zalecenie M.13 3,6 m – świadome odstępstwo dla obu banków na kondygnacjach biurowych).
+
+**Klatki (poprawka I5, `_v12_trzony.py` [T1]–[T4]).** Stopnie ≤ 17,5 × 28 cm (2h + s = 0,61–0,63 m), biegi 1,60 m, spoczniki ≥ 1,50 m, ≤ 17 stopni w biegu, prześwit ≥ 2,20 m. Klatka dwubiegowa wymaga: 5,24 m (3,00), 5,80 m (3,60 i 3,75), 6,08 m (4,20), 6,64 m (4,80). Klatka A v1.1 miała 5,15 m (brak 0,65 m na kondygnacjach typowych).
+
+| Klatka (w świetle) | Kondygnacje typowe 3,75 m i S → +30,90 | −1 → P (4,20 m) | P → 1 (4,80 m) | Decyzja v1.2 |
+|---|---|---|---|---|
+| **A** 3,40 × 5,80 | 2 biegi × 11 st. 17,05 cm (S → ANT 11 + 10 st. 17,14), 5,80 m | 3 biegi × 8 st. 17,50 cm, 4,96 m | 3 biegi 10 + 9 + 9 st. 17,14 cm, 5,52 m | trzon A wydłużony o 0,60 m na pd. (v 12,45 → 11,85, ściana 0,20 m) kosztem holu strefy środkowej, Hali i kuluaru S; spocznik parteru na końcu pn. (przedsionek wzdłuż całej klatki), na pozostałych kondygnacjach na końcu pd. |
+| **B** 3,40 × 6,64 | 2 biegi, 5,80 m | 2 biegi × 12 st. 17,50 cm, 6,08 m | 2 biegi × 14 st. 17,14 cm, 6,64 m | ściana klatka/przedsionek przesunięta o 0,29 m (przy 6,35 m parter wymagałby 4 biegów z prześwitem 2,05 m < 2,20); spocznik zawsze przy przedsionku |
+| **C** 5,80 × 3,40 | 2 biegi, 5,80 m | 3 biegi × 8 st., 4,96 m | 3 biegi 10 + 9 + 9 st., 5,52 m | nowy układ w obrysie trzonu C (biegi 1,60 zamiast 1,425 m), bez szybu C1 |
+
+Wpływ na kondygnacje biurowe: pas 7,20 × 0,60 m (4,32 m²) zajmuje wyłącznie komunikację – hol przed przedsionkiem A na kond. 1–6 (pozostaje ≥ 3,35 m), Halę na P (naroże trzonu 4,57 m od osi Hali, było 4,99) i pas za stanowiskami R2 w garażu (110 m.p. bez zmian, `_rewizja_parking.py` z obrysem v1.2). **Liczba jednostek elewacyjnych bez zmian (0 naruszonych; 43/43/43/43/22/20 + P 4).**
 
 **Ustrój:** żelbet monolityczny, sztywność dają trzony A, B, C i ściana przy Maz. 19 (REI 120). Beton CEM III/A–B, kruszywo z recyklingu w elementach niekonstrukcyjnych, stal zbrojeniowa i konstrukcyjna z pieca łukowego.
 
@@ -197,7 +207,7 @@ Odległość klatek A–B: **20,0 m**. Dojście z drogi pożarowej (dalszy pas W
 | S | Sejmik (rozdz. 7) | – | – | – | – | – |
 | **Σ** | | **187** (179 × 24 + 8 × 32) | **6** | **20** | **15** | MFP 10, porządkowe 12, PD na każdej kondygnacji |
 
-Na każdej kondygnacji 1–6 jest zespół WC w strefie środkowej wieży (K, M, toaleta dostępna): kond. 1–4 ≥ 24 m² (nieoświetlony pas zach. wieży), kond. 5–6 ≥ 26 m²; na kond. 1–4 drugi zespół przy trzonie C. **WC razem ≥ 380 m²** (model pomieszczeń: 397,7 m²); parter: WC ogólnodostępne ≥ 30 m² + komfortka. Pokoje socjalne: 4. pokój na kond. 1 (pas zach.), drugi na kond. 6 w strefie środkowej (D3). Archiwum PZGiK na kond. 3 – strefa płyty 0,40 m z belkami, gaszenie gazem (D15). Miejsca oczekiwania (9) leżą przy sekretariatach. Strefy pożarowe: kond. 1–4 po 2 160 m², P 2 003 m², S z antresolą 1 215 m² (< 2 500).
+Na każdej kondygnacji 1–6 jest zespół WC w strefie środkowej wieży (K, M, toaleta dostępna): kond. 1–4 ≥ 24 m² (nieoświetlony pas zach. wieży), kond. 5–6 ≥ 26 m²; na kond. 1–4 drugi zespół przy trzonie C. **WC razem ≥ 380 m²** (model pomieszczeń: 397,7 m²); parter: WC ogólnodostępne ≥ 30 m² + komfortka. Pokoje socjalne: 4. pokój na kond. 1 (pas zach.), drugi na kond. 6 w strefie środkowej (D3). Archiwum PZGiK na kond. 3 – strefa płyty 0,40 m z belkami, gaszenie gazem (D15). Miejsca oczekiwania (9) leżą przy sekretariatach. Strefy pożarowe: kond. 1–4 po 2 160 m², P 2 003 m², S z antresolą 1 443,7 m² (< 2 500).
 
 **Parter (P):**
 * **Wieża (1 049,5 m² PC poza podcieniem):**
@@ -215,61 +225,124 @@ Na każdej kondygnacji 1–6 jest zespół WC w strefie środkowej wieży (K, M,
   * **sala 200 os.** 16,20 × 14,0 = 226,8 m², w tym 2 reżyserki po 10 m², dzielona ścianą mobilną na 2 × 103 m², 4,25 m w świetle (s 23,40–39,60);
   * foyer, szatnia, WC konferencyjne, magazyn mebli (s 39,75–50; 138,2 m² w obrysie skrzydła – v1.0 liczyła 20 m² w wieży);
   * **bistro 82 m² brutto** (sala 62 + zaplecze 20, bez kuchni gorącej – regeneracja, wyciąg z odzyskiem do instalacji ogólnej) w dziobie NW z tarasem na najszerszej (17,9 m) części skweru; obok wejście konferencyjne; 10 m² zaplecza przeniesione do M4.
-* **Segment (167,4 m²):** rampa garażu **jednopasowa 3,50 m wzdłuż ściany pn.** (v −0,35…−3,85), **brama 4,0 m** od Wybrzeża (v −0,40…−4,40), próg 119,10 z zaporą samoczynną; w pasie pd. (93 m² brutto / 80 m² netto) trafo SN/nn 21 m² (drzwi od Wybrzeża, wentylacja kanałem do lica zach.), rozdzielnia nn z SZR 17 m², BESS 150 kWh 11 m² (EI 120), punkt wystawienia odpadów 7 m² i szyb dźwigu T w narożniku SE.
+* **Segment (167,4 m²):** rampa garażu **jednopasowa 3,50 m wzdłuż ściany pn.** (v −0,35…−3,85), **brama 4,0 m** od Wybrzeża (v −0,40…−4,40), próg 119,10 z zaporą samoczynną; w pasie pd. (93 m² brutto / 80 m² netto) trafo SN/nn 21 m² (drzwi od Wybrzeża, wentylacja kanałem do lica zach.), rozdzielnia nn z SZR 17 m², BESS 100 kWh 11 m² (EI 120; v1.2), punkt wystawienia odpadów 7 m² i szyb dźwigu T w narożniku SE.
 * **Segment, piętra:** kond. 1 – agregat HVO (pas zach., wzmocniony strop; powietrze przez żaluzje 8 m² w licu zach., spaliny szachtem w trzonie B do korony); kond. 2 – falowniki i rozdzielnice DC PV 12 m²; kond. 4 – dry-cooler hybrydowy 2 × 150 kW (żaluzje akustyczne 2 × 12 m² w licu zach. na kond. 3–4); pozostałe usługi pasa zach. – strefa środkowa wieży.
 
 ---
 
-## 7. Kondygnacja Sejmiku (+27,30 = 146,60 m n.p.m.; h = 8,90 m; antresola +30,90)
+## 7. Kondygnacja Sejmiku (+27,30 = 146,60 m n.p.m.; h = 8,90 m; antresola +30,90) – S-3 „hol z galerią”
 
-> **v1.1: kondygnacja S – patrz `kondygnacja_S2.md` (v1.1).** Poniżej stan 1.0 (bez zmian). Interfejsy z rewizją v1.1: dźwig T przeniesiony do segmentu (trzon B = klatka + P1/P2 1 600 kg 1,5 × 2,1 m + szacht); tryskacze nieprojektowane (dojścia ZL I bez zwiększeń); szkło korony na R 13,40, lamele R 13,40–14,00; centrala S na −1 przy trzonie B; koszt zawiera rezerwę na antresolę do ≈ 180 m².
+> **v1.2:** rozdział zastępuje stan 1.0. Wariant S-3 przyjęto po sprawdzeniu hipotezy weryfikatora S-2 i wariantów galerii (`kondygnacja_S2.md`, rozdz. 2). Dane: `model/koncepcja.json["kondygnacja_sejmiku"]` (= `kondygnacja_S2.json`). Dowody: `_s2_geometria.py` [G1]–[G8], `_s2_sala.py` [S1]–[S7], `_s2_ewakuacja.py` [E1]–[E6], trzony `_v12_trzony.py` [T1]–[T7]. Rzut: `img/s2_plan.png`, przekrój linii wzroku: `img/s2_przekroj.png`.
 
-**Zasada (Wyj. 21 odp. 85; WT § 3 pkt 19).** Wszystkie pomieszczenia zamknięte programu Sejmiku leżą na poziomie głównym w obrysie wieży, czyli w całości w A (wieża poza A: 0,000 m²). Antresola (69,7 m², 6 % rzutu) jest w całości otwarta na salę i kuluar. Mieści tylko galerię publiczności i foyer publiczne pełniące funkcję sali multimedialnej. Kancelaria Sejmiku leży kondygnację niżej (kond. 6). Wewnętrzne lico ścian zewnętrznych jest 0,50 m od obrysu.
+**Zasada (Wyj. 21 odp. 85; WT § 3 pkt 19).** Wszystkie pomieszczenia zamknięte programu Sejmiku leżą na poziomie S w obrysie wieży, czyli w całości w A (wieża poza A: 0,000 m²; [W2] `_v12_scalenie.py`). Antresola **297,9 m² (26,0 % rzutu)** ma dwie otwarte części rozdzielone ścianą i pustką sali:
+* radnych 161,4 m² – hol górny 89,6 + bar SWD.05 32,0 + strefa multimedialna SWD.03 33,8 + przedsionek A' 6,0;
+* publiczności 136,5 m² – galeria SWD.01g 65,3 + hol P1/P2 22,0 + korytarz EI 30 43,5 + toaleta dostępna 5,7.
 
-### 7.1 Poziom główny – pomieszczenia (powierzchnie netto policzone z rzutu)
+Zamknięte przegrodami na +30,90 są tylko toaleta publiczności, przedsionek A' (element klatki A) i korytarz publiczny EI 30 (droga ewakuacyjna). Antresola jest wszędzie ≥ 1,35 m od lica elewacji (w pasie przyelewacyjnym 0,00 m²), więc okna 1,65 × 4,20 m (pd., zach.) i 1,65 × 5,00 m (pn.) zachowują pełną wysokość. Pod antresolą 3,30 m w świetle, nad nią 3,25 m do spodu kratownic. Kancelaria Sejmiku leży kondygnację niżej (kond. 6; wykładnia I7 – rozdz. 16).
 
-| Kod | Pomieszczenie | Położenie (u, v) | m² | Program (zakres) |
+### 7.1 Pomieszczenia (netto z poligonów, PN-ISO 9836) [G4]
+
+| Kod | Pomieszczenie | Poziom | m² | Program (zakres) |
 |---|---|---|---:|---|
-| SWD.01 | **Sala obrad** (płyta) | u 20,00–39,50 × v 12,45–29,20 minus łuk R 13,5 | **287,4** | 320 (280–380) ✔ |
-| SWD.02 | **Hol reprezentacyjny**: 2 kondygnacje, narożnik NW z oknami na pl. Społeczny i Ostrów Tumski; w nim lada baru SWD.05 (30 m², przyłącza) i szatnia SWD.06 (12 m²) | NW + korytarz pn. + pasaż zach. | **79,9** | 150 (120–220): razem z kuluarem **167,7** ✔ |
-| KUL | **Galeria kuluarowa** (okna na zach. i wsch.; w części zach. wysokość 8,9 m) | v 10,05–12,30 × u 0,50–39,50 | **87,8** | (komunikacja, przeszczep K4) |
-| SWD.08 | Sala komisji 50 os. | u 0,50–10,65 × v 0,50–9,90 | 95,4 | 100 (90–120) ✔ |
-| SWD.10a/b | 2 zaplecza nagrań komisji (okna do sal) | u 10,80–12,75 | 2 × 9,0 | 10 (8–12) ✔ |
-| SWD.09 | Sala komisji 30 os. | u 12,90–18,80 × v 0,50–9,90 | 55,5 | 60 (54–72) ✔ |
-| SWD.11a | Klub radnych 30 os. (1) | u 18,95–24,70 × v 0,50–9,90 | 54,1 | 60 (54–72) ✔ |
-| SWD.11b | Klub radnych 30 os. (2) | u 31,25–39,50 × v 0,50–7,10 | 54,5 | 60 (54–72) ✔ |
-| SWD.12a/b | 2 kluby radnych 15 os. (okna na zach.) | u 0,50–6,50 × v 12,45–22,80 | 2 × 30,6 | 36 (30–40) ✔ |
-| SWD.13 | Wspólna sala radnych (okno na Ostrów Tumski) | u 8,30–14,35 × v 22,55–29,20 | 40,2 | 48 (36–60) ✔ |
-| SWD.14 | Pokój socjalny radnych | u 14,50–17,70 × v 22,55–29,20 | 21,3 | 24 (20–30) ✔ |
-| SWD.04 | Reżyserka (okno do sali, wgląd na prezydium) | u 15,65–19,85 × v 12,45–16,30 | 16,2 | 20 (15–30) ✔ |
-| SWD.07 | Pokój matki z dzieckiem | u 35,15–39,50 × v 7,25–9,90 | 11,5 | 10 (8–12) ✔ |
-| SWD.15 | Magazyn podręczny sali | u 15,65–19,85 × v 19,45–20,85 | 5,9 | 10 (6–15) ≈ |
-| PHS.05 | WC męskie z toaletą dostępną 12,0; WC damskie z toaletą dostępną 13,3 | | 25,3 | – |
-| PHS.05c | Przedsionek publiczny z toaletą dostępną (dostęp wyłącznie dźwigiem P2 z antresoli) | u 31,25–35,00 × v 7,25–9,90 | 9,9 | – |
-| C-A, C-B | Trzony A i B | | 119,2 | – |
-| | **Suma** | | **1 043,2** | |
-| | ściany wewnętrzne | | 36,9 | |
-| | **Wnętrze (od lica wewn.)** | | **1 080,1** | |
-| | ściany zewnętrzne | | 65,7 | |
-| | **PC poziomu głównego = rzut wieży w A** | | **1 145,8** | |
+| SWD.01 | Sala obrad – płyta (47 stanowisk, prezydium, mównica, goście 12, media 8, obsługa 4, PJM 2) | S | 232,0 | |
+| SWD.01g | Galeria publiczności (część SWD.01): 31 miejsc + 3 dla wózków | ANT | 65,3 | |
+| **SWD.01** | **razem** | | **297,3** | 320 (280–380) ✔ |
+| SWD.02 | Hol reprezentacyjny – poziom dolny (pustka 2-kond. NW, hol dźwigów A1/A2, pas pn.) | S | 74,8 | |
+| SWD.02g | Hol reprezentacyjny – poziom górny (antresola radnych) | ANT | 89,6 | |
+| **SWD.02** | **razem (wolna podłoga, bez szatni i baru)** | | **164,4** | 150 (120–220) ✔ |
+| SWD.03 | Sala multimedialna / poczekalnia gości – strefa otwarta na antresoli holu, 20 miejsc, ekran, głośniki kierunkowe, pętla | ANT | 33,8 | 40 (30–60) ✔ |
+| SWD.04 | Reżyserka (przeszklenie na prezydium i rzędy) | S | 17,6 | 20 (15–30) ✔ |
+| SWD.05 | Przestrzeń socjalno-gastronomiczna (bar z przyłączami) | ANT | 32,0 | 40 (30–60) ✔ |
+| SWD.06 | Szatnia – lada 4,1 m + wieszaki (otwarta na hol) | S | 12,5 | 15 (12–20) ✔ |
+| SWD.07 | Pokój matki z dzieckiem | S | 11,2 | 10 (8–12) ✔ |
+| SWD.08 | Sala komisji 50 os. | S | 90,5 | 100 (90–120) ✔ |
+| SWD.09 | Sala komisji 30 os. | S | 54,3 | 60 (54–72) ✔ |
+| SWD.10a/b | Zaplecza nagrań komisji (okna do sal, drzwi do kuluaru) | S | 2 × 8,7 | 10 (8–12) ✔ |
+| SWD.11a | Klub radnych 30 os. (1) | S | 54,5 | 60 (54–72) ✔ |
+| SWD.11b | Klub radnych 30 os. (2), naroże SE (okna pd. i wsch.) | S | 55,4 | 60 (54–72) ✔ |
+| SWD.12a/b | 2 kluby radnych 15 os. (okna zach.) | S | 2 × 30,2 | 36 (30–40) ✔ |
+| SWD.13 | Wspólna sala radnych (okno pn. – Ostrów Tumski) | S | 36,2 | 48 (36–60) ✔ |
+| SWD.14 | Pokój socjalny radnych (aneks kuchenny, okno pn.) | S | 20,0 | 24 (20–30) ✔ |
+| SWD.15 | Magazyn podręczny (pod wyższą częścią biegu schodów) | S | 6,0 | 10 (6–15) ✔ |
+| PHS.05a/b | WC damskie / męskie, każde z kabiną dostępną 2,2 × 2,5 m | S | 2 × 18,4 | |
+| PHS.05c | Toaleta dostępna publiczności (przy holu P1/P2) | ANT | 5,7 | |
+| **PHS.05** | **razem** | | **42,5** | 45 (35–60) ✔ |
+| PP.06 | Pomieszczenie porządkowe | S | 5,5 | 6 (4–8) ✔ |
+| IT.02 | Punkt dystrybucyjny IT (przy zapleczach nagrań) | S | 4,8 | 6 (4–10) ✔ |
+| | **Suma programu (SWD + PHS.05 + PP.06 + IT.02)** | | **1 016,2** | 1 106 (min. 928): **+88,2 nad minimum** |
 
-### 7.2 Antresola +30,90 (69,7 m² PC)
+Wszystkie pozycje mieszczą się w zakresach programu (SWD.01 i SWD.02 liczone łącznie z częścią na antresoli). Każde pomieszczenie ma drzwi na komunikację [G3].
 
-* **Galeria publiczności** 32,0 m² (u 21,0–37,0 × v 11,45–13,45; wysunięta 1,0 m nad salę). 2 rzędy, **30 miejsc, w tym 3 dla wózków** w 1. rzędzie bez stopni, balustrada szklana 1,10 m. Filtry prywatności na pulpitach radnych (przeszczep K3) zapewniają poufność głosowania.
-* **Foyer publiczne z ekranami** 37,7 m², czyli sala multimedialna / poczekalnia gości SWD.03 (40 m², zakres 30–60). Pas nad północną częścią kuluaru, otwarty na kuluar i salę.
-* Pod antresolą kuluar ma 3,25 m w świetle. Nad antresolą jest 3,25 m do rusztu dachu.
+### 7.2 Bilans poziomu S i antresoli [G5], [G6]
 
-### 7.3 Sala obrad
+| Składnik | m² |
+|---|---:|
+| Pomieszczenia (z salą, holem i szatnią) | 789,8 |
+| Komunikacja: kuluar 83,8 + pasaż zach. 15,4 + łącznik wsch. 12,0 + dojście do SWD.11b 4,2 + schody reprezentacyjne 8,4 | 123,7 |
+| Trzony A (64,8; v1.2 wydłużony wg I5) i B (58,8) | 123,6 |
+| Ściany wewnętrzne (średnio 0,219 m; ściany sali 0,30 m) | 43,1 |
+| **Wnętrze od lica wewnętrznego** | **1 080,2** |
+| Ściany zewnętrzne | 65,6 |
+| **PC poziomu S = rzut wieży w A** | **1 145,8** |
+| **Antresola +30,90** (radni 161,4 + publiczność 136,5) | **297,9** |
 
-* **Wymiary:** 19,5 × 16,75 m minus łuk, 287,4 m². Wysokość 6,85 m w świetle (+27,30 → spód rusztu +34,15). Kubatura ≈ 1 970 m³, RT ≈ 0,9 s (sufit z baffli, perforowane drewno na ścianach zach. i pd., ściana prezydium rozpraszająca).
-* **Układ amfiteatralny bez podnośników:** ognisko rzędów w (u 30,0; v 13,4). Trzy łukowe rzędy R 4,8 / 6,9 / 9,0 m na +0,15 / +0,30 / +0,45: **10 + 15 + 19 = 44 stałe stanowiska** (36 radnych z 4-os. prezydium, 5 członków Zarządu, Skarbnik, Sekretarz, przedstawiciel Wojewody) z głosowaniem, tabletami i mikrofonami. Pochylnie boczne ≤ 5 % (3,0 m na każdy uskok). **W każdym rzędzie miejsce dla wózka** (rząd 1: 2).
-* **Prezydium (4) i mównica** (blat regulowany 0,75–0,80 m, pętla) na poziomie podłogi przy **pełnej ścianie pd.**, za nią drzwi z kuluaru. Godło na balustradzie galerii nad prezydium. Światło z łuku pada z przodu.
-* **Płyta:** 44 + media 8 + goście 12 + obsługa kancelaryjna 4 + tłumacze PJM 2 (w kadrze kamery przy prezydium) = 70. **Galeria 30. Razem 100.**
-* **Panorama za radnymi:** łuk R 13,5 (szkło 22 × 6,6 m za lamelami) + okno pn. między filarami. Widok na most, Odrę i Ostrów Tumski (katedra: azymut ok. 328°, 670 m).
-* **Wyjścia:** drzwi do holu (zach.) i 2 drzwi do kuluaru (pd.), odstęp ≥ 5 m (WT § 238). Dojście do klatki B ≤ 22 m, do klatki A ≤ 26 m.
-* Wentylacja wyporowa spod rzędów (centrala S na −1, piony w trzonie A). Pętla indukcyjna, napisy na żywo.
+### 7.3 Sala obrad – rzędy, galeria, linie wzroku [S1]–[S7]
 
-**Ruch:** radni, Zarząd i goście jadą dźwigami A1/A2 z holu głównego i z garażu do holu Sejmiku. Publiczność wchodzi od bulwaru: Wejście Obywatelskie → kontrola → P1/P2 lub klatka B → foyer na antresoli → galeria. Do strefy radnych nie wchodzi. Toaleta publiczności jest w PHS.05c (P2, drzwi przelotowe). Druga droga z antresoli prowadzi otwartymi schodami do zach. części kuluaru (w czasie sesji zamknięte drzwiami z zamkiem ewakuacyjnym). Hol Sejmiku łączy się z holem głównym bankiem dźwigów A1/A2 (2 × 21 os./kurs) i P1/P2.
+| Rząd | Krawędź pulpitu R (od mównicy F = u 27,50; v 15,20) | Podest | Stanowiska | Wózek |
+|---|---:|---:|---:|---|
+| 1 | 4,50 m | +0,00 | 7 + 1 | koniec zach., na posadzce |
+| 2 | 6,30 m | +0,09 | 10 + 1 | koniec zach., przy pochylni |
+| 3 | 8,10 m | +0,18 | 12 + 1 | jw. |
+| 4 | 9,90 m | +0,27 | 14 + 1 | jw. |
+| **Razem** | | | **43 + 4 = 47** (wymagane 44) | pole 0,9 × 1,4 w każdym rzędzie |
+
+* **Wymiary:** płyta 232,0 m² (u 22,0–39,5 × v 12,6–29,2 minus łuk R 13,5 i reżyserka w narożu SE), 6,85 m w świetle (+27,30 → spód kratownic +34,15); z galerią 297,3 m².
+* **Pochylnie bez podnośników:** przewyższenie 0,09 m na rozstawie 1,80 m = 5,0 %, więc przejście wsch. (promieniowe, 1,30 m) ma dokładnie 5,00 %, a przejście zach. wzdłuż ściany sali odcinki 3,90 / 4,39 / 4,61 % (8,61 m); równolegle przejście płaskie 1,10 m.
+* **Prezydium (4, stół 6,0 m) i mównica** (blat regulowany 0,75–1,20 m, pętla) na +0,00 przy **pełnej ścianie pd.** z godłem; za nią drzwi prezydium z kuluaru. PJM przy mównicy w kadrze kamery. Mównica – 1. rząd 5,40 m.
+* **Płyta:** 47 + prezydium 4 + obsługa 4 + PJM 2 + goście 12 (strefa NW przy drzwiach z holu) + media 8 (łuk R 11,95 m) = **77** (wymagane 70). **Galeria 31 + 3 dla wózków.** Razem ≥ 100.
+* **Galeria publiczności** – antresola nad holem dźwigów A1/A2 (u 15,5–22,0 × v 12,6–22,65), balustrada szklana 1,10 m (część pionowa 0,70 + pozioma 0,50), 2 rzędy: +0,00 (3 miejsca dla wózków z opiekunami + 10) i +0,90 (18). Linia wzroku rzędu 2 nad rzędem 1: **C ≥ 77 mm** do całego prezydium (36/36), ≥ 346 / 395 mm do mówcy siedzącego / stojącego; zapas nad cokołem ≥ 289 mm; kąt na prezydium 34°–91° (mediana 60°), odległość 6,1–11,1 m. Galeria w łuku NE za radnymi sprawdzona i odrzucona (38 / 31 miejsc).
+* **Linie wzroku radnych:** do mówcy stojącego C ≥ 111 mm (39/39); do siedzącego prezydium 125/156 linii z C ≥ 60 mm (pozostałe skośne, min. 39 mm – uzupełnienie: ekrany pulpitów).
+* **Poufność głosowania:** ekrany pulpitów z filtrem ±30°; najmniejszy kąt normalna ekranu – oko na galerii **38,7°** ✔ + tryb tajny w systemie.
+* **Światło:** radni patrzą na pełną ścianę pd.; najmniejszy kąt kierunek patrzenia – szkło **51,1°** (pole ±45° wolne); odcinek łuku φ 0–10° przy reżyserce – szkło nieprzezierne za lamelami (z zewnątrz bez zmian).
+* Wentylacja wyporowa z cokołów pulpitów (kanały w podestach i warstwie posadzki 0,15 m), centrala S na −1 przy trzonie B. Pętla indukcyjna, napisy na żywo.
+
+### 7.4 Strefy, ruch i układ
+
+* **Poziom S:** pas pd. (okna 1,65 × 4,20) – SWD.08, SWD.09 z zapleczami nagrań, PD, klub SWD.11a przy trzonie B; naroże SE – SWD.11b (dojście 1,6 m z kuluaru i służbowy przystanek P2), pokój matki z dzieckiem, porządkowe. **Kuluar 2,20 m** (przy trzonie A 1,75 m) łączy klatki A i B – droga chroniona EI 30, drzwi S, samoczynne oddymianie. Pas zach.: kluby 15 os. (okna zach.) i pasaż 1,8 m; między trzonem A a salą łącznik 1,4 m i WC K, M; pas pn.: pokój socjalny i wspólna sala radnych (okna 1,65 × 5,0); naroże NW: pustka 2-kond. (okna pn. na Ostrów Tumski i zach. na pl. Społeczny), szatnia, schody reprezentacyjne na antresolę radnych.
+* **Radni, Zarząd, goście:** dźwigi A1/A2 (drzwi pn.) z holu głównego i garażu prosto do holu Sejmiku (wolna głębokość 5,95 m), wejście główne do sali z holu (NW, 1,6 m). Hol dolny i górny łączą schody reprezentacyjne i A1/A2 (przystanek +30,90).
+* **Publiczność:** Wejście Obywatelskie → kontrola → P1/P2 → przystanek +30,90 (hol 3,6 × 6,1 m = 22,0 m² z toaletą dostępną) → korytarz EI 30 nad kuluarem → galeria. **P1 nie zatrzymuje się na S**, P2 – tylko służbowo (na klucz). Publiczność nie wchodzi w strefę radnych; drzwi przedsionków A i A' z kontrolą dostępu zwalnianą przez SSP.
+
+### 7.5 Ewakuacja, strefy, dźwigi [E1]–[E6]
+
+* **Osoby:** maks. 354 → biegi 0,6 × 3,54 = 2,12 m ≤ 2 × 1,60 m ✔; kuluar 2,12 m ≤ 2,20 m ✔; przy trzonie A 1,75 m na 7,20 m (≥ 1,40 m WT; przepustowość 292 os. > ≈ 84 os. z części zach., bo hol i antresola radnych mają łącznik do przedsionka A i przedsionek A').
+* **Strefa ZL I:** S + antresola = 1 145,8 + 297,9 = **1 443,7 m² ≤ 2 500 m²**. Strefy dymowe: (1) sala + galeria, (2) hol + antresola radnych (schody reprezentacyjne wewnątrz), (3) kuluar i korytarz publiczny – drogi chronione. Bez schodów z antresoli do kuluaru (I4).
+* **Klatki A i B przedłużone do +30,90.** Przedsionki z nadciśnieniem i MOE 1,5 × 1,5 m: A 3,10 × 5,80 m (z dźwigiem R), A' 2,00 × 3,00 m, B 3,40 × 2,06 m.
+* **Limity (tryskacze nieprojektowane – v1.1):** przejście 40 m (+25 % w sali i holu h > 5 m), dojście ZL I 10 m (1 kierunek) / 40 m (2 kierunki); kuluar i korytarz publiczny z samoczynnym oddymianiem sterowanym SSP → +50 % (15 / 60 m, § 256 ust. 3; wykładnia do potwierdzenia z rzeczoznawcą).
+
+| Droga | Przejście [m] | Dojście [m] | Klatka |
+|---|---:|---:|---|
+| Sala: media NE → przejście wsch. → drzwi SE → kuluar | 17,1 | 8,2 | B |
+| Sala: media NE → za rzędem 4 → przejście zach. → drzwi SW → kuluar | 25,5 | 10,9 | A |
+| Galeria → foyer → przedsionek A (+30,90) / → korytarz publiczny → przedsionek B | 9,0 / 11,2 | 0 / 12,0 | A / B |
+| Toaleta publiczności → hol P1/P2 → korytarz → przedsionek B (1 kierunek) | 2,2 | 14,1 ≤ 15* | B |
+| Antresola radnych: bar → przedsionek A' / → schody → hol → łącznik → kuluar | 21,1 / 39,7 | 0 / 13,2 | A / B |
+| Hol NW → pasaż → kuluar / → łącznik → przedsionek A | 10,7 / 17,6 | 16,6 / 4,9 | A |
+| SWD.08 (naroże SW) → kuluar | 9,6 | 11,5 (A) / 21,5 (B) | A, B |
+| SWD.11b (naroże SE) → dojście → kuluar (1 kierunek do B) | 9,7 | 10,2* (B) / 22,8 (A) | B, A |
+| PP.06 – ślepy koniec kuluaru wsch. (odcinek 11,4 m) | 0,9 | 13,9* | B |
+
+\* dojście jednokierunkowe > 10 m – wymaga zwiększenia +50 % za samoczynne oddymianie drogi (limit 15 m).
+
+| Dźwig | Udźwig / kabina | Drzwi i przystanki na S / +30,90 | Wolna głębokość |
+|---|---|---|---:|
+| A1, A2 | 1 600 kg, 1,5 × 2,1 (3,15 ≤ 3,56 m², PN-EN 81-20 tabl. 6) | pn., S i +30,90 | 5,95 m ✔ M.13 |
+| P1, P2 | 1 600 kg, 1,5 × 2,1 | wsch.; P1 tylko +30,90, P2 +30,90 i S (służbowy) | 3,60 / 1,60 m ✔ |
+| R | 1 000 kg, 1,1 × 2,1 (PN-EN 81-72/76) | pd. do przedsionka A, S i +30,90 | MOE w przedsionku ✔ |
+
+### 7.6 Dostępność i odstępstwa
+
+* Galeria: 3 miejsca dla wózków z opiekunami w rzędzie 1, bez stopni z P1/P2; toaleta dostępna ≈ 4 m od drzwi dźwigów. Sala: 4 stanowiska radnych dla wózków (po jednym w rzędzie) przy pochylniach ≤ 5 %; prezydium i mównica bez stopni. WC K i M z kabinami dostępnymi 2,2 m (przewijaki w przedsionkach). Szatnia z częścią lady 0,75–0,80 m. MOE w przedsionkach A, A', B.
+* **Świadome odstępstwa od M.13 (WT spełnione):** szerokość 1,8 m – łącznik wsch. 1,40 m, dojście do SWD.11b 1,60 m, przystanek służbowy P2 1,60 m, kuluar przy trzonie A 1,75 m (v1.2).
 
 ---
 
@@ -363,7 +436,7 @@ Powyżej 25 m wszystkie okładziny, mocowania i izolacje są niepalne. Podokienn
 * **Forma:** A/V ≈ 0,18 m⁻¹; elewacje 6 880 m² (0,49 m²/m² PC nadziemnej); WWR 37–40 %, szkło pełne tylko w koronie (262 m²); osłony ZIP na elewacjach E, S, W; ościeża 0,45 m w wieży. Przegrody: ściana U 0,144–0,147 (wełna 260 / 240 mm, konsole nierdzewne – `_rewizja_elewacje.py`), dach ≤ 0,12, okna ≤ 0,80.
 * **Ciepło i chłód:** gruntowe pompy ciepła; dolne źródło: **58 sond × 91 m pod płytą −2** (siatka 6 × 6 m, dno 19,9 m n.p.m. ≤ 99,5 m p.p.t. – poza reżimem art. 86 PGiG) = 238 kW poboru + **ściany szczelinowe energetyczne** 4 230 m² (63 kW) + **36 pali energetycznych** (20 kW) = **321 kW** → moc grzewcza ok. **430 kW** (COP 4), chłód aktywny z gruntu ok. 330 kW + free cooling. Kolektory w warstwie podpłytowej, 2 przejścia przez białą wannę. **Szczyt chłodu ≈ 600 kW = GPC 330 kW + dry-cooler hybrydowy 2 × 150 kW** (kond. 4 segmentu, żaluzje w licu zach. od dziedzińca) + przesunięcie TABS. Nadwyżka ciepła gruntu 166 MWh/rok – dry-cooler, odzysk do c.w.u. i przepływ wód gruntowych (piaski połączone z Odrą). Sieć ciepłownicza tylko jako rezerwa/szczyt (≈ 0,3 MW). Odra jako źródło – odrzucona (`strategia_energetyczna.md`). TRT na 2 otworach próbnych.
 * **Wentylacja:** 5 central piętrowych (25 m², strefa środkowa wieży, kond. 1–5; kond. 5 obsługuje też 6) + centrala parteru na kond. 1 (pas zach. wieży) + centrala Sejmiku na −1 przy trzonie B, rekuperacja ≥ 80 %, sterowanie CO₂. **Czerpnia zbiorcza:** 2 rzędy płycin (P/1 i 1/2) elewacji pd. wieży u 2–12 = 17 m² (≈ 1,25 m/s), wyłączone z BIPV. **Piony** 2,7 + 1,4 + 3,5 m²/kond. w strefie środkowej. **Wyrzutnia zbiorcza:** lamele w pasie nad komisjami w koronie od pd. (21 m w poziomie i ≈ 29 m w pionie od czerpni; w przestrzeni sufitowej nad komisjami wyłącznie kanały i plenum). Wentylatory oddymiania korytarzy w szachtach trzonów A i B. **Garaż:** wyrzut wentylacji i oddymiania oraz **spaliny agregatu** – szacht w trzonie B (miejsce po dźwigu T) do lameli korony od pd.; **powietrze agregatu** – żaluzje 8 m² w licu zach. segmentu (kond. 1); **wentylacja trafo** – kanałem do lica zach. segmentu; **bistro bez kuchni gorącej** (wyciąg z odzyskiem do instalacji ogólnej); czerpnie nadciśnienia klatek – elewacja pd. wieży (parter), ≥ 5 m od czerpni zbiorczej; filtrowentylacja ukrycia – czerpnia w lamelach korony. Nic na dachu ani na elewacjach od ulic i bulwaru.
-* **PV 415 kWp, 328 MWh/rok:** dach wieży 204 kWp (179 MWh), dach skrzydła 147 kWp (116 MWh; cień wieży −11,6 %), płyciny wieży 11 kWp (5 MWh), ściana pd. segmentu 41 kWp (19 MWh), zadaszenie tarasu ogrodowego 13 kWp (9 MWh). Gęstość pola dachowego 0,215 kWp/m² (η ≥ 22,5 % × pokrycie 0,955 – warunek specyfikacji; przy η 21 % byłoby 391 kWp). Falowniki i rozdzielnice DC na kond. 2 segmentu (12 m²). Magazyn energii 150 kWh.
+* **PV 415 kWp, 328 MWh/rok:** dach wieży 204 kWp (179 MWh), dach skrzydła 147 kWp (116 MWh; cień wieży −11,6 %), płyciny wieży 11 kWp (5 MWh), ściana pd. segmentu 41 kWp (19 MWh), zadaszenie tarasu ogrodowego 13 kWp (9 MWh). Gęstość pola dachowego 0,215 kWp/m² (η ≥ 22,5 % × pokrycie 0,955 – warunek specyfikacji; przy η 21 % byłoby 391 kWp). Falowniki i rozdzielnice DC na kond. 2 segmentu (12 m²). Magazyn energii 100 kWh (v1.2; autokonsumpcja 0,80 w `_bilans_energii.py` bez zmian).
 * **Bilans:** zużycie EPB ≈ 297 MWh/rok (23,9 kWh/(m²·rok)), całkowite ≈ 645 MWh/rok; **PV pokrywa 111 % EPB i 51 % całości**. Resztę daje społeczność energetyczna OZE Województwa (EPBD art. 11 ust. 7).
 * **EP ≈ 28 kWh/(m²·rok)** (bez PV 60) wobec EPmax 95 (WT 2002) i progu ZEB 85 (projekt WT). Emisje operacyjne EPB 6,7 kg CO₂/(m²·rok) (próg ZEB 31,4).
 * **Woda:** woda szara (804 m³/rok) i deszczowa (848 m³/rok) pokrywają **≈ 100 %** spłukiwania (zapas 0,4 % przy zbiorniku 50 m³ – D-11). Zużycie wody wodociągowej spada o **47 %** (1 600 m³/rok).
@@ -378,14 +451,14 @@ Powyżej 25 m wszystkie okładziny, mocowania i izolacje są niepalne. Podokienn
 
 * **Wszystkie wejścia bez schodów i pochylni.** ±0,00 = 119,30, czyli poziom skweru i Wybrzeża (niwelacja chodnika ≤ 2 %). Dziedziniec przy drzwiach ogrodowych i rowerowni podniesiony do 119,25 i łagodnie (≤ 4 %) obniżony ku ogrodom, poza strefami korzeni. Brama ogrodowa w poziomie chodnika i ogrodu (spadek ≤ 2 %).
 * **Oś Hali bez przeszkód** (szerokość ≥ 6 m). Ścieżki dotykowe od przystanków tramwajowych na przyczółku, od wejść i z garażu do informacji i dźwigów (przeszczep K4). Tyflomapy przy wejściach. Kontrast posadzek, ścian i drzwi. Niski blat informacji i kancelarii. Pętle indukcyjne: sala obrad, komisje, kluby, sale konferencyjne, kancelaria.
-* **Komfortka 12 m²** (3,0 × 4,0 m) 14 m od wejścia głównego (WT § 85a). WC dostępne na każdej kondygnacji i w każdej strefie, także na −1 (sanitariaty MDS) i dla publiczności galerii (kondygnacja S – `kondygnacja_S2.md`). **Pokój cichy** 16 m² przy Hali.
+* **Komfortka 12 m²** (3,0 × 4,0 m) 14 m od wejścia głównego (WT § 85a). WC dostępne na każdej kondygnacji i w każdej strefie, także na −1 (sanitariaty MDS) i dla publiczności galerii (toaleta dostępna 5,7 m² przy holu P1/P2 na +30,90; rozdz. 7). **Pokój cichy** 16 m² przy Hali.
 * **Sala obrad:**
   * prezydium i mównica na poziomie podłogi;
   * pochylnie ≤ 5 % do każdego rzędu, **stanowisko dla wózka w każdym rzędzie**;
-  * 3 miejsca dla wózków na galerii (dostęp P1/P2 bez stopni) + 2 wśród gości;
+  * 4 stanowiska radnych dla wózków (po jednym w rzędzie) + 3 miejsca dla wózków z opiekunami na galerii (dostęp P1/P2 bez stopni);
   * tłumacz PJM w kadrze, napisy na żywo.
 * **Dwa publiczne dźwigi** (redundancja), 1 600 kg, kabiny 1,5 × 2,1 m (M.13), sygnalizacja głosowa i wizualna.
-* **Ewakuacja OzN:** MOE 1,5 × 1,5 m (poza biegiem) z krzesłem ewakuacyjnym i interkomem do ochrony i KDR na każdym podeście klatek A, B, C (poza szerokością biegu 1,60 m). Dźwig ewakuacyjny R (PN-EN 81-76). Sygnalizatory optyczne alarmu w WC i przestrzeniach ogólnodostępnych.
+* **Ewakuacja OzN:** MOE 1,5 × 1,5 m z krzesłem ewakuacyjnym i interkomem do ochrony i KDR w przedsionkach klatek A (3,10 × 5,80 m), B (3,40 × 2,06 m), C (5,80 × 2,00 m) na każdej kondygnacji i w przedsionku A' na antresoli (poza drogą i polem otwierania drzwi). Dźwig ewakuacyjny R (PN-EN 81-76). Sygnalizatory optyczne alarmu w WC i przestrzeniach ogólnodostępnych.
 * **Garaż:** 6 miejsc dla OzN 3,6 × 5,0 m przy trzonach A i B na −1, na posadzce (nie w stackerach); WC dostępne na −1. Pokój matki z dzieckiem na kondygnacji Sejmiku, przewijaki w WC holu i konferencji. Ogród bez barier dla mieszkańców.
 
 ---
@@ -396,49 +469,49 @@ Powyżej 25 m wszystkie okładziny, mocowania i izolacje są niepalne. Podokienn
 |---|---|
 | Powierzchnia zabudowy (PZ) | **2 165,8 m²** (58,1 % obszaru 3 728,7 m²) |
 | PBC | ≈ **1 185 m²** (teren 1 117,5 m², w tym zachowane ogródki 469,5 m², + 50 % × 135,3 m² dachu zielonego tarasu) = 32 % |
-| PC nadziemna | **14 164,5 m²** (P 2 005,8; kond. 1–4 po 2 162,9; kond. 5, 6, S po 1 145,8; antresola 69,7 – zmiana S w `kondygnacja_S2.md`, w koszcie rezerwa do ≈ 180 m²) |
+| PC nadziemna | **14 392,7 m²** (P 2 005,8; kond. 1–4 po 2 162,9; kond. 5, 6, S po 1 145,8; **antresola S-3 297,9** – v1.1: 69,7 + rezerwa w koszcie do ≈ 180 m²) |
 | PC podziemna | **4 365 m²** (−1: 2 263,9; −2: 2 101,3) |
-| PC razem | 18 530 m² (w koszcie 18 640 m² z rezerwą antresoli) |
-| PU (PN-ISO 9836) | **8 850,37 m²** = suma pomieszczeń kategorii PU modelu pomieszczeń (F.15.A, F.15.C I.12), bez powierzchni ruchu (RU 4 342), usługowej (US 590) i garażowej (PG 2 334); w tym pokoje 4 794, Sejmik 791, konferencje 362, strefa wejściowa 181, sale narad 360, socjalne 361, pomocnicze 1 124, WC 398, rowery 90, PPT 105, KS 96, inne 188 (v1.0 szacowała „≈ 8 400”) |
-| PC nadziemna / PU | 1,60 (program 1,71) |
+| PC razem | **18 757,9 m²** (= podstawa wskaźnika zł/m² PC) |
+| PU (PN-ISO 9836) | **8 871,47 m²** = 8 850,37 (suma pomieszczeń kategorii PU modelu pomieszczeń, F.15.A, F.15.C I.12; bez RU 4 342, US 590, PG 2 334) **+ 21,10 (S-3 wobec kondygnacji S w modelu: SWD +8,39, WC +7,25, PP.06 +5,46; antresola wnosi PU galerii, SWD.03, SWD.05 i toalety; `_v12_koszt.py` [K0])**; w tym pokoje 4 794, Sejmik 799, konferencje 362, strefa wejściowa 181, sale narad 360, socjalne 361, pomocnicze 1 130, WC 405, rowery 90, PPT 105, KS 96, inne 188 (model pomieszczeń do przeliczenia po v1.2) |
+| PC nadziemna / PU | 1,62 (program 1,71) |
 | Kubatura brutto (KW) | ≈ **81 400 m³** (wieża 42 162; skrzydło 17 423; segment 3 490; −1 9 508; −2 z płytą 8 825) |
-| Miejsca postojowe | **110** (−1: 70 = 38 na posadzce + 32 w stackerach zależnych; −2: 40), w tym 6 OzN; **wymagane (MPZP § 13): 12/1 000 × (8 850,37 − 88,47) + 6/1 000 × 88,47 = 105,67 → 106** (odczyt ostrożny 108; PU programu 103) ✔, zapas 4 (`_rewizja_parking.py`) |
+| Miejsca postojowe | **110** (−1: 70 = 38 na posadzce + 32 w stackerach zależnych; −2: 40), w tym 6 OzN; **wymagane (MPZP § 13): 12/1 000 × (8 871,47 − 88,47) + 6/1 000 × 88,47 = 105,93 → 106** (odczyt ostrożny 108; bar SWD.05 liczony jak PU biurowe) ✔, zapas 4; 110 m.p. wystarcza do PU 9 210,9 m² (rezerwa 339 m²); trzon A v1.2 bez wpływu na garaż (`_rewizja_parking.py`, `_v12_trzony.py` [T6]) |
 | Pokoje | 187 (179 × 24 + 8 × 32); pojemność elewacji 218 jedn. (43 × 4 + 22 + 20 + 4), zajęte ≈ 216 |
-| MDS / budowla ochronna | MDS ≥ PU/15 = 560 os.: **−2 ukrycie ≤ 300 os.** z filtrowentylacją, wyjścia klatkami A i B (20 m); **−1 MDS 260 os.** – klatka C, rampa, szyb wyjścia zapasowego (91,75; 32,00) 12,6 m od wieży (≥ H/3) z tunelem 7,6 m; sanitariaty MDS 30 m² + WC ukrycia 15 m² |
+| MDS / budowla ochronna | MDS ≥ PU/15: v1.1 przyjęła 560 os. (= 8 400/15, PU szacunkowe v1.0); przy PU 8 871,47 m² wychodzi 8 871,47/15 = 591,4 → 592 os. – różnica 32 os. do rozstrzygnięcia (pojemność określa organ, art. 95a; rozdz. 16): **−2 ukrycie ≤ 300 os.** z filtrowentylacją, wyjścia klatkami A i B (środki 19,8 m); **−1 MDS 260 os.** – klatka C, rampa, szyb wyjścia zapasowego (91,75; 32,00) 12,6 m od wieży (≥ H/3) z tunelem 7,6 m; sanitariaty MDS 30 m² + WC ukrycia 15 m² |
 
-**Koszt realizacji (netto, ceny II kw. 2026) – model F.14.B `tools/koszty_model.py`, poziom mid; ilości v1.1 i pozycje spoza modelu – `_rewizja_koszt.py`** (wejście modelu ze wszystkimi kluczami: `_rewizja_koszt_wejscie_v1_1.json`; ilości weryfikatora przyjęte: ościeża filarów wieży i okien skrzydła, pale CFA, ściana na uskoku, dry-cooler, przepusty GPC).
-Parametry: A_nad 14 274,5 (z rezerwą antresoli S); A_pod 4 365; obrys podziemia 2 264; ściany szczelinowe 222,6 m × 19 m; wykop średnio 7,92 m; płyta zastępcza 1,00 m; obrys parteru 2 166; wypór poza obrysem 121,5 m²; 3 klatki × 8,67 kond.; 5 dźwigów osobowych + 1 towarowy (C1 – szyb rezerwowy); ceramika i metal 1 763 m²; tynk mineralny 410 m²; granit 1 663 m² (bez cokołu skrzydła i bez węgarów); okna 2 167 m²; fasady słupowo-ryglowe 410 m²; BIPV elewacyjne i zadaszenie 457 m²; lamele 240 m²; dachy 2 163 m² (taras intensywny 135,3); stal 73 t; PV dachowe 351 kWp; BESS 150 kWh; sondy 58 × 91 = 5 278 mb; teren 2 224 m² (granit 500, zieleń 630 + pielęgnacja ogródków 470); 26 drzew; 55 EV; ścianki mobilne 60 m².
+**Koszt realizacji (netto, ceny II kw. 2026) – model F.14.B `tools/koszty_model.py`, poziom mid; v1.2 – `_v12_koszt.py`** (na bazie `_rewizja_koszt.py` v1.1; wejście modelu ze wszystkimi kluczami: `_rewizja_koszt_wejscie_v1_2.json`; ilości weryfikatora przyjęte: ościeża filarów wieży i okien skrzydła, pale CFA, ściana na uskoku, dry-cooler, przepusty GPC).
+Parametry: A_nad 14 392,7 (z antresolą S-3 297,9 m²); A_pod 4 365; obrys podziemia 2 264; ściany szczelinowe 222,6 m × 19 m; wykop średnio 7,92 m; płyta zastępcza 1,00 m; obrys parteru 2 166; wypór poza obrysem 121,5 m²; 3 klatki × 9,0 kond. (klatka A do +30,90); 5 dźwigów osobowych + 1 towarowy; ceramika i metal 1 763 m²; tynk mineralny 410 m²; granit 1 663 m² (bez cokołu skrzydła i bez węgarów); okna 2 167 m²; fasady słupowo-ryglowe 410 m²; BIPV elewacyjne i zadaszenie 457 m²; lamele 240 m²; dachy 2 163 m² (taras intensywny 135,3); stal 73 t; PV dachowe 351 kWp; BESS 100 kWh; balustrady wewn. 130 mb; sondy 58 × 91 = 5 278 mb; teren 2 224 m² (granit 500, zieleń 630 + pielęgnacja ogródków 470); 26 drzew; 55 EV; ścianki mobilne 60 m².
 
 | Grupa F.14.B | mln zł |
 |---|---:|
 | 1 Roboty przygotowawcze i ziemne (ściany szczelinowe 0,60 m, wykop, archeologia, monitoring sąsiadów) | 10,83 |
 | 2 Przyłącza i sieci, GPC (58 × 91 m), PV dachowe 351 kWp | 8,57 |
-| 3 Stan surowy (z garażem 4 365 m²) | 22,25 |
+| 3 Stan surowy (z garażem 4 365 m²) | 22,37 |
 | 4 Stolarka zewnętrzna i fasady słupowo-ryglowe | 5,70 |
-| 5 Stolarka wewnętrzna | 1,98 |
+| 5 Stolarka wewnętrzna | 2,01 |
 | 6 Elewacje (ceramika, tynk dziedzińcowy, granit, BIPV 457 m², lamele) | 7,31 |
-| 7 Instalacje sanitarne i HVAC | 21,20 |
-| 8 Instalacje elektryczne | 12,36 |
-| 9 Teletechnika i AV (głosowanie, transmisja, PJM) | 11,23 |
+| 7 Instalacje sanitarne i HVAC | 21,34 |
+| 8 Instalacje elektryczne (BESS 100 kWh) | 12,32 |
+| 9 Teletechnika i AV (głosowanie, transmisja, PJM) | 11,27 |
 | 10 Dźwigi (5 + T) | 3,80 |
-| 11 Wykończenie ścian, sala Sejmiku | 11,59 |
-| 12 Sufity | 2,56 |
-| 13 Posadzki | 4,56 |
-| 14 Balustrady | 0,73 |
+| 11 Wykończenie ścian, sala Sejmiku | 11,65 |
+| 12 Sufity | 2,58 |
+| 13 Posadzki | 4,59 |
+| 14 Balustrady | 0,76 |
 | 15 Zagospodarowanie terenu | 4,96 |
 | 17 Woda szara | 0,70 |
 | 18 MDS, zamurowanie okien Maz. 19 | 1,70 |
-| **Roboty – model** | **132,04** |
-| Pozycje spoza modelu (z rozbiciem w `_rewizja_koszt.py`): budowla ochronna 1,50; lapidarium 0,30; pale CFA 0,55; uskok −1/−2 0,14; iniekcja strumieniowa i podbicie Maz. 19 0,44; dry-cooler 0,45; GPC – wiercenie z dna, kolektory, absorbery ścian i pali 0,62; stackery 16 jedn. 1,12; zapora i sygnalizacja 0,16; szyb MDS 0,25; agregat w segmencie 0,11; ościeża Al wieży 0,54 i skrzydła 0,44; ścieżki 0,22; pielęgnacja ogródków 0,05; korekty: ściana 0,60 m −0,85, rampy jednopasowe −0,13 | 5,90 |
-| 16 Koszty stałe budowy 3 % | 4,14 |
-| **Roboty z kosztami stałymi** | **142,08** |
-| 18.3 Rezerwa na nieprzewidziane (contingency) **5 %** (wymóg ≥ 4 %) | 7,10 |
-| **Koszt realizacji z rezerwą** | **149,18 mln zł netto** |
-| Zapas do limitu 150 mln | **0,82 mln (0,5 %)**; bufor łącznie z rezerwą 7,92 mln (5,6 % robót); przy rezerwie 4 % – 147,76 mln (zapas 2,24) |
+| **Roboty – model** | **132,46** |
+| Pozycje spoza modelu (z rozbiciem w `_rewizja_koszt.py` i `_v12_koszt.py`): budowla ochronna 1,50; lapidarium 0,30; pale CFA 0,55; uskok −1/−2 0,14; iniekcja strumieniowa i podbicie Maz. 19 0,44; dry-cooler 0,45; GPC – wiercenie z dna, kolektory, absorbery ścian i pali 0,62; stackery 16 jedn. 1,12; zapora i sygnalizacja 0,16; szyb MDS 0,25; agregat w segmencie 0,11; ościeża Al wieży 0,54 i skrzydła 0,44; ścieżki 0,22; pielęgnacja ogródków 0,05; korekty: ściana 0,60 m −0,85, rampy jednopasowe −0,13; **v1.2:** trzon A wydłużony (I5) 0,03; klatki A i C trójbiegowe na −1/P i P/1 0,11; bez szybu C1 −0,03; biura z odsłoniętym TABS – wyspy akustyczne zamiast sufitu modułowego −0,43; ścianki szklane 10 → 8 % A −0,29 | 5,30 |
+| 16 Koszty stałe budowy 3 % | 4,13 |
+| **Roboty z kosztami stałymi** | **141,89** |
+| 18.3 Rezerwa na nieprzewidziane (contingency) **5 %** (wymóg ≥ 4 %) | 7,09 |
+| **Koszt realizacji z rezerwą** | **148,98 mln zł netto** |
+| Zapas do limitu 150 mln | **1,02 mln (0,7 %)**; bufor łącznie z rezerwą 8,11 mln (5,7 % robót); przy rezerwie 4 % – 147,56 mln (zapas 2,44) |
 
-**Dźwignie projektowe v1.1 (efekt w mln zł z KS i rezerwą, `_rewizja_koszt.py`):** ościeża wieży 0,60 m granit → 0,45 m blacha Al −1,80; ościeża skrzydła → blacha Al −0,58; ściany szczelinowe 0,80 → 0,60 m −0,91; dźwig C1 – szyb rezerwowy −0,65; elewacje dziedzińcowe skrzydła i segmentu – tynk mineralny −0,49; nawierzchnie: granit 1 050 → 500 m² −0,30; BESS 250 → 150 kWh −0,24; pole sond 58 × 91 m (+ ściany i pale energetyczne) −0,24; lapidarium 0,5 → 0,3 −0,22; ogródki – pielęgnacja zamiast nowej zieleni −0,20; lamele 450 → 240 m² −0,18; rampy jednopasowe −0,15; cokół skrzydła granit → ceramika −0,09. Dźwignie rezerwowe niewłączone: filary elewacji pd. wieży (dziedziniec) w ceramice −0,23; BESS 100 kWh −0,12.
+**Dźwignie projektowe v1.1 (efekt w mln zł z KS i rezerwą, `_rewizja_koszt.py`):** ościeża wieży 0,60 m granit → 0,45 m blacha Al −1,80; ościeża skrzydła → blacha Al −0,58; ściany szczelinowe 0,80 → 0,60 m −0,91; dźwig C1 – szyb rezerwowy −0,65; elewacje dziedzińcowe skrzydła i segmentu – tynk mineralny −0,49; nawierzchnie: granit 1 050 → 500 m² −0,30; BESS 250 → 150 kWh −0,24; pole sond 58 × 91 m (+ ściany i pale energetyczne) −0,24; lapidarium 0,5 → 0,3 −0,22; ogródki – pielęgnacja zamiast nowej zieleni −0,20; lamele 450 → 240 m² −0,18; rampy jednopasowe −0,15; cokół skrzydła granit → ceramika −0,09. **v1.2 (`_v12_koszt.py`):** antresola S-3 ponad rezerwę v1.1 (+118,2 m² PC) +0,49; klatka A do +30,90 i balustrady +0,09; trzony I5 +0,12 → przed dźwigniami 149,87 mln (zapas 0,13). Dźwignie v1.2 – najpierw niewidoczne na planszach: **biura z odsłoniętym TABS** (rozdz. 4.2; pokoje 4 794 m² – wyspy akustyczne 0,35 m²/m² zamiast sufitu modułowego; korekta spójności modelu) −0,46; **ścianki szklane 10 → 8 % A** (pokoje od korytarza – GK z naświetlem; szkło w salach narad, sekretariatach, holach i strefie Sejmiku bez zmian) −0,31; **BESS 100 kWh** (rezerwowa v1.1) −0,12 → 148,98 mln, zapas 1,02 mln. Dźwignia rezerwowa niewykorzystana (widoczna na P7/W10): filary elewacji pd. wieży w ceramice −0,23.
 
-**Wskaźniki (uczciwie, oba):** 149,18 mln / 18 640 m² PC = **8 003 zł/m² PC** – w paśmie porównywalnych budynków publicznych 7 400–9 300 zł/m² PC; **16 856 zł/m² PU** (PU 8 850 m²) – **powyżej** pasma B1/B2/B6 11 400–14 900 zł/m² PU (`koszty_benchmarki.md`), bo PC/PU = 2,11: dwie kondygnacje garażu–MDS (4 365 m² dla 110 m.p.), wysokie hole, sala Sejmiku i kondygnacja S. Porównanie z pasmem PC to **spójność z pasmem kalibracji stawek [Z] (nie jest niezależną kontrolą)**. Scenariusz low 109,6; high 207,7; waloryzacja +5 % (2027) od kosztu całkowitego: 156,7 mln (ryzyko opisane, F.14.B na poziomie cen II kw. 2026). Koszt Dokumentacji ≈ 7,6 mln zł netto (≤ 5,4 % = 8,1 mln), liczony osobno.
+**Wskaźniki (uczciwie, oba):** 148,98 mln / 18 757,9 m² PC = **7 942 zł/m² PC** – w paśmie porównywalnych budynków publicznych 7 400–9 300 zł/m² PC; **16 793 zł/m² PU** (PU 8 871 m²) – **powyżej** pasma B1/B2/B6 11 400–14 900 zł/m² PU (`koszty_benchmarki.md`), bo PC/PU = 2,11: dwie kondygnacje garażu–MDS (4 365 m² dla 110 m.p.), wysokie hole, sala Sejmiku i kondygnacja S. Porównanie z pasmem PC to **spójność z pasmem kalibracji stawek [Z] (nie jest niezależną kontrolą)**. Scenariusz low 109,4; high 207,4; waloryzacja +5 % (2027) od kosztu całkowitego: 156,4 mln (ryzyko opisane, F.14.B na poziomie cen II kw. 2026). Koszt Dokumentacji ≈ 7,6 mln zł netto (≤ 5,4 % = 8,1 mln), liczony osobno.
 
 ---
 
@@ -481,8 +554,8 @@ z = wysokość względem ±0,00 (119,30). Kamery ludzkie są poziome (perspektyw
 | **W4** | **Powiązanie z WS 5** | (130,0; 21,0; 1,56) | (107,0; 41,0; 9,0), az. 311° | 28 mm, shift_y +0,15 | 23.10 11:15 CEST | codzienność bulwaru; relief ściany segmentu w słońcu, czynne okna szczytu WS 5 w cieniu, pas 4,6 m z ławą i drzewem jako wejście do ogrodu, wieża w tle |
 | **W5** | **Powiązanie z Maz. 19** | (36,5; 0,0; 0,68) chodnik zach. Mazowieckiej | (56,0; 26,0; 9,0), az. 37° | 28 mm, shift_y +0,18 | 22.10 15:30 CEST | światło skośne z SW; gzyms i kordon w liniach nr 19, przęsło przejściowe, brama ogrodowa z widokiem na drzewa |
 | **W6** | **Hala Obywatelska** | (100,236; 68,619; 1,60) przy drzwiach w łuku | (84,321; 43,124; 1,80), az. 212° | 20 mm | 23.10 11:00 CEST | oś na wylot do ogrodu (drzewa na końcu), kancelaria z niskim blatem, lapidarium, granitowa posadzka ze śladem murów, tyflomapa |
-| **W7** | **Hol sali Sejmiku** | (82,097; 64,918; 28,90) przy dźwigach A | (69,432; 68,315; 30,50), az. 285° | 20 mm, shift_y +0,05 | 29.10 16:20 CET | początek błękitnej godziny; dwukondygnacyjny narożnik NW, okna na pl. Społeczny i wieże katedry, lada baru, wejście do sali, ludzie w rozmowie |
-| **W8** | **Sala Sejmiku z galerią publiczności i jej oddzielnym wejściem** | (98,661; 72,970; 29,00) za 3. rzędem | (100,188; 60,373; 30,90), az. 173° | 20 mm, shift_y +0,08 | 22.10 10:30 CEST, sesja | prezydium przy pełnej ścianie z godłem, oświetlone dziennym światłem z łuku za kamerą; 44 stanowiska; galeria z publicznością i widocznymi drzwiami z foyer (P1/P2); tłumacz PJM w kadrze; stanowisko radnego na wózku |
+| **W7** | **Hol sali Sejmiku** | (82,097; 64,918; 28,90) przed drzwiami pn. dźwigów A1/A2 | (69,432; 68,315; 30,50), az. 285° | 20 mm, shift_y +0,05 | 29.10 16:20 CET | początek błękitnej godziny; pustka 2-kond. w narożu NW, okna na pl. Społeczny i wieże katedry, schody reprezentacyjne na antresolę radnych z barem, szatnia, wejście do sali, ludzie w rozmowie |
+| **W8** | **Sala Sejmiku z galerią publiczności i jej oddzielnym wejściem** | (98,661; 72,970; 29,00) za 4. rzędem (≈ 11 m od mównicy) | (100,188; 60,373; 30,90), az. 173° | 20 mm, shift_y +0,08 | 22.10 10:30 CEST, sesja | prezydium przy pełnej ścianie z godłem, oświetlone dziennym światłem z łuku za kamerą; 47 stanowisk w 4 łukowych rzędach; po prawej galeria zach. z balustradą szklaną, publicznością i wejściem z korytarza publicznego (P1/P2); tłumacz PJM w kadrze; stanowisko radnego na wózku przy pochylni |
 | W9 | Latarnia wieczorem z mostu (dod.) | (126,0; 152,0; 3,90) chodnik mostu | (96,0; 62,0; 26,0), az. 198° | 50 mm | 29.10 17:05 CET, sesja | błękitna godzina; korona świeci zza lamel, pierzeja spokojna, gzyms poniżej hełmów |
 | W10 | Ogród Województwa (dod.) | (78,0; 17,0; 1,16) | (88,0; 45,0; 10,0), az. 20° | 24 mm, shift_y +0,12 | 22.10 13:30 CEST | mieszkańcy i pracownicy, drzewa ogródków, ogród deszczowy, wejście ogrodowe na końcu osi |
 | W11 | Taras nad Oławą (dod.; 135 m² w attyce, ≈ 92 m² użytkowych) | (101,169; 41,570; 21,40) | (117,0; 73,7; 20,0), az. 26° | 24 mm | 22.10 14:30 CEST | przerwa pracowników, Oława, most, Ostrów Tumski |
@@ -503,7 +576,7 @@ z = wysokość względem ±0,00 (119,30). Kamery ludzkie są poziome (perspektyw
 | **P5** | Rzuty kond. 5, 6, **S z antresolą** 1:200, tabela pomieszczeń Sejmiku (rozdz. 7.1) i dowód „całość w A”, rzut dachu (BIPV) | rzut S |
 | **P6** | Przekroje A-A (pn.–pd. przez łuk i segment z WS 5) i B-B (wsch.–zach. przez salę i skrzydło) 1:200 z ZWG i stropem glin; analiza przesłaniania i nasłonecznienia (§ 13 – tabela rozdz. 13); schemat ppoż. i dostępności | przekroje |
 | **P7** | Elewacje 1:200: Mazowiecka z Maz. 19, Wybrzeże z WS 5, pn. od skweru, pd. od ogrodu; przekrój elewacyjny + fragment 1:50 (wieża i skrzydło); **W4, W5** | elewacja Mazowiecka |
-| **P8** | **W6, W7, W8** (wnętrza), schemat proekologiczny (GPC 58 × 91 m + ściany i pale energetyczne, BIPV 415 kWp, dry-cooler, woda, retencja 157 m³, GWP), pasek KPI: EP 28 · PV 415 kWp / 111 % EPB · 110 m.p. · 149,2 mln | W8 |
+| **P8** | **W6, W7, W8** (wnętrza), schemat proekologiczny (GPC 58 × 91 m + ściany i pale energetyczne, BIPV 415 kWp, dry-cooler, woda, retencja 157 m³, GWP), pasek KPI: EP 28 · PV 415 kWp / 111 % EPB · 110 m.p. · 149,0 mln | W8 |
 
 **Część opisowa (5 × A3, ≥ 11 pkt) – punkty:**
 1. **Idea:** Brama Mostowa i Latarnia Sejmiku; pamięć narożnika 1934; wrocławski modernizm; ciągłość z Etapem I.
@@ -524,7 +597,7 @@ z = wysokość względem ±0,00 (119,30). Kamery ludzkie są poziome (perspektyw
    * KS pod Sejmikiem.
 5. **Sejmik:**
    * cały program zamknięty na poziomie sali;
-   * antresola otwarta;
+   * antresola otwarta (26 % rzutu; galeria publiczności oddzielona od antresoli radnych);
    * prezydium przy pełnej ścianie;
    * pochylnie ≤ 5 %;
    * publiczność z osobnym wejściem.
@@ -541,22 +614,26 @@ z = wysokość względem ±0,00 (119,30). Kamery ludzkie są poziome (perspektyw
 9. **Ekologia:** EP 28, PV 415 kWp (dachy 351 + ściana segmentu, płyciny, zadaszenie – bez podwójnego liczenia), GPC 58 × 91 m + ściany i pale energetyczne, dry-cooler od dziedzińca, woda −47 %, retencja 157 m³, GWP ≤ 500 (cel; szacunek ≈ 490), zieleń.
 10. **Zagospodarowanie:** Plac Mostowy ze śladem 1934 i lipami, Ogród Województwa, drzewa wg M.06: 36/44 zachowanych (26 po usunięciach sanitarnych), 8 usuwanych kolizyjnie, 26 nowych.
 11. **Prawo:** MPZP (tabela rozdz. 4.3), § 13 / § 60 (rozdz. 13), WT 2002 + projekt WT, budowla ochronna (art. 93).
-12. **Koszt:** F.14.B 149,2 mln (rezerwa 5 % w środku, zapas 0,8 mln), 8 003 zł/m² PC i 16 856 zł/m² PU z pasmami, dźwignie, koszt Dokumentacji ≈ 7,6 mln.
+12. **Koszt:** F.14.B 149,0 mln (148,98; rezerwa 5 % w środku, zapas 1,0 mln), 7 942 zł/m² PC i 16 793 zł/m² PU z pasmami, dźwignie, koszt Dokumentacji ≈ 7,6 mln.
 
 ---
 
 ## 16. Ryzyka resztkowe
 
 1. **Linia A z rastra 1:1000 (±0,3 m).** Lica wieży leżą na liniach A (bez żadnego wysięgu), a skrzydła i segmentu 4–5 cm poza nimi. Potrzebny pomiar geodezyjny, korekta lic bez zmiany układu.
-2. **Wykładnia antresoli** jest bezpieczna: brak pomieszczeń zamkniętych, 6 % rzutu.
+2. **Wykładnia antresoli (S-3):** 297,9 m² (26 % rzutu), otwarta na salę i pustkę holu; zamknięte tylko toaleta publiczności 5,7 m², przedsionek A' i korytarz EI 30 (dojścia) – wszystkie pomieszczenia programu na poziomie S; przedstawić jako uzgodnienie z rzeczoznawcą ppoż.
 3. **§ 13 dla własnych pokoi w narożach wklęsłych** – jednostki w narożu segment/wieża są pomieszczeniami pomocniczymi; pojemność kond. 5–6 (21/22 i 20/20 j.) nie ma rezerwy, a druga sala spotkań KS ma doświetlenie pośrednie (P-I8 – uzgodnienie z PWIS).
 4. **BIPV jako pokrycie** wobec MPZP § 6 pkt 13 (K-05) wymaga zgodnej interpretacji organu. Minimum 400 kWp wymaga modułów η ≥ 22,5 % (przy 21 % – 391 kWp) oraz BIPV na ścianie segmentu i zadaszeniu ogrodowym.
-5. **Budżet:** 149,2 mln z rezerwą 5 % (7,1 mln) i zapasem 0,8 mln; przy rezerwie 4 % zapas 2,2 mln; waloryzacja do 2027 r. +5 % (156,7 mln – opis w części opisowej). Dźwignie rezerwowe ≈ 0,35 mln. Pozycje [Z] do weryfikacji ofertowej: ściany szczelinowe, AV, stackery, iniekcja strumieniowa.
+5. **Budżet:** 148,98 mln z rezerwą 5 % (7,09 mln) i zapasem 1,02 mln; przy rezerwie 4 % zapas 2,44 mln; waloryzacja do 2027 r. +5 % (156,4 mln – opis w części opisowej). Dźwignia rezerwowa niewykorzystana: filary pd. wieży w ceramice −0,23 mln. Pozycje [Z] do weryfikacji ofertowej: ściany szczelinowe, AV, stackery, iniekcja strumieniowa.
 6. **Woda gruntowa i archeologia** (relikty piwnic) wpływają na harmonogram podziemia.
 7. **Budowla ochronna:** kategoria i pojemność zależą od postanowienia Prezydenta Miasta (art. 95a).
 8. **Okna szczytu WS 5 na piętrach 2–4:** przyjęto wariant najostrożniejszy, pomiar przy wizji.
 9. **Przebudowa przyczółka** (tramwaj, tunel; K-01, K-02): wibroizolacja sali obrad, izolacyjność elewacji pn. i zach.
-10. **Parking:** 110 m.p. wobec 106 wymaganych (ostrożnie 108) – zapas 4; 32 miejsca w stackerach zależnych (przydział parami, eksploatacja i serwis); wzrost PU o > 330 m² wymagałby dodatkowych stanowisk.
+10. **Parking:** 110 m.p. wobec 106 wymaganych (ostrożnie 108) przy PU 8 871 m² – zapas 4; 32 miejsca w stackerach zależnych (przydział parami, eksploatacja i serwis); wzrost PU o > 339 m² wymagałby dodatkowych stanowisk.
 11. **Maz. 19:** podbicie fundamentu szczytu iniekcją strumieniową wymaga zgody właściciela/zarządcy (art. 47 Pb) i odkrywek; bez zgody – kolumny tylko po naszej stronie granicy i monitoring.
 12. **Zajęcie pasa drogowego** Mazowieckiej na ściany prowadzące (zezwolenie ZDiUM) – harmonogram robót podziemnych.
 13. **Retencja zero odpływu** zależy od współczynnika filtracji (badanie k przed PB); wariant zapasowy – dławik ≤ 2 dm³/s.
+14. **Klatki – M.13 pkt 6** mierzy bieg 1,60 m między wewnętrznymi krawędziami poręczy: przy klatkach 3,40 m (2 × 1,60 + 0,20) i pochwytach obustronnych w świetle ≈ 1,46 m; pełna zgodność wymaga ≈ 3,69 m (A – możliwa kosztem przedsionka 3,10 → 2,81 m; B – brak 0,29 m w obrysie) albo pochwytów we wnękach ścian trzonu (brak ≈ 0,05 m) – do uzgodnienia (`_v12_trzony.py` [T7]).
+15. **Ewakuacja S bez tryskaczy:** trzy dojścia jednokierunkowe (10,2 / 13,9 / 14,1 m) mieszczą się w 15 m tylko przy zwiększeniu +50 % za samoczynne oddymianie kuluaru i korytarza publicznego (§ 256 ust. 3) – potwierdzić z rzeczoznawcą; alternatywa: tryskacze w strefie S.
+16. **MDS:** pojemność 560 os. (300 + 260) przyjęta w v1.1 z PU 8 400 m²; przy PU 8 871 m² art. 94 daje 592 os. (+32) – zwiększyć MDS −1 albo przyjąć pojemność z postanowienia organu (art. 95a). **Ukrycie −2 (≤ 300 os.):** środki klatek A i B 19,8 m, obudowy 13,95 m (po I5; v1.1 model pomieszczeń 15,58 m) – sposób pomiaru „2 klatki ≥ 15 m” (rozp. 2025 poz. 932 § 6) do potwierdzenia; alternatywa: szyb awaryjny z −2.
+17. **Holy windowe na kondygnacjach biurowych:** A1/A2 (drzwi pn. wg S-3) 2,15 m i P1/P2 2,20 m (WT § 195 ✔, M.13 3,6 m ✗ – świadome odstępstwo); kuluar S przy trzonie A 1,75 m (M.13 1,80 m).

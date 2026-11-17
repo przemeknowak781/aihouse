@@ -7,7 +7,9 @@ Jedno źródło geometrii dla skryptów _s2_*.py. Uruchomienie z katalogu umwd/:
 Układ (u, v) wieży wg model/koncepcja.json:
     e = 74,606 + 0,97155·u − 0,23684·v ;  n = 40,756 + 0,23684·u + 0,97155·v
     prostokąt u 0–40 × v 0–29,7 + łuk R 14,0 (środek u 26,0; v 15,7) w narożu NE; lico wewnętrzne ścian zewn. 0,50 m.
-Trzony (obrysy stałe): A u 8,30–15,50 × v 12,45–20,85; B u 24,85–31,10 × v 0,50–9,90.
+Trzony: A u 8,30–15,50 × v 11,85–20,85 (v1.2 – wydłużony o 0,60 m na pd. wg I5: klatka A 3,40 × 5,80 m);
+B u 24,85–31,10 × v 0,50–9,90 (obrys bez zmian; v1.2 – klatka B 3,40 × 6,64 m, przedsionek B 3,40 × 2,06 m).
+Dowód biegów i wpływu na kondygnacje: _v12_trzony.py.
 Źródła: koncepcja.json (bryly[W], rdzenie, kondygnacja_sejmiku), program.yaml (SWD, PHS.05, PP.06, IT.02),
 weryfikacja_program.md (K1–K3, I1, I4, D1, D9, D13, D14). Nie korzystano z informacji o pracach ani wynikach konkursu.
 """
@@ -52,7 +54,7 @@ def _inner():
 
 INNER = _inner()                # wnętrze kondygnacji (od lica wewnętrznego), ≈ 1 080,1 m²
 
-CORE_A = box(8.30, 12.45, 15.50, 20.85)
+CORE_A = box(8.30, 11.85, 15.50, 20.85)      # v1.2 (I5): ściana pd. trzonu 0,20 m na v 11,85–12,05
 CORE_B = box(24.85, 0.50, 31.10, 9.90)
 
 # Rzędne
@@ -62,18 +64,18 @@ Z_SPOD_DACHU = 34.15            # spód kratownic (pas dolny) = 6,85 m nad S
 H_SALA = Z_SPOD_DACHU - Z_S
 
 # ------------------------------------------------------------------------------------------------
-# Trzony – proponowany układ wewnętrzny (założenie do scalenia z I5; obrysy bez zmian)
+# Trzony – układ wewnętrzny v1.2 (scalenie S-3 z poprawką I5; dowód: _v12_trzony.py)
 # ------------------------------------------------------------------------------------------------
 CORE_A_CELLS = {
     "A1": box(8.55, 18.05, 10.80, 20.60),      # szyb 2,25 × 2,55 (kabina 1,5 × 2,1; 1 600 kg), drzwi N
     "A2": box(11.00, 18.05, 13.25, 20.60),     # jw.
     "R": box(13.45, 18.05, 15.25, 20.60),      # szyb 1,80 × 2,55 (kabina 1,1 × 2,1; 1 000 kg), drzwi S do przedsionka
-    "klatka_A": box(8.55, 12.70, 11.95, 17.85),
-    "przedsionek_A": box(12.15, 12.70, 15.25, 17.85),
+    "klatka_A": box(8.55, 12.05, 11.95, 17.85),           # 3,40 × 5,80: 2 biegi 1,60 × 10 st. 0,28 + spoczniki 1,50
+    "przedsionek_A": box(12.15, 12.05, 15.25, 17.85),     # 3,10 × 5,80 (MOE 1,5 × 1,5; drzwi R, kuluar/hol, klatka)
 }
 CORE_B_CELLS = {
-    "klatka_B": box(25.10, 0.75, 28.50, 7.10),
-    "przedsionek_B": box(25.10, 7.30, 28.50, 9.65),
+    "klatka_B": box(25.10, 0.75, 28.50, 7.39),            # 3,40 × 6,64: 2 biegi na każdej kondygnacji (P: 2 × 14 st.)
+    "przedsionek_B": box(25.10, 7.59, 28.50, 9.65),       # 3,40 × 2,06 (MOE 1,5 × 1,5 przy ścianie zach.)
     "szachty_B": box(28.70, 0.75, 30.85, 3.95),   # po przeniesieniu dźwigu T do segmentu (I5): wyrzutnia/czerpnia D8
     "P1": box(28.70, 4.15, 30.85, 6.80),        # szyb 2,15 × 2,65 (kabina 1,5 × 2,1 drzwiami na boku 2,1; 1 600 kg), drzwi E
     "P2": box(28.70, 7.00, 30.85, 9.65),        # jw.
@@ -111,8 +113,7 @@ def level_S():
     R["SWD.07"] = box(32.90, 7.30, 37.20, 9.90)
     R["PP.06"] = box(37.40, 7.30, 39.50, 9.90)
     # kuluar (droga ewakuacyjna, EI 30, oddymiany)
-    R["KUL"] = unary_union([box(0.50, 10.10, 39.50, 12.30),
-                            box(8.30, 12.30, 15.50, 12.45),     # przed przedsionkiem A
+    R["KUL"] = unary_union([box(0.50, 10.10, 39.50, 12.30).difference(CORE_A),   # v1.2: przy trzonie A 1,75 m (v 10,10–11,85)
                             box(24.85, 9.90, 31.10, 10.10)])    # przed przedsionkiem B
     # pas zach. – kluby 15 os. (okna zach.) + pasaż przy trzonie A
     R["SWD.12a"] = box(0.50, 12.50, 6.30, 17.70)
@@ -190,7 +191,7 @@ DOORS_S = [
     ("SWD.01", "KUL", (32.6, 12.45), 1.6),         # wyjście SE – do klatki B
     ("SWD.01", "KUL", (28.0, 12.45), 1.0),         # drzwi prezydium (za stołem prezydialnym)
     ("SWD.15", "SWD.02", (6.6, 24.6), 0.9),
-    ("przedsionek_A", "KUL", (13.7, 12.45), 1.2), ("przedsionek_A", "KW.S.03", (15.5, 16.6), 1.2),
+    ("przedsionek_A", "KUL", (13.7, 11.85), 1.2), ("przedsionek_A", "KW.S.03", (15.5, 16.6), 1.2),
     ("przedsionek_B", "KUL", (27.0, 9.9), 1.2),
 ]
 DOORS_ANT = [
@@ -200,7 +201,7 @@ DOORS_ANT = [
     ("przedsionek_A", "SWD.01g", (15.5, 15.6), 1.2),   # 2. droga z galerii → klatka A
     ("przedsionek_B", "KW.A.02", (27.0, 9.9), 1.2),    # 1. droga z galerii → klatka B
     ("KW.A.03", "SWD.02g", (7.3, 15.5), 1.2),          # przedsionek A' – 2. droga z górnego holu
-    ("klatka_A", "KW.A.03", (8.43, 13.6), 1.2),
+    ("klatka_A", "KW.A.03", (8.43, 12.8), 1.2),            # v1.2: w obrębie spocznika kondygnacyjnego (v 12,05–13,55)
 ]
 
 # ------------------------------------------------------------------------------------------------
@@ -343,8 +344,23 @@ PROG = {   # kod: (nazwa, kategoria, program_m2, zakres)
 PHS05_PROG = (45, (35, 60))
 
 
+def _no_holes(p):
+    """Wielokąt z otworem (np. hol SWD.02 wokół schodów) → części bez otworów (cięcie pionowe przez otwór); pole bez zmian."""
+    from shapely.ops import split
+    if not p.interiors:
+        return [p]
+    hx = Polygon(p.interiors[0]).centroid.x
+    mnx, mny, mxx, mxy = p.bounds
+    parts = split(p, LineString([(hx, mny - 1.0), (hx, mxy + 1.0)]))
+    out = []
+    for q in parts.geoms:
+        out += _no_holes(q)
+    return out
+
+
 def poly_list_uv(g, nd=3):
     gs = [g] if g.geom_type == "Polygon" else list(g.geoms)
+    gs = [q for p in gs for q in _no_holes(p)]          # v1.2: JSON zapisuje tylko pierścienie zewnętrzne – bez otworów
     out = []
     for p in gs:
         p = p.simplify(0.0005)

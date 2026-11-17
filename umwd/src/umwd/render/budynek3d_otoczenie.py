@@ -559,22 +559,27 @@ def _torus(R, r, n=40, m=8):
     return V, F
 
 
-def wozek(B, coll, zf):
+def wozek(B, coll, zf, poz=None, kier=None, nazwa=''):
     """Osoba na wózku wjeżdżająca samodzielnie do Bramy Mostowej (oś przekątna, przed drzwiami głównymi R 11):
-    wózek aktywny (koła Ø 0,60 m, obręcze, kółka przednie, rama), sylwetka siedząca z metaballi."""
+    wózek aktywny (koła Ø 0,60 m, obręcze, kółka przednie, rama), sylwetka siedząca z metaballi.
+    ``poz`` (e, n) i ``kier`` (wektor kierunku jazdy) – ustawienie dowolne (np. przy niskiej ladzie w hali)."""
     from mathutils import Vector
     sp = B.spec
     cx, cy = sp.luk['srodek']
     R11 = sp.podcien_R
-    # pozycja: w podcieniu między kolumnami 45° i 60° (kąt łuku liczony od elewacji wsch.), jazda wzdłuż podcienia
-    # ku drzwiom w osi 45° – z placu (W3) widoczna z boku, między kolumnami
-    kat = B.o.get('wozek_kat_luku', 52.0)
-    pk = np.subtract(sp.z_uv(26.0 + 14.0 * math.cos(math.radians(kat)), 15.7 + 14.0 * math.sin(math.radians(kat))),
-                     (cx, cy))
-    a_r = math.atan2(pk[1], pk[0])
-    kier_n = np.array([math.cos(a_r), math.sin(a_r)])
-    p = np.array([cx, cy]) + kier_n * (R11 + 1.4)
-    kier_ruchu = np.array([-kier_n[1], kier_n[0]]) * (1.0 if kat < 45.0 else -1.0)   # stycznie, ku osi 45°
+    if poz is None:
+        # pozycja: w podcieniu między kolumnami 45° i 60° (kąt łuku liczony od elewacji wsch.), jazda wzdłuż
+        # podcienia ku drzwiom w osi 45° – z placu (W3) widoczna z boku, między kolumnami
+        kat = B.o.get('wozek_kat_luku', 52.0)
+        pk = np.subtract(sp.z_uv(26.0 + 14.0 * math.cos(math.radians(kat)), 15.7 + 14.0 * math.sin(math.radians(kat))),
+                         (cx, cy))
+        a_r = math.atan2(pk[1], pk[0])
+        kier_n = np.array([math.cos(a_r), math.sin(a_r)])
+        p = np.array([cx, cy]) + kier_n * (R11 + 1.4)
+        kier_ruchu = np.array([-kier_n[1], kier_n[0]]) * (1.0 if kat < 45.0 else -1.0)   # stycznie, ku osi 45°
+    else:
+        p = np.asarray(poz, float)
+        kier_ruchu = np.asarray(kier, float) / np.linalg.norm(kier)
     z = float(zf([p[0]], [p[1]])[0])
     mat = B.mat('ludzie:okrycie_jasne')      # jasne okrycie – czytelne na tle ciemnego szklenia podcienia
     # wózek – lokalnie: przód +y, koła po bokach x = ±0,30
@@ -601,7 +606,7 @@ def wozek(B, coll, zf):
         else:
             G.pryzma(L.buffer(0.014, cap_style=2), z0, z0 + 0.03, 'metal')
     G.pryzma(Polygon([(-0.25, -0.05), (0.25, -0.05), (0.25, 0.38), (-0.25, 0.38)]), 0.50, 0.54, 'wn_ciemne')
-    ob = G.obiekt('wozek', coll, B.mat, 0.0)
+    ob = G.obiekt('wozek' + nazwa, coll, B.mat, 0.0)
     # sylwetka siedząca (metaballe)
     mb = bpy.data.metaballs.new('siedzacy')
     mb.resolution = mb.render_resolution = 0.018
@@ -655,13 +660,13 @@ def wozek(B, coll, zf):
     for pl in me.polygons:
         pl.use_smooth = True
     me.materials.append(mat)
-    os_ = bpy.data.objects.new('osoba_na_wozku', me)
+    os_ = bpy.data.objects.new('osoba_na_wozku' + nazwa, me)
     coll.objects.link(os_)
     rot = math.atan2(kier_ruchu[1], kier_ruchu[0]) - math.pi / 2     # przodem w kierunku jazdy (+y lokalnie)
     for o in (ob, os_):
         o.location = (p[0], p[1], z + B.DZ)
         o.rotation_euler = (0, 0, rot)
-    B.info['wozek'] = [round(float(p[0]), 2), round(float(p[1]), 2)]
+    B.info['wozek' + nazwa] = [round(float(p[0]), 2), round(float(p[1]), 2)]
 
 
 def ludzie(B, ctx, coll, plac, zf):

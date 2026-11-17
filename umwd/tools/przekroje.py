@@ -349,14 +349,20 @@ def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=()
                     xb = xe + inward * BAL_COF
                     svg.line(P(xb, zr), P(xb, zr + BAL_H), stroke="#4a6a85", sw=0.25)
     # ściany szczelinowe (v1.1: grubość i głębokość z siatka.posadowienie, obrys −1/−2 z koncepcja.json) i pale pod wieżą
+    #  (elementy głębsze niż z_lo przecina rama rysunku – linia urwania)
+    z_dw_bot = max(Z_DW_TOP - H_DW, z_lo)
     for a, b in intervals(UG_K, line, U):
         for x in (a, b - T_DW):
-            svg.poly([P(x, Z_DW_TOP), P(x + T_DW, Z_DW_TOP), P(x + T_DW, Z_DW_TOP - H_DW), P(x, Z_DW_TOP - H_DW)], fill="#3a3632", stroke="none")
+            svg.poly([P(x, Z_DW_TOP), P(x + T_DW, Z_DW_TOP), P(x + T_DW, z_dw_bot), P(x, z_dw_bot)], fill="#3a3632", stroke="none")
+            if z_dw_bot > Z_DW_TOP - H_DW:
+                ya = P(0, z_dw_bot)[1]
+                svg.line((P(x - 0.4, 0)[0], ya + 0.6), (P(x + T_DW + 0.4, 0)[0], ya - 0.6), stroke=INK, sw=0.15)
     z_pal = float(PD["spod"])
+    z_pal_bot = max(z_pal - L_PAL, z_lo)
     for a, b in intervals(TOWER, line, U):
         x = a + 2.0
         while x < b - 1.5:
-            svg.poly([P(x, z_pal), P(x + D_PAL, z_pal), P(x + D_PAL, z_pal - L_PAL), P(x, z_pal - L_PAL)], fill="#ffffff", stroke="#3a3632", sw=0.15, extra='stroke-dasharray="0.8,0.5"')
+            svg.poly([P(x, z_pal), P(x + D_PAL, z_pal), P(x + D_PAL, z_pal_bot), P(x, z_pal_bot)], fill="#ffffff", stroke="#3a3632", sw=0.15, extra='stroke-dasharray="0.8,0.5"')
             x += 4.05
     # groundwater
     for zabs, lab, col in ((117.0, "poziom obliczeniowy wód 117,00", "#3f74a0"), (116.45, "ZWG maks. 116,45", "#5b8db5"), (115.5, "ZWG średnie 115,50", "#8fb3cf")):
@@ -459,7 +465,7 @@ def main():
                               "najniższy punkt pokrycia +36,20 (MPZP strefa A: 35–45 m).",
                               "Sala obrad 6,85 m w świetle, amfiteatr 3 rzędy +0,15/0,30/0,45,",
                               "galeria publiczności +30,90, kratownice stalowe 1,60 m / 19,5 m.",
-                              f"Segment P+4 z tarasem zielonym {fz(Z_TARAS)} (attyka pd. {Z_ATT_SPD + Z0:.2f}),".replace(".", ",", 1),
+                              f"Segment P+4 z tarasem zielonym {fz(Z_TARAS)} (attyka pd. {Z_ATT_SPD + Z0:.2f}".replace("pd. 1", "pd.\u00a01").replace(".", ",").replace("pd,", "pd.") + "),",
                               "balustrada szklana 1,10 m cofnięta 1,5 m od lica pd. (WT § 298).",
                               "Odległość segment – szczyt WS 5: 10,58 m; okno w szczycie",
                               "zachowane (§ 13 WT – analiza nasłonecznienia na planszy 2).",

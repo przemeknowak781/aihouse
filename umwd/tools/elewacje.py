@@ -144,7 +144,7 @@ GLD = "#3d434a"      # szkło w cieniu / podcień
 GLF = "#85847f"      # szkło korony łuku z sitodrukiem ceramicznym 30 % (ton w ton z lamelami, ΔL* ≈ 8)
 REC = "#2e2b29"      # głęboki cień (kond. 6, podcień)
 PV_PL = "#433e3b"    # BIPV płycin wieży w kolorze grafitowego brązu
-PV_PL_L = "#5d5753"  # siatka ogniw / ramek BIPV
+PV_PL_L = "#6a635e"  # siatka ogniw / ramek BIPV
 PV_SEG = mix(C["SEG"], "#9aa3ab", 0.16)   # BIPV szkło satynowane w tonie ceramiki (ściana pd. segmentu)
 LOUV = "#57514c"     # żaluzje czerpni / wyrzutni
 NB_F, NB_S, NB_W = "#f2f0ec", "#8d877f", "#d9dcdf"   # sąsiedzi: tło, kreska, okna
@@ -747,11 +747,14 @@ def elevation(name, title, sub, view_az, faces, ground_pts, mpzp, levels, u_pad=
             svg.text((a[0] - 1.2, a[1] + 0.8), lab, size=1.9, fill="#a8483a", anchor="end")
     # level marks
     x = pad_l - 8
-    for z, lab in levels:
+    y_prev = -1e9
+    for z, lab in sorted(levels, key=lambda q: -q[0]):
         y = P(0, z)[1]
         svg.poly([(x, y), (x - 1.3, y - 1.5), (x + 1.3, y - 1.5)], fill=INK, stroke="none")
         svg.line((x - 2.2, y), (pad_l - 2, y), stroke=INK, sw=0.12)
-        svg.text((x - 2.6, y - 0.4), lab, size=1.85, anchor="end")
+        if y - y_prev >= 2.3:            # w małej skali opis rzędnej zbyt bliskiej poprzedniej – tylko znacznik
+            svg.text((x - 2.6, y - 0.4), lab, size=1.85, anchor="end")
+            y_prev = y
     # titles
     svg.text((pad_l, 9), title, size=4.2, weight=600)
     svg.text((pad_l, 14.5), sub, size=2.3, fill="#4d4842")
@@ -777,8 +780,8 @@ def main():
     O_min, O_max = 137.41 - Z0, 143.33 - Z0       # poza A: 18 / 25 m
     LEVELS = [(Z_ATT_W, f"{fz(Z_ATT_W)} attyka ({fnpm(Z_ATT_W)})"), (Z_ROOF_W, fz(Z_ROOF_W)), (LEV["S"], f"{fz(LEV['S'])} sala Sejmiku"),
               (LEV["6"], fz(LEV["6"])), (Z_GZ1, f"{fz(Z_GZ1)} gzyms ({fnpm(Z_GZ1)})"),
-              (Z_TARAS, f"{fz(Z_TARAS)} taras segmentu ({fnpm(Z_TARAS)})"), (LEV["1"], fz(LEV["1"])),
-              (0.0, f"±0,00 = {fnpm(0.0)} m n.p.m.")]
+              (Z_TARAS, f"{fz(Z_TARAS)} taras ({fnpm(Z_TARAS)})"), (LEV["1"], fz(LEV["1"])),
+              (0.0, f"±0,00 = {fnpm(0.0)}")]
     res = []
 
     def spans(az, near_out=None):

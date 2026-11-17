@@ -1,0 +1,70 @@
+{
+ "nr": 29,
+ "title": "Drawings on spec v1.1: binding M.06 tree balance, terrace canopy, new façade detailing; first interior test",
+ "stages": [
+  [
+   "Organiser materials ✔ (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register ✔ (184 requirements) + checklists",
+   "done"
+  ],
+  [
+   "Site ✔ (zoning, heritage, survey, geotech, trees, neighbours)",
+   "done"
+  ],
+  [
+   "Law ✔ (WT bridge, fire, accessibility, zero-emission)",
+   "done"
+  ],
+  [
+   "Design research ✔ (trends, visuals, boards, façades, costs)",
+   "done"
+  ],
+  [
+   "Programme ✔ (187 offices, PU ≈ 8,600 m²)",
+   "done"
+  ],
+  [
+   "Concept v1.1 ✔ + Sejmik storey S-3 ✔ → merge into v1.2 with stair-A fix and cost check (workflow ►)",
+   "running"
+  ],
+  [
+   "Production ►: drawings → v1.1 (workflow ►); plans re-run after S-2; photomatch tests ✔; extra showcase renders (workflow ►)",
+   "running"
+  ],
+  [
+   "Boards ►: Stage II 8/8 skeletons with true-scale drawings (vis pending); Stage I 2/2; tables F.15/F.14.B ✔ (draft)",
+   "running"
+  ],
+  [
+   "Audit ►: completeness 25/44; structural & functional audit ►; jury later",
+   "running"
+  ]
+ ],
+ "notes": [
+  "Drawings updated to spec v1.1 by a two-implementer workflow with independent spec-consistency checks: site plan now uses the binding M.06 tree survey (25 kept in place, 1 transplanted, 8 removed for the building, 10 dead/dying left to the arborist, 26 new), BIPV canopy over the garden terrace, lowered segment terrace attic with set-back glass balustrade, retention 157 m³.",
+  "Eco scheme and 1:50 façade section carry the v1.1 numbers (PV 415 kWp, EP ≈ 28, 58 boreholes × 91 m + energy walls/piles, dry-cooler in the segment; 0.45 m aluminium reveals instead of granite).",
+  "Interior test of the Citizens' Hall (vis 6) is honest but weak (dark, blank wall, mannequin-like figures) → detailed art-direction critique sent to the 3D agent: axis view to the garden, daylight, terrazzo/granite floor, better people.",
+  "Running: merge of Sejmik storey S-3 into v1.2 (stair-A length, cost margin), structural & functional audit (verification stage), extra showcase renders (scouting stage)."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/zagospodarowanie_v11.png",
+   "caption": "Site plan 1:500 v1.1 — M.06 tree balance, canopy, terrace"
+  },
+  {
+   "path": "umwd/raporty/img/schemat_eko_v11.png",
+   "caption": "Eco scheme v1.1 — PV 415 kWp, EP ≈ 28"
+  },
+  {
+   "path": "umwd/raporty/img/przekroj_1-50_v11.png",
+   "caption": "Façade section 1:50 v1.1 — Al reveals 0.45 m"
+  },
+  {
+   "path": "umwd/raporty/img/W6_hol_test.jpg",
+   "caption": "Vis 6 interior test (weak — being reworked)"
+  }
+ ]
+}

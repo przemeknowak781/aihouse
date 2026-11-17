@@ -1,5 +1,5 @@
 {
- "wersja": "S-2 / wariant „hol z galerią” – 17.11.2026 (opracowanie kondygnacji Sejmiku do scalenia z koncepcja.json)",
+ "wersja": "S-3 / wariant „hol z galerią” – v1.2 (scalona z koncepcja.json; trzony wg I5: _v12_trzony.py) – 17.11.2026",
  "zrodlo": "docs/20_koncepcja/_s2_model.py (geometria), _s2_geometria.py (kontrole i eksport), _s2_sala.py, _s2_ewakuacja.py",
  "uklad": "uv wieży: e = 74,606 + 0,97155·u − 0,23684·v; n = 40,756 + 0,23684·u + 0,97155·v",
  "posadzka": {
@@ -1725,17 +1725,17 @@
  },
  "pomieszczenia": {
   "C-A": {
-   "nazwa": "Trzon A (obrys bez zmian; układ: klatka A + przedsionek z MOE, A1/A2 1 600 kg kab. 1,5×2,1 drzwi pn., R 1 000 kg)",
+   "nazwa": "Trzon A (v1.2: wydłużony na pd. do v 11,85 wg I5; klatka A 3,40×5,80 + przedsionek 3,10×5,80 z MOE, A1/A2 1 600 kg kab. 1,5×2,1 drzwi pn., R 1 000 kg drzwi pd.)",
    "kategoria": "trzon",
    "poziom": "S+ANT",
-   "pow_m2": 60.48,
+   "pow_m2": 64.8,
    "program_m2": null,
    "zakres_m2": null,
    "obrys_uv": [
     [
      [
       15.5,
-      12.45
+      11.85
      ],
      [
       15.5,
@@ -1747,15 +1747,15 @@
      ],
      [
       8.3,
-      12.45
+      11.85
      ]
     ]
    ],
    "obrys_en": [
     [
      [
-      86.716,
-      56.523
+      86.858,
+      55.94
      ],
      [
       84.727,
@@ -1766,14 +1766,14 @@
       62.979
      ],
      [
-      79.721,
-      54.818
+      79.863,
+      54.235
      ]
     ]
    ]
   },
   "C-B": {
-   "nazwa": "Trzon B (obrys bez zmian; układ: klatka B + przedsionek z MOE, P1/P2 1 600 kg kab. 1,5×2,1 drzwi wsch., szachty po dźwigu T)",
+   "nazwa": "Trzon B (obrys bez zmian; klatka B 3,40×6,64 + przedsionek 3,40×2,06 z MOE, P1/P2 1 600 kg kab. 1,5×2,1 drzwi wsch., szachty po dźwigu T)",
    "kategoria": "trzon",
    "poziom": "S+ANT",
    "pow_m2": 58.75,
@@ -2379,7 +2379,7 @@
    "nazwa": "Kuluar – korytarz Sejmiku (droga ewakuacyjna EI 30, oddymiany; okna W i E)",
    "kategoria": "kom",
    "poziom": "S",
-   "pow_m2": 88.13,
+   "pow_m2": 83.81,
    "program_m2": null,
    "zakres_m2": null,
    "obrys_uv": [
@@ -2410,11 +2410,11 @@
      ],
      [
       8.3,
-      12.45
+      11.85
      ],
      [
       15.5,
-      12.45
+      11.85
      ],
      [
       15.5,
@@ -2461,12 +2461,12 @@
       54.672
      ],
      [
-      79.721,
-      54.818
+      79.863,
+      54.235
      ],
      [
-      86.716,
-      56.523
+      86.858,
+      55.94
      ],
      [
       86.752,
@@ -3078,6 +3078,36 @@
       29.2
      ],
      [
+      8.7,
+      29.2
+     ],
+     [
+      8.7,
+      26.6
+     ],
+     [
+      5.1,
+      26.6
+     ],
+     [
+      5.1,
+      24.6
+     ],
+     [
+      8.7,
+      24.6
+     ],
+     [
+      8.7,
+      20.85
+     ]
+    ],
+    [
+     [
+      8.7,
+      29.2
+     ],
+     [
       12.45,
       29.2
      ],
@@ -3092,6 +3122,26 @@
      [
       21.7,
       20.85
+     ],
+     [
+      8.7,
+      20.85
+     ],
+     [
+      8.7,
+      24.6
+     ],
+     [
+      12.3,
+      24.6
+     ],
+     [
+      12.3,
+      26.6
+     ],
+     [
+      8.7,
+      26.6
      ]
     ]
    ],
@@ -3130,6 +3180,36 @@
       69.244
      ],
      [
+      76.143,
+      71.186
+     ],
+     [
+      76.759,
+      68.66
+     ],
+     [
+      73.261,
+      67.807
+     ],
+     [
+      73.735,
+      65.864
+     ],
+     [
+      77.232,
+      66.717
+     ],
+     [
+      78.12,
+      63.073
+     ]
+    ],
+    [
+     [
+      76.143,
+      71.186
+     ],
+     [
       79.786,
       72.074
      ],
@@ -3144,6 +3224,26 @@
      [
       90.751,
       66.152
+     ],
+     [
+      78.12,
+      63.073
+     ],
+     [
+      77.232,
+      66.717
+     ],
+     [
+      80.73,
+      67.569
+     ],
+     [
+      80.256,
+      69.512
+     ],
+     [
+      76.759,
+      68.66
      ]
     ]
    ]
@@ -4819,7 +4919,7 @@
   ]
  },
  "trzony_uklad": {
-  "zalozenie": "do scalenia z poprawką I5 (obrysy trzonów bez zmian)",
+  "zalozenie": "v1.2 – poprawka I5 (_v12_trzony.py): trzon A u 8,30–15,50 × v 11,85–20,85 (wydłużony o 0,60 m na pd.), klatka A 3,40 × 5,80 m; trzon B bez zmiany obrysu, klatka B 3,40 × 6,64 m, przedsionek B 3,40 × 2,06 m",
   "A": {
    "A1": [
     [
@@ -4878,7 +4978,7 @@
    "klatka_A": [
     [
      11.95,
-     12.7
+     12.05
     ],
     [
      11.95,
@@ -4890,13 +4990,13 @@
     ],
     [
      8.55,
-     12.7
+     12.05
     ]
    ],
    "przedsionek_A": [
     [
      15.25,
-     12.7
+     12.05
     ],
     [
      15.25,
@@ -4908,7 +5008,7 @@
     ],
     [
      12.15,
-     12.7
+     12.05
     ]
    ]
   },
@@ -4920,11 +5020,11 @@
     ],
     [
      28.5,
-     7.1
+     7.39
     ],
     [
      25.1,
-     7.1
+     7.39
     ],
     [
      25.1,
@@ -4934,7 +5034,7 @@
    "przedsionek_B": [
     [
      28.5,
-     7.3
+     7.59
     ],
     [
      28.5,
@@ -4946,7 +5046,7 @@
     ],
     [
      25.1,
-     7.3
+     7.59
     ]
    ],
    "szachty_B": [
@@ -5325,7 +5425,7 @@
     "do": "KUL",
     "uv": [
      13.7,
-     12.45
+     11.85
     ],
     "szer_m": 1.2
    },
@@ -5408,7 +5508,7 @@
     "do": "KW.A.03",
     "uv": [
      8.43,
-     13.6
+     12.8
     ],
     "szer_m": 1.2
    }
@@ -5417,8 +5517,8 @@
  "bilans": {
   "wnetrze_S_m2": 1080.19,
   "pomieszczenia_S_m2": 789.81,
-  "komunikacja_S_m2": 128.05,
-  "trzony_m2": 119.23,
+  "komunikacja_S_m2": 123.73,
+  "trzony_m2": 123.55,
   "sciany_wewn_m2": 43.1,
   "antresola_m2": 297.88,
   "program_suma_m2": 1106,
