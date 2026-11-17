@@ -166,6 +166,48 @@ def _smooth(x, a, b):
     return t * t * (3 - 2 * t)
 
 
+def przytnij_do_obrysu(D, kier, loc, niebo, zapas=0.3):
+    """Piksele, których punkt (z passu Depth) leży w obrysie brył projektowanych poniżej attyki: D := odległość, przy
+    której promień wchodzi w obrys (przecięcie odcinków w rzucie, wektorowo). Zmienia D w miejscu; zwraca liczbę pikseli."""
+    import shapely
+    from shapely.ops import unary_union
+    bryly, _ = U.obrysy_bryl()
+    F = unary_union([P.buffer(zapas, join_style='mitre') for P, zt in bryly.values()])
+    zt_max = max(zt for P, zt in bryly.values()) + 0.05 + 1.0
+    Px = loc[0] + D * kier[..., 0]
+    Py = loc[1] + D * kier[..., 1]
+    Pz = loc[2] + D * kier[..., 2]
+    kand = (~niebo) & (Pz < zt_max)
+    jj, ii = np.nonzero(kand)
+    w = shapely.contains_xy(F, Px[jj, ii], Py[jj, ii])
+    jj, ii = jj[w], ii[w]
+    if not len(jj):
+        return 0
+    pier = [F] if F.geom_type == 'Polygon' else list(F.geoms)
+    A, B = [], []
+    for G in pier:
+        for r in [G.exterior] + list(G.interiors):
+            c = np.array(r.coords)
+            A.append(c[:-1])
+            B.append(c[1:])
+    A, B = np.concatenate(A), np.concatenate(B)
+    E = B - A                                                   # (m, 2)
+    Wv = A - loc[None, :2]                                      # (m, 2)
+    t_min = np.full(len(jj), np.inf)
+    for k0 in range(0, len(jj), 20000):
+        sl = slice(k0, k0 + 20000)
+        d = kier[jj[sl], ii[sl], :2]                            # (n, 2)
+        den = d[:, None, 0] * E[None, :, 1] - d[:, None, 1] * E[None, :, 0]
+        with np.errstate(divide='ignore', invalid='ignore'):
+            t = (Wv[None, :, 0] * E[None, :, 1] - Wv[None, :, 1] * E[None, :, 0]) / den
+            sg = (Wv[None, :, 0] * d[:, None, 1] - Wv[None, :, 1] * d[:, None, 0]) / den
+        ok = (np.abs(den) > 1e-9) & (t > 0) & (sg >= 0) & (sg <= 1)
+        t_min[sl] = np.where(ok, t, np.inf).min(axis=1)
+    fin = np.isfinite(t_min) & (t_min < D[jj, ii])
+    D[jj[fin], ii[fin]] = t_min[fin]
+    return int(fin.sum())
+
+
 def _post_przed_p(png, passy, cfg, raport):
     mg = (cfg or {}).get('mgla') or {}
     if mg.get('tryb') != 'woda':
@@ -202,6 +244,9 @@ def _post_przed_p(png, passy, cfg, raport):
         D = np.minimum(start + mist * gleb, dmax)
         zrodlo = 'Mist'
     D = np.where(niebo, dmax, D)
+    # szyby budynku: Depth podaje wnętrze za szkłem (hol, przejście do ogrodu) – odległość przycinana do wejścia
+    # promienia w obrys brył (lico elewacji), bo mgła leży przed szybą, nie za nią
+    n_szyby = przytnij_do_obrysu(D, kier, loc, niebo)
     zp = loc[2] + D * kier[..., 2]
     Hs, rho0 = float(mg.get('Hs', 3.0)), float(mg.get('rho0', 0.0045))
     hc = max(loc[2] - Z_WODA, 0.0)
@@ -227,7 +272,7 @@ def _post_przed_p(png, passy, cfg, raport):
     Image.fromarray(out).save(png)
     woda = np.abs(idx - FK.IDX_WODY) < 0.5
     f = 1 - T
-    info = {'mgla_woda': dict(zrodlo_odleglosci=zrodlo, Hs_m=Hs, rho0_1_m=rho0, rampa_m=[d0, d1], dmax_m=dmax,
+    info = {'mgla_woda': dict(zrodlo_odleglosci=zrodlo, piksele_przyciete_do_lica=n_szyby, Hs_m=Hs, rho0_1_m=rho0, rampa_m=[d0, d1], dmax_m=dmax,
                               barwa_lin=[round(float(x), 4) for x in fog],
                               luminancja_nieba_przy_horyzoncie=round(Lh, 4),
                               udzial_mgly_max=round(float(f.max()), 3),
