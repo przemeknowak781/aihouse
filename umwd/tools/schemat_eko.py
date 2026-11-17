@@ -131,7 +131,7 @@ for big, small in (("EP ≈ 26 kWh/(m²·rok)", "bez PV 60; próg ZEB 85, EPmax 
     svg.text((x0, y + 3.3), small, size=1.85, fill="#4d4842")
     y += 9.0
 
-out = PR.ROOT / "build" / "rysunki" / "schemat_eko.svg"
+out = PR.ROOT / "build" / "rysunki" / f"schemat_eko_1-{PR.SCALE}.svg"
 out.write_text(svg.render(), encoding="utf-8")
 html = PR.ROOT / "docs" / "70_rysunki" / "podglady" / "schemat_eko.html"
 html.write_text(f'<!doctype html><html><head><meta charset="utf-8"><style>@page{{size:{svg.w_mm + 10:.0f}mm {svg.h_mm + 10:.0f}mm;margin:0}}body{{margin:0;padding:5mm}}</style></head><body>{svg.render()}</body></html>', encoding="utf-8")

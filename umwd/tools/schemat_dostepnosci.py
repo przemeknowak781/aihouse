@@ -53,7 +53,9 @@ def cen(r):
     return (c.x, c.y)
 
 
-v = View(40, 10, 130, 92, 400)
+import os
+SCALE_D = int(os.environ.get("UMWD_SCALE", "400"))
+v = View(40, 10, 130, 92, SCALE_D)
 RIGHT = 150
 svg = Svg(v.w_mm + RIGHT, max(v.h_mm, 225) + 16)
 u = S["ulice_i_sytuacja"]
@@ -144,13 +146,13 @@ for r in HL.get("loop", []):
 for r in HL.get("lift", []):
     mark(r, "D", BLUE)
 north_arrow(svg, (v.w_mm - 10, 12), 9)
-scale_bar(svg, (8, v.h_mm + 8), 400, (0, 5, 10, 20))
+scale_bar(svg, (8, v.h_mm + 8), SCALE_D, (0, 5, 10, 20))
 
 # ---------------------------------------------------------------- right panel: legend + storey matrix (from model)
 lx = v.w_mm + 8
 y = 10
 svg.text((lx, y), "SCHEMAT DOSTĘPNOŚCI", size=3.8, weight=600); y += 5
-svg.text((lx, y), "parter z otoczeniem 1:400 · wszystkie wejścia w poziomie chodnika (±0,00 = 119,30)", size=2.0, fill="#4d4842"); y += 7
+svg.text((lx, y), f"parter z otoczeniem 1:{SCALE_D} · wszystkie wejścia w poziomie chodnika (±0,00 = 119,30)", size=2.0, fill="#4d4842"); y += 7
 leg = [("circle", GREEN, "1–8", "wejścia bezprogowe, drzwi automatyczne"), ("line", YEL, "", "ścieżki dotykowe: przystanki na przyczółku, wejścia, garaż → informacja → dźwigi"),
        ("sq", YEL, "T", "tyflomapy przy wejściach i informacji; niski blat informacji i kancelarii"),
        ("mk", ACC, "K", "komfortka 3,0 × 4,0 m przy wejściu głównym"), ("mk", "#b5534a", "W", "WC dostępne (w każdej strefie i na każdej kondygnacji)"),
@@ -206,7 +208,7 @@ for t in ["Sala obrad: prezydium i mównica na poziomie podłogi, pochylnie ≤ 
           "Ogród Województwa bez barier (spadki ≤ 4 %), brama ogrodowa w poziomie chodnika."]:
     svg.text((lx, y), t, size=1.9, fill="#3a3632"); y += 3.1
 
-out = ROOT / "build" / "rysunki" / "schemat_dostepnosci.svg"
+out = ROOT / "build" / "rysunki" / f"schemat_dostepnosci_1-{SCALE_D}.svg"
 out.write_text(svg.render(), encoding="utf-8")
 html = ROOT / "docs" / "70_rysunki" / "podglady" / "schemat_dostepnosci.html"
 html.write_text(f'<!doctype html><html><head><meta charset="utf-8"><style>@page{{size:{svg.w_mm + 10:.0f}mm {svg.h_mm + 10:.0f}mm;margin:0}}body{{margin:0;padding:5mm}}</style></head><body>{svg.render()}</body></html>', encoding="utf-8")

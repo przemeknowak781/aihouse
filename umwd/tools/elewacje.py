@@ -395,6 +395,14 @@ def elevation(name, title, sub, view_az, faces, ground_pts, mpzp, levels, u_pad=
             if cut is None or x * dd[0] + y * dd[1] >= cut - 0.5:
                 us.append(u_of(view_az, x, y))
     u0, u1 = min(us) - u_pad, max(us) + u_pad
+    # tight range: dry-run the painter to get the extent of what is actually visible (+ cut profile)
+    _tmp = Svg(10, 10)
+    _a, _b = draw_faces(_tmp, faces, view_az, lambda u, z: (u, z), cut=cut)
+    if _a < _b:
+        u0, u1 = _a - 2.0, _b + 2.0
+    if cut is not None:
+        u0 = min(u0, min(us) - 1.0); u1 = max(u1, max(us) + 1.0)
+    pad_l = 30
     W = pad_l + (u1 - u0) * k + pad_r
     H = pad_t + 48 * k + pad_b
     svg = Svg(W, H)
@@ -473,8 +481,8 @@ def main():
         return lines
 
     az = 256.3
-    res.append(elevation("E", "ELEWACJA WSCHODNIA", "od Wybrzeża J. Słowackiego i Odry · z kamienicami Wybrzeże J. Słowackiego 5 i 6", az,
-                         ours + neighbour_faces({"Wybrzeze J. Slowackiego 5", "Wybrzeze J. Slowackiego 6"}),
+    res.append(elevation("E", "ELEWACJA WSCHODNIA", "od Wybrzeża J. Słowackiego (Oława / Odra) · z kamienicą Wybrzeże J. Słowackiego 5", az,
+                         ours + neighbour_faces({"Wybrzeze J. Slowackiego 5"}),
                          [(118.3, 10.0, 118.85), (118.3, 28.2, 119.0), (115.98, 39.93, 118.91), (113.48, 50.18, 119.18), (109.75, 65.48, 119.44), (104.0, 76.0, 119.40)],
                          spans(az), LEVELS, debug=DEBUG))
     az = 166.3
@@ -482,8 +490,8 @@ def main():
                          [(61.25, 66.05, 119.41), (67.57, 69.61, 119.41), (92.83, 75.77, 119.44), (109.75, 65.48, 119.44), (116.0, 40.0, 119.18), (118.5, 28.0, 119.0)],
                          spans(az), LEVELS, debug=DEBUG))
     az = 102.4
-    res.append(elevation("W", "ELEWACJA ZACHODNIA", "od ul. Mazowieckiej · z kamienicami Mazowiecka 19 i 17 (pierzeja)", az,
-                         ours + neighbour_faces({"Mazowiecka 19", "Mazowiecka 17"}),
+    res.append(elevation("W", "ELEWACJA ZACHODNIA", "od ul. Mazowieckiej · z kamienicą Mazowiecka 19", az,
+                         ours + neighbour_faces({"Mazowiecka 19"}),
                          [(40.0, -25.0, 118.45), (44.64, -8.38, 118.51), (48.84, 9.68, 118.40), (61.25, 66.05, 119.41), (64.0, 72.0, 119.45)],
                          spans(az), LEVELS, debug=DEBUG))
     az = 346.3
