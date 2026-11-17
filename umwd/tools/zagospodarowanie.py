@@ -82,7 +82,7 @@ model_poly(svg, v, [(98.5, 38.0), (104.0, 38.3), (104.0, 38.9), (98.5, 38.6)], f
 trace = LineString([(63.4, 79.6), (75.0, 81.0), (86.0, 81.9), (93.5, 81.6), (98.6, 79.6)])
 svg.poly([v.p(*c) for c in trace.coords], fill="none", stroke="#8b6a3e", sw=0.55, close=False)
 svg.poly([v.p(*c) for c in trace.coords], fill="none", stroke="#f6efe2", sw=0.18, close=False)
-bench_c = (104.0, 73.5)
+bench_c = (105.54, 75.73)   # R 16,5 m od środka łuku (poza podcieniem R 11–14), ten sam kierunek
 svg.circle(v.p(*bench_c), v.mm(2.2), fill="none", stroke="#6f6a63", sw=0.35)
 
 # ---------------- shadows (sun from SW, 45°): existing + new

@@ -22,6 +22,26 @@ from umwd.render import blib
 from umwd.render.budynek3d import Geo, SITE_JSON
 
 
+# ============================================================================================== plan zagospodarowania
+# Położenia elementów jak na planszy zagospodarowania (tools/zagospodarowanie.py) – 3D zgodne z rysunkiem.
+PLAN = dict(
+    slad_1934=[(63.4, 79.6), (75.0, 81.0), (86.0, 81.9), (93.5, 81.6), (98.6, 79.6)],   # ślad pierzei z 1934 r.
+    lawa_okragla=((104.0, 73.5), 2.2),
+    lipy=[(66.0, 79.4), (71.5, 80.3), (77.0, 81.0), (82.5, 81.6)],                       # szpaler 4 lip
+    drzewa_pas=[(99.8, 37.2), (103.8, 37.6)],                                            # pas wejścia od bulwaru
+    drzewa_ogrod=[(64.5, 30.0), (70.5, 33.5), (89.0, 25.0), (93.0, 31.0), (73.0, 11.0), (90.5, 9.0)],
+    lawa_pas=[(98.5, 38.0), (104.0, 38.3), (104.0, 38.9), (98.5, 38.6)],
+    ogrod_deszczowy=[(84.5, 2.0), (94.0, 2.4), (93.4, 16.6), (84.6, 16.0)],
+    plac_zabaw=[(87.5, -5.5), (95.5, -5.2), (95.5, 0.8), (87.5, 0.6)],
+    pergola=(95.2, 5.0, 3.2, 8),                       # x, y0, krok, liczba słupów (przy murze kamienic)
+    sciezki=[[(84.32, 43.12), (83.0, 34.0), (80.6, 20.0), (77.5, 6.0), (76.0, -4.0)],
+             [(59.4, 23.6), (70.0, 22.5), (80.6, 20.0), (95.0, 27.0), (99.0, 36.0)],
+             [(83.0, 34.0), (97.5, 37.0)]],
+    sciezki_szer=2.2,
+    drzewa_rzeka_n=(16.0, 24.0, 32.0, 40.0, 48.0, 56.0),   # 6 drzew na chodniku od rzeki (1,4 m od krawężnika)
+)
+
+
 # ============================================================================================== posadzki
 def _z_posadzki(B, ctx, strefa0, brama):
     """Funkcja rzędnej posadzki (wzgl. ±0,00): teren + 0,03 m (nawierzchnie kontekstu pod posadzką są wycinane);
@@ -79,20 +99,14 @@ def zagospodarowanie(B):
     plac = unary_union([plac, strefa0])
     if ctx is not None and getattr(ctx, 'jezdnie_poly', None) is not None:
         plac = plac.difference(ctx.jezdnie_poly.buffer(0.3))
-    # ścieżki ogrodu (cegła z wykopu): brama ogrodowa → wejście ogrodowe wieży → pas od bulwaru
-    bc = brama.centroid
-    ogr_d = sp.z_uv(10.0, -1.5)
-    pas_c = sp.z_uv(30.0, -13.5)
-    pk = [sp.do_uv(*brama.exterior.coords[i]) for i in range(4)]
-    wyj_brama = sp.z_uv(max(c[0] for c in pk) + 2.2, sum(c[1] for c in pk) / 4)
-    sciezki = unary_union([
-        LineString([wyj_brama, sp.z_uv(-2.0, -9.0), sp.z_uv(6.0, -6.0), ogr_d]).buffer(1.2, cap_style=1),
-        LineString([ogr_d, sp.z_uv(16.0, -9.0), pas_c, sp.z_uv(44.0, -14.0)]).buffer(1.2, cap_style=1),
-    ]).intersection(inw).difference(foot).difference(plac.buffer(-0.05))
+    # ścieżki ogrodu (cegła z wykopu) wg planszy zagospodarowania
+    ogrod_poly = inw.difference(foot)
+    sciezki = unary_union([LineString(l).buffer(PLAN['sciezki_szer'] / 2, cap_style=2) for l in PLAN['sciezki']])
+    sciezki = sciezki.intersection(ogrod_poly).difference(plac.buffer(-0.05))
     # ogródki (zachowane, 29 drzew) – ścieżki je omijają
     try:
         ogr = Polygon(site['granice']['ogrodki_przydomowe']['pts']).buffer(0)
-        sciezki = sciezki.difference(ogr.buffer(0.3))
+        sciezki = sciezki.difference(ogr.buffer(0.1))
     except Exception:
         ogr = None
     zf = _z_posadzki(B, ctx, strefa0, brama)
@@ -109,22 +123,26 @@ def zagospodarowanie(B):
     B.info['posadzki_m2'] = {'plac_i_opaski': round(plac.area, 1), 'sciezki': round(sciezki.area, 1)}
     # --- przebudowa trawnika kontekstu (bez trawy pod posadzkami i budynkiem)
     if ctx is not None:
-        _przebuduj_trawnik(B, ctx, kon, unary_union([plac, sciezki, foot, brama]), plac)
+        deszcz = Polygon(PLAN['ogrod_deszczowy']).intersection(inw).difference(foot)
+        zabawa = Polygon(PLAN['plac_zabaw']).intersection(inw).difference(foot)
+        _przebuduj_trawnik(B, ctx, kon, unary_union([plac, sciezki, foot, brama, deszcz, zabawa]), plac)
+        _ogrod(B, ctx, coll, deszcz, zabawa, zf)
     # --- drzewa
     if ctx is not None:
         _drzewa(B, ctx, coll, foot, skwer, plac)
-    # --- ława okrągła przy łuku i ławy w pasie od bulwaru
+    # --- ława okrągła przy łuku, ława w pasie od bulwaru, ślad pierzei 1934, stojaki rowerowe
     G = Geo()
-    c = sp.z_uv(22.0, 35.6)
-    ring = Point(*c).buffer(2.4, 64).difference(Point(*c).buffer(1.85, 64))
+    c, rr = PLAN['lawa_okragla']
+    ring = Point(*c).buffer(rr, 64).difference(Point(*c).buffer(rr - 0.5, 64))
     zc = float(zf([c[0]], [c[1]])[0])
     G.pryzma(ring, zc - 0.3, zc + 0.45, 'granit')
-    for f in (0.50, 0.68):
-        p0, p1 = _pas_segmentu(B, f, 2.7), _pas_segmentu(B, f + 0.14, 2.7)
-        q = LineString([p0, p1]).buffer(0.25, cap_style=2)
-        zq = float(zf([q.centroid.x], [q.centroid.y])[0])
-        G.pryzma(q, zq - 0.3, zq + 0.45, 'granit')
-    G.obiekt('lawy', coll, B.mat, B.DZ)
+    G.pryzma(Point(*c).buffer(rr - 0.5, 48), zc - 0.2, zc + 0.02, 'sedum')
+    q = Polygon(PLAN['lawa_pas'])
+    zq = float(zf([q.centroid.x], [q.centroid.y])[0])
+    G.pryzma(q, zq - 0.3, zq + 0.45, 'granit')
+    _slad_1934(B, G, zf)
+    _stojaki(B, G, zf)
+    G.obiekt('lawy_slad1934_stojaki', coll, B.mat, B.DZ)
     # --- pnącza (winobluszcz na linkach) na ścianie pd. segmentu
     pnacza(B, coll)
     # --- ludzie
@@ -177,6 +195,104 @@ def _przebuduj_trawnik(B, ctx, kon, wyciecie, plac):
             bm.to_mesh(kr.data)
         bm.free()
     B.info['czasy_s']['nawierzchnie_przebudowa'] = round(time.time() - t0, 1)
+
+
+def _drzewa_rzeka(ctx):
+    """6 drzew na chodniku od rzeki (Wybrzeże): 1,4 m za krawężnikiem wsch. (jak w tools/zagospodarowanie.py)."""
+    U = ctx.site['ulice_i_sytuacja']
+    kr = unary_union([LineString(it['pts']) for it in U['krawezniki'] if len(it.get('pts', [])) >= 2])
+    out = []
+    for nn in PLAN['drzewa_rzeka_n']:
+        x = kr.intersection(LineString([(123.5, nn), (131.6, nn)]))
+        if not x.is_empty:
+            out.append((x.bounds[2] + 1.4, nn))
+    return out
+
+
+def _slad_1934(B, G, zf, szer=0.60, listwa=0.06):
+    """Ślad pierzei z 1934 r. w posadzce Placu Mostowego: pas ciemniejszego granitu 0,60 m z listwą z brązu
+    w osi i tablicą z planem kwartału (brąz) na zach. końcu."""
+    L = LineString(PLAN['slad_1934'])
+    pas = L.buffer(szer / 2, cap_style=2, join_style=2).difference(B.foot)
+    lis = L.buffer(listwa / 2, cap_style=2, join_style=2).difference(B.foot)
+    from umwd.render.context import siatka_drapowana
+    for geom, mat, dz in ((pas.difference(lis), 'granit:ciemny', 0.004), (lis, 'litery', 0.006)):
+        V, F = siatka_drapowana(geom, lambda e, n, dz=dz: zf(e, n) + dz, cell=0.5, skirt=0.02)
+        for f in F:
+            pts = [V[i] for i in f]
+            G.face(pts, [(p[0], p[1]) for p in pts], mat)
+    p0, p1 = np.array(PLAN['slad_1934'][0]), np.array(PLAN['slad_1934'][1])
+    t = (p1 - p0) / np.linalg.norm(p1 - p0)
+    nrm = np.array([-t[1], t[0]])
+    c = p0 + t * 1.6 + nrm * 1.0
+    tab = Polygon([c - t * 0.6 - nrm * 0.4, c + t * 0.6 - nrm * 0.4, c + t * 0.6 + nrm * 0.4, c - t * 0.6 + nrm * 0.4])
+    zt = float(zf([c[0]], [c[1]])[0])
+    G.pryzma(tab, zt - 0.05, zt + 0.008, 'litery')
+
+
+def _stojaki(B, G, zf, n=10, rozstaw=1.0, h=0.85, szer=0.70, rura=0.05):
+    """Stojaki rowerowe (U, stal nierdzewna → metal) dla gości: 10 szt. (20 rowerów) na Placu Mostowym, równolegle
+    do elewacji pn. wieży, 2,8 m od lica (rząd przy zach. części placu)."""
+    sp = B.spec
+    for k in range(n):
+        u = 1.2 + k * rozstaw
+        a = np.array(sp.z_uv(u, 29.7 + 2.8 - szer / 2))
+        b = np.array(sp.z_uv(u, 29.7 + 2.8 + szer / 2))
+        z0 = float(zf([a[0]], [a[1]])[0])
+        for p in (a, b):
+            G.pryzma(Point(*p).buffer(rura / 2, 8), z0 - 0.2, z0 + h, 'metal')
+        lin = LineString([a, b]).buffer(rura / 2, cap_style=2)
+        G.pryzma(lin, z0 + h - rura, z0 + h, 'metal')
+
+
+def _ogrod(B, ctx, coll, deszcz, zabawa, zf):
+    """Ogród deszczowy (niecka −0,25 m z roślinnością wilgociolubną i kamieniami na brzegu), plac zabaw (piasek,
+    drewniana konstrukcja), pergola przy murze kamienic."""
+    from umwd.render import context
+    G = Geo()
+    if not deszcz.is_empty:
+        z = lambda e, n: ctx.teren.z(e, n) - B.DZ
+        from umwd.render.context import siatka_drapowana
+        V, F = siatka_drapowana(deszcz.buffer(-0.4), lambda e, n: z(e, n) - 0.22, cell=1.0, skirt=0.25)
+        for f in F:
+            pts = [V[i] for i in f]
+            G.face(pts, [(p[0], p[1]) for p in pts], 'ogrod_deszczowy')
+        V, F = siatka_drapowana(deszcz.difference(deszcz.buffer(-0.4)), lambda e, n: z(e, n) - 0.05, cell=0.5,
+                                skirt=0.25)
+        for f in F:
+            pts = [V[i] for i in f]
+            G.face(pts, [(p[0], p[1]) for p in pts], 'zwir')
+        # kępy traw i bylin (prototypy krzewów kontekstu, małe)
+        P = context._prototypy(ctx)
+        x0, y0, x1, y1 = deszcz.bounds
+        rng = np.random.default_rng(31)
+        for i in range(70):
+            q = Point(rng.uniform(x0, x1), rng.uniform(y0, y1))
+            if not deszcz.buffer(-0.6).contains(q):
+                continue
+            pr = P['krzew'][i % len(P['krzew'])][0]
+            context._instancja(coll, pr, (q.x, q.y, ctx.teren.z1(q.x, q.y) - 0.2), rng.uniform(0, 6.28),
+                               rng.uniform(0.25, 0.45), 'deszczowy_%d' % i)
+    if not zabawa.is_empty:
+        zc = zabawa.centroid
+        z0 = float(ctx.teren.z1(zc.x, zc.y) - B.DZ)
+        G.pryzma(zabawa, z0 - 0.3, z0 + 0.04, 'piasek')
+        # drewniana konstrukcja: 4 słupy, podest, daszek
+        c = np.array([zc.x, zc.y])
+        for dx, dy in ((-1.0, -0.8), (1.0, -0.8), (1.0, 0.8), (-1.0, 0.8)):
+            G.pryzma(Point(*(c + [dx, dy])).buffer(0.07, 6), z0, z0 + 2.4, 'wn_drewno:jasne')
+        G.pryzma(Point(*c).buffer(1.15, 4), z0 + 1.0, z0 + 1.08, 'wn_drewno:jasne')
+        G.pryzma(Point(*c).buffer(1.25, 4), z0 + 2.4, z0 + 2.48, 'wn_drewno:jasne')
+    x, y0, krok, n = PLAN['pergola']
+    zp = float(ctx.teren.z1(x, y0 + krok * n / 2) - B.DZ)
+    for k in range(n):
+        G.pryzma(Point(x, y0 + k * krok).buffer(0.08, 4), zp - 0.3, zp + 2.6, 'wn_drewno')
+    G.pryzma(LineString([(x, y0 - 0.3), (x, y0 + krok * (n - 1) + 0.3)]).buffer(0.08, cap_style=2), zp + 2.6,
+             zp + 2.78, 'wn_drewno')
+    for k in range(int(krok * (n - 1) / 0.6) + 1):
+        yy = y0 + k * 0.6
+        G.pryzma(LineString([(x - 1.2, yy), (x + 0.3, yy)]).buffer(0.03, cap_style=2), zp + 2.78, zp + 2.86, 'wn_drewno')
+    G.obiekt('ogrod_deszczowy_plac_zabaw', coll, B.mat, B.DZ)
 
 
 def pnacza(B, coll, rozstaw=2.9, seed=7):
@@ -283,17 +399,14 @@ def _drzewa(B, ctx, coll, foot, skwer, plac):
         pr = P[typ][int(h * 97) % len(P[typ])][0]
         context._instancja(coll, pr, (e, n, ctx.teren.z1(e, n)), B.rng.uniform(0, 6.28), sk, 'drzewo_zach_' + nr)
         n_zach += 1
-    # nowe: 4 lipy na Placu Mostowym (szpaler w zach. części), 2 w pasie od bulwaru, 6 w ogrodzie
-    nowe = [sp.z_uv(u, 35.2) for u in (-3.0, 3.0, 9.0, 15.0)]
-    nowe += [_pas_segmentu(B, 0.30, 3.0)]
-    nowe += [sp.z_uv(u, v) for u, v in ((-12.0, -6.0), (-6.0, -13.0), (2.0, -16.0), (14.0, -18.0), (20.0, -6.5),
-                                         (-14.0, -18.0))]
+    # nowe (plansza zagospodarowania): 4 lipy wzdłuż śladu 1934, 2 w pasie od bulwaru, 6 w ogrodzie, 6 przy rzece
+    nowe = list(PLAN['lipy']) + list(PLAN['drzewa_pas']) + list(PLAN['drzewa_ogrod']) + _drzewa_rzeka(ctx)
     n_now = 0
     for i, (e, n) in enumerate(nowe):
         pt = Point(e, n)
         if foot.buffer(1.5).contains(pt) or not ctx.ramka.contains(pt):
             continue
-        typ = 'male' if i < 6 else ('srednie' if i % 2 else 'male')
+        typ = 'male' if (i < 6 or i >= 12) else ('srednie' if i % 2 else 'male')
         sk = 1.25 if i < 4 else (1.1 if typ == 'male' else 0.6)
         pr = P[typ][i % len(P[typ])][0]
         context._instancja(coll, pr, (e, n, ctx.teren.z1(e, n) + 0.1), B.rng.uniform(0, 6.28), sk, 'drzewo_nowe_%d' % i)

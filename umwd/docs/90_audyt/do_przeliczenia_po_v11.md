@@ -18,3 +18,4 @@
 - [ ] elewacje, przekroje, PZT, aksonometria, schematy, nasłonecznienie, rzuty bloków – przegenerować na v1.1; PZT: drzewa wg M.06 (bilans v1.1), rampa/brama, ścieżki.
 - [ ] tabele: `tools/tabele_konkursowe.py` (F.14.B z kosztów v1.1; usunąć znacznik „wersja robocza”).
 - [ ] F.14.B: VAT 8 % w poz. 7.8 i 15.7 – zweryfikować (budynek biurowy → 23 %); podział instalacji elektrycznych/teletechnicznych [Z] – opisać założenie.
+- [ ] Agent rzutów: okrągła ława na placu przeniesiona do (105,54; 75,73) – R 16,5 m (poza podcieniem); przeliczyć parter z otoczeniem.

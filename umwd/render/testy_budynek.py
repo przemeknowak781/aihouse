@@ -137,6 +137,7 @@ def main():
     ap.add_argument('--prefix', default='budynek_test_')
     ap.add_argument('--out', default=str(OUT))
     ap.add_argument('--tylko-kontrola', action='store_true', help='bez renderu – tylko kontrola kamer')
+    ap.add_argument('--odbicia', default='m09_30', help="środowisko odbić: m09_30|m09_40|m09_45|brak")
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -164,7 +165,8 @@ def main():
                           shift_y=k.get('shift_y', 0.0), name='K_' + kid)
         cam.data.clip_start = 0.2
         context.ustaw_kamere_trawy(kon, cam)
-        sw = budynek3d.swiatlo_dzienne(sc, k['czas'], ekspozycja=k.get('ekspozycja'))
+        sw = budynek3d.swiatlo_dzienne(sc, k['czas'], ekspozycja=k.get('ekspozycja'),
+                                       odbicia=None if a.odbicia == 'brak' else a.odbicia)
         uwagi, traf = kontrola_kamery(sc, B, cam, k, kon['ctx'])
         print('[testy] %s  %s  słońce az %.1f° el %.1f°  ekspozycja %.2f' % (kid, k['czas'], sw['az'], sw['el'],
                                                                              sw['ekspozycja']))

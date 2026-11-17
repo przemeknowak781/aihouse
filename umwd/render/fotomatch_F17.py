@@ -52,7 +52,7 @@ WYNIK = {'A': 'W1_F17A_test.jpg', 'B': 'W2_F17B_test.jpg'}
 GRADING = {
     # cien_min – jasność pełnego cienia względem słońca na zdjęciu (obróbka Shadows +50 rozjaśnia cienie; pomiar
     # na cieniach istniejących budynków ≈ 0,40–0,45); cien_barwa – ile chłodnej barwy cienia z passu zachować
-    'A': dict(p_jasne=0.92, cel_jasne=0.76, nasycenie=1.10, czern=0.0, mgla=0.05, mgla_kolor=(0.70, 0.76, 0.84),
+    'A': dict(p_jasne=0.92, cel_jasne=0.76, nasycenie=1.10, czern=0.0, mgla=0.03, mgla_kolor=(0.70, 0.76, 0.84),
               wyostrz=70, klarownosc=45, ziarno=0.012, cien_min=0.42, cien_barwa=0.35),
     'B': dict(p_jasne=0.92, cel_jasne=0.80, nasycenie=1.10, czern=0.0, mgla=0.025, mgla_kolor=(0.72, 0.78, 0.85),
               wyostrz=70, klarownosc=45, ziarno=0.012, cien_min=0.42, cien_barwa=0.35),
@@ -152,7 +152,7 @@ KALIBRACJA = {
               cg_slonce=((74.61, 40.76), (113.47, 50.23), (0.12, 0.45), (22.0, 34.0)), cel_slonce=0.84),
     # F.17.A: front Wybrzeża Słowackiego 5 (cień, elewacja wsch.) ↔ elewacja wsch. segmentu (ten sam porządek)
     'A': dict(ref=((118.55, 11.5), (118.25, 28.5), (0.2, 0.8), (4.0, 15.0)),
-              cg=((115.98, 39.93), (113.48, 50.18), (0.15, 0.85), (6.0, 18.0)), wspolczynnik=1.00),
+              cg=((115.98, 39.93), (113.48, 50.18), (0.15, 0.85), (6.0, 18.0)), wspolczynnik=0.92),
 }
 
 

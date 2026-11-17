@@ -203,22 +203,24 @@ DOORS_ANT = [
 ]
 
 # ------------------------------------------------------------------------------------------------
-# Sala obrad – ognisko, prezydium, rzędy (wynik _s2_sala.py: optymalizacja i kontrola)
+# Sala obrad – ognisko, prezydium, rzędy (kontrole: _s2_sala.py)
 # ------------------------------------------------------------------------------------------------
-F = (29.0, 14.60)                # ognisko rzędów = mównica (mówca twarzą na pn.)
-ROW_R = [4.40, 6.20, 8.00, 9.80]  # promień krawędzi pulpitów (od strony prezydium)
-ROW_Z = [0.00, 0.12, 0.24, 0.36]  # poziom podestów rzędów (wzgl. posadzki sali +27,30)
-BAND_IN, BAND_OUT = -0.05, 1.45   # pas rzędu: pulpit 0,60 + siedzisko/przejście 0,85 (+0,05)
-CHAIR_OFF = 0.90                  # linia oparć/oczu radnego od krawędzi pulpitu
+F = (27.50, 15.20)                # ognisko rzędów = mównica (mówca twarzą na pn., do radnych i galerii)
+ROW_R = [4.50, 6.30, 8.10, 9.90]  # promień krawędzi pulpitów (od strony prezydium)
+PITCH = 1.80
+RISE = 0.09                       # przewyższenie rzędu = 5 % × 1,80 m → przejścia-pochylnie promieniowe 5 %
+ROW_Z = [0.00, 0.09, 0.18, 0.27]  # podesty rzędów (wzgl. posadzki sali +27,30)
+BAND_IN, BAND_OUT = -0.05, 1.45   # pas rzędu: pulpit 0,60 + siedzisko i przejście za oparciami 0,85
+CHAIR_OFF = 0.90                  # linia siedzisk/oczu radnego od krawędzi pulpitu
+EYE = 1.20                        # wysokość oczu siedzącego
 DESK_W = 1.00                     # moduł stanowiska na linii siedzisk [m]
-WC_W = 1.50                       # moduł stanowiska dla wózka (0,9 × 1,4 + pole manewru wspólne z podestem)
-LAND = 1.50                       # podest pochylni (WT § 71)
-RAMP_RISE = 0.12
-RAMP_SLOPE = 0.05
-RAMP_L = RAMP_RISE / RAMP_SLOPE   # 2,40 m
-STEP_W = 0.90                     # schody w przejściu wsch. (stopień 0,12)
-PRES = box(F[0] - 3.0, 12.70, F[0] + 3.0, 14.20)       # stół prezydialny 6,0 m (4 os.) z krzesłami
-LECTERN = box(F[0] - 0.6, F[1] - 0.25, F[0] + 0.6, F[1] + 0.35)   # mównica regulowana 0,75–1,20 m
+WC_W = 1.50                       # moduł stanowiska dla wózka (0,9 × 1,4 + przestrzeń przy przejściu)
+AISLE_W = 1.30                    # przejścia-pochylnie (1,20 m w świetle poręczy)
+U_FLAT = (22.00, 23.10)           # przejście płaskie przy ścianie zach. sali (drzwi z holu ↔ drzwi SW)
+U_RAMP = (23.10, 24.40)           # przejście-pochylnia zach. (wzdłuż ściany), rzędy kończą się na u 24,40
+GLASS_OFF = 0.60                  # odsunięcie stanowisk od szkła/ściany zewn.
+PRES = box(F[0] - 3.0, 12.70, F[0] + 3.0, 14.25)       # stół prezydialny 6,0 m (4 os.) z krzesłami
+LECTERN = box(F[0] - 0.6, F[1] - 0.30, F[0] + 0.6, F[1] + 0.30)   # mównica z blatem regulowanym 0,75–1,20 m
 
 
 def sector(F_, r0, r1, a0, a1, n=48):
@@ -232,70 +234,70 @@ def sector(F_, r0, r1, a0, a1, n=48):
     return Polygon(pts)
 
 
-def row_zone():
-    """Obszar dopuszczalny dla rzędów: sala minus strefa prezydium/mównicy, przejście zach. 1,2 m, reżyserka."""
+def radial_strip(F_, phi, r0, r1, w):
+    a = math.radians(phi)
+    d = (math.cos(a), math.sin(a))
+    n = (-d[1], d[0])
+    p = lambda r, o: (F_[0] + r * d[0] + o * n[0], F_[1] + r * d[1] + o * n[1])
+    return Polygon([p(r0, -w / 2), p(r1, -w / 2), p(r1, w / 2), p(r0, w / 2)])
+
+
+def sala_zone():
     z = INNER.intersection(SALA_BOX).difference(SWD04_BOX.buffer(0.20, join_style=2))
-    z = z.difference(box(F[0] - 3.6, 12.6, F[0] + 3.6, F[1] + 0.6))
-    z = z.difference(box(22.0, 12.6, 23.2, 29.2))           # przejście zach. przy ścianie sali (wejście z holu)
-    z = z.difference(INNER.difference(INNER.buffer(-0.6)))   # 0,6 m od szkła i ścian zewn.
+    z = z.difference(box(F[0] - 3.6, 12.6, F[0] + 3.6, F[1] + 0.6))     # prezydium + mównica + PJM
+    z = z.difference(INNER.difference(INNER.buffer(-GLASS_OFF)))
     return z
 
 
 def build_rows():
-    """Rzędy: na końcach wsch. schodki (przejście wsch.), na końcach zach. sekwencja
-    [stanowiska | miejsce dla wózka | podest | pochylnia 5 % | podest niższy] – podest niższy rzędu k
-    leży promieniowo przy podeście górnym rzędu k−1 (ciąg pochylni bez stopni od posadzki sali do rzędu 4)."""
-    zone = row_zone()
+    """4 łukowe rzędy wokół F między dwoma przejściami-pochylniami (≤ 5 %):
+    wsch. – promieniowe (szer. 1,30), zach. – wzdłuż ściany sali (u 23,10–24,40).
+    Na końcu zach. każdego rzędu stanowisko dla wózka przy punkcie zrównania z pochylnią."""
+    zone = sala_zone()
+    zone_rows = zone.difference(box(22.0, 12.6, U_RAMP[1], 29.2))
+    rmin, rmax = ROW_R[0] - 0.60, ROW_R[-1] + BAND_OUT
+    phe = None
+    for p10 in range(0, 900):
+        ph = p10 / 10
+        if radial_strip(F, ph, rmin, ROW_R[-1] + 0.70 + 0.75, AISLE_W).within(zone):
+            phe = ph
+            break
+    east = radial_strip(F, phe, rmin, ROW_R[-1] + 0.70 + 0.75, AISLE_W)
     rows = []
-    prev_top = None
     for k, (R, z) in enumerate(zip(ROW_R, ROW_Z)):
-        r0, r1 = R + BAND_IN, R + BAND_OUT
-        rm = R + 0.70                 # promień osi pochylni/podestu
-        rc = R + CHAIR_OFF            # linia siedzisk
-        # granica wsch. – kąt minimalny, przy którym pas mieści się w strefie (+ schodki STEP_W)
-        a_e = None
-        for a10 in range(60, 900):
-            a = a10 / 10
-            if sector(F, r0, r1, a, a + 0.5, 4).within(zone):
-                a_e = a
+        r0, r1, rc = R + BAND_IN, R + BAND_OUT, R + CHAIR_OFF
+        a0 = None
+        for p10 in range(int(phe * 10), 1800):
+            a = p10 / 10
+            if not sector(F, r0, r1, a, a + 0.3, 3).intersects(east.buffer(-0.001)):
+                a0 = a
                 break
-        a_e_desk = a_e + math.degrees(STEP_W / rc)
-        # granica zach. – kąt maksymalny w strefie
-        a_w = None
-        for a10 in range(1790, 600, -1):
-            a = a10 / 10
-            if sector(F, r0, r1, a - 0.5, a, 4).within(zone):
-                a_w = a
+        a1 = None
+        for p10 in range(1795, int(a0 * 10), -1):
+            a = p10 / 10
+            if sector(F, r0, r1, a0, a, 60).within(zone_rows):
+                a1 = a
                 break
-        if k == 0:
-            a_wc_end = a_w                          # rząd 1 na posadzce: miejsce dla wózka na końcu zach.
-        else:
-            # podest niższy tego rzędu ma się pokrywać kątowo z podestem górnym rzędu poprzedniego
-            a_bottom_end = min(a_w, prev_top[1])
-            a_ramp_end = a_bottom_end - math.degrees(LAND / rm)
-            a_ramp_start = a_ramp_end - math.degrees(RAMP_L / rm)
-            a_top_start = a_ramp_start - math.degrees(LAND / rm)
-            a_wc_end = a_top_start
-        a_wc_start = a_wc_end - math.degrees(WC_W / rc)
-        n = int(math.floor((math.radians(a_wc_start - a_e_desk) * rc) / DESK_W + 1e-9))
-        a_desk_end = a_e_desk + math.degrees(n * DESK_W / rc)
-        row = dict(k=k + 1, R=R, z=z, a_east=a_e, a_desk0=a_e_desk, a_desk1=a_desk_end,
-                   a_wc=(a_wc_start, a_wc_end), n_desks=n, rc=rc)
-        row["band"] = sector(F, r0, r1, a_e, a_wc_end if k == 0 else a_bottom_end)
-        row["wc"] = sector(F, r0, r1, a_wc_start, a_wc_end)
-        row["desks"] = sector(F, R, R + 0.60, a_e_desk, a_desk_end)
-        if k == 0:
-            row["top_landing"] = (a_wc_start, a_wc_end)   # miejsce dla wózka = podest (poziom posadzki)
-            row["ramp"] = None
-        else:
-            row["top_landing"] = (a_top_start, a_ramp_start)
-            row["ramp"] = sector(F, r0 + 0.10, r0 + 1.30, a_ramp_start, a_ramp_end)
-            row["ramp_angles"] = (a_ramp_start, a_ramp_end)
-            row["bottom_landing"] = (a_ramp_end, a_bottom_end)
-            row["ramp_len"] = math.radians(a_ramp_end - a_ramp_start) * rm
-        prev_top = row["top_landing"]
-        rows.append(row)
-    return rows
+        a_wc0 = a1 - math.degrees(WC_W / rc)
+        n = int(math.floor(math.radians(a_wc0 - a0) * rc / DESK_W + 1e-9))
+        a_d1 = a0 + math.degrees(n * DESK_W / rc)
+        desks = [sector(F, R, R + 0.60, a0 + math.degrees(i * DESK_W / rc), a0 + math.degrees((i + 1) * DESK_W / rc), 6)
+                 for i in range(n)]
+        seats = [(F[0] + rc * math.cos(math.radians(a0 + math.degrees((i + 0.5) * DESK_W / rc))),
+                  F[1] + rc * math.sin(math.radians(a0 + math.degrees((i + 0.5) * DESK_W / rc)))) for i in range(n)]
+        am = math.radians((a_wc0 + a1) / 2)
+        wc_pt = (F[0] + rc * math.cos(am), F[1] + rc * math.sin(am))
+        rows.append(dict(k=k + 1, R=R, z=z, a0=a0, a1=a1, a_desk_end=a_d1, a_wc=(a_wc0, a1), n=n, rc=rc,
+                         band=sector(F, r0, r1, a0, a1), desks=desks, seats=seats, wc=sector(F, r0, r1, a_wc0, a1, 8),
+                         wc_pt=wc_pt))
+    # przejścia
+    r4f = ROW_R[-1] + 0.70
+    v_hi = F[1] + math.sqrt(max(0.0, (r4f + 0.75) ** 2 - (F[0] - sum(U_RAMP) / 2) ** 2))
+    v_lo = F[1] + math.sqrt(max(0.0, (ROW_R[0] + 0.70) ** 2 - (F[0] - sum(U_RAMP) / 2) ** 2)) if (ROW_R[0] + 0.70) > abs(F[0] - sum(U_RAMP) / 2) else F[1] + 0.6
+    aisles = dict(east=east, east_phi=phe,
+                  west_ramp=box(U_RAMP[0], v_lo - 1.5, U_RAMP[1], v_hi),
+                  west_flat=box(U_FLAT[0], 12.60, U_FLAT[1], 29.20 - GLASS_OFF))
+    return rows, aisles
 
 
 # ------------------------------------------------------------------------------------------------
@@ -352,5 +354,78 @@ def poly_list_en(g, nd=3):
     return [[[round(c, nd) for c in uv2en(x, y)] for x, y in ring] for ring in poly_list_uv(g, 6)]
 
 
+# ------------------------------------------------------------------------------------------------
+# Galeria publiczności (+30,90): 3 rzędy równoległe do ściany sali (u 22,0), stopnie 0,45 m
+# ------------------------------------------------------------------------------------------------
+GAL_PARAPET_U = (21.70, 22.00)    # attyka/balustrada: część pionowa 0,70 m + pozioma 0,50 m (WT § 298 ust. 7)
+GAL_LEDGE_U0 = 21.50              # początek części poziomej (u 21,50–22,00) na wys. +0,70
+GAL_PARAPET_H = 0.70
+GAL_ROWS = [  # (nr, u oka, podest wzgl. +30,90, v0, v1, układ)
+    (1, 20.95, 0.00, 16.10, 22.45, "3 miejsca dla wózków 0,90 × 1,40 + 3 opiekunów + 4 miejsca"),
+    (2, 20.05, 0.45, 16.10, 22.45, "12 miejsc × 0,52 m"),
+    (3, 19.15, 0.90, 16.10, 22.45, "12 miejsc × 0,52 m"),
+]
+GAL_SEAT_W = 0.52
+GAL_WC_W = 0.90
+GAL_STEPS = box(18.70, 15.00, 21.50, 16.05)   # stopnie 0,15 m do rzędów 2–3 (przejście poprzeczne przy wejściu)
+
+
+def gallery_seats():
+    """Zwraca listę miejsc (u, v, h_oka nad posadzką sali S, typ)."""
+    out = []
+    for nr, ue, dz, v0, v1, _ in GAL_ROWS:
+        h = (Z_ANT - Z_S) + dz + EYE
+        if nr == 1:
+            v = v0
+            for i in range(3):                 # wózek + opiekun
+                out.append((ue - 0.25, v + GAL_WC_W / 2, h, "wozek"))
+                v += GAL_WC_W
+                out.append((ue, v + GAL_SEAT_W / 2, h, "opiekun"))
+                v += GAL_SEAT_W
+            while v + GAL_SEAT_W <= v1 + 1e-9:
+                out.append((ue, v + GAL_SEAT_W / 2, h, "miejsce"))
+                v += GAL_SEAT_W
+        else:
+            n = int((v1 - v0 + 1e-9) // GAL_SEAT_W)
+            for i in range(n):
+                out.append((ue, v0 + (i + 0.5) * GAL_SEAT_W, h, "miejsce"))
+    return out
+
+
+# Strefy płyty sali poza rzędami (osoby: radni 44 (+3 rezerwy) + prezydium 4 + obsługa 4 + PJM 2 + goście 12 + media 8)
+def floor_seats():
+    """Miejsca poza rzędami: (u, v, typ). Goście – 2 × 6 w strefie NW za rzędem 4 (przy drzwiach z holu),
+    media – 8 na łuku R 11,95 m (φ 58°–80°) za rzędem 4, obsługa kancelaryjna – stół przy prezydium (wsch.),
+    tłumacze PJM – przy mównicy (w kadrze kamery)."""
+    out = []
+    for j, v in enumerate((27.10, 28.10)):
+        for i in range(6):
+            out.append((23.65 + i * 0.60, v, "gosc"))
+    rb = ROW_R[-1] + BAND_OUT + 0.60
+    for i in range(8):
+        a = math.radians(58.0 + (i + 0.5) * (22.0 / 8))
+        out.append((F[0] + rb * math.cos(a), F[1] + rb * math.sin(a), "media"))
+    for i in range(4):
+        out.append((F[0] + 3.55 + i * 0.75, 13.55, "obsluga"))
+    out += [(F[0] - 2.20, 15.20, "PJM"), (F[0] - 1.50, 15.20, "PJM")]
+    for i in range(4):
+        out.append((F[0] - 2.25 + i * 1.50, 13.25, "prezydium"))
+    return out
+
+
+def floor_zones():
+    return {
+        "goście (12)": box(23.30, 26.70, 27.30, 28.55),
+        "obsługa kancelaryjna (4)": box(F[0] + 3.20, 13.10, F[0] + 6.20, 14.20),
+        "PJM (2)": box(F[0] - 2.60, 14.80, F[0] - 1.10, 15.60),
+    }
+
+
 if __name__ == "__main__":
-    import _s2_export  # noqa: F401  (eksport i kontrole w osobnym module)
+    S = level_S()
+    A = level_ANT()
+    rows, aisles = build_rows()
+    print("S:", {k: round(v.area, 2) for k, v in S.items()})
+    print("ANT:", {k: round(v.area, 2) for k, v in A.items()})
+    print("rzędy:", [(r["k"], r["n"]) for r in rows], "wózki:", len(rows))
+    print("galeria:", len(gallery_seats()))

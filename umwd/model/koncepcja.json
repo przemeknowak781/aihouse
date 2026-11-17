@@ -1,7 +1,7 @@
 {
  "meta": {
   "nazwa": "BRAMA I LATARNIA – siedziba UMWD i Sejmiku Województwa Dolnośląskiego (synteza panelu: K5 + przeszczepy)",
-  "wersja": "synteza 1.0, 17.11.2026",
+  "wersja": "1.1 (po weryfikacji)",
   "uklad": "lokalny e,n wg model/site.json (e = Y2000 − 6 433 500; n = X2000 − 5 664 100), H PL-EVRF2007-NH",
   "zero": {
    "wzgl_0_00_m_npm": 119.3,
@@ -20,8 +20,13 @@
   "zrodla": [
    "docs/20_koncepcja/koncepcja_wybrana.md",
    "docs/20_koncepcja/panel/werdykt_panelu.md",
+   "docs/20_koncepcja/rejestr_poprawek_v1_1.md",
+   "docs/30_lokalizacja/dendrologia.md",
    "model/site.json"
-  ]
+  ],
+  "data_wersji": "17.11.2026",
+  "rejestr_poprawek": "docs/20_koncepcja/rejestr_poprawek_v1_1.md (dowody: docs/20_koncepcja/_rewizja_*.py)",
+  "kondygnacja_S_v1_1": "kondygnacja S – patrz docs/20_koncepcja/kondygnacja_S2.md i kondygnacja_S2.json (v1.1); klucz kondygnacja_sejmiku = stan 1.0"
  },
  "teren": {
   "wieza_2m": [
@@ -177,8 +182,9 @@
      92.832,
      75.769
     ],
-    "R_szyb_korony": 13.5,
-    "R_podcien_parter": 11.0
+    "R_szyb_korony": 13.4,
+    "R_podcien_parter": 11.0,
+    "lamele_korony": "R 13,40–14,00; 0,35 × 0,60 m; rozstawy 1,35 / 0,675 m w ciągu Fibonacciego; ceramika S 4005-Y20R, sitodruk 30 % na szkle"
    },
    "prostokat_uv": [
     [
@@ -220,146 +226,16 @@
      "npm": 156.5,
      "nad_najnizszym_terenem_A": 37.62,
      "nad_118_33": 38.17,
-     "wymagane_max": 45.0
-    }
+     "wymagane_max": 45.0,
+     "wysiegi_m": 0.0
+    },
+    "zwody": "niskie, ≤ korony attyki; wyłaz płaski przy trzonie B"
    }
   },
   {
    "id": "M",
    "nazwa": "Skrzydło Mazowieckie",
    "obrys_ccw": [
-    [
-     68.766,
-     64.397
-    ],
-    [
-     68.372,
-     63.74
-    ],
-    [
-     68.766,
-     64.397
-    ],
-    [
-     68.326,
-     66.196
-    ],
-    [
-     68.228,
-     66.525
-    ],
-    [
-     68.098,
-     66.843
-    ],
-    [
-     67.938,
-     67.146
-    ],
-    [
-     67.749,
-     67.433
-    ],
-    [
-     67.532,
-     67.699
-    ],
-    [
-     67.291,
-     67.943
-    ],
-    [
-     67.027,
-     68.163
-    ],
-    [
-     66.743,
-     68.355
-    ],
-    [
-     66.441,
-     68.519
-    ],
-    [
-     66.125,
-     68.652
-    ],
-    [
-     65.797,
-     68.753
-    ],
-    [
-     65.461,
-     68.822
-    ],
-    [
-     65.119,
-     68.858
-    ],
-    [
-     64.776,
-     68.86
-    ],
-    [
-     64.434,
-     68.829
-    ],
-    [
-     64.097,
-     68.764
-    ],
-    [
-     63.84,
-     68.701
-    ],
-    [
-     63.501,
-     68.6
-    ],
-    [
-     63.173,
-     68.465
-    ],
-    [
-     62.86,
-     68.297
-    ],
-    [
-     62.566,
-     68.099
-    ],
-    [
-     62.294,
-     67.872
-    ],
-    [
-     62.046,
-     67.618
-    ],
-    [
-     61.825,
-     67.341
-    ],
-    [
-     61.633,
-     67.042
-    ],
-    [
-     61.473,
-     66.726
-    ],
-    [
-     61.345,
-     66.395
-    ],
-    [
-     61.251,
-     66.053
-    ],
-    [
-     60.002,
-     60.378
-    ],
     [
      48.842,
      9.683
@@ -375,6 +251,110 @@
     [
      74.557,
      40.744
+    ],
+    [
+     67.494,
+     69.592
+    ],
+    [
+     63.84,
+     68.701
+    ],
+    [
+     63.683,
+     68.659
+    ],
+    [
+     63.528,
+     68.61
+    ],
+    [
+     63.376,
+     68.553
+    ],
+    [
+     63.226,
+     68.49
+    ],
+    [
+     63.079,
+     68.419
+    ],
+    [
+     62.936,
+     68.342
+    ],
+    [
+     62.797,
+     68.258
+    ],
+    [
+     62.662,
+     68.168
+    ],
+    [
+     62.531,
+     68.072
+    ],
+    [
+     62.404,
+     67.969
+    ],
+    [
+     62.283,
+     67.861
+    ],
+    [
+     62.166,
+     67.748
+    ],
+    [
+     62.055,
+     67.629
+    ],
+    [
+     61.95,
+     67.505
+    ],
+    [
+     61.851,
+     67.376
+    ],
+    [
+     61.757,
+     67.243
+    ],
+    [
+     61.67,
+     67.106
+    ],
+    [
+     61.59,
+     66.965
+    ],
+    [
+     61.516,
+     66.82
+    ],
+    [
+     61.449,
+     66.672
+    ],
+    [
+     61.388,
+     66.521
+    ],
+    [
+     61.335,
+     66.367
+    ],
+    [
+     61.289,
+     66.211
+    ],
+    [
+     61.251,
+     66.053
     ]
    ],
    "zaokraglenie_NW": {
@@ -384,7 +364,7 @@
      68.185
     ]
    },
-   "pow_rzutu_m2": 847.0,
+   "pow_rzutu_m2": 849.65,
    "w_A_m2": 0.0,
    "dylatacja_od_wiezy_m": "0,05–0,08 (lico wsch. na linii u = −0,05…−0,08, poza A)",
    "kondygnacje": "P+4",
@@ -393,9 +373,9 @@
     "najnizszy_pkt_pokrycia": {
      "wzgl": 20.2,
      "npm": 139.5,
-     "nad_najwyzszym_terenem": 20.09,
+     "nad_najwyzszym_terenem": 20.07,
      "wymagane_min": 18.0,
-     "zapas": 2.09
+     "zapas": 2.07
     },
     "najwyzszy_pkt_pokrycia": {
      "wzgl": 20.4,
@@ -404,9 +384,14 @@
     "gzyms_attyka": {
      "wzgl": 20.85,
      "npm": 140.15,
-     "nad_najnizszym_terenem": 21.75,
+     "nad_najnizszym_terenem": 21.79,
      "wymagane_max": 25.0,
-     "attyka_Maz19_npm": 140.24
+     "attyka_Maz19_npm": 140.24,
+     "wysiegi_m": {
+      "lica_przy_granicy_(zach., pd., dziób pn.)": 0.0,
+      "lico_dziedzincowe": 0.3
+     },
+     "fryz_wklesly_m": 0.15
     }
    }
   },
@@ -448,14 +433,21 @@
     "attyka": {
      "wzgl": 20.85,
      "npm": 140.15,
-     "nad_najnizszym_terenem": 21.24
-    }
+     "nad_najnizszym_terenem": 21.24,
+     "sciana_pd_npm": 139.1,
+     "balustrada_szklana": "1,10 m, cofnięta 1,5 m od lica pd. (140,20)",
+     "wysiegi_m": {
+      "lico_wsch_(Wybrzeze)": 0.0,
+      "lico_zach_(dziedziniec)": 0.3
+     }
+    },
+    "taras_pow_m2": 135.3
    }
   }
  ],
  "zabudowa": {
-  "pow_zabudowy_m2": 2162.9,
-  "udzial_w_OI_proc": 58.0
+  "pow_zabudowy_m2": 2165.8,
+  "udzial_w_OI_proc": 58.1
  },
  "cofniecia_wneki": {
   "podcien_Brama_Mostowa": {
@@ -724,37 +716,43 @@
  "kondygnacje": [
   {
    "kondygnacja": "-2",
-   "posadzka_wzgl": -7.0,
-   "posadzka_npm": 112.3,
-   "wysokosc_kondygnacji": 3.25,
+   "posadzka_wzgl": -7.2,
+   "posadzka_npm": 112.1,
+   "wysokosc_kondygnacji": 3.0,
    "zakres": [
     "wieza",
     "segment",
-    "pas dziedzinca 7 m"
+    "pas dziedzinca 5 m",
+    "skrzydlo od s = 12,15 (bez M1 przy Maz. 19)"
    ],
    "plyta_denna": {
-    "wierzch": -7.1,
-    "spod": -8.2,
-    "spod_npm": 111.1
+    "wierzch": -7.3,
+    "spod": -8.4,
+    "spod_npm": 110.9,
+    "grubosc_wieza_m": 1.1,
+    "grubosc_poza_wieza_m": 0.9
    },
    "strop_nad": {
-    "wierzch": -3.9,
-    "spod_wieza": -4.25
-   }
+    "wierzch": -4.2,
+    "spod_wieza": -4.55
+   },
+   "wys_w_swietle": 2.65
   },
   {
    "kondygnacja": "-1",
-   "posadzka_wzgl": -3.75,
-   "posadzka_npm": 115.55,
-   "wysokosc_kondygnacji": 3.75,
+   "posadzka_wzgl": -4.2,
+   "posadzka_npm": 115.1,
+   "wysokosc_kondygnacji": 4.2,
    "zakres": [
-    "calosc",
-    "pas dziedzinca"
+    "calosc (lico 0,15 m od dz. 8/8, 1,20 m od Maz. 19)",
+    "pas dziedzinca 5 m"
    ],
    "strop_nad": {
     "wierzch": -0.15,
-    "spod_wieza": -0.5
-   }
+    "spod_wieza": -0.55
+   },
+   "wys_w_swietle": 3.65,
+   "uwaga": "wysokość 4,20 m dla stackerów zależnych 2-poziomowych (≥ 3,50 m w świetle)"
   },
   {
    "kondygnacja": "P",
@@ -924,8 +922,8 @@
    "zakres": "−2…S",
    "sklad": [
     "klatka A obudowana REI 60, biegi 1,60 m, z przedsionkiem ppoż. 2,4×3,0 m (MOE 0,9×1,4 m + krzesło ewakuacyjne + interkom), nadciśnienie",
-    "dźwig A1 1 600 kg (os.)",
-    "dźwig A2 1 600 kg (os.)",
+    "dźwig A1 1 600 kg (os.), kabina 1,5 × 2,1 m, przelotowa",
+    "dźwig A2 1 600 kg (os.), kabina 1,5 × 2,1 m, przelotowa",
     "dźwig R dla ekip ratowniczych PN-EN 81-72 i ewakuacyjny PN-EN 81-76, 1 000 kg, kabina 1,1×2,1 m, szyb REI 60, nadciśnienie",
     "szachty: nadciśnienie klatki/przedsionka, oddymianie korytarzy, piony instalacyjne"
    ]
@@ -970,8 +968,8 @@
    "zakres": "−2…S (+ przystanek antresoli +30,90)",
    "sklad": [
     "klatka B obudowana REI 60, biegi 1,60 m, przedsionek ppoż. z MOE i interkomem, nadciśnienie",
-    "dźwigi publiczne P1, P2 1 275 kg, kabiny 1,4×2,4 m (przystanki: −2…6, S, antresola; P2 z drzwiami przelotowymi do przedsionka publicznego PHS.05c na S)",
-    "dźwig T osobowo-towarowy 2 000 kg, kabina 1,5×2,7 m (dostawy z −1, bar Sejmiku, odpady)",
+    "dźwigi publiczne P1, P2 1 600 kg, kabiny 1,5 × 2,1 m (przystanki −2…6, S, antresola)",
+    "szacht (≈ 4 m², po dźwigu T): przewód spalin agregatu, wyrzut wentylacji i oddymiania garażu, piony centrali S → lamele korony od pd.",
     "szachty"
    ]
   },
@@ -1015,10 +1013,52 @@
    "zakres": "−1…4",
    "sklad": [
     "klatka C obudowana z przedsionkiem ppoż. i MOE",
-    "dźwig C1 1 000 kg z drzwiami przelotowymi (przyszłe połączenie z Mazowiecką 19 na jej rzędnych)"
+    "szyb C1 w stanie surowym – rezerwa (przyszłe połączenie z Mazowiecką 19), bez urządzenia dźwigowego"
    ]
   },
-  "odleglosc_klatek_A_B_m": 20.0
+  "odleglosc_klatek_A_B_m": 20.0,
+  "T": {
+   "obrys_uv": [
+    [
+     36.9,
+     -9.7
+    ],
+    [
+     39.2,
+     -9.7
+    ],
+    [
+     39.2,
+     -6.45
+    ],
+    [
+     36.9,
+     -6.45
+    ]
+   ],
+   "obrys_en": [
+    [
+     112.754,
+     40.071
+    ],
+    [
+     114.988,
+     40.616
+    ],
+    [
+     114.218,
+     43.774
+    ],
+    [
+     111.984,
+     43.229
+    ]
+   ],
+   "zakres": "−2…4 (segment)",
+   "sklad": [
+    "dźwig T osobowo-towarowy 2 000 kg, kabina 1,5 × 2,7 m – narożnik SE segmentu (P-I5); parter: drzwi od Wybrzeża, punkt wystawienia odpadów"
+   ]
+  }
  },
  "siatka": {
   "wieza": {
@@ -1032,8 +1072,9 @@
    ],
    "osie_v": [
     0.0,
-    8.1,
-    21.6,
+    8.7,
+    16.0,
+    23.15,
     29.7
    ],
    "luk": "słupy w osiach promieniowych co 15° na R = 13,5 m (elewacja) i R = 7,0 m (korytarz)",
@@ -1041,29 +1082,32 @@
    "przeslo_filarow_m": 2.7,
    "filar_m": 1.05,
    "okno_m": "1,65 × 2,45 (dwuskrzydłowe, słupek w osi modułu)",
-   "strop": "płyta sprężona 0,28 m z aktywacją termiczną (TABS), rozpiętości ≤ 8,10 m",
-   "dach_S": "ruszt stalowy (kratownice 1,60 m, rozpiętość 19,5 m) + płyta zespolona; słupy wewnętrzne kończą się na stropie S"
+   "strop": "płyta sprężona 0,28 m z aktywacją termiczną (TABS), rozpiętości ≤ 8,70 m",
+   "dach_S": "ruszt stalowy (kratownice 1,60 m, rozpiętość 19,5 m) + płyta zespolona; słupy wewnętrzne kończą się na stropie S",
+   "uwaga_osie_v": "v1.1: słupy poza drogami garażu i w licach ścian korytarzy (v 8,70 i 23,15 jako 0,60 × 0,35 m); dodatkowa oś v 16,00 w strefie środkowej; rozpiętości 8,70 / 7,30 / 7,15 / 6,55 m"
   },
   "skrzydlo": {
    "os_okien_m": 2.025,
    "slupy": "w filarach obu elewacji co 4,05 m (2 osie okienne), rozpiętość 14,20 m bez słupów pośrednich",
    "strop": "płyta sprężona 0,40 m (TABS)",
-   "modul_m": 1.35
+   "modul_m": 1.35,
+   "trakt_m": "15,00 = 0,47 + 6,08 + 0,10 + 1,70 + 0,10 + 6,08 + 0,47"
   },
   "segment": {
    "slupy": "w elewacjach co 4,05 m + ściana pd. żelbetowa",
    "strop": "płyta 0,28 m"
   },
   "posadowienie": {
-   "wieza": "płyta palowo-fundamentowa 1,10 m na −2 (spód 111,20 m n.p.m.), 36 pali CFA Ø 0,8 m L ≈ 14 m do glin zwałowych QpB (strop 101,8–103,4)",
-   "skrzydlo_segment": "płyta 0,90 m na −1 / −2; pas dziedzińca: płyta + mikropale kotwiące (wypór)",
-   "obudowa": "ściany szczelinowe 0,80 m, obwód 244,6 m, głębokość ≈ 18 m (wcięte w gliny zwałowe) = ok. 4 400 m², biała wanna, bez odwodnienia regionalnego",
+   "wieza": "płyta palowo-fundamentowa 1,10 m na −2 (spód 110,90 m n.p.m.), 36 pali CFA Ø 0,8 m L ≈ 14 m (energetyczne) do glin zwałowych QpB",
+   "skrzydlo_segment": "płyta 0,90 m na −2 (skrzydło od s 12,15, segment, pas) i na −1 (M1); pas dziedzińca: mikropale kotwiące (121,5 m²)",
+   "obudowa": "ściany szczelinowe 0,60 m (energetyczne), 222,6 m × 19 m = 4 229 m², wcięte w gliny QpB; przy Maz. 19 (15,0 m) ściana z kolumn iniekcji strumieniowej Ø 1,2 m z podbiciem fundamentu szczytu, lico −1 1,20 m od granicy; przy dz. 8/8 lico zewn. ściany 0,15 m od granicy, ściana prowadząca zewn. tymczasowo w pasie drogowym (zezwolenie ZDiUM); biała wanna; bez kotew poza granicą; bez odwodnienia regionalnego",
    "woda": {
     "ZWG_srednie_npm": 115.5,
     "ZWG_max_npm": 116.45,
     "poziom_obliczeniowy_npm": 117.0,
     "wyjatkowy_npm": 119.0
-   }
+   },
+   "sondy_GPC": "58 × 91 m pod płytą −2 (siatka 6,0 × 6,0 m), dno 19,9 m n.p.m. ≤ 99,5 m p.p.t. (poza art. 86 PGiG)"
   }
  },
  "kondygnacja_sejmiku": {
@@ -2958,132 +3002,36 @@
   "-1": {
    "obrys_ccw": [
     [
-     68.254,
-     66.667
+     61.757,
+     67.243
     ],
     [
-     67.749,
-     67.433
+     61.67,
+     67.106
     ],
     [
-     67.532,
-     67.699
+     61.614,
+     67.008
     ],
     [
-     67.291,
-     67.943
+     49.246,
+     10.823
     ],
     [
-     67.027,
-     68.163
-    ],
-    [
-     66.743,
-     68.355
-    ],
-    [
-     66.441,
-     68.519
-    ],
-    [
-     66.125,
-     68.652
-    ],
-    [
-     65.797,
-     68.753
-    ],
-    [
-     65.461,
-     68.822
-    ],
-    [
-     65.119,
-     68.858
-    ],
-    [
-     64.776,
-     68.86
-    ],
-    [
-     64.434,
-     68.829
-    ],
-    [
-     64.097,
-     68.764
-    ],
-    [
-     63.84,
-     68.701
-    ],
-    [
-     63.501,
-     68.6
-    ],
-    [
-     63.173,
-     68.465
-    ],
-    [
-     62.86,
-     68.297
-    ],
-    [
-     62.566,
-     68.099
-    ],
-    [
-     62.294,
-     67.872
-    ],
-    [
-     62.046,
-     67.618
-    ],
-    [
-     61.825,
-     67.341
-    ],
-    [
-     61.633,
-     67.042
-    ],
-    [
-     61.473,
-     66.726
-    ],
-    [
-     61.345,
-     66.395
-    ],
-    [
-     61.251,
-     66.053
-    ],
-    [
-     60.002,
-     60.378
-    ],
-    [
-     48.842,
-     9.683
-    ],
-    [
-     63.498,
-     6.487
+     63.75,
+     7.63
     ],
     [
      70.828,
      39.787
     ],
     [
-     72.475,
-     33.031
+     72.001,
+     34.975
     ],
     [
-     96.666,
-     38.929
+     96.192,
+     40.872
     ],
     [
      96.694,
@@ -3094,8 +3042,8 @@
      39.93
     ],
     [
-     113.452,
-     50.298
+     113.456,
+     50.278
     ],
     [
      109.75,
@@ -3198,31 +3146,180 @@
      75.769
     ],
     [
-     67.572,
-     69.611
+     67.494,
+     69.592
     ],
     [
-     68.286,
-     66.681
+     67.494,
+     69.592
+    ],
+    [
+     63.84,
+     68.701
+    ],
+    [
+     63.683,
+     68.659
+    ],
+    [
+     63.528,
+     68.61
+    ],
+    [
+     63.376,
+     68.553
+    ],
+    [
+     63.226,
+     68.49
+    ],
+    [
+     63.079,
+     68.419
+    ],
+    [
+     62.936,
+     68.342
+    ],
+    [
+     62.797,
+     68.258
+    ],
+    [
+     62.662,
+     68.168
+    ],
+    [
+     62.531,
+     68.072
+    ],
+    [
+     62.404,
+     67.969
+    ],
+    [
+     62.283,
+     67.861
+    ],
+    [
+     62.166,
+     67.748
+    ],
+    [
+     62.055,
+     67.629
+    ],
+    [
+     61.95,
+     67.505
+    ],
+    [
+     61.851,
+     67.376
     ]
    ],
-   "pow_m2": 2337.2,
-   "miejsca": 68,
-   "posadzka_wzgl": -3.75
+   "pow_m2": 2263.9,
+   "miejsca": 70,
+   "posadzka_wzgl": -4.2,
+   "miejsca_opis": "38 na posadzce + 32 w stackerach (16 jednostek podwójnych), w tym 6 OzN 3,60 × 5,00 m"
   },
   "-2": {
    "obrys_ccw": [
     [
-     79.464,
-     41.94
+     63.84,
+     68.701
     ],
     [
-     81.122,
-     35.139
+     63.683,
+     68.659
     ],
     [
-     96.666,
-     38.929
+     63.528,
+     68.61
+    ],
+    [
+     63.376,
+     68.553
+    ],
+    [
+     63.226,
+     68.49
+    ],
+    [
+     63.079,
+     68.419
+    ],
+    [
+     62.936,
+     68.342
+    ],
+    [
+     62.797,
+     68.258
+    ],
+    [
+     62.662,
+     68.168
+    ],
+    [
+     62.531,
+     68.072
+    ],
+    [
+     62.404,
+     67.969
+    ],
+    [
+     62.283,
+     67.861
+    ],
+    [
+     62.166,
+     67.748
+    ],
+    [
+     62.055,
+     67.629
+    ],
+    [
+     61.95,
+     67.505
+    ],
+    [
+     61.851,
+     67.376
+    ],
+    [
+     61.757,
+     67.243
+    ],
+    [
+     61.67,
+     67.106
+    ],
+    [
+     61.614,
+     67.008
+    ],
+    [
+     51.6,
+     21.517
+    ],
+    [
+     66.104,
+     18.324
+    ],
+    [
+     70.828,
+     39.787
+    ],
+    [
+     72.001,
+     34.975
+    ],
+    [
+     96.192,
+     40.872
     ],
     [
      96.694,
@@ -3233,8 +3330,8 @@
      39.93
     ],
     [
-     113.452,
-     50.298
+     113.456,
+     50.278
     ],
     [
      109.75,
@@ -3337,28 +3434,70 @@
      75.769
     ],
     [
-     67.572,
-     69.611
+     67.494,
+     69.592
     ],
     [
-     74.606,
-     40.756
+     67.494,
+     69.592
     ]
    ],
-   "pow_m2": 1426.2,
-   "miejsca": 41,
-   "posadzka_wzgl": -7.0,
+   "pow_m2": 2101.3,
+   "miejsca": 40,
+   "posadzka_wzgl": -7.2,
    "ukrycie": true
   },
-  "razem_miejsc": 109,
+  "razem_miejsc": 110,
   "OzN": 6,
   "EV_punkty": 55,
   "rampa": {
-   "wjazd": "elewacja wsch. segmentu (6KDB/2), brama 6,0 m, v −4,1…−10,1",
+   "wjazd": "elewacja wsch. segmentu (6KDB/2), brama 4,0 m, v −0,40…−4,40",
    "pochylenie_max_proc": 18,
    "przejscia_proc": 9,
-   "prog_npm": 119.6,
-   "szerokosc_m": 6.5
+   "prog_npm": 119.1,
+   "szerokosc_m": 3.5,
+   "pas_v": [
+    -0.35,
+    -3.85
+   ],
+   "dlugosc_m": 25.22,
+   "zapora": "samoczynna przeciwpowodziowa do 120,30 we wnęce bramy + odwodnienie liniowe i pompownia",
+   "strop_przy_licu_zach_segmentu_npm": 118.53,
+   "sygnalizacja": "wahadłowa (jednopasowa)",
+   "rampa_wewnetrzna": {
+    "miejsce": "kieszeń wsch. wieży u 34,6–38,5",
+    "dlugosc_m": 19.67,
+    "pochylenie_max_proc": 18,
+    "szerokosc_m": 3.5,
+    "z": "−1 (v 16,6)",
+    "do": "−2 (segment)"
+   }
+  },
+  "wymagane_MPZP": {
+   "PU_m2": 8850.37,
+   "PU_gastronomia_m2": 88.47,
+   "wymagane": 106,
+   "odczyt_ostrozny": 108,
+   "wzor": "12/1000 × (PU − PU_gastr.) + 6/1000 × PU_gastr. = 105,67 → 106"
+  },
+  "stackery": {
+   "typ": "zależne 2-poziomowe bez zagłębienia, jednostki podwójne 5,0 m",
+   "jednostki": 16,
+   "miejsca_gorne": 32,
+   "wys_w_swietle_min_m": 3.5,
+   "rzedy": "−1: skrzydło zach., R1, R2, R3, R4 (pracownicy z przydziałem parami)"
+  },
+  "MDS": {
+   "pojemnosc_os": 560,
+   "ukrycie_-2_os": 300,
+   "MDS_-1_os": 260,
+   "wyjscia": "−2: klatki A, B; −1: klatka C, rampa, szyb wyjścia zapasowego (91,75; 32,00) + tunel 7,6 m",
+   "sanitariaty": "−1 pn. od trzonu A 30 m² z WC dostępnym; −2 WC ukrycia 15 m²"
+  },
+  "technika": {
+   "-1": "warsztat PPT, odpady, magazyn MDS (M1); sanitariaty MDS, pralnia (pn. od trzonu A); centrala S (wsch. od trzonu B); woda szara MBR (łuk); przyłącze wody (pod rampą); korytarz do dźwigu T",
+   "-2": "maszynownia GPC (przy trzonie B); filtrowentylacja ukrycia; zbiornik deszczówki 50 m³ (łuk)",
+   "tryskacze": "nieprojektowane (nieobowiązkowe – ppoz.md 7.3)"
   }
  },
  "elewacje": {
@@ -3367,7 +3506,8 @@
     "id": "G",
     "nazwa": "granit strzegomski jasny, płomieniowany",
     "NCS": "S 1502-Y",
-    "gdzie": "filary wieży, cokół, gzymsy, kordon +19,80–20,85, attyka, posadzki zewn."
+    "gdzie": "filary wieży, cokół, gzymsy, kordon +19,80–20,85, attyka, posadzki zewn.",
+    "NCS_cokol": "S 3502-Y (płomieniowany, ta sama rodzina)"
    },
    {
     "id": "C",
@@ -3375,19 +3515,19 @@
     "NCS": {
      "M1": "S 1505-Y20R",
      "M2": "S 1010-Y30R",
-     "M3": "S 1005-Y20R",
-     "M4": "S 1510-Y40R",
+     "M3": "S 2005-Y20R",
+     "M4": "S 1510-Y30R",
      "segment": "S 1010-Y30R",
      "luk": "S 1005-Y20R",
-     "lamele_korony": "S 1005-Y20R"
+     "lamele_korony": "S 4005-Y20R"
     },
-    "gdzie": "skrzydło, segment, pasma łuku, lamele korony"
+    "gdzie": "skrzydło i segment od ulic, pasma łuku, lamele korony; elewacje dziedzińcowe skrzydła i segmentu – tynk mineralny w tonie posesji"
    },
    {
     "id": "Me",
     "nazwa": "aluminium anodowane – grafitowy brąz",
     "RAL": "8019 (≈ NCS S 7502-Y)",
-    "gdzie": "stolarka, płyciny podokienne wieży (od dziedzińca ≤ 25 m jako BIPV w tym kolorze), kondygnacja 6, obróbki, żaluzje wyrzutni"
+    "gdzie": "stolarka, ościeża wieży (0,45 m) i skrzydła (0,35 m), płyciny wieży (od dziedzińca ≤ 25 m jako BIPV w tym kolorze), kondygnacja 6, obróbki, żaluzje czerpni i wyrzutni (tylko od dziedzińca)"
    }
   ],
   "szklo": {
@@ -3408,10 +3548,10 @@
    "filar_m": 0.825,
    "okno_m": [
     1.2,
-    2.4
+    2.35
    ],
-   "parapet_m": 0.9,
-   "WWR": 0.38,
+   "parapet_m": 0.6,
+   "WWR": 0.371,
    "segmenty_m": {
     "M1": 12.15,
     "M2": 16.2,
@@ -3430,6 +3570,15 @@
     "kordon_npm": 124.1,
     "spod_gzymsu_npm": 139.45,
     "attyka_npm": 140.15
+   },
+   "kwatera_stala_do_m": 0.9,
+   "nadproze_m": 2.95,
+   "osciez_m": 0.35,
+   "relief_opis": "cofnięcie wypełnień za lico filarów (lico filarów = obrys)",
+   "gzyms": {
+    "wysieg_lica_przy_granicy_m": 0.0,
+    "wysieg_dziedziniec_m": 0.3,
+    "fryz_wklesly_m": 0.15
    }
   },
   "wieza": {
@@ -3443,71 +3592,129 @@
    "filary_ciagle_od_do_wzgl": [
     4.8,
     37.2
-   ]
+   ],
+   "parapet_m": 0.55,
+   "nadproze_m": 3.0,
+   "osciez_m": 0.45,
+   "osciez_material": "blacha Al lakierowana proszkowo RAL 8019"
   },
   "luk": {
    "P": "podcień 3,0 m, szklenie R 11",
    "1-6": "pasma ceramiczne 1,30 m + okna wstęgowe 2,45 m",
-   "S": "lamele ceramiczne pionowe 0,25×0,60 m co 0,90 m, szkło bezpośrednio za lamelami (R 13,5)"
+   "S": "lamele ceramiczne pionowe 0,35 × 0,60 m (R 13,40–14,00), rozstawy 1,35 / 0,675 m w ciągu Fibonacciego, ton w ton (S 4005-Y20R + sitodruk 30 %), przesłonięcie w osi 32 %, pełne od 59°"
   },
   "przeszklenia_korony_m2": 262,
   "PV": {
-   "BIPV_dach_kWp": 364,
-   "BIPV_elewacje_kWp": 48,
-   "razem_kWp": 412
+   "BIPV_dach_kWp": 351,
+   "BIPV_elewacje_kWp": 52,
+   "BIPV_zadaszenie_kWp": 13,
+   "razem_kWp": 415,
+   "MWh_rok": 328,
+   "pola": {
+    "dach_wiezy_m2": 948,
+    "dach_skrzydla_m2": 685,
+    "plyciny_wiezy_m2": 82,
+    "sciana_pd_segmentu_m2": 295,
+    "zadaszenie_tarasu_ogrodowego_m2": 80
+   },
+   "gestosc_dach_kWp_m2": 0.215,
+   "warunek": "sprawność modułów ≥ 22,5 %"
+  },
+  "U_scian": {
+   "wieza": 0.147,
+   "skrzydlo_segment": 0.144,
+   "opis": "wełna 260 λ 0,033 (wieża) / 240 λ 0,031 (skrzydło), konsole nierdzewne z przekładką"
   }
  },
  "zagospodarowanie": {
   "drzewa_usuniete": [
    "D701",
    "D702",
+   "D703",
+   "D704",
    "D867",
    "D868",
    "D882",
    "D897"
   ],
   "drzewa_chronione_palisada": [
-   "D703",
-   "D704",
-   "D886"
+   "I881"
   ],
   "drzewa_w_OI_numery": 44,
-  "zachowane_numery": 38,
-  "drzewa_ogrodkow_zachowane": "29/29",
-  "nowe_nasadzenia": 18,
-  "retencja_m3": 151,
-  "V60_C10_m3": 70
+  "zachowane_numery": 36,
+  "drzewa_ogrodkow_zachowane": "28 drzew M.06 w ogródkach: 19 w miejscu, 1 przesadzane (72), 8 U sanitarnie, 0 kolizyjnie",
+  "nowe_nasadzenia": 26,
+  "retencja_m3": 157,
+  "V60_C10_m3": 70,
+  "drzewa_usuniete_M06": [
+   1,
+   2,
+   60,
+   61,
+   67,
+   79,
+   80,
+   81
+  ],
+  "drzewa_przesadzane_M06": [
+   72
+  ],
+  "drzewa_U_sanitarnie_M06": [
+   5,
+   13,
+   18,
+   19,
+   20,
+   38,
+   53,
+   57,
+   59,
+   62
+  ],
+  "drzewa_chronione_opis": "nr 78 M.06 (= I881): wygrodzenie korona + 1 m, odkrywki ręczne, nadzór arborysty; bez palisady",
+  "zachowane_po_usunieciach_sanitarnych": 26,
+  "sciezki": "poza poligonem ogródków (obrzeżem); w ogródkach tylko istniejące ścieżki"
  },
  "bilans": {
-  "PZ_m2": 2162.9,
-  "PC_nadziemna_m2": 14151.2,
-  "PC_podziemna_m2": 3763.4,
-  "PU_m2": 8400,
-  "KW_m3": 77989,
-  "PBC_m2": 1170,
-  "koszt_mln_netto": 146.2,
-  "koszt_model_F14B_mid_mln": 144.2
+  "PZ_m2": 2165.8,
+  "PC_nadziemna_m2": 14164.5,
+  "PC_podziemna_m2": 4365.2,
+  "PU_m2": 8850.37,
+  "PU_definicja": "PN-ISO 9836 – pomieszczenia kategorii PU (model pomieszczeń, F.15.A); bez RU, US, PG",
+  "KW_m3": 81408,
+  "PBC_m2": 1185,
+  "koszt_mln_netto": 149.18,
+  "koszt_model_F14B_mid_mln": 142.8,
+  "koszt_roboty_KS_mln": 142.08,
+  "rezerwa_proc": 5,
+  "rezerwa_mln": 7.1,
+  "zapas_do_limitu_mln": 0.82,
+  "zl_m2_PC": 8003,
+  "zl_m2_PU": 16856,
+  "EP_kWh_m2": 28.0,
+  "EPB_kWh_m2": 23.9
  },
  "par13": {
   "okna_WS5": "szczyt (101,93;28,52)–(118,16;29,46), normalna 356,7°, wierzchołek 0,55 m w głąb",
   "segment": {
    "wariant_ostrozny_H_od_120_0": {
-    "H": 20.15,
-    "wymagane": 10.08,
+    "H": 19.1,
+    "wymagane": 9.55,
     "min_odl": 11.13,
-    "zapas": 1.05
+    "zapas": 1.58,
+    "uwaga": "attyka ściany pd. 139,10; balustrada 140,20 cofnięta 1,5 m: 12,63 ≥ 10,10 (zapas 2,53)"
    },
    "okno_pokoju_lok_6_6A": {
-    "H": 16.15,
-    "wymagane": 8.08,
-    "odl": 11.15,
-    "zapas": 3.07
+    "H": 15.1,
+    "wymagane": 7.55,
+    "odl": 11.13,
+    "zapas": 3.58
    }
   },
   "wieza": {
    "wymagane": 17.5,
-   "min_odl_dowolne_okno": 18.99,
-   "zapas": 1.49,
+   "min_odl_dowolne_okno": 19.0,
+   "zapas": 1.5,
    "okno_pokoju": 20.46
   }
  },
@@ -3733,7 +3940,9 @@
   "parter_wieza": 4.37,
   "sala_200": 4.25,
   "sala_obrad": 6.85,
-  "komisje_S": 4.9
+  "komisje_S": 4.9,
+  "garaz_-1": 3.65,
+  "garaz_-2": 2.65
  },
  "parter": {
   "wieza": [
@@ -4074,7 +4283,7 @@
     ]
    },
    {
-    "strefa": "Foyer 80, szatnia 20, WC 40, magazyn mebli 25",
+    "strefa": "Foyer, szatnia, WC konferencyjne, magazyn mebli (+10 m² z bistro) – 138.2 m² brutto",
     "sd": [
      39.75,
      0.5,
@@ -4087,21 +4296,25 @@
       48.396
      ],
      [
-      60.079,
-      58.407
-     ],
-     [
-      75.217,
-      55.074
-     ],
-     [
       73.013,
       45.064
+     ],
+     [
+      73.243,
+      46.11
+     ],
+     [
+      70.811,
+      56.044
+     ],
+     [
+      60.079,
+      58.407
      ]
     ]
    },
    {
-    "strefa": "Bistro 92 m² (sala 70 + zaplecze 22), taras na skwerze; wejście konferencyjne w dziobie NW",
+    "strefa": "Bistro 82.4 m² brutto (sala 62 + zaplecze 20, bez kuchni gorącej), taras na skwerze; wejście konferencyjne w dziobie NW",
     "sd": [
      50.0,
      0.5,
@@ -4114,26 +4327,49 @@
       58.407
      ],
      [
-      62.208,
-      68.075
-     ],
-     [
-      71.486,
-      66.033
-     ],
-     [
       69.357,
       56.364
+     ],
+     [
+      70.008,
+      59.322
+     ],
+     [
+      68.188,
+      66.759
+     ],
+     [
+      62.465,
+      68.018
+     ],
+     [
+      62.404,
+      67.969
+     ],
+     [
+      62.283,
+      67.861
+     ],
+     [
+      62.166,
+      67.748
+     ],
+     [
+      62.127,
+      67.706
      ]
     ]
    }
   ],
   "segment": [
    {
-    "strefa": "Rampa 2 × 3,0 m (≤ 18 %), brama 6,0 m od Wybrzeża (v −4,1…−10,1)"
+    "strefa": "Rampa 1 × 3,50 m (≤ 18 %) przy ścianie pn., brama 4,0 m od Wybrzeża (v −0,40…−4,40), próg 119,10 + zapora samoczynna"
    },
    {
-    "strefa": "Trafo SN/nn 21 m² (drzwi od Wybrzeża), rozdzielnia nn z SZR 17, BESS 250 kWh 11 (EI 120), punkt odpadów 7"
+    "strefa": "Pas pd.: trafo SN/nn 21 m² (drzwi od Wybrzeża, wentylacja do lica zach.), rozdzielnia nn z SZR 17, BESS 150 kWh 11 (EI 120), punkt odpadów 7, szyb T (narożnik SE)"
+   },
+   {
+    "strefa": "Kond. 1: agregat HVO (pas zach.); kond. 2: falowniki PV 12 m²; kond. 4: dry-cooler 2 × 150 kW (żaluzje w licu zach.)"
    }
   ]
  },
@@ -4167,11 +4403,12 @@
   ],
   "pojemnosc_jedn": {
    "1-4": 43,
-   "5": 24,
-   "6": 24,
+   "5": 22,
+   "6": 20,
    "P": 4,
-   "razem": 224,
-   "zajete": 220.8
+   "razem": 218,
+   "zajete": 216.1,
+   "uwaga": "wg suchej próby modelu pomieszczeń (docs/70_rysunki/rzuty_raport.md)"
   },
   "rozmieszczenie": [
    {
@@ -4229,33 +4466,35 @@
      "DZ": 19
     },
     "pokoje": 34,
-    "sale_narad": 1,
+    "sale_narad": 2,
     "magazynki": 6,
-    "socjalne": 3
+    "socjalne": 3,
+    "inne": "sala narad z kond. 5"
    },
    {
     "kond": "5",
     "komorki": {
-     "DSS": 19
+     "DSS": 19,
+     "DRA": 2
     },
-    "pokoje": 19,
-    "sale_narad": 1,
-    "magazynki": 4,
+    "pokoje": 21,
+    "sale_narad": 0,
+    "magazynki": 1,
     "magazynki_typ": "głębokie",
     "socjalne": 2,
-    "inne": "wyjście na taras 167 m²"
+    "inne": "wyjście na taras nad Oławą (135 m²); DRA 5.2 (Wyj. 17 odp. 70)"
    },
    {
     "kond": "6",
     "komorki": {
      "KS": 8,
-     "DRA": 11
+     "DRA": 9
     },
-    "pokoje": 19,
+    "pokoje": 17,
     "sale_narad": 0,
     "magazynki": 0,
     "socjalne": 1,
-    "inne": "gabinet Przewodniczącego 40 + asystent 14,5 (łuk NE), zaplecze 8, 3 × Wiceprzewodniczący 30, 2 sale 20 os. × 44 (wnętrze), miejsce oczekiwania 12"
+    "inne": "gabinet Przewodniczącego 48 + zaplecze 8 + asystent 24 (łuk NE), 3 × Wiceprzewodniczący 24 (elewacja), sala spotkań KS.05 2 × 44 dzielona (strefa środkowa, doświetlenie pośrednie), miejsca oczekiwania KS.06 i DRA.OCZ – wnęki holu"
    }
   ],
   "sumy": {
@@ -4266,8 +4505,9 @@
    "magazynki": 20,
    "socjalne": 15,
    "MFP": 10,
-   "porzadkowe": 12
+   "porzadkowe": 12,
+   "WC_m2_min": 380
   },
-  "centrale_pietrowe": "25 m² w strefie środkowej wieży na kond. 1–5 (kond. 5 obsługuje 5 i 6); czerpnia: płyciny elewacji pd. kond. 1 (u 2–12); wyrzutnia: lamele korony od pd."
+  "centrale_pietrowe": "25 m² w strefie środkowej wieży na kond. 1–5 (kond. 5 obsługuje 5 i 6) + centrala parteru na kond. 1 (pas zach.); centrala S na −1 przy trzonie B; czerpnia: płyciny elewacji pd. kond. P/1 i 1/2 (u 2–12, 17 m²); wyrzutnia: lamele korony od pd."
  }
 }

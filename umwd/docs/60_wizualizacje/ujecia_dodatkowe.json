@@ -1,0 +1,31 @@
+{
+ "_opis": "Kamery dodatkowych (nadprogramowych) ujęć budynku BRAMA I LATARNIA. Renderer: umwd/render/ujecia_dodatkowe.py (--json TEN_PLIK --id ID). Układ: e, n jak site.json; z domyślnie w rzędnych względnych budynku (±0,00 = 119,30 m n.p.m.), w scenie Z = z + 0,05.",
+ "_pola": {
+  "id": "nazwa ujęcia (bez spacji) – także nazwa pliku wynikowego <id>_<szer>.jpg",
+  "opis": "co ma pokazać kadr (opcjonalnie)",
+  "cam": "{e, n, z[, z_od]} – położenie kamery; z_od: 'zero' (domyślnie, z nad ±0,00 = 119,30), 'teren' (z nad podłożem pod punktem – teren, posadzka, pomost mostu; drzewa i ludzie pomijani), 'scena' (Z sceny = H − 119,25)",
+  "target": "{e, n, z[, z_od]} – punkt, na który patrzy kamera (te same zasady z_od)",
+  "lens_mm": "ogniskowa na pełnej klatce 36 mm, liczona dla DŁUŻSZEGO boku kadru (kadr pionowy = aparat obrócony)",
+  "shift_x / shift_y": "przesunięcie obiektywu w jednostkach dłuższego boku kadru; shift_y może być 'auto' (cel w środku wysokości kadru przy kamerze poziomej)",
+  "aspect": "proporcja szer./wys.: liczba (1.5) albo tekst '3:2', '16:9', '4:5', '2:3'",
+  "czas": "data i godzina czasu lokalnego, np. '2026-10-23 14:30 CEST' (słońce wg położenia Wrocławia)",
+  "ludzie": "true/false – sylwetki ludzi (34, z metaballi; w podglądach wyłączać --bez-ludzi)",
+  "preset": "dzien | lot | zmierzch | wnetrze – postprodukcja (tools/postprodukcja.py) + domyślne ustawienia: lot – kamera nachylona; zmierzch – latarnie uliczne zapalone; wnetrze – bez kontroli obrysu",
+  "opcjonalne": "poziom (bool; domyślnie true, dla 'lot' false – zachowanie pionów), ekspozycja (EV; domyślnie z swiatlo_dzienne, po zachodzie słońca wg kalibracji W9), udzial_opraw (0–1, udział zapalonych opraw biurowych; domyślnie 1 w dzień, 0,35 przy słońcu < 3°), latarnie (bool), chmury (0–1, domyślnie 0,35), lampy (mnożnik opraw we wnętrzach – wymaga budowy sceny od zera)"
+ },
+ "ujecia": [
+  {
+   "id": "plac_mostowy",
+   "opis": "TEST skryptu – kamera 'plac_mostowy' z render/testy_budynek.py: Plac Mostowy (skwer 9/2) od pn.-zach.: elewacja pn. z podcieniem, łuk, lipy, dziób skrzydła",
+   "cam": {"e": 68.0, "n": 99.0, "z": 1.62},
+   "target": {"e": 88.0, "n": 72.0, "z": 12.0},
+   "lens_mm": 24,
+   "shift_x": 0.0,
+   "shift_y": 0.28,
+   "aspect": 1.5,
+   "czas": "2026-10-23 14:30 CEST",
+   "ludzie": true,
+   "preset": "dzien"
+  }
+ ]
+}

@@ -1130,6 +1130,40 @@ class Materialy:
         nb.l(col, b.inputs['Base Color'])
         nb.output(b)
 
+    def m_ogrod_deszczowy(self, m):
+        """Ogród deszczowy: mozaika traw (słoma, rdza), bylin (zieleń, fiolet), wilgotna gleba."""
+        nb = NodeBuilder(m)
+        pos = nb.n('ShaderNodeNewGeometry').outputs['Position']
+        nz = nb.n('ShaderNodeTexNoise', Scale=1.8, Detail=6.0, Roughness=0.65)
+        nb.l(pos, nz.inputs['Vector'])
+        r = nb.n('ShaderNodeValToRGB')
+        els = r.color_ramp.elements
+        els[0].position, els[0].color = 0.3, (0.05, 0.06, 0.03, 1)
+        els[1].position, els[1].color = 0.75, (0.30, 0.22, 0.10, 1)
+        e = els.new(0.5)
+        e.color = (0.12, 0.13, 0.05, 1)
+        e = els.new(0.62)
+        e.color = (0.14, 0.07, 0.12, 1)
+        nb.l(nz.outputs['Fac'], r.inputs['Fac'])
+        n2 = nb.n('ShaderNodeTexNoise', Scale=30.0, Detail=3.0)
+        nb.l(pos, n2.inputs['Vector'])
+        b = nb.n('ShaderNodeBsdfPrincipled', Roughness=0.9)
+        nb.l(nb.mix(nb.math('MULTIPLY', n2.outputs['Fac'], 0.4), r.outputs['Color'], (0.04, 0.035, 0.025)),
+             b.inputs['Base Color'])
+        bm = nb.n('ShaderNodeBump', Strength=0.9, Distance=0.05)
+        nb.l(n2.outputs['Fac'], bm.inputs['Height'])
+        nb.l(bm.outputs['Normal'], b.inputs['Normal'])
+        nb.output(b)
+
+    def m_piasek(self, m):
+        nb = NodeBuilder(m)
+        pos = nb.n('ShaderNodeNewGeometry').outputs['Position']
+        nz = nb.n('ShaderNodeTexNoise', Scale=25.0, Detail=4.0)
+        nb.l(pos, nz.inputs['Vector'])
+        b = nb.n('ShaderNodeBsdfPrincipled', Roughness=0.95)
+        nb.l(nb.mix(nz.outputs['Fac'], (0.42, 0.34, 0.22), (0.55, 0.46, 0.32)), b.inputs['Base Color'])
+        nb.output(b)
+
     def m_pnacze(self, m):
         """Liście winobluszczu jesienią: karmin – bordo – pomarańcz (losowo na liść wg ``fu``), przeświecanie."""
         nb = NodeBuilder(m)
@@ -2343,6 +2377,56 @@ def _interp_slonce(el):
     return T[-1][1], T[-1][2]
 
 
+# Panoramy 360° M.09 (29.10.2025, 11:48–11:52 CET) – środowisko odbić. u_slonca: kolumna tarczy słońca (pomiar),
+# azymut słońca wg NOAA dla 11:50 CET = 183,9° (+0,738° w siatce) → obrót panoramy wokół osi Z.
+_M09 = UMWD / '00_materialy' / '_rozpak' / '5_Zalaczniki_Merytoryczne_M.01-M.14_pop.13.02.2026' / \
+    'M.09. ZDJĘCIA 360 ST' / 'M.09. ZDJĘCIA 360 ST'
+PANORAMY_M09 = {'m09_30': (_M09 / '360_30m.jpg', 0.6090), 'm09_40': (_M09 / '360_40m_2.jpg', 0.6117),
+                'm09_45': (_M09 / '360_45m.jpg', 0.6003)}
+AZ_SLONCA_M09 = 183.90 + 0.738
+
+
+def _obrot_panoramy(u_slonca, az_slonca=AZ_SLONCA_M09):
+    """Kąt obrotu wektora (węzeł Mapping, oś Z) tak, by kolumna słońca panoramy wypadła na azymut słońca.
+    Blender (equirect): u = atan2(d.y, −d.x)/2π + 0,5; obrót CCW o θ zmniejsza azymut kompasowy o θ."""
+    a = (u_slonca - 0.5) * 2 * math.pi
+    az_p = math.degrees(math.atan2(-math.cos(a), math.sin(a))) % 360      # azymut kierunku o danym u
+    return math.radians(az_slonca - az_p)
+
+
+def dodaj_odbicia_panoramy(sc, klucz='m09_30', sila=22.0):
+    """Panorama M.09 jako środowisko widoczne TYLKO w promieniach odbitych (Light Path → Is Glossy Ray):
+    szkło, metal, woda odbijają prawdziwe miasto; oświetlenie i tło kadru zostają z nieba fizycznego.
+    Zwraca węzeł obrazu lub None (brak pliku)."""
+    if klucz in PANORAMY_M09:
+        plik, u_s = PANORAMY_M09[klucz]
+    else:
+        plik, u_s = Path(klucz), 0.5
+    if not Path(plik).exists():
+        return None
+    nt = sc.world.node_tree
+    out = next(n for n in nt.nodes if n.bl_idname == 'ShaderNodeOutputWorld')
+    src = out.inputs['Surface'].links[0].from_socket
+    tc = nt.nodes.new('ShaderNodeTexCoord')
+    mp = nt.nodes.new('ShaderNodeMapping')
+    mp.inputs['Rotation'].default_value = (0.0, 0.0, _obrot_panoramy(u_s))
+    nt.links.new(tc.outputs['Generated'], mp.inputs['Vector'])
+    env = nt.nodes.new('ShaderNodeTexEnvironment')
+    env.image = bpy.data.images.load(str(plik), check_existing=True)
+    env.image.colorspace_settings.name = 'sRGB'
+    nt.links.new(mp.outputs['Vector'], env.inputs['Vector'])
+    bg2 = nt.nodes.new('ShaderNodeBackground')
+    bg2.inputs['Strength'].default_value = sila
+    nt.links.new(env.outputs['Color'], bg2.inputs['Color'])
+    lp = nt.nodes.new('ShaderNodeLightPath')
+    mx = nt.nodes.new('ShaderNodeMixShader')
+    nt.links.new(lp.outputs['Is Glossy Ray'], mx.inputs['Fac'])
+    nt.links.new(src, mx.inputs[1])
+    nt.links.new(bg2.outputs['Background'], mx.inputs[2])
+    nt.links.new(mx.outputs[0], out.inputs['Surface'])
+    return env
+
+
 def czas_kamery(txt):
     """'2026-10-23 09:40 CEST[, …]' → datetime ze strefą Europe/Warsaw."""
     import datetime
@@ -2352,9 +2436,10 @@ def czas_kamery(txt):
 
 
 def swiatlo_dzienne(sc, czas, ekspozycja=None, sila_slonca=1.0, sila_nieba=1.0, aerozole=1.6, chmury=0.35,
-                    wb=None):
+                    wb=None, odbicia=None, odbicia_sila=22.0):
     """Niebo fizyczne (Multiple Scattering, ``sun_rotation`` = azymut kompasowy w siatce) + lampa Sun wg kalibracji
     (bez tarczy na niebie – cienie kontrolowane lampą). Azymut siatki = azymut geograficzny + 0,738°.
+    ``odbicia``: 'm09_30' | 'm09_40' | 'm09_45' | ścieżka panoramy – środowisko tylko dla promieni odbitych.
     Zwraca dict(az, el, ekspozycja). ``czas``: datetime lub tekst z koncepcja.json."""
     from mathutils import Vector
     from umwd.sun import sun_position
@@ -2395,6 +2480,9 @@ def swiatlo_dzienne(sc, czas, ekspozycja=None, sila_slonca=1.0, sila_nieba=1.0, 
     if chmury:
         from umwd.render import context
         context.dodaj_chmury(sc, pokrycie=chmury)
+    if odbicia:
+        # odbicia z panoramy M.09 (tylko promienie odbite); o zmierzchu przyciemnione proporcjonalnie do nieba
+        dodaj_odbicia_panoramy(sc, odbicia, odbicia_sila * (1.0 if el > 8 else max(0.04, (el + 6.0) / 14.0)))
     # o zmierzchu „reszta budynku milknie”: zapalona tylko część opraw biurowych (korona i hol – w pełni)
     m_l = bpy.data.materials.get('B_wn_lampa')
     if m_l is not None and m_l.node_tree and 'udzial' in m_l.node_tree.nodes:
