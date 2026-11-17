@@ -469,9 +469,24 @@ class Materialy:
         nb.l(nf.outputs['Fac'], bmp.inputs['Height'])
         nb.output(self._bsdf(nb, col, rough, metal, normal=bmp.outputs['Normal']))
 
+    def _liscie_na_ziemi(self, nb, uv, col, gest=0.5):
+        """Opadłe liście (jesień): rozproszone drobne plamy żółto-brązowe, skupione w płatach."""
+        n3 = nb.n('ShaderNodeTexNoise', Scale=0.5, Detail=5.0)
+        nb.l(uv, n3.inputs['Vector'])
+        v = nb.n('ShaderNodeTexVoronoi', Scale=24.0)
+        nb.l(uv, v.inputs['Vector'])
+        sep = nb.n('ShaderNodeSeparateColor')
+        nb.l(v.outputs['Color'], sep.inputs[0])
+        pl = nb.math('MULTIPLY', nb.math('MAXIMUM', nb.math('SUBTRACT', n3.outputs['Fac'], 0.5), 0.0), 4.0 * gest)
+        f = nb.math('MULTIPLY', nb.math('LESS_THAN', v.outputs['Distance'], 0.16),
+                    nb.math('LESS_THAN', sep.outputs[0], pl))
+        leaf = nb.mix(sep.outputs[1], (0.30, 0.16, 0.03), (0.20, 0.07, 0.02))
+        return nb.mix(nb.math('MINIMUM', f, 1.0), col, leaf), f
+
     def _uklad_cegiel(self, m, bw, bh, mortar, c1, c2, cm, rough=0.75, bump=0.3, var=0.25, scale_noise=3.0,
-                      wet_z=None, offset=0.5):
-        """Wzór bloków/kostki/płyt (Brick Texture) we współrzędnych uv_sciana (metry)."""
+                      wet_z=None, offset=0.5, brud=0.0, liscie=0.0):
+        """Wzór bloków/kostki/płyt (Brick Texture) we współrzędnych uv_sciana (metry); brud – plamy
+        i ciemniejsze spoiny, liscie – opadłe liście (tylko jesień)."""
         nb = NodeBuilder(m)
         uv = self.uv_sciana(nb)
         br = nb.n('ShaderNodeTexBrick', {'offset': offset, 'squash': 1.0}, Scale=1.0)
@@ -487,6 +502,23 @@ class Materialy:
         nz = nb.n('ShaderNodeTexNoise', Scale=scale_noise, Detail=6.0)
         nb.l(uv, nz.inputs['Vector'])
         col = nb.mix(var, br.outputs['Color'], nz.outputs['Color'], blend='MULTIPLY')
+        if brud > 0:
+            # jasność losowa na element (kostka/płyta): drugi wzór cegieł z kolorami czarny/biały i losowym biasem
+            br2 = nb.n('ShaderNodeTexBrick', {'offset': offset, 'squash': 1.0}, Scale=1.0)
+            for k_, v_ in (('Brick Width', bw), ('Row Height', bh), ('Mortar Size', 0.0), ('Bias', 0.0)):
+                nb.set(br2, k_, v_)
+            nb.set(br2, 'Color1', (0.0, 0.0, 0.0))
+            nb.set(br2, 'Color2', (1.0, 1.0, 1.0))
+            nb.l(uv, br2.inputs['Vector'])
+            g2 = nb.n('ShaderNodeRGBToBW')
+            nb.l(br2.outputs['Color'], g2.inputs[0])
+            col = nb.mix(nb.math('MULTIPLY', g2.outputs[0], 0.35 * brud), col, (0.03, 0.03, 0.028))
+            nd = nb.n('ShaderNodeTexNoise', Scale=0.45, Detail=7.0, Roughness=0.65)
+            nb.l(uv, nd.inputs['Vector'])
+            pl = nb.math('MULTIPLY', nb.math('MAXIMUM', nb.math('SUBTRACT', nd.outputs['Fac'], 0.52), 0.0), 2.2 * brud)
+            col = nb.mix(nb.math('MINIMUM', pl, 0.7), col, (0.05, 0.048, 0.042))
+        if liscie > 0 and self.ctx.opts['pora_roku'] == 'jesien':
+            col, _ = self._liscie_na_ziemi(nb, uv, col, liscie)
         if wet_z is not None:
             geo = nb.n('ShaderNodeNewGeometry')
             sz = nb.n('ShaderNodeSeparateXYZ')
@@ -506,22 +538,27 @@ class Materialy:
         col = self._ramp(nb, n1.outputs['Fac'], (0.032, 0.032, 0.034), (0.07, 0.068, 0.066), 0.35, 0.7)
         n2 = nb.n('ShaderNodeTexNoise', Scale=90.0, Detail=2.0)
         nb.l(uv, n2.inputs['Vector'])
+        np_ = nb.n('ShaderNodeTexNoise', Scale=0.08, Detail=3.0)
+        nb.l(uv, np_.inputs['Vector'])
+        col = nb.mix(nb.math('MULTIPLY', nb.math('GREATER_THAN', np_.outputs['Fac'], 0.6), 0.6), col, (0.025, 0.025, 0.027))
+        if self.ctx.opts['pora_roku'] == 'jesien':
+            col, _ = self._liscie_na_ziemi(nb, uv, col, 0.3)
         r = nb.math('ADD', nb.math('MULTIPLY', n1.outputs['Fac'], 0.25), 0.62)
         bmp = nb.n('ShaderNodeBump', Strength=0.25, Distance=0.004)
         nb.l(n2.outputs['Fac'], bmp.inputs['Height'])
         nb.output(self._bsdf(nb, col, r, normal=bmp.outputs['Normal']))
 
     def m_kostka_granit(self, m):   # jezdnia z kostki granitowej (Mazowiecka, Wybrzeże Słowackiego)
-        self._uklad_cegiel(m, 0.17, 0.115, 0.012, (0.21, 0.20, 0.17), (0.15, 0.145, 0.125), (0.08, 0.075, 0.065),
-                           rough=0.72, bump=0.45, var=0.4, scale_noise=7.0)
+        self._uklad_cegiel(m, 0.17, 0.115, 0.014, (0.22, 0.205, 0.175), (0.13, 0.125, 0.11), (0.05, 0.047, 0.04),
+                           rough=0.7, bump=0.55, var=0.45, scale_noise=7.0, brud=1.0, liscie=0.25)
 
     def m_kostka_bet(self, m):
-        self._uklad_cegiel(m, 0.2, 0.1, 0.006, (0.30, 0.29, 0.27), (0.25, 0.24, 0.23), (0.17, 0.165, 0.16),
-                           rough=0.8, bump=0.25, var=0.3, scale_noise=5.0)
+        self._uklad_cegiel(m, 0.2, 0.1, 0.006, (0.30, 0.29, 0.27), (0.23, 0.22, 0.21), (0.13, 0.125, 0.12),
+                           rough=0.8, bump=0.3, var=0.3, scale_noise=5.0, brud=0.8, liscie=0.5)
 
     def m_plyty_bet(self, m):
-        self._uklad_cegiel(m, 0.5, 0.5, 0.005, (0.36, 0.35, 0.33), (0.31, 0.30, 0.29), (0.2, 0.19, 0.18),
-                           rough=0.82, bump=0.2, var=0.35, scale_noise=1.5, offset=0.0)
+        self._uklad_cegiel(m, 0.5, 0.5, 0.006, (0.34, 0.33, 0.31), (0.27, 0.265, 0.25), (0.13, 0.125, 0.12),
+                           rough=0.82, bump=0.25, var=0.35, scale_noise=1.5, offset=0.0, brud=1.0, liscie=0.6)
 
     def m_zwir(self, m):
         self._noise_mat(m, (0.24, 0.21, 0.17), (0.36, 0.33, 0.28), scale=6.0, rough=0.95, fine=120.0, finebump=0.4)
@@ -571,8 +608,24 @@ class Materialy:
         rr = nb.math('ADD', nb.math('MULTIPLY', n2.outputs['Fac'], 0.15), 0.82)
         nb.output(self._bsdf(nb, col, rr, spec=0.25, normal=bmp.outputs['Normal']))
 
-    def m_granit(self, m):          # krawężniki, cokoły
-        self._noise_mat(m, (0.17, 0.165, 0.16), (0.28, 0.27, 0.26), scale=6.0, rough=0.6, fine=60.0, finebump=0.15)
+    def m_granit(self, m):          # krawężniki, cokoły: granit szary z ziarnem i zróżnicowaniem między elementami
+        nb = NodeBuilder(m)
+        uv = self.uv_sciana(nb)
+        n1 = nb.n('ShaderNodeTexNoise', Scale=1.0, Detail=2.0)
+        nb.l(uv, n1.inputs['Vector'])
+        col = self._ramp(nb, n1.outputs['Fac'], (0.15, 0.145, 0.14), (0.27, 0.26, 0.25), 0.35, 0.65)
+        v = nb.n('ShaderNodeTexVoronoi', Scale=180.0)
+        nb.l(uv, v.inputs['Vector'])
+        grain = self._ramp(nb, v.outputs['Distance'], (0.05, 0.05, 0.05), (0.42, 0.41, 0.40), 0.0, 0.6)
+        col = nb.mix(0.35, col, grain, blend='OVERLAY')
+        nd = nb.n('ShaderNodeTexNoise', Scale=0.6, Detail=6.0)
+        nb.l(uv, nd.inputs['Vector'])
+        col = nb.mix(nb.math('MULTIPLY', nb.math('GREATER_THAN', nd.outputs['Fac'], 0.58), 0.45), col, (0.06, 0.06, 0.055))
+        nf = nb.n('ShaderNodeTexNoise', Scale=60.0, Detail=4.0)
+        nb.l(uv, nf.inputs['Vector'])
+        bmp = nb.n('ShaderNodeBump', Strength=0.15, Distance=0.01)
+        nb.l(nf.outputs['Fac'], bmp.inputs['Height'])
+        nb.output(self._bsdf(nb, col, 0.55, normal=bmp.outputs['Normal']))
 
     def m_schody(self, m):
         self._uklad_cegiel(m, 1.0, 0.3, 0.008, (0.28, 0.27, 0.26), (0.25, 0.24, 0.23), (0.15, 0.15, 0.14), rough=0.75,
@@ -629,13 +682,17 @@ class Materialy:
         nb.l(uv, n0.inputs['Vector'])
         col = nb.mix(nb.math('MULTIPLY', n0.outputs['Fac'], 0.5), col, tuple(x * 0.8 for x in c), blend='MIX')
         if lat > 0:
-            vo = nb.n('ShaderNodeTexVoronoi', Scale=0.22)
-            nb.l(uv, vo.inputs['Vector'])
-            sep = nb.n('ShaderNodeSeparateColor')
-            nb.l(vo.outputs['Color'], sep.inputs[0])
-            fl = nb.math('GREATER_THAN', sep.outputs[0], 1.0 - lat)
-            lc = nb.mix(sep.outputs[1], tuple(min(1, x * 1.12) for x in c), (0.36, 0.35, 0.33))
-            col = nb.mix(nb.math('MULTIPLY', fl, 0.85), col, lc)
+            # łaty napraw tynku: plamy o miękkich, nieregularnych brzegach (szum progowany), jaśniejsze/szarsze
+            mpl = nb.n('ShaderNodeMapping', Scale=(1.0, 1.6, 1.0))
+            nb.l(uv, mpl.inputs['Vector'])
+            nl = nb.n('ShaderNodeTexNoise', Scale=0.32, Detail=7.0, Roughness=0.7)
+            nb.l(mpl.outputs[0], nl.inputs['Vector'])
+            fl = nb.math('MULTIPLY', nb.math('MAXIMUM', nb.math('SUBTRACT', nl.outputs['Fac'], 0.62 - 0.2 * lat), 0.0), 12.0)
+            fl = nb.math('MINIMUM', fl, 1.0)
+            nl2 = nb.n('ShaderNodeTexNoise', Scale=0.11, Detail=2.0)
+            nb.l(uv, nl2.inputs['Vector'])
+            lc = nb.mix(nl2.outputs['Fac'], tuple(min(1, x * 1.10) for x in c), tuple(x * 0.86 for x in c))
+            col = nb.mix(nb.math('MULTIPLY', fl, 0.8), col, lc)
         # zacieki: szum rozciągnięty w pionie
         mp = nb.n('ShaderNodeMapping', Scale=(1.6, 0.07, 1.0))
         nb.l(uv, mp.inputs['Vector'])
@@ -731,6 +788,10 @@ class Materialy:
     def m_stal_ciemna(self, m):
         self._plain(m, (0.035, 0.038, 0.04), 0.4, 0.8)
 
+    def m_stal_lakier(self, m):     # słupy oświetleniowe – stal malowana proszkowo, grafit
+        self._noise_mat(m, (0.045, 0.048, 0.05), (0.075, 0.078, 0.08), scale=3.0, rough=0.42, fine=50.0,
+                        finebump=0.03, metal=0.3)
+
     def m_stal_ocynk(self, m):
         self._plain(m, (0.42, 0.42, 0.42), 0.38, 1.0)
 
@@ -782,11 +843,17 @@ class Materialy:
         win = nb.math('MULTIPLY', win, gl)
         n1 = nb.n('ShaderNodeTexNoise', Scale=0.2, Detail=3.0)
         nb.l(uv, n1.inputs['Vector'])
-        wall = self._ramp(nb, n1.outputs['Fac'], tuple(x * 0.62 for x in c), tuple(x * 0.78 for x in c), 0.3, 0.7)
+        wall = self._ramp(nb, n1.outputs['Fac'], tuple(x * 0.52 for x in c), tuple(x * 0.66 for x in c), 0.3, 0.7)
+        # ciemniejszy pas cokołu/parteru i gzyms pod dachem (czytelna tektonika z daleka)
+        geo2 = nb.n('ShaderNodeNewGeometry')
+        sz2 = nb.n('ShaderNodeSeparateXYZ')
+        nb.l(geo2.outputs['Position'], sz2.inputs[0])
+        parter = nb.math('LESS_THAN', sz2.outputs[2], 3.8)
+        wall = nb.mix(nb.math('MULTIPLY', parter, 0.35), wall, tuple(x * 0.35 for x in c))
         roof = (0.11, 0.11, 0.11)
         base = nb.mix(vert, roof, wall)
-        col = nb.mix(win, base, (0.02, 0.025, 0.03))
-        rgh = nb.mix(win, 0.85, 0.08, dtype='FLOAT')
+        col = nb.mix(win, base, (0.05, 0.055, 0.06))
+        rgh = nb.mix(win, 0.85, 0.12, dtype='FLOAT')
         nb.output(self.mgla_shader(nb, self._bsdf(nb, col, rgh, spec=0.6)))
 
     def m_ortofoto(self, m):
@@ -2077,14 +2144,19 @@ def zbuduj_zielen(ctx):
         if pusty and ctx.inwest.buffer(0.5).contains(Pz.representative_point()):
             continue
         x0, y0, x1, y1 = Pz.bounds
-        for x in np.arange(x0, x1, 1.7):
-            for y in np.arange(y0, y1, 1.7):
-                q = Point(x + rng.uniform(-0.6, 0.6), y + rng.uniform(-0.6, 0.6))
-                if Pz.contains(q):
+        for x in np.arange(x0, x1, 2.2):
+            for y in np.arange(y0, y1, 2.2):
+                q = Point(x + rng.uniform(-0.9, 0.9), y + rng.uniform(-0.9, 0.9))
+                if not Pz.contains(q) or rng.random() < 0.22:
+                    continue
+                if rng.random() < 0.06:      # pojedyncze młode drzewa w zakrzewieniu
+                    pr = P['male'][nk % len(P['male'])][0]
+                    sk = rng.uniform(0.8, 1.1)
+                else:
                     pr = P['krzew'][nk % 2][0]
-                    _instancja(coll, pr, (q.x, q.y, ctx.teren.z1(q.x, q.y)), rng.uniform(0, 6.28),
-                               rng.uniform(0.8, 1.3), 'krzew_%d' % nk)
-                    nk += 1
+                    sk = rng.uniform(0.55, 1.15)
+                _instancja(coll, pr, (q.x, q.y, ctx.teren.z1(q.x, q.y)), rng.uniform(0, 6.28), sk, 'krzew_%d' % nk)
+                nk += 1
     ctx.info['drzewa_w_ramce'] = n
     ctx.info['krzewy'] = nk
     ctx.czas('zielen', t0)
@@ -2092,19 +2164,32 @@ def zbuduj_zielen(ctx):
 
 # ============================================================================================== ulica
 def _latarnia_proto(ctx):
+    """Latarnia uliczna (typowa wrocławska: stalowy słup stożkowy ok. 8 m na fundamencie z cokołem, wysięgnik
+    łukowy, płaska oprawa LED). Oś słupa w (0, 0), wysięgnik w kierunku +X (ku jezdni)."""
     g = Geo()
-    # słup stożkowy 8 m, wysięgnik 1,4 m, oprawa
-    k = 8
-    for i in range(k):
-        a0, a1 = 2 * math.pi * i / k, 2 * math.pi * (i + 1) / k
-        r0, r1 = 0.085, 0.05
-        g.add([(r0 * math.cos(a0), r0 * math.sin(a0), -0.3), (r0 * math.cos(a1), r0 * math.sin(a1), -0.3),
-               (r1 * math.cos(a1), r1 * math.sin(a1), 8.0), (r1 * math.cos(a0), r1 * math.sin(a0), 8.0)],
-              [(0, 1, 2, 3)], 'stal_ocynk')
-    g.belka((0, 0, 7.9), (1.4, 0, 8.15), 0.06, 0.06, 'stal_ocynk')
-    g.belka((1.1, 0, 8.12), (1.75, 0, 8.18), 0.28, 0.12, 'stal_ciemna')
-    g.belka((1.15, 0, 8.04), (1.7, 0, 8.1), 0.22, 0.03, 'klosz')
-    g.belka((0, 0, -0.3), (0, 0, 0.5), 0.22, 0.22, 'stal_ocynk')
+    k = 12
+
+    def stozek(z0, z1, r0, r1, m):
+        for i in range(k):
+            a0, a1 = 2 * math.pi * i / k, 2 * math.pi * (i + 1) / k
+            g.add([(r0 * math.cos(a0), r0 * math.sin(a0), z0), (r0 * math.cos(a1), r0 * math.sin(a1), z0),
+                   (r1 * math.cos(a1), r1 * math.sin(a1), z1), (r1 * math.cos(a0), r1 * math.sin(a0), z1)],
+                  [(0, 1, 2, 3)], m)
+        g.poly([(r1 * math.cos(2 * math.pi * i / k), r1 * math.sin(2 * math.pi * i / k), z1) for i in range(k)], m)
+    stozek(-0.3, 0.05, 0.22, 0.22, 'beton')            # fundament
+    stozek(0.05, 0.95, 0.105, 0.098, 'stal_lakier')    # cokół z drzwiczkami
+    g.belka((0.0, -0.1, 0.35), (0.0, -0.1, 0.75), 0.07, 0.012, 'stal_ciemna', up=(0, -1, 0))
+    stozek(0.95, 1.0, 0.098, 0.085, 'stal_lakier')
+    stozek(1.0, 8.0, 0.085, 0.048, 'stal_lakier')      # trzon stożkowy
+    pts = [(0.0, 0.0, 7.7)]
+    for t in np.linspace(0.15, 1.0, 6):                # wysięgnik łukowy 1,5 m
+        pts.append((1.5 * t, 0.0, 7.7 + 0.55 * math.sin(math.pi / 2 * t) - 0.12 * t * t))
+    for p_, q_ in zip(pts[:-1], pts[1:]):
+        g.belka(p_, q_, 0.06, 0.06, 'stal_lakier')
+    hx = pts[-1][0]
+    hz = pts[-1][2]
+    g.belka((hx - 0.15, 0, hz), (hx + 0.55, 0, hz - 0.03), 0.30, 0.10, 'stal_lakier')   # oprawa
+    g.belka((hx - 0.10, 0, hz - 0.055), (hx + 0.50, 0, hz - 0.08), 0.24, 0.012, 'klosz')
     me = blib.mesh_from_arrays('latarnia_proto', g.V, g.F, [0] * len(g.F), [], None)
     keys = []
     for kk in g.M:

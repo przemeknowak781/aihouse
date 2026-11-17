@@ -1,0 +1,80 @@
+{
+  "juror": "J3",
+  "oceny": [
+    {
+      "id": "K1",
+      "a_funkcja": 7,
+      "b_tkanka": 7,
+      "c_atrakcyjnosc": 7,
+      "d_ekologia": 8,
+      "e_dostepnosc": 8,
+      "f_ekonomia": 8,
+      "mocne": "Najlepsza w konkursie artykulacja pierzei Mazowieckiej: 4 „posesje” 13,5–16,2 m plus wieża jako piąta, gzyms +21,00 = attyka Maz. 19 (140,25 m n.p.m.), segment S1 przejmuje linie sąsiada 1:1 i przez 8 m nie ma nadbudowy. Materiały zgodne z oczekiwaniem DWKZ: jasna ceramika w 3 tonach, granit strzegomski w cokole w dialogu z pylonami, brąz. Najczytelniejszy znak obywatelski wobec mostu: okno sali obrad w łuku R 13 m patrzy w oś pl. Grunwaldzkiego, wieża stoi 16–20° od portalu, hełmy pozostają na tle nieba, latarnia za lamelami ma 38,2 m (zachowawczo). Prosta „Sień Województwa” 9,75 × 28 m prowadzi ze skweru na dziedziniec, bistro w narożniku ma ogródek na skwerze, Brama Ogrodowa otwiera przejście z Mazowieckiej. Sprawdzenie geometrii: wieża 1 081 m² w całości w A, § 13 – wieża 22,2 m od wierzchołka sektora (wymagane 17,5 m), dachy w pasmach (19,2–24,5 m oraz 36,4–38,5 m), brak zjazdu z 1KDG. Koszt 147 mln jest realny: model zespołu daje ok. 143–144 mln dla 13 906 + 3 330 m².",
+      "slabe": "Pierzeja Wybrzeża jest otwarta na ok. 23 m, od naroża SE wieży do szczytu WS5, a „domyka” ją tylko rama bramna h 4,80. To sprzeczne z DWKZ P7 (ciągłe pierzeje wzdłuż Wybrzeża). Argument autora, że odcinka „nie da się zabudować” z powodu § 13, jest błędny: segment P+4 w odległości ok. 10,5–12,5 m od okna lokalu 6-6A spełnia § 13 (H ≈ 16,2 m, wymagane ok. 8,1 m), co pokazują K2, K4 i K5. Kondygnacja attykowa do +23,60 jest cofnięta tylko o 1,5 m, więc widać ją z ulicy i rozmywa linię gzymsu 21 m. Parter S1 przy chronionej Maz. 19 to portal 9,6 m (przejście i brama garażu) oraz stacja SN/nn od ulicy, czyli martwy odcinek pierzei. Zjazd z Mazowieckiej koliduje z planowanym tramwajem i tunelem (K-02). Antresola 416 m² mieści zamknięte pomieszczenia Sejmiku (kluby 15 os., sala radnych, pokój socjalny, pokój matki) – to najsłabsza wykładnia Wyj. 21/85 w konkursie. 36 ze 104 m.p. stoi na platformach typu puzzle, rezerwa programowa wynosi 1,8 jedn., sala 200 os. pod belkami transferowymi ma tylko 3,6–4,2 m w świetle. Ogród jest najmniejszy (ok. 710 + 491 m²).",
+      "bledy_dyskwalifikujace": "Brak. Do korekty jest styk skrzydła z wieżą. Między krawędzią A a zachodnim licem wieży leży pas ok. 0,3 m, a narożnik skrzydła (74,48; 42,58) też wchodzi w A (razem ok. 10 m² w A). Jeżeli ten pas przykrywa dach skrzydła +19,45, to w A powstaje dach niższy niż 35 m, co literalnie narusza § 26 ust. 2 pkt 3 lit. b MPZP. Mieści się to w dokładności rastra i autor sam to sygnalizuje. Rozwiązanie: dosunąć wieżę do krawędzi A albo zostawić tam nieprzekrytą dylatację."
+    },
+    {
+      "id": "K2",
+      "a_funkcja": 7,
+      "b_tkanka": 7,
+      "c_atrakcyjnosc": 8,
+      "d_ekologia": 7,
+      "e_dostepnosc": 8,
+      "f_ekonomia": 6,
+      "mocne": "Najsilniej rozwiązuje przestrzeń publiczną przy moście i bulwarze. Dwukondygnacyjna Arkada Obywatelska (54,6 m, 7,50 m w świetle) ma skalę bramy pylonu i biegnie wzdłuż przyczółka, łuku i bulwaru, z bistro i tarasem – parter publiczny całą dobę. Obie pierzeje są domknięte. Mazowiecka ma 60,2 m w linii nr 19 (spód gzymsu 139,50 = spód gzymsu Maz. 19). Na Wybrzeżu segment SE stoi w linii WS5, a szczelina ma 11,3–11,8 m. § 13 jest spełniony: segment stoi 12,5 m od wierzchołka sektora przy wymaganych ok. 8,2 m, wieża 20,4 m. Foyer SK wzdłuż Mazowieckiej daje aktywny parter. Forum jest przelotowe z arkady do ogrodu, a ogród w kształcie U (1 571 m²) ma pełne słońce. Tektonika filar–nadproże jest spójna, moduł 1,35 m = 5 cegieł, cegła z gruzu kamienic buduje narrację, w posadzce jest okno archeologiczne. Bilans pokoi ma rezerwę 7,8 modułu, wieża leży w całości w A (1 165 m²).",
+      "slabe": "Kampanila 44,0 m (zapas 0,63 m do 45 m) to drugi akcent wysokościowy obok wieży 37 m. Stoi to w sprzeczności z oczekiwaniem DWKZ: jedna dominanta, spokojne zwieńczenie, zachowawczość (P9). Z osi mostu, 100–300 m za portalem, kampanila sięga w kadrze wyżej niż hełmy pylonów i konkuruje z zabytkowym mostem. Motyw dzwonnicy jest też semantycznie obcy siedzibie samorządu. Cegła klinkierowa w kwartale historycznie tynkowanym odbiega od jasnej ceramiki lub tynku, co grozi problemem w uzgodnieniu WKZ. Zwieńczenie kampanili mieści centralę wentylacyjną Sejmiku, wentylatory oddymiające, czerpnię i wyrzutnię za ażurem na elewacjach od 1KDG i 3KDL/1, co koliduje z § 6 pkt 13 lit. b MPZP. Portal garażu 6,5 m stoi na bulwarze ok. 12 m od WS5. Nie ma publicznego przejścia z Mazowieckiej do ogrodu, jest tylko Forum w godzinach pracy. Praca ma największą PC (14 161 m²), koszt 148,6 mln z rezerwą 0,9 %, a wg wrażliwości autora do 158 mln, czyli na granicy limitu. 6 sal narad i 16 magazynków nie ma światła dziennego.",
+      "bledy_dyskwalifikujace": "Brak przy życzliwej wykładni. Ryzyka formalne: (1) urządzenia techniczne (czerpnia, wyrzutnia, centrala) w ażurze kampanili od strony ulic – § 6 pkt 13 lit. b MPZP; (2) rezerwa budżetowa 0,9 %, więc każde urealnienie wskaźników przekracza 150 mln; (3) sala multimedialna i reżyserka to przeszklone pomieszczenia na antresoli 7A – zależy od wykładni Wyj. 21/85."
+    },
+    {
+      "id": "K3",
+      "a_funkcja": 6,
+      "b_tkanka": 6,
+      "c_atrakcyjnosc": 6,
+      "d_ekologia": 6,
+      "e_dostepnosc": 8,
+      "f_ekonomia": 7,
+      "mocne": "Najlepsza przepuszczalność kwartału. Prowadzą przez niego dwie publiczne osie: N–S (most → Hala Forum → forum → ogród) i E–W (Mazowiecka → brama 6,1 m → forum → bulwar). Forum ma 618 m² i podcień 120 m², ogród 1 105 m². Idea „przejrzystości przez prawo wstępu” jest trafna i zgodna z trendem publicznego parteru. Wejście Obywatelskie z forum ma dwa dźwigi prosto na galerię. Pierzeja Mazowiecka jest ciągła, w 4 „posesjach”, z oknami 1:2 jak w kamienicach. Korona-kolumnada z granitową attyką daje spokojną sylwetę 38,0 m, hełmy pozostają na tle nieba. Sprawdzenie: wieża 1 143 m² w A, § 13 – 20,6 m (wymagane 17,5 m), dachy w pasmach, brak zjazdu z 1KDG, 106 m.p.",
+      "slabe": "Furta od Oławy otwiera pierzeję Wybrzeża na ok. 21 m (od bulwaru zostaje tylko 15,2 m lica wieży i łuk), co jest sprzeczne z DWKZ P7. Szpaler 3 lip nie zastąpi ściany kwartału. Okno Sejmiku jest skierowane na pd., do wnętrza forum, więc od mostu i z osi pl. Grunwaldzkiego sala nie działa jako znak (widać tylko loggię holu). To osłabia wyeksponowanie od 1KDG. Dostawy wjeżdżają z 6KDB/2 do zatoki w narożu forum, czyli ruch obsługi trafia na główną przestrzeń obywatelską. Zjazd do garażu z Mazowieckiej leży 6–12 m od chronionej Maz. 19 (hałas, kolizja z tramwajem i tunelem K-02), a pd. odcinek parteru Mazowieckiej zajmują rampa, rowerownia i PPT. Antresola 440 m² mieści zamkniętą salę radnych i kluby 15 os., co budzi wątpliwości wobec Wyj. 21/85. Ekologia jest najsłabsza: EP ≈ 55 kWh/(m²·rok), PV 0,35 MWp (poniżej 0,4 MWp z M.12) pokrywa 37 % zapotrzebowania. 2 sale narad nie mają światła dziennego (§ 57). Prefabrykowany beton architektoniczny jako materiał główny jest poprawny, ale mniej szlachetny niż ceramika czy kamień. Forum otwarte całą dobę oznacza koszty utrzymania i ochrony.",
+      "bledy_dyskwalifikujace": "Brak. Niezgodności merytoryczne: PV 0,35 MWp poniżej minimum M.12 (0,4–1,0 MWp); 2 z 6 sal narad bez okien wymagają odstępstwa od § 57 WT; przerwanie pierzei Wybrzeża wbrew wytycznym DWKZ P7 to ryzyko w uzgodnieniu konserwatorskim."
+    },
+    {
+      "id": "K4",
+      "a_funkcja": 7,
+      "b_tkanka": 7,
+      "c_atrakcyjnosc": 7,
+      "d_ekologia": 8,
+      "e_dostepnosc": 9,
+      "f_ekonomia": 7,
+      "mocne": "Najlepsza idea przestrzeni wspólnej: zamiast placu z kamienia Ogród Województwa (1 520 m²), nieogrodzony i przechodni. Prowadzą do niego sień-brama 4,05 m z Mazowieckiej, brama ogrodowa od bulwaru i forum od skweru. Zostają wszystkie drzewa ogródków, retencja 137 m³ daje zero odpływu. Obie pierzeje są domknięte, przerwa przy WS5 ma tylko 10,2 m. § 13: segment E stoi 10,75 m od wierzchołka sektora przy wymaganych ok. 8,1 m, wieża 20,4 m. Gzyms +20,94 = attyka Maz. 19 (140,24 m n.p.m.). Kondygnacja P5 jest cofnięta o 6,75 m i niewidoczna z chodnika, więc linia gzymsu pozostaje czysta. Wejście publiczności Sejmiku leży w łuku przy moście, hol Sejmiku w narożniku nad mostem, sala ma okno 18,65 × 6,2 m na Odrę. Kondygnacja Sejmiku jest rozwiązana najczyściej: na antresoli jest wyłącznie otwarta galeria. Ekologia jest spójna i uczciwie opisana: stropy HBV w skrzydłach z wariantem awaryjnym, EP ≈ 31, GPC 75 × 99 m. Dostępne stanowiska radnych są w każdym rzędzie, przy forum jest pokój cichy.",
+      "slabe": "Latarnia do +42,20 (attyka +42,50) podnosi sylwetę ponad pasmo 36–40 m sugerowane przez DWKZ, a w widoku z mostu wieża ma dwa poziomy zwieńczenia. Parter od bulwaru zajmuje obsługa: brama garażu 6,0 m, śluza dostaw i pomieszczenie odpadów z drzwiami na ulicę w segmencie E, czyli na najcenniejszej elewacji nad Oławą. Pd. połowę parteru Mazowieckiej zajmują PPT i rowerownia. Pierzeja Mazowiecka ma 3 segmenty po ok. 20 m, na górnej granicy rytmu posesji (12–20 m), mniej drobno niż w K1, K3 i K5. Kondygnacja Sejmiku nie ma zapasu: ok. 900 m² netto na poziomie głównym, komisja 50 os. ok. 75 m², kluby 15 os. po 25 m². CLT w budynku wysokim nie spełnia wymogu NRO i wymaga rozwiązania zamiennego (KW PSP i WKZ, 3–6 miesięcy). PV 0,35 MWp jest poniżej 0,4 MWp z M.12. Dach P5 skrzydła na +23,85 ma tylko 0,18 m zapasu do 25 m od najniższego terenu, więc jest wrażliwy na pomiar geodezyjny. Ok. 250 m² na kondygnację nie ma światła dziennego, 15 z 20 magazynków leży wewnątrz.",
+      "bledy_dyskwalifikujace": "Brak. Niezgodności do usunięcia: PV poniżej minimum M.12; drewno konstrukcyjne w budynku W wymaga rozwiązania zamiennego (autor podaje wariant kapsułowania albo stropów filigranowych za ±0 zł); zapas 0,18 m wysokości dachu P5 trzeba potwierdzić pomiarem."
+    },
+    {
+      "id": "K5",
+      "a_funkcja": 8,
+      "b_tkanka": 8,
+      "c_atrakcyjnosc": 7,
+      "d_ekologia": 8,
+      "e_dostepnosc": 8,
+      "f_ekonomia": 8,
+      "mocne": "Najlepsze wpisanie w tkankę przy najmniejszej skali. Obie pierzeje są domknięte. Mazowiecka ma 60,2 m w 4 posesjach 13,5–16,2 m, a gzyms-attyka 140,15 m n.p.m. nie przekracza attyki Maz. 19 (140,24). Wybrzeże biegnie w linii WS5 z segmentem SE, przerwa ma ok. 11,6 m (dz. 10/2 i 5,1 m). Od 1KDG powstaje nowa pierzeja na linii zabudowy, a front z 1934 r. zapisano w posadzce skweru. Dominanta jest najniższa w konkursie (36,8 m, 7 kondygnacji), najbardziej zachowawcza wobec DWKZ P9 i mostu, hełmy pozostają na tle nieba. Narożnik R 14 m pełni dwie role obywatelskie. W parterze łukowy podcień „Brama Mostowa” prowadzi prosto z mostu i bulwaru. Na szczycie sala obrad stoi przed panoramą Odry, mostu i Ostrowa Tumskiego i jest widoczna z mostu oraz z pl. Grunwaldzkiego. Hala-pasaż (ok. 55 m) prowadzi do nieogrodzonego ogrodu 1 590 m² dostępnego z trzech stron: halą, bramą z Mazowieckiej i przez dz. 10/2. Bistro ma taras na skwerze. Parter Mazowieckiej nie ma wjazdów (centrum konferencyjne, brama ogrodowa), co jest zgodne z K-02. Cały zamknięty program Sejmiku leży na poziomie głównym, na antresoli są tylko galeria i foyer. Sprawdzenie: wieża 1 146 m² w A (0,00 m² poza), § 13 – segment 10,95 m (wymagane ok. 8,1 m), wieża 20,45 m, dachy 19,7–21,8 m oraz 35,4–36,8 m. PC 13 090 m² jest najniższa, koszt 146,5 mln realny (model zespołu ≈ 142 mln).",
+      "slabe": "Poziome pasma i okna-wstęgi w pierzei Mazowieckiej (przeszklenie ok. 45 %) najsłabiej zakorzeniają się w XIX-wiecznym kwartale wpisanym do rejestru. Posesje czytają się słabiej niż przy pionowym rytmie i przy Maz. 19 grozi ocena „zu fremd”; łagodzi to segment przejściowy z oknami punktowymi. Korona Sejmiku ma 12 m wysokości i taflę szkła 33 × 10,2 m na łuku, czyli dużą szybę przy moście (refleksy, dominacja nocą) i nadmiar kubatury kondygnacji. Ślepa ściana pd. segmentu SE jest widoczna z bulwaru. Brama garażu 6,0 m stoi na bulwarze ok. 9–11 m od WS5 (hałas). Pasaż hali łamie się w L (od mostu wzdłuż pn. elewacji, potem wzdłuż trzonu), więc jest mniej czytelny niż prosta oś. Ażurowa brama 2,5 m w linii Wybrzeża musi pozostać otwarta, bo teren ma być nieogrodzony (Wyj. 20/77). Trzy z sześciu sal narad nie mają bezpośredniego światła. Rezerwa budżetowa wynosi 2,3 %.",
+      "bledy_dyskwalifikujace": "Brak. Sprawdzone: Sejmik w całości w A; 187 pokoi (179 × 24,1 + 8 × 32,3 m²) przy pojemności 209 stanowisk; dachy w pasmach 18–25 m i 35–45 m; zjazd tylko z 6KDB/2; § 13 wobec okna lokalu 6-6A spełniony z zapasem ≥ 2,8 m; koszt ≤ 150 mln."
+    }
+  ],
+  "ranking": [
+    "K5",
+    "K4",
+    "K1",
+    "K2",
+    "K3"
+  ],
+  "przeszczepy": [
+    "Z K1: pionowy rytm filarów ceramicznych i drobna segmentacja „posesji” z przejęciem linii Maz. 19 1:1 (S1 bez nadbudowy na 8 m od szczytu). W K5 zastąpić nimi poziome wstęgi w pierzei Mazowieckiej, a pasma zostawić tylko w łuku narożnika. Przed oknem sali obrad dać lamele ceramiczne zamiast pełnej tafli 33 × 10,2 m.",
+    "Z K2: arkadę (podcień) na całej długości przyczółka i łuku, a nie tylko 59 m² w narożniku, z tarasem bistro. Daje to całodobową publiczną krawędź skweru 9/2 i bulwaru w skali bramy pylonu. Do tego narracja cegły z gruzu kamienic w nawierzchniach ogrodu.",
+    "Z K3: prosta, przelotowa oś skwer → hala → ogród, z widokiem na drzewa od drzwi wejściowych, oraz druga publiczna oś Mazowiecka → podwórze → bulwar. „Wejście Obywatelskie” z podwórza z dźwigami prosto na galerię.",
+    "Z K4: program Ogrodu Województwa: retencja ok. 137 m³ (zero odpływu), wszystkie drzewa ogródków zachowane, „taras nad Oławą” na dachu segmentu SE i zieleń na jego ślepej ścianie. Drogi pożarowe z ulic zamiast przez skwer, co pozwala posadzić więcej drzew na dz. 9/2. Stropy HBV w skrzydle z gotowym wariantem awaryjnym.",
+    "Z K1 i K4: ślad pierzei z 1934 r. ze szpalerem lip na skwerze oraz okno archeologiczne z reliktem piwnicy kamienicy w hali."
+  ],
+  "uzasadnienie": "Jako Architekt Miasta oceniam przede wszystkim domknięcie kwartału (ciągłość obu pierzei wg DWKZ P7), skalę i sylwetę od mostu i z osi pl. Grunwaldzkiego, publiczny parter oraz powiązania przestrzeni publicznych (skwer 9/2, ogród, bulwar). Twarde warunki sprawdziłem na site.json w shapely. Wszystkie wieże leżą w A (poza A najwyżej 0,1 m², czyli w granicy dokładności). Najmniejsze odległości w sektorze 60° od okna lokalu 6-6A wynoszą 10,75–12,55 m dla segmentów (wymagane ok. 8,1–8,2 m) i 20,4–22,2 m dla wież (wymagane 17,5 m). Żadna praca nie ma zjazdu z 1KDG, wszystkie dachy mieszczą się w pasmach 18–25 m i 35–45 m, koszty są w limicie. Błędów dyskwalifikujących nie stwierdzam. K5 to najlepszy kompromis urbanistyczny: obie pierzeje, najniższa dominanta (36,8 m), wejście z mostu w narożniku, ogród dostępny z trzech stron, parter Mazowieckiej bez wjazdów, najniższa PC i realny koszt. Jej słabością jest język elewacji (pasma, szklana korona); można go poprawić w etapie II przeszczepami z K1. K4 ma najlepszą ideę przestrzeni wspólnej i najczystsze rozwiązanie Sejmiku, ale latarnia do 42,5 m i obsługa (garaż, odpady) na bulwarze ją obniżają. K1 ma najdojrzalszą elewację i najmocniejszy znak w osi mostu, ale bez potrzeby otwiera pierzeję Wybrzeża na ok. 23 m, a § 13, na który powołuje się autor, wcale tego nie wymusza. K2 ma najlepszy publiczny parter (arkada), lecz kampanila 44 m konkuruje z mostem, a budżet jest na granicy limitu. K3 ma trafną ideę forum, ale otwiera pierzeję Wybrzeża, odwraca okno Sejmiku od mostu i ma najsłabszą ekologię."
+}

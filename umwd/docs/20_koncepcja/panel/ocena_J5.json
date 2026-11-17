@@ -1,0 +1,81 @@
+{
+  "juror": "J5",
+  "oceny": [
+    {
+      "id": "K1",
+      "a_funkcja": 7,
+      "b_tkanka": 8,
+      "c_atrakcyjnosc": 7,
+      "d_ekologia": 8,
+      "e_dostepnosc": 8,
+      "f_ekonomia": 8,
+      "mocne": "Najpełniejszy pakiet M.12 bez gadżetów: EP ≤ 30, GPC 420 kW z polem sond jako magazynem sezonowym (BTES) i buforami, PV 0,41 MWp (jedyna obok K5 praca formalnie ≥ 0,4 MWp), BESS 250 kWh, woda szara i deszczowa (−45 %), retencja 100 % deszczu 30-min. Najmniejsze podziemie (3 330 m², −2 tylko pod wieżą), więc najmniej betonu w wodzie gruntowej, najmniej CO₂ wbudowanego i najmniejsze ryzyko kosztu. Cel ≤ 500 kg CO₂e/m² PC (A1–A5, PN-EN 15978), CEM III z kruszywem z recyklingu, ceramika na suchych mocowaniach. Najbardziej wiarygodna wycena: wskaźnik nadziemia 8 926 zł/m², a model F.14.B na moich ilościach daje ≈ 142,8 mln (mid, z rezerwą 5 %) wobec deklarowanych 147,0. Duże zapasy geometryczne: wieża 21,7–22,2 m od okna lokalu 6-6A (wymagane 17,5 m), w sektorze nic poza wieżą; dachy w pasmach z zapasem ≥ 1,3 m. Pełny program Sejmiku w wymiarach z PU, 187 pokoi.",
+      "slabe": "Antresola (416 m², 38 % rzutu) mieści 9 zamkniętych pomieszczeń Sejmiku (kluby 15 os., sala radnych, socjalny, gastro, pokój matki, reżyserka, multimedialna). WT § 3 pkt 19 wymaga antresoli „niezamkniętej przegrodami”, więc grozi zarzut wobec Wyj. 21/85. Sala 200 os. pod belkami transferowymi ma tylko 3,6–4,2 m w świetle. 36 ze 104 miejsc na platformach puzzle: awarie i serwis, nie dla każdego auta. Rezerwa programowa tylko 1,8 jednostki. Latarnia przeszklona w ok. 65 % dookoła (także S i W), plus okno 20 × 8 m: zyski latem i mycie na wysokości. Półprzezierne BIPV w pd. ścianie latarni leży powyżej 25 m (WT § 216 ust. 8). Odwierty 120 m przekraczają 100 m, więc wchodzi procedura PGiG. Zużycie całkowite 570 MWh/a jest optymistyczne (K4/K5 ≈ 645). 21 punktów EV to 1 na 5 miejsc, mniej niż 1/2 wg EPBD art. 14 dla biur. Kondygnacja attykowa cofnięta tylko 1,5 m rozmywa gzyms 21 m. Wieża ma niemal kwadratową elewację 40 × 38 m.",
+      "bledy_dyskwalifikujace": "Brak. Do korekty przed Etapem II: na styku skrzydło–wieża lico zach. wieży stoi 0,3–0,4 m w głębi A. Zostaje pas ok. 6–10 m² wewnątrz A, który jest albo szczeliną, albo dachem skrzydła (+19,45/+23,60), czyli dachem poniżej 35 m w obszarze A. Lico wieży trzeba przesunąć na krawędź A. Ryzyko formalne: zamknięte pomieszczenia Sejmiku na antresoli (WT § 3 pkt 19 / Wyj. 21/85)."
+    },
+    {
+      "id": "K2",
+      "a_funkcja": 6,
+      "b_tkanka": 6,
+      "c_atrakcyjnosc": 7,
+      "d_ekologia": 6,
+      "e_dostepnosc": 7,
+      "f_ekonomia": 5,
+      "mocne": "Wyrazista, regionalna tożsamość: ceglana arkada w skali bramy pylonu, segment SE domykający pierzeję Wybrzeża (§ 13 spełniony z zapasem: segment 12,0–12,6 m przy wymaganych 8,2–10,2 m, wieża 19,9–20,4 m). Cegła o trwałości ponad 100 lat, na zaprawie wapienno-cementowej pozwalającej na odzysk, oraz cegła z gruzu kamienic w posadzkach to spójny wątek cyrkularny. Dwa publiczne dźwigi w kampanili prowadzą wprost na galerię (redundancja), stanowiska radnych na wózku są w rzędach 1 i 3, mównica i podium z pochylnią 1:12. 8 dźwigów, przewijaki, pokój matki. Zjazd z 6KDB/2, brak dojazdu z 1KDG.",
+      "slabe": "Kondygnacja Sejmiku poniżej PU: komisja 50 os. 80 m² (PU 100), komisja 30 os. 55 (60), kluby 30 os. 2 × 50 (2 × 60), kluby 15 os. 2 × 30 (2 × 36), sala radnych 40 (48), socjalny 20 (24), razem ok. −69 m². Forum ma tylko 260 m², a 6 sal narad i 16 z 20 magazynków leży w strefie bez światła dziennego (§ 57). Kampanila 44 m to drugi akcent obok wieży 37 m, wbrew zaleceniu DWKZ „jedna dominanta ze spokojnym zwieńczeniem”. W jej ażurze ponad dachem stoją centrala i wentylatory oddymiające, a uznanie tego za „nadbudówkę” a nie urządzenie na dachu to wątpliwa wykładnia MPZP § 6 pkt 13. EP ≤ 40 to najsłabszy cel po K3. PV 0,40 MWp mieści się na styk, w tym 161 kWp jako biosolar (stelaże nad zielenią) liczony jednocześnie do PBC. GWP ≤ 450 obejmuje tylko A1–A3, więc zakres jest wąski i nieporównywalny. Odwierty 120 m. Tylko 12 punktów EV (≈ 1/9). Najwyższa PC nadziemna (14 161 m²) i duże podziemie (3 940 m²).",
+      "bledy_dyskwalifikujace": "Brak twardo dyskwalifikujących, ale praca ma najwyższe ryzyko budżetowe. Rezerwa do limitu wynosi 0,9 %, a autor sam podaje 158 mln przy 9 300/5 700 zł/m², przy limicie 150 mln nieprzekraczalnym (Wyj. 20/74). Model F.14.B daje ≈ 144,3 mln (mid) jeszcze bez premii za cegłę ręcznie formowaną na budynku wysokim i 44-metrową murowaną kampanilę. Do tego niedobór powierzchni pomieszczeń Sejmiku wobec PU i wątpliwa wykładnia technicznej „latarni” kampanili wobec zakazu urządzeń na dachach."
+    },
+    {
+      "id": "K3",
+      "a_funkcja": 7,
+      "b_tkanka": 7,
+      "c_atrakcyjnosc": 7,
+      "d_ekologia": 5,
+      "e_dostepnosc": 9,
+      "f_ekonomia": 6,
+      "mocne": "Najlepsza obywatelska dostępność: osobne Wejście Obywatelskie z forum, z 2 dźwigami i klatką wprost na galerię (redundancja dla osób na wózku), kabiny 1,4 × 2,4 m, toaleta dostępna w każdej strefie, pętle indukcyjne wszędzie (także KS i kluby), komfortka 12 m od wejścia, ławki z oparciami co ≤ 30 m, miejsca dla rowerów cargo i trójkołowych, forum i ogród bez stopni. Pełny program Sejmiku w wymiarach z PU (≈ 1 230 m² netto). Najmniej szkła (38 %) i najzwartsza bryła (A/V 0,17). Kruszywo z gruzowych nasypów działki to dobra, lokalna gospodarka obiegu zamkniętego. 54 punkty EV (1/2 wg EPBD). Miara GWP A1–C4 na m² PU w 50 latach jest najbliższa metodzie EPBD. § 13: wieża 20,1–20,6 m od okna, w sektorze brak innej kubatury.",
+      "slabe": "Najsłabsza ekologia: cel EP ≈ 55 kWh/(m²·rok) to tylko ok. 10 % poniżej progu, PV 0,35 MWp pokrywa 37 % zapotrzebowania, dach zielony ma tylko 173 m². Największe podziemie (4 072 m², prawie dwie pełne kondygnacje ok. 4 m pod zwierciadłem wody) daje najwięcej betonu, odwodnienia i CO₂ wbudowanego. Antresola 440 m² z zamkniętymi pomieszczeniami radnych (sala radnych, socjalny, 2 kluby 15 os.) to ryzyko wobec WT § 3 pkt 19 i Wyj. 21/85. Furta 21 m w pierzei Wybrzeża jest wbrew postulatowi ciągłości DWKZ. Wąski klin skrzydła (5,9–8,6 m) słabo się nadaje do użytku. 2 z 6 sal narad są bez światła dziennego, 13 z 20 magazynków nie da się zamienić na biura. Forum otwarte całą dobę generuje stały koszt ochrony, oświetlenia i sprzątania.",
+      "bledy_dyskwalifikujace": "Brak dyskwalifikujących wg MPZP i § 13. Niezgodność ze standardem M.12: PV 0,35 MWp przy wymaganych 0,4–1,0 MWp. Wycena podziemia (4 072 m² × 5 400 zł/m²) jest poniżej realnego wskaźnika ≈ 5 800 zł/m² dla dwóch kondygnacji w wodzie (różnica ok. 1,6 mln przy rezerwie 3,4 mln). Ryzyko formalne dotyczy zamkniętych pomieszczeń Sejmiku na antresoli."
+    },
+    {
+      "id": "K4",
+      "a_funkcja": 6,
+      "b_tkanka": 7,
+      "c_atrakcyjnosc": 8,
+      "d_ekologia": 8,
+      "e_dostepnosc": 9,
+      "f_ekonomia": 7,
+      "mocne": "Najbardziej przemyślana i uczciwa strategia materiałowa. Stropy HBV (ok. 960 m³ CLT, ok. 800 t CO₂ biogenicznego) leżą na żelbetowym, prefabrykowanym rastrze 8,10/1,35 m; projekt przewiduje demontaż, paszport materiałowy i ścieżki awaryjne (kapsułowanie +0,6 mln albo filigran przy ±0 zł). Energia: EP ≈ 31, 75 sond × 99 m poza reżimem PGiG, przeanalizowany bilans cieplny pola sond. Woda: retencja 137 m³ (zero odpływu deszczu miarodajnego), −42 % wody wodociągowej. 55 punktów EV zgodnie z EPBD. Dostępność wzorcowa: stanowisko radnego na wózku w każdym rzędzie (pochylenia ≤ 5 %), prezydium i mównica na poziomie wejścia, pokój cichy, ścieżki dotykowe od przystanków tramwajowych, drzwi przesuwne, akustyka T ≤ 0,8 s. Antresola zawiera wyłącznie otwartą galerię, co jest najbezpieczniejsze wobec Wyj. 21/85. Ogród Województwa (1 520 m²) z zachowanymi drzewami. Wycena sprawdzona dwiema metodami (146,3 i 143,8 mln; mój model ≈ 144,7).",
+      "slabe": "Kondygnacja Sejmiku mieści się w A tylko dzięki okrojeniu pomieszczeń: netto ≈ 1 040 m² wobec 1 094 m². Komisja 50 os. ma ≈ 75 m² (PU 100), komisja 30 os. ≈ 50 (60), kluby 30 os. 2 × 50 (2 × 60), kluby 15 os. 2 × 25 (2 × 36), reżyserka 15 (20), a zapasu nie ma. PV 0,35 MWp < 0,4 MWp z M.12 (autor przyznaje). Odsłonięte CLT (D-s2,d0) w budynku wysokim nie spełnia wprost wymogu NRO i wymaga rozwiązania zamiennego KW PSP (3–6 mies.), a po kapsułowaniu efekt drewna znika. Cel GWP ≤ 550 kg/m² (A1–A5) jest mimo drewna słabszy niż w K1, a węgiel biogeniczny trzeba raportować osobno. Forum 8,8 m zjada kondygnację wieży (P1 to tylko kładka 22 m²). Ok. 250 m² na kondygnację bez światła dziennego, 15 z 20 magazynków wewnętrznych. Latarnia do +42,5 przekracza zalecenie DWKZ 36–40 m. Tarasy i zieleń intensywna podnoszą koszt utrzymania.",
+      "bledy_dyskwalifikujace": "Brak jednego błędu dyskwalifikującego, ale formalnych ryzyk jest najwięcej. (1) Program Sejmiku poniżej PU, co dotyczy kluczowego testu „czy Sejmik mieści się w A”. (2) PV poniżej minimum M.12. (3) Konstrukcja z drewnem klejonym w budynku W tylko w trybie rozwiązania zamiennego. (4) Bardzo małe zapasy: § 13 dla segmentu E to wg mojego sprawdzenia 0,15 m (okno 110,5; 29,0) i 0,68 m (wierzchołek w licu wewnętrznym) w wariancie ostrożnym, przy niepewności położenia okna ±1,5 m. Dach wieży jest 0,21 m ponad progiem 35 m, a dach P5 skrzydła 0,18 m pod 25 m. Każda korekta geodezyjna może naruszyć MPZP lub WT."
+    },
+    {
+      "id": "K5",
+      "a_funkcja": 8,
+      "b_tkanka": 8,
+      "c_atrakcyjnosc": 8,
+      "d_ekologia": 7,
+      "e_dostepnosc": 8,
+      "f_ekonomia": 7,
+      "mocne": "Najodporniejsze rozwiązanie kondygnacji Sejmiku: wszystkie pomieszczenia zamknięte stoją na poziomie głównym (1 146 m², w pełnym rzucie A), w wymiarach z PU. Na antresoli są tylko galeria i otwarte foyer, więc zgodność z Wyj. 21/85 i WT § 3 pkt 19 jest najmniej podważalna. Najmniejsza PC nadziemna (13 090 m², PC/PU ≈ 1,53): Sejmik nad P+5 oszczędza ok. 10 mln. Ekologia: najlepszy wynik EP ≈ 28, 75 sond × 99 m (bez PGiG), free cooling, odzysk ciepła z serwerowni do c.w.u., brak spalania, woda −42 %, a −2 projektowane jako budowla ochronna (art. 93 ustawy o ochronie ludności) daje realną odporność. Wycena ostrożna: podziemie 5 800 zł/m², model F.14.B ≈ 141,5 mln (mid, z rezerwą 5 % i dopłatą 1,5 mln za ukrycie) wobec deklarowanych 146,5. Prezydium i mównica stoją na poziomie podłogi, 3 dostępne stanowiska w 1. rzędzie, miejsca dla wózków na galerii i wśród gości, toaleta dostępna także na antresoli. Wieża 36,8 m w dolnym paśmie, zgodnie z DWKZ.",
+      "slabe": "Kondygnacja Sejmiku o wysokości 12 m to nadmiar kubatury ogrzewanej i chłodzonej. Ok. 650 m² pełnego szkła w koronie (panorama 33 × 10,2 m i okno holu 21 × 11 m) oznacza straty zimą, poranne olśnienie od NE i trudne mycie na wysokości nad przyczółkiem. Bilans PV jest zawyżony: 340 kWp ma dać „BIPV jako pokrycie dachów biosolarnych” na ok. 1 700 m², czyli ≈ 0,2 kWp/m² przy jednoczesnym zaliczeniu tych dachów do zieleni (PBC ≈ 50 %). Biosolar to w praktyce stelaże, a więc ryzyko zakazu urządzeń na dachach. Realnie wychodzi ok. 0,30–0,33 MWp, poniżej M.12, a EP 28 też spadnie. Brak liczbowego celu GWP i LCA (tylko BREEAM Excellent), mimo obowiązku obliczenia GWP w cyklu życia z EPBD art. 7. Retencja tylko redukuje odpływ (55 → 36 dm³/s), nie zeruje go. Na rzędy radnych prowadzi podnośnik zamiast pochylni. Do galerii jest jeden publiczny dźwig P, bez redundancji. 3 z 6 sal narad są bez okien. Tylko 22 punkty EV (≈ 1/5). Ślepa ściana segmentu S od bulwaru.",
+      "bledy_dyskwalifikujace": "Brak. Ryzyka do domknięcia: § 13 dla segmentu S ma zapas 0,40 m (okno 110,5; 29,0) i 0,93 m (lico wewnętrzne) w wariancie ostrożnym, poniżej zalecanego 1 m. Dach wieży jest 0,41 m ponad progiem 35 m. Pomost techniczny z 4 centralami wewnątrz 12-metrowej kondygnacji Sejmiku może zostać uznany za ukrytą kondygnację techniczną. Minimum PV z M.12 trzeba wykazać realnym rozkładem modułów, bez łączenia BIPV z zielenią na tych samych m²."
+    }
+  ],
+  "ranking": [
+    "K5",
+    "K1",
+    "K4",
+    "K3",
+    "K2"
+  ],
+  "przeszczepy": [
+    "Z K1 do K5: ograniczyć kondygnację −2 do rzutu wieży (ukrycie i technika pod wieżą, garaż na −1 i ewentualnie platformy). Podziemie spada z 3 922 do ok. 3 300 m², co daje mniej betonu w wodzie gruntowej, ok. 2–3 mln zł oszczędności i kilkaset ton CO₂e mniej.",
+    "Z K1 (i K4): przyjąć liczbowy cel GWP ≤ 500 kg CO₂e/m² PC (A1–A5, PN-EN 15978) z LCA zgodną z EPBD art. 7 ust. 2. PV liczyć wyłącznie jako BIPV-pokrycie za attyką (bez stelaży biosolarnych), z rzetelnym rozkładem modułów pokazującym ≥ 0,4 MWp wg M.12. Brakującą moc uzupełnić BIPV w pasach podokiennych od dziedzińca ≤ 25 m.",
+    "Z K4: stropy hybrydowe drewno–beton (HBV) w skrzydle na żelbetowym prefabrykowanym rastrze 8,10/1,35 m, ze ścieżką kapsułowania K2 60 na wypadek odmowy KW PSP. Do tego retencja z zerowym odpływem deszczu miarodajnego (≈ 137 m³), bilans cieplny pola sond z symulacją 25-letnią i 1 punkt ładowania na 2 miejsca (EPBD art. 14).",
+    "Z K4: w sali obrad dostęp do każdego rzędu łagodnymi pochyleniami ≤ 5 % zamiast podnośnika oraz pokój cichy (strefa niskiej stymulacji) przy holu.",
+    "Z K3: Wejście Obywatelskie z dwoma dźwigami publicznymi na galerię (redundancja dla osób na wózku) i kabiny 1,4 × 2,4 m. Kruszywo z gruzowych nasypów działki użyć w betonach niekonstrukcyjnych i nawierzchniach ogrodu.",
+    "Z K2: cegła i gruz z wykopu (relikty kamienic) w posadzkach hali i ścieżkach ogrodu jako materiał pamięci miejsca i element obiegu zamkniętego, a nie dekoracja."
+  ],
+  "uzasadnienie": "Oceniam z perspektywy zero-emisyjności, cyklu życia, dostępności i realności kosztów, ale punktuję wszystkie kryteria Regulaminu. Sprawdziłem geometrię na site.json (shapely). Wszystkie wieże leżą w A ∩ obszarze inwestycji w granicach tolerancji rastra (≤ 0,14 m² poza A). Dachy mieszczą się w pasmach 18–25 m i 35–45 m przy ostrożnym odczycie terenu (A: 118,88–119,44; całość: 118,33–119,44). Najmniejsze zapasy ma K4 (0,21 m nad 35 m, 0,18 m pod 25 m), następnie K5 (0,41 m). Żadna praca nie ma zjazdu z 1KDG. § 13 wobec okna lokalu 6-6A: wieże stoją 19,9–22,2 m od okna, przy wymaganych 17,5 m, więc warunek spełniają wszystkie. Segmenty przy Wybrzeżu Słowackiego 5 w wariancie ostrożnym (H od najniższych okien) mają zapasy: K2 1,8–2,4 m, K5 0,4–0,9 m, K4 0,15–0,7 m (poniżej zalecanego 1 m). K1 i K3 nie mają kubatury w sektorze. Koszty przeliczyłem parametrycznym modelem F.14.B zespołu na własnych ilościach (mid, z rezerwą 5 %): K1 ≈ 142,8; K2 ≈ 144,3; K3 ≈ 141,7; K4 ≈ 144,7; K5 ≈ 141,5 mln. Wszystkie deklaracje (146,3–148,6) są z tym spójne. Wszystkie przekraczają jednak 150 mln po waloryzacji +5 % do 2027 r., a scenariusz high to ok. 200 mln, więc liczą się rezerwa i dźwignie. Najsłabiej wypada K2 (0,9 %, sam autor podaje 158 mln przy wyższych wskaźnikach), najlepiej K1. M.12: PV ≥ 0,4 MWp formalnie spełniają K1, K2 i K5, przy czym K5 i K2 zawyżają moc przez łączenie BIPV z zielenią. K3 i K4 mają 0,35 MWp. Kondygnacja Sejmiku: K4 i K2 mieszczą się w A kosztem sal komisji i klubów poniżej PU. K1 i K3 umieszczają zamknięte pomieszczenia radnych na antresoli (WT § 3 pkt 19). Najodporniejsze jest K5. Ranking: K5 jest najbardziej zrównoważona (bez krytycznej słabości, najsprawniejszy program i PC, najlepsze EP, ostrożna wycena), ale musi urealnić PV, dodać cel GWP i odchudzić podziemie. K1 to ekologicznie i kosztowo najpewniejsza praca, słabsza w funkcji parteru i oryginalności. K4 ma najlepszą strategię materiałową i dostępność, ale najwięcej ryzyk formalnych (program Sejmiku, M.12, CLT w budynku W, minimalne zapasy). K3 łączy wzorową dostępność z najsłabszą energetyką i największym podziemiem. K2 ma silny charakter, ale niedobory programu, drugi akcent wysokościowy i najwyższe ryzyko budżetu."
+}
