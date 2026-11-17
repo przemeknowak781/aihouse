@@ -1,0 +1,153 @@
+{
+ "id": "zlota-godzina-2",
+ "opis": "ZŁOTA GODZINA 2 – „Brama i Latarnia” znad Odry od pn.-wsch.: z 12 m nad prawym brzegiem przy pn. przyczółku Mostu Grunwaldzkiego, 180 m od wieży; łańcuchy i kratownica mostu biegną pod podstawą wieży, portal pd. z hełmami na prawo od wieży, woda na pierwszym planie. Poranek 1 października, słońce z lewej (az 109,5°, wys. 11,2°): łuk oświetlony od strony kamery, terminator na łuku, elewacja pn. w cieniu.",
+ "preset": "dzien",
+ "czas": "2026-10-01 08:10 CEST",
+ "slonce": {
+  "az": 109.51,
+  "el": 11.17,
+  "ekspozycja": -3.9,
+  "czas": "2026-10-01T08:10:00+02:00",
+  "udzial_opraw": 1.0,
+  "latarnie": 0,
+  "oprawy_cieple": 3.5999999046325684,
+  "lamele_korony": {
+   "luk_L_m": 21.991,
+   "lamele_szt": 21,
+   "szer_m": 0.35,
+   "glab_m": 0.6,
+   "rozstawy": "LkLLkLkLLkLLkLkLLkLk",
+   "zapas_krawedzi_m": 0.021,
+   "przechwycone_ze_Spec": 16,
+   "spec_pierwotna": [
+    0.35,
+    0.6,
+    13.4
+   ]
+  }
+ },
+ "kamera": {
+  "loc": [
+   198.0,
+   226.0,
+   12.108
+  ],
+  "cel": [
+   134.06,
+   149.12,
+   10.05
+  ],
+  "z_wzgl_kamery": 12.058,
+  "lens_mm": 55.0,
+  "shift_x": 0.0,
+  "shift_y": 0.0,
+  "poziom": true,
+  "rozdzielczosc": [
+   2000,
+   1333
+  ],
+  "sensor_fit": "AUTO (36 mm na dłuższym boku)"
+ },
+ "ludzie": true,
+ "probki": 64,
+ "czasy_s": {
+  "kontekst_s": 9.5,
+  "budynek_s": 11.0,
+  "zrodlo_sceny": "budowa od zera",
+  "scena_s": 21.3,
+  "kontrola_s": 0.6
+ },
+ "uwagi": [],
+ "info": [
+  "oko 12.00 m nad podłożem (teren_dalszy_ortofoto) – typowo 1,5–1,7 m",
+  "kamera poza ramką mapy (e 11–152, n -36–148): z tej strony teren to ortofotomapa, zabudowa – proste bryły"
+ ],
+ "promienie": [
+  "oś: wieza_elewacje 203.3 m",
+  "L-dół: most_pomost_lancuchy 68.5 m",
+  "P-dół: woda 125.3 m",
+  "L-góra: wieza_elewacje 191.9 m",
+  "P-góra: niebo",
+  "dół: woda 105.1 m"
+ ],
+ "udzialy_kadru": {
+  "niebo": 0.289,
+  "most": 0.234,
+  "woda": 0.201,
+  "budynek": 0.169,
+  "drzewa": 0.07,
+  "zabudowa_kontekstu": 0.018,
+  "teren": 0.008,
+  "ortofoto_plaskie": 0.008,
+  "inne": 0.003
+ },
+ "zaslona_pierwszego_planu": 0.0,
+ "najblizsza_przeszkoda": {
+  "obiekt": "iglaste_52_liscie",
+  "odl_m": 6.97
+ },
+ "oko_nad_podlozem_m": 12.0,
+ "podloze": "teren_dalszy_ortofoto",
+ "budynek_w_kadrze": {
+  "wieża": {
+   "x0": 0.117,
+   "x1": 0.502,
+   "y0": 0.344,
+   "y1": 0.825,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  },
+  "skrzydło": {
+   "x0": 0.278,
+   "x1": 0.524,
+   "y0": 0.364,
+   "y1": 0.599,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  },
+  "segment": {
+   "x0": 0.063,
+   "x1": 0.23,
+   "y0": 0.354,
+   "y1": 0.607,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  }
+ },
+ "punkty_kluczowe": {
+  "Brama Mostowa – napis (+5,2)": {
+   "w_kadrze": true,
+   "x": 0.29,
+   "y": 0.411,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 178.7
+  },
+  "korona – lamele łuku (+31,7)": {
+   "w_kadrze": true,
+   "x": 0.29,
+   "y": 0.755,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 179.6
+  },
+  "attyka wieży (+37,2)": {
+   "w_kadrze": true,
+   "x": 0.29,
+   "y": 0.826,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 180.3
+  },
+  "cel kamery": {
+   "w_kadrze": true,
+   "x": 0.5,
+   "y": 0.453,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 100.0
+  }
+ },
+ "horyzont_y": 0.5,
+ "pochylenie_deg": 0.0
+}

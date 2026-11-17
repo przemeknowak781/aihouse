@@ -1173,6 +1173,27 @@ class Materialy:
         nb.l(b.outputs[0], mx.inputs[2])
         nb.output(mx)
 
+    def m_ekran(self, m):
+        """Ekran sali (wyświetlana plansza: jasny gradient z pasem tytułowym) – emisja niska."""
+        nb = NodeBuilder(m)
+        tc = nb.n('ShaderNodeTexCoord').outputs['Generated']
+        sep = nb.n('ShaderNodeSeparateXYZ')
+        nb.l(tc, sep.inputs[0])
+        col = nb.mix(sep.outputs[2], (0.10, 0.16, 0.26), (0.55, 0.62, 0.70))
+        e = nb.n('ShaderNodeEmission')
+        nb.l(col, e.inputs['Color'])
+        e.inputs['Strength'].default_value = 3.5
+        nb.output(e)
+
+    def m_flaga_pl_czerwien(self, m):
+        self._proste(m, (0.55, 0.02, 0.04), 0.8)
+
+    def m_flaga_pl_biel(self, m):
+        self._proste(m, (0.80, 0.80, 0.78), 0.8)
+
+    def m_flaga_ue(self, m):
+        self._proste(m, (0.0, 0.05, 0.30), 0.8)
+
     def m_mosiadz(self, m):
         """Mosiądz szczotkowany – litery systemu informacji, listwy."""
         self._proste(m, (0.62, 0.43, 0.19), 0.32, metal=1.0)
@@ -1406,6 +1427,7 @@ class Materialy:
         c = nb.mix(nb.math('GREATER_THAN', hz, 0.862), c, skora)
         c = nb.mix(nb.math('GREATER_THAN', hz, 0.935), c, wlosy)
         c = nb.mix(nb.math('GREATER_THAN', sk, 0.5), c, skora)
+        c = nb.mix(nb.math('GREATER_THAN', self._attr(nb, 'wl'), 0.5), c, wlosy)
         # szum tkaniny (fałdy, cienie) – ±12 %
         pos = nb.n('ShaderNodeTexCoord').outputs['Object']
         nz = nb.n('ShaderNodeTexNoise', Scale=9.0, Detail=3.0)
@@ -2388,7 +2410,12 @@ class Budynek:
         # strop nad parterem (spód = sufit holu i podcienia)
         G.pryzma(Wp.buffer(-g - 0.03, join_style=2), suf, kd[1]['F'], 'wn_sufit', mat_gora='wn_podloga')
         self._ring(G, 'W', Wp, kd[1:], g, gd, rng)
-        self._korona(G, Wp, kd, g)
+        if self.o.get('sejmik_szczegolowy'):
+            # kondygnacja Sejmiku wg kondygnacja_sejmiku (v1.2, S-3) – W7/W8 (budynek3d_sejmik.py)
+            from umwd.render import budynek3d_sejmik
+            budynek3d_sejmik.Sejmik(self).buduj(G, Wp, g)
+        else:
+            self._korona(G, Wp, kd, g)
         # ---------------- SKRZYDŁO, SEGMENT
         for br in ('M', 'S'):
             Pp = self.poly[br]

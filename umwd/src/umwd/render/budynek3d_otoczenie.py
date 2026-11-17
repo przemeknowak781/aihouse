@@ -606,6 +606,10 @@ def _prototyp_czlowieka(nazwa, H=1.75, chod=0.0, plaszcz=0.36, kobieta=False, se
             sk = np.maximum(sk, (np.linalg.norm(V - c, axis=1) < r).astype(np.float32))
         c_ = me.attributes.new('sk', 'FLOAT', 'POINT')
         c_.data.foreach_set('value', sk)
+        # włosy: tył głowy powyżej karku (z przodu twarz)
+        wl = ((V[:, 2] > 1.56 * s) & (V[:, 1] < 0.0)).astype(np.float32)
+        d_ = me.attributes.new('wl', 'FLOAT', 'POINT')
+        d_.data.foreach_set('value', wl)
     for p in me.polygons:
         p.use_smooth = True
     return me
@@ -801,6 +805,89 @@ def rowerzysta(B, coll, poz, kier, z, nazwa='rowerzysta', seed=0):
         o.location = (float(poz[0]), float(poz[1]), float(z))
         o.rotation_euler = (0, 0, rot)
     return os_
+
+
+def _prototyp_siedzacego(nazwa, siedzisko=0.46, dlonie=None, kobieta=False, seed=0):
+    """Postać siedząca (metaballe) – radny przy pulpicie / widz na galerii. Początek układu: posadzka pod
+    siedziskiem, przód +y. ``dlonie`` – punkty dłoni (domyślnie na pulpicie 0,75 m przed sobą). Atrybuty jak
+    w ``_prototyp_czlowieka`` (fv, fu, sk)."""
+    from mathutils import Vector
+    rng = np.random.default_rng(seed)
+    s = rng.uniform(0.94, 1.04)
+    zs = siedzisko + 0.08
+    if dlonie is None:
+        dlonie = ((-0.19, 0.42, 0.78), (0.19, 0.40, 0.78))
+    mb = bpy.data.metaballs.new(nazwa)
+    mb.resolution = mb.render_resolution = 0.018
+    mb.threshold = 0.6
+
+    def el(typ, co, r, sx=None, sy=None, sz=None, rot=None):
+        e = mb.elements.new(type=typ)
+        e.co = co
+        e.radius = r
+        e.stiffness = 4.0
+        if sx:
+            e.size_x = sx
+        if sy:
+            e.size_y = sy
+        if sz:
+            e.size_z = sz
+        if rot is not None:
+            e.rotation = rot
+        return e
+
+    def kaps(a, b, r):
+        a, b = Vector(a), Vector(b)
+        q = Vector((1, 0, 0)).rotation_difference((b - a).normalized())
+        el('CAPSULE', ((a + b) / 2)[:], r / 0.78, sx=(b - a).length / 2, rot=q)
+    pochyl = rng.uniform(-0.04, 0.06)
+    for sx in (-0.11, 0.11):
+        kaps((sx, -0.02, zs), (sx, 0.42 * s, zs - 0.02), 0.085)                       # uda
+        kaps((sx, 0.44 * s, zs - 0.04), (sx, 0.50 * s, 0.10), 0.058)                  # podudzia
+        el('ELLIPSOID', (sx, 0.56 * s, 0.05), 0.065 / 0.78, sx=0.6, sy=1.45, sz=0.6)   # stopy
+    for i, (zz, rx) in enumerate(((0.10, 0.19), (0.28, 0.20), (0.44, 0.21), (0.56, 0.20))):
+        el('ELLIPSOID', (0, -0.04 + pochyl * zz * 2, zs + zz * s), rx * s / 0.78, sy=0.62, sz=0.7)
+    hz = zs + 0.68 * s
+    el('BALL', (0, -0.02 + pochyl, hz), 0.05 / 0.78)
+    el('ELLIPSOID', (0, pochyl + 0.01, hz + 0.11 * s), 0.10 * s / 0.78, sx=0.8, sy=0.95, sz=1.1)
+    el('ELLIPSOID', (0, pochyl - 0.01, hz + 0.15 * s), 0.10 * s / 0.78, sx=0.86, sy=0.92,
+       sz=0.8 if not kobieta else 1.0)
+    if kobieta:
+        el('ELLIPSOID', (0, pochyl - 0.05, hz + 0.05), 0.08 / 0.78, sx=1.05, sy=0.6, sz=1.3)
+    bark_z = zs + 0.54 * s
+    for (sx, d) in zip((-1, 1), dlonie):
+        ram = (sx * 0.21, -0.02 + pochyl, bark_z)
+        dl_ = Vector(d)
+        lok = (Vector(ram) + dl_) / 2 + Vector((sx * 0.06, -0.10, -0.12))
+        kaps(ram, lok[:], 0.055)
+        kaps(lok[:], dl_[:], 0.046)
+        el('BALL', dl_[:], 0.045 / 0.78)
+    tmp = bpy.data.objects.new(nazwa + '_mb', mb)
+    bpy.context.scene.collection.objects.link(tmp)
+    me = bpy.data.meshes.new_from_object(tmp.evaluated_get(bpy.context.evaluated_depsgraph_get()))
+    bpy.data.objects.remove(tmp)
+    bpy.data.metaballs.remove(mb)
+    me.name = nazwa
+    V = np.array([v.co[:] for v in me.vertices])
+    H = hz + 0.25 * s
+    fv = V[:, 2] / H
+    fv = np.where(V[:, 2] < zs + 0.02, 0.2, fv)            # nogi – strefa spodni
+    a_ = me.attributes.new('fv', 'FLOAT', 'POINT')
+    a_.data.foreach_set('value', fv.astype(np.float32))
+    b_ = me.attributes.new('fu', 'FLOAT', 'POINT')
+    b_.data.foreach_set('value', np.full(len(V), (zs + 0.02) / H, np.float32))
+    sk = np.zeros(len(V), np.float32)
+    for d in dlonie:
+        sk = np.maximum(sk, (np.linalg.norm(V - np.array(d), axis=1) < 0.075).astype(np.float32))
+    c_ = me.attributes.new('sk', 'FLOAT', 'POINT')
+    c_.data.foreach_set('value', sk)
+    # włosy: tył i boki głowy (za płaszczyzną twarzy) powyżej linii karku
+    wl = ((V[:, 2] > hz + 0.06) & (V[:, 1] < pochyl - 0.01)).astype(np.float32)
+    d_ = me.attributes.new('wl', 'FLOAT', 'POINT')
+    d_.data.foreach_set('value', wl)
+    for pl in me.polygons:
+        pl.use_smooth = True
+    return me
 
 
 def wozek(B, coll, zf, poz=None, kier=None, nazwa=''):

@@ -537,9 +537,11 @@ def rzut_dodatkow(sc):
     loc = cam.matrix_world.translation
     out = {}
     for ob in [o for o in sc.objects if o.name.startswith(('tramwaj_most', 'czlowiek_most_'))]:
-        pts = [ob.matrix_world @ Vector(c) for c in ob.bound_box]
+        vs = ob.data.vertices
+        krok = max(1, len(vs) // 400)
+        pts = [ob.matrix_world @ vs[i].co for i in range(0, len(vs), krok)]
         uv = [world_to_camera_view(sc, cam, p) for p in pts]
-        c = sum(pts, Vector()) / 8.0
+        c = sum(pts, Vector()) / len(pts)
         d = c - loc
         hit, pos, nrm, i_, obh, mx = sc.ray_cast(dg, loc, d.normalized(), distance=d.length + 1.0)
         out[ob.name] = dict(x0=round(min(v.x for v in uv), 3), x1=round(max(v.x for v in uv), 3),

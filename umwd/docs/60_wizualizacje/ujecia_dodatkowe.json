@@ -148,7 +148,7 @@
   },
   {
    "id": "zlota-godzina-2",
-   "opis": "ZŁOTA GODZINA 2 – „Brama i Latarnia” znad Odry od pn.-wsch.: z 12 m nad prawym brzegiem (taras / okno przy pl. Grunwaldzkim albo dron), 180 m od wieży; łańcuchy i kratownica mostu biegną pod podstawą wieży, portal pd. z hełmami 6° na prawo od wieży, woda na pierwszym planie. Poranek, światło boczne z lewej.",
+   "opis": "ZŁOTA GODZINA 2 – „Brama i Latarnia” znad Odry od pn.-wsch.: z 12 m nad prawym brzegiem przy pn. przyczółku Mostu Grunwaldzkiego, 180 m od wieży; łańcuchy i kratownica mostu biegną pod podstawą wieży, portal pd. z hełmami na prawo od wieży, woda na pierwszym planie. Poranek 1 października, słońce z lewej (az 109,5°, wys. 11,2°): łuk oświetlony od strony kamery, terminator na łuku, elewacja pn. w cieniu.",
    "cam": {
     "e": 198.0,
     "n": 226.0,
@@ -162,12 +162,110 @@
    },
    "lens_mm": 55,
    "shift_x": 0.0,
-   "shift_y": -0.03,
+   "shift_y": 0.0,
    "aspect": "3:2",
-   "czas": "2026-10-20 08:35 CEST",
-   "ludzie": false,
+   "czas": "2026-10-01 08:10 CEST",
+   "ludzie": true,
    "preset": "dzien",
-   "uwaga_render": "Podgląd renderowany przez render/ujecia_poprawki_kontekstu.py (te same argumenty co ujecia_dodatkowe.py): usuwa artefakty context.py widoczne z wody – ścianę 3,8 m w nurcie wzdłuż granicy ramki (e 152,5 / n 148,6) i fałszywą groblę z ortofotomapy pod Mostem Grunwaldzkim. Po poprawce context.zbuduj_dalsze można renderować wprost."
+   "uwaga_render": "Render przez render/ujecia_finalne_korekty.py (te same argumenty co ujecia_dodatkowe.py; łańcuch: ujecia_poprawki_kontekstu.py – artefakty context.py pod mostem). Nakładka: lamele korony łuku wg koncepcja.json v1.1 (21 szt. 0,35 × 0,60, rozstawy 1,35/0,675 Fibonacci; Spec bierze dziś „R 13,40” jako rozstaw → 2 lamele), sitodruk 30 % na szkle korony łuku, ciepłe oprawy ×0,12 za dnia, klucze woda / tramwaj / piesi_most / post_przed tego wpisu. Po poprawce budynek3d.Spec można renderować wprost (klucze dodatków wymagają nakładki).",
+   "tytul": "Brama i Latarnia – wieża nad Mostem Grunwaldzkim od pn.-wsch.",
+   "woda": {
+    "szorstkosc": 0.02,
+    "fale": 0.12,
+    "barwa": [
+     [
+      0.032,
+      0.046,
+      0.052
+     ],
+     [
+      0.05,
+      0.066,
+      0.072
+     ]
+    ]
+   },
+   "tramwaj": {
+    "s0": 3.0,
+    "tor_x": 1.28,
+    "kierunek": -1
+   },
+   "piesi_most": [
+    [
+     28.0,
+     6.8,
+     1
+    ],
+    [
+     31.5,
+     7.4,
+     -1
+    ],
+    [
+     47.0,
+     6.9,
+     -1
+    ],
+    [
+     48.2,
+     7.6,
+     -1
+    ],
+    [
+     71.0,
+     7.0,
+     1
+    ],
+    [
+     56.0,
+     7.2,
+     1
+    ],
+    [
+     79.0,
+     6.8,
+     -1
+    ],
+    [
+     40.5,
+     -7.0,
+     1
+    ],
+    [
+     60.0,
+     -6.9,
+     -1
+    ]
+   ],
+   "post_przed": {
+    "woda_cienie_ev": 0.5,
+    "mgla": {
+     "start": 190,
+     "glebokosc": 300,
+     "ev": 0.5,
+     "desat": 0.3,
+     "niebo": 0.0,
+     "wykladnik": 0.8
+    }
+   },
+   "podpis": "Brama i Latarnia – wieża Sejmiku nad Mostem Grunwaldzkim; widok z wysokości ok. 12 m nad prawym brzegiem Odry, przy pn. przyczółku mostu; poranek 1 października",
+   "korekty_jury": {
+    "wdrozone": [
+     "kamera (198; 226; 12 m nad terenem), cel (134,06; 149,12; 10) i 55 mm bez zmian (J1, J2; J3 – kamera)",
+     "shift_y −0,03 → 0,00 (wszyscy): attyka y 0,825 (było 0,871), woda 20 % kadru (było 24,5 %), niebo 29 %",
+     "pora 2026-10-20 08:35 → 2026-10-01 08:10 CEST (az 109,5°, wys. 11,2°) wg J3 – spełnia też J2 (słońce 11° zamiast 9,6°, jaśniejsza tafla). Rachunek na łuku: część zwrócona do kamery (kąt 58° w układzie łuku) przy 08:35 dostaje światło styczne (cos 0,03), przy 20.10 08:50 (J2) jest w cieniu (cos −0,02), przy 1.10 08:10 – cos 0,21; terminator na łuku przesuwa się z 60° na 70°, elewacja pn. w cieniu (cos −0,54), wsch. w pełnym świetle (0,82)",
+     "warunek wspólny 1 – lamele korony łuku: 21 szt. 0,35 × 0,60 m (R 13,40–14,00) w rozstawach 1,35 / 0,675 m w ciągu Fibonacciego, wyśrodkowane (zapas 2 cm), wg koncepcja.json v1.1 i tools/elewacje.py; sitodruk 30 % na szkle korony łuku (koncepcja.json: „sitodruk 30 % na szkle”). budynek3d.Spec bierze dziś „R 13,40” jako rozstaw (2 lamele) – poprawka w nakładce render/ujecia_finalne_korekty.py, pliki wspólne nieruszane",
+     "warunek wspólny 2 – ciepłe oprawy (korona, hol, podcień) za dnia ×0,12 (emisja 30 → 3,6)",
+     "woda (J2): chropowatość 0,035 → 0,02, fale (bump) 0,22 → 0,12, barwa mniej brunatna; postprodukcja (J1): +0,5 EV w cieniach wody, maska z passu Object Index",
+     "perspektywa powietrzna (J3): pass Mist – tło dalej niż 190 m stopniowo do +0,5 EV i −30 % nasycenia przy 490 m; wieża (180 m) i portal bez zmian",
+     "tramwaj (J2): generyczny niskopodłogowy 33 m na bliższym torze pomostu, s 3–36 (kadr x 0,57–0,77 – prawa połowa, nie przed wieżą), czoło wjeżdża w portal pd.; 9 pieszych na chodnikach mostu"
+    ],
+    "nie_wdrozone": [
+     "ogniskowa 50 mm (J3): większość (J1, J2) za 55 mm. Przy shift_y 0 segment ma 6 % zapasu od lewej krawędzi, portal 8 % od prawej, budynek zajmuje 17 % kadru (przy 50 mm 14 %); pierzeję Wybrzeża krawędź kadru tnie przy każdej ogniskowej",
+     "podpis „z tarasu … przy pl. Grunwaldzkim” (J2, J3): w punkcie kamery nie ma budynku (najbliższa bryła 48 m), więc podpis jak u J1 – „z wysokości ok. 12 m” – z lokalizacją przy pn. przyczółku mostu",
+     "≥ 4000 px (J1): to zlecenie – 2000 px / 64 próbki; plik planszowy 4000 px – osobny przebieg (ok. 4× czasu)"
+    ]
+   }
   },
   {
    "id": "zlota-godzina-3",

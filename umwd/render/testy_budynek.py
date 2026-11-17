@@ -45,10 +45,11 @@ KAMERY_DODATKOWE = {
 }
 # proporcje kadrów = proporcje pól na planszach (tools/plansze_etap2.py, b.add(...) w mm) – plansza nie przycina
 # obrazu; szerokości minimalne wersji finalnych (300 dpi planszy) wg koordynatora 17.11
-PROPORCJE_PLANSZ = {'W3': 578 / 400, 'W6': 578 / 196, 'W4': 480 / 256, 'W5': 464 / 338.67}
+PROPORCJE_PLANSZ = {'W3': 578 / 400, 'W6': 578 / 196, 'W4': 480 / 256, 'W5': 464 / 338.67,
+                    'W7': 275.35 / 189.6, 'W8': 575.35 / 236.9}
 SZEROKOSC_FINALNA = {'W3': 5800, 'W6': 5000, 'W4': 4000, 'W5': 4000, 'W1': 5800, 'W2': 4000}
 NAZWY_FINALNE = {'W3': 'W3_wejscie_final.jpg', 'W4': 'W4_WS5_final.jpg', 'W5': 'W5_Maz19_final.jpg',
-                 'W6': 'W6_hol_final.jpg'}
+                 'W6': 'W6_hol_final.jpg', 'W7': 'W7_hol_sejmiku_final.jpg', 'W8': 'W8_sala_sejmiku_final.jpg'}
 # W3–W5 (uwagi 17.11): jedno popołudnie listopadowe dla wszystkich (spójny azymut cieni; słońce az 209°, el 19°)
 # i niebo z kumulusami jak na zdjęciach F.17 (`budynek3d.dodaj_kumulusy`)
 NIEBO_W3_W5 = dict(czas='2026-11-05 13:30 CET', niebo='kumulusy', chmury=0.50)
@@ -90,6 +91,17 @@ KOREKTY = {
     # Pole planszy 578 × 196 mm (2,95 : 1) – panorama prostoliniowa 16 mm (97° w poziomie), piony zachowane.
     'W6': dict(kamera_e_n_z=(97.73, 70.59, 1.60), cel_e_n_z=(89.90, 45.60, 1.60), lens_mm=16, shift_y=0.04,
                wnetrze=True, preset='wnetrze', ekspozycja=-0.35, plik='W6_hol_test.jpg'),
+    # W7 – hol sali Sejmiku (kondygnacja S wg kondygnacja_sejmiku v1.2): punkt z koncepcja.json (u 13,0; v 21,7)
+    # wypada w v1.2 w korytarzu 1,8 m przy WC (ściana 1,1 m od obiektywu) – stanowisko w pd.-wsch. narożu holu
+    # dolnego (u 12,1; v 23,5), widok na pustkę 2-kondygnacyjną NW ze schodami reprezentacyjnymi, krawędzią
+    # antresoli i oknami pn./zach. (zachód słońca); pole 1,45 : 1
+    'W7': dict(kamera_e_n_z=(80.796, 66.453, 1.60 + 27.30), cel_e_n_z=(69.917, 68.433, 27.30 + 2.6), lens_mm=20,
+               shift_y=0.10, sejmik=True, wnetrze=False, preset='wnetrze', ekspozycja=-0.4,
+               plik='W7_hol_sejmiku_test.jpg'),
+    # W8 – sala obrad z galerią (zach., +30,90): kamera za rzędem 4 (~11 m od mównicy), oś obrócona na zach. tak,
+    # by przy 20 mm w kadrze 2,43 : 1 były prezydium, mównica i balustrada galerii publiczności
+    'W8': dict(kamera_e_n_z=(98.661, 72.97, 29.17), cel_e_n_z=(95.461, 60.764, 29.2), lens_mm=20, shift_y=0.05,
+               sejmik=True, preset='wnetrze', ekspozycja=-1.4, plik='W8_sala_sejmiku_test.jpg'),
     # W10 – widok ogrodowy, próba 2 (decyzja 17.11): z pn.-wsch. części ogrodu (przy wylocie pasa od bulwaru) na
     # pd.-zach. – taras ogrodowy z zadaszeniem BIPV wzdłuż elewacji pd. wieży (po prawej), ogród deszczowy i nowe
     # drzewa jako rama, w głębi skrzydło z bramą ogrodową; południe listopadowe (słońce z pd. – taras w słońcu).
@@ -303,8 +315,9 @@ def main():
     t_kon = time.time() - t0
     t1 = time.time()
     hala = any(KOREKTY.get(kid, {}).get('wnetrze') for kid in a.kamery)
+    sejmik = any(KOREKTY.get(kid, {}).get('sejmik') for kid in a.kamery)
     bud = budynek3d.build_building(sc, {'kontekst': kon, 'ludzie': not a.bez_ludzi, 'wnetrza': not a.bez_wnetrz,
-                                        'hala_szczegolowa': hala})
+                                        'hala_szczegolowa': hala, 'sejmik_szczegolowy': sejmik})
     t_bud = time.time() - t1
     B = bud['budynek']
     print('[testy] kontekst %.1f s, budynek %.1f s' % (t_kon, t_bud))
