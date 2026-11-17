@@ -944,7 +944,7 @@ class Materialy:
         tv = {'biuro': self.spec.szklo['biura']['Tvis'], 'korona': self.spec.szklo['korona']['Tvis'],
               'parter': 0.74, 'balustrada': 0.85}.get(typ, 0.62)
         tint = (tv * 0.97, tv * 1.0, tv * 0.985)
-        R0 = 0.07 if typ != 'balustrada' else 0.05
+        R0 = 0.09 if typ != 'balustrada' else 0.05
         lw = nb.n('ShaderNodeLayerWeight', Blend=0.5)
         f5 = nb.math('POWER', lw.outputs['Facing'], 5.0)
         r = nb.math('ADD', R0, nb.math('MULTIPLY', f5, 1.0 - R0), clamp=True)

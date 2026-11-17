@@ -1562,15 +1562,15 @@ def build_UG(kid):
             ("IT.15", "Strefa dostaw – zatoka przy dźwigu T (pojazdy ≤ 2,20 m)", "IT", T.rect(uE0, TOWER_U, cB[2], cB[2] + 4.2)),
             ("IT.14", "Pomieszczenie odpadów komunalnych", "IT", T.rect(uE0, TOWER_U, cB[2] + 4.2 + W, cB[3] + 0.6)),
             ("IT.13", "Centrale wentylacyjne parteru i Sejmiku", "IT", T.rect(uE0, TOWER_U, cB[3] + 0.6 + W, ARC_C_UV[1] + 2.5)),
-            ("IT.11", "Przyłącze wody, pompownia, woda szara (IT.12)", "IT", annulus_sector(T, ARC_C_UV, 8.0, R_ARC, 0, 38)),
-            ("PPT.06", "Szatnie i prysznice personelu i rowerzystów", "PPT", annulus_sector(T, ARC_C_UV, 8.0, R_ARC, 38.15, 64)),
-            ("PPT.03", "Warsztat konserwacyjny (PPT)", "PPT", annulus_sector(T, ARC_C_UV, 8.0, R_ARC, 64.15, 90)),
-            ("PPM.04", "Magazyn wyposażenia MDS", "PPM", T.rect(cA[0] - W - 3.4, cA[0] - W, cA[2] - 0.4, cA[2] + 4.0)),
-            ("PP.07", "Pomieszczenie porządkowe z pralnią i suszarnią", "PP", T.rect(cA[0] - 2 * W - 6.0, cA[0] - 2 * W - 3.4, cA[2] - 0.4, cA[2] + 4.0)),
-            ("IT.02", "Punkt dystrybucyjny IT (PD)", "IT", T.rect(cA[0] - W - 2.6, cA[0] - W, cA[2] + 4.0 + W, cA[2] + 4.0 + W + 2.2)),
+            ("IT.11", "Przyłącze wody, pompownia, woda szara (IT.12)", "IT", annulus_sector(T, ARC_C_UV, 8.0, R_ARC, 0, 24)),
+            ("PPT.06", "Szatnie i prysznice personelu i rowerzystów", "PPT", annulus_sector(T, ARC_C_UV, 8.0, R_ARC, 24.15, 46)),
+            ("PPT.03", "Warsztat konserwacyjny (PPT)", "PPT", annulus_sector(T, ARC_C_UV, 8.0, R_ARC, 46.15, 68)),
+            ("PPM.04", "Magazyn wyposażenia MDS", "PPM", annulus_sector(T, ARC_C_UV, 8.0, R_ARC, 68.15, 80)),
+            ("PP.07", "Pomieszczenie porządkowe z pralnią i suszarnią", "PP", annulus_sector(T, ARC_C_UV, 8.0, R_ARC, 80.15, 90)),
+            ("IT.02", "Punkt dystrybucyjny IT (PD)", "IT", T.rect(cB[1] - 2.75, cB[1], cB[3] + 0.2, cB[3] + 2.6)),
             ("PPT.02", "Magazyn narzędzi i materiałów", "PPT", T.rect(cB[1] + W, TOWER_U, ARC_C_UV[1] + 2.5 + W, ARC_C_UV[1] + 5.5)),
         ]
-        wc_poly = T.rect(cA[0] - 2 * W - 5.2, cA[0] - 2 * W - 2.6, cA[2] + 4.0 + W, cA[2] + 4.0 + W + 2.2)
+        wc_poly = T.rect(cB[1] - 2.75, cB[1], cB[3] + 2.6 + W, cB[3] + 5.0)
     else:
         techs = [
             ("IT.08", "Maszynownia gruntowych pomp ciepła z rozdzielaczami", "IT", T.rect(uE0, TOWER_U, cB[2], cB[3] + 5.0)),
@@ -1578,15 +1578,18 @@ def build_UG(kid):
             ("IT.06", "Agregat prądotwórczy HVO (spaliny szachtem)", "IT", annulus_sector(T, ARC_C_UV, 8.0, R_ARC, 0, 30)),
             ("IT.10", "Instalacja tryskaczowa – pompownia i zbiornik", "IT", annulus_sector(T, ARC_C_UV, 8.0, R_ARC, 30.15, 60)),
             ("PPM.04", "Filtrowentylacja ukrycia (budowla ochronna)", "PPM", annulus_sector(T, ARC_C_UV, 8.0, R_ARC, 60.15, 90)),
-            ("IT.12", "Zbiornik wody deszczowej 50 m³", "IT", T.rect(cA[0] - 2 * W - 6.0, cA[0] - W, cA[2] - 0.4, cA[2] + 4.0)),
-            ("IT.02", "Punkt dystrybucyjny IT (PD)", "IT", T.rect(cA[0] - W - 2.6, cA[0] - W, cA[2] + 4.0 + W, cA[2] + 4.0 + W + 2.2)),
+            ("IT.12", "Zbiornik wody deszczowej 50 m³", "IT", T.rect(cB[1] - 2.75, cB[1], cB[3] + 5.0 + W, ARC_C_UV[1] + 2.5)),
+            ("IT.02", "Punkt dystrybucyjny IT (PD)", "IT", T.rect(cB[1] - 2.75, cB[1], cB[3] + 0.2, cB[3] + 2.6)),
         ]
-        wc_poly = T.rect(cA[0] - 2 * W - 5.2, cA[0] - 2 * W - 2.6, cA[2] + 4.0 + W, cA[2] + 4.0 + W + 2.2)
+        wc_poly = T.rect(cB[1] - 2.75, cB[1], cB[3] + 2.6 + W, cB[3] + 5.0)
     for pid, nm, kod, poly in techs:
         L.add(Space(poly, nm, kod, prog_id=pid, kind="room"))
     L.add(Space(wc_poly, "WC dostępne (garaż / ukrycie)", "PHS", prog_id="PHS.01", tags={"wc", "wc_ozn"}, furn="wc"))
     parking(L, kid)
     return L
+
+
+OZN_DONE = {}
 
 
 def parking(L: Level, kid):
@@ -1623,10 +1626,10 @@ def parking(L: Level, kid):
         uv1 = (gap_lo + gap_hi) / 2
     vN1 = SIATKA["wieza"]["osie_v"][2] + 0.3
     aisle_defs = [
-        ("WA", WF, E + sl, 0.0, 70.0),
+        ("WA", WF, E + sl, 0.0, 48.0),
         ("T1", T, vT1, -9.0, cB[0] - 0.2),
         ("V1", Tv, -(uv1 + ai / 2), vT1 + ai - 0.5, 40.0),
-        ("N1", T, vN1, -12.0, uv1 - ai / 2 + 0.5),
+        ("W1", Tv, -((lines_u[0] + lines_u[1]) / 2 + ai / 2), vT1 + ai - 0.5, 40.0),
     ]
     aisles = []
     av_a = avail
@@ -1671,7 +1674,7 @@ def parking(L: Level, kid):
                     x += 0.1
     # OzN
     n_ozn = int(S["podziemie"].get("OzN", 6))
-    target = n_ozn if kid == "-1" else 0
+    target = n_ozn if kid == "-1" else max(0, n_ozn - OZN_DONE.get("-1", 0))
     cen = [Point(*T.en((CORE_UV[c][0] + CORE_UV[c][1]) / 2, (CORE_UV[c][2] + CORE_UV[c][3]) / 2)) for c in ("A", "B")]
     pairs = []
     for i, st_ in enumerate(stalls):
@@ -1696,6 +1699,7 @@ def parking(L: Level, kid):
         gone.discard(i)
         target -= 1
     L.stalls = [dict(poly=s_["poly"], ozn=s_["ozn"], aisle=s_["aisle"]) for k, s_ in enumerate(stalls) if k not in gone]
+    OZN_DONE[kid] = sum(1 for s_ in L.stalls if s_["ozn"])
     L.extra["aisles"] = [a["poly"] for a in aisles]
     L.extra["ozn_pasy"] = unary_union([s_["pas"] for s_ in stalls if s_.get("pas") is not None]) if any(s_.get("pas") is not None for s_ in stalls) else Polygon()
     rest = L.inner.difference(unary_union([s.poly for s in L.spaces]).buffer(W, **MITRE))
@@ -1894,7 +1898,7 @@ def number_all(levels):
         for sp in L.spaces:
             if sp.numer:
                 continue
-            if sp.prog_id and re.match(r"^[A-Z]+\.\d+[a-z]?$", sp.prog_id):
+            if sp.prog_id and (re.match(r"^[A-Z]+\.\d+[a-z]?$", sp.prog_id) or re.match(r"^[A-Z]+\.[A-Z]+$", sp.prog_id)):
                 multi[sp.prog_id].append(sp)
     for pid, lst in multi.items():
         if re.search(r"[a-z]$", pid):          # już z literą (Sejmik)
@@ -2017,15 +2021,25 @@ def tests(levels):
             (split_ok if adj else split).append(f"{code}: {ks}")
     ok("departamenty niedzielone (dopuszczalny podział wydziałami na 2 sąsiednie kondygnacje)", not split,
        "; ".join(split) + (" | sąsiednie (Wyj. 17): " + "; ".join(split_ok) if split_ok else ""))
-    # zgodność z rozmieszczeniem
-    rzd = []
+    # zgodność z rozmieszczeniem (z uwzględnieniem udokumentowanych relokacji wydziałów na kondygnacje sąsiednie)
+    rzd, rel = [], []
+
+    def spec_floor(k, sp):
+        for u in sp.uwagi:
+            m = re.match(r"relokacja z kond\. (\S+)", u)
+            if m:
+                return m.group(1)
+        return k
     for r in KB["rozmieszczenie"]:
         for code, n in r["komorki"].items():
             c2 = norm_code(code)
-            have = sum(1 for k, sp in offices if k == r["kond"] and sp.kod == c2)
+            have = sum(1 for k, sp in offices if spec_floor(k, sp) == r["kond"] and sp.kod == c2)
+            here = sum(1 for k, sp in offices if k == r["kond"] and sp.kod == c2)
             if have != n:
                 rzd.append(f"kond. {r['kond']} {c2}: {have}/{n}")
-    ok("rozmieszczenie komórek na kondygnacjach wg specyfikacji", not rzd, "; ".join(rzd))
+            elif here != n:
+                rel.append(f"kond. {r['kond']} {c2}: {here}/{n} (wydział na kondygnacji sąsiedniej)")
+    ok("rozmieszczenie komórek na kondygnacjach wg specyfikacji (z relokacjami Wyj. 17)", not rzd, "; ".join(rzd + rel))
     # bez łączenia działów: każdy pokój ma jedną komórkę (z konstrukcji) – sprawdzamy unikalność prog_id na pokój
     ok("bez łączenia działów w pokojach (1 pokój = 1 komórka)", all(sp.komorka for _, sp in offices if sp.kod not in ("DK", "DW")) or True)
     allsp = [(L.kid, sp) for L in levels for sp in L.spaces]
@@ -2049,10 +2063,172 @@ def tests(levels):
     return res
 
 
+# ----------------------------------------------------------------------------------------------------------------
+# Raport (docs/70_rysunki/rzuty_raport.md)
+# ----------------------------------------------------------------------------------------------------------------
+OUT_MD = ROOT / "docs" / "70_rysunki" / "rzuty_raport.md"
+LNAME = {"-2": "−2", "-1": "−1", "P": "P", "ANT": "S (antresola)", "D": "dach"}
+
+
+def fpl(x, nd=1):
+    return f"{x:,.{nd}f}".replace(",", " ").replace(".", ",")
+
+
+def write_report(levels, T_, moves):
+    L_ = []
+    a = L_.append
+    a("# Rzuty 1:200 i model pomieszczeń – raport kontrolny")
+    a("")
+    a(f"Wygenerowano z `model/koncepcja.json` ({S['meta']['wersja']}) i `docs/20_program/program.yaml` narzędziem "
+      "`tools/model_pomieszczen.py` → `model/budynek.json`, `model/zestawienie_pomieszczen.csv` (podstawa F.15.B); rysunki `tools/rzuty.py` → "
+      "`build/rzuty/rzut_*_1-200.svg` (+ PNG), podglądy `docs/70_rysunki/podglady/rzut_*_1-200.png`. Powierzchnie netto wg PN-ISO 9836 z poligonów "
+      "w świetle ścian. Numeracja: kod grupy (Wyj. 20 odp. 73) + numer kolejny; biura `KOD.nn` z numerem komórki z tabeli 1 M.01 w nazwie.")
+    a("")
+    a("## 1. Testy-asercje")
+    a("")
+    a("| test | wynik | szczegóły |")
+    a("|---|---|---|")
+    for n, o, d in T_:
+        a(f"| {n} | {'OK' if o else '**BŁĄD**'} | {(d or '').replace('|', '/')} |")
+    a("")
+    # sumy per kondygnacja
+    a("## 2. Sumy powierzchni netto per kondygnacja")
+    a("")
+    a("| kondygnacja | pomieszczeń | pow. netto [m²] | w tym KW | pokoje biurowe (szt.) | stanowiska postojowe |")
+    a("|---|---:|---:|---:|---:|---:|")
+    tot = 0
+    for L in levels:
+        if L.kid == "D":
+            continue
+        sp = [x for x in L.spaces if x.kind != "roof"]
+        ar = sum(x.area for x in sp)
+        kw = sum(x.area for x in sp if x.kod == "KW")
+        off = sum(1 for x in sp if x.kind == "office" and x.kod in DEPT_CODES and not x.prog_id.startswith("KS.0"))
+        tot += ar
+        a(f"| {LNAME.get(L.kid, L.kid)} | {len(sp)} | {fpl(ar)} | {fpl(kw)} | {off} | {len(L.stalls)} |")
+    a(f"| **razem** | | **{fpl(tot)}** | | | |")
+    a("")
+    # sumy per kod
+    a("## 3. Sumy per kod grupy (wszystkie kondygnacje) wobec programu (M.01)")
+    a("")
+    sums = defaultdict(float)
+    for L in levels:
+        for x in L.spaces:
+            if x.kind != "roof":
+                sums[x.kod] += x.area
+    a("| kod | nazwa bloku | model [m²] | program [m²] |")
+    a("|---|---|---:|---:|")
+    for k in sorted(sums, key=lambda c: -sums[c]):
+        b = BLOK.get(k)
+        a(f"| {k} | {b['nazwa'] if b else ''} | {fpl(sums[k])} | {fpl(float(b['pow_suma']), 0) if b else '–'} |")
+    a("")
+    # pokoje per kondygnacja i komórka
+    a("## 4. Kontrola 187 pokoi (zał. 1 M.01, Wyj. 16/17 – bez łączenia działów)")
+    a("")
+    a("| kond. | specyfikacja (komórki) | model (pokoje biurowe wg kodu) |")
+    a("|---|---|---|")
+    for r in KB["rozmieszczenie"]:
+        L = [x for x in levels if x.kid == r["kond"]][0]
+        cnt = defaultdict(int)
+        for x in L.spaces:
+            if x.kind == "office" and x.kod in DEPT_CODES and not x.prog_id.startswith("KS.0"):
+                cnt[x.kod] += 1
+        a(f"| {r['kond']} | {', '.join(f'{c} {n}' for c, n in r['komorki'].items())} | {', '.join(f'{c} {n}' for c, n in sorted(cnt.items()))} |")
+    a("")
+    a("Pojemność elewacji (jednostki pokoju 24 m², sucha próba układu): " +
+      ", ".join(f"kond. {k}: {office_capacity(k)}" for k in ("1", "2", "3", "4", "5", "6")) +
+      f". Specyfikacja zakłada: kond. 1–4 po {KB['pojemnosc_jedn'].get('1-4')}, kond. 5 i 6 po {KB['pojemnosc_jedn'].get('5')}. "
+      "Wieża bez skrzydła (kond. 5–6) mieści 22 jednostki (narożniki SW/NW/SE z końcami korytarzy przy elewacji, trzon B przy elewacji pd., "
+      "trzon A wymuszający korytarz zach.), na kond. 6 łuk zajmują gabinet Przewodniczącego z zapleczem i asystent – zostaje 20 miejsc.")
+    a("")
+    a("**Przeniesienia wykonane przez generator (relokacja nadmiaru):**")
+    a("")
+    for m_ in moves:
+        a(f"* {m_}")
+    a("")
+    # parking
+    a("## 5. Garaż – wykonalność 109 miejsc")
+    a("")
+    for L in levels:
+        if L.kid not in ("-1", "-2"):
+            continue
+        g_area = sum(x.area for x in L.spaces if x.kod == "PPM" and x.kind in ("garage", "corridor"))
+        ramp = sum(x.area for x in L.spaces if x.kind == "ramp")
+        tech = sum(x.area for x in L.spaces if x.kind == "room")
+        cores = sum(x.area for x in L.spaces if x.kind.startswith("core"))
+        n = len(L.stalls)
+        oz = sum(1 for s_ in L.stalls if s_["ozn"])
+        a(f"* **{LNAME[L.kid]}**: w układzie rysunku **{n} m.p.** (OzN {oz}); specyfikacja {S['podziemie'][L.kid]['miejsca']}. "
+          f"Powierzchnia garażu (stanowiska + drogi, bez rampy i techniki) {fpl(g_area)} m² → górne oszacowanie przy bardzo wydajnym "
+          f"układzie 25 m²/m.p.: **≤ {int(g_area // 25)}**, realnie (30 m²/m.p.): ≈ {int(g_area // 30)}. Rampa {fpl(ramp)} m², "
+          f"technika i pomieszczenia {fpl(tech)} m², trzony {fpl(cores)} m².")
+    tot_st = sum(len(L.stalls) for L in levels)
+    ub = sum(int(sum(x.area for x in L.spaces if x.kod == "PPM" and x.kind in ("garage", "corridor")) // 25) for L in levels if L.kid in ("-1", "-2"))
+    pu = S["bilans"]["PU_m2"]
+    a("")
+    a(f"Razem w układzie: **{tot_st} m.p.**, górne oszacowanie powierzchniowe ≤ {ub}; wymaganie MPZP ≥ 12 m.p./1000 m² PU → "
+      f"przy PU {fpl(pu, 0)} m² ≥ {math.ceil(pu * 12 / 1000)} m.p. **109 m.p. nie mieści się w obrysach −1/−2 przy drogach 6,0 m i stanowiskach "
+      "2,5 × 5,0 m.** Przyczyny: (1) siatka wieży 8,10 m z liniami słupów v = 0 / 8,10 / 21,60 przecinającymi pasma – drogi muszą omijać "
+      "linie słupów, a pas 13,5 m między v = 8,10 i 21,60 zajmuje trzon A; (2) trzony A i B w środku rzutu; (3) rampa(y) "
+      f"{fpl(L_ramp_len())} + kolejne odcinki (spadek 18 %, przejścia 9 %) w pasie dziedzińca i segmencie; (4) technika na −1/−2 (centrale, GPC, "
+      "tryskacze, agregat, zbiorniki, ukrycie) ≈ 600 m²; (5) skrzydło 15 m (13,4 m w świetle ścian szczelinowych) mieści tylko jeden rząd "
+      "stanowisk 90° z drogą 6,0 m. Do decyzji: transfer słupów nad garażem (ruszt na stropie −0,15) i siatka garażowa 7,5 / 16,0 m, "
+      "przeniesienie techniki na dach segmentu / do wieży, rampa jednopasmowa (rewizja), ew. −2 także pod skrzydłem.")
+    a("")
+    # rozbieżności
+    a("## 6. Rozbieżności ze specyfikacją i założenia własne")
+    a("")
+    a(f"* Trakt skrzydła 15,0 m (0,50 + 6,10 + 1,80 + 6,10 + 0,50) nie mieści ścian korytarza – przyjęto ścianę zewn. {fpl(P['EXT_W'], 2)} m, pokoje "
+      f"{fpl(P['W_O'], 2)} × {fpl(P['D_W'], 2)} m = {fpl(P['W_O'] * P['D_W'], 2)} m², ściany korytarza {fpl(P['WALL'], 2)} m, korytarz {fpl(P['CORR'], 2)} m (M.13). "
+      "Wieża: ściana 0,50, pokoje 3,95 × 6,10 = 24,10 m², korytarz 1,80.")
+    a(f"* Ścianki między pokojami {fpl(P['PART'], 2)} m (wynika ze specyfikacji: oś 4,05 → netto 3,95); pozostałe ściany działowe 0,12 m, ściany "
+      "trzonów 0,25 m.")
+    a("* Osie konstrukcyjne v = 8,10 i 21,60 (spec.) przypadają w pasie korytarzy pierścieniowych (6,72–8,52 i 21,18–22,98) – słupy "
+      "zaznaczone w osiach zwężają korytarz; do korekty siatki (np. v = 8,58 / 21,12) lub słupy w licu ścian korytarza.")
+    a("* Hol przed dźwigami P1/P2 na kond. 1–6 ma 2,2 m (korytarz wsch. przy licu trzonu B): WT § 195 ≥ 1,6 m spełnione, M.13 zaleca 3,6 m. "
+      "Hol przed A1/A2 (pd.) ≥ 3,6 m.")
+    a("* Pokoje GW 32 m²: w strefach głębokich wieży 3,95 × 8,11 m, poza nimi format 4-modułowy 5,30 × 6,10 m (spec. dopuszcza oba).")
+    a("* Magazynki: 20/20 przy elewacji; w strefach głębokich jako 2,60 × 9,25 m (głębokie), poza nimi 3,95 × 6,10 m – typ dobierany wg miejsca "
+      "(więcej głębokich niż 7 ze spec.), co pozwala zmieścić program kond. 5–6.")
+    a("* Kond. 6: dwie sale spotkań 20 os. (KS.05) i miejsce oczekiwania nie mieszczą się w strefie środkowej razem z WC i socjalnym – "
+      "nadmiar przeniesiony niżej (lista w uwagach). Gabinet Przewodniczącego na łuku NE w pierścieniu głębokim z zapleczem od strony korytarza.")
+    a("* Sejmik (S) i antresola – narysowane z poligonów specyfikacji (bez zmian); hol/kuluar przed dźwigami 2,25 m.")
+    a("* Rampa i garaż liczone parametrycznie z `podziemie.rampa` (brama, szerokość, spadki, próg) i obrysów −1/−2.")
+    a("")
+    a("### Uwagi generatora")
+    a("")
+    for k, t in NOTES:
+        a(f"* [{k}] {t}")
+    for t in DATA_FIX:
+        a(f"* [dane wejściowe] {t}")
+    a("")
+    a("## 7. Zależności od zapowiedzianej rewizji specyfikacji")
+    a("")
+    a("1. **Kondygnacja S (S-2, antresola 180 m², galeria zach., trzon A do +30,90, 4 rzędy):** rzuty S i antresoli są rysowane wprost z "
+      "`kondygnacja_sejmiku.pomieszczenia` / `antresola_strefy`; po zmianie danych wystarczy ponowne uruchomienie (bez zmian kodu, o ile "
+      "zachowane zostaną klucze `obrys_en`/`obrys_uv`, `sala.rzedy`, `ognisko_rzedow_uv`). Trzon A na antresoli: dodać w `build_ANT` (lista trzonów).")
+    a("2. **Rampa jednopasmowa 3,5 m wzdłuż ściany pn. segmentu, brama 4,0 m (v −0,4…−4,4), próg 119,10, technika przy ścianie pd.:** "
+      "`ramp_spec()` sam rozpozna stronę (brama przy v≈0 → ściana pn.), szerokość i długość (spadki, próg); pomieszczenia w pasie pn. "
+      "segmentu na parterze (trafo, rozdzielnia, BESS, odpady) są dziś układane przy licu pn. – po rewizji przenieść do pasa pd. (stała `segn` "
+      "w `build_P`). Wejście nr 8 na rzucie P czyta zakres bramy z tekstu `wjazd`.")
+    a("3. **Pas −1 pod dziedzińcem 7,0 → 5,0 m (−1 = 2 287 m², ok. 66 m.p.):** obrys −1 czytany z `podziemie['-1'].obrys_ccw`, droga T1 "
+      "liczona od lica pasa (v = max(0,6; lico + 5,0)) – przeliczy się automatycznie; liczba miejsc spadnie o rząd w pasie.")
+    a("")
+    OUT_MD.parent.mkdir(parents=True, exist_ok=True)
+    OUT_MD.write_text("\n".join(L_) + "\n", encoding="utf-8")
+
+
+def L_ramp_len():
+    rs = ramp_spec()
+    z0 = S["meta"]["zero"]["wzgl_0_00_m_npm"]
+    lvl = {k["kondygnacja"]: k["posadzka_wzgl"] for k in S["kondygnacje"]}
+    return ramp_length((rs["prog"] - z0) - lvl["-1"], rs)
+
+
 def main():
     levels = []
-    UG2 = build_UG("-2")
     UG1 = build_UG("-1")
+    UG2 = build_UG("-2")
     LP = build_P()
     Q, moves = plan_queues()
     for m_ in moves:
@@ -2093,6 +2269,7 @@ def main():
                     continue
                 w.writerow([L.kid if L.kid != "ANT" else "S (antresola)", sp.numer, sp.nazwa, sp.kod, f"{sp.area:.2f}".replace(".", ","),
                             sp.osoby if sp.osoby is not None else ""])
+    write_report(levels, T_, moves)
     print("== TESTY ==")
     for n, o, d in T_:
         print(("OK  " if o else "BŁĄD") + f"  {n}  {d}")

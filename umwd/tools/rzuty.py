@@ -505,7 +505,8 @@ def natural(n):
 
 
 def legend_rows(rooms):
-    rs = [r for r in rooms if r["kind"] not in ("roof",) and r["numer"]]
+    only_roof = all(r["kind"] == "roof" for r in rooms)
+    rs = [r for r in rooms if (only_roof or r["kind"] not in ("roof",)) and r["numer"]]
     rs.sort(key=lambda r: natural(r["numer"]))
     rows = []
     for r in rs:
@@ -572,8 +573,9 @@ def draw_legend(svg, x0, y0, wcol, lv, extra_blocks=()):
     y = ymax + 3.0
     # bilans kondygnacji wg kodów
     sums = {}
+    only_roof = all(r["kind"] == "roof" for r in lv["pomieszczenia"])
     for r in lv["pomieszczenia"]:
-        if r["kind"] in ("roof",):
+        if r["kind"] in ("roof",) and not only_roof:
             continue
         sums[r["kod_grupy"]] = sums.get(r["kod_grupy"], 0) + r["powierzchnia"]
     svg.text((x0, y + 2.0), "BILANS KONDYGNACJI (pow. netto wg kodów grup)", size=2.2, weight=700, fill=INK)
@@ -585,7 +587,8 @@ def draw_legend(svg, x0, y0, wcol, lv, extra_blocks=()):
         svg.text((x0 + c * (col_w / ncol), y + rr * 2.6 + 1.7), f"{k}  {fnum(a)}", size=1.7, fill=ACC if k in PUBLIC else INK)
     y += (len(items) + ncol - 1) // ncol * 2.6 + 1.0
     tot = sum(sums.values())
-    svg.text((x0, y + 2.0), f"Razem powierzchnia netto kondygnacji: {fnum(tot)} m²", size=1.9, weight=600, fill=INK)
+    svg.text((x0, y + 2.0), (f"Razem pola dachowe w obrysie attyk: {fnum(tot)} m²" if only_roof else f"Razem powierzchnia netto kondygnacji: {fnum(tot)} m²"),
+             size=1.9, weight=600, fill=INK)
     y += 5.0
     for blk in extra_blocks:
         y = blk(svg, x0, y, col_w)
@@ -801,7 +804,7 @@ def draw_plan(svg, v, lid, lab: Labels):
             draw_stair(svg, v, g)
         elif r["kind"] == "core_lift":
             tag = ""
-            m = re.search(r"Dźwig (\w+)", r["nazwa"])
+            m = re.search(r"\b([A-Z]\d?)\b", r["nazwa"].replace("Dźwig", ""))
             if m:
                 tag = m.group(1)
             draw_lift(svg, v, g, tag)
@@ -992,10 +995,10 @@ def site_design(svg, v, lab):
             svg.poly([v.p(*c) for c in g.coords], fill="none", stroke="#ffffff", sw=0.12, close=False)
             mpnt = g.interpolate(0.5, normalized=True)
             p = v.p(mpnt.x, mpnt.y)
-            svg.text((p[0], p[1] - 1.6), "ślad pierzei 1934 r. – pas granitu z listwą z brązu", size=1.7, anchor="middle", fill=ACC, extra=halo_extra(0.7))
+            svg.text((p[0], p[1] + 3.2), "ślad pierzei 1934 r. – pas granitu z listwą z brązu", size=1.7, anchor="middle", fill=ACC, extra=halo_extra(0.7))
             # 4 lipy drobnolistne wzdłuż śladu w zach. części skweru
             for k in range(4):
-                q = g.interpolate(0.08 + 0.12 * k, normalized=True)
+                q = g.interpolate(min(g.length, 2.0 + 6.5 * k))
                 q2 = (q.x + T.ey[0] * 2.2, q.y + T.ey[1] * 2.2)
                 NEW_TREES.append((q2, "lipa drobnolistna"))
     # okrągła ława przy łuku
@@ -1140,7 +1143,7 @@ def fon_paths(svg, v):
     lines = [[d_arc, info, kanc], [info, (18.0, 12.5), lifts_A], [ent_ob, pp], [garden, (12.0, 6.5), lifts_A]]
     for ln in lines:
         pts = [v.pu(*p) for p in ln]
-        svg.poly(pts, fill="none", stroke=INK, sw=v.mm(0.40), close=False, extra='stroke-dasharray="0.45,0.3" stroke-opacity="0.75"')
+        svg.poly(pts, fill="none", stroke="#6f6a63", sw=v.mm(0.30), close=False, extra='stroke-dasharray="0.35,0.35"')
     # informacja i tyflomapy
     p = v.pu(*info)
     svg.poly([(p[0] - 3.5, p[1] - 1.2), (p[0] + 3.5, p[1] - 1.2), (p[0] + 3.5, p[1] + 1.2), (p[0] - 3.5, p[1] + 1.2)], fill="#ffffff", stroke=INK, sw=0.15)
@@ -1229,7 +1232,7 @@ def roof_plan(svg, v, lab):
 # ----------------------------------------------------------------------------------------------------------------
 WINDOWS = {
     "P": (-50.0, 62.0, -44.0, 52.0),
-    "full": (-38.0, 54.0, -38.0, 46.0),
+    "full": (-41.0, 54.0, -40.0, 46.0),
     "tower": (-14.0, 56.0, -22.0, 46.0),
 }
 
@@ -1285,6 +1288,21 @@ def page(lid):
         label_rooms(svg, v, lv, lab)
         block_names(svg, v, lv, lab)
         level_marks(svg, v, lid, lab)
+    else:
+        for r in lv["pomieszczenia"]:
+            g = mp(r["poligon"])
+            if g.is_empty:
+                continue
+            pg = poly_paper(v, g)
+            b = pg.bounds
+            for fx, fy in ((0.5, 0.25), (0.5, 0.75), (0.3, 0.5), (0.7, 0.5)):
+                x, y = b[0] + (b[2] - b[0]) * fx, b[1] + (b[3] - b[1]) * fy
+                bx = (x - 6, y - 2.5, x + 6, y + 2.5)
+                if pg.buffer(-1).contains(Point(x, y)) and lab.free(bx):
+                    lab.add(bx)
+                    svg.text((x, y), r["numer"], size=1.8, anchor="middle", weight=600, fill=INK, extra=halo_extra(0.6))
+                    svg.text((x, y + 2.2), fnum(r["powierzchnia"]) + " m²", size=1.6, anchor="middle", fill=GREY, extra=halo_extra(0.6))
+                    break
     if lid == "P":
         terrain_marks(svg, v, lab)
         material_labels(svg, v, lab)
