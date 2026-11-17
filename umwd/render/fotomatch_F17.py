@@ -50,10 +50,12 @@ WYNIK = {'A': 'W1_F17A_test.jpg', 'B': 'W2_F17B_test.jpg'}
 
 # dopasowanie tonalne CG do zdjęcia (zdjęcia: Dehaze +24/+29, Saturation +17/+24, Vibrance +7/+9, Shadows +50)
 GRADING = {
-    'A': dict(p_jasne=0.92, cel_jasne=0.80, nasycenie=1.18, czern=0.055, mgla=0.05, mgla_kolor=(0.70, 0.76, 0.84),
-              wyostrz=70, ziarno=0.012, cien_gestosc=0.92),
-    'B': dict(p_jasne=0.92, cel_jasne=0.82, nasycenie=1.20, czern=0.050, mgla=0.025, mgla_kolor=(0.72, 0.78, 0.85),
-              wyostrz=70, ziarno=0.012, cien_gestosc=0.92),
+    # cien_min – jasność pełnego cienia względem słońca na zdjęciu (obróbka Shadows +50 rozjaśnia cienie; pomiar
+    # na cieniach istniejących budynków ≈ 0,40–0,45); cien_barwa – ile chłodnej barwy cienia z passu zachować
+    'A': dict(p_jasne=0.92, cel_jasne=0.76, nasycenie=1.18, czern=0.03, mgla=0.05, mgla_kolor=(0.70, 0.76, 0.84),
+              wyostrz=70, klarownosc=45, ziarno=0.012, cien_min=0.42, cien_barwa=0.35),
+    'B': dict(p_jasne=0.92, cel_jasne=0.80, nasycenie=1.20, czern=0.03, mgla=0.025, mgla_kolor=(0.72, 0.78, 0.85),
+              wyostrz=70, klarownosc=45, ziarno=0.012, cien_min=0.42, cien_barwa=0.35),
 }
 
 
@@ -184,9 +186,12 @@ def main():
     for o in inne:
         o.is_shadow_catcher = True
     for o in drzewa:
+        # drzewa istniejące są już na zdjęciu (z cieniami) – w renderze głównym niewidoczne i bez cienia
         o.visible_camera = False
         o.visible_glossy = False
+        o.visible_shadow = False
     cam = ustaw_kamere(sc, kam, a.skala)
+    bpy.context.view_layer.update()
     sw = budynek3d.swiatlo_dzienne(sc, kam['exif']['czas'], chmury=0)
     blib.render_settings(sc, sc.render.resolution_x, sc.render.resolution_y, samples=a.probki, adaptive=0.02,
                          exposure=0.0, transparent=True, max_bounces=8, clamp_indirect=8.0)
@@ -254,8 +259,10 @@ def main():
     zasl = np.clip(drz_d * veg * 1.15, 0, 1)
     a_cg = alfa * (1.0 - zasl)
     # cień nowego budynku na zdjęciu (pass Shadow Catcher, gęstość dopasowana)
-    sc_ = np.clip(cien, 0.0, 1.0)
-    sc_ = 1.0 - G['cien_gestosc'] * (1.0 - sc_)
+    sc_ = np.clip(cien, 1e-3, 1.0)
+    s_l = np.clip(lum(sc_), 1e-3, 1.0)[..., None]
+    s_n = G['cien_min'] + (1.0 - G['cien_min']) * s_l
+    sc_ = s_n * (sc_ / s_l) ** G['cien_barwa']
     # poza ramką renderu pass cienia = 0 → bez zmian zdjęcia
     ramka = np.zeros((Hh, Ww), bool)
     ramka[int((1 - y1) * Hh):int((1 - y0) * Hh) + 1, int(x0 * Ww):int(x1 * Ww) + 1] = True
@@ -279,7 +286,8 @@ def main():
     wyn = cg * a_cg[..., None] + tlo * (1.0 - a_cg[..., None])
     img = Image.fromarray((np.clip(wyn, 0, 1) * 255 + 0.5).astype(np.uint8))
     # wyostrzenie i ziarno tylko w obszarze CG (zdjęcie jest już wyostrzone po upscalingu)
-    ost = img.filter(ImageFilter.UnsharpMask(radius=1.2, percent=G['wyostrz'], threshold=1))
+    ost = img.filter(ImageFilter.UnsharpMask(radius=max(3, Ww / 400), percent=G['klarownosc'], threshold=2))
+    ost = ost.filter(ImageFilter.UnsharpMask(radius=1.2, percent=G['wyostrz'], threshold=1))
     ost_a = np.asarray(ost, dtype=np.float32) / 255.0
     rng = np.random.default_rng(5)
     ost_a = ost_a + rng.normal(0, G['ziarno'], (Hh, Ww, 1)).astype(np.float32)

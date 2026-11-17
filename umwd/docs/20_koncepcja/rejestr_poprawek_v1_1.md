@@ -17,7 +17,7 @@
 | G-I-4 | IST. | (w toku) | | | ⏳ |
 | G-I-5 | IST. | (w toku) | | | ⏳ |
 | E-K-1 | KRYT. | (w toku) | | | ⏳ |
-| E-K-2 | KRYT. | (w toku) | | | ⏳ |
+| E-K-2 | KRYT. | Dachy (BIPV jako pokrycie, wykładnia K-05 utrzymana) dają realnie **351 kWp** < 400: wieża 948 m² netto (attyka 0,50 + pas 1,0 m, wyłaz, wpusty, zwody) × 0,215 = 204 kWp; skrzydło 685 m² (attyka 0,52 + pas 0,5 m, przerwa 1,0 m, wyłaz) × 0,215 = 147 kWp; gęstość 0,215 kWp/m² = η 22,5 % × pokrycie 0,955 (warunek przetargowy η ≥ 22,5 %). Uzupełnienie legalne i widoczne, wszystko ≤ 25 m i poza elewacjami od ulic: płyciny wieży od dziedzińca (38 × 2,145 m², bez czerpni) 11 kWp; **ściana pd. segmentu BIPV** (295 m², od dz. 10/2) 41 kWp; **zadaszenie tarasu ogrodowego** przy elewacji pd. wieży (80 m², BIPV półprzezierne) 13 kWp. **Razem 415 kWp (zapas 15 kWp), 328 MWh/rok; PV/EPB 111 %, PV/całość 51 %; EP 28,0 (bez PV 60); emisje EPB 6,7 kg/(m²·rok)**. Wrażliwość: przy η 21 % → 391 kWp (dlatego wymóg η ≥ 22,5 %) | `_rewizja_pv_ep.py` (uruchamia `40_prawo/_bilans_energii.py`) | rozdz. 2 (20), 8, 10, 15, P8 (KPI), JSON `elewacje.PV`, `bilans` | ✅ |
 | E-I-1 | IST. | (w toku) | | | ⏳ |
 | E-I-2 | IST. | (w toku) | | | ⏳ |
 | E-I-3 | IST. | (w toku) | | | ⏳ |

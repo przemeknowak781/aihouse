@@ -125,6 +125,12 @@ def dpl(x, nd=2, unit=""):
     return ("+" if x > 0 else "−") + pl(abs(x), nd, unit)
 
 
+def xround(x, nd=2):
+    """ROUND jak w Excelu/LibreOffice: 15 cyfr znaczących, potem połówki od zera (Python round() zaokrągla „do parzystej”)."""
+    from decimal import ROUND_HALF_UP, Decimal
+    return float(Decimal(f"{x:.15g}").quantize(Decimal(1).scaleb(-nd), rounding=ROUND_HALF_UP))
+
+
 def nat(s):
     return [(0, int(t), "") if t.isdigit() else (1, 0, t) for t in re.split(r"(\d+)", s or "") if t != ""]
 
@@ -302,10 +308,13 @@ class Body:
     def val(self, proto, col):
         return self.protos[proto]["v"].get(col)
 
-    def put(self, proto, values=None, height="proto", merges="proto"):
+    def put(self, proto, values=None, height="proto", merges="proto", keep=False):
+        """keep=True: przepisz też treść wiersza-wzorca (etykiety wzoru), potem nadpisz `values`."""
         p, r, ws = self.protos[proto], self.r, self.ws
         for c, st in p["st"].items():
             ws.cell(r, c)._style = copy(st)
+            if keep and p["v"].get(c) is not None:
+                ws.cell(r, c).value = p["v"][c]
         for c, v in (values or {}).items():
             ci = openpyxl.utils.column_index_from_string(c) if isinstance(c, str) else c
             ws.cell(r, ci).value = v
@@ -477,7 +486,7 @@ def build_f15a(D, res):
              "KW i szachty IT z oznaczeniem kondygnacji (np. KW.3.05). Powierzchnie netto wg PN-ISO 9836:2022-07, liczone z obrysów "
              "pomieszczeń w świetle ścian. Dodane grupy spoza wzoru: " + ", ".join(extra) + ". Kolumna „kond.”: oznaczenie jak w F.15.B.",
              "Kategorie PN-ISO 9836 (kolumna D w wierszach „w tym”): PU – użytkowa, RU – ruchu, US – usługowa (techniczna), "
-             "PG – stanowiska garażowe; przypisanie wg kategorii pozycji programu (docs programu, Wyj. 20 odp. 73)."]
+             "PG – stanowiska garażowe; przypisanie wg kategorii pozycji programu użytkowego (M.01; Wyj. 20 odp. 73)."]
     for t in notes:
         rr = body.put(spacer_proto, {"B": t}, height=15.0 * xl_lines(t, 105) + 2, merges=[(2, 5)])
         note_style(ws.cell(rr, 2))
@@ -667,9 +676,9 @@ def build_f15c(D, res):
     head2 = next(r for r in range(tr["RAZEM TEREN OPRACOWANIA"] + 1, ws.max_row + 1) if ws.cell(r, 2).value == "nr")
     body = Body(ws, 7)
     R, html1, html2 = {}, [], []
-    cwC = (col_w(ws, "C") + col_w(ws, "D") + col_w(ws, "E")) * 1.05
+    cwC = (col_w(ws, "C") + col_w(ws, "D") + col_w(ws, "E")) * 1.12
 
-    def put(key, proto, desc=None, val=None, unit=None, hrows=None, part=1, disp=None):
+    def put(key, proto, desc=None, val=None, unit=None, hrows=None, part=1, disp=None, fmt=None):
         vals = {}
         d = desc if desc is not None else body.val(proto, 3)
         if desc is not None:
@@ -680,8 +689,10 @@ def build_f15c(D, res):
             vals["E"] = unit
         if key is not None and not str(body.val(proto, 2) or "").strip() == key:
             vals["B"] = key
-        ln = xl_lines(d, cwC if part == 1 else (col_w(ws, "C") + col_w(ws, "D")) * 1.05)
-        rr = body.put(proto, vals, height=max(body.protos[proto]["h"] or 15.0, 13.0 * ln + 2.4))
+        ln = xl_lines(d, cwC if part == 1 else (col_w(ws, "C") + col_w(ws, "D")) * 1.12)
+        rr = body.put(proto, vals, height=max(body.protos[proto]["h"] or 15.0, 13.0 * ln + 2.4), keep=True)
+        if fmt:
+            ws.cell(rr, 6).number_format = fmt
         R[key or f"r{rr}"] = rr
         row = dict(k="item", c={"nr": key or str(body.val(proto, 2) or ""), "opis": str(d or "").strip(),
                                 "pow": disp if disp is not None else (pl(val) if isinstance(val, (int, float)) else "")})
@@ -691,7 +702,7 @@ def build_f15c(D, res):
         (html1 if part == 1 else html2).append(row)
         return rr
 
-    body.put(tr["BILANS TERENU"])
+    body.put(tr["BILANS TERENU"], keep=True)
     html1.append(dict(k="sec", c={"nr": "BILANS TERENU"}, span=("nr", "pow")))
     put("1", tr["1"], val=None)
     put("1.1", tr["1.1"], val=S["PZ"])
@@ -718,7 +729,7 @@ def build_f15c(D, res):
     ws.cell(R["3"], 6).value = "=" + "+".join(f"F{R[k]}" for k in ("3.1", "3.2", "3.3"))
     for k, v in (("1", S["PZ"] + S["istn"]), ("2", S["utw"]), ("3", S["pbc"])):
         next(x for x in html1 if x["c"].get("nr") == k)["c"]["pow"] = pl(v)
-    rt = body.put(tr["RAZEM TEREN OPRACOWANIA"], {"F": f"=F{R['1']}+F{R['2']}+F{R['3']}-F{R['3.3']}"})
+    rt = body.put(tr["RAZEM TEREN OPRACOWANIA"], {"F": f"=F{R['1']}+F{R['2']}+F{R['3']}-F{R['3.3']}"}, keep=True)
     teren = round(S["PZ"] + S["istn"] + S["utw"] + S["pbc_ground"], 2)
     html1.append(dict(k="sum", c={"nr": "RAZEM TEREN OPRACOWANIA", "pow": pl(teren)}, span=("nr", "opis")))
     t = (f"Bilans dla Obszaru inwestycji wg M.04 (Wyj. 8 odp. 59), pow. {pl(S['OI'])} m². Poz. 3.3 wliczona do poz. 3, lecz nie do "
@@ -727,8 +738,8 @@ def build_f15c(D, res):
     note_style(ws.cell(rr, 2))
     html1.append(dict(k="note", c={"nr": t}, span=("nr", "pow")))
     body.put(head2 - 1)
-    body.put(head2)
-    body.put(tr["PODSTAWOWE PARAMETRY"])
+    body.put(head2, keep=True)
+    body.put(tr["PODSTAWOWE PARAMETRY"], keep=True)
     html2.append(dict(k="sec", c={"nr": "PODSTAWOWE PARAMETRY"}, span=("nr", "ilosc")))
     i = lambda k: tr[k]  # noqa: E731
     put("I.1", i("I.1"), val=K["PZ"], part=2)
@@ -736,11 +747,11 @@ def build_f15c(D, res):
     r_i3 = put("I.3", i("I.3"), val=K["PC_nad"], part=2)
     r_i4 = put("I.4", i("I.4"), val=K["PC_pod"], part=2)
     ws.cell(r_i2, 6).value = f"=F{r_i3}+F{r_i4}"
-    put("I.5", i("I.5"), val=K["n_pod"], part=2, unit="[szt.]", disp=str(K["n_pod"]))
+    put("I.5", i("I.5"), val=K["n_pod"], part=2, unit="[szt.]", disp=str(K["n_pod"]), fmt="0")
     mz = any(s["mezz"] for s in D.storeys)
     put("I.6", i("I.6"), desc=f"liczba kondygnacji nadziemnych (parter + {K['n_nad'] - 1} pięter, w tym kondygnacja Sejmiku"
         + ("; antresola w kondygnacji Sejmiku nie stanowi odrębnej kondygnacji)" if mz else ")"),
-        val=K["n_nad"], part=2, unit="[szt.]", disp=str(K["n_nad"]))
+        val=K["n_nad"], part=2, unit="[szt.]", disp=str(K["n_nad"]), fmt="0")
     put("I.7", i("I.7"), desc="wysokość – dominanta: attyka nad najniższym terenem przy bryle"
         + (f" (attyka {pl(K['H_W_attyka_npm'])} m n.p.m.)" if K["H_W_attyka_npm"] else ""), val=K["H_W_attyka"], part=2)
     put("I.7.1", i("I.7"), desc=" - dominanta: najniższy punkt pokrycia dachu nad najwyższym terenem (MPZP ≥ 35 m)", val=K["H_W_min"], part=2)
@@ -750,8 +761,8 @@ def build_f15c(D, res):
     r_i9 = put("I.9", i("I.9"), val=None, unit="[m3]", part=2, disp=pl(K["KW"] - K["KW_pod"]))
     r_i10 = put("I.10", i("I.10"), val=K["KW_pod"], part=2)
     ws.cell(r_i9, 6).value = f"=F{r_i8}-F{r_i10}"
-    put("I.11", i("I.11"), val=K["lifts_os"], part=2, unit="[szt.]", disp=str(K["lifts_os"]))
-    put("I.11.1", i("I.11"), desc=" - ponadto dźwigi osobowo-towarowe", val=K["lifts_tow"], part=2, unit="[szt.]", disp=str(K["lifts_tow"]))
+    put("I.11", i("I.11"), val=K["lifts_os"], part=2, unit="[szt.]", disp=str(K["lifts_os"]), fmt="0")
+    put("I.11.1", i("I.11"), desc=" - ponadto dźwigi osobowo-towarowe", val=K["lifts_tow"], part=2, unit="[szt.]", disp=str(K["lifts_tow"]), fmt="0")
     r_i12 = put("I.12", i("I.12"), desc="powierzchnia użytkowa (PN-ISO 9836; bez powierzchni ruchu, usługowej i stanowisk garażowych)",
                 val=None, part=2, disp=pl(K["kat_PU"]))
     put("I.13", i("I.13"), val=S["green_roof"], part=2)
@@ -759,9 +770,9 @@ def build_f15c(D, res):
     opis_m = ("liczba miejsc postojowych w garażu podziemnym (" + ", ".join(f"{k}: {v}" for k, v in mk.items())
               + (f"; w tym dla OzN: {K['ozn']}" if K["ozn"] is not None else "")
               + (f"; z punktem ładowania EV: {K['ev']}" if K["ev"] is not None else "") + ")")
-    put("I.14", i("I.13"), desc=opis_m, val=K["miejsca"], unit="[szt.]", part=2, disp=str(K["miejsca"]))
+    put("I.14", i("I.13"), desc=opis_m, val=K["miejsca"], unit="[szt.]", part=2, disp=str(K["miejsca"]), fmt="0")
     put("I.15", i("I.13"), desc="liczba stanowisk postojowych dla rowerów w budynku (PR)", val=K["rowery"], unit="[szt.]", part=2,
-        disp=str(K["rowery"]))
+        disp=str(K["rowery"]), fmt="0")
     r16 = put("I.16", i("I.13"), desc="powierzchnia netto wszystkich kondygnacji (PN-ISO 9836; = RAZEM F.15.B)", val=K["net"], part=2)
     r161 = put("I.16.1", i("I.13"), desc=" - w tym powierzchnia ruchu (komunikacja wewnętrzna KW, hole SW/SK/SWD, rampy)",
                val=K["kat_RU"], part=2)
@@ -836,10 +847,13 @@ def md_pu(text):
 
 
 def find_revision():
+    """Skrypty rewizji kosztów: nazwa z „koszt”/„f14” albo jawny kontrakt (f14b_rows / F14B_ROWS) w treści.
+    Inne _rewizja_*.py (np. PV/EP) nie są uruchamiane."""
     d = ROOT / "docs" / "20_koncepcja"
     c = sorted(d.glob("_rewizja_*.py"))
-    cost = [p for p in c if re.search(r"koszt|F\.?14", p.name, re.I)]
-    cost += [p for p in c if p not in cost and re.search(r"koszty_model|F\.?14\.?B|koszt", p.read_text(encoding="utf-8", errors="ignore"), re.I)]
+    cost = [p for p in c if re.search(r"koszt|f14", p.name, re.I)]
+    cost += [p for p in c if p not in cost
+             and re.search(r"def\s+f14b_rows|^F14B_ROWS\s*=", p.read_text(encoding="utf-8", errors="ignore"), re.M)]
     return cost
 
 
@@ -866,6 +880,8 @@ def revision_rows(km, base_params):
                 r = km.compute(q, "mid")
                 ex = list((getattr(mod, "POZA_MODELEM", None) or {}).items())
                 return r["rows"], ex, fee, f"{rel(p)} (PARAMS)"
+        if not re.search(r"koszt|f14", p.name, re.I):
+            continue
         try:
             out = subprocess.run([sys.executable, "-I", str(p), "--rows", "mid"], cwd=ROOT, capture_output=True, text=True, timeout=300)
             rows = []
@@ -989,20 +1005,21 @@ def build_f14b(D, res):
     def row_vals(cs):
         if not cs:
             return None, None, None
-        if len(cs) == 1 and "share" not in cs[0]:
+        if len(cs) == 1:
             x = cs[0]
             d = round(x["q"], 2)
-            return d, x["jm"], (x["v"] / d if d else x["c"])
-        if all("share" in x for x in cs) and len(cs) == 1:
-            x = cs[0]
-            d = round(x["q"], 2)
-            return d, x["jm"], (x["v"] / d if d else x["c"])
+            return d, x["jm"], round(x["v"] / d if d else x["c"], 6)
         if len({x["jm"] for x in cs}) == 1:
             d = round(sum(x["q"] for x in cs), 2)
             v = sum(x["v"] for x in cs)
-            return d, cs[0]["jm"], (v / d if d else 0.0)
-        return 1.0, "kpl", sum(x["v"] for x in cs)
+            return d, cs[0]["jm"], round(v / d if d else 0.0, 6)
+        return 1.0, "kpl", round(sum(x["v"] for x in cs), 2)
 
+    # kolumny Ilość / J.m. / wartości poszerzone kosztem „Opis” – ta sama łączna szerokość B:H co we wzorze (wydruk bez zmian)
+    tot_w = sum(col_w(ws, c) for c in "BCDEFGH")
+    for c, w in (("D", 10.5), ("E", 6.0), ("F", 18.0), ("H", 18.0)):
+        ws.column_dimensions[c].width = max(w, col_w(ws, c))
+    ws.column_dimensions["C"].width = round(tot_w - sum(col_w(ws, c) for c in "BDEFGH"), 2)
     body = Body(ws, 7)
     cwC = col_w(ws, "C") * 1.12
     out_rows, html_rows, gcells, gsum = [], [], [], {}
@@ -1031,12 +1048,14 @@ def build_f14b(D, res):
                             notes.append(f"{x['lp']}: {x['opis']} – {pl(x['q'])} {x['jm']} × {pl(x['c'])} zł")
                 lines.append(dict(proto=d["row"], lp=d["lp"], opis=d["opis"], D=D_, E=jm or d["jm"], J=J, G=vat, K="; ".join(notes)))
             else:
-                lines.append(dict(proto=d["row"], lp=d["lp"], opis=d["opis"], D=None, E=d["jm"], J=None, G=vat, F0=0.0,
+                if not d["jm"]:
+                    jm_fill.append(d["lp"])
+                lines.append(dict(proto=d["row"], lp=d["lp"], opis=d["opis"], D=None, E=d["jm"] or "kpl", J=None, G=vat, F0=0.0,
                                   K=NOTY_F14B.get(d["lp"], "brak pozycji w modelu kosztów")))
         nmax = max([d["n"] for d in g["det"]] or [0])
         for k, x in enumerate(extra.get(g["num"], [])):
             D_, jm, J = row_vals([x])
-            lines.append(dict(proto=g["ph"] or (g["det"][-1]["row"] if g["det"] else g["row"] + 1), lp=f"{g['num']}.{nmax + k + 1}",
+            lines.append(dict(proto=(g["det"][-1]["row"] if g["det"] else (g["ph"] or g["row"] + 1)), lp=f"{g['num']}.{nmax + k + 1}",
                               opis=x["opis"], D=D_, E=jm, J=J, G=VAT, K=f"pozycja dodatkowa (model: {x['lp']})", new=True))
         if not extra.get(g["num"]) and g["ph"]:
             lines.append(dict(proto=g["ph"], lp=None, opis=None, D=None, E=None, J=None, G=None, F0=0.0, K="", ph=True))
@@ -1046,18 +1065,18 @@ def build_f14b(D, res):
                 vals.update({"B": ln["lp"], "C": ln["opis"], "E": ln["E"], "G": ln["G"]})
             if ln["D"] is not None:
                 vals.update({"D": ln["D"], "J": ln["J"]})
-                F = round(ln["D"] * ln["J"], 2)
+                F = xround(ln["D"] * ln["J"], 2)
             else:
                 F = ln.get("F0", 0.0)
             vals["K"] = ln["K"] or None
             nl = xl_lines(ln["opis"] or "", cwC)
-            rr = body.put(ln["proto"], vals, height=(13.2 * nl + 2.0) if nl > 1 else "proto")
+            rr = body.put(ln["proto"], vals, height=(13.2 * nl + 2.0) if nl > 1 else "proto", keep=bool(ln.get("ph")))
             ws.cell(rr, 6).value = f"=ROUND(D{rr}*J{rr},2)" if ln["D"] is not None else F
             G = ln["G"] if isinstance(ln["G"], (int, float)) else (body.val(ln["proto"], 7) if isinstance(body.val(ln["proto"], 7), (int, float)) else 0)
             ws.cell(rr, 8).value = f"=ROUND(F{rr}*(1+G{rr}),2)"
             for c in (4, 10):
                 ws.cell(rr, c).number_format = "#,##0.00"
-            H = round(F * (1 + (G or 0)), 2)
+            H = xround(F * (1 + (G or 0)), 2)
             gF += F
             gH += H
             a = a or rr
@@ -1074,11 +1093,11 @@ def build_f14b(D, res):
         html_rows[[i for i, x in enumerate(html_rows) if x["k"] == "grp"][-1]]["c"].update(net=pl(gF, 2), brt=pl(gH, 2))
     totF = round(sum(v[0] for v in gsum.values()), 2)
     totH = round(sum(v[1] for v in gsum.values()), 2)
-    rt = body.put(total_row, {"F": "=" + "+".join(f"F{r}" for r in gcells), "H": "=" + "+".join(f"H{r}" for r in gcells)})
+    rt = body.put(total_row, {"F": "=" + "+".join(f"F{r}" for r in gcells), "H": "=" + "+".join(f"H{r}" for r in gcells)}, keep=True)
     lab_t = str(body.val(total_row, 2))
     html_rows.append(dict(k="grand", c={"lp": lab_t, "jm": "kpl", "net": pl(totF, 2), "brt": pl(totH, 2)}, span=("lp", "il")))
     t_uw = str(body.val(note_row, 2))
-    body.put(note_row)
+    body.put(note_row, keep=True)
     html_rows.append(dict(k="note", c={"lp": t_uw.replace("\n\n", " ").replace("\n", " ")}, span=("lp", "brt")))
     zal = ("Założenia: ceny netto z narzutami, poziom cen II kw. 2026 (Wrocław), bez waloryzacji; ilości wg modelu koncepcji; koszty "
            "stałe budowy – gr. 16; rezerwa na nieprzewidziane – gr. 18; ceny jednostkowe – kolumna pomocnicza J (poza wydrukiem). "
@@ -1088,9 +1107,9 @@ def build_f14b(D, res):
     note_style(ws.cell(rr, 2))
     html_rows.append(dict(k="note", c={"lp": zal}, span=("lp", "brt")))
     body.put(note_row + 2)
-    r_fn = body.put(fee_n, {"H": round(fee, 2) if fee is not None else None})
-    r_fb = body.put(fee_b, {"H": f"=ROUND(H{r_fn}*(1+{VAT}),2)"})
-    fee_b_v = round(fee * (1 + VAT), 2) if fee is not None else None
+    r_fn = body.put(fee_n, {"H": round(fee, 2) if fee is not None else None}, keep=True)
+    r_fb = body.put(fee_b, {"H": f"=ROUND(H{r_fn}*(1+{VAT}),2)"}, keep=True)
+    fee_b_v = xround(fee * (1 + VAT), 2) if fee is not None else None
     html_rows.append(dict(k="fee", c={"lp": str(body.val(fee_n, 2)), "brt": pl(fee, 2) if fee else "–"}, span=("lp", "net")))
     html_rows.append(dict(k="fee", c={"lp": str(body.val(fee_b, 2)), "brt": pl(fee_b_v, 2) if fee_b_v else "–"}, span=("lp", "net")))
     # kolumny pomocnicze J/K
@@ -1141,13 +1160,13 @@ tr.gap td { border: none; height: 1.2mm; padding: 0 }
 FS_PT, LH_MM, PADV = 7.2, 3.25, 1.0
 
 
-def est_lines(text, w_mm, bold=False, italic=False, fs=FS_PT):
+def est_lines(text, w_mm, bold=False, italic=False, fs=FS_PT):  # noqa: ARG001
     cw = fs * 0.3528 * (0.50 if bold else 0.47)
     cap = max(1, int((w_mm - 2.0) / cw * 0.94))
     return xl_lines(text, cap)
 
 
-def row_h(row, cols):
+def row_h(row, cols, base=FS_PT):
     if row["k"] == "gap":
         return 1.6
     span = row.get("span")
@@ -1162,9 +1181,9 @@ def row_h(row, cols):
     else:
         cells = [(row["c"].get(k, ""), w[k]) for k in keys]
     bold = row["k"] in ("sec", "grp", "sum", "grand", "fee")
-    fs = 6.6 if row["k"] == "note" else FS_PT
+    fs = base * (6.6 / FS_PT if row["k"] == "note" else 1.0)
     n = max(est_lines(t, ww, bold, fs=fs) for t, ww in cells) if cells else 1
-    return n * (LH_MM * fs / FS_PT) + PADV + (0.8 if row["k"] == "note" else 0)
+    return n * (LH_MM * fs / FS_PT) + PADV * base / FS_PT + (0.8 if row["k"] == "note" else 0)
 
 
 def td_html(row, cols):
@@ -1187,7 +1206,7 @@ def td_html(row, cols):
     return "".join(out)
 
 
-def render_html(code, hdr, blocks, ncols, draft=None, gap=6.0):
+def render_html(code, hdr, blocks, ncols, draft=None, gap=6.0, fs=FS_PT):
     avail = 297 - 9 - 7 - 22.5 - 6
     pages, page, col, used = [], [], None, 0.0
 
@@ -1202,10 +1221,10 @@ def render_html(code, hdr, blocks, ncols, draft=None, gap=6.0):
 
     for cols, rows in blocks:
         close_col()
-        th_h = max(est_lines(c["label"], c["w"], True) for c in cols) * LH_MM + PADV + 0.6
+        th_h = max(est_lines(c["label"], c["w"], True, fs=fs) for c in cols) * LH_MM * fs / FS_PT + PADV + 0.6
         for i, row in enumerate(rows):
-            h = row_h(row, cols)
-            need = h + (row_h(rows[i + 1], cols) if row["k"] == "sec" and i + 1 < len(rows) else 0)
+            h = row_h(row, cols, fs)
+            need = h + (row_h(rows[i + 1], cols, fs) if row["k"] == "sec" and i + 1 < len(rows) else 0)
             if col is None:
                 col, used = dict(cols=cols, rows=[]), th_h
             if used + need > avail and col["rows"]:
@@ -1219,7 +1238,9 @@ def render_html(code, hdr, blocks, ncols, draft=None, gap=6.0):
     if page:
         pages.append(page)
     n = len(pages)
-    parts = [f'<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>{html.escape(code)}</title><style>{CSS}</style></head><body>']
+    sc = (f"table{{font-size:{fs}pt;line-height:{LH_MM * fs / FS_PT:.2f}mm}} tr.note td{{font-size:{6.6 * fs / FS_PT:.2f}pt}} "
+          f"td,th{{padding:{0.35 * fs / FS_PT:.2f}mm 0.9mm}}") if fs != FS_PT else ""
+    parts = [f'<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>{html.escape(code)}</title><style>{CSS}{sc}</style></head><body>']
     for pi, pg in enumerate(pages, 1):
         parts.append('<section class="page">')
         if draft:
@@ -1253,10 +1274,10 @@ def html_blocks(res):
          dict(key="jm", label="J.m.", w=12, al="c"), dict(key="net", label="Wartość [netto] zł", w=27, al="r"),
          dict(key="vat", label="VAT", w=10, al="c"), dict(key="brt", label="Wartość [brutto] zł", w=27, al="r")]
     return {
-        "F.15.A": ([(A, res["F.15.A"]["rows_html"])], 3, None),
-        "F.15.B": ([(B, res["F.15.B"]["rows_html"])], 3, None),
-        "F.15.C": ([(C1, res["F.15.C"]["html"][0]), (C2, res["F.15.C"]["html"][1])], 2, None),
-        "F.14.B": ([(E, res["F.14.B"]["html"])], 2, "WERSJA ROBOCZA – PRZED REWIZJĄ KOSZTÓW" if res["F.14.B"]["draft"] else None),
+        "F.15.A": ([(A, res["F.15.A"]["rows_html"])], 3, None, FS_PT),
+        "F.15.B": ([(B, res["F.15.B"]["rows_html"])], 3, None, FS_PT),
+        "F.15.C": ([(C1, res["F.15.C"]["html"][0]), (C2, res["F.15.C"]["html"][1])], 2, None, 9.6),
+        "F.14.B": ([(E, res["F.14.B"]["html"])], 2, "WERSJA ROBOCZA – PRZED REWIZJĄ KOSZTÓW" if res["F.14.B"]["draft"] else None, FS_PT),
     }
 
 
@@ -1268,8 +1289,8 @@ def render_pdfs(res, log):
     hd = OUT / "_html"
     hd.mkdir(parents=True, exist_ok=True)
     out = {}
-    for code, (blocks, ncols, draft) in html_blocks(res).items():
-        doc, n = render_html(code, res[code]["hdr"], blocks, ncols, draft)
+    for code, (blocks, ncols, draft, fs) in html_blocks(res).items():
+        doc, n = render_html(code, res[code]["hdr"], blocks, ncols, draft, fs=fs)
         hp = hd / f"{code}.html"
         hp.write_text(doc, encoding="utf-8")
         pdf = OUT / f"{code}.pdf"
@@ -1419,7 +1440,9 @@ def kontrola(D, res, plans, lo, pdfs, pdfchk, log):
            ("tools/zagospodarowanie.py", P["zag"])]
     L.append(md_table(["plik", "sha1"], [(f"`{a}`", f"`{sha(b)}`") for a, b in src], ["l", "l"]))
     rv = find_revision()
-    L.append(f"\nSkrypt rewizji kosztów `_rewizja_*.py`: {'**' + F['rev'] + '**' if F['rev'] else ('znaleziono ' + ', '.join(rel(x) for x in rv) + ' – bez odczytywalnych pozycji F.14.B' if rv else 'brak')}. "
+    other = [rel(x) for x in sorted((ROOT / "docs" / "20_koncepcja").glob("_rewizja_*.py")) if x not in rv]
+    L.append(f"\nSkrypt rewizji kosztów `_rewizja_*.py`: {'**' + F['rev'] + '**' if F['rev'] else ('znaleziono ' + ', '.join(rel(x) for x in rv) + ' – bez odczytywalnych pozycji F.14.B' if rv else 'brak')}"
+             + (f" (inne skrypty rewizji, nie dotyczą kosztów: {', '.join(other)})" if other else "") + ". "
              f"Rejestr poprawek v1.1: {'istnieje' if P['rej'].exists() else 'brak'}"
              + (f" (pozycje ⏳ w toku: {len(re.findall('⏳', P['rej'].read_text(encoding='utf-8')))})" if P["rej"].exists() else "") + ".")
     if F["draft"]:
@@ -1700,7 +1723,7 @@ def kontrola(D, res, plans, lo, pdfs, pdfchk, log):
     if F["diffs"]:
         L.append("Parametry modelu kosztów nadpisane danymi z modelu (wartość spec. → model): "
                  + ", ".join(f"{k} {pl(a, 1)} → {pl(b, 1)}" for k, a, b in F["diffs"]) + ".")
-    rows = [("Suma F.14.B (F159) netto", pl(tot), "", ""),
+    rows = [("Suma F.14.B (wiersz sumy) netto", pl(tot), "", ""),
             ("koncepcja.bilans.koszt_mln_netto", pl(kk * 1e6) if kk else "–", dpl(tot - kk * 1e6) if kk else "–", ok(kk and abs(tot - kk * 1e6) < 0.06e6)),
             ("koncepcja.bilans.koszt_model_F14B_mid_mln (bez korekt poza modelem)", pl(km_mid * 1e6) if km_mid else "–",
              dpl(F["model_total"] - km_mid * 1e6) if km_mid else "–", "model: " + pl(F["model_total"])),
