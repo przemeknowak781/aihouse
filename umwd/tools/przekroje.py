@@ -85,7 +85,8 @@ def tree(svg, P, u, zg, h=11.0, r=3.2, op=0.22):
     svg.circle((x, y - (h - r) * k), r * k, fill="#9db28a", stroke="#7d8f6a", sw=0.12, extra=f'fill-opacity="{op}"')
 
 
-def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=(), notes=(), u_rng=None, z_lo=-24.0, z_hi=40.0, places=(), mode="full", pad=(40, 70, 24, 16)):
+def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=(), notes=(), u_rng=None, z_lo=-13.0, z_hi=40.0, places=(), mode="full", pad=(40, 70, 24, 16)):
+    """z_lo default −13: diaphragm walls and piles are cut by the frame (break line)."""
     ex, ey = p1[0] - p0[0], p1[1] - p0[1]
     Ln = math.hypot(ex, ey)
     r = (ex / Ln, ey / Ln)

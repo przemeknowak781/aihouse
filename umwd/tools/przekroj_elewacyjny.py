@@ -13,14 +13,15 @@ from umwd.svg import Svg
 
 INK = "#1f1d1a"
 SC = 20.0                         # 1:50 → 20 mm per metre
-ZB, ZT = 19.10, 37.70
+import os
+ZB, ZT = float(os.environ.get("UMWD_ZB", "19.10")), 37.70
 GRAN, GRAN_H = "#ddd8cf", "#b9b2a6"
 INS = "#f1e9cf"
 MET = "#4a4541"
 GLASS = "#4a6a85"
 CONC = "#e4e2de"
 
-W_MM, H_MM = 480.0, 18.6 * SC + 60
+W_MM, H_MM = 480.0, (ZT - ZB) * SC + 60
 svg = Svg(W_MM, H_MM)
 OX, OY = 178.0, 30.0 + (ZT - ZB) * SC        # section: façade plane X=0 at paper x=OX
 
@@ -227,6 +228,9 @@ erect(0, 36.20, 5.4, 37.05, hg, sw=0.2)
 erect(-0.05, 37.05, 5.45, 37.20, MET, stroke=MET, sw=0.1)
 svg.text((E(2.7, 0)[0], E(0, ZT)[1] - 2), "FRAGMENT ELEWACJI PÓŁNOCNEJ (2 przęsła)", size=2.6, anchor="middle", weight=600)
 svg.text((P(-2.3, 0)[0], P(0, ZT)[1] - 2), "PRZEKRÓJ PRZEZ OŚ OKNA", size=2.6, anchor="middle", weight=600)
+# mask everything below the fragment base (crown variant) – white band from ZB down
+svg.poly([(0, OY + 0.3), (W_MM, OY + 0.3), (W_MM, H_MM), (0, H_MM)], fill="#ffffff", stroke="none")
+svg.line((OX + (X_IN - 0.2) * SC, OY + 0.3), (OX + 0.5 * SC, OY + 0.3), stroke=INK, sw=0.15, dash="1.5,0.8")
 # dimensions (bottom of elevation)
 yd = E(0, ZB)[1] + 7
 for u0, u1, t in ((0.525, 2.175, "1,65"), (2.175, 3.225, "1,05"), (3.225, 4.875, "1,65"), (0.0, 0.525, ""), (4.875, 5.4, "")):
@@ -272,8 +276,9 @@ for i in range(4):
     svg.poly([(sx + i * 0.5 * SC, sy), (sx + (i + 1) * 0.5 * SC, sy), (sx + (i + 1) * 0.5 * SC, sy + 1.2), (sx + i * 0.5 * SC, sy + 1.2)], fill=INK if i % 2 == 0 else "#fff", stroke=INK, sw=0.12)
 svg.text((sx + 2 * SC + 4, sy + 1.2), "0–2 m · 1:50", size=2.2, weight=600)
 
-out = ROOT / "build" / "rysunki" / "przekroj_elewacyjny_1-50.svg"
+SUF = "_korona" if ZB > 20 else ""
+out = ROOT / "build" / "rysunki" / f"przekroj_elewacyjny_1-50{SUF}.svg"
 out.write_text(svg.render(), encoding="utf-8")
-html = ROOT / "docs" / "70_rysunki" / "podglady" / "przekroj_elewacyjny_1-50.html"
+html = ROOT / "docs" / "70_rysunki" / "podglady" / f"przekroj_elewacyjny_1-50{SUF}.html"
 html.write_text(f'<!doctype html><html><head><meta charset="utf-8"><style>@page{{size:{W_MM + 10:.0f}mm {H_MM + 10:.0f}mm;margin:0}}body{{margin:0;padding:5mm}}</style></head><body>{svg.render()}</body></html>', encoding="utf-8")
 print(f"{W_MM + 10:.0f} {H_MM + 10:.0f}")
