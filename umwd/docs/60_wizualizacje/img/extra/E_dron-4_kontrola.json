@@ -55,7 +55,9 @@
   "budynek_s": 12.0,
   "zrodlo_sceny": "budowa od zera",
   "scena_s": 22.5,
-  "kontrola_s": 0.9
+  "kontrola_s": 0.9,
+  "render_s": 1426.0,
+  "postprodukcja_s": 4.8
  },
  "uwagi": [],
  "info": [
@@ -148,5 +150,205 @@
   }
  },
  "horyzont_y": 1.716,
- "pochylenie_deg": -36.11
+ "pochylenie_deg": -36.11,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/E_dron-4.png",
+ "jpg": "docs/60_wizualizacje/img/extra/E_dron-4.jpg",
+ "dodatki_w_kadrze": {},
+ "korekty": {
+  "lamele_korony": {
+   "luk_L_m": 21.991,
+   "lamele_szt": 21,
+   "szer_m": 0.35,
+   "glab_m": 0.6,
+   "rozstawy": "LkLLkLkLLkLLkLkLLkLk",
+   "zapas_krawedzi_m": 0.021,
+   "przechwycone_ze_Spec": 16,
+   "spec_pierwotna": [
+    0.35,
+    0.6,
+    13.4
+   ]
+  },
+  "oprawy_cieple_moc": 3.5999999046325684,
+  "post_przed": {
+   "zamglenie_udzial_kadru_w>0.3": 0.185,
+   "zamglenie_barwa_lin": [
+    0.1792,
+    0.1949,
+    0.2173
+   ],
+   "zamglenie_max_udzial": 0.257,
+   "cfg": {
+    "mgla": {
+     "tryb": "zamglenie",
+     "start": 200,
+     "glebokosc": 220,
+     "sila": 0.3,
+     "wykladnik": 1.0,
+     "percentyl": 80,
+     "barwa": [
+      0.8,
+      0.87,
+      0.97
+     ],
+     "desat": 0.15
+    }
+   }
+  },
+  "wycinek": null,
+  "czas_calkowity_s": 1432.0,
+  "bipv": {
+   "ogniwo": [
+    0.018,
+    0.027,
+    0.056
+   ],
+   "spoina": [
+    0.075,
+    0.08,
+    0.09
+   ],
+   "szorstkosc_ogniw": 0.38,
+   "coat_ior": 1.52,
+   "coat_szorstkosc": 0.05,
+   "zmiennosc_tonu": 0.3,
+   "nachylenie_bump": 0.035,
+   "skala_modulu": 0.55,
+   "opis": "szkło osłonowe (coat) z odbiciem nieba, ogniwa ciemnogranatowe, zmienność modułów"
+  },
+  "ceramika_posesji": {
+   "w_obrazie": {
+    "BIPV_dachy": {
+     "piksele_probki": 7221,
+     "srgb": [
+      41.4,
+      54.9,
+      74.5
+     ],
+     "lab": [
+      22.7,
+      0.4,
+      -13.8
+     ]
+    },
+    "M1": {
+     "piksele_probki": 177,
+     "srgb": [
+      54.2,
+      63.8,
+      70.4
+     ],
+     "lab": [
+      26.4,
+      -2.2,
+      -5.4
+     ]
+    },
+    "M2": {
+     "piksele_probki": 199,
+     "srgb": [
+      58.1,
+      63.6,
+      65.3
+     ],
+     "lab": [
+      26.5,
+      -1.9,
+      -1.8
+     ]
+    },
+    "M3": {
+     "piksele_probki": 128,
+     "srgb": [
+      50.9,
+      59.7,
+      65.4
+     ],
+     "lab": [
+      24.6,
+      -2.2,
+      -4.8
+     ]
+    },
+    "M4": {
+     "piksele_probki": 108,
+     "srgb": [
+      55.6,
+      60.5,
+      62.7
+     ],
+     "lab": [
+      25.2,
+      -1.5,
+      -2.1
+     ]
+    }
+   },
+   "dE76_sasiednie_w_obrazie": {
+    "M1-M2": 3.6,
+    "M2-M3": 3.6,
+    "M3-M4": 2.9
+   },
+   "ncs_konwersja": {
+    "M1": {
+     "ncs": "S 1505-Y20R",
+     "srgb": [
+      228,
+      221,
+      208
+     ],
+     "lab": [
+      88.3,
+      0.2,
+      7.2
+     ]
+    },
+    "M2": {
+     "ncs": "S 1010-Y30R",
+     "srgb": [
+      241,
+      224,
+      199
+     ],
+     "lab": [
+      89.9,
+      1.8,
+      14.3
+     ]
+    },
+    "M3": {
+     "ncs": "S 2005-Y20R",
+     "srgb": [
+      214,
+      208,
+      196
+     ],
+     "lab": [
+      83.6,
+      -0.0,
+      6.7
+     ]
+    },
+    "M4": {
+     "ncs": "S 1510-Y30R",
+     "srgb": [
+      228,
+      212,
+      188
+     ],
+     "lab": [
+      85.6,
+      1.7,
+      13.9
+     ]
+    }
+   },
+   "dE76_sasiednie_ncs": {
+    "M1-M2": 7.5,
+    "M2-M3": 10.0,
+    "M3-M4": 7.7
+   },
+   "krok_px": 4
+  }
+ }
 }

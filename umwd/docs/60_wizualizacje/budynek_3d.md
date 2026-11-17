@@ -243,6 +243,22 @@ krawężnika, ruch prawostronny). **W10** – druga próba (pn.-wsch. część o
 ogrodowa, południe) nieudana: zachowane drzewo 3 m przed obiektywem, ogród w cieniu koron – **W10 odrzucona**
 (nie jest wymagana regulaminem). **W6** – wstrzymana do korekty rzutu (oś przekątna ≥ 6,3 m na całej długości).
 
+## 5c. Rewizja v1.3 – przełączniki (audyt `docs/90_audyt/audyt_konstrukcja_funkcja.md`)
+
+Zmiany z audytu przygotowane jako przełączniki w `ZALOZENIA` z wartościami domyślnymi wg tekstu audytu
+(włączone – finały po wejściu v1.3 przeliczą się bez zmian kodu). Wartości z `koncepcja.json` → klucz
+`render_zalozenia` (słownik o tych samych nazwach) nadpisują domyślne; opcja `zalozenia` – na końcu.
+
+| Przełącznik | Ustalenie | Co robi w modelu | Widoczne w |
+|---|---|---|---|
+| `v13_slupek_scianki`, `scianki_wieza_osie` (0,45; 4,05), `scianki_skrzydlo` | F2-program-biura-03 | wieża, kond. 1–6: dodatkowy słupek w osi każdej ścianki (0,45 + 4,05·j) wewnątrz okna – skrzydło 0,825 + kwatery 0,45 / 0,375; skrzydło od dziedzińca: co 2. okno kwatera stała 0,40 + skrzydło 0,72; rolety ZIP osobno dla każdej kwatery | W1, W2, W3, W9, widoki z lotu ptaka |
+| `v13_luk_bez_slupa_45` | S1-konstrukcja-03 | bez kolumny R 13,5/45° przed drzwiami Bramy Mostowej (przęsło 30°–60°, belka w nadprożu – niewidoczna) | W3, detal podcienia, W6 (od wnętrza) |
+| `v13_usun_slupy_uv` | S1-konstrukcja-03 | bez słupów w osi Hali: (32,40; 23,15), (32,40; 21,60), R 7,0/45° (30,95; 20,65) – hol schematyczny i W6 | W6 |
+| `v13_brama_garazu`, `brama_garazu_v13` (v −6,4…−0,4; cofnięcie 1,75; rozglifienie 0,55; h 4,2) | F3-garaz-technika-01 | brama 6,0 m w głębi wnęki 1,75 m, otwór w licu 7,1 m z ukośnymi ościeżami granitowymi, podsufitka z oprawami, posadzka z bruku, bez słupa; zostają tylko drzwi trafo (rozdzielnia → kond. 1) | W4, W1, lot ptaka |
+| `segment_poszerzenie_parteru` (0) | F3-garaz-technika-01 (wariant) | tylko przełącznik – geometria poszerzenia parteru o 1,5 m czeka na v1.3 | – |
+| `v13_ei60_pierwsza_os`, `ei60_os_s` (0,41; 1,61) | S3-ppoz-10 | pierwsza oś skrzydła przy Maz. 19, kond. 1–4, oba lica: szkło stałe EI 60 – rama 0,10 m, bez rygla i rolety | W5 (z bliska – różnica znikoma), W2 |
+| `m1_posadzka_wzgl` (−0,47) | F1-komunikacja-10 | posadzka parteru M1 (s 0–12,15) obniżona do poziomu bramy; cokół od Mazowieckiej bez zmian | żaden kadr (wnętrze M1 za witrynami / w głębi bramy ogrodowej – w W5 ciemne) |
+
 ## 5a. Fotomatch W1/W2 na zdjęciach F.17.A/B (`render/fotomatch_F17.py`)
 
 * Kamera z `model/kamery_F17.json` (parametry Blendera: pozycja, yaw/pitch/roll, ogniskowa, shift); słońce i niebo

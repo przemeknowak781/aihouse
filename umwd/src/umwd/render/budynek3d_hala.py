@@ -214,8 +214,12 @@ class Hala:
 
     def slupy(self, G):
         n = 0
+        # v1.3 (S1-konstrukcja-03): bez słupów w osi Hali (pierścień R 7,0, słup siatki przy wiatrołapie)
+        usun = [self.B.spec.z_uv(*q) for q in (self.B.Z.get('v13_usun_slupy_uv') or ())]
         for s in self.P['slupy']:
             c = Point(s)
+            if any(math.dist(s, q) < 0.8 for q in usun):
+                continue
             if self.H.buffer(0.35).contains(c):
                 G.pryzma(c.buffer(0.28, 32), 0.0, self.suf, 'beton', gora=False, dno=False)
                 G.pryzma(c.buffer(0.30, 32), 0.0, 0.08, 'granit:ciemny', gora=True, dno=False)

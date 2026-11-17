@@ -99,6 +99,19 @@ ZALOZENIA = dict(
     gzyms_wysieg_ulica=0.0,     # rewizja 17.11: na elewacjach < 0,30 m od granicy gzyms bez wysięgu …
     fryz_cofniecie=0.15,        # … a cień daje fryz cofnięty o 0,15 m pod gzymsem
     gzyms_wysieg_pn=0.25,       # elewacja pn. skrzydła (dziób) – wysięg maks. 0,25 m
+    # ---- rewizja v1.3 wg audytu docs/90_audyt/audyt_konstrukcja_funkcja.md (przełączniki; wartości z JSON
+    #      ``render_zalozenia`` nadpisują te domyślne, gdy v1.3 je poda; opcja ``zalozenia`` – na końcu)
+    v13_slupek_scianki=True,      # F2-program-biura-03: słupek w osi każdej ścianki między pokojami
+    scianki_wieza_osie=(0.45, 4.05),            # wieża: ścianki w osiach 0,45 + 4,05·j (q elewacji)
+    scianki_skrzydlo=dict(co_ile=2, od=1, kwatera_stala=0.40),   # skrzydło (dziedziniec): co 2. okno, kw. 0,40 + 0,72
+    v13_luk_bez_slupa_45=True,    # S1-konstrukcja-03: bez kolumny R 13,5/45° przed drzwiami (przęsło 6,99 m)
+    v13_usun_slupy_uv=((32.40, 23.15), (32.40, 21.60), (30.95, 20.65)),   # słupy w osi Hali (pierścień R 7,0 i siatki)
+    v13_brama_garazu=True,        # F3-garaz-technika-01: brama ≥ 6,0 m cofnięta za lico, ukośne ościeża, bez słupa
+    brama_garazu_v13=dict(v=(-6.4, -0.4), cofniecie=1.75, rozglifienie=0.55, h=4.2),
+    segment_poszerzenie_parteru=0.0,             # wariant „parterowe poszerzenie segmentu o 1,5 m na pd.” (domyślnie 0)
+    v13_ei60_pierwsza_os=True,    # S3-ppoz-10: pierwsza oś skrzydła przy Maz. 19 (s 0,41–1,61, P–4) – szkło stałe EI 60
+    ei60_os_s=(0.41, 1.61),
+    m1_posadzka_wzgl=-0.47,       # F1-komunikacja-10: parter M1 (s 0–12,15) ok. 118,82–118,85 (wnętrze; cokół bez zmian)
     brama_garazu_v=(-4.4, -0.4),  # rewizja 17.11 (weryfikacja K-2/I-1): brama 4,0 m przy ścianie pn. segmentu
     brama_garazu_prog_npm=119.10,
     drzwi_segmentu=((0.75, 1.95), (2.55, 3.55), (4.15, 5.15)),   # trafo, rozdzielnia nn, odpady – od narożnika pd.
@@ -1451,6 +1464,8 @@ class Budynek:
         self.o.update(opts or {})
         self.spec = Spec(self.o['koncepcja'])
         self.Z = dict(ZALOZENIA)
+        # wartości rewizji podane w koncepcja.json (``render_zalozenia``) – przed nadpisaniem z opcji
+        self.Z.update(self.spec.K.get('render_zalozenia', {}) or {})
         self.Z.update(self.o.get('zalozenia', {}))
         self.mat = Materialy(self.spec, self.o)
         self.DZ = self.spec.DZ
@@ -1593,8 +1608,9 @@ class Budynek:
 
     # ================================================================ okna (wspólne)
     def okno(self, G, b, s0, s1, t_szkla, z0, z1, typ='biuro', slupek=True, powiew=None, rama=0.06,
-             slupek_w=0.07, rygiel=None, roleta=True, wewn_do=None, przytnij=True):
-        """Okno: szyba (2 kwatery ze słupkiem w osi), rama obwodowa z metalu, opcjonalny rygiel (z), roleta ZIP."""
+             slupek_w=0.07, rygiel=None, roleta=True, wewn_do=None, przytnij=True, slupki=None):
+        """Okno: szyba (2 kwatery ze słupkiem w osi), rama obwodowa z metalu, opcjonalny rygiel (z), roleta ZIP.
+        ``slupki`` – dodatkowe słupki (s) w osiach ścianek (v1.3, F2-program-biura-03); rolety ZIP osobno dla kwater."""
         if przytnij and not self.widoczne(b, s0, s1, z0, z1):
             return
         tz = t_szkla
@@ -1610,13 +1626,22 @@ class Budynek:
             sm = (s0 + s1) / 2
             self.el(Gr, b, sm - slupek_w / 2, sm + slupek_w / 2, tr0 - 0.01, tr1, z0 + rama, z1 - rama, m,
                     przytnij=przytnij)
+        for sd in (slupki or []):
+            self.el(Gr, b, sd - slupek_w / 2, sd + slupek_w / 2, tr0 - 0.01, tr1, z0 + rama, z1 - rama, m,
+                    przytnij=przytnij)
         if rygiel is not None:
             self.el(Gr, b, s0 + rama, s1 - rama, tr0 - 0.005, tr1, rygiel - 0.035, rygiel + 0.035, m, przytnij=przytnij)
-        if roleta and self.rng.random() < self.o['rolety']:
-            fr = self.rng.uniform(0.15, 0.75)
-            zr = z1 - rama - (z1 - z0 - 2 * rama) * fr
-            self.el(self.Gwn, b, s0 + rama, s1 - rama, tz + 0.05, tz + 0.06, zr, z1 - rama, 'roleta', przytnij=przytnij)
-            self.el(Gr, b, s0 + rama, s1 - rama, tz + 0.045, tz + 0.075, zr - 0.04, zr, m, przytnij=przytnij)
+        if slupki:
+            granice = sorted([s0 + rama] + list(slupki) + [s1 - rama])
+            kwatery = list(zip(granice[:-1], granice[1:]))
+        else:
+            kwatery = [(s0 + rama, s1 - rama)]
+        for qa_, qb_ in kwatery:
+            if roleta and self.rng.random() < self.o['rolety']:
+                fr = self.rng.uniform(0.15, 0.75)
+                zr = z1 - rama - (z1 - z0 - 2 * rama) * fr
+                self.el(self.Gwn, b, qa_, qb_, tz + 0.05, tz + 0.06, zr, z1 - rama, 'roleta', przytnij=przytnij)
+                self.el(Gr, b, qa_, qb_, tz + 0.045, tz + 0.075, zr - 0.04, zr, m, przytnij=przytnij)
         if wewn_do is not None and wewn_do < tz - 0.04:
             # parapet i nadproże wewnętrzne (domykają widok między szybą a krawędzią stropu)
             self.el(self.Gwn, b, s0, s1, wewn_do, tz - 0.035, z0 - 0.03, z0 + 0.0, 'wn_sciana', przytnij=przytnij)
@@ -1796,7 +1821,8 @@ class Budynek:
                         self.el(G, b, e0, e1, -gl - 0.05, -g - 0.06, 0.0, z_lintel0, 'granit', rz=0.0)
             # ---- kondygnacje 1–6 i korona
             for s0, s1 in przesla:
-                self._wieza_przeslo(G, b, s0, s1, kd, Fk, g, g6, okh, kor0, kor1, zt, q_c=q_of_s((s0 + s1) / 2))
+                self._wieza_przeslo(G, b, s0, s1, kd, Fk, g, g6, okh, kor0, kor1, zt, q_c=q_of_s((s0 + s1) / 2),
+                                    q_kr=(q_of_s(s0), q_of_s(s1)))
         # obróbka attyki i attyka (pierścień)
         Wp = self.poly['W']
         ring = Wp.difference(Wp.buffer(-g - 0.1, join_style=2))
@@ -1808,7 +1834,23 @@ class Budynek:
         self.czas('wieza', t0)
         return ob
 
-    def _wieza_przeslo(self, G, b, s0, s1, kd, Fk, g, g6, okh, kor0, kor1, zt, q_c=None):
+    def _slupki_scianek(self, s0, s1, q_kr):
+        """Dodatkowe słupki okna wieży w osiach ścianek 0,45 + 4,05·j (v1.3): s słupków wewnątrz okna (poza ramą
+        i słupkiem środkowym). Okno 1,65 m ze ścianką 0,45 od osi: skrzydło 0,825 + kwatery 0,45 / 0,375 m."""
+        if not self.Z.get('v13_slupek_scianki') or q_kr is None:
+            return []
+        q0, q1 = q_kr
+        a0, krok = self.Z['scianki_wieza_osie']
+        lo, hi = min(q0, q1), max(q0, q1)
+        out = []
+        j0 = math.ceil((lo - a0) / krok)
+        for j in range(j0, j0 + 3):
+            qp = a0 + j * krok
+            if lo + 0.10 < qp < hi - 0.10 and abs(qp - (q0 + q1) / 2) > 0.10:
+                out.append(s0 + (qp - q0) * (s1 - s0) / (q1 - q0))
+        return out
+
+    def _wieza_przeslo(self, G, b, s0, s1, kd, Fk, g, g6, okh, kor0, kor1, zt, q_c=None, q_kr=None):
         """Przęsło wieży na kondygnacjach 1–6 i w koronie S (wg ``tools/elewacje.py``: parapet 0,90; kond. 5 nad
         kordonem; kond. 6 – pas cienia 0,40 m za licem; korona: okna hali 5,0 m lub komisji 4,2 m, lamele pd.)."""
         Z = self.Z
@@ -1830,7 +1872,7 @@ class Budynek:
                 self.el(G, b, s0, s1, -g6, -gp + 0.02, F - 0.03, F, m)                  # półka dolna
                 a, c = Z['kond6_szklo']
                 self.el(G, b, s0, s1, -g6 - 0.03, -g6, F, F + a, m)
-                self.okno(G, b, s0, s1, -g6, F + a, F + c, wewn_do=-g - 0.05)
+                self.okno(G, b, s0, s1, -g6, F + a, F + c, wewn_do=-g - 0.05, slupki=self._slupki_scianek(s0, s1, q_kr))
                 self.el(G, b, s0, s1, -g6 - 0.03, -g6, F + c, F_S, m)
                 self.el(G, b, s0, s1, -g6, -Z['korona_wypelnienie_gl'], F_S, F_S + 0.03, m)   # podsufitka
                 poprz = None
@@ -1853,7 +1895,7 @@ class Budynek:
                 for zz in np.arange(zo0 + 0.1, zo1 - 0.05, 0.17):
                     self.el(G, b, s0, s1, -g, -g + 0.06, zz - 0.035, zz, m)
             else:
-                self.okno(G, b, s0, s1, -g, zo0, zo1)
+                self.okno(G, b, s0, s1, -g, zo0, zo1, slupki=self._slupki_scianek(s0, s1, q_kr))
             poprz = zo1
         # ---- korona S
         typ = Z['korona_typ'].get(b.nazwa, 'komisje')
@@ -1903,6 +1945,9 @@ class Budynek:
         ws, wg = Z['luk_slupy_szer'], Z['luk_slupy_gl']
         tc = -(R - sp.luk_slupy_R)
         for i in range(1, nk):
+            if Z.get('v13_luk_bez_slupa_45') and abs(i * deg - 45.0) < 1e-3:
+                # v1.3 (S1-konstrukcja-03): przęsło 30°–60° (cięciwa 6,99 m) – belka 0,45 × 0,90 w nadprożu granitowym
+                continue
             sc = b.L * i / nk
             self.el(G, b, sc - ws / 2, sc + ws / 2, tc - wg / 2, min(0.0, tc + wg / 2), zb, z_l0, 'granit', rz=0.0)
         smid = b.L / 2
@@ -2178,6 +2223,8 @@ class Budynek:
                 v_b = sp.do_uv(*b.P[-1])[1]
                 kv = 1 if v_b > v_a else -1
                 lo, hi = Z['brama_garazu_v'] if Z.get('brama_garazu_v') else sp.brama_garazu_v
+                if Z.get('v13_brama_garazu'):
+                    lo, hi = Z['brama_garazu_v13']['v']
                 garaz_z = [tuple(sorted([(lo - v_a) * kv, (hi - v_a) * kv]))]
             sciana_pd_seg = bryla == 'S' and abs(((b.az_normalnej - (math.degrees(math.atan2(sp.uv['A'][0, 0], sp.uv['A'][1, 0])) % 360 + 90)) + 180) % 360 - 180) < 25
             # ---- PARTER (cokół): filary granitowe co 2 osie, witryny z naświetlem, kordon
@@ -2283,8 +2330,24 @@ class Budynek:
                     self.el(G, b, s0, s1, tgl, tp + 0.035, zo0 - 0.03, zo0, 'metal')        # parapet Al
                     self.el(G, b, s0, s1, tgl, tp, zo1, zo1 + 0.02, 'metal')                 # nadproże
                     # ościeża (boki) – ceramika (przy płycinach cofniętych względem filarów)
-                    self.okno(G, b, s0, s1, tgl, zo0, zo1, typ='biuro', slupek=False, rygiel=zo0 + okh * 0.70,
-                              wewn_do=min(tgl - 0.08, -0.75))
+                    qc_ = q0 + kier * (s0 + s1) / 2                          # współrzędna s skrzydła (od Maz. 19)
+                    e0, e1 = Z.get('ei60_os_s', (0.41, 1.61))
+                    if bryla == 'M' and Z.get('v13_ei60_pierwsza_os') and e0 - 0.05 <= qc_ <= e1 + 0.05 \
+                            and k['nazwa'] in ('1', '2', '3', '4'):
+                        # v1.3 (S3-ppoz-10): przeszklenie stałe EI 60 – rama szersza, bez skrzydła i rygla
+                        self.okno(G, b, s0, s1, tgl, zo0, zo1, typ='ei60', slupek=False, rama=0.10, roleta=False,
+                                  wewn_do=min(tgl - 0.08, -0.75))
+                    else:
+                        sl_ = []
+                        sk_ = Z.get('scianki_skrzydlo') or {}
+                        if bryla == 'M' and not ulica and not b.krzywy and Z.get('v13_slupek_scianki') and sk_:
+                            k_os = int(round((qc_ - os_ / 2) / os_))
+                            if k_os % sk_.get('co_ile', 2) == sk_.get('od', 1) % sk_.get('co_ile', 2):
+                                # kwatera stała 0,40 m po stronie bliższej Maz. 19 + skrzydło 0,72 m (słupek w osi ścianki)
+                                kr0 = s0 if kier > 0 else s1
+                                sl_ = [kr0 + kier * (0.06 + sk_.get('kwatera_stala', 0.40))]
+                        self.okno(G, b, s0, s1, tgl, zo0, zo1, typ='biuro', slupek=False, rygiel=zo0 + okh * 0.70,
+                                  wewn_do=min(tgl - 0.08, -0.75), slupki=sl_)
                     poprz = zo1
                 self.el(G, b, s0, s1, tg, tp, poprz, z_fr0, mt, rz=poprz)
             # ---- fryz i gzyms-attyka (granit, ciągłe); przy granicy: architraw w licu + fryz cofnięty 0,15 m
@@ -2307,11 +2370,16 @@ class Budynek:
 
     def _parter_obslugi(self, G, b, brama, z_kor0):
         """Parter elewacji wsch. segmentu (rysunek elewacji, rewizja 17.11): pełny granit, brama garażu 4,0 m
-        (żaluzja stalowa, próg w poziomie chodnika 119,10), drzwi trafo / rozdzielni / odpadów w części pd."""
+        (żaluzja stalowa, próg w poziomie chodnika 119,10), drzwi trafo / rozdzielni / odpadów w części pd.
+        v1.3 (F3-garaz-technika-01): brama ≥ 6,0 m cofnięta za lico (wnęka z ukośnymi ościeżami, bez słupa
+        w otworze, belki krawędziowe ukryte w granicie), drzwi kolidujące z wnęką pominięte."""
         Z = self.Z
         zp = Z['brama_garazu_prog_npm'] - self.spec.zero
         hb = Z['brama_garazu_h']
         hd = Z['drzwi_segmentu_h']
+        if Z.get('v13_brama_garazu'):
+            self._brama_garazu_v13(G, b, brama, z_kor0, zp, hd)
+            return
         otw = [(brama[0], brama[1], hb, 0.40)] + [(a, c, hd, 0.18) for a, c in Z['drzwi_segmentu']]
         for p, q in self._odejmij([(0.0, b.L)], [(a, c) for a, c, _, _ in otw]):
             self.el(G, b, p, q, -0.70, 0.0, Z['z_podstawy'], z_kor0, 'granit', rz=0.0)
@@ -2322,6 +2390,48 @@ class Budynek:
             for zz in np.arange(zp + 0.30, zp + h - 0.05, 0.30 if gl < 0.3 else 0.15):
                 self.el(G, b, a + 0.03, c - 0.03, -gl, -gl + 0.02, zz - 0.02, zz, 'metal')
             self.el(G, b, a, c, -gl, 0.0, zp + h, zp + h + 0.02, 'metal')
+
+    def _brama_garazu_v13(self, G, b, brama, z_kor0, zp, hd):
+        """Brama garażu v1.3: otwór w licu poszerzony o rozglifienie po obu stronach, brama (żaluzja) w głębi
+        ``cofniecie``, ościeża ukośne i podsufitka z granitu, posadzka wnęki w poziomie progu; w otworze brak słupa."""
+        Z = self.Z
+        P = Z['brama_garazu_v13']
+        cf, rg, hb = P['cofniecie'], P['rozglifienie'], P['h']
+        a, c = brama
+        A, C = a - rg, c + rg                      # otwór w licu (krawędzie belek ~7,1 m)
+        drzwi = [(p, q) for p, q in Z['drzwi_segmentu'] if q < A - 0.25 or p > C + 0.25]
+        otw = [(A, C)] + drzwi
+        for p, q in self._odejmij([(0.0, b.L)], otw):
+            self.el(G, b, p, q, -0.70, 0.0, Z['z_podstawy'], z_kor0, 'granit', rz=0.0)
+        # nadproże nad wnęką (granit w licu) i podsufitka wnęki
+        self.el(G, b, A, C, -0.70, 0.0, zp + hb, z_kor0, 'granit', rz=zp + hb)
+        sufit = Polygon([b.pt(A, 0.0), b.pt(C, 0.0), b.pt(c, -cf), b.pt(a, -cf)])
+        G.pryzma(sufit, zp + hb, zp + hb + 0.35, 'granit', mat_dol='granit')
+        # posadzka wnęki (bruk granitowy w poziomie progu) i ościeża ukośne
+        G.pryzma(sufit, Z['z_podstawy'], zp, 'bruk', dno=False, boki=False)
+        for (e_l, e_g, kier) in ((A, a, -1), (C, c, 1)):
+            sc = Polygon([b.pt(e_l, 0.0), b.pt(e_g, -cf), b.pt(e_g + kier * 0.35, -cf), b.pt(e_l + kier * 0.35, 0.0)])
+            G.pryzma(sc, Z['z_podstawy'], zp + hb + 0.35, 'granit', mat_gora='granit')
+        # żaluzja w głębi + prowadnice; oprawy w podsufitce
+        self.el(G, b, a, c, -cf - 0.06, -cf, zp, zp + hb, 'metal:fuga', przytnij=False)
+        for zz in np.arange(zp + 0.15, zp + hb - 0.05, 0.15):
+            self.el(G, b, a + 0.03, c - 0.03, -cf, -cf + 0.02, zz - 0.02, zz, 'metal', przytnij=False)
+        for e in (a, c - 0.08):
+            self.el(G, b, e, e + 0.08, -cf - 0.02, -cf + 0.05, zp, zp + hb, 'metal', przytnij=False)
+        for t in np.linspace(a + 1.0, c - 1.0, 3):
+            p0 = b.pt(t, -cf * 0.5)
+            G.pryzma(Point(*p0).buffer(0.18, 10), zp + hb - 0.01, zp + hb, 'wn_lampa:cieple', gora=False)
+        # drzwi techniczne (poza wnęką)
+        for p, q in drzwi:
+            self.el(G, b, p, q, -0.70, 0.0, zp + hd, z_kor0, 'granit', rz=zp + hd)
+            self.el(G, b, p, q, -0.70, 0.0, Z['z_podstawy'], zp, 'granit', rz=0.0)
+            self.el(G, b, p, q, -0.22, -0.18, zp, zp + hd, 'metal:fuga')
+            for zz in np.arange(zp + 0.30, zp + hd - 0.05, 0.30):
+                self.el(G, b, p + 0.03, q - 0.03, -0.18, -0.16, zz - 0.02, zz, 'metal')
+            self.el(G, b, p, q, -0.18, 0.0, zp + hd, zp + hd + 0.02, 'metal')
+        self.wneka_garazu = sufit
+        self.info['brama_garazu'] = dict(wariant='v1.3', szer_bramy=round(c - a, 2), otwor_w_licu=round(C - A, 2),
+                                         cofniecie=cf, drzwi=len(drzwi))
 
     @staticmethod
     def _odejmij(kaw, wyc):
@@ -2384,9 +2494,12 @@ class Budynek:
             # słupy w siatce (u, v) wieży
             osu = sp.K['siatka']['wieza']['osie_u']
             osv = sp.K['siatka']['wieza']['osie_v']
+            usun = [sp.z_uv(*q) for q in (Z.get('v13_usun_slupy_uv') or ())]
             for u in osu[1:-1]:
                 for v in osv[1:-1]:
                     e, n = sp.z_uv(u, v)
+                    if any(math.dist((e, n), q) < 0.8 for q in usun):
+                        continue
                     c = Point(e, n).buffer(0.25, 16)
                     if hall.contains(c) and not any(r.intersects(c) for r in rdz):
                         G.pryzma(c, 0.0, suf, 'beton', gora=False, dno=False)
@@ -2422,10 +2535,20 @@ class Budynek:
             kdb = sp.kondygnacje(br)
             osc = Z['gzyms_wysieg'] + sp.osc['skrzydlo_i_segment_m']
             podl = Pp.buffer(-Z['parter_szklo_skrzydlo'] - 0.03, join_style=2)
+            if br == 'S' and getattr(self, 'wneka_garazu', None) is not None:
+                podl = podl.difference(self.wneka_garazu.buffer(0.35, join_style=2))
             if br == 'M':
                 podl = podl.difference(sp.brama.buffer(0.05, join_style=2))
                 for pp in self.wneki_polys:
                     podl = podl.difference(pp.buffer(0.03, join_style=2))
+            m1 = None
+            if br == 'M' and Z.get('m1_posadzka_wzgl') is not None:
+                # v1.3 (F1-komunikacja-10): parter M1 (s 0–12,15 skrzydła) obniżony do poziomu bramy (~118,82–118,85)
+                m1 = Polygon([sp.z_uv(s_, d_, uk=sp.sd) for s_, d_ in ((0.0, -1.0), (12.15, -1.0), (12.15, 16.0),
+                                                                        (0.0, 16.0))]).intersection(podl)
+                if not m1.is_empty:
+                    G.pryzma(m1, -0.9, Z['m1_posadzka_wzgl'], 'wn_kamien', boki=False, dno=False)
+                    podl = podl.difference(m1)
             G.pryzma(podl, -0.4, 0.0, 'wn_kamien', boki=False, dno=False)
             suf = kdb[0]['sufit']
             jadro = Pp.buffer(-gd - 0.6, join_style=2)
