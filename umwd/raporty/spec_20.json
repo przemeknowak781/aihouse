@@ -1,0 +1,63 @@
+{
+ "nr": 20,
+ "title": "Sunlight engine built: equinox shadow diagram + ray-traced window sun-hours — neighbours keep 160–340 min of continuous sun (required: 90 min) with the K5 massing",
+ "stages": [
+  [
+   "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register (184 requirements, 14 conflicts) + checklists ✔ verified",
+   "done"
+  ],
+  [
+   "Site ✔: zoning, heritage, 1934 overlay, DWG survey, geotech, dendrology (44 trees, keep-classes), neighbours (window positions & sills)",
+   "done"
+  ],
+  [
+   "Law ✔ (verified): WT 2002 expired 20.09.2026 → art. 102a Building Law bridge; fire ✔; accessibility ✔; zero-emission ✔",
+   "done"
+  ],
+  [
+   "Design research ✔ (verified): trends, visual craft, boards, façades, Wrocław context, cost model",
+   "done"
+  ],
+  [
+   "Programme ✔: 193 rooms, 187 offices (24/32 m², 1.35 m module), PU ≈ 8,600 m², GFA ≈ 14,000 m² above ground",
+   "done"
+  ],
+  [
+   "Concept panel ✔: K5 wins unanimously (5/5); synthesis K5 + grafts ► → 3 verifiers (geometry/MPZP/§13, programme/Sejmik, cost/eco) → revision",
+   "running"
+  ],
+  [
+   "3D/visuals ✔ engines: plans, site plan, elevations (new), façades v2, context, photomatch; waiting for the final spec",
+   "running"
+  ],
+  [
+   "Stage I study (2 boards) + Stage II entry (≤8 boards 100×70 per clarif. 20), 5×A3 text, F.14.B/F.15 tables, white model 1:250",
+   "todo"
+  ],
+  [
+   "Jury simulation & compliance audit → iterate until no open issues",
+   "todo"
+  ]
+ ],
+ "notes": [
+  "Shadow diagram (right): 20 March 2027, shadows at 09/11/13/15/17 h CET (sun from umwd.sun NOAA, grid convergence −0.738° applied). The tower's shadow sweeps the bridgehead square and the river — no residential façades in its path before 15 h.",
+  "§60 check (2.5D ray casting, 5-min steps, both equinoxes separately per NSA II OSK 942/16): Wybrzeże Słowackiego 5 street rooms 290–340 min, courtyard rooms 225–230 min; Mazowiecka 19 courtyard 160–165 min — all continuous, all ≥ 90 min (downtown requirement 1.5 h).",
+  "§13 sector for the protected gable window (flat 6-6A) to be re-checked on the final geometry (segment SE margin ≥ 1 m required by our verifiers).",
+  "This engine will produce the mandatory 'zacienianie' diagram (Stage I) and the synthetic obstruction analysis (Stage II, clarification 21/86).",
+  "Synthesis spec still in progress — the lead-designer agent is reconciling the full room programme with the floor plates."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/shadow_demo.png",
+   "caption": "Equinox shadow diagram (20.03, 9–17 h) for the K5 base massing — site plan 1:500 engine"
+  },
+  {
+   "path": "umwd/raporty/img/k5_ctx.jpg",
+   "caption": "K5 base massing in context"
+  }
+ ]
+}

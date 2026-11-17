@@ -1,5 +1,5 @@
 {
- "title": "Drawing toolchain complete for all mandatory views: site plan 1:500, plans 1:200, elevations (new: orthographic generator incl. curved corner), boards; lead designer still writing the winning-concept spec",
+ "title": "Sunlight engine built: equinox shadow diagram + ray-traced window sun-hours — neighbours keep 160–340 min of continuous sun (required: 90 min) with the K5 massing",
  "stages": [
   [
    "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
@@ -43,20 +43,20 @@
   ]
  ],
  "notes": [
-  "Elevation generator (right): projects every façade run (straight or curved) onto the drawing plane with a painter's algorithm — piers, glazing per storey, floor lines, cornices; the R-14 m corner shows the correct foreshortening of its bays. Same façade parameters drive the 3D renders, so drawings and visualisations cannot drift apart.",
-  "Synthesis agent is cross-checking the full programme (all 193 rooms, Sejmik and Kancelaria groups) against the K5 floor plates before fixing coordinates — slow but this is where the competition is won (jury criterion a).",
-  "Critical design decision under evaluation: 12 m Sejmik storey (K5) vs. one more office floor — weighed against MPZP 35 m minimum roof in zone A and the 150 M PLN cap.",
-  "Production plan after the spec: (1) parametric model & room layout → table F.15.B; (2) drawings; (3) 3D building + 10 renders incl. F.17 montages; (4) F.14.B cost & F.15 tables; (5) 5 × A3 text; (6) 8 + 2 boards; (7) jury simulation & compliance audit loop.",
-  "Graphic style of drawings will be lightened for the boards (pale glazing, hierarchy of line weights) — the test uses dark glass for legibility of the projection only."
+  "Shadow diagram (right): 20 March 2027, shadows at 09/11/13/15/17 h CET (sun from umwd.sun NOAA, grid convergence −0.738° applied). The tower's shadow sweeps the bridgehead square and the river — no residential façades in its path before 15 h.",
+  "§60 check (2.5D ray casting, 5-min steps, both equinoxes separately per NSA II OSK 942/16): Wybrzeże Słowackiego 5 street rooms 290–340 min, courtyard rooms 225–230 min; Mazowiecka 19 courtyard 160–165 min — all continuous, all ≥ 90 min (downtown requirement 1.5 h).",
+  "§13 sector for the protected gable window (flat 6-6A) to be re-checked on the final geometry (segment SE margin ≥ 1 m required by our verifiers).",
+  "This engine will produce the mandatory 'zacienianie' diagram (Stage I) and the synthetic obstruction analysis (Stage II, clarification 21/86).",
+  "Synthesis spec still in progress — the lead-designer agent is reconciling the full room programme with the floor plates."
  ],
  "images": [
   {
-   "path": "umwd/raporty/img/elev_test.png",
-   "caption": "Elevation generator test on the K5 base massing: north (top) and east (bottom) elevations"
+   "path": "umwd/raporty/img/shadow_demo.png",
+   "caption": "Equinox shadow diagram (20.03, 9–17 h) for the K5 base massing — site plan 1:500 engine"
   },
   {
    "path": "umwd/raporty/img/k5_ctx.jpg",
-   "caption": "K5 base massing in 3D context"
+   "caption": "K5 base massing in context"
   }
  ]
 }
