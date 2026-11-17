@@ -127,6 +127,10 @@
      "glebokosc": 1500,
      "Hs": 2.5,
      "rho0": 0.0065,
+     "rampa_m": [
+      55,
+      130
+     ],
      "dmax": 800,
      "barwa": [
       1.0,
@@ -702,12 +706,26 @@
    "shift_y": 0.0,
    "aspect": "4:5",
    "poziom": false,
-   "czas": "2026-11-05 16:45 CET",
-   "ekspozycja": 0.6,
-   "ludzie": false,
+   "czas": "2026-11-05 16:38 CET",
+   "ekspozycja": -0.7,
+   "ludzie": true,
    "preset": "zmierzch",
-   "opis": "ZMIERZCH-DETAL 3 – „Żabie ujęcie: dziób łuku i latarnia”: z placu na promieniu osi przekątnej (az 31,25°), 16,5 m od lica łuku, oko 1,6 m, kamera nachylona 51° (piony zbiegają się – zamierzone). Symetria osiowa: łuk R 14 jak dziób statku, poziome pasma ceramiki i okien wstęgowych wyginają się w łuki zbiegające ku górze, granitowe filary po bokach zbiegają się nad kadrem; korona w górnej tercji świeci przez szkło (bafle, oprawy), attyka tnie granatowe niebo (~25 % kadru). 5.11 16:45 CET (el −4,5°), ekspozycja 0,6 EV (+0,4 względem kalibracji – elewacja oświetlona tylko niebem), 35 % opraw. 40 mm, 4:5.",
-   "poprawki": "v0: od chodnika Wybrzeża (116,9; 61,4), 35 mm, 55° – pół kadru pustego nieba, korona niewidoczna, za ciemno; v1: oś łuku, 15 m, 40 mm, 50°, 0,6 EV – głowica latarni ulicznej na dole kadru; v2: 16,5 m, 51° – latarnia poza kadrem."
+   "opis": "ZMIERZCH-DETAL 3 – „Żabie ujęcie: dziób łuku i latarnia”: z placu na promieniu osi przekątnej (az 31,25°), 16,5 m od lica łuku, oko 1,6 m, kamera nachylona 51° (piony zbiegają się – zamierzone). Symetria osiowa: łuk R 14 jak dziób statku, poziome pasma ceramiki i okien wstęgowych wyginają się w łuki zbiegające ku górze, granitowe filary po bokach zbiegają się nad kadrem; korona w górnej tercji – sala Sejmiku świeci za rytmem 21 lamel ceramicznych (ciepłe bafle i oprawy w prześwitach), attyka tnie granatowe niebo (~30 % kadru). 5.11 16:38 CET (słońce az 249°, el −3,5°), kopuła nieba ×6,5, ekspozycja −0,7 EV (bezwzględna) ustawiona na elewację i filtr połówkowy −0,8 EV na niebie (maska nieba) – granit i ceramika czytelne jako jasny kamień ok. 2,5–3 EV pod koroną, niebo granatowe z gradientem ku attyce; w biurach 15 % opraw, korona w pełni (ciepłe oprawy ×5). Delikatna winieta i lekkie przyciemnienie dolnej krawędzi prowadzą wzrok ku koronie. 40 mm, kadr 4:5.",
+   "poprawki": "v0: od chodnika Wybrzeża (116,9; 61,4), 35 mm, 55° – pół kadru pustego nieba, korona niewidoczna, za ciemno; v1: oś łuku, 15 m, 40 mm, 50°, 0,6 EV – głowica latarni ulicznej na dole kadru; v2: 16,5 m, 51° – latarnia poza kadrem. v3 (final, korekty jury): lamele korony v1.1 (21 szt.) i sitodruk, pora 16:38, niebo ×6,5, ekspozycja −0,7 EV + filtr połówkowy −0,8 EV na niebie, udział opraw biur 0,15, ciepłe oprawy korony ×5, winieta i przyciemnienie dołu, ludzie włączeni (poza kadrem); stanowisko, oś, 40 mm, nachylenie 51° i kadr 4:5 bez zmian (48° odrzucone – głowica latarnia_14 wchodzi w kadr). Podglądy 480 px: v3a (−1,6 EV, bez filtra, winieta 0,6 EV u dołu – dolne 35 % kadru granatowo-czarne), v3b (16:30 – niebo jasnobłękitne), v3c/v3d (−1,0/−0,5 i −0,7/−0,8 EV), v3e (= v3d + oprawy ×5) – przyjęty.",
+   "tytul": "Żabie ujęcie – dziób łuku i latarnia",
+   "sila_nieba": 6.5,
+   "udzial_opraw": 0.15,
+   "oprawy_cieple_mnoznik": 5.0,
+   "winieta": {
+    "ev": 0.25,
+    "d0": 0.7,
+    "d1": 1.45,
+    "srodek_y": 0.6,
+    "dol_ev": 0.3,
+    "dol_zasieg": 0.18,
+    "niebo_ev": -0.8
+   },
+   "uwaga_render": "Render finalny: render/final_zmierzch_detal_3.py (nakładka na render/final_zmierzch_detal_1.py → ujecia_finalne_korekty.py → ujecia_poprawki_kontekstu.py → ujecia_dodatkowe.py; te same argumenty). Warunek wspólny zestawu: lamele korony łuku v1.1 (21 szt.) i sitodruk 30 % na szkle korony łuku. Klucze sila_nieba i oprawy_cieple_mnoznik obsługuje final_zmierzch_detal_1.py, klucz winieta (z niebo_ev – maska nieba z passów Mist/Object Index) – final_zmierzch_detal_3.py; ekspozycja −0,7 jest dobrana do nieba ×6,5 (render samym ujecia_dodatkowe.py wyjdzie ok. 2,7 EV za ciemny i bez filtra na niebie)."
   },
   {
    "id": "dron-1",

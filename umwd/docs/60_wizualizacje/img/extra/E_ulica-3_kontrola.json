@@ -51,13 +51,13 @@
  "ludzie": true,
  "probki": 64,
  "czasy_s": {
-  "kontekst_s": 9.4,
-  "budynek_s": 10.9,
+  "kontekst_s": 10.6,
+  "budynek_s": 11.0,
   "zrodlo_sceny": "budowa od zera",
-  "scena_s": 20.8,
-  "kontrola_s": 0.6,
+  "scena_s": 22.2,
+  "kontrola_s": 0.7,
   "render_s": 777.7,
-  "postprodukcja_s": 7.0
+  "postprodukcja_s": 6.6
  },
  "uwagi": [],
  "info": [
@@ -73,15 +73,15 @@
  ],
  "udzialy_kadru": {
   "niebo": 0.344,
-  "budynek": 0.341,
+  "budynek": 0.339,
   "woda": 0.156,
   "drzewa": 0.07,
   "inne": 0.052,
   "zabudowa_kontekstu": 0.016,
   "ortofoto_plaskie": 0.008,
   "teren": 0.005,
+  "zagospodarowanie": 0.005,
   "ulica": 0.003,
-  "ludzie": 0.003,
   "dalsze_otoczenie": 0.003
  },
  "zaslona_pierwszego_planu": 0.0,
@@ -173,26 +173,35 @@
   },
   "oprawy_cieple_moc": 3.5999999046325684,
   "post_przed": {
+   "surowy_z_renderu": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/E_ulica-3_surowy64.png",
    "mgla_woda": {
+    "zrodlo_odleglosci": "Depth (pierwsza powierzchnia o alfie ≥ 0,5)",
     "Hs_m": 2.5,
     "rho0_1_m": 0.0065,
+    "rampa_m": [
+     55.0,
+     130.0
+    ],
     "dmax_m": 800.0,
     "barwa_lin": [
-     0.4439,
-     0.4283,
-     0.4083
+     0.4415,
+     0.4261,
+     0.4062
     ],
-    "luminancja_nieba_przy_horyzoncie": 0.4528,
-    "udzial_mgly_max": 0.377,
-    "udzial_mgly_p50_woda": 0.083,
+    "luminancja_nieba_przy_horyzoncie": 0.4505,
+    "udzial_mgly_max": 0.37,
+    "udzial_mgly_p50_woda": 0.0,
     "udzial_mgly_p95_woda": 0.265,
-    "kadr_mgla_powyzej_10proc": 0.021,
-    "os_kamery_z": 0.0,
-    "punkt_osi_kadru": [
-     110.2,
-     78.35,
-     14.39,
-     64.21
+    "kadr_mgla_powyzej_5proc": 0.023,
+    "kadr_mgla_powyzej_15proc": 0.012,
+    "srodek_kadru_pass_vs_promien_m": [
+     73.56,
+     73.51
+    ],
+    "srodek_kadru_punkt": [
+     107.27,
+     69.58,
+     15.74
     ]
    },
    "cfg": {
@@ -202,6 +211,10 @@
      "glebokosc": 1500,
      "Hs": 2.5,
      "rho0": 0.0065,
+     "rampa_m": [
+      55,
+      130
+     ],
      "dmax": 800,
      "barwa": [
       1.0,
@@ -213,7 +226,7 @@
    }
   },
   "wycinek": null,
-  "czas_calkowity_s": 785.5,
+  "czas_calkowity_s": 48.6,
   "kontrola_ulica3": {
    "az_osi_deg": 198.45,
    "pol_kat_lewo_deg": 29.36,
@@ -255,98 +268,8 @@
     "naroza_w_kadrze": 8
    },
    "ludzie_widoczni": {
-    "liczba": 18,
+    "liczba": 3,
     "lista": [
-     [
-      "czlowiek_00",
-      0.455,
-      0.242,
-      72.0
-     ],
-     [
-      "czlowiek_01",
-      0.486,
-      0.232,
-      71.4
-     ],
-     [
-      "czlowiek_02",
-      0.643,
-      0.236,
-      68.1
-     ],
-     [
-      "czlowiek_03",
-      0.639,
-      0.236,
-      64.8
-     ],
-     [
-      "czlowiek_04",
-      0.688,
-      0.239,
-      70.0
-     ],
-     [
-      "czlowiek_11",
-      0.133,
-      0.259,
-      111.3
-     ],
-     [
-      "czlowiek_15",
-      0.282,
-      0.261,
-      111.1
-     ],
-     [
-      "czlowiek_16",
-      0.282,
-      0.26,
-      111.5
-     ],
-     [
-      "czlowiek_19",
-      0.331,
-      0.256,
-      99.5
-     ],
-     [
-      "czlowiek_20",
-      0.329,
-      0.256,
-      99.6
-     ],
-     [
-      "czlowiek_23",
-      0.289,
-      0.266,
-      116.7
-     ],
-     [
-      "czlowiek_30",
-      0.333,
-      0.236,
-      64.4
-     ],
-     [
-      "czlowiek_31",
-      0.383,
-      0.232,
-      60.3
-     ],
-     [
-      "czlowiek_32",
-      0.178,
-      0.265,
-      125.9
-     ],
-     [
-      "czlowiek_33",
-      0.194,
-      0.257,
-      102.0
-     ],
      [
       "czlowiek_bulwar_0",
       0.282,
@@ -369,7 +292,7 @@
    },
    "udzialy_obiektow": {
     "niebo": 0.343,
-    "budynek:wieza": 0.323,
+    "budynek:wieza": 0.322,
     "nabrzeze": 0.104,
     "drzewa/krzewy": 0.074,
     "ZG3_barka": 0.047,
@@ -380,9 +303,17 @@
     "brzegi_dalsze": 0.005,
     "budynek:skrzydlo": 0.005,
     "teren_chodnik_bt": 0.004,
-    "teren_trawnik": 0.004,
+    "teren_trawnik": 0.003,
     "Wybrzeze_J_Slowackiego_6_LOD2": 0.003
    }
-  }
+  },
+  "czas_calkowity_renderu_s": 785.5
+ },
+ "post_z_surowego": {
+  "surowy_png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/E_ulica-3_surowy64.png",
+  "probki_passow": 1,
+  "render_passow_s": 41.2,
+  "postprodukcja_s": 6.6,
+  "opis": "passy (Depth, Mist, Object Index) z renderu 1 próbki tego samego kadru i sceny; obraz – surowy PNG renderu finalnego (próbki i czas niżej)"
  }
 }

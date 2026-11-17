@@ -6,6 +6,10 @@ nakładkę finałową zestawu ``render/ujecia_finalne_korekty.py`` (→ ``ujecia
     nice -n 5 /home/user/aihouse/.venv-render/bin/python -I umwd/render/final_ulica_3.py \
         --id ulica-3 --szer 2000 --probki 64 --out umwd/docs/60_wizualizacje/img/extra/E_ulica-3.jpg
 
+``--surowy PNG`` (opcja tej nakładki): obraz bierze się z zachowanego surowego PNG renderu (ten sam kadr i scena),
+a render służy tylko passom (Depth, Mist, Object Index) – wystarczy ``--probki 1``; potem mgła i postprodukcja.
+Raport kontroli zachowuje próbki i czas renderu, z którego pochodzi surowy PNG (``post_z_surowego``).
+
 Warunki wspólne zestawu (z ``ujecia_finalne_korekty.py``, przy budowie sceny od zera): lamele korony łuku wg v1.1
 (21 szt. 0,35 × 0,60 m, rozstawy 1,35 / 0,675 m w ciągu Fibonacciego), sitodruk 30 % na szkle korony, w dzień ciepłe
 oprawy ×0,12; klucz ``woda`` wpisu JSON (chropowatość, fale, barwa wody).
@@ -20,12 +24,13 @@ Poprawki tego ujęcia wg uwag jurorów (po zbudowaniu / wczytaniu sceny, idempot
    (pionowa smuga cienia), trzech pieszych na bulwarze przy nabrzeżu.
 2. **Druga barka (pd., (145; 27), 20 × 7 m)** – jeśli wchodzi w kadr, też byłaby „pudłem”: ``"barka_pd": "usun"``
    w JSON usuwa jej ściany z obiektu ``barki`` (przystań w głębi, 110 m od kamery).
-3. **Lekka mgła nad wodą** (``post_przed.mgla.tryb = 'woda'``) – krok przed wspólną postprodukcją: z passu Mist
-   (liniowo 0…``glebokosc`` m, ``start`` = 0 → odległość od kamery) i kierunków promieni kamery odtwarzane jest
+3. **Lekka mgła nad wodą** (``post_przed.mgla.tryb = 'woda'``) – krok przed wspólną postprodukcją: z passu Depth
+   (Cycles zapisuje go dla pierwszej powierzchni o alfie ≥ 0,5 – szkło i puste pola kart liści są pomijane; pass Mist
+   uśrednia się przez przezroczystości i za szybami daje „daleko”) i kierunków promieni kamery odtwarzane jest
    położenie punktu w każdym pikselu; grubość optyczna mgły to całka gęstości ρ(h) = ρ0·exp(−h / Hs) (h – wysokość
-   nad zwierciadłem wody) wzdłuż promienia, transmisja T = exp(−τ), wynik = obraz·T + barwa mgły·(1 − T). Barwa –
-   ciepła biel o luminancji nieba przy horyzoncie (rano mgła oświetlona nisko stojącym słońcem). Mgła rośnie z
-   odległością i przy wodzie – głębia kadru bez zmiany kontrastu pierwszego planu i wieży.
+   nad zwierciadłem wody) wzdłuż promienia, mnożona przez rampę odległości (``rampa_m``, domyślnie 55 → 130 m –
+   mgła „w głębi”, pierwszy plan bez zmian); transmisja T = exp(−τ), wynik = obraz·T + barwa mgły·(1 − T). Barwa –
+   ciepła biel o luminancji nieba przy horyzoncie (rano mgła oświetlona nisko stojącym słońcem).
 4. **Kontrola dodatkowa** (raport ``korekty.kontrola_ulica3``): kąt pylonu pd. i łańcucha po stronie kamery od osi
    kadru, elementy mostu w kadrze (wierzchołki siatek mostu rzutowane na kadr, widoczne promieniem), rzut barki
    z detalem i drugiej barki na kadr, ludzie w kadrze (rzut głowy, widoczność).
