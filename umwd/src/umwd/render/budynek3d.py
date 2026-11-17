@@ -1025,8 +1025,13 @@ class Materialy:
             nb.set(e, 'Color', (1.0, 0.78, 0.52))
             e.inputs['Strength'].default_value = 30.0 * moc
         else:
+            # biura: udział zapalonych opraw (węzeł 'udzial' – zmieniany przez swiatlo_dzienne o zmierzchu)
             nb.set(e, 'Color', (1.0, 0.93, 0.84))
-            e.inputs['Strength'].default_value = 24.0 * moc
+            ud = nb.n('ShaderNodeValue')
+            ud.name = 'udzial'
+            ud.outputs[0].default_value = 1.0
+            wl = nb.math('LESS_THAN', self._attr(nb, 'rnd'), ud.outputs[0])
+            nb.l(nb.math('MULTIPLY', wl, 24.0 * moc), e.inputs['Strength'])
         nb.output(e)
 
     def m_wn_biurko(self, m):
@@ -2390,6 +2395,10 @@ def swiatlo_dzienne(sc, czas, ekspozycja=None, sila_slonca=1.0, sila_nieba=1.0, 
     if chmury:
         from umwd.render import context
         context.dodaj_chmury(sc, pokrycie=chmury)
+    # o zmierzchu „reszta budynku milknie”: zapalona tylko część opraw biurowych (korona i hol – w pełni)
+    m_l = bpy.data.materials.get('B_wn_lampa')
+    if m_l is not None and m_l.node_tree and 'udzial' in m_l.node_tree.nodes:
+        m_l.node_tree.nodes['udzial'].outputs[0].default_value = 1.0 if el > 3 else 0.35
     if ekspozycja is None:
         # dzień: ok. −4,3 EV (biała płaszczyzna ≈ 20); zmierzch: jaśniej
         ekspozycja = -4.3 if el > 12 else (-3.9 if el > 4 else (-3.0 if el > 0 else -1.2 + 0.25 * el))

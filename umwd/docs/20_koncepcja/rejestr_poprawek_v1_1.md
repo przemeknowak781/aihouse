@@ -8,6 +8,7 @@
 
 | ID | Waga | Decyzja v1.1 | Dowód liczbowy (skrypt) | Rysunki / tabele do zmiany | Status |
 |---|---|---|---|---|---|
+| **PARK** | **KRYT.** (zlecenie koordynatora) | (w toku) – model pomieszczeń mieści 37 m.p. wobec 109 deklarowanych; wymagane ≥ 101 (MPZP § 13) | `_rewizja_parking.py` | rzuty −1, −2, przekroje | ⏳ |
 | G-K-1 | KRYT. | (w toku) | | | ⏳ |
 | G-K-2 | KRYT. | (w toku) | | | ⏳ |
 | G-I-1 | IST. | (w toku) | | | ⏳ |

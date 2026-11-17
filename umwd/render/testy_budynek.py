@@ -33,6 +33,9 @@ OUT = UMWD / 'docs' / '60_wizualizacje' / 'img'
 
 # kamery dodatkowe (nie ma ich w koncepcja.json) – tylko do kontroli bryły
 KAMERY_DODATKOWE = {
+    'detal_podcien': dict(opis='Detal: podcień Bramy Mostowej z napisem, kolumny, okładziny (kontrola materiałów)',
+                          kamera_e_n_z=(118.0, 70.0, 1.62), cel_e_n_z=(103.4, 74.1, 3.6), lens_mm=35, shift_y=0.12,
+                          poziom=True, czas='2026-10-23 09:40 CEST'),
     'plac_mostowy': dict(opis='Plac Mostowy (skwer 9/2) od pn.-zach.: elewacja pn. z podcieniem, łuk, lipy, dziób skrzydła',
                          kamera_e_n_z=(68.0, 99.0, 1.62), cel_e_n_z=(88.0, 72.0, 12.0), lens_mm=24, shift_y=0.28,
                          poziom=True, czas='2026-10-23 14:30 CEST'),
@@ -47,15 +50,14 @@ KOREKTY = {
     # i napisem w lewej części kadru, pylon mostu z hełmem po prawej. Korony (+27 m) z odległości ~18 m nie da się
     # objąć obiektywem ≥ 24 mm – do decyzji: odsunięcie kamery albo kadr pionowy (patrz budynek_3d.md).
     'W3': dict(cel_e_n_z=(102.7, 80.6, 10.0), shift_y=0.25),
-    # W9: punkt (126; 152) leży na jezdni mostu, 3,8 m od osi – oś widzenia przecina kratownicę pd.-wsch. (krzyżulce
-    # zasłaniają kadr). Ten sam przekrój mostu, chodnik pd.-wsch. poza kratownicą (7,2 m od osi), oko 1,6 m nad
-    # chodnikiem (+4,05). Ekspozycja dla błękitnej godziny dobrana w teście.
-    # Pozycja dobrana przeszukaniem promieniami (oś i 35 promieni kadru bez trafień w konstrukcję mostu ≤ 30 m):
-    # 25 m od portalu pd., 8,6 m od osi (przy kratownicy – oś widzenia przechodzi przez górny trójkąt krzyżulców).
+    # W9: punkt (126; 152) leży na jezdni mostu, 3,8 m od osi; z chodnika widok przecinają krzyżulce kratownicy
+    # (płaszczyzny ±9,6 m). Pozycja dobrana przeszukaniem promieni na drzewie BVH mostu (117 promieni kadru bez trafień w kratownicę,
+    # łańcuchy i wieszaki): 38 m od portalu pd. (JSON: 35 m), 9,3 m od osi – tuż przy płaszczyźnie kratownicy
+    # (±9,6 m), oś widzenia przechodzi przez górny trójkąt krzyżulców. Oko 1,6 m nad chodnikiem (+4,05).
     # Przesunięcie obiektywu tak, by cel (+26 m) był w środku kadru (kamera pozioma, piony zachowane).
-    'W9': dict(kamera_e_n_z=(120.34, 136.86, 4.05), shift_y=0.385, ekspozycja=0.6),
-    # W10: punkt (78; 17) stoi w ogródkach pod koronami zachowanych drzew (widok zasłonięty w 90 %). Zastępczo:
-    # wejście do ogrodu od bulwaru (pas 4,6 m przy segmencie), widok na zach. przez ogród na elewację pd. wieży.
+    'W9': dict(kamera_e_n_z=(132.82, 140.57, 4.05), shift_y=0.351, ekspozycja=0.6),
+    # W10: punkt (78; 17) stoi w ogródkach pod koronami zachowanych drzew (widok zasłonięty w ~90 %). Wariant
+    # zastępczy z pasa od bulwaru (poniżej) był ciasny – W10 jest poza domyślną listą, kadr do ponownego wyboru.
     'W10': dict(kamera_e_n_z=(115.5, 37.5, 1.62), cel_e_n_z=(75.6, 35.2, 7.0), lens_mm=24, shift_y=0.12),
 }
 
@@ -79,8 +81,6 @@ def kontrola_kamery(sc, B, kam, k, ctx):
     p = Point(loc.x, loc.y)
     if B.foot.buffer(0.3).contains(p):
         uwagi.append('KAMERA W OBRYSIE BUDYNKU')
-    for nm, poly in (('Maz19/sąsiedzi', None),):
-        pass
     for ob in bpy.data.objects:
         if ob.instance_type == 'COLLECTION' and ob.instance_collection is not None and (
                 ob.name.startswith('drzewo') or ob.name.startswith('szpaler') or ob.name.startswith('krzew')):
@@ -182,8 +182,15 @@ def main():
             wpis.update(render_s=round(dt, 1), plik=str(jpg))
             print('[testy] %s: %.1f s → %s' % (kid, dt, jpg))
         raport['kamery'][kid] = wpis
-    (UMWD / 'build' / 'budynek_test_raport.json').write_text(json.dumps(raport, ensure_ascii=False, indent=1),
-                                                         encoding='utf-8')
+    # raport kumulowany (przebiegi po jednej kamerze dopisują swoje wpisy)
+    plik_r = UMWD / 'build' / 'budynek_test_raport.json'
+    try:
+        stary = json.loads(plik_r.read_text(encoding='utf-8'))
+        stary['kamery'].update(raport['kamery'])
+        raport['kamery'] = stary['kamery']
+    except Exception:
+        pass
+    plik_r.write_text(json.dumps(raport, ensure_ascii=False, indent=1), encoding='utf-8')
     if a.blend:
         bpy.ops.wm.save_as_mainfile(filepath=a.blend)
     print('[testy] razem %.1f s' % (time.time() - t0))
