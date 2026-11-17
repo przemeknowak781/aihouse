@@ -44,3 +44,11 @@
 
 ## Z raportu agenta 3D (etap 2, 17.11 ok. 06:45) – PRIORYTET dla rzutów v1.2
 - [ ] **Hala Obywatelska – przekątna oś Brama Mostowa → drzwi ogrodowe musi mieć ≥ 6,3 m wolnej szerokości na całej długości** (tak twierdzi opis i koncepcja). Teraz: oś mija narożnik SW.02 o 0,45 m (prześwit 4,6 m), między SW.06 a trzonami 3,9 m, narożnik PHS.04 na osi, koniec osi (84,32; 43,12) w toaletach PHS.04; drzwi ogrodowe przyjęte prowizorycznie w środku ściany ogrodowej (u 15,9–18,3). Poprawić model_pomieszczen (parter) tak, by oś była wolna, a drzwi ogrodowe leżały w osi; potem kamera W6 wraca na oś.
+
+## Z workflow części opisowej (wf_8789b36e-70e, 17.11 ok. 08:40) – po v1.3
+- [ ] Teksty Etapu II i I: ponowny render `tools/opis.py` po v1.3 (placeholdery same się odświeżą); przejrzeć LEDGER (liczby literalne) pod kątem zmian v1.3 (rampy, MDS, sale konferencyjne, oś Hali, R-040, koszt).
+- [ ] R-040 (OBLIGATORYJNE): usunąć z opisu sformułowanie „świadome odstępstwo” po wdrożeniu poszerzonych podestów w v1.3; Etap I §6/§9 spójnie.
+- [ ] Oddymianie korytarzy: opis ↔ koszt (v1.3 wycenia albo zmienia koncepcję) – dostosować B.5 i F.14.A grupa 9.
+- [ ] Zakładki PDF: łączenie zawiniętych nagłówków bez spacji („szczególnymipotrzebami”) – post-processing konspektu w tools/opis.py.
+- [ ] Zeszyty CZESC_OPISOWA (Etap I i II): przebudować po regeneracji plansz i tabel (`--zeszyt`, `--zeszyt-etap1`); eksport A3 bez zmiany proporcji (tools/eksport.py ściska o ~1 %) – dodać pasy zamiast skalowania.
+- [ ] Plansze PDF: Inter osadzany jako Type 3 – w eksporcie JPG bez znaczenia; w PDF plansz użyć fontów TTF z build/opis/_fonts.
