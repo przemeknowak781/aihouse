@@ -1,5 +1,5 @@
 {
- "title": "All 5 concepts complete (K4 'Garden of the Voivodeship' added); 5 jurors now scoring in parallel; drone photo cameras solved — test blocks sit on the photos within 0.3 % of frame width",
+ "title": "JURY VERDICT: K5 'Bands & Lantern' ranked 1st by all five jurors (42.8 pts vs 39.9 for K1/K4); synthesis of the winning concept with grafts now under adversarial verification",
  "stages": [
   [
    "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
@@ -26,7 +26,7 @@
    "done"
   ],
   [
-   "Concept panel: K1 ✔ K2 ✔ K3 ✔ K4 ✔ K5 ✔ → 5 jurors scoring ► → synthesis",
+   "Concept panel ✔: K5 wins unanimously (5/5); synthesis K5 + grafts ► → 3 verifiers (geometry/MPZP/§13, programme/Sejmik, cost/eco) → revision",
    "running"
   ],
   [
@@ -43,20 +43,20 @@
   ]
  ],
  "notes": [
-  "Photomatch: F.17 frames are crops of an in-drone stitched panorama (×1.25), located by phase correlation of 77 patches; pinhole cameras solved by least squares (A: 4 manual + 57 tie points; B: 13 manual points + horizon). Blender cameras reproduce the solution to 0.02 px; test blocks of the neighbours align with the photos (right).",
-  "Independent check: camera height difference 37.7 m vs 37.1 m from drone telemetry; heading matches flight yaw within 1–1.4°. Sun for the montages: az ≈ 181–186°, el ≈ 25° (29.10.2025, 11:38 / 11:57).",
-  "K4 'Garden of the Voivodeship': U-shaped block around a 1,520 m² public garden keeping 29 trees, through-route Mazowiecka → boulevard, tower over the whole zone A with lantern to +42.2 m; timber-concrete slabs in the wings honestly flagged as needing a fire-safety derogation; 13,808 m² GFA; 146.3 M PLN.",
-  "Recovery: the container restarted once — all data on disk survived; interrupted agents (K4, photomatch, 3D context) were resumed from their transcripts; only the site-team's final verification pass was lost (will be covered by the final compliance audit).",
-  "Next: jury scores → synthesis of the winning concept → parametric model → drawings & photoreal renders."
+  "Why K5: one legible Wrocław gesture — the rounded bridgehead corner (R 14 m, as on the 1934 plan) is the arched entrance portico below and the Sejmik panorama over the Odra and Ostrów Tumski above; both street frontages closed; leanest GFA (13,090 m²); best EP; all closed Sejmik rooms on the hall level (mezzanine only open gallery).",
+  "Weak points named by the jurors (to be fixed in the synthesis): Sejmik level overfilled (~70–130 m² short, no lobby corridor to committee rooms); presidium against a 33 × 10 m glass panorama; 6.6 m technical platform might count as a storey; horizontal band language weaker than vertical rhythm; SE segment 2.96 m from plot 10/2 (needs 3 m); PV double-counted on green roofs.",
+  "Grafts proposed by the jurors: vertical 'plot' rhythm and ceramic lamellas in front of the hall (K1); straight public axes bridge → hall → garden and Mazowiecka → boulevard (K3); the 'Garden of the Voivodeship' with zero-runoff retention, ramps to every row of the hall, garage + deliveries in one place from the boulevard (K4); trace of the 1934 frontage in the square paving (K1/K2).",
+  "Cost cross-check by jurors with the team model: all concepts 138–145 M PLN (mid prices + 5 % reserve); K5 ≈ 141.5 M — the most realistic margin.",
+  "Also ready for the montage: parametric façade generator (piers, bands, reveals, frames, cornices, fillets) tested in Blender."
  ],
  "images": [
   {
-   "path": "umwd/raporty/img/pm_A.jpg",
-   "caption": "F.17.A photomatch test: neighbour blocks + site boundary rendered onto the photo"
+   "path": "umwd/raporty/img/jury_scores.png",
+   "caption": "Mean jury scores per criterion — K5 (red) leads in 4 of 6 criteria"
   },
   {
-   "path": "umwd/raporty/img/pm_B.jpg",
-   "caption": "F.17.B photomatch test (view from west)"
+   "path": "umwd/raporty/img/pm_A.jpg",
+   "caption": "Calibrated F.17.A camera — the tower will rise left of the bridge pylons"
   }
  ]
 }

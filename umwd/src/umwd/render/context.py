@@ -733,14 +733,12 @@ class Materialy:
         att = nb.n('ShaderNodeAttribute', {'attribute_name': 'rnd', 'attribute_type': 'GEOMETRY'})
         cur = nb.math('GREATER_THAN', att.outputs['Fac'], 0.62)
         col = nb.mix(cur, (0.012, 0.014, 0.016), (0.30, 0.29, 0.26))
-        tint = nb.math('MULTIPLY', att.outputs['Fac'], 0.012)
         b = self._bsdf(nb, col, 0.03, spec=0.9)
         nb.set(b, 'IOR', 1.52)
         if 'Coat Weight' in b.inputs:
             nb.set(b, 'Coat Weight', 1.0)
             nb.set(b, 'Coat Roughness', 0.02)
         nb.output(b)
-        _ = tint
 
     def m_rama(self, m, hexcol='e8e6e0'):
         c = tuple((int(hexcol[i:i + 2], 16) / 255.0) ** 2.2 for i in (0, 2, 4))
@@ -852,7 +850,16 @@ class Materialy:
         wall = nb.mix(nb.math('MULTIPLY', parter, 0.35), wall, tuple(x * 0.35 for x in c))
         roof = (0.11, 0.11, 0.11)
         base = nb.mix(vert, roof, wall)
-        col = nb.mix(win, base, (0.05, 0.055, 0.06))
+        # losowość na okno (komórka siatki): część okien jaśniejsza (firanki, odbicia), część ciemna
+        cu = nb.math('FLOOR', nb.math('DIVIDE', sp.outputs[0], 3.6))
+        cv = nb.math('FLOOR', nb.math('DIVIDE', sp.outputs[1], 3.5))
+        cc3 = nb.n('ShaderNodeCombineXYZ')
+        nb.l(cu, cc3.inputs[0])
+        nb.l(cv, cc3.inputs[1])
+        wn = nb.n('ShaderNodeTexWhiteNoise', props={'noise_dimensions': '3D'})
+        nb.l(cc3.outputs[0], wn.inputs['Vector'])
+        wcol = nb.mix(wn.outputs['Value'], (0.03, 0.035, 0.04), (0.22, 0.23, 0.24))
+        col = nb.mix(win, base, wcol)
         rgh = nb.mix(win, 0.85, 0.12, dtype='FLOAT')
         nb.output(self.mgla_shader(nb, self._bsdf(nb, col, rgh, spec=0.6)))
 
@@ -2381,7 +2388,7 @@ def przygotuj_ortofoto(ctx):
         small[1:] = s2 < 900
         woda = woda | small[lab2]
     exg = 2 * G - R - B
-    std = ndimage.generic_filter(lum, np.std, size=5) if False else np.sqrt(np.maximum(
+    std = np.sqrt(np.maximum(
         ndimage.uniform_filter(lum ** 2, 5) - ndimage.uniform_filter(lum, 5) ** 2, 0))
     drz = (exg > 18) & (lum < 112) & (std > 9.0) & ~woda
     drz = ndimage.binary_opening(drz, iterations=1)
@@ -2400,7 +2407,7 @@ def zbuduj_dalsze(ctx):
     H, Wd = woda_m.shape
     # kontury wody (piksele → układ lokalny)
     sm = ndimage.gaussian_filter(woda_m.astype(np.float32), 1.2)
-    cg = contourpy.contour_generator(z=sm, line_type='SeparateCode' if False else 'Separate')
+    cg = contourpy.contour_generator(z=sm, line_type='Separate')
     polys = []
     for ln in cg.lines(0.5):
         if len(ln) < 8:
@@ -2698,7 +2705,7 @@ def ustaw_kamere_trawy(wynik, kamera):
     trawa.ustaw_kamere(getattr(ctx, 'trawa_obiekty', []), kamera)
 
 
-def export_preview(out_dir=None, opts=None, kamery=None, samples=28, data_godzina='2025-10-29 11:40', jpg_q=88,
+def export_preview(out_dir=None, opts=None, kamery=None, samples=28, data_godzina='2025-10-29 11:40', jpg_q=93,
                    prefix='context_test_', chmury=True):
     """Render testowy kontekstu z kamer KAMERY do ``docs/60_wizualizacje/img/context_test_<kamera>.jpg``
     (≤ 1 MB). Zwraca {kamera: (ścieżka, czas_s)} oraz info z budowy."""
