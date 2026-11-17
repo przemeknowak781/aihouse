@@ -11,6 +11,10 @@ Założenia (task / WT § 68–69 / M.13 s. 162–164 / dostepnosc.md):
   spocznik ≥ 1,50 m, prześwit pod biegiem/spocznikiem ≥ 2,20 m (M.13 pkt 3 – przyjęto też jako prześwit nad biegiem).
 Wysokości kondygnacji z model/koncepcja.json (kondygnacje): −2 3,00; −1 4,20; P 4,80; 1–6 3,75; S → antresola 3,60.
 Obrysy wewnętrzne klatek A i B z _s2_model.py (CORE_A_CELLS, CORE_B_CELLS); klatka C – układ v1.2 w tym skrypcie.
+v1.2b (decyzje po scaleniu): [T7] – M.13 pkt 6 (szerokość biegu między wewnętrznymi krawędziami poręczy ≥ 1,60 m) spełniony
+przez pochwyty przyścienne we wnękach ścian klatek (wnęka 0,10 × 0,30 m w ścianach 0,25 m) i balustradę środkową w duszy 0,20 m
+z pochwytami obustronnymi nad krawędziami biegów; ściany klatek wzdłuż biegów 0,25 m (przedsionek A 3,05 m, szyby trzonu B +0,05 m,
+trzon C: ściana przedsionka 0,25 / ściana od korytarza 0,20). Zestawienie decyzji: _v12b_decyzje.py [D1].
 Nie korzystano z informacji o pracach ani wynikach konkursu.
 """
 import json
@@ -164,8 +168,8 @@ resB, endB = check_klatka("B", SEQ_AB, LB, WB, flip_ok=False, start_end="N-end")
 hr("[T4] Trzon C (skrzydło) – obrys bez zmian s 0,5–8,6 × d 8,4–14,5; v1.2: nowy układ (bieg 1,60 m), bez szybu C1")
 C_CELLS = {
     "klatka_C": box(0.75, 10.85, 6.55, 14.25),       # 5,80 × 3,40 (biegi wzdłuż s)
-    "przedsionek_C": box(0.75, 8.65, 6.55, 10.65),   # 5,80 × 2,00, drzwi z korytarza (lico d 8,40), MOE 1,5 × 1,5 na końcu
-    "szachty_C": box(6.75, 8.65, 8.35, 14.25),       # 1,60 × 5,60 (nadciśnienie, piony; dawniej 1,40 × 5,60)
+    "przedsionek_C": box(0.75, 8.60, 6.55, 10.60),   # 5,80 × 2,00, drzwi z korytarza (lico d 8,40; ściana 0,20), MOE 1,5 × 1,5 na końcu
+    "szachty_C": box(6.75, 8.60, 8.35, 14.25),       # 1,60 × 5,65 (nadciśnienie, piony); v1.2b: ściana klatka/przedsionek 0,25 (wnęka pochwytu)
 }
 CORE_C = box(0.5, 8.4, 8.6, 14.5)
 for k, g in C_CELLS.items():
@@ -271,11 +275,55 @@ for lvl in ("-1", "-2"):
           " → bez utraty miejsc ✔; pas pd. trzonu (v 11,85–12,45) za stanowiskami R2 (kończą się na v 11,60) ✔")
 
 # ------------------------------------------------------------------------------------------------ [T7] szerokość w świetle poręczy
-hr("[T7] M.13 pkt 6 – szerokość biegu mierzona między wewnętrznymi krawędziami poręczy (pozycja otwarta)")
-for nm, W_ in (("A", WA), ("B", WB), ("C", bC[3] - bC[1])):
-    clear = (W_ - WELL) / 2 - 0.095 - 0.05
-    print(f"  klatka {nm} {W_:.2f} m: bieg konstrukcyjny {(W_ - WELL) / 2:.2f} m; w świetle poręczy (pochwyt przyścienny 0,095 m,"
-          f" przy duszy 0,05 m) ≈ {clear:.3f} m; dla 1,60 m w świetle potrzeba {2 * (1.60 + 0.095 + 0.05) + WELL:.2f} m szer. klatki")
-print("  Wniosek: v1.1 i S-3 przyjmują bieg konstrukcyjny 1,60 m (jak weryfikacja I5). Pełna zgodność z pkt 6 M.13 wymaga ≈ 3,69 m"
-      " szerokości klatki (A: możliwe kosztem przedsionka 3,10 → 2,81 m; B: brak 0,29 m w obrysie bez zmiany S-3) – do uzgodnienia"
-      " z Zamawiającym / rzeczoznawcą (pochwyty we wnękach ścian trzonu redukują brak do ≈ 0,05 m na bieg).")
+hr("[T7] M.13 pkt 6 – szerokość biegu między wewnętrznymi krawędziami poręczy ≥ 1,60 m (v1.2b: wnęki + balustrada środkowa)")
+POCH_D, POCH_GAP = 0.040, 0.05            # pochwyt Ø 40 mm (M.13: 35–45 mm), ≥ 5 cm od płaszczyzny pionowej (M.13 pkt 12)
+POCH_OCC = POCH_D + POCH_GAP              # 0,09 m – pas zajęty przez pochwyt mierzony od płaszczyzny ściany / balustrady
+WNEKA_D, WNEKA_H = 0.10, 0.30             # wnęka w ścianie żelbetowej: głęb. 0,10 × wys. 0,30 (pas 0,68–0,98 m nad linią krawędzi stopni)
+BAL_T = 0.020                             # balustrada środkowa duszy: płaszczyzna ≤ 20 mm (pręty Ø 12 co ≤ 0,12 / szkło VSG 2 × 8)
+WALL_MIN = 0.15                           # żelbet w pasie wnęki ≥ 0,15 m: REI 60 (EN 1992-1-2 tab. 5.4, μfi ≤ 0,7: 130 mm) ✔
+CL_MIN = 1.60
+CORE_C = box(0.5, 8.4, 8.6, 14.5)
+KL = {   # klatka: (komórka, oś szerokości 0 = u/s, 1 = v/d; grubości ścian wzdłuż biegów [niska, wysoka] z sąsiednich komórek)
+    "A": (cA["klatka_A"], 0, [cA["klatka_A"].bounds[0] - S2.CORE_A.bounds[0], cA["przedsionek_A"].bounds[0] - cA["klatka_A"].bounds[2]]),
+    "B": (cB["klatka_B"], 0, [cB["klatka_B"].bounds[0] - S2.CORE_B.bounds[0], cB["szachty_B"].bounds[0] - cB["klatka_B"].bounds[2]]),
+    "C": (C_CELLS["klatka_C"], 1, [C_CELLS["klatka_C"].bounds[1] - C_CELLS["przedsionek_C"].bounds[3], CORE_C.bounds[3] - C_CELLS["klatka_C"].bounds[3]]),
+}
+RES_T7 = {}
+for nm, (cell, ax, walls) in KL.items():
+    b = cell.bounds
+    W_ = b[2 + ax] - b[ax]
+    lane = (W_ - WELL) / 2
+    reveal_wall = WNEKA_D - POCH_OCC                     # krawędź pochwytu za licem ściany (+)
+    reveal_well = (WELL - BAL_T) / 2 - POCH_OCC          # krawędź pochwytu względem krawędzi biegu (+ = nad duszą)
+    clear = lane + reveal_wall + reveal_well
+    gap = (WELL - BAL_T) / 2                             # szczelina bieg – balustrada środkowa
+    rest = [w - WNEKA_D for w in walls]
+    res_ = {"A": resA, "B": resB, "C": resC}[nm]
+    land_ok = all(LAND >= 1.50 - 1e-9 and LAND >= 0.30 for *_x, best in res_ if best)      # przedłużenie 0,30 m mieści się na spoczniku
+    n_tr = sum(1 for *_x, best in res_ if best)
+    n3 = sum(1 for *_x, best in res_ if best and best["n_fl"] == 3)
+    RES_T7[nm] = dict(szer=W_, bieg=lane, swiatlo=clear, sciany=walls, zelbet_we_wnece=rest, szczelina=gap, przejscia=n_tr, trojbiegowe=n3)
+    print(f"  klatka {nm} {W_:.2f} m: biegi konstrukcyjne 2 × {lane:.2f} + dusza {WELL:.2f}; ściany wzdłuż biegów {walls[0]:.2f} / {walls[1]:.2f} m"
+          f" → żelbet w pasie wnęki {min(rest):.2f} m ({'✔' if min(rest) >= WALL_MIN - 1e-9 else '✗'} ≥ {WALL_MIN:.2f}); pochwyt przyścienny"
+          f" we wnęce {WNEKA_D:.2f} m (krawędź {reveal_wall * 100:+.1f} cm za licem), pochwyt od duszy na balustradzie środkowej"
+          f" (krawędź {reveal_well * 100:+.1f} cm od krawędzi biegu); w świetle poręczy {clear:.3f} m"
+          f" {'✔' if clear >= CL_MIN - 1e-9 else '✗'} ≥ 1,60; szczelina bieg–balustrada {gap:.2f} m ≤ 0,12 ✔; {n_tr} przejść kondygnacyjnych"
+          f" ({n3} trójbiegowe) – spoczniki {LAND:.2f} m mieszczą przedłużenie pochwytów 0,30 m ✔")
+    assert clear >= CL_MIN - 1e-9 and min(rest) >= WALL_MIN - 1e-9 and gap <= 0.12 + 1e-9 and land_ok, f"[T7] klatka {nm}"
+    assert POCH_GAP >= 0.05 - 1e-9 and 0.035 <= POCH_D <= 0.045
+# schody reprezentacyjne S → +30,90 (droga z antresoli radnych) i stopnie galerii – balustrady obustronne z pochwytem 0,05 m od płaszczyzny
+st_w = S2.STAIR_V[1] - S2.STAIR_V[0]
+gs = S2.GAL_STEPS[0].bounds
+gal_w = gs[3] - gs[1]
+st_cl, gal_cl = st_w - 2 * POCH_OCC, gal_w - 2 * POCH_OCC
+print(f"  schody reprezentacyjne S → +30,90: bieg {st_w:.2f} m, balustrady szklane obustronnie → w świetle poręczy {st_cl:.2f} m"
+      f" ✔ ≥ 1,60 (gdyby traktować je jak klatkę na drodze ewakuacyjnej; M.13 pkt 4.3: ≥ 1,20)")
+print(f"  stopnie galerii (6 × 0,15/0,30): {gal_w:.2f} m (v1.2b; było 1,00) → w świetle poręczy {gal_cl:.2f} m ✔ ≥ 1,20 (M.13 pkt 4.3);"
+      f" przedsionek A' – bez schodów (dotyczy klatki A: S → +30,90 jak wyżej)")
+assert st_cl >= 1.60 - 1e-9 and gal_cl >= 1.20 - 1e-9
+cap = min(v["swiatlo"] for v in RES_T7.values())
+print(f"  przepustowość klatki w świetle {cap:.2f} m: WT 0,6 m/100 os. → {cap / 0.006:.0f} os.; MDS (rozp. 2025 poz. 932 § 6 ust. 3) 0,4 m/100 os."
+      f" → {cap / 0.004:.0f} os.")
+print("  Wniosek: odstępstwo od M.13 pkt 6 niepotrzebne – pochwyty we wnękach (M.13 Balustrady i poręcze pkt 2: „poręcze możesz umieścić"
+      " we wnęce”) i pochwyty od duszy nad krawędziami biegów; klatki 3,40 m bez zmiany obrysów trzonów; wariant poszerzenia do 3,69 m"
+      " (przedsionek A 2,81 m; B i C – zmiana obrysów trzonów) odrzucony.")

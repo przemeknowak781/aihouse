@@ -1,0 +1,155 @@
+{
+ "id": "zmierzch-detal-1",
+ "opis": "ZMIERZCH-DETAL 1 – „Latarnia przez gałęzie”: błękitna godzina z pn.-zach. narożnika skweru przy rampie Mostu Grunwaldzkiego (chodnik, oko 1,65 m), 60 m od łuku. Lewa połowa – koronkowa sylweta jesiennej korony drzewa E10 (14 m od kamery, drobne liście z maską alfa) na granatowym niebie, u dołu cienki pas krzewów skweru; prawa – łuk R 14 z wstęgami okien i świecąca korona Sejmiku za lamelami ceramicznymi (21 szt., rytm 1,35 / 0,675 m) na prawej linii trójpodziału; elewacja pn. świadomie wychodzi poza prawą krawędź. 5.11 16:38 CET (słońce az 249°, el −3,5°): niebo jaśniejsze od koron drzew, granit czytelny w chłodnym świetle nieba, w biurach 35 % pomieszczeń, korona i hol w pełni, latarnie zapalone. 50 mm, kadr 4:5, kamera pozioma, shift 0,55 (piony proste).",
+ "preset": "zmierzch",
+ "czas": "2026-11-05 16:38 CET",
+ "slonce": {
+  "az": 249.07,
+  "el": -3.49,
+  "ekspozycja": -2.3,
+  "czas": "2026-11-05T16:38:00+01:00",
+  "sila_nieba": 6.5,
+  "udzial_opraw": 0.35,
+  "latarnie": 22,
+  "oprawy_cieple": 120.0,
+  "lamele_korony": {
+   "luk_L_m": 21.991,
+   "lamele_szt": 21,
+   "szer_m": 0.35,
+   "glab_m": 0.6,
+   "rozstawy": "LkLLkLkLLkLLkLkLLkLk",
+   "zapas_krawedzi_m": 0.021,
+   "przechwycone_ze_Spec": 16,
+   "spec_pierwotna": [
+    0.35,
+    0.6,
+    13.4
+   ]
+  },
+  "oprawy_cieple_mnoznik": 4.0
+ },
+ "kamera": {
+  "loc": [
+   64.0,
+   120.0,
+   3.704
+  ],
+  "cel": [
+   104.59,
+   75.15,
+   0.05
+  ],
+  "z_wzgl_kamery": 3.654,
+  "lens_mm": 50.0,
+  "shift_x": 0.0,
+  "shift_y": 0.55,
+  "poziom": true,
+  "rozdzielczosc": [
+   2000,
+   2500
+  ],
+  "sensor_fit": "AUTO (36 mm na dłuższym boku)"
+ },
+ "ludzie": true,
+ "probki": 64,
+ "czasy_s": {
+  "kontekst_s": 9.8,
+  "budynek_s": 12.1,
+  "zrodlo_sceny": "budowa od zera",
+  "scena_s": 24.4,
+  "kontrola_s": 1.7
+ },
+ "uwagi": [],
+ "info": [],
+ "promienie": [
+  "oś: niebo",
+  "L-dół: srednie_22_liscie_drobne 14.2 m",
+  "P-dół: wieza_elewacje 53.2 m",
+  "L-góra: srednie_22_liscie_drobne 14.1 m",
+  "P-góra: wieza_elewacje 60.9 m",
+  "dół: male_31_liscie_drobne 22.0 m"
+ ],
+ "udzialy_kadru": {
+  "drzewa": 0.385,
+  "budynek": 0.352,
+  "niebo": 0.263
+ },
+ "zaslona_pierwszego_planu": 0.0,
+ "najblizsza_przeszkoda": {
+  "obiekt": "teren_chodnik_bt",
+  "odl_m": 1.65
+ },
+ "oko_nad_podlozem_m": 1.65,
+ "podloze": "teren_chodnik_bt",
+ "budynek_w_kadrze": {
+  "wieża": {
+   "x0": 0.526,
+   "x1": 1.861,
+   "y0": -0.178,
+   "y1": 1.122,
+   "rzut_w_kadrze": true,
+   "uciete": [
+    "prawo",
+    "dół"
+   ]
+  },
+  "skrzydło": {
+   "x0": 1.696,
+   "x1": 2.567,
+   "y0": -0.185,
+   "y1": 0.587,
+   "rzut_w_kadrze": false,
+   "uciete": [
+    "prawo",
+    "dół"
+   ]
+  },
+  "segment": {
+   "x0": 0.708,
+   "x1": 1.139,
+   "y0": -0.117,
+   "y1": 0.265,
+   "rzut_w_kadrze": true,
+   "uciete": [
+    "prawo",
+    "dół"
+   ]
+  }
+ },
+ "punkty_kluczowe": {
+  "Brama Mostowa – napis (+5,2)": {
+   "w_kadrze": false,
+   "x": 0.535,
+   "y": -0.014,
+   "widoczny": false,
+   "zaslania": "krzew_62_liscie_drobne",
+   "odl_m": 60.4
+  },
+  "korona – lamele łuku (+31,7)": {
+   "w_kadrze": true,
+   "x": 0.535,
+   "y": 0.595,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 66.6
+  },
+  "attyka wieży (+37,2)": {
+   "w_kadrze": true,
+   "x": 0.535,
+   "y": 0.722,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 69.1
+  },
+  "cel kamery": {
+   "w_kadrze": false,
+   "x": 0.5,
+   "y": -0.134,
+   "widoczny": false,
+   "zaslania": "krzew_62_liscie_drobne",
+   "odl_m": 60.6
+  }
+ },
+ "horyzont_y": -0.05,
+ "pochylenie_deg": 0.0
+}

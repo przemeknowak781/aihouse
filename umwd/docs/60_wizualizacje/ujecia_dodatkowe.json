@@ -317,7 +317,7 @@
   },
   {
    "id": "zlota-godzina-3",
-   "opis": "ZŁOTA GODZINA 3 – znad wody (łódź na Odrze, oko 1,2 m nad lustrem), 130 m na wsch. od wieży; kadr pionowy 4:5, 65 mm: lustro wody z lekko rwącym się odbiciem wieży, nabrzeże z balustradą i barką-restauracją, pieszi na bulwarze, szpaler bulwaru, wieża z łukiem i koroną z lamelami nad koronami drzew. Poranek, słońce z lewej z tyłu.",
+   "opis": "ZŁOTA GODZINA 3 – znad wody (łódź na Odrze, oko 1,2 m nad lustrem), 130 m na wsch. od wieży; kadr pionowy 4:5, 65 mm: lustro wody z lekko rwącym się odbiciem wieży, nabrzeże z balustradą i barką-restauracją, piesi na bulwarze, szpaler bulwaru, wieża z łukiem i koroną z lamelami nad koronami drzew. Poranek, słońce z lewej z tyłu.",
    "cam": {
     "e": 238.0,
     "n": 88.0,
@@ -337,7 +337,23 @@
    "ludzie": true,
    "preset": "dzien",
    "uwaga_render": "Render finalny: render/final_zlota_godzina_3.py (nakładka na wspólną nakładkę finałową render/ujecia_finalne_korekty.py → ujecia_poprawki_kontekstu.py → ujecia_dodatkowe.py; te same argumenty). Warunki wspólne zestawu: lamele korony łuku v1.1 (21 szt., Fibonacci 1,35/0,675), sitodruk 30 % na szkle korony, oprawy ciepłe w dzień ×0,12. Poprawki ujęcia: barka-restauracja z detalem zamiast białego prostopadłościanu, zmarszczka wody (~2 mm, skala 0,5 m), wyrównany uskok 0,3 m lica muru nabrzeża (pionowy cień czytany jako słup przy x ≈ 0,40), 3 pieszych na bulwarze. Podglądy: render/ujecia_poprawki_kontekstu.py (artefakty context.py widoczne z wody: ściana w nurcie wzdłuż granicy ramki, grobla pod Mostem Grunwaldzkim).",
-   "poprawki": "v0 (podgląd): oko 1,8 m nad wodą (z −1,95), 60 mm, shift 0,12 – attyka y 0,87–0,89, woda 44 %, biała barka w osi łuku, słup x ≈ 0,40, 2 lamele na łuku. v1 (final, korekty jury): oko 1,2 m (z −2,55, jurorzy 1 i 3) – dłuższe odbicie; 65 mm (juror 2), shift 0,15 zamiast 0,14 – po obniżeniu oka attyka łuku zostaje na y 0,88 (narożnik 0,91), horyzont 0,35, wieża +8 %, woda 35 %; barka z detalem (2 i 3), zmarszczka wody (2 i 3), 3 pieszych na bulwarze (2), słup usunięty (1: to cień uskoku muru – wyrównany w 3D), lamele v1.1 i wygaszone oprawy korony (1, 2). Nie przyjęto (juror 3, przegłosowany): obrót osi 260° → 258,5° (jurorzy 1 i 2 – oś bez zmian; juror 1: niebo po prawej to przestrzeń, w którą patrzy łuk) i pory 1.10 08:15 (1 i 2 – 20.10 08:45 bez zmian)."
+   "poprawki": "v0 (podgląd): oko 1,8 m nad wodą (z −1,95), 60 mm, shift 0,12 – attyka y 0,87–0,89, woda 44 %, biała barka w osi łuku, słup x ≈ 0,40, 2 lamele na łuku. v1 (final, korekty jury): oko 1,2 m (z −2,55, jurorzy 1 i 3) – dłuższe odbicie; 65 mm (juror 2), shift 0,15 zamiast 0,14 – po obniżeniu oka attyka łuku zostaje na y 0,88 (narożnik 0,91), horyzont 0,35, wieża +8 %, woda 35 %; barka z detalem (2 i 3), zmarszczka wody (2 i 3), 3 pieszych na bulwarze (2), słup usunięty (1: to cień uskoku muru – wyrównany w 3D), lamele v1.1 i wygaszone oprawy korony (1, 2). Nie przyjęto (juror 3, przegłosowany): obrót osi 260° → 258,5° (jurorzy 1 i 2 – oś bez zmian; juror 1: niebo po prawej to przestrzeń, w którą patrzy łuk) i pory 1.10 08:15 (1 i 2 – 20.10 08:45 bez zmian).",
+   "final": {
+    "plik": "docs/60_wizualizacje/img/extra/E_zlota-godzina-3.jpg",
+    "rozdzielczosc": [
+     2000,
+     2500
+    ],
+    "probki": 64,
+    "odszumianie": "OIDN",
+    "ludzie": true,
+    "postprodukcja": "dzien",
+    "skrypt": "render/final_zlota_godzina_3.py",
+    "czas_renderu_s": 1707,
+    "czas_calkowity_s": 1733,
+    "data": "2026-11-17",
+    "kontrola": "uwagi: brak; woda 35 %, niebo 29 %, budynek 27 %, barka/inne 6 %, drzewa 3 %; napis Bramy Mostowej y 0,455, korona y 0,81, attyka łuku y 0,883 – widoczne; lamele łuku 21 szt.; 3 pieszych na bulwarze widocznych od kolan (x 0,43–0,52)"
+   }
   },
   {
    "id": "zlota-godzina-4",
@@ -402,11 +418,45 @@
    "shift_x": 0,
    "shift_y": 0.55,
    "aspect": "4:5",
-   "czas": "2026-11-05 16:42 CET",
-   "ludzie": false,
+   "czas": "2026-11-05 16:38 CET",
+   "ludzie": true,
    "preset": "zmierzch",
-   "opis": "ZMIERZCH-DETAL 1 – „Latarnia przez gałęzie”: błękitna godzina z pn.-zach. narożnika skweru przy rampie Mostu Grunwaldzkiego (chodnik, oko 1,65 m), 60 m od łuku. Lewa połowa – koronkowa sylweta jesiennej korony drzewa E10 (15 m od kamery) na granatowym niebie, u dołu cienki pas krzewów skweru; prawa – łuk R 14 z wstęgami okien i świecąca korona Sejmiku (drewniane bafle, wiszące oprawy) na prawej linii trójpodziału; elewacja pn. świadomie wychodzi poza prawą krawędź. 5.11 16:42 CET (słońce az 250°, el −4,1°): niebo jeszcze jaśniejsze od koron drzew, w biurach 35 % opraw, korona i hol w pełni, latarnie zapalone. 50 mm, kadr 4:5, kamera pozioma, shift 0,55 (piony proste).",
-   "poprawki": "v0: 40 mm, cel z 20 – czarny pas krzewów ~30 % kadru, wieża ucięta; v1: 50 mm, obrót osi o 1,5°, shift 0,5; v2: pora 16:42 (el −4,1° zamiast −6°) i shift 0,55 – jaśniejsze niebo za gałęziami, mniej czerni u dołu."
+   "opis": "ZMIERZCH-DETAL 1 – „Latarnia przez gałęzie”: błękitna godzina z pn.-zach. narożnika skweru przy rampie Mostu Grunwaldzkiego (chodnik, oko 1,65 m), 60 m od łuku. Lewa połowa – koronkowa sylweta jesiennej korony drzewa E10 (14 m od kamery, drobne liście z maską alfa) na granatowym niebie, u dołu cienki pas krzewów skweru; prawa – łuk R 14 z wstęgami okien i świecąca korona Sejmiku za lamelami ceramicznymi (21 szt., rytm 1,35 / 0,675 m) na prawej linii trójpodziału; elewacja pn. świadomie wychodzi poza prawą krawędź. 5.11 16:38 CET (słońce az 249°, el −3,5°): niebo jaśniejsze od koron drzew, granit czytelny w chłodnym świetle nieba, w biurach 35 % pomieszczeń, korona i hol w pełni, latarnie zapalone. 50 mm, kadr 4:5, kamera pozioma, shift 0,55 (piony proste).",
+   "poprawki": "v0: 40 mm, cel z 20 – czarny pas krzewów ~30 % kadru, wieża ucięta; v1: 50 mm, obrót osi o 1,5°, shift 0,5; v2: pora 16:42 (el −4,1° zamiast −6°) i shift 0,55 – jaśniejsze niebo za gałęziami, mniej czerni u dołu. v3 (final, korekty jury): lamele korony v1.1 (21 szt.), pora 16:38, niebo ×6,5, ciepłe oprawy korony ×4 (kompensacja lamel i sitodruku), ekspozycja −2,3 (bezwzględna przy niebie ×6,5), drobne liście z maską alfa w drzewach i krzewach kadru (do 32 m), ludzie włączeni (w kadrze żadnej sylwetki); stanowisko, oś, 50 mm, shift 0,55 i kadr 4:5 bez zmian.",
+   "sila_nieba": 6.5,
+   "ekspozycja": -2.3,
+   "udzial_opraw": 0.35,
+   "oprawy_cieple_mnoznik": 4.0,
+   "liscie_drobne": {
+    "promien_m": 32,
+    "k": 6,
+    "f": 0.45,
+    "szer": 0.55,
+    "skupienie": 0.45,
+    "rozrzut": 0.4,
+    "margines_deg": 4
+   },
+   "tytul": "Latarnia przez gałęzie – błękitna godzina od pn.-zach.",
+   "uwaga_render": "Render finalny: render/final_zmierzch_detal_1.py (nakładka na wspólną nakładkę finałową render/ujecia_finalne_korekty.py → ujecia_poprawki_kontekstu.py → ujecia_dodatkowe.py; te same argumenty). Warunek wspólny zestawu: lamele korony łuku v1.1 (21 szt. 0,35 × 0,60 m, rozstawy 1,35/0,675 m w ciągu Fibonacciego) i sitodruk 30 % na szkle korony łuku. Klucze sila_nieba, oprawy_cieple_mnoznik i liscie_drobne obsługuje tylko ta nakładka – ekspozycja −2,3 jest dobrana do nieba ×6,5 (render samym ujecia_dodatkowe.py wyjdzie ok. 2,7 EV za ciemny).",
+   "korekty_jury": {
+    "wdrozone": [
+     "lamele korony łuku (wszyscy, warunek renderu): 21 szt. 0,35 × 0,60 m (R 13,40–14,00) w rozstawach 1,35 / 0,675 m w ciągu Fibonacciego, wyśrodkowane, wg koncepcja.json v1.1 i tools/elewacje.py; sitodruk 30 % na szkle korony łuku. budynek3d.Spec daje dziś 16 lamel – podmiana w nakładce render/ujecia_finalne_korekty.py (pliki wspólne nieruszane). Przy krawędzi łuku lamele zachodzą na siebie i korona „domyka się” – rytm czyta się jako ciemne pionowe żebra na ciepłym tle",
+     "stanowisko (64; 120; oko 1,65 m nad chodnikiem), cel (104,59; 75,15), oś 137,8°, 50 mm, shift 0,55 i kadr 4:5 bez zmian (J1, J2; J3 – kamera i ogniskowa)",
+     "pora 16:42 → 16:38 CET (J1; mediana propozycji 16:35 / 16:38 / 16:42): słońce az 249,1°, el −3,5°; przy tej samej ekspozycji niebo ok. +0,7 EV jaśniejsze niż o 16:42 – więcej chłodnego światła na granicie",
+     "kopuła nieba ×6,5 jak w W9 (J3) i ekspozycja −2,3 EV (bezwzględna, przy niebie ×6,5): niebo u góry kadru 0,014 → 0,035 (luminancja liniowa obrazu, +1,3 EV razem z porą; J2: +0,3 EV, J3: dolna połowa nie może być czarna), granit 2,1 EV pod medianą nieba – filary i pasma ceramiki czytelne w chłodnym świetle",
+     "ciepłe oprawy korony, holu i podcienia ×4 (emisja 30 → 120) – kompensacja lamel i sitodruku: przy tym samym świetle suma ciepłych pikseli pasa korony spadła po poprawce lamel ok. 6× (0,56 → 0,09), a przy samym niebie ×6,5 korona byłaby tylko 1,1 EV nad granitem i ciemniejsza od okien biur. Pomiar w obrazie (promienie przez siatkę 96 × 120 → klasy materiałów): szkło korony 1,6 EV (mediana) – 3,7 EV (p90) nad medianą granitu, środek ok. 2,6 EV (J2: 2–3 EV, J3: ok. 2 EV); szkło korony p90 2,1 EV nad oknami biur – latarnia jedynym ciepłym i najjaśniejszym akcentem (J1)",
+     "drobne liście (J3: gęściej, liść z maską alfa zamiast płaskich kart; J2: liście mniejsze względem wieży): w drzewach i krzewach, których korona wchodzi w kadr do 32 m od kamery (61 instancji: E09, E10, E13, krzewy skweru; 6 prototypów), każda karta 0,23 m zastąpiona 6 liśćmi z maską alfa (owal zaostrzony z ogonkiem, dł. ok. 0,10 m – ok. 2,2× mniejsze względem wieży, J2 chciał −15 %), karty ściągnięte ku sąsiadom (liście w kępach przy gałązkach, bez pojedynczych liści „w powietrzu”), pole liści ≈ 1,2 × pole kart",
+     "korona E10 czarna, bez rozjaśniania w postprodukcji (J1): preset zmierzch bez podnoszenia cieni (lift 0); mediana luminancji drzew 0,001 – 5,4 EV pod niebem (sylweta)",
+     "ludzie włączeni (zlecenie): kontrola rzutu sylwetek – w kadrze nie ma żadnej osoby (napis i podcień zasłaniają krzewy, zamierzone), ujęcie bez zmian"
+    ],
+    "nie_wdrozone": [
+     "udział opraw biur 0,20 (J1) i 0,45 (J2) – kierunki przeciwne, J3 bez zmian; mediana 0,35 zostaje. Cel J1 (okna nie konkurują z latarnią) osiągnięty niebem ×6,5 i jasnością korony: okna biur 2,1 EV pod koroną",
+     "obrót osi 137,8° → 141° (J3): J1 i J2 – kadr bez zmian. Kontrola wariantu: łuk na x 0,44 (środek kadru zamiast prawej tercji), drzewa 39 → 31 %, budynek 35 → 44 % – rama z gałęzi i przekątna prowadząca do latarni słabną",
+     "wariant J2 – kamera 4 m dalej (61,3; 123,0) z 55 mm: sprawdzony kontrolą – kadr prawie ten sam (drzewa 38 %, attyka y 0,75 zamiast 0,72), karty liści względem wieży −16 %; J1 i J3 – stanowisko i 50 mm bez zmian, a drobne liście zmniejszają je względem wieży ok. 2× – wariant zbędny",
+     "pora 16:35 (J3) i 16:42 (J2) – przyjęta mediana 16:38 (J1)",
+     "kopuła nieba ×6,5 bez kompensacji korony (J3 dosłownie) – pomiar: korona 1,1 EV nad granitem, poniżej celu „ok. 2 EV” tego samego jurora; stąd ciepłe oprawy ×4"
+    ]
+   }
   },
   {
    "id": "zmierzch-detal-2",

@@ -11,6 +11,8 @@ _v12_baza_v1_1_mpzp.json = git 7acc69a), spójność uv ↔ en.
 v1.2-fix: drzwi dźwigów w rdzenie.* – pełne listy przystanków −2…ANT (lokalna lista S-3 tylko w kondygnacja_sejmiku.trzony_uklad),
 blok ewakuacji z _s2_ewakuacja.py, wzór MPZP z przecinkiem tylko w liczbie.
 NIE zmienia model/budynek.json (model pomieszczeń przelicza inny agent).
+v1.2b: klatki z pochwytami we wnękach (M.13 pkt 6 – _v12_trzony.py [T7]), przedsionek A 3,05 m, szyby trzonu B +0,05 m, P2 bez
+przystanku S*, kuluar 1,80 m przy trzonie A; klucz podziemie.MDS i decyzje v1.2b zapisuje _v12b_decyzje.py (uruchamiany PO tym skrypcie).
 """
 import copy
 import io
@@ -98,7 +100,8 @@ def build():
     ks["ewakuacja"] = {
         "osoby_maks": E.N, "osoby_plyta": E.N_PLYTA, "osoby_galeria": E.N_GAL,
         "strefa_ZL_I_m2": round(W_area + S3["antresola"]["pow_m2"], 1),
-        "kuluar_szer_m": 2.20, "kuluar_wymagane_m": round(0.6 * E.N / 100, 2), "kuluar_przy_trzonie_A_m": round(S2.CORE_A.bounds[1] - 10.10, 2),
+        "kuluar_szer_m": round(12.30 - S2.KUL_V0, 2), "kuluar_wymagane_m": round(0.6 * E.N / 100, 2),
+        "kuluar_przy_trzonie_A_m": round(S2.CORE_A.bounds[1] - S2.KUL_V0, 2),
         "klatki_do_antresoli": ["A", "B"], "przedsionki": ["A", "A'", "B"],
         "limity": "ZL I bez tryskaczy, BEZ zwiększeń: przejście 40 m (+25 % w sali i holu h > 5 m), dojście 1 kierunek 10 m, 2 kierunki"
                   " (do różnych klatek, odcinek wspólny ≤ 10 m) 40 m; zwiększenie +50 % za samoczynne oddymianie (§ 256 ust. 4 pkt 2)"
@@ -136,10 +139,13 @@ def build():
     r["A"]["obrys_en"] = ring_en(S2.CORE_A)
     r["A"]["pow_m2"] = round(S2.CORE_A.area, 2)
     r["A"]["zakres"] = "−2…S + antresola +30,90"
+    bpA = cA["przedsionek_A"].bounds
     r["A"]["sklad"] = [
-        "klatka A obudowana REI 60, 3,40 × 5,80 m w świetle: 2 biegi 1,60 m (M.13), stopnie ≤ 17,5 × 28 cm, spoczniki ≥ 1,50 m; "
-        "kond. −1/P i P/1 – 3 biegi (spocznik kondygnacyjny parteru na końcu pn.); do antresoli +30,90",
-        "przedsionek ppoż. A 3,10 × 5,80 m z MOE 1,5 × 1,5 m (poza torem 1,2 m i polem otwierania skrzydeł – _s2_ewakuacja.py [E6]),"
+        "klatka A obudowana REI 60, 3,40 × 5,80 m w świetle: 2 biegi 1,60 m, stopnie ≤ 17,5 × 28 cm, spoczniki ≥ 1,50 m; "
+        "kond. −1/P i P/1 – 3 biegi (spocznik kondygnacyjny parteru na końcu pn.); do antresoli +30,90; v1.2b: pochwyty Ø 40 przyścienne we wnękach"
+        f" 0,10 × 0,30 m ścian 0,25 m i obustronne na balustradzie środkowej duszy 0,20 m – w świetle poręczy {pl(T.RES_T7['A']['swiatlo'])} m"
+        " ≥ 1,60 (M.13 pkt 6; _v12_trzony.py [T7])",
+        f"przedsionek ppoż. A {pl(bpA[2] - bpA[0])} × {pl(bpA[3] - bpA[1])} m" + " z MOE 1,5 × 1,5 m (poza torem 1,2 m i polem otwierania skrzydeł – _s2_ewakuacja.py [E6]),"
         " krzesłem ewakuacyjnym i interkomem, nadciśnienie; drzwi pd. (kuluar S, korytarz publiczny +30,90, hol strefy środkowej 1–6,"
         " Hala P), wsch. (łącznik S, galeria +30,90, garaż); przedsionek A' 2,50 × 3,00 m (antresola radnych) przy ścianie zach. klatki,"
         " drzwi do klatki 1,0 m przy spoczniku",
@@ -147,7 +153,8 @@ def build():
         f" – wolna głębokość od lica trzonu min. {pl(min(E.dA_min.values()))} m (A1, do biegu schodów / otworu nad biegiem; M.13 3,6 m,"
         f" zapas {pl(min(E.dA_min.values()) - 3.6)} m), łącznik pn. P, korytarz pn. kond. 1–6 2,15 m, przedsionek dźwigów −1/−2 (pas 7,20 × 1,75 m)",
         "dźwig R dla ekip ratowniczych PN-EN 81-72 i ewakuacyjny PN-EN 81-76, 1 000 kg, kabina 1,1 × 2,1 m, szyb 1,80 × 2,55 m REI 60, drzwi pd. do przedsionka A",
-        "v1.2 (I5): trzon wydłużony o 0,60 m na pd. (v 12,45 → 11,85; ściana pd. 0,20 m) – kosztem holu strefy środkowej (kond. 1–6), Hali (P) i kuluaru S (2,20 → 1,75 m przy trzonie)",
+        "v1.2 (I5): trzon wydłużony o 0,60 m na pd. (v 12,45 → 11,85; ściana pd. 0,20 m) – kosztem holu strefy środkowej (kond. 1–6), Hali (P) i kuluaru S"
+        " (przy trzonie 1,80 m po v1.2b – ściana kuluaru od pd. 0,15 m)",
     ]
     r["A"]["uklad_uv"] = {k: ring_uv(g) for k, g in cA.items()}
     # v1.2-fix: pełne listy przystanków (zgodnie z „sklad”); lokalna lista S-3 (S/ANT) zostaje w kondygnacja_sejmiku.trzony_uklad
@@ -162,27 +169,31 @@ def build():
     r["B"]["pow_m2"] = round(S2.CORE_B.area, 2)
     r["B"]["zakres"] = "−2…S + antresola +30,90"
     r["B"]["sklad"] = [
-        "klatka B obudowana REI 60, 3,40 × 6,64 m w świetle: 2 biegi 1,60 m na każdej kondygnacji (P: 2 × 14 stopni 17,14 × 28 cm), spoczniki ≥ 1,50 m; do antresoli +30,90",
+        "klatka B obudowana REI 60, 3,40 × 6,64 m w świetle: 2 biegi 1,60 m na każdej kondygnacji (P: 2 × 14 stopni 17,14 × 28 cm), spoczniki ≥ 1,50 m; do antresoli +30,90;"
+        f" v1.2b: pochwyty we wnękach ścian 0,25 m (szyby P1/P2 i szacht przesunięte o 0,05 m na wsch., ściana wsch. trzonu 0,20 m) i na balustradzie"
+        f" środkowej – w świetle poręczy {pl(T.RES_T7['B']['swiatlo'])} m",
         "przedsionek ppoż. B 3,40 × 2,06 m z MOE 1,5 × 1,5 m w narożu SW (poza torem 1,2 m i polem otwierania skrzydła; drzwi N w u 27,80"
         " – _s2_ewakuacja.py [E6]) i interkomem, nadciśnienie (v1.2: ściana klatka/przedsionek przesunięta o 0,29 m)",
         "dźwigi publiczne P1, P2 1 600 kg, kabiny 1,5 × 2,1 m, szyby 2,15 × 2,65 m, drzwi wsch.; P1 – przystanki P, 1–6, ANT; P2 przelotowy – −2, −1 "
-        "(drzwi zach. do przedsionka B), P, 1–6, S (służbowy, na klucz), ANT",
+        "(drzwi zach. do przedsionka B), P, 1–6, ANT (v1.2b: bez przystanku służbowego na S – dostawy baru dźwigami A1/A2/R)",
         "szacht 2,15 × 3,20 m (po dźwigu T): przewód spalin agregatu, wyrzut wentylacji i oddymiania garażu, piony centrali S → lamele korony od pd.",
     ]
     r["B"]["uklad_uv"] = {k: ring_uv(g) for k, g in cB.items()}
     r["B"]["drzwi_dzwigow"] = [
         {"dzwig": "P1", "uv": [31.10, 5.475], "kierunek": [1, 0], "przystanki": ["P", "1", "2", "3", "4", "5", "6", "ANT"],
          "uwaga": "drzwi wsch.; na S bez przystanku (strefa radnych)"},
-        {"dzwig": "P2", "uv": [31.10, 8.325], "kierunek": [1, 0], "przystanki": ["P", "1", "2", "3", "4", "5", "6", "S*", "ANT"],
-         "uwaga": "drzwi wsch.; S* – przystanek służbowy (klucz)"},
-        {"dzwig": "P2", "uv": [28.70, 8.325], "kierunek": [-1, 0], "przystanki": ["-2", "-1"],
+        {"dzwig": "P2", "uv": [31.10, 8.325], "kierunek": [1, 0], "przystanki": ["P", "1", "2", "3", "4", "5", "6", "ANT"],
+         "uwaga": "drzwi wsch.; v1.2b: bez przystanku na S"},
+        {"dzwig": "P2", "uv": [round(cB["P2"].bounds[0], 3), 8.325], "kierunek": [-1, 0], "przystanki": ["-2", "-1"],
          "uwaga": "P2 przelotowy – drzwi zach. do przedsionka B na −2/−1"},
     ]
     r["B"]["klatka"] = klatka_json(T.resB, "spocznik kondygnacyjny zawsze na końcu pn. (przy przedsionku B)")
     r["C"]["sklad"] = [
         "klatka C obudowana REI 60, 5,80 × 3,40 m w świetle (biegi wzdłuż s): 2 biegi 1,60 m (M.13; MDS 260 os. → 1,56 m), kond. −1/P i P/1 – 3 biegi",
-        "przedsionek ppoż. C 5,80 × 2,00 m z MOE 1,5 × 1,5 m (koniec przeciwny do drzwi klatki) i interkomem, nadciśnienie; drzwi z korytarza (lico d 8,40)",
-        "szachty 1,60 × 5,60 m (nadciśnienie, piony)",
+        "przedsionek ppoż. C 5,80 × 2,00 m z MOE 1,5 × 1,5 m (koniec przeciwny do drzwi klatki) i interkomem, nadciśnienie; drzwi z korytarza (lico d 8,40;"
+        " ściana od korytarza 0,20 m, ściana klatki 0,25 m z wnęką pochwytu – v1.2b)",
+        f"v1.2b: pochwyty we wnękach i na balustradzie środkowej – w świetle poręczy {pl(T.RES_T7['C']['swiatlo'])} m (M.13 pkt 6)",
+        "szachty 1,60 × 5,65 m (nadciśnienie, piony)",
         "v1.2 (I5): rezygnacja z szybu rezerwowego C1 (nie mieścił się obok klatki 3,40 m; ściana przy Maz. 19 REI 120 bez otworów) – skrzydło obsługują A1/A2 przez ciągłe korytarze kond. 1–4",
     ]
     r["C"]["uklad_sd"] = {k: ring_uv(g) for k, g in T.C_CELLS.items()}
@@ -191,7 +202,8 @@ def build():
     kA, kB = cA["klatka_A"], cB["klatka_B"]
     r["odleglosc_klatek_A_B_m"] = round(kA.centroid.distance(kB.centroid), 1)
     r["odleglosc_klatek_A_B_uwaga"] = (f"między środkami klatek {kA.centroid.distance(kB.centroid):.1f} m (v1.1: 20,0); najmniejsza między obudowami "
-                                       f"{kA.distance(kB):.2f} m – sposób pomiaru „2 klatki ≥ 15 m” (MDS −2, rozp. 2025 poz. 932 § 6) do potwierdzenia")
+                                       f"{kA.distance(kB):.2f} m – v1.2b: bez znaczenia dla MDS (wyjścia zapasowe poza strefą prognozowanego zagruzowania –"
+                                       " szyb podwójny SZ-MDS, rozp. 2025 poz. 932 § 6 ust. 4; ust. 5 nie jest stosowany – _v12b_decyzje.py [D2])")
 
     # ------------------------------------------------------------------------------- parter, podziemie, bilans
     for z in d["parter"]["wieza"]:
@@ -204,8 +216,7 @@ def build():
         "PU_m2": round(C.PU12, 2), "PU_gastronomia_m2": 88.47, "wymagane": C.REQ, "odczyt_ostrozny": C.REQ_CONS,
         "wzor": f"12/1000 × (PU − PU_gastr.) + 6/1000 × PU_gastr. = {pl(12 / 1000 * (C.PU12 - 88.47) + 6 / 1000 * 88.47)} → {C.REQ}",
     }
-    d["podziemie"]["MDS"]["wyjscia"] = ("−2: klatki A, B (środki klatek 19,8 m; obudowy 13,95 m – pomiar do potwierdzenia); −1: klatka C (bieg 1,60 m), "
-                                        "rampa, szyb wyjścia zapasowego (91,75; 32,00) + tunel 7,6 m")
+    # v1.2b: podziemie.MDS zapisuje _v12b_decyzje.py ([D2])
     b = d["bilans"]
     b["PC_nadziemna_m2"] = C.PC_nad12
     b["PU_m2"] = round(C.PU12, 2)

@@ -1,0 +1,57 @@
+{
+ "nr": 35,
+ "title": "Second finished extra render: the lantern from the Oder at golden hour",
+ "stages": [
+  [
+   "Organiser materials ✔ (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register ✔ (184 requirements) + checklists",
+   "done"
+  ],
+  [
+   "Site ✔ (zoning, heritage, survey, geotech, trees, neighbours)",
+   "done"
+  ],
+  [
+   "Law ✔ (WT bridge, fire, accessibility, zero-emission)",
+   "done"
+  ],
+  [
+   "Design research ✔ (trends, visuals, boards, façades, costs)",
+   "done"
+  ],
+  [
+   "Programme ✔ (187 offices, PU ≈ 8,600 m²)",
+   "done"
+  ],
+  [
+   "Concept v1.2 ✔ (Sejmik storey merged, cost 148.99 mln) → open decisions v1.2b (workflow ►)",
+   "running"
+  ],
+  [
+   "Production ►: drawings v1.1 ✔ (verified); plans + tables re-run after v1.2; photomatch W1/W2 tests ✔; extra showcase renders (workflow ►)",
+   "running"
+  ],
+  [
+   "Boards & texts ►: Stage II 8/8 skeletons (vis pending, P7/P8 re-layout); Stage II text 5 × A3 + Stage I text + F.14.A (workflow ►); 300-dpi export ✔",
+   "running"
+  ],
+  [
+   "Audit ►: completeness 25/44; structural & functional audit ►; jury later",
+   "running"
+  ]
+ ],
+ "notes": [
+  "Second finished extra render (your request): portrait view from the Oder at golden hour. The lantern and its reflection fill the vertical frame; the segment and the boulevard with the bistro barge give the scale.",
+  "Next extra renders in progress: blue-hour close-up of the crown and a drone view.",
+  "Board finals: W5 (Mazowiecka 19) rendering at 4 000 px; W4, W3, then photomatch W1/W2."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/E_zlota-godzina-3.jpg",
+   "caption": "Extra render E-3: from the river, golden hour (final, 2 000 × 2 500 px)"
+  }
+ ]
+}

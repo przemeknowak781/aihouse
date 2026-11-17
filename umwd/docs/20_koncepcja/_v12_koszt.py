@@ -17,6 +17,9 @@ Kontrakt generatora tabel (tools/tabele_konkursowe.py): f14b_rows(level) – poz
 spoza modelu jako 18.10*… + 16.1 i 18.3* od sumy), KOSZT_DOKUMENTACJI [zł netto].
 v1.2-fix (po weryfikacji scalenia): baza PU zamrożona (S, ANT modelu v1.1), balustrady podestu galerii, dźwignia „pokoje bez sufitu
 podwieszanego” z podziałem na bryły, ścianki pokoi od korytarza – pełna ściana GK (bez naświetli), wariant ryzyka [K4].
+v1.2b (decyzje po scaleniu, _v12b_decyzje.py): pozycje POZA12B – MDS 592 os. na −1 z szybem podwójnym wyjść zapasowych poza strefą
+prognozowanego zagruzowania (zamiast szybu P-I6), wnęki pochwytów klatek (M.13 pkt 6), drzewa w pasie od bulwaru w systemie komór;
+zapas docelowy ≥ 0,5 mln (ZAPAS_MIN; limit 150 mln z rezerwą 5 % – twardy).
 """
 import io
 import json
@@ -32,7 +35,7 @@ import _rewizja_koszt as RK  # noqa: E402
 km = RK.km
 ROOT = RK.ROOT
 LIMIT = 150.0
-ZAPAS_MIN = 1.0
+ZAPAS_MIN = 0.5                          # v1.2b: zapas docelowy ≥ 0,5 mln (v1.2: 1,0) – dźwignie widoczne (FILARY) tylko gdy zapas < 0,5
 K = json.load(open(os.path.join(ROOT, "model", "koncepcja.json"), encoding="utf-8"))
 S3 = json.load(open(os.path.join(HERE, "kondygnacja_S2.json"), encoding="utf-8"))
 B = json.load(open(os.path.join(ROOT, "model", "budynek.json"), encoding="utf-8"))
@@ -135,6 +138,29 @@ POZA12 = {
 }
 for k, (v, why) in POZA12.items():
     print(f"     + {k}: {v * KS_REZ / 1e6:+.3f} mln (z KS i rezerwą; {why})")
+# ---- v1.2b: decyzje po scaleniu (_v12b_decyzje.py [D1], [D2], [D8]) – ilości z geometrii, stawki [Z]
+from _rewizja_wspolne import uv2en as _uv2en  # noqa: E402
+from shapely.geometry import LineString as _LS  # noqa: E402
+MDS_SZYB_UV = (11.50, -17.90)            # szyb podwójny SZ-MDS (środek), uv wieży – ≥ 12,84 m od ścian budynku ([D2])
+MDS_SZYB_WYM = (2.80, 1.55)              # obrys zewn. szybu podwójnego: 2 × (1,00 × 1,05) w świetle + ściany 0,25 (u × v)
+MDS_PORTAL_UV = (13.10, -5.00)           # wylot tuneli w ścianie szczelinowej −1 (droga u stopy rampy, bez stanowisk)
+MDS_TUNEL_M = round(_LS([_uv2en(*MDS_PORTAL_UV), _uv2en(*MDS_SZYB_UV)]).length - MDS_SZYB_WYM[1] / 2, 2)
+MDS_N = math.ceil(PU12 / 15 - 1e-9)      # art. 94 ust. 1 pkt 1: PU / 15 m² na osobę
+L_WNEK = round(2 * 1.1 * (10 * 5.80 + 10 * 6.64 + 5 * 5.80), 1)   # wnęki pochwytów: 2 ściany × długość klatki × 1,1 (pochylenie) × przejścia
+POZA12B = {
+    f"MDS (v1.2b): szyb podwójny wyjść zapasowych SZ-MDS (2 × 1,00 × 1,05 m, żelbet 0,25, 2 włazy 0,8 × 0,8, drabiny) 0,14 mln + tunel"
+    f" podwójny z −1 {MDS_TUNEL_M:.1f} m × 25 000 zł – poza strefą prognozowanego zagruzowania (≥ H/3 od wszystkich ścian), w miejsce szybu"
+    f" P-I6 z tunelem 7,6 m (0,25 mln w pozycjach v1.1)": (0.14e6 + MDS_TUNEL_M * 25000 - 0.25e6, "_v12b_decyzje.py [D2]; [Z]"),
+    f"MDS (v1.2b): pojemność {MDS_N} os. (art. 94: PU {PU12:,.2f} / 15) zamiast 560 – adaptacja 18.1* 1,5 mln × {MDS_N - 560}/560"
+    f" (wyposażenie, sanitariaty 8 + 8, podpory tymczasowe stropu)": (1.5e6 * (MDS_N - 560) / 560, "_v12b_decyzje.py [D2]"),
+    f"klatki A, B, C (v1.2b, M.13 pkt 6): wnęki pochwytów 0,10 × 0,30 m w ścianach żelbetowych {L_WNEK:.0f} mb × 150 zł + ściana klatka/przedsionek A"
+    f" 0,20 → 0,25 m (0,05 × 5,80 × 41,45 m × 1 600 zł/m³)": (L_WNEK * 150 + 0.05 * 5.80 * 41.45 * 1600, "_v12_trzony.py [T7]; [Z]"),
+    "pas od bulwaru (v1.2b): 2 drzewa w pasie – strefy korzeniowe w systemie komór (2 × 9 m² × 1,0 m × 1 300 zł/m³) + kosz i kratownica":
+        (2 * 9 * 1.0 * 1300 + 2 * 3500, "_v12b_decyzje.py [D8]; [Z]"),
+}
+for k, (v, why) in POZA12B.items():
+    print(f"     + {k[:140]}: {v * KS_REZ / 1e6:+.3f} mln (z KS i rezerwą; {why})")
+POZA12 = {**POZA12, **POZA12B}
 POZA = {**POZA11, **POZA12}
 ex = sum(v[0] for v in POZA.values())
 t0, wk0, r0 = RK.total(P, ex)
@@ -142,7 +168,8 @@ print(f"  v1.2 przed dźwigniami: roboty + KS {wk0:.2f}, razem {t0:.2f} mln (Δ 
 eff_ant = RK.total(dict(P11, A_nad=PC_nad12), ex11)[0] - t11
 print(f"     w tym antresola ponad rezerwę (sama zmiana A_nad): {eff_ant:+.2f} mln; klatka A i balustrady:"
       f" {RK.total(dict(P11, A_nad=PC_nad12, n_kond_klatki=P['n_kond_klatki'], bal_wew=P['bal_wew']), ex11)[0] - t11 - eff_ant:+.2f};"
-      f" trzony I5: {sum(v[0] for v in POZA12.values()) * KS_REZ / 1e6:+.2f}")
+      f" trzony I5: {sum(v[0] for k_, v in POZA12.items() if k_ not in POZA12B) * KS_REZ / 1e6:+.2f};"
+      f" decyzje v1.2b: {sum(v[0] for v in POZA12B.values()) * KS_REZ / 1e6:+.2f}")
 
 # ------------------------------------------------------------------------------------------------ [K3] dźwignie
 hr("[K3] Dźwignie v1.2 (efekt pojedynczy, mln zł z KS i rezerwą 5 %)")
@@ -235,10 +262,10 @@ print("  wariant ryzyka (pozycje otwarte v1.2 – rozdz. 16, rejestr V12-OPEN):"
 RISK = {
     "R1": ("tryskacze w strefie S (pompownia 80 m² i zbiornik; weryfikacja_koszt_eko.md: +0,5…+1,0 mln)", (0.5e6, 1.0e6),
            "NIEPOTRZEBNE po v1.2-fix: dojścia ZL I bez zwiększeń +50 % (_s2_ewakuacja.py [E2]) – wariant tylko informacyjnie"),
-    "R2": ("szyb awaryjny z −2 (gdy „2 klatki ≥ 15 m” liczone między obudowami: 13,95 m) – jak szyb MDS + tunel (P-I6)", (0.25e6, 0.25e6),
-           "otwarte – pomiar do potwierdzenia (rozp. 2025 poz. 932 § 6)"),
-    "R3": ("MDS 592 zamiast 560 os. (+32 os.; adaptacja 18.1* 1,5 mln × 32/560)", (1.5e6 * 32 / 560, 1.5e6 * 32 / 560),
-           "otwarte – pojemność z postanowienia organu (art. 95a)"),
+    "R2": ("szyb awaryjny z −2 do budowli ochronnej (ukrycie) – gdyby postanowienie organu (art. 95a) / rozp. 2025 poz. 1548 wymagało"
+           " dla −2 wyjścia niezależnego od rampy wewnętrznej (jak szyb P-I6)", (0.25e6, 0.25e6),
+           "warunkowe – v1.2b: MDS 592 os. na −1 z wyjściami zapasowymi poza strefą zagruzowania (w bazie); „2 klatki ≥ 15 m” bez znaczenia"),
+    "R3": ("MDS 592 zamiast 560 os.", (0.0, 0.0), "v1.2b: ujęte w kosztach bazowych (POZA12B)"),
 }
 for k, (nm, (lo, hi), st) in RISK.items():
     rng = f"{lo * KS_REZ / 1e6:.2f}" + (f"–{hi * KS_REZ / 1e6:.2f}" if hi != lo else "")
@@ -247,11 +274,11 @@ R_OPEN = sum(RISK[k][1][1] for k in ("R2", "R3")) * KS_REZ / 1e6
 z_r = LIMIT - tF - R_OPEN
 z_rf = z_r - eff["FILARY"] if "FILARY" not in chosen else z_r
 t4r = t4 + R_OPEN * (1 + km.KS[1]) * 1.04 / KS_REZ
-print(f"     R2 + R3 (otwarte): +{R_OPEN:.2f} mln → zapas {z_r:.2f} mln {'≥' if z_r >= ZAPAS_MIN else '<'} {ZAPAS_MIN:.1f};"
+print(f"     R2 (warunkowe): +{R_OPEN:.2f} mln → zapas {z_r:.2f} mln {'≥' if z_r >= ZAPAS_MIN else '<'} {ZAPAS_MIN:.1f};"
       f" pokrycie: dźwignia FILARY ({eff['FILARY']:+.2f}) → zapas {z_rf:.2f}; rezerwa 4 % (≥ 4 % – wymóg) → razem {t4r:.2f} mln,"
       f" zapas {LIMIT - t4r:.2f} mln {'≥' if LIMIT - t4r >= ZAPAS_MIN else '<'} {ZAPAS_MIN:.1f}")
 r1lo, r1hi = (x * KS_REZ / 1e6 for x in RISK["R1"][1])
-print(f"     gdyby mimo to wymagano tryskaczy (R1): zapas przy rezerwie 4 % i R2 + R3: {LIMIT - t4r - r1hi * 1.04 / 1.05:.2f}…"
+print(f"     gdyby mimo to wymagano tryskaczy (R1): zapas przy rezerwie 4 % i R2: {LIMIT - t4r - r1hi * 1.04 / 1.05:.2f}…"
       f"{LIMIT - t4r - r1lo * 1.04 / 1.05:.2f} mln (+ FILARY {-eff['FILARY']:.2f})")
 out = os.path.join(HERE, "_rewizja_koszt_wejscie_v1_2.json")
 json.dump({k_: P_sel[k_] for k_ in sorted(P_sel)}, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)

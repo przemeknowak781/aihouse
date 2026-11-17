@@ -984,10 +984,11 @@ def render_stage(stage, src, outdir, png=True, quiet=False):
         with open(out_pdf, "wb") as fh:
             w.write(fh)
     shutil.rmtree(tmpd, ignore_errors=True)
-    rep["pdf"] = str(out_pdf.relative_to(ROOT))
+    rep["pdf"] = str(out_pdf.relative_to(ROOT)) if out_pdf.is_relative_to(ROOT) else str(out_pdf)
     rep["metadane"] = check_metadata(out_pdf)
     if png:
-        rep["podglad"] = [str(p.relative_to(ROOT)) for p in previews(out_pdf, name, outdir)]
+        rep["podglad"] = [str(p.relative_to(ROOT)) if p.is_relative_to(ROOT) else str(p)
+                          for p in previews(out_pdf, name, outdir)]
     rep["ostrzezenia"] = ctx.warnings
     # ---- werdykty
     t = rep["czesci"]["tekst"]

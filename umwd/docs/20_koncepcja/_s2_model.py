@@ -14,6 +14,10 @@ v1.2 – poprawki po weryfikacji scalenia (17.11.2026): schody reprezentacyjne w
 spocznik 1,50 m, płaskie pole 1,53 m przed stopą), galeria z zatoką +0,00 dla wózków i podestem rzędu 2 z przejściem tylnym,
 przedsionek A' 2,50 × 3,00 m, drzwi przedsionka B w u 27,80, korytarz publiczny przedłużony do przedsionka A (2 kierunki na +30,90),
 PHS.05c na wsch. końcu korytarza publicznego, PP.06 i SWD.07 zamienione (dojścia ≤ 10 m bez zwiększeń), drzwi SWD.12a w u 5,70.
+v1.2b (decyzje po scaleniu, _v12b_decyzje.py): ściany klatek wzdłuż biegów 0,25 m (wnęki pochwytów – M.13 pkt 6): przedsionek A
+3,05 m, szachty/szyby P1, P2 trzonu B przesunięte o 0,05 m na wsch. (ściana wsch. trzonu 0,20 m); ściana kuluaru od pd. 0,15 m
+(kuluar przy trzonie A 1,80 m – M.13); łącznik KW.S.03 z polem mijania 1,80 × 2,00 m (wnęka kosztem PHS.05a); P2 bez przystanku
+służbowego na S (dostawy baru dźwigami A1/A2/R); stopnie galerii 1,40 m (M.13 pkt 4.3: ≥ 1,20 m między poręczami).
 Źródła: koncepcja.json (bryly[W], rdzenie, kondygnacja_sejmiku), program.yaml (SWD, PHS.05, PP.06, IT.02),
 weryfikacja_program.md (K1–K3, I1, I4, D1, D9, D13, D14). Nie korzystano z informacji o pracach ani wynikach konkursu.
 """
@@ -115,21 +119,21 @@ CORE_A_CELLS = {
     "A2": box(11.00, 18.05, 13.25, 20.60),     # jw.
     "R": box(13.45, 18.05, 15.25, 20.60),      # szyb 1,80 × 2,55 (kabina 1,1 × 2,1; 1 000 kg), drzwi S do przedsionka
     "klatka_A": box(8.55, 12.05, 11.95, 17.85),           # 3,40 × 5,80: 2 biegi 1,60 × 10 st. 0,28 + spoczniki 1,50
-    "przedsionek_A": box(12.15, 12.05, 15.25, 17.85),     # 3,10 × 5,80 (MOE 1,5 × 1,5; drzwi R, kuluar/hol, klatka)
+    "przedsionek_A": box(12.20, 12.05, 15.25, 17.85),     # 3,05 × 5,80 (v1.2b: ściana klatki 0,25 – wnęka pochwytu; MOE, drzwi R, kuluar/hol, klatka)
 }
 CORE_B_CELLS = {
     "klatka_B": box(25.10, 0.75, 28.50, 7.39),            # 3,40 × 6,64: 2 biegi na każdej kondygnacji (P: 2 × 14 st.)
     "przedsionek_B": box(25.10, 7.59, 28.50, 9.65),       # 3,40 × 2,06 (MOE 1,5 × 1,5 przy ścianie zach.)
-    "szachty_B": box(28.70, 0.75, 30.85, 3.95),   # po przeniesieniu dźwigu T do segmentu (I5): wyrzutnia/czerpnia D8
-    "P1": box(28.70, 4.15, 30.85, 6.80),        # szyb 2,15 × 2,65 (kabina 1,5 × 2,1 drzwiami na boku 2,1; 1 600 kg), drzwi E
-    "P2": box(28.70, 7.00, 30.85, 9.65),        # jw.
+    "szachty_B": box(28.75, 0.75, 30.90, 3.95),   # po przeniesieniu dźwigu T do segmentu (I5): wyrzutnia/czerpnia D8
+    "P1": box(28.75, 4.15, 30.90, 6.80),        # szyb 2,15 × 2,65 (kabina 1,5 × 2,1 drzwiami na boku 2,1; 1 600 kg), drzwi E
+    "P2": box(28.75, 7.00, 30.90, 9.65),        # jw. (v1.2b: szyby +0,05 m na wsch. – ściana klatki 0,25 z wnęką pochwytu, ściana wsch. 0,20)
 }
 # drzwi dźwigów: (szyb, punkt środka drzwi na licu trzonu, kierunek wyjścia, kondygnacje)
 LIFT_DOORS = [
     ("A1", (9.60, 20.85), (0, 1), ["S", "ANT"]),
     ("A2", (11.85, 20.85), (0, 1), ["S", "ANT"]),
     ("P1", (31.10, 5.475), (1, 0), ["ANT"]),          # na S bez przystanku (strefa radnych)
-    ("P2", (31.10, 8.325), (1, 0), ["S*", "ANT"]),    # S* – przystanek służbowy (klucz), zaplecze baru / dostawy
+    ("P2", (31.10, 8.325), (1, 0), ["ANT"]),          # v1.2b: bez przystanku służbowego S* (dostawy baru dźwigami A1/A2/R)
 ]
 DOOR_W_LIFT = 1.10
 
@@ -138,6 +142,10 @@ DOOR_W_LIFT = 1.10
 # ------------------------------------------------------------------------------------------------
 SALA_BOX = box(22.00, 12.60, 39.50, 29.20)
 SWD04_BOX = box(33.80, 12.60, 39.50, 16.00)      # reżyserka ze ścianami od strony sali
+
+
+KUL_V0 = 10.05                    # v1.2b: lico pd. kuluaru (ściana od pomieszczeń pd. 0,15 m: v 9,90–10,05) – przy trzonie A 1,80 m
+KW_S03_BAY = box(16.90, 15.60, 17.30, 17.60)     # v1.2b: pole mijania łącznika KW.S.03 (1,80 × 2,00 przed drzwiami przedsionka A)
 
 
 def level_S():
@@ -153,20 +161,20 @@ def level_S():
     R["SWD.11a"] = box(19.05, 0.50, 24.85, 9.90)
     # naroże SE (okna pd. i wsch.)
     R["SWD.11b"] = box(31.10, 0.50, 39.50, 7.10)
-    R["KW.S.02"] = box(31.10, 7.30, 32.70, 9.90)      # dojście do SWD.11b i przystanek służbowy P2
+    R["KW.S.02"] = box(31.10, 7.30, 32.70, 9.90)      # dojście do SWD.11b (1,60 × 2,60 – przewężenie miejscowe ≤ 5 m, M.13)
     # v1.2-fix: PP.06 i SWD.07 zamienione – drzwi obu przy zach. końcu (u ≤ 35,2): dojście do przedsionka B ≤ 10 m bez zwiększeń
     R["PP.06"] = box(32.90, 7.30, 34.50, 9.90)        # 1,60 × 2,60 (zlew, wózek porządkowy)
     R["SWD.07"] = box(34.70, 7.45, 39.50, 9.90)       # 4,80 × 2,45 (okna wsch.)
     # kuluar (droga ewakuacyjna, EI 30, oddymiany)
-    R["KUL"] = unary_union([box(0.50, 10.10, 39.50, 12.30).difference(CORE_A),   # v1.2: przy trzonie A 1,75 m (v 10,10–11,85)
-                            box(24.85, 9.90, 31.10, 10.10)])    # przed przedsionkiem B
+    R["KUL"] = unary_union([box(0.50, KUL_V0, 39.50, 12.30).difference(CORE_A),   # v1.2b: ściana od pd. 0,15 → przy trzonie A 1,80 m
+                            box(24.85, 9.90, 31.10, KUL_V0)])    # przed przedsionkiem B
     # pas zach. – kluby 15 os. (okna zach.) + pasaż przy trzonie A
     R["SWD.12a"] = box(0.50, 12.50, 6.30, 17.70)
     R["SWD.12b"] = box(0.50, 17.90, 6.30, 23.10)
     R["KW.S.01"] = box(6.50, 12.30, 8.30, 20.85)      # pasaż zach.: kuluar ↔ hol
     # pas między trzonem A a salą: łącznik + WC
-    R["KW.S.03"] = box(15.50, 12.30, 16.90, 20.85)    # łącznik wsch.: kuluar ↔ hol, drzwi przedsionka A
-    R["PHS.05a"] = box(17.10, 12.50, 19.30, 20.85)    # WC damskie z kabiną dostępną
+    R["KW.S.03"] = box(15.50, 12.30, 16.90, 20.85).union(KW_S03_BAY)   # łącznik wsch. 1,40 m + pole mijania 1,80 × 2,00 (v1.2b)
+    R["PHS.05a"] = box(17.10, 12.50, 19.30, 20.85).difference(box(17.10, KW_S03_BAY.bounds[1], 17.50, KW_S03_BAY.bounds[3]))   # WC damskie
     R["PHS.05b"] = box(19.50, 12.50, 21.70, 20.85)    # WC męskie z kabiną dostępną
     # pas pn. (okna pn. 1,65 × 5,0)
     R["SWD.14"] = box(12.65, 22.85, 15.80, 29.20)
@@ -453,8 +461,8 @@ PROG = {   # kod: (nazwa, kategoria, program_m2, zakres)
     "IT.02": ("Punkt dystrybucyjny IT (PD) – przy zapleczach nagrań", "zamk", 6, (4, 10)),
     "KUL": ("Kuluar – korytarz Sejmiku (droga ewakuacyjna EI 30, oddymiany; okna W i E)", "kom", None, None),
     "KW.S.01": ("Pasaż zachodni: kuluar ↔ hol", "kom", None, None),
-    "KW.S.02": ("Dojście do SWD.11b, przystanek służbowy P2", "kom", None, None),
-    "KW.S.03": ("Łącznik wschodni: kuluar ↔ hol, drzwi przedsionka A", "kom", None, None),
+    "KW.S.02": ("Dojście do SWD.11b", "kom", None, None),
+    "KW.S.03": ("Łącznik wschodni: kuluar ↔ hol, drzwi przedsionka A (1,40 m z polem mijania 1,80 × 2,00 m)", "kom", None, None),
     "KW.S.04": ("Schody reprezentacyjne S → antresola (dolny bieg; cały bieg w pustce holu)", "kom", None, None),
     "KW.A.01": ("Hol dźwigów publicznych P1/P2 (antresola)", "kom", None, None),
     "KW.A.02": ("Korytarz publiczny nad kuluarem (EI 30) – dojście z P1/P2 na galerię, do przedsionków A i B", "kom", None, None),
@@ -512,7 +520,8 @@ GAL_R2_U = (20.10, 20.90)         # miejsca rzędu 2 na podeście: siedzisko 0,5
 GAL_PODEST_DZ = 0.90
 GAL_PODEST = box(19.10, 13.50, 20.90, 18.30)            # podest +0,90 (przejście tylne 1,00 m u 19,10–20,10)
 GAL_S_PASS = box(19.10, 12.60, GAL_PARAPET_U[0], 13.50)  # przejście +0,00 foyer → rząd 1 (0,90 m)
-GAL_STEPS = [box(17.30, 13.60, 19.10, 14.60)]           # 6 × 0,15 / 0,30 z foyer na przejście tylne podestu
+GAL_STEPS = [box(17.30, 13.60, 19.10, 15.00)]           # 6 × 0,15 / 0,30 z foyer na przejście tylne podestu; v1.2b: 1,40 m
+                                                        # (poręcze obustronnie – w świetle 1,22 ≥ 1,20 m, M.13 pkt 4.3 i 6)
 GAL_BAY = box(19.10, 18.30, GAL_PARAPET_U[0], 22.65)    # zatoka +0,00 (z foyer bez stopni)
 GAL_BAY_ORDER = ("opiekun", "wozek") * 3                 # od pd. przy balustradzie
 GAL_BAY_V0 = 18.35

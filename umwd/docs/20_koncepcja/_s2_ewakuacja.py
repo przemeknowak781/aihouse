@@ -50,7 +50,7 @@ print("  – zwiększenie +50 % za samoczynne oddymianie drogi (§ 256 ust. 4 pk
       " wykorzystywane w projekcie;")
 print("  – antresola radnych (hol górny SWD.02g z barem SWD.05 i strefą multimedialną SWD.03) – pomieszczenie otwarte: przejście"
       " ≤ 40 m do wyjść: drzwi przedsionka A' albo stopa schodów reprezentacyjnych w holu (dalej dojście jak z drzwi).")
-vK = round((10.10 + S["KUL"].bounds[3]) / 2, 3)                          # oś kuluaru i korytarza publicznego (v 10,10–12,30 → 11,20)
+vK = round((M.KUL_V0 + S["KUL"].bounds[3]) / 2, 3)                        # oś kuluaru i korytarza publicznego (v1.2b: v 10,05–12,30 → 11,175)
 vH = round((20.85 + 22.65) / 2, 3)                                        # oś pasa holu przed A1/A2 (v 21,75)
 vN = round((23.30 + M.STAIR_V[0]) / 2, 3)                                 # oś holu NW przed biegiem (v 23,95)
 vF = round(sum(M.STAIR_V) / 2, 3)                                         # oś biegu schodów (v 25,60)
@@ -310,12 +310,20 @@ print("  – zwiększenie +50 % (§ 256 ust. 4 pkt 2) nie jest potrzebne: wszyst
       if not cats.get(2) and not cats.get(3) else "  – UWAGA: część dojść wymaga zwiększeń lub jest niezgodna")
 # v1.2 (I5): zwężenie kuluaru przy wydłużonym trzonie A
 kul_a = S["KUL"].intersection(box(M.CORE_A.bounds[0], 9.0, M.CORE_A.bounds[2], 13.0))
-w_a = M.CORE_A.bounds[1] - 10.10
+w_a = M.CORE_A.bounds[1] - M.KUL_V0
 west_occ = OCC["SWD.08"] + OCC["SWD.12a"] + OCC["SWD.12b"] + 4
 print(f"  – v1.2: kuluar przy trzonie A {w_a:.2f} m na długości {M.CORE_A.bounds[2] - M.CORE_A.bounds[0]:.2f} m"
       f" (pole {kul_a.area:.1f} m²) ≥ 1,40 m (WT § 242) ✔; przepustowość 0,6 m/100 os. → {w_a / 0.006:.0f} os.;"
       f" odcinek obsługuje osoby z części zach. (SWD.08 + SWD.12a/b + SWD.10a/IT.02 ≈ {west_occ} os.; hol i antresola radnych"
-      f" mają łącznik KW.S.03 do przedsionka A i przedsionek A') ✔; M.13 1,80 m – odstępstwo lokalne −{1.80 - w_a:.2f} m")
+      f" mają łącznik KW.S.03 do przedsionka A i przedsionek A') ✔; M.13 1,80 m: {'✔' if w_a >= 1.80 - 1e-9 else '✗ odstępstwo −%.2f m' % (1.80 - w_a)}"
+      f" (v1.2b: ściana kuluaru od pd. 0,15 m zamiast 0,20 – pomieszczenia pd. bez zmian)")
+assert w_a >= 1.80 - 1e-9, "kuluar przy trzonie A < 1,80 m (M.13)"
+b03 = S["KW.S.03"]
+print(f"  – v1.2b: łącznik KW.S.03 1,40 m z polem mijania 1,80 × 2,00 m (v {M.KW_S03_BAY.bounds[1]:.2f}–{M.KW_S03_BAY.bounds[3]:.2f},"
+      f" przed drzwiami przedsionka A): przewężenia 1,40 m na {M.KW_S03_BAY.bounds[1] - b03.bounds[1]:.2f} i {b03.bounds[3] - M.KW_S03_BAY.bounds[3]:.2f} m"
+      f" ≤ 5 m – M.13 (korytarze pkt 2.2–3) ✔; dojście do SWD.11b (KW.S.02) 1,60 × {S['KW.S.02'].bounds[3] - S['KW.S.02'].bounds[1]:.2f} m –"
+      f" przewężenie miejscowe ≤ 5 m przy kuluarze 2,25 m (pole mijania) ✔")
+assert M.KW_S03_BAY.bounds[1] - b03.bounds[1] <= 5.0 and b03.bounds[3] - M.KW_S03_BAY.bounds[3] <= 5.0
 print("  – żadne schody z antresoli nie prowadzą do kuluaru; schody reprezentacyjne leżą w pustce holu (strefa dymowa 2: hol +"
       " antresola radnych), oddzielonego od kuluaru drzwiami EI 30 S w pasażu i łączniku (I4) ✔")
 
@@ -371,8 +379,8 @@ for lift, pt, d, levels in M.LIFT_DOORS:
         free = FREE_S if lv.startswith("S") else FREE_A
         dep = depth(pt, d, free)              # pomiar od lica trzonu (punkt drzwi = lico), bez wliczania biegu schodów
         DEPTH[(lift, lv)] = dep
-        need = 3.6 if lv != "S*" else 1.6
-        ok = "✔ M.13 3,6" if dep >= 3.6 - 1e-9 and lv != "S*" else ("✔ WT § 195 1,6 (przystanek służbowy)" if lv == "S*" and dep >= 1.6 - 1e-9 else "✗")
+        need = 3.6
+        ok = "✔ M.13 3,6" if dep >= 3.6 - 1e-9 else "✗"
         print(f"  {lift} na {lv:4s}: głębokość wolna od lica trzonu {dep:.2f} m {ok}" + (f" (zapas {dep - need:.2f} m)" if dep >= need else ""))
 dA_min = {lv: min(v for (l, x), v in DEPTH.items() if l.startswith("A") and x == lv) for lv in ("S", "ANT")}
 print(f"  A1/A2 – najmniejsza wolna głębokość: S {dA_min['S']:.2f} m (A1: do biegu schodów v {M.STAIR_V[0]:.2f}), +30,90 {dA_min['ANT']:.2f} m"

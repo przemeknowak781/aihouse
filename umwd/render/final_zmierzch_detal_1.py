@@ -15,11 +15,14 @@ Dodatkowe klucze wpisu JSON obsługiwane przez tę nakładkę (wszystkie opcjona
 * ``"sila_nieba": 6.5`` – mnożnik kopuły nieba w ``budynek3d.swiatlo_dzienne`` (jak W9 w ``testy_budynek.py``):
   więcej chłodnego światła nieba na kamieniu względem ciepłych opraw; ekspozycję podaje się wtedy wprost
   (``"ekspozycja"``, wartość bezwzględna).
-* ``"liscie_drobne": {"promien_m": 32, "k": 4, "f": 0.5, "szer": 0.55, "margines_deg": 4}`` – drzewa i krzewy, których
+* ``"liscie_drobne": {"promien_m": 32, "k": 6, "f": 0.45, "szer": 0.55, "skupienie": 0.45, "rozrzut": 0.4,
+  "margines_deg": 4}`` – drzewa i krzewy, których
   korona wchodzi w kadr bliżej niż ``promien_m`` od kamery, dostają kopię prototypu z drobnymi liśćmi: każda karta
   liścia („rombik” ok. 0,23 m z ``drzewa.py``) zastąpiona przez ``k`` liści o długości ``f`` × karta, z maską alfa
-  kształtu liścia (owal zaostrzony, ogonek u nasady), rozsianych w obrębie karty, z losowym obrotem i pochyleniem.
-  Pole liści ≈ pole kart (korona tak samo gęsta i ciemna), krawędź korony czyta się jak koronka, nie „konfetti”.
+  kształtu liścia (owal zaostrzony, ogonek u nasady), rozsianych w obrębie karty, z losowym obrotem i pochyleniem;
+  karty przed podziałem ściągnięte o ``skupienie`` ku średniej 8 sąsiednich (liście w kępach przy gałązkach, bez
+  pojedynczych liści „w powietrzu”). Pole liści ≈ 1,2 × pole kart (korona gęstsza, nadal z prześwitami), krawędź
+  korony czyta się jak koronka, nie „konfetti”.
   Prototypy dalszych drzew bez zmian.
 * pomiar luminancji (zawsze, po renderze): promienie przez siatkę 96 × 120 pikseli → klasy (granit, ceramika,
   szkło korony, szkło biur, drzewa, niebo, …) i luminancja obrazu po postprodukcji w tych pikselach (mediana, p90,
@@ -149,6 +152,13 @@ def _siatka_drobna(ob_l, cfg, seed):
         me.attributes['lisc_rnd'].data.foreach_get('value', rnd)
     v0, v1, v2, v3 = Q[:, 0], Q[:, 1], Q[:, 2], Q[:, 3]
     C = (v1 + v3) / 2.0
+    # skupienie: karta przesunięta o α ku średniej 8 najbliższych kart – liście gromadzą się przy gałązkach,
+    # znikają pojedyncze liście „zawieszone w powietrzu” na obrzeżu korony (efekt konfetti)
+    alfa_sk = float(cfg.get('skupienie', 0.45))
+    if alfa_sk > 0 and nf > 16:
+        from scipy.spatial import cKDTree
+        _, nn = cKDTree(C).query(C, k=9)
+        C = C + alfa_sk * (C[nn[:, 1:]].mean(axis=1) - C)
     s = np.linalg.norm(v1 - v3, axis=1) / 0.60                       # rozmiar karty (drzewa.py: L2 = 0,30)
     th = v0 - C
     th /= np.maximum(np.linalg.norm(th, axis=1, keepdims=True), 1e-9)
@@ -165,7 +175,8 @@ def _siatka_drobna(ob_l, cfg, seed):
     si = np.repeat(s, k, 0)
     ti, bi, ni = np.repeat(th, k, 0), np.repeat(bh, k, 0), np.repeat(nh, k, 0)
     a_, c_, e_ = rng.uniform(-1, 1, n), rng.uniform(-1, 1, n), rng.normal(0, 1, n)
-    P = Ci + (ti * a_[:, None] * 0.50 + bi * c_[:, None] * 0.38 + ni * e_[:, None] * 0.10) * si[:, None]
+    rz = float(cfg.get('rozrzut', 0.40))
+    P = Ci + (ti * a_[:, None] * rz + bi * c_[:, None] * rz * 0.8 + ni * e_[:, None] * 0.10) * si[:, None]
     ang = rng.uniform(0, 2 * math.pi, n)
     ux = ti * np.cos(ang)[:, None] + bi * np.sin(ang)[:, None]
     n2 = ni + rng.normal(0, 0.45, (n, 3))

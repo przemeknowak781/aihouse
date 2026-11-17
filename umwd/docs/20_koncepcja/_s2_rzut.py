@@ -70,12 +70,12 @@ def base(ax, title):
 
 fig, axs = plt.subplots(2, 1, figsize=(11.0, 17.0))
 ax = axs[0]
-base(ax, "Kondygnacja S (+27,30) – wariant S-3 „hol z galerią” – v1.2 (trzon A wg I5; poprawki po weryfikacji scalenia)")
+base(ax, "Kondygnacja S (+27,30) – wariant S-3 „hol z galerią” – v1.2b (trzon A wg I5; poprawki po weryfikacji scalenia; decyzje v1.2b)")
 for k, g in S.items():
     draw(ax, g, COL[cat(k)], z=4)
     if k == "SWD.01":
         continue
-    nm = {"KUL": "KUL – kuluar 2,2 m (przy trzonie A 1,75 m; EI 30)", "KW.S.01": "pasaż", "KW.S.03": "łącznik", "KW.S.02": "doj.",
+    nm = {"KUL": "KUL – kuluar 2,25 m (przy trzonie A 1,80 m; EI 30)", "KW.S.01": "pasaż", "KW.S.03": "łącznik", "KW.S.02": "doj.",
           "KW.S.04": "schody", "SWD.02": "SWD.02 hol\n(2 kond. NW)"}.get(k, k)
     if k == "SWD.02":
         ax.text(8.2, 28.2, f"{nm}\n{g.area:.1f}", fontsize=5.2, ha="center", va="center", zorder=10)
