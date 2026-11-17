@@ -1,0 +1,410 @@
+[
+ {
+  "okno": "WS 5 – front od Wybrzeża, parter, oś 1",
+  "e": 118.75,
+  "n": 13.0,
+  "z_parapet_wzgl": 1.35,
+  "azymut_normalnej": 88.6,
+  "2027-03-20": {
+   "suma_min": 290,
+   "najdluzszy_ciagly_min": 290,
+   "bez_projektu_suma_min": 290
+  },
+  "2027-09-23": {
+   "suma_min": 335,
+   "najdluzszy_ciagly_min": 335,
+   "bez_projektu_suma_min": 335
+  }
+ },
+ {
+  "okno": "WS 5 – front od Wybrzeża, I p., oś 1",
+  "e": 118.75,
+  "n": 13.0,
+  "z_parapet_wzgl": 5.1,
+  "azymut_normalnej": 88.6,
+  "2027-03-20": {
+   "suma_min": 290,
+   "najdluzszy_ciagly_min": 290,
+   "bez_projektu_suma_min": 290
+  },
+  "2027-09-23": {
+   "suma_min": 335,
+   "najdluzszy_ciagly_min": 335,
+   "bez_projektu_suma_min": 335
+  }
+ },
+ {
+  "okno": "WS 5 – front od Wybrzeża, parter, oś 2",
+  "e": 118.75,
+  "n": 16.5,
+  "z_parapet_wzgl": 1.35,
+  "azymut_normalnej": 88.6,
+  "2027-03-20": {
+   "suma_min": 295,
+   "najdluzszy_ciagly_min": 295,
+   "bez_projektu_suma_min": 295
+  },
+  "2027-09-23": {
+   "suma_min": 340,
+   "najdluzszy_ciagly_min": 340,
+   "bez_projektu_suma_min": 340
+  }
+ },
+ {
+  "okno": "WS 5 – front od Wybrzeża, I p., oś 2",
+  "e": 118.75,
+  "n": 16.5,
+  "z_parapet_wzgl": 5.1,
+  "azymut_normalnej": 88.6,
+  "2027-03-20": {
+   "suma_min": 295,
+   "najdluzszy_ciagly_min": 295,
+   "bez_projektu_suma_min": 295
+  },
+  "2027-09-23": {
+   "suma_min": 340,
+   "najdluzszy_ciagly_min": 340,
+   "bez_projektu_suma_min": 340
+  }
+ },
+ {
+  "okno": "WS 5 – front od Wybrzeża, parter, oś 3",
+  "e": 118.75,
+  "n": 20.0,
+  "z_parapet_wzgl": 1.35,
+  "azymut_normalnej": 88.6,
+  "2027-03-20": {
+   "suma_min": 295,
+   "najdluzszy_ciagly_min": 295,
+   "bez_projektu_suma_min": 295
+  },
+  "2027-09-23": {
+   "suma_min": 340,
+   "najdluzszy_ciagly_min": 340,
+   "bez_projektu_suma_min": 340
+  }
+ },
+ {
+  "okno": "WS 5 – front od Wybrzeża, I p., oś 3",
+  "e": 118.75,
+  "n": 20.0,
+  "z_parapet_wzgl": 5.1,
+  "azymut_normalnej": 88.6,
+  "2027-03-20": {
+   "suma_min": 295,
+   "najdluzszy_ciagly_min": 295,
+   "bez_projektu_suma_min": 295
+  },
+  "2027-09-23": {
+   "suma_min": 340,
+   "najdluzszy_ciagly_min": 340,
+   "bez_projektu_suma_min": 340
+  }
+ },
+ {
+  "okno": "WS 5 – front od Wybrzeża, parter, oś 4",
+  "e": 118.75,
+  "n": 23.5,
+  "z_parapet_wzgl": 1.35,
+  "azymut_normalnej": 88.6,
+  "2027-03-20": {
+   "suma_min": 295,
+   "najdluzszy_ciagly_min": 295,
+   "bez_projektu_suma_min": 295
+  },
+  "2027-09-23": {
+   "suma_min": 340,
+   "najdluzszy_ciagly_min": 340,
+   "bez_projektu_suma_min": 340
+  }
+ },
+ {
+  "okno": "WS 5 – front od Wybrzeża, I p., oś 4",
+  "e": 118.75,
+  "n": 23.5,
+  "z_parapet_wzgl": 5.1,
+  "azymut_normalnej": 88.6,
+  "2027-03-20": {
+   "suma_min": 295,
+   "najdluzszy_ciagly_min": 295,
+   "bez_projektu_suma_min": 295
+  },
+  "2027-09-23": {
+   "suma_min": 340,
+   "najdluzszy_ciagly_min": 340,
+   "bez_projektu_suma_min": 340
+  }
+ },
+ {
+  "okno": "WS 5 – oficyna od ogrodu, parter, oś 1",
+  "e": 101.85,
+  "n": 12.5,
+  "z_parapet_wzgl": 1.35,
+  "azymut_normalnej": 267.9,
+  "2027-03-20": {
+   "suma_min": 220,
+   "najdluzszy_ciagly_min": 220,
+   "bez_projektu_suma_min": 220
+  },
+  "2027-09-23": {
+   "suma_min": 220,
+   "najdluzszy_ciagly_min": 220,
+   "bez_projektu_suma_min": 220
+  }
+ },
+ {
+  "okno": "WS 5 – oficyna od ogrodu, I p., oś 1",
+  "e": 101.85,
+  "n": 12.5,
+  "z_parapet_wzgl": 5.1,
+  "azymut_normalnej": 267.9,
+  "2027-03-20": {
+   "suma_min": 240,
+   "najdluzszy_ciagly_min": 240,
+   "bez_projektu_suma_min": 240
+  },
+  "2027-09-23": {
+   "suma_min": 240,
+   "najdluzszy_ciagly_min": 240,
+   "bez_projektu_suma_min": 240
+  }
+ },
+ {
+  "okno": "WS 5 – oficyna od ogrodu, parter, oś 2",
+  "e": 101.85,
+  "n": 16.0,
+  "z_parapet_wzgl": 1.35,
+  "azymut_normalnej": 267.9,
+  "2027-03-20": {
+   "suma_min": 220,
+   "najdluzszy_ciagly_min": 220,
+   "bez_projektu_suma_min": 220
+  },
+  "2027-09-23": {
+   "suma_min": 215,
+   "najdluzszy_ciagly_min": 215,
+   "bez_projektu_suma_min": 215
+  }
+ },
+ {
+  "okno": "WS 5 – oficyna od ogrodu, I p., oś 2",
+  "e": 101.85,
+  "n": 16.0,
+  "z_parapet_wzgl": 5.1,
+  "azymut_normalnej": 267.9,
+  "2027-03-20": {
+   "suma_min": 235,
+   "najdluzszy_ciagly_min": 235,
+   "bez_projektu_suma_min": 235
+  },
+  "2027-09-23": {
+   "suma_min": 235,
+   "najdluzszy_ciagly_min": 235,
+   "bez_projektu_suma_min": 235
+  }
+ },
+ {
+  "okno": "WS 5 – oficyna od ogrodu, parter, oś 3",
+  "e": 101.85,
+  "n": 19.5,
+  "z_parapet_wzgl": 1.35,
+  "azymut_normalnej": 267.9,
+  "2027-03-20": {
+   "suma_min": 215,
+   "najdluzszy_ciagly_min": 215,
+   "bez_projektu_suma_min": 215
+  },
+  "2027-09-23": {
+   "suma_min": 215,
+   "najdluzszy_ciagly_min": 215,
+   "bez_projektu_suma_min": 215
+  }
+ },
+ {
+  "okno": "WS 5 – oficyna od ogrodu, I p., oś 3",
+  "e": 101.85,
+  "n": 19.5,
+  "z_parapet_wzgl": 5.1,
+  "azymut_normalnej": 267.9,
+  "2027-03-20": {
+   "suma_min": 235,
+   "najdluzszy_ciagly_min": 235,
+   "bez_projektu_suma_min": 235
+  },
+  "2027-09-23": {
+   "suma_min": 235,
+   "najdluzszy_ciagly_min": 235,
+   "bez_projektu_suma_min": 235
+  }
+ },
+ {
+  "okno": "WS 5 – oficyna od ogrodu, parter, oś 4",
+  "e": 101.85,
+  "n": 23.0,
+  "z_parapet_wzgl": 1.35,
+  "azymut_normalnej": 267.9,
+  "2027-03-20": {
+   "suma_min": 215,
+   "najdluzszy_ciagly_min": 215,
+   "bez_projektu_suma_min": 235
+  },
+  "2027-09-23": {
+   "suma_min": 210,
+   "najdluzszy_ciagly_min": 210,
+   "bez_projektu_suma_min": 210
+  }
+ },
+ {
+  "okno": "WS 5 – oficyna od ogrodu, I p., oś 4",
+  "e": 101.85,
+  "n": 23.0,
+  "z_parapet_wzgl": 5.1,
+  "azymut_normalnej": 267.9,
+  "2027-03-20": {
+   "suma_min": 230,
+   "najdluzszy_ciagly_min": 230,
+   "bez_projektu_suma_min": 250
+  },
+  "2027-09-23": {
+   "suma_min": 230,
+   "najdluzszy_ciagly_min": 230,
+   "bez_projektu_suma_min": 230
+  }
+ },
+ {
+  "okno": "Maz. 19 – od podwórza, parter, oś 1",
+  "e": 61.568000000000005,
+  "n": -5.294,
+  "z_parapet_wzgl": 0.69,
+  "azymut_normalnej": 104.8,
+  "2027-03-20": {
+   "suma_min": 140,
+   "najdluzszy_ciagly_min": 140,
+   "bez_projektu_suma_min": 140
+  },
+  "2027-09-23": {
+   "suma_min": 145,
+   "najdluzszy_ciagly_min": 145,
+   "bez_projektu_suma_min": 145
+  }
+ },
+ {
+  "okno": "Maz. 19 – od podwórza, I p., oś 1",
+  "e": 61.568000000000005,
+  "n": -5.294,
+  "z_parapet_wzgl": 4.53,
+  "azymut_normalnej": 104.8,
+  "2027-03-20": {
+   "suma_min": 170,
+   "najdluzszy_ciagly_min": 170,
+   "bez_projektu_suma_min": 170
+  },
+  "2027-09-23": {
+   "suma_min": 170,
+   "najdluzszy_ciagly_min": 170,
+   "bez_projektu_suma_min": 170
+  }
+ },
+ {
+  "okno": "Maz. 19 – od podwórza, parter, oś 2",
+  "e": 62.465500000000006,
+  "n": -1.8865,
+  "z_parapet_wzgl": 0.69,
+  "azymut_normalnej": 104.8,
+  "2027-03-20": {
+   "suma_min": 145,
+   "najdluzszy_ciagly_min": 145,
+   "bez_projektu_suma_min": 145
+  },
+  "2027-09-23": {
+   "suma_min": 145,
+   "najdluzszy_ciagly_min": 145,
+   "bez_projektu_suma_min": 145
+  }
+ },
+ {
+  "okno": "Maz. 19 – od podwórza, I p., oś 2",
+  "e": 62.465500000000006,
+  "n": -1.8865,
+  "z_parapet_wzgl": 4.53,
+  "azymut_normalnej": 104.8,
+  "2027-03-20": {
+   "suma_min": 175,
+   "najdluzszy_ciagly_min": 175,
+   "bez_projektu_suma_min": 175
+  },
+  "2027-09-23": {
+   "suma_min": 175,
+   "najdluzszy_ciagly_min": 175,
+   "bez_projektu_suma_min": 175
+  }
+ },
+ {
+  "okno": "Maz. 19 – od podwórza, parter, oś 3",
+  "e": 63.36300000000001,
+  "n": 1.5209999999999988,
+  "z_parapet_wzgl": 0.69,
+  "azymut_normalnej": 104.8,
+  "2027-03-20": {
+   "suma_min": 145,
+   "najdluzszy_ciagly_min": 145,
+   "bez_projektu_suma_min": 145
+  },
+  "2027-09-23": {
+   "suma_min": 145,
+   "najdluzszy_ciagly_min": 145,
+   "bez_projektu_suma_min": 145
+  }
+ },
+ {
+  "okno": "Maz. 19 – od podwórza, I p., oś 3",
+  "e": 63.36300000000001,
+  "n": 1.5209999999999988,
+  "z_parapet_wzgl": 4.53,
+  "azymut_normalnej": 104.8,
+  "2027-03-20": {
+   "suma_min": 170,
+   "najdluzszy_ciagly_min": 170,
+   "bez_projektu_suma_min": 170
+  },
+  "2027-09-23": {
+   "suma_min": 170,
+   "najdluzszy_ciagly_min": 170,
+   "bez_projektu_suma_min": 170
+  }
+ },
+ {
+  "okno": "Maz. 19 – od podwórza, parter, oś 4",
+  "e": 64.1528,
+  "n": 4.5196000000000005,
+  "z_parapet_wzgl": 0.69,
+  "azymut_normalnej": 104.8,
+  "2027-03-20": {
+   "suma_min": 135,
+   "najdluzszy_ciagly_min": 135,
+   "bez_projektu_suma_min": 135
+  },
+  "2027-09-23": {
+   "suma_min": 135,
+   "najdluzszy_ciagly_min": 135,
+   "bez_projektu_suma_min": 135
+  }
+ },
+ {
+  "okno": "Maz. 19 – od podwórza, I p., oś 4",
+  "e": 64.1528,
+  "n": 4.5196000000000005,
+  "z_parapet_wzgl": 4.53,
+  "azymut_normalnej": 104.8,
+  "2027-03-20": {
+   "suma_min": 160,
+   "najdluzszy_ciagly_min": 160,
+   "bez_projektu_suma_min": 160
+  },
+  "2027-09-23": {
+   "suma_min": 160,
+   "najdluzszy_ciagly_min": 160,
+   "bez_projektu_suma_min": 160
+  }
+ }
+]
