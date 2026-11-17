@@ -39,7 +39,9 @@
   "wczytanie_blend_s": 0.5,
   "zrodlo_sceny": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/zmierzch_detal/scena_zd.blend",
   "scena_s": 0.5,
-  "kontrola_s": 0.6
+  "kontrola_s": 0.6,
+  "render_s": 20.7,
+  "postprodukcja_s": 0.3
  },
  "uwagi": [],
  "info": [
@@ -136,5 +138,7 @@
   }
  },
  "horyzont_y": 0.007,
- "pochylenie_deg": 0.0
+ "pochylenie_deg": 0.0,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/podglad_zmierzch-detal-4.png",
+ "jpg": "/home/user/aihouse/umwd/docs/60_wizualizacje/img/extra/podglad_zmierzch-detal-4.jpg"
 }
