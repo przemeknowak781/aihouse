@@ -11,7 +11,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import _s2_model as M  # noqa: E402
-from shapely.geometry import Point, LineString, box  # noqa: E402
+from shapely.geometry import Point, LineString, Polygon, box  # noqa: E402
 from shapely.ops import unary_union  # noqa: E402
 
 
@@ -346,48 +346,63 @@ print("  P1/P2 1 275 kg z kabiną 1,4 × 2,4 (v1.0): 3,36 m² > 2,95 m² ✗ →
 
 # -------------------------------------------------------------------------------------------------
 hr("[E5] Holy windowe – głębokość wolnej przestrzeni przed drzwiami (WT § 195 ≥ 1,6 m; M.13 ≥ 3,6 m)")
-CIRC_S = unary_union([S[k] for k in ("SWD.02", "KUL", "KW.S.01", "KW.S.02", "KW.S.03", "KW.S.04")])
-CIRC_A = unary_union([A[k] for k in ("SWD.02g", "KW.A.01", "KW.A.02")])
+FREE_S = unary_union([S[k] for k in ("SWD.02", "KUL", "KW.S.01", "KW.S.02", "KW.S.03")])   # bez biegu schodów KW.S.04
+FREE_A = unary_union([A[k] for k in ("SWD.02g", "KW.A.01", "KW.A.02")])
 
 
-def depth(pt, d, free, w=M.DOOR_W_LIFT):
-    """Największa głębokość prostokąta (szer. drzwi) przed drzwiami mieszczącego się w przestrzeni komunikacji."""
+def depth(pt, d, free, w=M.DOOR_W_LIFT, dmax=20.0, step=0.01):
+    """Głębokość prostokąta o szerokości drzwi przed drzwiami (od lica trzonu) mieszczącego się w wolnej podłodze komunikacji."""
     nx, ny = -d[1], d[0]
     best = 0.0
-    for i in range(1, 120):
-        dd = i * 0.05
+    for i in range(1, int(dmax / step) + 1):
+        dd = i * step
         q = [(pt[0] + nx * w / 2, pt[1] + ny * w / 2), (pt[0] - nx * w / 2, pt[1] - ny * w / 2),
              (pt[0] - nx * w / 2 + d[0] * dd, pt[1] - ny * w / 2 + d[1] * dd), (pt[0] + nx * w / 2 + d[0] * dd, pt[1] + ny * w / 2 + d[1] * dd)]
-        from shapely.geometry import Polygon
-        if Polygon(q).buffer(-0.01).within(free):
+        if Polygon(q).buffer(-0.001).within(free):
             best = dd
         else:
             break
     return best
 
 
+DEPTH = {}
 for lift, pt, d, levels in M.LIFT_DOORS:
     for lv in levels:
-        free = CIRC_S if lv.startswith("S") else CIRC_A
-        p0 = (pt[0] + d[0] * 0.26, pt[1] + d[1] * 0.26) if lift.startswith("A") else (pt[0] + d[0] * 0.01, pt[1] + d[1] * 0.01)
-        dep = depth(p0, d, free)
+        free = FREE_S if lv.startswith("S") else FREE_A
+        dep = depth(pt, d, free)              # pomiar od lica trzonu (punkt drzwi = lico), bez wliczania biegu schodów
+        DEPTH[(lift, lv)] = dep
         need = 3.6 if lv != "S*" else 1.6
-        print(f"  {lift} na {lv:4s}: głębokość wolna {dep:.2f} m {'✔ M.13 3,6' if dep >= 3.6 else ('✔ WT 1,6 (przystanek służbowy)' if dep >= 1.6 else '✗')}")
+        ok = "✔ M.13 3,6" if dep >= 3.6 - 1e-9 and lv != "S*" else ("✔ WT § 195 1,6 (przystanek służbowy)" if lv == "S*" and dep >= 1.6 - 1e-9 else "✗")
+        print(f"  {lift} na {lv:4s}: głębokość wolna od lica trzonu {dep:.2f} m {ok}" + (f" (zapas {dep - need:.2f} m)" if dep >= need else ""))
+dA_min = {lv: min(v for (l, x), v in DEPTH.items() if l.startswith("A") and x == lv) for lv in ("S", "ANT")}
+print(f"  A1/A2 – najmniejsza wolna głębokość: S {dA_min['S']:.2f} m (A1: do biegu schodów v {M.STAIR_V[0]:.2f}), +30,90 {dA_min['ANT']:.2f} m"
+      f" (A1: do otworu nad biegiem v {M.STAIR_V[0]:.2f}) – M.13 3,6 m spełnione z zapasem {min(dA_min.values()) - 3.6:.2f} m")
 bA = M.CORE_A_CELLS["przedsionek_A"].bounds
-print(f"  R: drzwi do przedsionka A (S i +30,90) – pole 1,5 × 1,5 m (MOE) w przedsionku {bA[2] - bA[0]:.2f} × {bA[3] - bA[1]:.2f} m ✔")
+print(f"  R: drzwi do przedsionka A (S i +30,90) – MOE w przedsionku {bA[2] - bA[0]:.2f} × {bA[3] - bA[1]:.2f} m – test [E6]")
 
 # -------------------------------------------------------------------------------------------------
-hr("[E6] Klatki i przedsionki na S i +30,90; MOE (dostepnosc.md pkt 8, D9)")
-for nm in ("przedsionek_A", "przedsionek_B"):
-    g = CELLS[nm]
-    b = g.bounds
-    print(f"  {nm}: {b[2] - b[0]:.2f} × {b[3] - b[1]:.2f} m = {g.area:.1f} m², MOE 1,5 × 1,5 m poza torem 1,2 m: "
-          f"{'✔' if min(b[2] - b[0], b[3] - b[1]) >= 2.4 or (b[2] - b[0]) * (b[3] - b[1]) >= 2.25 + 1.2 * 2.4 else '✗'}")
-g = A["KW.A.03"]
-b = g.bounds
-print(f"  przedsionek A' (+30,90): {b[2] - b[0]:.2f} × {b[3] - b[1]:.2f} m = {g.area:.1f} m² (MOE 1,5 × 1,5 przy ścianie trzonu)")
-print("  Klatka A i klatka B przedłużone do +30,90 (podest antresoli); klatka A: przedsionek A (drzwi wsch. na galerię)"
-      " i przedsionek A' (drzwi pn. z antresoli radnych) – drzwi z kontrolą dostępu, zwalniane przez SSP.")
+hr("[E6] Klatki i przedsionki na S i +30,90; MOE 1,5 × 1,5 m poza torem 1,2 m i polem otwierania skrzydeł (D9)")
+print("Test geometryczny (_s2_model.moe_search): tor ewakuacji 1,2 m = prosta od każdych drzwi wejściowych do drzwi klatki;"
+      " skrzydła drzwi wejściowych (szer. otworu) otwierane do przedsionka (kierunek ewakuacji), drzwi do klatki – do klatki;"
+      " przeszukanie siatką 0,05 m i układów zawiasów.")
+MOE = {}
+for nm, (room, din, dout) in M.przedsionki().items():
+    r = M.moe_search(room, din, dout)
+    b = room.bounds
+    MOE[nm] = r
+    dd = "; ".join(f"({p[0]:.2f}; {p[1]:.2f}) {w:.1f} m" for p, w in din)
+    if r:
+        mb = r["moe"].bounds
+        print(f"  przedsionek {nm}: {b[2] - b[0]:.2f} × {b[3] - b[1]:.2f} m = {room.area:.2f} m²; drzwi wejściowe {dd}; do klatki"
+              f" ({dout[0][0]:.2f}; {dout[0][1]:.2f}) {dout[1]:.1f} m → MOE u {mb[0]:.2f}–{mb[2]:.2f} × v {mb[1]:.2f}–{mb[3]:.2f} ✔"
+              f" (zawiasy {''.join('L' if h < 0 else 'P' for h in r['hinges'])})")
+    else:
+        print(f"  przedsionek {nm}: {b[2] - b[0]:.2f} × {b[3] - b[1]:.2f} m; drzwi {dd} → BRAK ułożenia MOE ✗")
+MOE_OK = all(MOE.values())
+print(f"  Wynik: MOE we wszystkich przedsionkach S i +30,90: {'✔' if MOE_OK else '✗'} (v1.2 przed poprawką: A' 2,00 × 3,00 m i drzwi B"
+      f" w u 27,0 – brak ułożenia)")
+print("  Klatka A i klatka B przedłużone do +30,90 (podest antresoli); klatka A: przedsionek A (drzwi pd. z korytarza publicznego,"
+      " wsch. z galerii) i przedsionek A' (drzwi pn. z antresoli radnych) – drzwi z kontrolą dostępu, zwalniane przez SSP.")
 bk = M.CORE_A_CELLS["klatka_A"].bounds
 bkB = M.CORE_B_CELLS["klatka_B"].bounds
 print(f"  v1.2 (I5): klatka A {bk[2] - bk[0]:.2f} × {bk[3] - bk[1]:.2f} m (trzon A wydłużony o 0,60 m na pd.), klatka B"
