@@ -416,6 +416,7 @@ U.ustaw_swiatlo = _ustaw_swiatlo_p
 
 
 def _kompozytor(sc, prefix):
+    sc.render.engine = 'CYCLES'          # pass Object Index istnieje tylko w Cycles (render_settings ustawia go później)
     vl = sc.view_layers[0]
     vl.use_pass_mist = True
     vl.use_pass_object_index = True
