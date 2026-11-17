@@ -24,7 +24,9 @@ K = json.loads((ROOT / "model" / "koncepcja.json").read_text(encoding="utf-8"))
 BM = json.loads((ROOT / "model" / "budynek.json").read_text(encoding="utf-8"))
 S = load_site()
 Z0 = 119.30
-k = 1000.0 / 200
+import os
+SCALE = int(os.environ.get('UMWD_SCALE', '200'))
+k = 1000.0 / SCALE
 ACC = "#a8483a"
 POCHE = "#1f1d1a"
 B = {b["id"]: b for b in K["bryly"]}
@@ -311,10 +313,10 @@ def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=()
     sx, sy = pad_l, H - 8
     for i in range(5):
         svg.poly([(sx + i * 2 * k, sy), (sx + (i + 1) * 2 * k, sy), (sx + (i + 1) * 2 * k, sy + 1.2), (sx + i * 2 * k, sy + 1.2)], fill=INK if i % 2 == 0 else "#fff", stroke=INK, sw=0.12)
-    svg.text((sx + 10 * k + 6, sy + 1.2), "0–10 m · 1:200", size=2.0, weight=600)
+    svg.text((sx + 10 * k + 6, sy + 1.2), f"0–10 m · 1:{SCALE}", size=2.0, weight=600)
     svg.P, svg.U, svg.uv_range = P, U, (u0, u1)
     if mode == "full":
-        out = ROOT / "build" / "rysunki" / f"przekroj_{name}_1-200.svg"
+        out = ROOT / "build" / "rysunki" / f"przekroj_{name}_1-{SCALE}.svg"
         out.write_text(svg.render(), encoding="utf-8")
     return svg
 
@@ -375,7 +377,7 @@ def main():
     total_h = sum(s.h_mm for s in res) + 12
     max_w = max(s.w_mm for s in res)
     body = "".join(f'<div style="margin:0 0 4mm 0">{s.render()}</div>' for s in res)
-    html = ROOT / "docs" / "70_rysunki" / "podglady" / "przekroje_1-200.html"
+    html = ROOT / "docs" / "70_rysunki" / "podglady" / f"przekroje_1-{SCALE}.html"
     html.write_text(f'<!doctype html><html><head><meta charset="utf-8"><style>@page{{size:{max_w+10:.0f}mm {total_h+10:.0f}mm;margin:0}}body{{margin:0;padding:5mm}}</style></head><body>{body}</body></html>', encoding="utf-8")
     print(f"{max_w + 10:.0f} {total_h + 10:.0f}")
 

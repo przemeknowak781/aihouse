@@ -123,7 +123,7 @@ def draw_faces(svg, faces, view_az, P, facing_tol=0.03, cut=None, debug=False):
                              extra=(f'stroke-dasharray="{extra}"' if extra else ""))
                 else:
                     pts = [P(u, z0) for u in us] + [P(u, z1) for u in reversed(us)]
-                    ex = (f'fill-opacity="{op}" ' if op < 1 else "") + (extra or "") + ' stroke-linejoin="round"'
+                    ex = (f'fill-opacity="{op}" ' if op < 1 else "") + (extra or "")
                     svg.poly(pts, fill=fill, stroke=stroke, sw=sw, extra=ex)
     if debug:
         for f in vis_faces:

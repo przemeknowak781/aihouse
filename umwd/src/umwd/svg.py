@@ -70,20 +70,22 @@ class Svg:
         return d + (" Z" if close else "")
 
     def poly(self, pts, fill="none", stroke="#000", sw=0.18, close=True, extra=""):
-        self.add(f'<path d="{self.path_d(pts, close)}" fill="{fill}" stroke="{stroke}" stroke-width="{sw:.3f}" '
-                 f'stroke-linejoin="round" stroke-linecap="round" {extra}/>')
+        dflt = "".join(f' {k}="round"' for k in ("stroke-linejoin", "stroke-linecap") if k not in (extra or ""))
+        self.add(f'<path d="{self.path_d(pts, close)}" fill="{fill}" stroke="{stroke}" stroke-width="{sw:.3f}"'
+                 f'{dflt} {extra}/>')
 
     def multipoly(self, rings_list, fill="none", stroke="#000", sw=0.18, extra=""):
         """rings_list: list of rings (each a list of points); uses evenodd so holes work."""
         d = " ".join(self.path_d(r, True) for r in rings_list if r)
         if d:
-            self.add(f'<path d="{d}" fill="{fill}" fill-rule="evenodd" stroke="{stroke}" stroke-width="{sw:.3f}" '
-                     f'stroke-linejoin="round" {extra}/>')
+            lj = '' if 'stroke-linejoin' in (extra or '') else ' stroke-linejoin="round"'
+            self.add(f'<path d="{d}" fill="{fill}" fill-rule="evenodd" stroke="{stroke}" stroke-width="{sw:.3f}"'
+                     f'{lj} {extra}/>')
 
     def line(self, a, b, stroke="#000", sw=0.18, dash=None, extra=""):
         da = f'stroke-dasharray="{dash}"' if dash else ""
         self.add(f'<line x1="{a[0]:.3f}" y1="{a[1]:.3f}" x2="{b[0]:.3f}" y2="{b[1]:.3f}" stroke="{stroke}" '
-                 f'stroke-width="{sw:.3f}" stroke-linecap="round" {da} {extra}/>')
+                 f'stroke-width="{sw:.3f}"{"" if "stroke-linecap" in (extra or "") else " stroke-linecap=\"round\""} {da} {extra}/>')
 
     def circle(self, c, r, fill="none", stroke="#000", sw=0.18, extra=""):
         self.add(f'<circle cx="{c[0]:.3f}" cy="{c[1]:.3f}" r="{r:.3f}" fill="{fill}" stroke="{stroke}" stroke-width="{sw:.3f}" {extra}/>')
@@ -151,3 +153,110 @@ def scale_bar(svg: Svg, xy, scale, metres=(0, 5, 10, 20), h=1.6, label=True):
         svg.text((x + m * 1000.0 / scale, y + h + 3.0), f"{m}", size=2.2, anchor="middle")
     if label:
         svg.text((x + L + 3, y + h), f"m   1:{int(scale)}", size=2.4, weight=500)
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# Rozszerzenia (rzuty 1:200) – prymitywy w milimetrach papieru. Nie zmieniają API powyżej.
+# ---------------------------------------------------------------------------------------------------------------
+INK = "#1f1d1a"
+
+
+def halo_extra(width=0.7, color="#ffffff"):
+    return f'stroke="{color}" stroke-width="{width:.2f}" stroke-linejoin="round" paint-order="stroke"'
+
+
+def arrow(svg: Svg, a, b, sw=0.25, head=1.6, color=INK, both=False):
+    """Strzałka z a do b (mm papieru)."""
+    svg.line(a, b, stroke=color, sw=sw)
+    def head_at(p, q):
+        dx, dy = p[0] - q[0], p[1] - q[1]
+        L = math.hypot(dx, dy) or 1.0
+        ux, uy = dx / L, dy / L
+        nx, ny = -uy, ux
+        p1 = (p[0] - ux * head + nx * head * 0.35, p[1] - uy * head + ny * head * 0.35)
+        p2 = (p[0] - ux * head - nx * head * 0.35, p[1] - uy * head - ny * head * 0.35)
+        svg.poly([p, p1, p2], fill=color, stroke="none")
+    head_at(b, a)
+    if both:
+        head_at(a, b)
+
+
+def dim_chain(svg: Svg, p0, p1, ticks, offset_dir, labels=None, size=1.8, sw=0.13, ext=1.2, color=INK, fmt=None):
+    """Łańcuch wymiarowy wzdłuż odcinka p0→p1 (mm). ticks: pozycje (0..1) wzdłuż odcinka; labels: teksty odcinków.
+    offset_dir: jednostkowy wektor 'na zewnątrz' (tekst po tej stronie)."""
+    dx, dy = p1[0] - p0[0], p1[1] - p0[1]
+    L = math.hypot(dx, dy) or 1.0
+    ux, uy = dx / L, dy / L
+    ox, oy = offset_dir
+    svg.line(p0, p1, stroke=color, sw=sw)
+    pts = [(p0[0] + dx * t, p0[1] + dy * t) for t in ticks]
+    for p in pts:
+        svg.line((p[0] - ox * ext * 0.6, p[1] - oy * ext * 0.6), (p[0] + ox * ext, p[1] + oy * ext), stroke=color, sw=sw)
+        # ukośna kreska 45°
+        a = (p[0] - (ux + ox) * 0.7, p[1] - (uy + oy) * 0.7)
+        b = (p[0] + (ux + ox) * 0.7, p[1] + (uy + oy) * 0.7)
+        svg.line(a, b, stroke=color, sw=sw * 2.2)
+    if labels:
+        ang = math.degrees(math.atan2(uy, ux))
+        if ang > 90 or ang < -90:
+            ang += 180
+        for i, lab in enumerate(labels):
+            if lab is None or i + 1 >= len(pts):
+                continue
+            m = ((pts[i][0] + pts[i + 1][0]) / 2 + ox * 1.0, (pts[i][1] + pts[i + 1][1]) / 2 + oy * 1.0)
+            svg.text(m, lab, size=size, anchor="middle", rot=ang, fill=color, extra='dominant-baseline="auto"')
+
+
+def axis_bubble(svg: Svg, c, label, r=3.0, size=2.6, color=INK, sw=0.18):
+    svg.circle(c, r, fill="#ffffff", stroke=color, sw=sw)
+    svg.text((c[0], c[1] + size * 0.36), label, size=size, anchor="middle", weight=600, fill=color)
+
+
+def level_mark(svg: Svg, xy, top, bottom=None, size=1.9, color=INK):
+    """Rzędna posadzki: krzyż w kole + opis (np. '+4,80' i '124,10 m n.p.m.')."""
+    x, y = xy
+    r = 1.3
+    svg.circle((x, y), r, fill="#ffffff", stroke=color, sw=0.15)
+    svg.poly([(x, y), (x + r, y), (x + r, y - 0), (x, y - r)], fill=color, stroke="none")
+    svg.poly([(x, y), (x - r, y), (x, y + r)], fill=color, stroke="none")
+    svg.text((x + 2.0, y - 0.3), top, size=size, weight=600, fill=color, extra=halo_extra(0.6))
+    if bottom:
+        svg.text((x + 2.0, y + size + 0.1), bottom, size=size * 0.85, fill="#4a4641", extra=halo_extra(0.6))
+
+
+def icon_wheelchair(svg: Svg, c, s=2.4, color=INK, bg="#ffffff"):
+    """Piktogram dostępności (uproszczony) w kwadracie o boku s mm."""
+    x, y = c
+    svg.poly([(x - s / 2, y - s / 2), (x + s / 2, y - s / 2), (x + s / 2, y + s / 2), (x - s / 2, y + s / 2)], fill=color, stroke="none")
+    k = s / 10.0
+    svg.circle((x - 0.6 * k, y - 3.0 * k), 0.85 * k, fill=bg, stroke="none")
+    svg.add(f'<path d="M{x - 0.9 * k:.3f},{y - 1.6 * k:.3f} L{x - 0.6 * k:.3f},{y + 0.9 * k:.3f} L{x + 2.2 * k:.3f},{y + 0.9 * k:.3f} '
+            f'L{x + 3.0 * k:.3f},{y + 3.0 * k:.3f}" fill="none" stroke="{bg}" stroke-width="{0.75 * k:.3f}" stroke-linecap="round" stroke-linejoin="round"/>')
+    svg.add(f'<path d="M{x - 2.6 * k:.3f},{y - 0.4 * k:.3f} A{2.6 * k:.3f},{2.6 * k:.3f} 0 1 0 {x + 1.4 * k:.3f},{y + 2.8 * k:.3f}" '
+            f'fill="none" stroke="{bg}" stroke-width="{0.65 * k:.3f}" stroke-linecap="round"/>')
+
+
+def icon_loop(svg: Svg, c, s=2.4, color=INK):
+    """Pętla indukcyjna – ucho + litera T (uproszczone)."""
+    x, y = c
+    svg.poly([(x - s / 2, y - s / 2), (x + s / 2, y - s / 2), (x + s / 2, y + s / 2), (x - s / 2, y + s / 2)], fill="#ffffff", stroke=color, sw=0.15)
+    k = s / 10.0
+    svg.add(f'<path d="M{x - 2.0 * k:.3f},{y + 1.0 * k:.3f} C{x - 3.2 * k:.3f},{y - 4.2 * k:.3f} {x + 3.4 * k:.3f},{y - 4.6 * k:.3f} '
+            f'{x + 1.6 * k:.3f},{y + 0.6 * k:.3f} C{x + 0.8 * k:.3f},{y + 2.6 * k:.3f} {x - 0.6 * k:.3f},{y + 2.0 * k:.3f} {x - 0.8 * k:.3f},{y + 3.6 * k:.3f}" '
+            f'fill="none" stroke="{color}" stroke-width="{0.7 * k:.3f}" stroke-linecap="round"/>')
+    svg.text((x + 2.6 * k, y + 3.8 * k), "T", size=3.4 * k, weight=700, anchor="middle", fill=color)
+
+
+def icon_moe(svg: Svg, c, s=2.6, color="#a8483a"):
+    """Miejsce oczekiwania na ewakuację – kwadrat z obwódką i literami MOE."""
+    x, y = c
+    svg.poly([(x - s / 2, y - s / 2), (x + s / 2, y - s / 2), (x + s / 2, y + s / 2), (x - s / 2, y + s / 2)], fill="#ffffff", stroke=color, sw=0.25)
+    svg.text((x, y + s * 0.18), "MOE", size=s * 0.36, weight=700, anchor="middle", fill=color)
+
+
+def icon_tyflo(svg: Svg, c, s=2.4, color=INK):
+    x, y = c
+    svg.poly([(x - s / 2, y - s / 2), (x + s / 2, y - s / 2), (x + s / 2, y + s / 2), (x - s / 2, y + s / 2)], fill="#ffffff", stroke=color, sw=0.15)
+    for i in range(3):
+        for j in range(2):
+            svg.circle((x - s * 0.16 + j * s * 0.32, y - s * 0.28 + i * s * 0.28), s * 0.07, fill=color, stroke="none")

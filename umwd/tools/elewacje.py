@@ -18,7 +18,8 @@ K = json.loads((ROOT / "model" / "koncepcja.json").read_text(encoding="utf-8"))
 SAS = json.loads((ROOT / "model" / "sasiedzi.json").read_text(encoding="utf-8"))
 S = load_site()
 Z0 = 119.30
-SCALE = 200
+import os
+SCALE = int(os.environ.get('UMWD_SCALE', '200'))
 DEBUG = '--debug' in sys.argv
 k = 1000.0 / SCALE
 
@@ -440,8 +441,8 @@ def elevation(name, title, sub, view_az, faces, ground_pts, mpzp, levels, u_pad=
                  fill=INK if i % 2 == 0 else "#ffffff", stroke=INK, sw=0.12)
     for i, t in enumerate(("0", "2", "4", "6", "8", "10 m")):
         svg.text((sx + i * 2 * k, sy + 4.0), t, size=1.8, anchor="middle")
-    svg.text((sx + 10 * k + 10, sy + 1.2), "1:200", size=2.2, weight=600)
-    out = ROOT / "build" / "rysunki" / f"elewacja_{name}_1-200.svg"
+    svg.text((sx + 10 * k + 10, sy + 1.2), f"1:{SCALE}", size=2.2, weight=600)
+    out = ROOT / "build" / "rysunki" / f"elewacja_{name}_1-{SCALE}.svg"
     out.write_text(svg.render(), encoding="utf-8")
     return svg, out
 
@@ -500,7 +501,7 @@ def main():
     body = ""
     for s, _ in res:
         body += f'<div style="margin:0 0 4mm 0">{s.render()}</div>'
-    html = ROOT / "docs" / "70_rysunki" / "podglady" / "elewacje_1-200.html"
+    html = ROOT / "docs" / "70_rysunki" / "podglady" / f"elewacje_1-{SCALE}.html"
     html.write_text(f'<!doctype html><html><head><meta charset="utf-8"><style>@page{{size:{max_w+10:.0f}mm {total_h+10:.0f}mm;margin:0}}body{{margin:0;padding:5mm}}</style></head><body>{body}</body></html>', encoding="utf-8")
     print(f"{max_w + 10:.0f} {total_h + 10:.0f}")
 
