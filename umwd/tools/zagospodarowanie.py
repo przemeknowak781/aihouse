@@ -167,17 +167,27 @@ N_NEW = len(new_trees) + len(river_trees)
 ENTR = [((103.2, 73.5), "1", "Brama Mostowa – wejście główne"), ((91.0, 76.6), "2", "wejście od skweru (podcień)"),
         ((114.6, 46.2), "3", "Wejście Obywatelskie (galeria Sejmiku)"), ((62.6, 69.8), "4", "wejście konferencyjne / bistro"),
         ((84.3, 42.6), "5", "wejście ogrodowe"), ((77.6, 41.5), "6", "rowerownia (50 st.)"),
-        ((51.8, 23.6), "7", "brama ogrodowa (przejście publiczne)"), ((116.4, 41.5), "8", "portal obsługi: zjazd do garażu, dostawy, trafo, odpady")]
+        ((51.8, 23.6), "7", "brama ogrodowa (przejście publiczne)"), ((114.6, 47.9), "8", "zjazd do garażu (brama 4,0 m, rampa jednopasowa), dostawy")]
 for (e, n), k, _ in ENTR:
     x, y = v.p(e, n)
     svg.circle((x, y), 2.1, fill=ACC, stroke="#ffffff", sw=0.25)
     svg.text((x, y + 0.75), k, size=2.1, anchor="middle", weight=700, fill="#ffffff")
 # ramp arrow from Wybrzeże into segment
-svg.line(v.p(124.0, 40.6), v.p(117.2, 40.2), stroke=INK, sw=0.35)
-svg.poly([v.p(117.2, 40.2), v.p(118.6, 41.0), v.p(118.6, 39.4)], fill=INK, stroke="none")
+svg.line(v.p(123.0, 48.4), v.p(116.3, 48.0), stroke=INK, sw=0.35)
+svg.poly([v.p(116.3, 48.0), v.p(117.7, 48.8), v.p(117.7, 47.2)], fill=INK, stroke="none")
 # fire access lines along streets (far lane)
 for ln in ([(36.0, -20.0), (49.0, 40.0), (55.0, 66.0)], [(122.0, 30.0), (119.5, 50.0), (115.0, 66.0), (110.0, 80.0)]):
     svg.poly([v.p(*p) for p in ln], fill="none", stroke="#c0392b", sw=0.45, close=False, extra='stroke-dasharray="2.2,1.2" stroke-opacity="0.8"')
+
+# ---------------- access to plot 10/2 (kept, R-214): parcel outline + arrow from Wybrzeże
+for it in S["dzialki"]["items"]:
+    if it.get("nr") == "10/2":
+        pg10 = Polygon(it["pts"]).buffer(0)
+        model_rings(svg, v, pg10, fill="none", stroke="#6f6a63", sw=0.25, extra='stroke-dasharray="1.0,0.6"')
+        c10 = pg10.centroid
+        svg.line(v.p(c10.x + 8.5, c10.y), v.p(c10.x - 4.0, c10.y), stroke="#3a3632", sw=0.3)
+        svg.poly([v.p(c10.x - 4.0, c10.y), v.p(c10.x - 2.6, c10.y + 0.8), v.p(c10.x - 2.6, c10.y - 0.8)], fill="#3a3632", stroke="none")
+        svg.text(v.p(c10.x + 9.0, c10.y - 2.4), "dojazd do dz. 10/2 zachowany", size=1.8, anchor="end", fill="#3a3632")
 
 # ---------------- boundaries
 model_rings(svg, v, comp, fill="none", stroke="#2f6f8f", sw=0.35, extra='stroke-dasharray="3,1.2"')
