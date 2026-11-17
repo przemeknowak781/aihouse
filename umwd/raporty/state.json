@@ -1,5 +1,5 @@
 {
- "title": "Synthesis of the winning concept K5 in progress; 3D context finished at street level (LOD3 neighbour from the official inventory, granite curbs, 3D grass, bridge helmets); curved-façade generator ready",
+ "title": "Pipeline integration test passed: the winning K5 massing (tower with R-14 m corner, Mazowiecka wing, SE segment) placed into the 3D context and rendered; synthesis spec still being written",
  "stages": [
   [
    "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
@@ -43,20 +43,20 @@
   ]
  ],
  "notes": [
-  "3D context (right, top): Mazowiecka 19 modelled from the official inventory drawing (pilasters with capitals, balusters, pediments on consoles, crowning cornice), weathered plaster, per-stone paving tones, granite curbs, 3D grass near camera, bridge pylon with the restored helmet in the distance.",
-  "Façade generator v2 (right, bottom): outline split into straight and curved 'runs'; bays distributed by arc length, so the piers follow the R-14 m bridgehead corner exactly — the signature element of the winning concept.",
-  "Synthesis brief to the lead designer: keep K5's single gesture; fix every juror objection (Sejmik level area & lobby corridor, presidium not against the light, no 'technical storey' above the hall, vertical rhythm with ceramic lamellas instead of horizontal bands, 3 m wall distance at plot 10/2, honest PV count); graft only ideas that strengthen the gesture.",
-  "Output will be machine-readable (model/koncepcja.json: volumes with coordinates & levels, cores, grid, façade parameters, camera list) so drawings, tables F.15/F.14.B and renders are generated from one source of truth.",
-  "Three independent verifiers (geometry/MPZP/§13; programme & Sejmik floor; cost/ecology/façades) will try to break the spec before revision."
+  "Integration test (right): K5 dossier coordinates → façade generator v2 (granite piers 2.70 m on the tower, ceramic bands on the wing) → full 3D context (survey terrain, river, bridge with helmets, autumn trees) → Cycles render in ~30 s at preview resolution.",
+  "First read of the massing: the tower stands back from the bridge portal, the wing closes the Mazowiecka frontage to No. 19, and the garden court opens south — consistent with the heritage brief ('rebuild the block, not the tenements').",
+  "Known issues to be resolved by the synthesis: the 12 m Sejmik storey (driven by the 35 m minimum roof height in zone A at only P+5) vs. an extra office floor (+1,146 m², ≈ +5 M PLN); presidium orientation; technical platform; façade language (vertical rhythm & lamellas).",
+  "Board design system ready (1000 × 700 mm, 12-column grid, Inter typography, terracotta accent, numbered header, anonymous).",
+  "Next steps once the spec lands: parametric model → floor plans 1:200 with room numbers/areas → sections/elevations → photoreal renders (incl. F.17 montages) → boards."
  ],
  "images": [
   {
-   "path": "umwd/raporty/img/ctx_maz.jpg",
-   "caption": "3D context test — Mazowiecka looking north (Mazowiecka 19 LOD3, bridge pylon behind)"
+   "path": "umwd/raporty/img/k5_ctx.jpg",
+   "caption": "Integration test: K5 base massing in the 3D context (aerial from NE) — not final architecture"
   },
   {
-   "path": "umwd/raporty/img/facade2_test.png",
-   "caption": "Curved-run façade generator test (piers follow the fillet)"
+   "path": "umwd/raporty/img/jury_scores.png",
+   "caption": "Why K5: unanimous jury ranking"
   }
  ]
 }

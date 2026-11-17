@@ -1,0 +1,63 @@
+{
+ "nr": 18,
+ "title": "Pipeline integration test passed: the winning K5 massing (tower with R-14 m corner, Mazowiecka wing, SE segment) placed into the 3D context and rendered; synthesis spec still being written",
+ "stages": [
+  [
+   "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register (184 requirements, 14 conflicts) + checklists ✔ verified",
+   "done"
+  ],
+  [
+   "Site ✔: zoning, heritage, 1934 overlay, DWG survey, geotech, dendrology (44 trees, keep-classes), neighbours (window positions & sills)",
+   "done"
+  ],
+  [
+   "Law ✔ (verified): WT 2002 expired 20.09.2026 → art. 102a Building Law bridge; fire ✔; accessibility ✔; zero-emission ✔",
+   "done"
+  ],
+  [
+   "Design research ✔ (verified): trends, visual craft, boards, façades, Wrocław context, cost model",
+   "done"
+  ],
+  [
+   "Programme ✔: 193 rooms, 187 offices (24/32 m², 1.35 m module), PU ≈ 8,600 m², GFA ≈ 14,000 m² above ground",
+   "done"
+  ],
+  [
+   "Concept panel ✔: K5 wins unanimously (5/5); synthesis K5 + grafts ► → 3 verifiers (geometry/MPZP/§13, programme/Sejmik, cost/eco) → revision",
+   "running"
+  ],
+  [
+   "3D/visuals: engines ✔; photomatch ✔; 3D context ✔ (street-level detail); curved façade generator ✔ → awaiting concept spec",
+   "running"
+  ],
+  [
+   "Stage I study (2 boards) + Stage II entry (≤8 boards 100×70 per clarif. 20), 5×A3 text, F.14.B/F.15 tables, white model 1:250",
+   "todo"
+  ],
+  [
+   "Jury simulation & compliance audit → iterate until no open issues",
+   "todo"
+  ]
+ ],
+ "notes": [
+  "Integration test (right): K5 dossier coordinates → façade generator v2 (granite piers 2.70 m on the tower, ceramic bands on the wing) → full 3D context (survey terrain, river, bridge with helmets, autumn trees) → Cycles render in ~30 s at preview resolution.",
+  "First read of the massing: the tower stands back from the bridge portal, the wing closes the Mazowiecka frontage to No. 19, and the garden court opens south — consistent with the heritage brief ('rebuild the block, not the tenements').",
+  "Known issues to be resolved by the synthesis: the 12 m Sejmik storey (driven by the 35 m minimum roof height in zone A at only P+5) vs. an extra office floor (+1,146 m², ≈ +5 M PLN); presidium orientation; technical platform; façade language (vertical rhythm & lamellas).",
+  "Board design system ready (1000 × 700 mm, 12-column grid, Inter typography, terracotta accent, numbered header, anonymous).",
+  "Next steps once the spec lands: parametric model → floor plans 1:200 with room numbers/areas → sections/elevations → photoreal renders (incl. F.17 montages) → boards."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/k5_ctx.jpg",
+   "caption": "Integration test: K5 base massing in the 3D context (aerial from NE) — not final architecture"
+  },
+  {
+   "path": "umwd/raporty/img/jury_scores.png",
+   "caption": "Why K5: unanimous jury ranking"
+  }
+ ]
+}
