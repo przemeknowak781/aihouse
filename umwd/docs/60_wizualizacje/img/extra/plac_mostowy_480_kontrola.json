@@ -1,0 +1,119 @@
+{
+ "id": "plac_mostowy",
+ "opis": "TEST skryptu – kamera 'plac_mostowy' z render/testy_budynek.py: Plac Mostowy (skwer 9/2) od pn.-zach.: elewacja pn. z podcieniem, łuk, lipy, dziób skrzydła",
+ "preset": "dzien",
+ "czas": "2026-10-23 14:30 CEST",
+ "slonce": {
+  "az": 210.42,
+  "el": 22.71,
+  "ekspozycja": -4.3,
+  "czas": "2026-10-23T14:30:00+02:00",
+  "udzial_opraw": 1.0,
+  "latarnie": 0
+ },
+ "kamera": {
+  "loc": [
+   68.0,
+   99.0,
+   1.67
+  ],
+  "cel": [
+   88.0,
+   72.0,
+   12.05
+  ],
+  "z_wzgl_kamery": 1.62,
+  "lens_mm": 24.0,
+  "shift_x": 0.0,
+  "shift_y": 0.28,
+  "poziom": true,
+  "rozdzielczosc": [
+   480,
+   320
+  ],
+  "sensor_fit": "AUTO (36 mm na dłuższym boku)"
+ },
+ "ludzie": false,
+ "probki": 16,
+ "czasy_s": {
+  "kontekst_s": 9.7,
+  "budynek_s": 4.1,
+  "zrodlo_sceny": "budowa od zera",
+  "scena_s": 13.8,
+  "kontrola_s": 24.6
+ },
+ "uwagi": [],
+ "info": [
+  "bryła ucięta u góry kadru (attyka poza kadrem) – zamierzone?"
+ ],
+ "promienie": [
+  "oś: wieza_elewacje 33.5 m",
+  "L-dół: niebo",
+  "P-dół: wieza_elewacje 28.7 m",
+  "L-góra: niebo",
+  "P-góra: wieza_elewacje 33.9 m",
+  "dół: male_32_liscie 22.4 m"
+ ],
+ "udzialy_kadru": {
+  "budynek": 0.578,
+  "niebo": 0.25,
+  "drzewa": 0.135,
+  "teren": 0.029,
+  "dalsze_otoczenie": 0.005,
+  "ulica": 0.003
+ },
+ "zaslona_pierwszego_planu": 0.0,
+ "najblizsza_przeszkoda": {
+  "obiekt": "teren_chodnik_bt",
+  "odl_m": 1.43
+ },
+ "oko_nad_podlozem_m": 1.43,
+ "podloze": "teren_chodnik_bt",
+ "budynek_w_kadrze": {
+  "x0": 0.278,
+  "x1": 1.257,
+  "y0": 0.005,
+  "y1": 1.603,
+  "uciete": [
+   "prawo",
+   "góra"
+  ],
+  "naroza_za_kamera": 0
+ },
+ "punkty_kluczowe": {
+  "Brama Mostowa – napis (+5,2)": {
+   "w_kadrze": true,
+   "x": 0.272,
+   "y": 0.167,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 43.4
+  },
+  "korona – lamele łuku (+31,7)": {
+   "w_kadrze": true,
+   "x": 0.272,
+   "y": 0.815,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 52.7
+  },
+  "attyka wieży (+37,2)": {
+   "w_kadrze": true,
+   "x": 0.272,
+   "y": 0.949,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 56.0
+  },
+  "cel kamery": {
+   "w_kadrze": true,
+   "x": 0.5,
+   "y": 0.389,
+   "widoczny": false,
+   "zaslania": "male_32_liscie",
+   "odl_m": 35.2
+  }
+ },
+ "horyzont_y": 0.08,
+ "pochylenie_deg": 0.0
+}

@@ -133,6 +133,7 @@ def zagospodarowanie(B):
     # --- ława okrągła przy łuku, ława w pasie od bulwaru, ślad pierzei 1934, stojaki rowerowe
     G = Geo()
     c, rr = PLAN['lawa_okragla']
+    c = _lawa_poza_lukiem(B, ctx, c, rr)
     ring = Point(*c).buffer(rr, 64).difference(Point(*c).buffer(rr - 0.5, 64))
     zc = float(zf([c[0]], [c[1]])[0])
     G.pryzma(ring, zc - 0.3, zc + 0.45, 'granit')
@@ -142,6 +143,8 @@ def zagospodarowanie(B):
     G.pryzma(q, zq - 0.3, zq + 0.45, 'granit')
     _slad_1934(B, G, zf)
     _stojaki(B, G, zf)
+    if B.o.get('ludzie'):
+        wozek(B, coll, zf)
     G.obiekt('lawy_slad1934_stojaki', coll, B.mat, B.DZ)
     # --- pnącza (winobluszcz na linkach) na ścianie pd. segmentu
     pnacza(B, coll)
@@ -197,6 +200,22 @@ def _przebuduj_trawnik(B, ctx, kon, wyciecie, plac):
     B.info['czasy_s']['nawierzchnie_przebudowa'] = round(time.time() - t0, 1)
 
 
+def _lawa_poza_lukiem(B, ctx, c, rr):
+    """Ława okrągła z planszy leży w pierścieniu podcienia (R 11–14) – przesunięcie promieniowe poza lico łuku
+    (R 14 + 0,3 m + promień ławy), a gdy wchodzi w jezdnię – obrót wokół środka łuku w stronę placu."""
+    cx, cy = B.spec.luk['srodek']
+    R = B.spec.luk['R_zewn']
+    v = np.array(c) - np.array([cx, cy])
+    a0 = math.atan2(v[1], v[0])
+    rad = R + 0.3 + rr
+    jezd = getattr(ctx, 'jezdnie_poly', None) if ctx is not None else None
+    for da in np.radians(np.arange(0, 60, 3)):
+        p = (cx + rad * math.cos(a0 + da), cy + rad * math.sin(a0 + da))
+        if jezd is None or not Point(*p).buffer(rr + 0.3).intersects(jezd):
+            return p
+    return (cx + rad * math.cos(a0), cy + rad * math.sin(a0))
+
+
 def _drzewa_rzeka(ctx):
     """6 drzew na chodniku od rzeki (Wybrzeże): 1,4 m za krawężnikiem wsch. (jak w tools/zagospodarowanie.py)."""
     U = ctx.site['ulice_i_sytuacja']
@@ -209,7 +228,7 @@ def _drzewa_rzeka(ctx):
     return out
 
 
-def _slad_1934(B, G, zf, szer=0.60, listwa=0.06):
+def _slad_1934(B, G, zf, szer=0.60, listwa=0.06):  # noqa: C901
     """Ślad pierzei z 1934 r. w posadzce Placu Mostowego: pas ciemniejszego granitu 0,60 m z listwą z brązu
     w osi i tablicą z planem kwartału (brąz) na zach. końcu."""
     L = LineString(PLAN['slad_1934'])
@@ -512,6 +531,134 @@ def _prototyp_czlowieka(nazwa, H=1.75, chod=0.0, plaszcz=0.36, kobieta=False, se
     return me
 
 
+def _krzywe(action):
+    """F-krzywe akcji (bpy 5.x: warstwy/kanały; starsze: action.fcurves)."""
+    if hasattr(action, 'fcurves') and action.fcurves:
+        return list(action.fcurves)
+    out = []
+    for lay in getattr(action, 'layers', []):
+        for st in lay.strips:
+            for cb in getattr(st, 'channelbags', []):
+                out += list(cb.fcurves)
+    return out
+
+
+def _torus(R, r, n=40, m=8):
+    """Torus w płaszczyźnie XZ (oś obrotu Y) – koło wózka. Zwraca (V, F)."""
+    V, F = [], []
+    for i in range(n):
+        a = 2 * math.pi * i / n
+        for j in range(m):
+            b = 2 * math.pi * j / m
+            rr = R + r * math.cos(b)
+            V.append((rr * math.cos(a), r * math.sin(b), rr * math.sin(a)))
+    for i in range(n):
+        for j in range(m):
+            a, b2 = i * m + j, ((i + 1) % n) * m + j
+            F.append((a, b2, ((i + 1) % n) * m + (j + 1) % m, i * m + (j + 1) % m))
+    return V, F
+
+
+def wozek(B, coll, zf):
+    """Osoba na wózku wjeżdżająca samodzielnie do Bramy Mostowej (oś przekątna, przed drzwiami głównymi R 11):
+    wózek aktywny (koła Ø 0,60 m, obręcze, kółka przednie, rama), sylwetka siedząca z metaballi."""
+    from mathutils import Vector
+    sp = B.spec
+    cx, cy = sp.luk['srodek']
+    R11 = sp.podcien_R
+    srodek = math.atan2(*reversed(np.subtract(sp.z_uv(40.0 - 14.0 + 14.0 * math.cos(math.radians(45)),
+                                                         15.7 + 14.0 * math.sin(math.radians(45))), (cx, cy))))
+    kier_n = np.array([math.cos(srodek), math.sin(srodek)])          # na zewnątrz łuku w osi przekątnej
+    p = np.array([cx, cy]) + kier_n * (R11 + 1.5)
+    z = float(zf([p[0]], [p[1]])[0])
+    mat = B.mat('ludzie')
+    mm = B.mat('metal')
+    # wózek – lokalnie: przód +y, koła po bokach x = ±0,30
+    Vt, Ft = _torus(0.30, 0.018)
+    Vo, Fo = _torus(0.27, 0.008)
+    Vk, Fk = _torus(0.07, 0.02, 16, 6)
+    G = Geo()
+    for sx in (-0.31, 0.31):
+        for V, F, (oy, oz), mt in ((Vt, Ft, (0.0, 0.30), 'wn_ciemne'), (Vo, Fo, (0.0, 0.30), 'metal'),
+                                   (Vk, Fk, (0.42, 0.09), 'wn_ciemne')):
+            Vs = [(x + sx + (0.025 if mt == 'metal' else 0) * np.sign(sx), y + oy, zz + oz) for x, y, zz in
+                  [(vx, vz, vy) for vx, vy, vz in V]]
+            for f in F:
+                G.face([Vs[i] for i in f], [(0, 0)] * len(f), mt)
+    # rama i siedzisko
+    for a, b in (((-0.27, -0.05, 0.50), (-0.27, 0.42, 0.50)), ((0.27, -0.05, 0.50), (0.27, 0.42, 0.50)),
+                 ((-0.27, 0.42, 0.50), (-0.27, 0.42, 0.12)), ((0.27, 0.42, 0.50), (0.27, 0.42, 0.12)),
+                 ((-0.27, -0.08, 0.50), (-0.27, -0.12, 0.92)), ((0.27, -0.08, 0.50), (0.27, -0.12, 0.92))):
+        L = LineString([a[:2], b[:2]])
+        z0, z1 = min(a[2], b[2]), max(a[2], b[2])
+        if L.length < 0.01:
+            G.pryzma(Point(a[:2]).buffer(0.014, 6), z0, z1, 'metal')
+        else:
+            G.pryzma(L.buffer(0.014, cap_style=2), z0, z0 + 0.03, 'metal')
+    G.pryzma(Polygon([(-0.25, -0.05), (0.25, -0.05), (0.25, 0.38), (-0.25, 0.38)]), 0.50, 0.54, 'wn_ciemne')
+    ob = G.obiekt('wozek', coll, B.mat, 0.0)
+    # sylwetka siedząca (metaballe)
+    mb = bpy.data.metaballs.new('siedzacy')
+    mb.resolution = mb.render_resolution = 0.018
+    mb.threshold = 0.6
+
+    def el(typ, co, r, sx=None, sy=None, sz=None, rot=None):
+        e = mb.elements.new(type=typ)
+        e.co = co
+        e.radius = r
+        e.stiffness = 4.0
+        if sx:
+            e.size_x = sx
+        if sy:
+            e.size_y = sy
+        if sz:
+            e.size_z = sz
+        if rot is not None:
+            e.rotation = rot
+        return e
+
+    def kaps(a, b, r):
+        a, b = Vector(a), Vector(b)
+        q = Vector((1, 0, 0)).rotation_difference((b - a).normalized())
+        el('CAPSULE', ((a + b) / 2)[:], r / 0.78, sx=(b - a).length / 2, rot=q)
+    for sx in (-0.11, 0.11):
+        kaps((sx, 0.0, 0.62), (sx, 0.42, 0.60), 0.085)          # uda
+        kaps((sx, 0.44, 0.58), (sx, 0.48, 0.16), 0.06)          # podudzia
+        el('ELLIPSOID', (sx, 0.54, 0.12), 0.07 / 0.78, sx=0.6, sy=1.4, sz=0.6)
+    for zz, rx in ((0.70, 0.19), (0.88, 0.20), (1.04, 0.21), (1.16, 0.20)):
+        el('ELLIPSOID', (0, -0.03, zz), rx / 0.78, sy=0.62, sz=0.7)
+    el('BALL', (0, -0.02, 1.27), 0.05 / 0.78)
+    el('ELLIPSOID', (0, 0.0, 1.38), 0.10 / 0.78, sx=0.8, sy=0.95, sz=1.1)
+    el('ELLIPSOID', (0, -0.02, 1.42), 0.10 / 0.78, sx=0.86, sy=0.92, sz=0.8)
+    for sx in (-1, 1):
+        kaps((sx * 0.21, -0.02, 1.14), (sx * 0.27, 0.05, 0.86), 0.055)
+        kaps((sx * 0.27, 0.05, 0.86), (sx * 0.31, 0.12, 0.62), 0.046)
+    tmp = bpy.data.objects.new('siedzacy_mb', mb)
+    bpy.context.scene.collection.objects.link(tmp)
+    dg = bpy.context.evaluated_depsgraph_get()
+    me = bpy.data.meshes.new_from_object(tmp.evaluated_get(dg))
+    bpy.data.objects.remove(tmp)
+    bpy.data.metaballs.remove(mb)
+    V = np.array([v.co[:] for v in me.vertices])
+    H = 1.50
+    a_ = me.attributes.new('fv', 'FLOAT', 'POINT')
+    fv = V[:, 2] / H
+    fv = np.where(fv < 0.42, np.minimum(fv, 0.30) * 0 + 0.2, fv)          # nogi (siedzące) – strefa spodni
+    a_.data.foreach_set('value', fv.astype(np.float32))
+    b_ = me.attributes.new('fu', 'FLOAT', 'POINT')
+    b_.data.foreach_set('value', np.full(len(V), 0.45, np.float32))
+    for pl in me.polygons:
+        pl.use_smooth = True
+    me.materials.append(mat)
+    os_ = bpy.data.objects.new('osoba_na_wozku', me)
+    coll.objects.link(os_)
+    rot = math.atan2(-kier_n[1], -kier_n[0]) - math.pi / 2           # przodem do drzwi (+y lokalnie)
+    for o in (ob, os_):
+        o.location = (p[0], p[1], z + B.DZ)
+        o.rotation_euler = (0, 0, rot)
+    B.info['wozek'] = [round(float(p[0]), 2), round(float(p[1]), 2)]
+
+
 def ludzie(B, ctx, coll, plac, zf):
     """Sylwetki ludzi na chodnikach i posadzkach w pobliżu budynku (ruch wzdłuż elewacji, ku wejściom)."""
     t0 = time.time()
@@ -582,5 +729,18 @@ def ludzie(B, ctx, coll, plac, zf):
             kier += math.pi
         kier += rng.normal(0, 0.35)
         ob.rotation_euler = (0, 0, kier - math.pi / 2)
+        if idzie and B.o.get('ruch_ludzi', True):
+            # lekkie rozmycie ruchu (ok. 1/8 s przy 1,3 m/s): klatki 0–2, migawka 1 klatka
+            v = np.array([math.cos(kier), math.sin(kier)]) * 0.16
+            for f in (0, 1, 2):
+                ob.location = (p[0] + v[0] * (f - 1), p[1] + v[1] * (f - 1), z + B.DZ)
+                ob.keyframe_insert('location', frame=f)
+            if ob.animation_data and ob.animation_data.action:
+                for fc in _krzywe(ob.animation_data.action):
+                    for kp in fc.keyframe_points:
+                        kp.interpolation = 'LINEAR'
+            B.sc.render.use_motion_blur = True
+            B.sc.render.motion_blur_shutter = 1.0
+            B.sc.frame_set(1)
     B.info['ludzie'] = len(poz)
     B.info['czasy_s']['ludzie'] = round(time.time() - t0, 1)
