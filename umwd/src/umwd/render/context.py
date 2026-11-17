@@ -1472,7 +1472,7 @@ def kamienica_maz19(ctx, g):
     T_M = 'tynk:b1a998:0.5:0'           # tynk szarobeżowy, zabrudzony, z ubytkami (zdjęcie F.17.B)
     T_B = 'tynk:a89f8e:0.5:0.6'         # boniowanie pasowe
     T_C = 'kamien_cokol'
-    TOP = 21.8                          # korona murka attykowego (≈140,31 m n.p.m.)
+    TOP = 140.25 - 118.51               # korona murka attykowego 140,25 m n.p.m. (site.json, M.07 przekrój A-A)
     # ---- front (zach.) u od narożnika pn. (szczyt) – rysunek s. 12, skala pozioma 1,80 cm/px
     R = Ramka(P[1], P[2], zr)
     k = R.L / 17.81
