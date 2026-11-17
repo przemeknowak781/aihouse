@@ -72,12 +72,15 @@ FONT_PT = {"body": 11.0, "table": 11.0, "caption": 11.0, "list": 11.0, "header":
            "h1": 18.0, "title": 26.0}
 LEADING = 1.32
 MIN_PT = 11.0
+# Chromium/HarfBuzz zapisuje rozmiar kroju w stałym przecinku 26.6 px (1/64 px) z obcięciem w dół: 11 pt = 14,667 px →
+# 14,656 px = 10,99 pt w PDF. Do CSS trafia rozmiar nominalny + 0,01 pt, żeby w PDF było ≥ 11,00 pt (sprawdzane z PDF).
+PT_COMP = 0.01
 TITLE = "Budynek administracyjny Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu – część opisowa"
 
 LAYOUTS = {
     # w, h [mm]; marginesy [mm]: góra (z paskiem nagłówka), dół, lewy, prawy; łamy, odstęp łamów
     "A3": dict(w=420.0, h=297.0, top=24.0, bottom=14.0, left=18.0, right=18.0, cols=3, gap=9.0),
-    "A4": dict(w=210.0, h=297.0, top=27.0, bottom=16.0, left=26.0, right=24.0, cols=1, gap=8.0),
+    "A4": dict(w=210.0, h=297.0, top=27.0, bottom=16.0, left=31.0, right=29.0, cols=1, gap=8.0),   # łam 150 mm ≈ 75–80 zn.
     "A4zal": dict(w=210.0, h=297.0, top=27.0, bottom=16.0, left=18.0, right=18.0, cols=1, gap=8.0),
 }
 STAGES = {
@@ -373,6 +376,7 @@ def typo(s):
     s = re.sub(rf"(?<![\w])({ABBR}\.?) +(?=[\w\d{S0}])", "\\1" + NBSP, s)      # ul. Mazowiecka, § 13, nr 5
     s = re.sub(rf"(?<=[\d{S1}]) (?=[^\s\d{S0}]{{1,6}}(?:[\s.,;:)!?]|$))", NBSP, s)   # 8,9 m · 150 mln · 26 %
     s = re.sub(r"(?<!\d)(\d{1,3})((?: \d{3})+)(?![\d])", lambda m: m.group(1) + m.group(2).replace(" ", NNBSP), s)
+    s = re.sub(r" (n\.p\.m\.|p\.p\.t\.|zł\b|m²|m³)", NBSP + r"\1", s)                # 156,50 m n.p.m. · mln zł
     return s
 
 
@@ -557,7 +561,7 @@ def render_blocks(blocks, ctx, src_dir, multicol):
             m = re.match(r"^((?:\d+\.)*\d+\.?|[A-Z]\.|[a-z]\))(\s|&nbsp;| )(.*)$", txt)
             if m and b["lvl"] >= 2:
                 txt = f'<span class="k">{m.group(1)}</span> {m.group(3)}'
-            if b["lvl"] == 1 and first and multicol:
+            if b["lvl"] == 1 and first:
                 cls.append("title")
             c = f' class="{" ".join(cls)}"' if cls else ""
             out.append(f"<h{b['lvl']}{c}>{txt}</h{b['lvl']}>")
@@ -708,7 +712,7 @@ def css_str(s):
 
 def make_css(lay, header_lines, page_label):
     L = LAYOUTS[lay]
-    f = FONT_PT
+    f = {k: round(v + PT_COMP, 2) for k, v in FONT_PT.items()}
     head = css_str("\n".join(header_lines)).replace("\n", "\\A ")
     box = (f"font-family: 'Inter', 'DejaVu Sans', sans-serif; font-size: {f['header']}pt; line-height: 1.22; "
            f"vertical-align: bottom; padding-bottom: 2.4mm; margin-bottom: 6.5mm; border-bottom: 0.3mm solid {INK};")
@@ -725,7 +729,7 @@ html {{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }}
 body {{ margin: 0; background: #fff; color: {INK}; font-family: 'Inter', 'DejaVu Sans', sans-serif;
        font-size: {f['body']}pt; line-height: {LEADING}; font-feature-settings: 'ss01' 1, 'kern' 1; font-kerning: normal; }}
 main.flow {{ {f"column-count: {L['cols']}; column-gap: {L['gap']}mm; column-rule: 0.2mm solid #d9d3ca; column-fill: balance;" if multicol else ""}
-       text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; orphans: 2; widows: 2; }}
+       text-align: justify; hyphens: auto; -webkit-hyphens: auto; orphans: 2; widows: 2; }}
 p {{ margin: 0 0 1.9mm 0; text-wrap: pretty; }}
 strong {{ font-weight: 600; }}
 em {{ font-style: italic; }}
@@ -748,14 +752,15 @@ ol > li::marker {{ color: {ACC}; font-weight: 600; }}
 li {{ margin: 0 0 0.7mm 0; text-wrap: pretty; }}
 li > ul, li > ol {{ margin: 0.7mm 0 0 0; }}
 table {{ border-collapse: collapse; width: 100%; margin: 1.2mm 0 3.2mm 0; font-size: {f['table']}pt; line-height: 1.25;
-         font-variant-numeric: tabular-nums; text-align: left; hyphens: manual; }}
+         text-align: left; hyphens: manual; }}
 table.small {{ break-inside: avoid; }}
 caption {{ caption-side: top; text-align: left; font-weight: 600; font-size: {f['caption']}pt; line-height: 1.25;
            padding: 0 0 1.4mm 0; break-after: avoid; }}
-th {{ font-weight: 600; border-bottom: 0.35mm solid {INK}; padding: 0.8mm 1.6mm 0.9mm 0; vertical-align: bottom; }}
-td {{ border-bottom: 0.2mm solid {RULE}; padding: 0.8mm 1.6mm 0.8mm 0; vertical-align: top; }}
+th {{ font-weight: 600; border-bottom: 0.35mm solid {INK}; padding: 0.8mm 3mm 0.9mm 0; vertical-align: bottom; }}
+td {{ border-bottom: 0.2mm solid {RULE}; padding: 0.8mm 3mm 0.8mm 0; vertical-align: top; }}
 th:last-child, td:last-child {{ padding-right: 0; }}
 td.r, th.r {{ text-align: right; white-space: nowrap; }}
+td.r {{ font-variant-numeric: tabular-nums; }}
 td.c, th.c {{ text-align: center; }}
 thead {{ display: table-header-group; }}
 tr {{ break-inside: avoid; }}
@@ -769,8 +774,8 @@ figcaption {{ font-size: {f['caption']}pt; color: {GREY}; line-height: 1.25; mar
 
 
 def css_min_font(css):
-    """Najmniejszy rozmiar czcionki zadeklarowany w CSS (pt) – kontrola statyczna."""
-    sizes = [float(x) for x in re.findall(r"font-size:\s*([\d.]+)pt", css)]
+    """Najmniejszy nominalny rozmiar czcionki zadeklarowany w CSS (pt, bez kompensacji PT_COMP) – kontrola statyczna."""
+    sizes = [round(float(x) - PT_COMP, 2) for x in re.findall(r"font-size:\s*([\d.]+)pt", css)]
     bad = re.findall(r"font-size:\s*[\d.]+(?:px|em|rem|%)|font:\s", css)
     if bad:
         raise OpisError(f"CSS zawiera rozmiary czcionek spoza pt: {bad}")
@@ -987,7 +992,7 @@ def render_stage(stage, src, outdir, png=True, quiet=False):
         rep["kod"] = 2
     bad_fmt = [f for part in rep["czesci"].values() for f in part["format_mm"]
                if abs(f[0] - LAYOUTS[part_l(part)]["w"]) > 0.6 or abs(f[1] - LAYOUTS[part_l(part)]["h"]) > 0.6]
-    font_bad = any((p["min_pt"] or 0) < MIN_PT - 0.01 or p["css_min_pt"] < MIN_PT for p in rep["czesci"].values())
+    font_bad = any((p["min_pt"] or 0) < MIN_PT - 0.005 or p["css_min_pt"] < MIN_PT for p in rep["czesci"].values())
     if (bad_fmt or font_bad or any(p["przepelnienia"] for p in rep["czesci"].values())) and rep["kod"] == 0:
         rep["kod"] = 4
     (outdir / f"{name}_kontrola.json").write_text(json.dumps(rep, ensure_ascii=False, indent=1), encoding="utf-8")
@@ -1117,17 +1122,17 @@ def pdf_text_flags(pdf):
     return flags
 
 
-def build_zeszyt(stage, allow_missing, png=True):
+def build_zeszyt(stage, allow_missing, png=True, src=None, outdir=OUT):
     st = STAGES[stage]
-    src = SRC_DIR / st["src"]
+    src = Path(src) if src else SRC_DIR / st["src"]
     if not src.exists():
-        raise OpisError(f"brak {src.relative_to(ROOT)} – zeszyt wymaga tekstu (fixture'y: --test)")
-    rep = render_stage(stage, src, OUT, png=png)
+        raise OpisError(f"brak {src} – zeszyt wymaga tekstu (fixture'y: --test)")
+    rep = render_stage(stage, src, outdir, png=png)
     if rep["kod"] == 2:
         raise OpisError("tekst przekracza limit stron – zeszyt nie zostanie złożony")
     if rep["kod"]:
         raise OpisError(f"kontrola tekstu nie przeszła (kod {rep['kod']}) – zeszyt nie zostanie złożony")
-    comps = [(f"Część opisowa – tekst ({st['label']})", OUT / f"{st['name']}.pdf")]
+    comps = [(f"Część opisowa – tekst ({st['label']})", outdir / f"{st['name']}.pdf")]
     tables = ["F.15.A", "F.15.B", "F.15.C", "F.14.B"] if stage == 2 else ["F.14.A"]
     names = {"F.15.A": "F.15.A – Tabela programowa", "F.15.B": "F.15.B – Zestawienie pomieszczeń",
              "F.15.C": "F.15.C – Dane bilansowe", "F.14.B": "F.14.B – Informacja o kosztach (Etap II)",
@@ -1156,22 +1161,22 @@ def build_zeszyt(stage, allow_missing, png=True):
         e = OpisError("zeszyt niekompletny – brak elementów obowiązkowych (uruchom z --allow-missing dla wersji roboczej)")
         e.code = 3
         raise e
-    zdir = OUT if stage == 2 else OUT / "etap1"
+    zdir = outdir if stage == 2 else outdir / "etap1"
     zdir.mkdir(parents=True, exist_ok=True)
     cache = OUT / "_a3"
     jpgs = [board_a3(stage, n, cache, notes) for n in ns]
     from pypdf import PdfReader, PdfWriter
     w = PdfWriter()
     for title, p in comps:
-        w.append(str(p), outline_item=title, import_outline=(p.parent == OUT))
+        w.append(str(p), outline_item=title, import_outline=(p.parent == outdir))
     if jpgs:
         bp = cache / f"_plansze_etap{stage}.pdf"
         images_pdf(jpgs, bp)
         start = len(w.pages)
         w.append(str(bp), import_outline=False)
-        parent = w.add_outline_item("Plansze pomniejszone do A3", start)
+        parent = w.add_outline_item(title="Plansze pomniejszone do A3", page_number=start)
         for k, n in enumerate(ns):
-            w.add_outline_item(f"Plansza {n}", start + k, parent=parent)
+            w.add_outline_item(title=f"Plansza {n}", page_number=start + k, parent=parent)
     neutral_writer(w, f"Część opisowa – {st['label']}")
     out = zdir / "CZESC_OPISOWA.pdf"
     tmp = out.with_suffix(".tmp.pdf")
@@ -1294,7 +1299,7 @@ def run_tests(png=True):
     t("strony ≤ 5", p2["strony"] <= 5, f"{p2['strony']} str.")
     t("format A3 poziomo na każdej stronie (±0,6 mm)", all(abs(f[0] - 420) <= 0.6 and abs(f[1] - 297) <= 0.6
                                                            for f in p2["format_mm"]), str(p2["format_mm"][:1]))
-    t("najmniejsza czcionka w PDF ≥ 11 pt", (p2["min_pt"] or 0) >= MIN_PT - 0.01, f"{p2['min_pt']} pt")
+    t("najmniejsza czcionka w PDF ≥ 11 pt", (p2["min_pt"] or 0) >= MIN_PT - 0.005, f"{p2['min_pt']} pt")
     t("najmniejsza czcionka w CSS ≥ 11 pt", p2["css_min_pt"] >= MIN_PT, f"{p2['css_min_pt']} pt")
     t("tylko kroje Inter / Inter Display", not p2["zastepcze"], ", ".join(sorted(p2["czcionki"])))
     t("brak przepełnień łamów", not p2["przepelnienia"], str(p2["przepelnienia"][:2]))
@@ -1321,11 +1326,41 @@ def run_tests(png=True):
     t("format A4 pionowo (±0,6 mm)", all(abs(f[0] - 210) <= 0.6 and abs(f[1] - 297) <= 0.6
                                          for part in r1["czesci"].values() for f in part["format_mm"]))
     t("najmniejsza czcionka w PDF ≥ 11 pt (tekst + zał.)",
-      all((p["min_pt"] or 0) >= MIN_PT - 0.01 for p in r1["czesci"].values()))
+      all((p["min_pt"] or 0) >= MIN_PT - 0.005 for p in r1["czesci"].values()))
     t("brak przepełnień", not any(p["przepelnienia"] for p in r1["czesci"].values()))
     from pypdf import PdfReader
     n_all = len(PdfReader(str(tout / "opis_etap1_A4.pdf")).pages)
     t("PDF Etapu I = tekst + załącznik", n_all == p1["strony"] + r1["czesci"]["zalacznik"]["strony"], f"{n_all} str.")
+    log("== 7. zeszyt Etapu II (tekst fixture'u + F.15.A/B/C + F.14.B + plansze A3)")
+    try:
+        zc = build_zeszyt(2, False, False, TEST_DIR / "etap2_opis.md", tout)
+        zp = tout / "CZESC_OPISOWA.pdf"
+        rz = PdfReader(str(zp))
+        exp_n = p2["strony"] + sum(len(PdfReader(str(ROOT / "build" / "tabele" / f"{c}.pdf")).pages)
+                                   for c in ("F.15.A", "F.15.B", "F.15.C", "F.14.B")) + len(board_numbers(2))
+        t("zeszyt złożony, liczba stron = tekst + tabele + plansze", zc == 0 and len(rz.pages) == exp_n,
+          f"{len(rz.pages)} / oczekiwano {exp_n}")
+        k = 72 / 25.4
+        t("wszystkie strony zeszytu A3 poziomo (±1 mm)", all(abs(float(pg.mediabox.width) / k - 420) <= 1 and
+                                                         abs(float(pg.mediabox.height) / k - 297) <= 1 for pg in rz.pages))
+        md = check_metadata(zp)
+        t("metadane zeszytu neutralne (tylko /Title), bez XMP", md["ok"], str(md["metadane"]))
+        t("zakładki PDF (tekst, tabele, plansze)", len(rz.outline) >= 6, f"{len(rz.outline)} pozycji najwyższego poziomu")
+        t("zeszyt ≤ 100 MB (R-131)", zp.stat().st_size <= 100 * 2 ** 20, f"{zp.stat().st_size / 2 ** 20:.1f} MB")
+    except OpisError as e:
+        t("zeszyt Etapu II złożony", False, str(e))
+    log("== 8. zeszyt Etapu I bez F.14.A → odmowa (kod 3); z --allow-missing → wersja robocza")
+    f14a = ROOT / "build" / "tabele" / "F.14.A.pdf"
+    if f14a.exists():
+        t("F.14.A istnieje – test odmowy pominięty", True)
+    else:
+        try:
+            build_zeszyt(1, False, False, TEST_DIR / "etap1_opis.md", tout)
+            t("odmowa przy braku F.14.A", False)
+        except OpisError as e:
+            t("odmowa przy braku F.14.A (kod 3)", e.code == 3, str(e))
+        zc1 = build_zeszyt(1, True, False, TEST_DIR / "etap1_opis.md", tout)
+        t("wersja robocza z --allow-missing (kod 3, plik powstał)", zc1 == 3 and (tout / "etap1" / "CZESC_OPISOWA.pdf").exists())
     log(f"== WYNIK: {len(ok)} PASS, {len(fail)} FAIL")
     for f in fail:
         log(f"   FAIL: {f}")
@@ -1362,10 +1397,12 @@ def main(argv=None):
             return run_tests(png)
         if a.zeszyt or a.zeszyt_etap1:
             code = 0
+            if a.src and a.zeszyt and a.zeszyt_etap1:
+                ap.error("--src z jednym rodzajem zeszytu naraz")
             if a.zeszyt:
-                code = max(code, build_zeszyt(2, a.allow_missing, png))
+                code = max(code, build_zeszyt(2, a.allow_missing, png, a.src, a.out.resolve()))
             if a.zeszyt_etap1:
-                code = max(code, build_zeszyt(1, a.allow_missing, png))
+                code = max(code, build_zeszyt(1, a.allow_missing, png, a.src, a.out.resolve()))
             return code
         if a.src and a.etap not in ("1", "2"):
             ap.error("--src wymaga --etap 1 albo --etap 2")

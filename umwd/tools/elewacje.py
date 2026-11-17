@@ -729,6 +729,10 @@ def elevation(name, title, sub, view_az, faces, ground_pts, mpzp, levels, u_pad=
         u0 = min(u0, min(us) - 1.0); u1 = max(u1, max(us) + 1.0)
     pad_l = 30
     W = pad_l + (u1 - u0) * k + pad_r
+    # linie MPZP przycięte do zakresu rysunku; arkusz poszerzony tak, by opisy z prawej nie były ucinane
+    for (ua, ub, z, lab, side) in mpzp:
+        if side == "r":
+            W = max(W, pad_l + (min(ub, u1) - u0) * k + 1.2 + len(lab) * 1.9 * 0.56 + 1.5)
     H = pad_t + 48 * k + pad_b
     svg = Svg(W, H)
     oy = pad_t + 46 * k
@@ -752,12 +756,17 @@ def elevation(name, title, sub, view_az, faces, ground_pts, mpzp, levels, u_pad=
     svg.poly([P(u, z) for u, z in gp], fill="none", stroke=INK, sw=0.45, close=False)
     # MPZP limits
     for (ua, ub, z, lab, side) in mpzp:
+        ua, ub = max(ua, u0), min(ub, u1)
+        if ub - ua < 0.5:
+            continue
         a, b = P(ua, z), P(ub, z)
         svg.line(a, b, stroke="#a8483a", sw=0.22, dash="2.2,1.0")
         if side == "r":
             svg.text((b[0] + 1.2, b[1] + 0.8), lab, size=1.9, fill="#a8483a")
-        else:
+        elif a[0] - 1.2 - len(lab) * 1.9 * 0.56 >= pad_l:
             svg.text((a[0] - 1.2, a[1] + 0.8), lab, size=1.9, fill="#a8483a", anchor="end")
+        else:                            # linia od krawędzi rysunku – opis nad linią, wewnątrz ramki (bez kolizji z rzędnymi)
+            svg.text((a[0] + 0.8, a[1] - 0.7), lab, size=1.9, fill="#a8483a")
     # level marks
     x = pad_l - 8
     y_prev = -1e9
@@ -846,7 +855,7 @@ def main():
     dd = frame(az)[0]
     pc = uv(U_CUT, 0.0)
     res.append(elevation("Sg", "ELEWACJA SEGMENTU OD DZIEDZIŃCA",
-                         "elewacja zachodnia segmentu i wieży (żaluzje agregatu, trafo i dry-coolera) · przekrój przez skrzydło 1,0 m przed licem wieży",
+                         "elewacja zach. segmentu i wieży · przekrój przez skrzydło przy wieży",
                          az, ours,
                          [(*uv(U_CUT, 34.0), 119.45), (*uv(U_CUT, 29.7), 119.43), (*uv(U_CUT, 0.0), 119.00), (*uv(U_CUT, -4.0), 118.87),
                           (*uv(U_CUT, -8.0), 118.90), (*uv(U_CUT, -12.0), 118.80)],
