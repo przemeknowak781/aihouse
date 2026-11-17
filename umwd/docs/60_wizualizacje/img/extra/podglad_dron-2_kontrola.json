@@ -1,0 +1,139 @@
+{
+ "id": "dron-2",
+ "opis": "DRON 2 – pół-ukos 50° na cały kwartał od wsch.-pd.-wsch.: dron 124 m nad Odrą (Z 120), oś az 290°. Wieża z dachem BIPV w prawej górnej tercji, skrzydło Mazowieckie z dachem BIPV u góry, Ogród Województwa (jesienne korony) i dziedziniec w środku między skrzydłem, wieżą i Wybrzeżem Słowackiego 5, taras segmentu przy wieży; nabrzeże z barkami i szpalerem prowadzi przekątną od dołu do portalu mostu przy prawej krawędzi. Horyzont poza kadrem. 1.10 11:30 (az 158°, el 33°) – słońce z tyłu po lewej: elewacje pd. w pełnym świetle, wschodnie w świetle ślizgowym (relief filarów), cienie ku pn.-pn.-zach.",
+ "preset": "lot",
+ "czas": "2026-10-01 11:30 CEST",
+ "slonce": {
+  "az": 158.43,
+  "el": 33.54,
+  "ekspozycja": -4.3,
+  "czas": "2026-10-01T11:30:00+02:00",
+  "udzial_opraw": 1.0,
+  "latarnie": 0
+ },
+ "kamera": {
+  "loc": [
+   195.0,
+   0.0,
+   120.0
+  ],
+  "cel": [
+   104.32,
+   33.0,
+   5.0
+  ],
+  "z_wzgl_kamery": 119.95,
+  "lens_mm": 30.0,
+  "shift_x": 0.0,
+  "shift_y": 0.0,
+  "poziom": false,
+  "rozdzielczosc": [
+   480,
+   320
+  ],
+  "sensor_fit": "AUTO (36 mm na dłuższym boku)"
+ },
+ "ludzie": false,
+ "probki": 16,
+ "czasy_s": {
+  "wczytanie_blend_s": 0.5,
+  "zrodlo_sceny": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/dron/scena_final.blend",
+  "scena_s": 0.9,
+  "kontrola_s": 1.0,
+  "render_s": 19.4,
+  "postprodukcja_s": 0.4
+ },
+ "uwagi": [],
+ "info": [
+  "kamera poza ramką mapy (e 11–152, n -36–148): z tej strony teren to ortofotomapa, zabudowa – proste bryły"
+ ],
+ "promienie": [
+  "oś: Wybrzeze_Slowackiego_5_LOD3 130.5 m",
+  "L-dół: teren_teren 145.2 m",
+  "P-dół: woda 149.4 m",
+  "L-góra: teren_teren 218.7 m",
+  "P-góra: duze_11_galezie 185.8 m",
+  "dół: woda 135.8 m"
+ ],
+ "udzialy_kadru": {
+  "woda": 0.255,
+  "teren": 0.18,
+  "zabudowa_kontekstu": 0.141,
+  "budynek": 0.125,
+  "drzewa": 0.12,
+  "ortofoto_plaskie": 0.099,
+  "dalsze_otoczenie": 0.065,
+  "most": 0.016
+ },
+ "zaslona_pierwszego_planu": 0.0,
+ "najblizsza_przeszkoda": {
+  "obiekt": null,
+  "odl_m": 1000000000.0
+ },
+ "oko_nad_podlozem_m": 123.75,
+ "podloze": "woda",
+ "budynek_w_kadrze": {
+  "wieża": {
+   "x0": 0.483,
+   "x1": 0.737,
+   "y0": 0.457,
+   "y1": 0.956,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  },
+  "skrzydło": {
+   "x0": 0.293,
+   "x1": 0.608,
+   "y0": 0.639,
+   "y1": 0.864,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  },
+  "segment": {
+   "x0": 0.515,
+   "x1": 0.618,
+   "y0": 0.418,
+   "y1": 0.673,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  }
+ },
+ "punkty_kluczowe": {
+  "Brama Mostowa – napis (+5,2)": {
+   "w_kadrze": true,
+   "x": 0.702,
+   "y": 0.59,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 164.5
+  },
+  "korona – lamele łuku (+31,7)": {
+   "w_kadrze": true,
+   "x": 0.732,
+   "y": 0.757,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 147.2
+  },
+  "attyka wieży (+37,2)": {
+   "w_kadrze": true,
+   "x": 0.739,
+   "y": 0.797,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 144.0
+  },
+  "cel kamery": {
+   "w_kadrze": true,
+   "x": 0.5,
+   "y": 0.5,
+   "widoczny": false,
+   "zaslania": "Wybrzeze_Slowackiego_5_LOD3",
+   "odl_m": 150.1
+  }
+ },
+ "horyzont_y": 1.99,
+ "pochylenie_deg": -50.0,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/podglad_dron-2.png",
+ "jpg": "/home/user/aihouse/umwd/docs/60_wizualizacje/img/extra/podglad_dron-2.jpg"
+}

@@ -2,12 +2,12 @@
  "id": "zmierzch-detal-4",
  "opis": "",
  "preset": "dzien",
- "czas": "2026-10-23 09:15 CEST",
+ "czas": "2026-10-23 09:50 CEST",
  "slonce": {
-  "az": 129.07,
-  "el": 13.89,
+  "az": 136.95,
+  "el": 17.88,
   "ekspozycja": -4.3,
-  "czas": "2026-10-23T09:15:00+02:00",
+  "czas": "2026-10-23T09:50:00+02:00",
   "udzial_opraw": 1.0,
   "latarnie": 0
  },
@@ -39,8 +39,8 @@
   "wczytanie_blend_s": 0.5,
   "zrodlo_sceny": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/zmierzch_detal/scena_zd.blend",
   "scena_s": 0.5,
-  "kontrola_s": 0.6,
-  "render_s": 20.7,
+  "kontrola_s": 0.9,
+  "render_s": 31.2,
   "postprodukcja_s": 0.3
  },
  "uwagi": [],

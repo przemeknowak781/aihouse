@@ -2,12 +2,12 @@
  "id": "zmierzch-detal-1",
  "opis": "",
  "preset": "zmierzch",
- "czas": "2026-11-05 16:55 CET",
+ "czas": "2026-11-05 16:42 CET",
  "slonce": {
-  "az": 252.3,
-  "el": -6.05,
-  "ekspozycja": 0.68,
-  "czas": "2026-11-05T16:55:00+01:00",
+  "az": 249.83,
+  "el": -4.09,
+  "ekspozycja": 0.07,
+  "czas": "2026-11-05T16:42:00+01:00",
   "ekspozycja_zrodlo": "kalibracja zmierzchu (W9)",
   "udzial_opraw": 0.35,
   "latarnie": 22
@@ -26,7 +26,7 @@
   "z_wzgl_kamery": 3.654,
   "lens_mm": 50.0,
   "shift_x": 0.0,
-  "shift_y": 0.5,
+  "shift_y": 0.55,
   "poziom": true,
   "rozdzielczosc": [
    480,
@@ -40,24 +40,24 @@
   "wczytanie_blend_s": 0.4,
   "zrodlo_sceny": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/zmierzch_detal/scena_zd.blend",
   "scena_s": 0.4,
-  "kontrola_s": 0.9,
-  "render_s": 42.8,
+  "kontrola_s": 0.7,
+  "render_s": 39.7,
   "postprodukcja_s": 0.4
  },
  "uwagi": [],
  "info": [],
  "promienie": [
   "oś: niebo",
-  "L-dół: srednie_22_liscie 14.2 m",
-  "P-dół: wieza_szklo 53.2 m",
-  "L-góra: srednie_22_liscie 14.0 m",
-  "P-góra: wieza_elewacje 59.9 m",
-  "dół: male_31_liscie 22.5 m"
+  "L-dół: srednie_22_liscie 14.4 m",
+  "P-dół: wieza_elewacje 53.2 m",
+  "L-góra: srednie_22_liscie 13.9 m",
+  "P-góra: wieza_elewacje 60.9 m",
+  "dół: male_31_liscie 22.2 m"
  ],
  "udzialy_kadru": {
-  "budynek": 0.37,
-  "drzewa": 0.362,
-  "niebo": 0.268
+  "drzewa": 0.365,
+  "budynek": 0.357,
+  "niebo": 0.279
  },
  "zaslona_pierwszego_planu": 0.0,
  "najblizsza_przeszkoda": {
@@ -70,8 +70,8 @@
   "wieża": {
    "x0": 0.526,
    "x1": 1.861,
-   "y0": -0.128,
-   "y1": 1.172,
+   "y0": -0.178,
+   "y1": 1.122,
    "rzut_w_kadrze": true,
    "uciete": [
     "prawo",
@@ -81,8 +81,8 @@
   "skrzydło": {
    "x0": 1.696,
    "x1": 2.567,
-   "y0": -0.135,
-   "y1": 0.637,
+   "y0": -0.185,
+   "y1": 0.587,
    "rzut_w_kadrze": false,
    "uciete": [
     "prawo",
@@ -92,8 +92,8 @@
   "segment": {
    "x0": 0.708,
    "x1": 1.139,
-   "y0": -0.067,
-   "y1": 0.315,
+   "y0": -0.117,
+   "y1": 0.265,
    "rzut_w_kadrze": true,
    "uciete": [
     "prawo",
@@ -103,9 +103,9 @@
  },
  "punkty_kluczowe": {
   "Brama Mostowa – napis (+5,2)": {
-   "w_kadrze": true,
+   "w_kadrze": false,
    "x": 0.535,
-   "y": 0.036,
+   "y": -0.014,
    "widoczny": false,
    "zaslania": "krzew_62_liscie",
    "odl_m": 60.4
@@ -113,7 +113,7 @@
   "korona – lamele łuku (+31,7)": {
    "w_kadrze": true,
    "x": 0.535,
-   "y": 0.645,
+   "y": 0.595,
    "widoczny": true,
    "zaslania": null,
    "odl_m": 66.6
@@ -121,7 +121,7 @@
   "attyka wieży (+37,2)": {
    "w_kadrze": true,
    "x": 0.535,
-   "y": 0.772,
+   "y": 0.722,
    "widoczny": true,
    "zaslania": null,
    "odl_m": 69.1
@@ -129,13 +129,13 @@
   "cel kamery": {
    "w_kadrze": false,
    "x": 0.5,
-   "y": -0.084,
+   "y": -0.134,
    "widoczny": false,
    "zaslania": "krzew_62_liscie",
    "odl_m": 60.6
   }
  },
- "horyzont_y": -0.0,
+ "horyzont_y": -0.05,
  "pochylenie_deg": 0.0,
  "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/podglad_zmierzch-detal-1.png",
  "jpg": "/home/user/aihouse/umwd/docs/60_wizualizacje/img/extra/podglad_zmierzch-detal-1.jpg"

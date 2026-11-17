@@ -1,0 +1,147 @@
+{
+ "id": "dron-5",
+ "opis": "DRON 5 – latarnia o zmierzchu znad Odry: dron 35 m nad wodą, 130 m na wsch. od wieży, kamera pozioma (shift −0,08), horyzont na 0,6 wysokości kadru. Wieża w lewej tercji rysuje się sylwetą na tle zorzy (słońce 4° pod horyzontem tuż za wieżą, az 265°): świeci korona za lamelami łuku – sala Sejmiku – i ok. 35 % opraw biur; portal pd. mostu z latarniami w prawej tercji, nabrzeże i barka u dołu. 8.10 18:35, ekspozycja +0,7 EV (automatyczna kalibracja zmierzchu dawała 0,0 EV – za ciemno).",
+ "preset": "zmierzch",
+ "czas": "2026-10-08 18:35 CEST",
+ "slonce": {
+  "az": 265.35,
+  "el": -3.97,
+  "ekspozycja": 0.7,
+  "czas": "2026-10-08T18:35:00+02:00",
+  "udzial_opraw": 0.35,
+  "latarnie": 22
+ },
+ "kamera": {
+  "loc": [
+   220.0,
+   72.0,
+   31.2
+  ],
+  "cel": [
+   120.97,
+   85.92,
+   31.2
+  ],
+  "z_wzgl_kamery": 31.15,
+  "lens_mm": 40.0,
+  "shift_x": 0.0,
+  "shift_y": -0.08,
+  "poziom": true,
+  "rozdzielczosc": [
+   480,
+   320
+  ],
+  "sensor_fit": "AUTO (36 mm na dłuższym boku)"
+ },
+ "ludzie": false,
+ "probki": 16,
+ "czasy_s": {
+  "wczytanie_blend_s": 0.4,
+  "zrodlo_sceny": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/dron/scena_final.blend",
+  "scena_s": 0.7,
+  "kontrola_s": 0.7,
+  "render_s": 17.5,
+  "postprodukcja_s": 0.3
+ },
+ "uwagi": [
+  "KADR SIĘGA POZA ORTOFOTOMAPĘ (pusta płaszczyzna): 4.4 % kadru"
+ ],
+ "info": [
+  "kamera poza ramką mapy (e 11–152, n -36–148): z tej strony teren to ortofotomapa, zabudowa – proste bryły"
+ ],
+ "promienie": [
+  "oś: srednie_23_liscie 260.6 m",
+  "L-dół: wieza_elewacje 112.3 m",
+  "P-dół: nabrzeze 132.5 m",
+  "L-góra: niebo",
+  "P-góra: niebo",
+  "dół: teren_chodnik_bt 114.8 m"
+ ],
+ "udzialy_kadru": {
+  "niebo": 0.357,
+  "budynek": 0.185,
+  "woda": 0.117,
+  "drzewa": 0.107,
+  "teren": 0.094,
+  "most": 0.049,
+  "poza_swiatem": 0.044,
+  "ortofoto_plaskie": 0.021,
+  "dalsze_otoczenie": 0.021,
+  "ulica": 0.005
+ },
+ "zaslona_pierwszego_planu": 0.0,
+ "najblizsza_przeszkoda": {
+  "obiekt": "woda",
+  "odl_m": 34.95
+ },
+ "oko_nad_podlozem_m": 34.95,
+ "podloze": "woda",
+ "budynek_w_kadrze": {
+  "wieża": {
+   "x0": 0.093,
+   "x1": 0.382,
+   "y0": 0.113,
+   "y1": 0.718,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  },
+  "skrzydło": {
+   "x0": -0.16,
+   "x1": 0.326,
+   "y0": 0.248,
+   "y1": 0.513,
+   "rzut_w_kadrze": true,
+   "uciete": [
+    "lewo"
+   ]
+  },
+  "segment": {
+   "x0": -0.021,
+   "x1": 0.105,
+   "y0": 0.093,
+   "y1": 0.477,
+   "rzut_w_kadrze": true,
+   "uciete": [
+    "lewo"
+   ]
+  }
+ },
+ "punkty_kluczowe": {
+  "Brama Mostowa – napis (+5,2)": {
+   "w_kadrze": true,
+   "x": 0.367,
+   "y": 0.246,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 119.3
+  },
+  "korona – lamele łuku (+31,7)": {
+   "w_kadrze": true,
+   "x": 0.367,
+   "y": 0.628,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 116.4
+  },
+  "attyka wieży (+37,2)": {
+   "w_kadrze": true,
+   "x": 0.367,
+   "y": 0.707,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 116.6
+  },
+  "cel kamery": {
+   "w_kadrze": true,
+   "x": 0.5,
+   "y": 0.62,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 100.0
+  }
+ },
+ "horyzont_y": 0.62,
+ "pochylenie_deg": 0.0,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/podglad_dron-5.png",
+ "jpg": "/home/user/aihouse/umwd/docs/60_wizualizacje/img/extra/podglad_dron-5.jpg"
+}

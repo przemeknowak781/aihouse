@@ -183,6 +183,13 @@ def grupa_poza(opis):
     return 20, False
 
 
+def krotko(opis, n=70):
+    s = re.sub(r"^dźwignia v1\.2 \w+:\s*", "", opis)
+    m = re.search(r" \(|: | = ", s[12:])
+    s = s[: 12 + m.start()] if m else s
+    return s if len(s) <= n else s[:n].rsplit(" ", 1)[0] + " …"
+
+
 def koszt_dokumentacji(text):
     m = re.search(r"Koszt Dokumentacji\s*≈?\s*([\d\s,]+)\s*mln", text)
     return float(m.group(1).replace(" ", "").replace(",", ".")) * 1e6 if m else None
@@ -219,7 +226,7 @@ def compute():
         if not ok:
             unmapped.append(opis[:60])
         groups[g]["v"] += v
-        groups[g]["poza"].append(re.split(r"[:(–]", opis, maxsplit=1)[0].strip())
+        groups[g]["poza"].append(krotko(opis))
     if unmapped:
         issues.append("pozycje spoza modelu bez reguły grupy (→ gr. 20): " + "; ".join(unmapped))
     works = works_model + sum(poza.values())
@@ -230,9 +237,15 @@ def compute():
     groups[20]["v"] += rez
     groups[20]["model"].append(f"18.3* rezerwa {rez_rate:.0%}")
     total_exact = works + ks + rez
-    for g in groups.values():
-        g["F"] = round(g["v"] / ZAOKR) * ZAOKR
-        g["H"] = round(g["F"] * (1 + VAT), 2)
+    # zaokrąglenie grup do ZAOKR metodą największych reszt – suma grup = zaokrąglona suma dokładna (bez narastania błędu)
+    target = round(total_exact / ZAOKR)
+    base = {g: int(v["v"] // ZAOKR) for g, v in groups.items()}
+    rest = sorted(groups, key=lambda g: groups[g]["v"] / ZAOKR - base[g], reverse=True)
+    for g in rest[: max(0, target - sum(base.values()))]:
+        base[g] += 1
+    for g, v in groups.items():
+        v["F"] = base[g] * ZAOKR
+        v["H"] = round(v["F"] * (1 + VAT), 2)
     totF = round(sum(g["F"] for g in groups.values()), 2)
     totH = round(sum(g["H"] for g in groups.values()), 2)
     fee = koszt_dokumentacji(P_KMD.read_text(encoding="utf-8")) if P_KMD.exists() else None
@@ -319,9 +332,10 @@ def scan_template(ws):
     return rows
 
 
-ZALOZENIA = ("Założenia: wartości szacunkowe netto, poziom cen II kw. 2026 (Wrocław), bez waloryzacji; VAT 23 % (wzór nie podaje "
-             "stawek); grupy zaokrąglone do 1 000 zł; koszty stałe budowy – gr. 16; rezerwa na nieprzewidziane – gr. 20; "
-             "skład grup – kolumna pomocnicza J (poza wydrukiem).")
+ZALOZENIA_PDF = ("Założenia: wartości szacunkowe netto, poziom cen II kw. 2026 (Wrocław), bez waloryzacji; VAT 23 % (wzór nie podaje "
+                 "stawek); grupy zaokrąglone do 1 000 zł; koszty stałe budowy – gr. 16; rezerwa na nieprzewidziane – gr. 20.")
+ZALOZENIA = ZALOZENIA_PDF[:-1] + "; skład grup – kolumna pomocnicza J (poza wydrukiem)."
+
 
 
 def build_xlsx(R):
@@ -403,26 +417,26 @@ CSS = """
 @page { size: 210mm 297mm; margin: 0 }
 * { box-sizing: border-box }
 html, body { margin: 0; padding: 0; background: #fff; color: #000; font-family: Carlito, Calibri, 'Liberation Sans', sans-serif }
-.page { width: 210mm; height: 297mm; padding: 14mm 12mm 12mm 12mm; position: relative }
-.hdr { text-align: center; margin-bottom: 5mm }
+.page { width: 210mm; height: 297mm; padding: 11mm 12mm 8mm 12mm; position: relative }
+.hdr { text-align: center; margin-bottom: 4mm }
 .hdr .k { font-size: 9.5pt; line-height: 1.3; margin-bottom: 2.5mm }
 .hdr .t { font-size: 14pt; font-weight: 700; line-height: 1.25; border: 0.5mm solid #000; padding: 1.8mm 3mm }
 .hdr .z { font-size: 10.5pt; font-weight: 700; text-align: right; margin-top: 1.5mm }
 table { border-collapse: collapse; table-layout: fixed; width: 186mm; font-size: 11pt; line-height: 1.22 }
-td, th { border: 0.2mm solid #222; padding: 1.1mm 1.4mm; vertical-align: middle }
+td, th { border: 0.2mm solid #222; padding: 0.8mm 1.3mm; vertical-align: middle }
 th { background: #B4C7E7; font-weight: 700; text-align: center }
 td.lp { text-align: center; font-weight: 700 }
 td.r { text-align: right; white-space: nowrap }
 td.c { text-align: center }
 tr.inne td { font-size: 10pt; color: #333 }
-tr.suma td { background: #BFBFBF; font-weight: 700; font-size: 11.5pt }
+tr.suma td { background: #BFBFBF; font-weight: 700 }
 tr.uwaga td, tr.zal td { border: none; font-size: 9.5pt; padding-top: 2mm; line-height: 1.3 }
 tr.zal td { font-style: italic; color: #333; padding-top: 0.5mm }
 tr.gap td { border: none; height: 4mm }
 tr.fee td { background: #B4C7E7; font-weight: 700; font-size: 11pt; border: 0.4mm solid #000 }
 tr.fee td.lab { text-align: center }
 """
-COLS = [("L.p.", 11), ("Opis", 79), ("Ilość", 13), ("J.m.", 10), ("Wartość [netto]", 30), ("VAT", 12), ("Wartość [brutto]", 31)]
+COLS = [("L.p.", 10), ("Opis", 80), ("Ilość", 11), ("J.m.", 10), ("Wartość [netto]", 31), ("VAT", 12), ("Wartość [brutto]", 32)]
 
 
 def zl(x):
@@ -451,7 +465,7 @@ def render_html(R, X):
              f'<td class="r">{zl(R["totF"])}</td><td></td><td class="r">{zl(R["totH"])}</td></tr>')
     uw = e(X["texts"]["uwaga"]).replace("\n\n", "<br>").replace("\n", "<br>")
     p.append(f'<tr class="uwaga"><td colspan="7">{uw}</td></tr>')
-    p.append(f'<tr class="zal"><td colspan="7">{e(ZALOZENIA.replace(" – skład grup – kolumna pomocnicza J (poza wydrukiem)", ""))}</td></tr>')
+    p.append(f'<tr class="zal"><td colspan="7">{e(ZALOZENIA_PDF)}</td></tr>')
     p.append('<tr class="gap"><td colspan="7"></td></tr>')
     fee_n = zl(R["fee"]) if R["fee"] is not None else "–"
     fee_b = zl(R["fee_b"]) if R["fee_b"] is not None else "–"

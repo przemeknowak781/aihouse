@@ -515,8 +515,8 @@ def _prototyp_czlowieka(nazwa, H=1.75, chod=0.0, plaszcz=0.36, kobieta=False, se
             dl = lok + Vector((-side * 0.10 * s, 0.20 * s, 0.10 * s))
         if side < 0 and poza in ('kieszen', 'oba'):
             # dłoń w kieszeni płaszcza: łokieć odwiedziony, dłoń przy biodrze (schowana w okryciu)
-            lok = ram + Vector((side * 0.10 * s, -0.03 * s, -0.27 * s))
-            dl = Vector((side * (bark + 0.01) * s, 0.04 * s, 0.98 * s))
+            lok = ram + Vector((side * 0.055 * s, -0.04 * s, -0.28 * s))
+            dl = Vector((side * (bark - 0.01) * s, 0.05 * s, 0.99 * s))
         kapsula(ram, lok, 0.058 * s)
         kapsula(lok, dl, 0.05 * s)
         pd = dl + Vector((0, 0, -0.04 * s)) if not (side > 0 and poza in ('telefon', 'oba')) else dl + Vector((0, 0.02 * s, 0))

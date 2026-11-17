@@ -1,0 +1,70 @@
+{
+ "nr": 32,
+ "title": "Blue-hour lantern, arcade detail, drone scouting; Stage I text + F.14.A drafted",
+ "stages": [
+  [
+   "Organiser materials ✔ (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register ✔ (184 requirements) + checklists",
+   "done"
+  ],
+  [
+   "Site ✔ (zoning, heritage, survey, geotech, trees, neighbours)",
+   "done"
+  ],
+  [
+   "Law ✔ (WT bridge, fire, accessibility, zero-emission)",
+   "done"
+  ],
+  [
+   "Design research ✔ (trends, visuals, boards, façades, costs)",
+   "done"
+  ],
+  [
+   "Programme ✔ (187 offices, PU ≈ 8,600 m²)",
+   "done"
+  ],
+  [
+   "Concept v1.1 ✔ + Sejmik storey S-3 ✔ → merge into v1.2 with stair-A fix and cost check (workflow ►)",
+   "running"
+  ],
+  [
+   "Production ►: drawings v1.1 ✔ (verified); plans + tables re-run after v1.2; photomatch W1/W2 tests ✔; extra showcase renders (workflow ►)",
+   "running"
+  ],
+  [
+   "Boards & texts ►: Stage II 8/8 skeletons (vis pending, P7/P8 re-layout); Stage II text 5 × A3 + Stage I text + F.14.A (workflow ►); 300-dpi export ✔",
+   "running"
+  ],
+  [
+   "Audit ►: completeness 25/44; structural & functional audit ►; jury later",
+   "running"
+  ]
+ ],
+ "notes": [
+  "Night test re-done as blue hour after art-direction review: cool stone, warm crown signalling a Sejmik session.",
+  "Extra showcase renders: drone stations scouted (top-down over the bridgehead, oblique views); dusk close-ups of the crown lamellas.",
+  "Arcade detail test: granite lintel with cut inscription, glazed Citizens' Hall behind.",
+  "Stage I text and F.14.A cost form drafted. Stage II text in verification."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/W9_blue_hour.jpg",
+   "caption": "Lantern at blue hour (test)"
+  },
+  {
+   "path": "umwd/raporty/img/scout_dron2.jpg",
+   "caption": "Drone scouting: plan view over the bridgehead (preview)"
+  },
+  {
+   "path": "umwd/raporty/img/detal_podcien.jpg",
+   "caption": "Arcade detail: granite lintel with inscription (test)"
+  },
+  {
+   "path": "umwd/raporty/img/scout_zmierzch5.jpg",
+   "caption": "Dusk close-up of the crown (preview)"
+  }
+ ]
+}

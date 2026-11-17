@@ -253,11 +253,13 @@
    },
    "lens_mm": 50,
    "shift_x": 0,
-   "shift_y": 0.5,
+   "shift_y": 0.55,
    "aspect": "4:5",
-   "czas": "2026-11-05 16:55 CET",
+   "czas": "2026-11-05 16:42 CET",
    "ludzie": false,
-   "preset": "zmierzch"
+   "preset": "zmierzch",
+   "opis": "ZMIERZCH-DETAL 1 – „Latarnia przez gałęzie”: błękitna godzina z pn.-zach. narożnika skweru przy rampie Mostu Grunwaldzkiego (chodnik, oko 1,65 m), 60 m od łuku. Lewa połowa – koronkowa sylweta jesiennej korony drzewa E10 (15 m od kamery) na granatowym niebie, u dołu cienki pas krzewów skweru; prawa – łuk R 14 z wstęgami okien i świecąca korona Sejmiku (drewniane bafle, wiszące oprawy) na prawej linii trójpodziału; elewacja pn. świadomie wychodzi poza prawą krawędź. 5.11 16:42 CET (słońce az 250°, el −4,1°): niebo jeszcze jaśniejsze od koron drzew, w biurach 35 % opraw, korona i hol w pełni, latarnie zapalone. 50 mm, kadr 4:5, kamera pozioma, shift 0,55 (piony proste).",
+   "poprawki": "v0: 40 mm, cel z 20 – czarny pas krzewów ~30 % kadru, wieża ucięta; v1: 50 mm, obrót osi o 1,5°, shift 0,5; v2: pora 16:42 (el −4,1° zamiast −6°) i shift 0,55 – jaśniejsze niebo za gałęziami, mniej czerni u dołu."
   },
   {
    "id": "zmierzch-detal-2",
@@ -279,7 +281,10 @@
    "czas": "2026-11-05 17:40 CET",
    "ludzie": false,
    "preset": "zmierzch",
-   "ekspozycja": -0.4
+   "ekspozycja": -0.4,
+   "opis": "ZMIERZCH-DETAL 2 – „Nocny podcień Bramy Mostowej”: z chodnika przy nabrzeżu, 18 m od kolumny w osi przekątnej (58,75°), oko 1,65 m. Stanowisko na prostej kolumna→latarnia (az 46,7°): istniejąca latarnia uliczna latarnia_14 (0,9 m przed licem łuku, na osi wejścia) chowa się za kolumną osiową. Trzy pasy poziome: podcień z ciepło oświetlonym holem za kolumnami 0,60 m co 15°, granitowe nadproże z wykutym napisem „SEJMIK WOJEWÓDZTWA DOLNOŚLĄSKIEGO” biegnącym po łuku, u góry krawędź okna wstęgowego kond. 1; łuk ucieka w prawo, na pierwszym planie posadzka placu, słupki i okrągła ława (ślad 1934). 5.11 17:40 CET (el −12,9°, noc), ekspozycja ręczna −0,4 EV (z kalibracji +1,59 hol był przepalony). 50 mm, 3:2, kamera pozioma, shift 0,105.",
+   "poprawki": "v0: ekspozycja z kalibracji +1,59 EV – hol przepalony, granit jak w dzień; v1: 0,5 EV, shift 0,105 (górna krawędź ~+7,0, głowica latarni poza kadrem); v2: −0,4 EV – nastrój nocy, hol ciepły, napis czytelny słabiej.",
+   "uwaga_model": "Brak iluminacji elewacji: napis oświetla tylko latarnia uliczna (przy −0,4 EV czytelny słabo). Do finału: liniowe oprawy w podsufitce / krawędzi podcienia kierowane na nadproże (osobny materiał emisji) albo ekspozycja ~0 EV z maską holu. Latarnię latarnia_14 na osi wejścia warto przenieść w projekcie zagospodarowania."
   },
   {
    "id": "zmierzch-detal-3",
@@ -302,7 +307,9 @@
    "czas": "2026-11-05 16:45 CET",
    "ekspozycja": 0.6,
    "ludzie": false,
-   "preset": "zmierzch"
+   "preset": "zmierzch",
+   "opis": "ZMIERZCH-DETAL 3 – „Żabie ujęcie: dziób łuku i latarnia”: z placu na promieniu osi przekątnej (az 31,25°), 16,5 m od lica łuku, oko 1,6 m, kamera nachylona 51° (piony zbiegają się – zamierzone). Symetria osiowa: łuk R 14 jak dziób statku, poziome pasma ceramiki i okien wstęgowych wyginają się w łuki zbiegające ku górze, granitowe filary po bokach zbiegają się nad kadrem; korona w górnej tercji świeci przez szkło (bafle, oprawy), attyka tnie granatowe niebo (~25 % kadru). 5.11 16:45 CET (el −4,5°), ekspozycja 0,6 EV (+0,4 względem kalibracji – elewacja oświetlona tylko niebem), 35 % opraw. 40 mm, 4:5.",
+   "poprawki": "v0: od chodnika Wybrzeża (116,9; 61,4), 35 mm, 55° – pół kadru pustego nieba, korona niewidoczna, za ciemno; v1: oś łuku, 15 m, 40 mm, 50°, 0,6 EV – głowica latarni ulicznej na dole kadru; v2: 16,5 m, 51° – latarnia poza kadrem."
   },
   {
    "id": "dron-1",
@@ -425,6 +432,54 @@
    "ludzie": false,
    "preset": "zmierzch",
    "uwaga_render": "Podgląd renderowany przez render/ujecia_poprawki_kontekstu.py (te same argumenty co ujecia_dodatkowe.py) – z drona widać Odrę: nakładka usuwa ścianę 3,8 m w nurcie wzdłuż granicy ramki (e 152,5 / n 148,6) i fałszywą groblę pod Mostem Grunwaldzkim. Po poprawce context.zbuduj_dalsze można renderować wprost."
+  },
+  {
+   "id": "zmierzch-detal-4",
+   "cam": {
+    "e": 119.2,
+    "n": 82.19,
+    "z": 1.65,
+    "z_od": "teren"
+   },
+   "target": {
+    "e": 108.27,
+    "n": 69.17,
+    "z": 5.3
+   },
+   "lens_mm": 60,
+   "shift_x": 0,
+   "shift_y": "auto",
+   "aspect": "3:2",
+   "czas": "2026-10-23 09:50 CEST",
+   "ludzie": false,
+   "preset": "dzien",
+   "opis": "ZMIERZCH-DETAL 4 – „Styk łuku z filarem masywnym – detal w świetle bocznym”: z chodnika nabrzeża, 17 m od lica, oko 1,65 m, cel – łuk przy 30° w paśmie nadproża (+5,3). Lewa ćwierć – filar masywny (v 13,5–15,7) i przęsło wielkiego porządku elewacji wsch.; dalej łuk: podcień (kolumna, szklenie, oświetlony hol), pas granitu z wykutym napisem „SEJMIK WOJ…” uciętym prawą krawędzią (wzrok biegnie wzdłuż krzywizny), okno wstęgowe kond. 1 (Al RAL 8019), u góry krawędź pasma ceramicznego; z lewej u dołu ażurowy cień drzewa szpaleru. 23.10 09:50 CEST: słońce az 137°, el 18° – ok. 83° na lewo od osi widzenia, ślizgowe na łuku (kąt padania 61–80°, terminator ok. 43°), cienie w krawędziach liter i spoin, światło gaśnie w prawo z krzywizną. 60 mm, 3:2, kamera pozioma, shift 0,33.",
+   "poprawki": "v0: 70 mm 4:5 na 25° – napis poza kadrem (tylko „S”); v1: 60 mm 3:2, cel na 30°, 09:15; v2: 09:50 – mocniejsze światło ślizgowe przy napisie.",
+   "uwaga_model": "Z bliska ceramika łuku ma barwę zbliżoną do granitu (przybliżone NCS), faktura płomieniowana tylko w shaderze – do wersji 3000+ px dodać bump/mikrorelief granitu i profil ceramiki."
+  },
+  {
+   "id": "zmierzch-detal-5",
+   "cam": {
+    "e": 127.34,
+    "n": 141.05,
+    "z": 1.65,
+    "z_od": "teren"
+   },
+   "target": {
+    "e": 103.4,
+    "n": 74.1,
+    "z": 31.0
+   },
+   "lens_mm": 100,
+   "shift_x": 0,
+   "shift_y": "auto",
+   "aspect": "3:2",
+   "czas": "2026-11-05 16:55 CET",
+   "ludzie": false,
+   "preset": "zmierzch",
+   "opis": "ZMIERZCH-DETAL 5 – „Latarnia – teleobiektyw z Mostu Grunwaldzkiego”: z chodnika mostu po stronie pd.-wsch., ok. 33 m od portalu pd., 2,3 m od płaszczyzny kratownicy, oko 1,65 m nad chodnikiem, 76 m od korony. Korona wypełnia środek kadru: sala Sejmiku za szkłem (drewniane bafle, siatka wiszących opraw), granitowe ściany korony po bokach, ciemny pas cienia (kond. 6) i wstęga okien poniżej – „latarnia na bębnie”; attyka cienką linią na granatowym niebie (~20 %). Kompresja tele spłaszcza krzywiznę. 5.11 16:55 CET (el −6,0°), ekspozycja 0,68 EV (kalibracja W9), 35 % opraw. 100 mm, 3:2, kamera pozioma, shift 1,015 (piony proste – odpowiednik korekty perspektywy w postprodukcji).",
+   "poprawki": "v0: chodnik pn.-zach., s 40 m – łańcuch mostu przecina kadr szerokim pasem pod koroną (czyta się jak element budynku); v1: punkt W9 z KOREKTY – oko tylko 0,6 m nad chodnikiem mostu (+3,46); v2: s 33 m, x −7,0 – przeszukanie 700 stanowisk na chodnikach siatką promieni kadru 100 mm bez trafień w kratownicę, łańcuchy i wieszaki, oko 1,65 m.",
+   "uwaga_model": "W koronie łuku są tylko 2 lamele: Spec.lamela = _liczby(elewacje.luk.S)[:3] bierze z tekstu v1.2 „0,35 × 0,60 m (R 13,40–14,00), rozstawy 1,35 / 0,675 m…” rozstaw 13,40 m (powinno 1,35/0,675 w ciągu Fibonacciego). Do poprawy w budynek3d.py (Spec) przed finałem – dotyczy wszystkich ujęć korony."
   }
  ]
 }

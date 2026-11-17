@@ -201,9 +201,9 @@ Skrypt przed renderem sprawdza położenie kamery (w obrysie budynku? przy pniu 
 |---|---|---|---|
 | W3 Brama Mostowa | JSON, **nowe stanowisko** (decyzja 17.11) | 23.10 09:40 CEST (az 135°, el 17°) | wymóg: poziom człowieka, ≥ 30 m od lica, Brama z napisem i cała korona. Przy 24 mm rozpiętość posadzka podcienia → attyka (+37,2) mieści się dopiero z ≥ 38 m, a tam oś przecinają istniejące krzewy przyczółka (krzew_61/62, poza granicą). Przeszukanie promieni (drzwi, kolumny, napis w 9 kierunkach łuku + attyka; `szukaj_w3d/e`): czyste stanowisko (109,0; 107,5; oko +2,67) na skraju chodnika przy schodach przyczółka, **33,1 m od lica**; kadr 1,445 : 1, **20 mm, shift 0,276** (piony zachowane). Osoba na wózku w podcieniu między kolumnami 45°/60°, z profilu. Wariant 24 mm z 37 m (107,5; 112,3) – krzewy zasłaniają prawą część podcienia |
 | W6 Hala Obywatelska | JSON, **korekta** | 23.10 11:00 CEST (154°/24°), ekspozycja −0,35 | oś 211,7° z JSON nie jest drożna w `budynek.json` (narożnik SW.02 0,45 m od osi przy a ≈ 8,7 m; przejście SW.06/trzony 3,9 m; narożnik PHS.04 na osi przy a = 25,5 m; koniec osi w PHS.04). Stanowisko 3 m w prawo od osi, 3 m od drzwi Bramy Mostowej (97,73; 70,59; 1,60), kadr na drzwi ogrodowe: panorama 2,95 : 1, **16 mm**, shift 0,04 – lapidarium i ściana z listew z napisem po lewej, informacja z osobą na wózku w środku, przejście z drzewami ogrodu na końcu |
-| W4 Wybrzeże Słowackiego 5 | JSON | 23.10 11:15 CEST (158°/25°) | bez uwag; ściana pd. segmentu z reliefem i pnączami w słońcu, WS 5 w cieniu. Okien szczytu WS 5 z tej pozycji nie widać (kamera na pd. od szczytu) |
-| W5 Mazowiecka 19 | JSON | 22.10 15:30 CEST (225°/17°) | bez uwag; gzyms i kordon w liniach nr 19, M1, brama ogrodowa |
-| W9 Latarnia z mostu | JSON, **korekta pozycji** | 29.10 17:05 CET (el −5,8°, błękitna godzina, ekspozycja +0,6 EV) | punkt z JSON (126; 152) leży na jezdni mostu, 3,8 m od osi; z chodnika widok przecinają krzyżulce kratownicy (płaszczyzny ±9,6 m). Pozycja (132,82; 140,57; +4,05) – 38 m od portalu pd., 0,3 m od kratownicy – dobrana przeszukaniem 117 promieni kadru na drzewie BVH mostu (oś przez górny trójkąt krzyżulców); kamera pozioma, shift 0,351 – korona w środku kadru. Biura: zapalone ~35 % opraw („reszta budynku milknie”), korona i hol w pełni |
+| W4 Wybrzeże Słowackiego 5 | JSON, **korekta obiektywu** | 23.10 11:15 CEST (158°/25°) | kadr 1,875 : 1 (pole planszy) – przy 28 mm gzyms-attyka segmentu poza kadrem; **21 mm, shift 0,18**. Ściana pd. segmentu z reliefem i pnączami w słońcu, WS 5 w cieniu |
+| W5 Mazowiecka 19 | JSON, **korekta obiektywu** | 22.10 15:30 CEST (225°/17°) | kadr 1,37 : 1 – przy 28 mm styk gzymsu skrzydła z gzymsem nr 19 poza górną krawędzią; **24 mm, shift 0,29**. Gzyms i kordon w liniach nr 19, M1, brama ogrodowa |
+| W9 Latarnia z mostu | JSON, **korekta pozycji** | 29.10 17:05 CET (el −5,8° – **błękitna godzina**) | pozycja (132,82; 140,57; +4,05) – 38 m od portalu pd., przy płaszczyźnie kratownicy (przeszukanie 117 promieni na BVH mostu); kamera pozioma, shift 0,351. Uwagi 17.11: kopuła nieba ×6,5 (`sila_nieba`), ekspozycja +0,2 – kamień elewacji czytelny w chłodnym świetle ok. 2–3 EV pod ciepłą koroną; biura – ok. 35 % **pomieszczeń** zapalonych nieregularnie (losowanie w materiale opraw per komórka ~4 × 4 m na kondygnację, nie per oprawa) |
 | plac_mostowy | dodatkowa | 23.10 14:30 CEST | elewacja pn. w cieniu (światło rozproszone), łuk, młode lipy |
 | detal_podcien | dodatkowa (kontrola materiałów) | 23.10 09:40 CEST | podcień z napisem, kolumny, okładziny granitowe i ceramiczne z bliska (35 mm) |
 | lot_ptaka | dodatkowa (kontrola) | 29.10.2025 11:40 CET | bryła, dachy BIPV, relacja z mostem |
@@ -227,6 +227,19 @@ Skrypt przed renderem sprawdza położenie kamery (w obrysie budynku? przy pniu 
   segmentu), kompresja Reinharda y = t/(1+k·t) z dwóch punktów (cień → sąsiad, słońce: lico pd. wieży → 0,84),
   balans bieli z sąsiada ograniczony do 0,92–1,08; grading (nasycenie 1,10, mgiełka 0,025–0,03, wyostrzenie,
   ziarno 0,012); na koniec `postprodukcja` preset `lot`.
+* **Cień kontaktowy** u podstawy (budynek nie „pływa”): pod dolną krawędzią sylwetki budynku zdjęcie przyciemnione
+  sumą przesunięć maski w dół z wagą wykładniczą (zasięg 0,4 % wysokości kadru; siła A 0,25, B 0,40).
+* **Postaci CG** przy budynku (`LUDZIE_FM`): B – 9 osób na chodniku przy licu ulicznym skrzydła, A – 4 przy
+  segmencie i 6 na placu przed Bramą Mostową; samochody przy krawężniku i grupa pieszych przy Mazowieckiej 19 –
+  z warstwy zdjęcia (leżą poza sylwetką budynku).
+* **Słońce W2 (sprawdzenie uwagi 17.11)**: o 11:57:36 CET słońce ma az ≈ 186–188°, a lica uliczne przy
+  Mazowieckiej (normalna ≈ 282°) są 95° za płaszczyzną światła – **w cieniu**. Potwierdza to zdjęcie w pełnej
+  rozdzielczości: na fasadach nr 19 i UMWD brak cieni rzucanych przez gzymsy i ościeża, chodnik w cieniu; ciemniejszy
+  pas przy dalszym krawężniku to bruk pasa postojowego, nie cień. Lico skrzydła jest więc słusznie w cieniu
+  (kalibracja p70 na froncie nr 19); cień rzucany budynku pada na pn. – na plac, przyczółek i część jezdni
+  z zaparkowanymi autami przy pn. końcu skrzydła (pass shadow catcher). B: mniejsze nasycenie (0,96), więcej
+  mgiełki (0,07), łagodniejsze wyostrzenie, mocniejszy cień (pełny cień 0,34 jasności słońca – pomiar cienia na
+  trawniku na zdjęciu).
 * Wynik przycinany do proporcji pola planszy; `--final` – pełna rozdzielczość pliku zdjęcia (8470 × 4475 /
   7962 × 4505), plik `W1_F17A_final.jpg` / `W2_F17B_final.jpg` bez limitu wielkości.
 

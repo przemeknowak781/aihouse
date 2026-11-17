@@ -1,0 +1,137 @@
+{
+ "id": "dron-3",
+ "opis": "DRON 3 – plan kwartału z góry (pochylenie 85°, 120 m): góra kadru na az 166° (pd. u góry, kadr równoległy do elewacji wieży), tak aby słońce świeciło od góry kadru, a cienie padały w dół – rzeźba czyta się naturalnie. Dach wieży z modułami BIPV i łukowym narożem w środku-prawo, skrzydło przekątną ku górze w prawo, ogród i Wybrzeże Słowackiego 5 u góry, Odra w lewej tercji (linia brzegu na 1/3 szerokości), most z portalem pd. jako pas u dołu, Plac Mostowy w prawym dolnym polu. 8.10 12:00 (az 168°, el 32°) – cień wieży z konturem łuku wyciąga się prosto w dół kadru przez plac (ok. 59 m).",
+ "preset": "lot",
+ "czas": "2026-10-08 12:00 CEST",
+ "slonce": {
+  "az": 168.4,
+  "el": 32.32,
+  "ekspozycja": -4.3,
+  "czas": "2026-10-08T12:00:00+02:00",
+  "udzial_opraw": 1.0,
+  "latarnie": 0
+ },
+ "kamera": {
+  "loc": [
+   92.4,
+   85.4,
+   120.0
+  ],
+  "cel": [
+   94.9,
+   75.2,
+   0.0
+  ],
+  "z_wzgl_kamery": 119.95,
+  "lens_mm": 24.0,
+  "shift_x": 0.0,
+  "shift_y": 0.0,
+  "poziom": false,
+  "rozdzielczosc": [
+   480,
+   600
+  ],
+  "sensor_fit": "AUTO (36 mm na dłuższym boku)"
+ },
+ "ludzie": false,
+ "probki": 16,
+ "czasy_s": {
+  "wczytanie_blend_s": 0.4,
+  "zrodlo_sceny": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/dron/scena_final.blend",
+  "scena_s": 0.7,
+  "kontrola_s": 1.1,
+  "render_s": 30.5,
+  "postprodukcja_s": 0.4
+ },
+ "uwagi": [],
+ "info": [],
+ "promienie": [
+  "oś: wieza_elewacje 110.5 m",
+  "L-dół: woda 140.3 m",
+  "P-dół: teren_chodnik_bt 134.6 m",
+  "L-góra: woda 151.9 m",
+  "P-góra: dachy 122.3 m",
+  "dół: teren_chodnik_bt 127.4 m"
+ ],
+ "udzialy_kadru": {
+  "teren": 0.357,
+  "woda": 0.271,
+  "budynek": 0.138,
+  "drzewa": 0.099,
+  "most": 0.062,
+  "zabudowa_kontekstu": 0.06,
+  "ortofoto_plaskie": 0.01,
+  "zagospodarowanie": 0.003
+ },
+ "zaslona_pierwszego_planu": 0.0,
+ "najblizsza_przeszkoda": {
+  "obiekt": null,
+  "odl_m": 1000000000.0
+ },
+ "oko_nad_podlozem_m": 120.17,
+ "podloze": "teren_jezdnia_kb",
+ "budynek_w_kadrze": {
+  "wieża": {
+   "x0": 0.381,
+   "x1": 0.779,
+   "y0": 0.494,
+   "y1": 0.747,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  },
+  "skrzydło": {
+   "x0": 0.69,
+   "x1": 0.982,
+   "y0": 0.494,
+   "y1": 0.887,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  },
+  "segment": {
+   "x0": 0.401,
+   "x1": 0.556,
+   "y0": 0.655,
+   "y1": 0.765,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  }
+ },
+ "punkty_kluczowe": {
+  "Brama Mostowa – napis (+5,2)": {
+   "w_kadrze": true,
+   "x": 0.44,
+   "y": 0.519,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 115.8
+  },
+  "korona – lamele łuku (+31,7)": {
+   "w_kadrze": true,
+   "x": 0.423,
+   "y": 0.542,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 89.6
+  },
+  "attyka wieży (+37,2)": {
+   "w_kadrze": true,
+   "x": 0.418,
+   "y": 0.548,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 84.2
+  },
+  "cel kamery": {
+   "w_kadrze": true,
+   "x": 0.5,
+   "y": 0.5,
+   "widoczny": false,
+   "zaslania": "wieza_elewacje",
+   "odl_m": 120.5
+  }
+ },
+ "horyzont_y": 8.118,
+ "pochylenie_deg": -85.0,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/podglad_dron-3.png",
+ "jpg": "/home/user/aihouse/umwd/docs/60_wizualizacje/img/extra/podglad_dron-3.jpg"
+}

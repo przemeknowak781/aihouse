@@ -1033,7 +1033,18 @@ class Materialy:
             ud = nb.n('ShaderNodeValue')
             ud.name = 'udzial'
             ud.outputs[0].default_value = 1.0
-            wl = nb.math('LESS_THAN', self._attr(nb, 'rnd'), ud.outputs[0])
+            # losowanie per pomieszczenie (komórka ~4 × 4 m na kondygnację), nie per oprawa – o zmierzchu świecą
+            # nieregularnie całe pokoje, reszta ciemna
+            pos = nb.n('ShaderNodeNewGeometry').outputs['Position']
+            skv = nb.n('ShaderNodeVectorMath', {'operation': 'MULTIPLY'})
+            nb.l(pos, skv.inputs[0])
+            skv.inputs[1].default_value = (0.25, 0.25, 0.267)
+            vor = nb.n('ShaderNodeTexVoronoi', Randomness=0.0)
+            vor.inputs['Scale'].default_value = 1.0
+            nb.l(skv.outputs[0], vor.inputs['Vector'])
+            sep = nb.n('ShaderNodeSeparateColor')
+            nb.l(vor.outputs['Color'], sep.inputs[0])
+            wl = nb.math('LESS_THAN', sep.outputs[0], ud.outputs[0])
             nb.l(nb.math('MULTIPLY', wl, 24.0 * moc), e.inputs['Strength'])
         nb.output(e)
 

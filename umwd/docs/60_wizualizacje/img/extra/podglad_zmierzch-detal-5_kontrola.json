@@ -1,0 +1,142 @@
+{
+ "id": "zmierzch-detal-5",
+ "opis": "",
+ "preset": "zmierzch",
+ "czas": "2026-11-05 16:55 CET",
+ "slonce": {
+  "az": 252.3,
+  "el": -6.05,
+  "ekspozycja": 0.68,
+  "czas": "2026-11-05T16:55:00+01:00",
+  "ekspozycja_zrodlo": "kalibracja zmierzchu (W9)",
+  "udzial_opraw": 0.35,
+  "latarnie": 22
+ },
+ "kamera": {
+  "loc": [
+   127.34,
+   141.05,
+   5.071
+  ],
+  "cel": [
+   103.4,
+   74.1,
+   31.05
+  ],
+  "z_wzgl_kamery": 5.021,
+  "lens_mm": 100.0,
+  "shift_x": 0.0,
+  "shift_y": 1.015,
+  "poziom": true,
+  "rozdzielczosc": [
+   480,
+   320
+  ],
+  "sensor_fit": "AUTO (36 mm na dłuższym boku)"
+ },
+ "ludzie": false,
+ "probki": 16,
+ "czasy_s": {
+  "wczytanie_blend_s": 0.4,
+  "zrodlo_sceny": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/zmierzch_detal/scena_zd.blend",
+  "scena_s": 0.4,
+  "kontrola_s": 0.5,
+  "render_s": 12.2,
+  "postprodukcja_s": 0.3
+ },
+ "uwagi": [],
+ "info": [],
+ "promienie": [
+  "oś: wieza_szklo 76.3 m",
+  "L-dół: wieza_elewacje 82.5 m",
+  "P-dół: wieza_elewacje 76.3 m",
+  "L-góra: niebo",
+  "P-góra: wieza_elewacje 79.4 m",
+  "dół: wieza_szklo 74.2 m"
+ ],
+ "udzialy_kadru": {
+  "budynek": 0.797,
+  "niebo": 0.203
+ },
+ "zaslona_pierwszego_planu": 0.0,
+ "najblizsza_przeszkoda": {
+  "obiekt": "most_pomost_lancuchy",
+  "odl_m": 1.65
+ },
+ "oko_nad_podlozem_m": 1.65,
+ "podloze": "most_pomost_lancuchy",
+ "budynek_w_kadrze": {
+  "wieża": {
+   "x0": -0.04,
+   "x1": 1.524,
+   "y0": -1.318,
+   "y1": 0.872,
+   "rzut_w_kadrze": true,
+   "uciete": [
+    "lewo",
+    "prawo",
+    "dół"
+   ]
+  },
+  "skrzydło": {
+   "x0": 0.778,
+   "x1": 1.62,
+   "y0": -1.262,
+   "y1": -0.268,
+   "rzut_w_kadrze": false,
+   "uciete": [
+    "prawo",
+    "dół"
+   ]
+  },
+  "segment": {
+   "x0": -0.155,
+   "x1": 0.454,
+   "y0": -1.254,
+   "y1": -0.291,
+   "rzut_w_kadrze": false,
+   "uciete": [
+    "lewo",
+    "dół"
+   ]
+  }
+ },
+ "punkty_kluczowe": {
+  "Brama Mostowa – napis (+5,2)": {
+   "w_kadrze": false,
+   "x": 0.497,
+   "y": -1.012,
+   "widoczny": false,
+   "zaslania": "most_pomost_lancuchy",
+   "odl_m": 70.7
+  },
+  "korona – lamele łuku (+31,7)": {
+   "w_kadrze": true,
+   "x": 0.497,
+   "y": 0.549,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 75.6
+  },
+  "attyka wieży (+37,2)": {
+   "w_kadrze": true,
+   "x": 0.497,
+   "y": 0.873,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 77.7
+  },
+  "cel kamery": {
+   "w_kadrze": true,
+   "x": 0.5,
+   "y": 0.5,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 75.7
+  }
+ },
+ "horyzont_y": -1.022,
+ "pochylenie_deg": 0.0,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/podglad_zmierzch-detal-5.png",
+ "jpg": "/home/user/aihouse/umwd/docs/60_wizualizacje/img/extra/podglad_zmierzch-detal-5.jpg"
+}

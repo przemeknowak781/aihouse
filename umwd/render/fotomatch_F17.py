@@ -40,6 +40,7 @@ import bpy  # noqa: E402
 from mathutils import Vector  # noqa: E402
 from bpy_extras.object_utils import world_to_camera_view  # noqa: E402
 from PIL import Image, ImageFilter  # noqa: E402
+from shapely.geometry import Point  # noqa: E402
 
 from umwd.render import blib, context, budynek3d  # noqa: E402
 
@@ -55,11 +56,63 @@ PROPORCJE_POLA = {'A': 578 / 340, 'B': 366 / 206}
 GRADING = {
     # cien_min – jasność pełnego cienia względem słońca na zdjęciu (obróbka Shadows +50 rozjaśnia cienie; pomiar
     # na cieniach istniejących budynków ≈ 0,40–0,45); cien_barwa – ile chłodnej barwy cienia z passu zachować
+    # kontakt – siła cienia kontaktowego u podstawy (pod sylwetką budynku), ułamek
     'A': dict(p_jasne=0.92, cel_jasne=0.76, nasycenie=1.10, czern=0.0, mgla=0.03, mgla_kolor=(0.70, 0.76, 0.84),
-              wyostrz=70, klarownosc=45, ziarno=0.012, cien_min=0.42, cien_barwa=0.35),
-    'B': dict(p_jasne=0.92, cel_jasne=0.80, nasycenie=1.10, czern=0.0, mgla=0.025, mgla_kolor=(0.72, 0.78, 0.85),
-              wyostrz=70, klarownosc=45, ziarno=0.012, cien_min=0.42, cien_barwa=0.35),
+              wyostrz=70, klarownosc=45, ziarno=0.012, cien_min=0.42, cien_barwa=0.35, kontakt=0.25),
+    # B (uwagi koordynatora 17.11): elewacja zbyt czysta i ostra względem sąsiadów w tej odległości – mniej nasycenia,
+    # więcej mgiełki, łagodniejsze wyostrzenie; cień mocniejszy (cień na trawniku na zdjęciu ≈ 0,34 słońca);
+    # cień kontaktowy u podstawy (budynek nie „pływa” nad trawnikiem i chodnikiem)
+    'B': dict(p_jasne=0.92, cel_jasne=0.80, nasycenie=0.96, czern=0.0, mgla=0.07, mgla_kolor=(0.72, 0.78, 0.85),
+              wyostrz=35, klarownosc=20, ziarno=0.012, cien_min=0.34, cien_barwa=0.35, kontakt=0.40),
 }
+
+# postaci CG przy budynku (ok. 5–15 px w pełnej rozdzielczości – sylwetki z budynek3d_otoczenie): B – chodnik przy
+# licu ulicznym skrzydła i brama ogrodowa; A – plac przed Bramą Mostową i chodnik przy segmencie
+LUDZIE_FM = {
+    'B': dict(lico=((48.84, 9.68), (61.25, 66.05)), s=(0.08, 0.18, 0.27, 0.33, 0.47, 0.58, 0.66, 0.80, 0.90),
+              odsuniecie=(1.6, 2.6)),
+    'A': dict(lico=((115.98, 39.93), (113.48, 50.18)), s=(0.15, 0.45, 0.62, 0.85), odsuniecie=(1.5, 2.5),
+              luk=((12.0, 16.0), (24.0, 15.4), (31.0, 17.5), (52.0, 16.2), (66.0, 15.8), (78.0, 18.0))),
+}
+
+
+def ludzie_fotomatch(B, kon, zdjecie):
+    """Kilka sylwetek przy budynku (widoczne w renderze CG, rzucają cień na łapacz cieni)."""
+    from umwd.render import budynek3d_otoczenie as oto
+    L = LUDZIE_FM.get(zdjecie)
+    if not L:
+        return 0
+    ctx = kon['ctx']
+    rng = np.random.default_rng(17)
+    mat = B.mat('ludzie')
+    proto = []
+    for i, (H, chod, pl, kob, tb, pz) in enumerate(((1.80, 0.30, 0.40, False, False, ''), (1.66, 0.28, 0.36, True, True, ''),
+                                                    (1.74, 0.0, 0.50, False, False, 'kieszen'),
+                                                    (1.62, 0.0, 0.36, True, False, 'telefon'))):
+        me = oto._prototyp_czlowieka('fm_czlowiek_%d' % i, H, chod, pl, kob, seed=60 + i, torba=tb, poza=pz)
+        me.materials.append(mat)
+        proto.append(me)
+    poz = []
+    a, b = np.array(L['lico'][0]), np.array(L['lico'][1])
+    t = (b - a) / np.linalg.norm(b - a)
+    n = np.array([-t[1], t[0]])
+    if B.foot.contains(Point(*((a + b) / 2 + n * 1.0))):
+        n = -n
+    for f in L['s']:
+        poz.append((a + (b - a) * f + n * rng.uniform(*L['odsuniecie']), t if rng.random() < 0.5 else -t))
+    if 'luk' in L:
+        cx, cy = B.spec.luk['srodek']
+        for kat, rr in L['luk']:
+            pk = np.subtract(B.spec.z_uv(26.0 + 14.0 * math.cos(math.radians(kat)), 15.7 + 14.0 * math.sin(math.radians(kat))),
+                             (cx, cy))
+            q = np.array([cx, cy]) + pk / 14.0 * rr
+            poz.append((q, -pk / 14.0))
+    for i, (p, kier) in enumerate(poz):
+        ob = bpy.data.objects.new('fm_czlowiek_%02d' % i, proto[i % len(proto)])
+        B.kol['zagospodarowanie_bliskie'].objects.link(ob)
+        ob.location = (float(p[0]), float(p[1]), float(ctx.teren.z1(p[0], p[1])) + 0.03)
+        ob.rotation_euler = (0, 0, math.atan2(kier[1], kier[0]) - math.pi / 2 + rng.normal(0, 0.3))
+    return len(poz)
 
 
 def srgb_lin(x):
@@ -216,6 +269,7 @@ def main():
                                      'dalsze': False})
     bud = budynek3d.build_building(sc, {'kontekst': kon, 'zagospodarowanie': False, 'ludzie': False})
     B = bud['budynek']
+    n_ludzi = ludzie_fotomatch(B, kon, a.zdjecie)
     t_bud = time.time() - t0
     # ---- kontekst: łapacz cieni (teren, woda, budynki, most, ulica); drzewa – tylko cień
     drzewa, inne = [], []
@@ -311,6 +365,18 @@ def main():
     ramka = np.zeros((Hh, Ww), bool)
     ramka[int((1 - y1) * Hh):int((1 - y0) * Hh) + 1, int(x0 * Ww):int(x1 * Ww) + 1] = True
     sc_ = np.where(ramka[..., None], sc_, 1.0)
+    # cień kontaktowy: pod dolną krawędzią sylwetki budynku (styk z chodnikiem/trawnikiem) – suma przesunięć maski
+    # w dół z wagą wykładniczą, tylko poza budynkiem i w ramce renderu (wiersz 0 = góra obrazu)
+    if G.get('kontakt', 0.0) > 0:
+        N = max(3, int(round(Hh * 0.004)))
+        acc = np.zeros((Hh, Ww), np.float32)
+        wsum = 0.0
+        for k_ in range(1, N + 1):
+            w_ = math.exp(-k_ / (0.45 * N))
+            acc[k_:, :] += w_ * alfa[:-k_, :]
+            wsum += w_
+        kont = np.clip(acc / wsum, 0, 1) * (1.0 - alfa) * ramka
+        sc_ = sc_ * (1.0 - G['kontakt'] * kont)[..., None]
     tlo_l = f_l * sc_
     # budynek: kolor prosty, ekspozycja z percentyla jasnych powierzchni, nasycenie, czerń, mgiełka
     rgb = kol[..., :3] / np.maximum(alfa[..., None], 1e-4)
@@ -402,7 +468,8 @@ def main():
                   ramka=[x0, x1, y0, y1], ekspozycja_gain=float(gain), balans_bieli=[float(x) for x in wb],
                   czas_budowy_s=round(t_bud, 1),
                   czas_renderu_s=round(t_r, 1), czas_masek_s=round(t_m, 1), wynik=str(out),
-                  udzial_zaslon_drzew=float((zasl * alfa).sum() / max(alfa.sum(), 1)), kadr_px=kadr)
+                  udzial_zaslon_drzew=float((zasl * alfa).sum() / max(alfa.sum(), 1)), kadr_px=kadr,
+                  ludzie_cg=n_ludzi)
     (BUILD / (pre + 'raport.json')).write_text(json.dumps(raport, ensure_ascii=False, indent=1), encoding='utf-8')
     print('[foto]', json.dumps(raport, ensure_ascii=False))
 

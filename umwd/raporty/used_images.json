@@ -262,5 +262,21 @@
  "7077d2cf7ccc36159492": {
   "path": "umwd/raporty/img/W9_noc_test.jpg",
   "board": "spec_31"
+ },
+ "edcceefe9199d262eb9d": {
+  "path": "umwd/raporty/img/W9_blue_hour.jpg",
+  "board": "spec_32"
+ },
+ "60b225c28e64bac55c1b": {
+  "path": "umwd/raporty/img/scout_dron2.jpg",
+  "board": "spec_32"
+ },
+ "c93733f1ff6bc83d4c38": {
+  "path": "umwd/raporty/img/detal_podcien.jpg",
+  "board": "spec_32"
+ },
+ "2de85340be8bebe054d1": {
+  "path": "umwd/raporty/img/scout_zmierzch5.jpg",
+  "board": "spec_32"
  }
 }

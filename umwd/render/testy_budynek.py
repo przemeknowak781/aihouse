@@ -64,13 +64,16 @@ KOREKTY = {
     # W4, W5: kadr w proporcji pól planszy (1,875 / 1,37) – przy ogniskowej z JSON gzyms-attyka segmentu (W4)
     # i styk gzymsu skrzydła z gzymsem Mazowieckiej 19 (W5) wypadały poza górną krawędź; szerszy obiektyw i shift.
     'W4': dict(lens_mm=21, shift_y=0.18),
-    'W5': dict(lens_mm=24, shift_y=0.24),
+    'W5': dict(lens_mm=24, shift_y=0.29),
     # W9: punkt (126; 152) leży na jezdni mostu, 3,8 m od osi; z chodnika widok przecinają krzyżulce kratownicy
     # (płaszczyzny ±9,6 m). Pozycja dobrana przeszukaniem promieni na drzewie BVH mostu (117 promieni kadru bez trafień w kratownicę,
     # łańcuchy i wieszaki): 38 m od portalu pd. (JSON: 35 m), 9,3 m od osi – tuż przy płaszczyźnie kratownicy
     # (±9,6 m), oś widzenia przechodzi przez górny trójkąt krzyżulców. Oko 1,6 m nad chodnikiem (+4,05).
     # Przesunięcie obiektywu tak, by cel (+26 m) był w środku kadru (kamera pozioma, piony zachowane).
-    'W9': dict(kamera_e_n_z=(132.82, 140.57, 4.05), shift_y=0.351, ekspozycja=0.6),
+    # Błękitna godzina (słońce −5,8°), nie noc (uwagi 17.11): kopuła nieba ×6,5 – kamień elewacji czytelny w chłodnym
+    # świetle, ok. 2–3 EV pod ciepłą koroną; biura – ok. 35 % pomieszczeń zapalonych nieregularnie (losowanie per
+    # komórka ~4 m / kondygnacja w materiale opraw).
+    'W9': dict(kamera_e_n_z=(132.82, 140.57, 4.05), shift_y=0.351, ekspozycja=0.2, sila_nieba=6.5),
     # W6 – Hala Obywatelska (SW.01c wg model/budynek.json, szczegółowe wnętrze: budynek3d_hala.py). Oś 211,7°
     # z koncepcja.json nie jest w budynek.json drożna na całej długości: narożnik SW.02 0,45 m od osi (a ≈ 8,7 m),
     # przejście SW.06 / trzony 3,9 m (a ≈ 16–19 m), narożnik PHS.04 na osi (a = 25,5 m), koniec osi w PHS.04.
@@ -224,6 +227,7 @@ def main():
         sc.render.resolution_y = int(round(a.szer / prop))
         context.ustaw_kamere_trawy(kon, cam)
         sw = budynek3d.swiatlo_dzienne(sc, k['czas'], ekspozycja=k.get('ekspozycja'),
+                                       sila_nieba=k.get('sila_nieba', 1.0),
                                        odbicia=None if a.odbicia == 'brak' else a.odbicia)
         uwagi, traf = kontrola_kamery(sc, B, cam, k, kon['ctx'])
         print('[testy] %s  %s  słońce az %.1f° el %.1f°  ekspozycja %.2f' % (kid, k['czas'], sw['az'], sw['el'],

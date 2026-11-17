@@ -1,0 +1,145 @@
+{
+ "id": "dron-1",
+ "opis": "DRON 1 – niski przelot nad Odrą ku Bramie Mostowej: dron 30 m nad wodą, 21 m na pd. od osi Mostu Grunwaldzkiego (strona górnej wody), 125 m od łuku. Kamera pozioma z przesunięciem obiektywu (piony proste), horyzont na 2/3 wysokości przecina wieżę na wysokości korony – latarnia rysuje się na tle nieba. Pomost z kratownicą wchodzi przekątną od prawego dolnego rogu do portalu pd. (prawa tercja), wieża z łukiem R 14, podcieniem i napisem – lewa tercja; woda z odbiciami i barka-restauracja w pierwszym planie. 8.10 09:30 (słońce az 129°, el 20°) – z tyłu po lewej: elewacja wsch. i wsch. połowa łuku w świetle, część pn.-wsch. łuku w cieniu (modelowanie walca).",
+ "preset": "lot",
+ "czas": "2026-10-08 09:30 CEST",
+ "slonce": {
+  "az": 128.85,
+  "el": 20.09,
+  "ekspozycja": -4.3,
+  "czas": "2026-10-08T09:30:00+02:00",
+  "udzial_opraw": 1.0,
+  "latarnie": 0
+ },
+ "kamera": {
+  "loc": [
+   200.0,
+   150.0,
+   26.2
+  ],
+  "cel": [
+   106.6,
+   114.2,
+   26.2
+  ],
+  "z_wzgl_kamery": 26.15,
+  "lens_mm": 28.0,
+  "shift_x": 0.0,
+  "shift_y": -0.094,
+  "poziom": true,
+  "rozdzielczosc": [
+   480,
+   270
+  ],
+  "sensor_fit": "AUTO (36 mm na dłuższym boku)"
+ },
+ "ludzie": false,
+ "probki": 16,
+ "czasy_s": {
+  "kontekst_s": 10.0,
+  "budynek_s": 9.3,
+  "zrodlo_sceny": "budowa od zera",
+  "zapis_blend": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/dron/scena_final.blend",
+  "scena_s": 20.1,
+  "kontrola_s": 1.0,
+  "render_s": 19.3,
+  "postprodukcja_s": 0.3
+ },
+ "uwagi": [
+  "KADR SIĘGA POZA ORTOFOTOMAPĘ (pusta płaszczyzna): 2.6 % kadru"
+ ],
+ "info": [
+  "kamera poza ramką mapy (e 11–152, n -36–148): z tej strony teren to ortofotomapa, zabudowa – proste bryły"
+ ],
+ "promienie": [
+  "oś: teren_dalszy_ortofoto 216.7 m",
+  "L-dół: barki 97.7 m",
+  "P-dół: most_pomost_lancuchy 77.7 m",
+  "L-góra: niebo",
+  "P-góra: niebo",
+  "dół: woda 85.5 m"
+ ],
+ "udzialy_kadru": {
+  "niebo": 0.279,
+  "woda": 0.221,
+  "most": 0.143,
+  "budynek": 0.135,
+  "dalsze_otoczenie": 0.06,
+  "drzewa": 0.052,
+  "teren": 0.049,
+  "ortofoto_plaskie": 0.031,
+  "poza_swiatem": 0.026,
+  "zabudowa_kontekstu": 0.003
+ },
+ "zaslona_pierwszego_planu": 0.0,
+ "najblizsza_przeszkoda": {
+  "obiekt": "most_portal_pn",
+  "odl_m": 26.0
+ },
+ "oko_nad_podlozem_m": 29.95,
+ "podloze": "woda",
+ "budynek_w_kadrze": {
+  "wieża": {
+   "x0": 0.085,
+   "x1": 0.359,
+   "y0": 0.351,
+   "y1": 0.801,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  },
+  "skrzydło": {
+   "x0": 0.13,
+   "x1": 0.365,
+   "y0": 0.43,
+   "y1": 0.629,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  },
+  "segment": {
+   "x0": 0.02,
+   "x1": 0.156,
+   "y0": 0.357,
+   "y1": 0.613,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  }
+ },
+ "punkty_kluczowe": {
+  "Brama Mostowa – napis (+5,2)": {
+   "w_kadrze": true,
+   "x": 0.26,
+   "y": 0.42,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 124.3
+  },
+  "korona – lamele łuku (+31,7)": {
+   "w_kadrze": true,
+   "x": 0.26,
+   "y": 0.733,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 122.6
+  },
+  "attyka wieży (+37,2)": {
+   "w_kadrze": true,
+   "x": 0.26,
+   "y": 0.798,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 123.0
+  },
+  "cel kamery": {
+   "w_kadrze": true,
+   "x": 0.5,
+   "y": 0.667,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 100.0
+  }
+ },
+ "horyzont_y": 0.667,
+ "pochylenie_deg": 0.0,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/podglad_dron-1.png",
+ "jpg": "/home/user/aihouse/umwd/docs/60_wizualizacje/img/extra/podglad_dron-1.jpg"
+}
