@@ -265,15 +265,63 @@
      "podpis „z tarasu … przy pl. Grunwaldzkim” (J2, J3): w punkcie kamery nie ma budynku (najbliższa bryła 48 m), więc podpis jak u J1 – „z wysokości ok. 12 m” – z lokalizacją przy pn. przyczółku mostu",
      "≥ 4000 px (J1): to zlecenie – 2000 px / 64 próbki; plik planszowy 4000 px – osobny przebieg (ok. 4× czasu)"
     ]
+   },
+   "render_final": {
+    "plik": "docs/60_wizualizacje/img/extra/E_zlota-godzina-2.jpg",
+    "kontrola": "docs/60_wizualizacje/img/extra/E_zlota-godzina-2_kontrola.json",
+    "rozdzielczosc": [
+     2000,
+     1333
+    ],
+    "probki": 64,
+    "odszumianie": "OIDN",
+    "ludzie": true,
+    "preset": "dzien",
+    "czas_renderu_s": 939.9,
+    "czas_calkowity_s": 966.0,
+    "watki": 2,
+    "obciazenie_maszyny": "ok. 9 (renderowali też inni)",
+    "slonce": {
+     "az": 109.51,
+     "el": 11.17
+    },
+    "udzialy_kadru": {
+     "niebo": 0.289,
+     "most": 0.234,
+     "woda": 0.201,
+     "budynek": 0.169,
+     "drzewa": 0.07,
+     "zabudowa_kontekstu": 0.018,
+     "teren": 0.008,
+     "ortofoto_plaskie": 0.008,
+     "inne": 0.003
+    },
+    "wieza_w_kadrze": {
+     "x0": 0.117,
+     "x1": 0.502,
+     "y0": 0.344,
+     "y1": 0.825,
+     "rzut_w_kadrze": true,
+     "uciete": []
+    },
+    "post_przed": {
+     "mgla_udzial_kadru_w>0.3": 0.024,
+     "woda_udzial_kadru": 0.177,
+     "woda_luma_przed_po": [
+      0.135,
+      0.154
+     ]
+    },
+    "data": "2026-11-17"
    }
   },
   {
    "id": "zlota-godzina-3",
-   "opis": "ZŁOTA GODZINA 3 – znad wody (łódź na Odrze, 1,8 m nad lustrem), 130 m na wsch. od wieży; kadr pionowy: lustro wody z odbiciami, nabrzeże z balustradą i barką-restauracją, szpaler bulwaru, wieża z łukiem i koroną nad koronami drzew. Poranek, słońce z lewej z tyłu.",
+   "opis": "ZŁOTA GODZINA 3 – znad wody (łódź na Odrze, oko 1,2 m nad lustrem), 130 m na wsch. od wieży; kadr pionowy 4:5, 65 mm: lustro wody z lekko rwącym się odbiciem wieży, nabrzeże z balustradą i barką-restauracją, pieszi na bulwarze, szpaler bulwaru, wieża z łukiem i koroną z lamelami nad koronami drzew. Poranek, słońce z lewej z tyłu.",
    "cam": {
     "e": 238.0,
     "n": 88.0,
-    "z": -1.95,
+    "z": -2.55,
     "z_od": "scena"
    },
    "target": {
@@ -281,14 +329,15 @@
     "n": 70.64,
     "z": 10.0
    },
-   "lens_mm": 60,
+   "lens_mm": 65,
    "shift_x": 0.0,
-   "shift_y": 0.12,
+   "shift_y": 0.15,
    "aspect": "4:5",
    "czas": "2026-10-20 08:45 CEST",
-   "ludzie": false,
+   "ludzie": true,
    "preset": "dzien",
-   "uwaga_render": "Podgląd renderowany przez render/ujecia_poprawki_kontekstu.py (te same argumenty co ujecia_dodatkowe.py): usuwa artefakty context.py widoczne z wody – ścianę 3,8 m w nurcie wzdłuż granicy ramki (e 152,5 / n 148,6) i fałszywą groblę z ortofotomapy pod Mostem Grunwaldzkim. Po poprawce context.zbuduj_dalsze można renderować wprost."
+   "uwaga_render": "Render finalny: render/final_zlota_godzina_3.py (nakładka na wspólną nakładkę finałową render/ujecia_finalne_korekty.py → ujecia_poprawki_kontekstu.py → ujecia_dodatkowe.py; te same argumenty). Warunki wspólne zestawu: lamele korony łuku v1.1 (21 szt., Fibonacci 1,35/0,675), sitodruk 30 % na szkle korony, oprawy ciepłe w dzień ×0,12. Poprawki ujęcia: barka-restauracja z detalem zamiast białego prostopadłościanu, zmarszczka wody (~2 mm, skala 0,5 m), wyrównany uskok 0,3 m lica muru nabrzeża (pionowy cień czytany jako słup przy x ≈ 0,40), 3 pieszych na bulwarze. Podglądy: render/ujecia_poprawki_kontekstu.py (artefakty context.py widoczne z wody: ściana w nurcie wzdłuż granicy ramki, grobla pod Mostem Grunwaldzkim).",
+   "poprawki": "v0 (podgląd): oko 1,8 m nad wodą (z −1,95), 60 mm, shift 0,12 – attyka y 0,87–0,89, woda 44 %, biała barka w osi łuku, słup x ≈ 0,40, 2 lamele na łuku. v1 (final, korekty jury): oko 1,2 m (z −2,55, jurorzy 1 i 3) – dłuższe odbicie; 65 mm (juror 2), shift 0,15 zamiast 0,14 – po obniżeniu oka attyka łuku zostaje na y 0,88 (narożnik 0,91), horyzont 0,35, wieża +8 %, woda 35 %; barka z detalem (2 i 3), zmarszczka wody (2 i 3), 3 pieszych na bulwarze (2), słup usunięty (1: to cień uskoku muru – wyrównany w 3D), lamele v1.1 i wygaszone oprawy korony (1, 2). Nie przyjęto (juror 3, przegłosowany): obrót osi 260° → 258,5° (jurorzy 1 i 2 – oś bez zmian; juror 1: niebo po prawej to przestrzeń, w którą patrzy łuk) i pory 1.10 08:15 (1 i 2 – 20.10 08:45 bez zmian)."
   },
   {
    "id": "zlota-godzina-4",

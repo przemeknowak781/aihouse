@@ -26,7 +26,7 @@
    "done"
   ],
   [
-   "Concept v1.1 ✔ + Sejmik storey S-3 ✔ → merge into v1.2 with stair-A fix and cost check (workflow ►)",
+   "Concept v1.2 ✔ (Sejmik storey merged, cost 148.99 mln) → open decisions v1.2b (workflow ►)",
    "running"
   ],
   [
@@ -43,9 +43,9 @@
   ]
  ],
  "notes": [
-  "Sejmik storey S-3 merged into spec v1.2 (verification in progress): chamber 232 m² with 47 desks in 4 curved rows (43 + 4 wheelchair, 5 % ramps), presidium against the full wall; councillors' upper hall and public gallery on the +30.90 mezzanine with separate routes; stair A now 21 risers with a 1.50 m landing.",
-  "Gallery sightlines checked in section: both gallery rows see the presidium, the speaker and the chair over the 1.10 m glass.",
-  "Exterior frames W1–W5 approved; finals running in order W5 → W4 → W3 → W1/W2 (≈ 4.5–6 h at 4 000–8 000 px). Hall W6 on hold: the 3D agent found the diagonal hall axis narrows to 3.9 m in the plan (claimed 6.3 m); fix routed to the plans re-run."
+  "First finished extra showcase render (your request): from the deck of Most Grunwaldzki at golden hour. The lantern is framed between the bridge chains and the pylon, the arcade and inscription read at street level, and the Oder carries the reflection.",
+  "Finals running: W5 (Mazowiecka 19) at 4 000 px, then W4 and W3; photomatch W1/W2 last (high memory).",
+  "Spec v1.2b decisions and structural audit: in verification."
  ],
  "images": [
   {

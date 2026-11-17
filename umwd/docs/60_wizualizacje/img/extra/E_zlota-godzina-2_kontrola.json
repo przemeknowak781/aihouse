@@ -55,7 +55,9 @@
   "budynek_s": 11.0,
   "zrodlo_sceny": "budowa od zera",
   "scena_s": 21.3,
-  "kontrola_s": 0.6
+  "kontrola_s": 0.6,
+  "render_s": 939.9,
+  "postprodukcja_s": 4.2
  },
  "uwagi": [],
  "info": [
@@ -149,5 +151,127 @@
   }
  },
  "horyzont_y": 0.5,
- "pochylenie_deg": 0.0
+ "pochylenie_deg": 0.0,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/E_zlota-godzina-2.png",
+ "jpg": "/home/user/aihouse/umwd/docs/60_wizualizacje/img/extra/E_zlota-godzina-2.jpg",
+ "dodatki_w_kadrze": {
+  "tramwaj_most": {
+   "x0": 0.571,
+   "x1": 0.77,
+   "y0": 0.309,
+   "y1": 0.431,
+   "odl_m": 119.3,
+   "srodek_trafia": "most_pomost_lancuchy"
+  },
+  "czlowiek_most_00": {
+   "x0": 0.701,
+   "x1": 0.708,
+   "y0": 0.314,
+   "y1": 0.347,
+   "odl_m": 109.0,
+   "srodek_trafia": "most_pomost_lancuchy"
+  },
+  "czlowiek_most_01": {
+   "x0": 0.688,
+   "x1": 0.697,
+   "y0": 0.309,
+   "y1": 0.347,
+   "odl_m": 105.6,
+   "srodek_trafia": "most_pomost_lancuchy"
+  },
+  "czlowiek_most_02": {
+   "x0": 0.576,
+   "x1": 0.586,
+   "y0": 0.286,
+   "y1": 0.327,
+   "odl_m": 91.8,
+   "srodek_trafia": "czlowiek_most_03"
+  },
+  "czlowiek_most_03": {
+   "x0": 0.577,
+   "x1": 0.587,
+   "y0": 0.284,
+   "y1": 0.328,
+   "odl_m": 90.4,
+   "srodek_trafia": "czlowiek_most_03"
+  },
+  "czlowiek_most_04": {
+   "x0": 0.335,
+   "x1": 0.347,
+   "y0": 0.225,
+   "y1": 0.277,
+   "odl_m": 71.5,
+   "srodek_trafia": "czlowiek_most_04"
+  },
+  "czlowiek_most_05": {
+   "x0": 0.503,
+   "x1": 0.515,
+   "y0": 0.267,
+   "y1": 0.314,
+   "odl_m": 83.8,
+   "srodek_trafia": "czlowiek_most_05"
+  },
+  "czlowiek_most_06": {
+   "x0": 0.217,
+   "x1": 0.229,
+   "y0": 0.195,
+   "y1": 0.254,
+   "odl_m": 65.4,
+   "srodek_trafia": "czlowiek_most_06"
+  },
+  "czlowiek_most_07": {
+   "x0": 0.439,
+   "x1": 0.449,
+   "y0": 0.311,
+   "y1": 0.35,
+   "odl_m": 104.4,
+   "srodek_trafia": "most_pomost_lancuchy"
+  },
+  "czlowiek_most_08": {
+   "x0": 0.256,
+   "x1": 0.266,
+   "y0": 0.278,
+   "y1": 0.319,
+   "odl_m": 88.6,
+   "srodek_trafia": "czlowiek_most_08"
+  }
+ },
+ "korekty": {
+  "lamele_korony": {
+   "luk_L_m": 21.991,
+   "lamele_szt": 21,
+   "szer_m": 0.35,
+   "glab_m": 0.6,
+   "rozstawy": "LkLLkLkLLkLLkLkLLkLk",
+   "zapas_krawedzi_m": 0.021,
+   "przechwycone_ze_Spec": 16,
+   "spec_pierwotna": [
+    0.35,
+    0.6,
+    13.4
+   ]
+  },
+  "oprawy_cieple_moc": 3.5999999046325684,
+  "post_przed": {
+   "mgla_udzial_kadru_w>0.3": 0.024,
+   "woda_udzial_kadru": 0.177,
+   "woda_luma_przed_po": [
+    0.135,
+    0.154
+   ],
+   "cfg": {
+    "woda_cienie_ev": 0.5,
+    "mgla": {
+     "start": 190,
+     "glebokosc": 300,
+     "ev": 0.5,
+     "desat": 0.3,
+     "niebo": 0.0,
+     "wykladnik": 0.8
+    }
+   }
+  },
+  "wycinek": null,
+  "czas_calkowity_s": 945.0
+ }
 }

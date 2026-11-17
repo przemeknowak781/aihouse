@@ -1,0 +1,57 @@
+{
+ "nr": 34,
+ "title": "First finished extra showcase render: the lantern from Most Grunwaldzki at golden hour",
+ "stages": [
+  [
+   "Organiser materials ✔ (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register ✔ (184 requirements) + checklists",
+   "done"
+  ],
+  [
+   "Site ✔ (zoning, heritage, survey, geotech, trees, neighbours)",
+   "done"
+  ],
+  [
+   "Law ✔ (WT bridge, fire, accessibility, zero-emission)",
+   "done"
+  ],
+  [
+   "Design research ✔ (trends, visuals, boards, façades, costs)",
+   "done"
+  ],
+  [
+   "Programme ✔ (187 offices, PU ≈ 8,600 m²)",
+   "done"
+  ],
+  [
+   "Concept v1.2 ✔ (Sejmik storey merged, cost 148.99 mln) → open decisions v1.2b (workflow ►)",
+   "running"
+  ],
+  [
+   "Production ►: drawings v1.1 ✔ (verified); plans + tables re-run after v1.2; photomatch W1/W2 tests ✔; extra showcase renders (workflow ►)",
+   "running"
+  ],
+  [
+   "Boards & texts ►: Stage II 8/8 skeletons (vis pending, P7/P8 re-layout); Stage II text 5 × A3 + Stage I text + F.14.A (workflow ►); 300-dpi export ✔",
+   "running"
+  ],
+  [
+   "Audit ►: completeness 25/44; structural & functional audit ►; jury later",
+   "running"
+  ]
+ ],
+ "notes": [
+  "First finished extra showcase render (your request): from the deck of Most Grunwaldzki at golden hour. The lantern is framed between the bridge chains and the pylon, the arcade and inscription read at street level, and the Oder carries the reflection.",
+  "Finals running: W5 (Mazowiecka 19) at 4 000 px, then W4 and W3; photomatch W1/W2 last (high memory).",
+  "Spec v1.2b decisions and structural audit: in verification."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/E_zlota-godzina-2.jpg",
+   "caption": "Extra render E-2: from the bridge deck, golden hour (final, 2 000 px)"
+  }
+ ]
+}

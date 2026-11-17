@@ -186,6 +186,21 @@ na łuku):
   placu (pas granitu ciemnego 0,60 m + listwa z brązu 0,06 m + tablica); **ogród deszczowy** (obniżenie −0,22 m,
   obrzeże żwirowe, krzewy), **plac zabaw** (piasek, rama drewniana), pergola przy murze kamienic; **10 stojaków
   rowerowych** U przy Wejściu Obywatelskim; ścieżki ogrodu z `PLAN` (szer. 2,2 m).
+* **Kondygnacja Sejmiku – W7/W8** (`sejmik_szczegolowy=True`, `budynek3d_sejmik.py`, dane `kondygnacja_sejmiku`
+  spec v1.2 / S-3): ściany S = wnętrze minus pomieszczenia (wielokąty „w świetle ścian”), na poziomie antresoli
+  (+30,90) bryła pełna poza przestrzeniami otwartymi (hol górny SWD.02g, SWD.03, bar SWD.05, galeria SWD.01g),
+  korytarzem publicznym i holem dźwigów, pustką holu, schodami i salą; strop antresoli (spód tynk, wierzch
+  lastryko); **sala obrad** SWD.01 (232 m², 6,85 m): 4 rzędy łukowe wokół F (u 27,5; v 15,2) z obrysów JSON
+  (podesty +0,00…0,27, pulpity, 47 stanowisk – fotele co ≤ 1,0 m, zach. końce rzędów dla wózków), prezydium
+  (stół 6,0 m, 4 fotele) przy pełnej ścianie pd. z listew dębowych, mównica w F, 2 ekrany, flagi PL/UE, napis
+  z mosiądzu, sufit z bafli, pierścienie wiszące (emisja + lampy powierzchniowe), spoty frontowe na prezydium;
+  **galeria publiczności** (zach., u 15,5–22,0): rząd 1 (8), podest +0,90 (9) z balustradą szklaną 0,70, stopnie,
+  zatoka 3 wózków, balustrada szklana 1,10 na cokole 0,20 w licu u 22,00; **hol**: pustka 2-kond. NW, schody
+  reprezentacyjne w pustce (21 × 17,14 cm, 11 + 10, spocznik 1,5 m, bieg 2,0 m, stopnie dębowe, policzki
+  betonowe, balustrady szklane z pochwytem mosiężnym), balustrady krawędzi antresoli, lada szatni, ławy, bar,
+  lamele dębowe w pustce, downlighty; ludzie: radni w fotelach (~86 % miejsc; prototyp siedzący
+  `_prototyp_siedzacego`), prezydium, mówca, publiczność na galerii, osoba na wózku w zatoce galerii, goście
+  w holu. Domyślnie (bez opcji) – schematyczna korona `_korona` (widok z zewnątrz).
 * **Ogród wg planszy v1.1** (`tools/zagospodarowanie.py`, stan 17.11): ogród deszczowy 140 m² (dwie niecki przy wsch.
   granicy), plac zabaw (90,6–96,3; −6,0…−0,6), ścieżki obrzeżem ogródków (szer. 1,8 m), 14 nowych drzew w ogrodzie
   i 2 u wylotu pasa od bulwaru; **taras ogrodowy** na stropie pasa −1 (u −3,9…21,0, v 0…−5,0 – posadzka
@@ -207,6 +222,8 @@ Skrypt przed renderem sprawdza położenie kamery (w obrysie budynku? przy pniu 
 | Kamera | Źródło | Pora (słońce) | Uwagi z kontroli i korekty |
 |---|---|---|---|
 | W3 Brama Mostowa | JSON, **nowe stanowisko** (decyzja 17.11) | 23.10 09:40 CEST (az 135°, el 17°) | wymóg: poziom człowieka, ≥ 30 m od lica, Brama z napisem i cała korona. Przy 24 mm rozpiętość posadzka podcienia → attyka (+37,2) mieści się dopiero z ≥ 38 m, a tam oś przecinają istniejące krzewy przyczółka (krzew_61/62, poza granicą). Przeszukanie promieni (drzwi, kolumny, napis w 9 kierunkach łuku + attyka; `szukaj_w3d/e`): czyste stanowisko (109,0; 107,5; oko +2,67) na skraju chodnika przy schodach przyczółka, **33,1 m od lica**; kadr 1,445 : 1, **20 mm, shift 0,276** (piony zachowane). Osoba na wózku w podcieniu między kolumnami 45°/60°, z profilu. Wariant 24 mm z 37 m (107,5; 112,3) – krzewy zasłaniają prawą część podcienia |
+| W7 Hol sali Sejmiku | JSON, **nowe stanowisko** | 29.10 16:20 CET (el 1°, zachód) | punkt z JSON (u 13,0; v 21,7) w v1.2 wypada w korytarzu 1,8 m przy WC; stanowisko w pd.-wsch. narożu holu dolnego (u 12,1; v 23,5), widok na pustkę ze schodami, krawędź antresoli i okna pn./zach.; pole 1,45 : 1, 20 mm, shift 0,10 – test (finał po zamrożeniu spec) |
+| W8 Sala obrad z galerią | JSON, **korekta osi** | 22.10 10:30 CEST, sesja | kamera za rzędem 4 (u 31,0; v 25,6; ~11 m od mównicy); oś obrócona na zach. – przy 20 mm w polu 2,43 : 1 widać prezydium, mównicę i galerię publiczności (zach.) z widzami – test (finał po zamrożeniu spec) |
 | W6 Hala Obywatelska | JSON, **korekta** | 23.10 11:00 CEST (154°/24°), ekspozycja −0,35 | oś 211,7° z JSON nie jest drożna w `budynek.json` (narożnik SW.02 0,45 m od osi przy a ≈ 8,7 m; przejście SW.06/trzony 3,9 m; narożnik PHS.04 na osi przy a = 25,5 m; koniec osi w PHS.04). Stanowisko 3 m w prawo od osi, 3 m od drzwi Bramy Mostowej (97,73; 70,59; 1,60), kadr na drzwi ogrodowe: panorama 2,95 : 1, **16 mm**, shift 0,04 – lapidarium i ściana z listew z napisem po lewej, informacja z osobą na wózku w środku, przejście z drzewami ogrodu na końcu |
 | W4 Wybrzeże Słowackiego 5 | JSON, **korekta obiektywu** | 23.10 11:15 CEST (158°/25°) | kadr 1,875 : 1 (pole planszy) – przy 28 mm gzyms-attyka segmentu poza kadrem; **21 mm, shift 0,18**. Ściana pd. segmentu z reliefem i pnączami w słońcu, WS 5 w cieniu |
 | W5 Mazowiecka 19 | JSON, **korekta obiektywu** | 22.10 15:30 CEST (225°/17°) | kadr 1,37 : 1 – przy 28 mm styk gzymsu skrzydła z gzymsem nr 19 poza górną krawędzią; **24 mm, shift 0,29**. Gzyms i kordon w liniach nr 19, M1, brama ogrodowa |

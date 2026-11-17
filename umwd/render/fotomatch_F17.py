@@ -131,7 +131,10 @@ def lum(a):
 def wczytaj_exr(p):
     im = bpy.data.images.load(str(p))
     im.colorspace_settings.name = 'Non-Color'
-    a = np.array(im.pixels[:], dtype=np.float32).reshape(im.size[1], im.size[0], 4)[::-1]
+    # foreach_get do bufora numpy (pixels[:] tworzy listę Pythona – przy 38 Mpx ok. 5 GB RAM)
+    buf = np.empty(im.size[0] * im.size[1] * 4, np.float32)
+    im.pixels.foreach_get(buf)
+    a = buf.reshape(im.size[1], im.size[0], 4)[::-1]
     bpy.data.images.remove(im)
     return a
 
@@ -337,9 +340,9 @@ def main():
     # ---- kompozycja
     G = GRADING[a.zdjecie]
     kol = wczytaj_exr(BUILD / (pre + 'glowny_kolor.exr'))
-    cien = wczytaj_exr(BUILD / (pre + 'glowny_cien.exr'))[..., :3]
-    mT = wczytaj_exr(BUILD / (pre + 'maskaT_kolor.exr'))[..., 3]
-    mB = wczytaj_exr(BUILD / (pre + 'maskaB_kolor.exr'))[..., 3]
+    cien = wczytaj_exr(BUILD / (pre + 'glowny_cien.exr'))[..., :3].copy()
+    mT = wczytaj_exr(BUILD / (pre + 'maskaT_kolor.exr'))[..., 3].copy()
+    mB = wczytaj_exr(BUILD / (pre + 'maskaB_kolor.exr'))[..., 3].copy()
     Hh, Ww = kol.shape[:2]
     foto = Image.open(UMWD / kam['zdjecie']).convert('RGB').resize((Ww, Hh), Image.LANCZOS)
     f_s = np.asarray(foto, dtype=np.float32) / 255.0

@@ -1,0 +1,150 @@
+{
+ "id": "zlota-godzina-3",
+ "opis": "ZŁOTA GODZINA 3 – znad wody (łódź na Odrze, oko 1,2 m nad lustrem), 130 m na wsch. od wieży; kadr pionowy 4:5, 65 mm: lustro wody z lekko rwącym się odbiciem wieży, nabrzeże z balustradą i barką-restauracją, pieszi na bulwarze, szpaler bulwaru, wieża z łukiem i koroną z lamelami nad koronami drzew. Poranek, słońce z lewej z tyłu.",
+ "preset": "dzien",
+ "czas": "2026-10-20 08:45 CEST",
+ "slonce": {
+  "az": 121.96,
+  "el": 10.92,
+  "ekspozycja": -3.9,
+  "czas": "2026-10-20T08:45:00+02:00",
+  "udzial_opraw": 1.0,
+  "latarnie": 0,
+  "oprawy_cieple": 3.5999999046325684,
+  "lamele_korony": {
+   "luk_L_m": 21.991,
+   "lamele_szt": 21,
+   "szer_m": 0.35,
+   "glab_m": 0.6,
+   "rozstawy": "LkLLkLkLLkLLkLkLLkLk",
+   "zapas_krawedzi_m": 0.021,
+   "przechwycone_ze_Spec": 16,
+   "spec_pierwotna": [
+    0.35,
+    0.6,
+    13.4
+   ]
+  }
+ },
+ "kamera": {
+  "loc": [
+   238.0,
+   88.0,
+   -2.55
+  ],
+  "cel": [
+   139.52,
+   70.64,
+   10.05
+  ],
+  "z_wzgl_kamery": -2.6,
+  "lens_mm": 65.0,
+  "shift_x": 0.0,
+  "shift_y": 0.15,
+  "poziom": true,
+  "rozdzielczosc": [
+   2000,
+   2500
+  ],
+  "sensor_fit": "AUTO (36 mm na dłuższym boku)"
+ },
+ "ludzie": true,
+ "probki": 64,
+ "czasy_s": {
+  "kontekst_s": 9.8,
+  "budynek_s": 11.2,
+  "zrodlo_sceny": "budowa od zera",
+  "scena_s": 21.6,
+  "kontrola_s": 0.8
+ },
+ "uwagi": [],
+ "info": [
+  "kamera poza ramką mapy (e 11–152, n -36–148): z tej strony teren to ortofotomapa, zabudowa – proste bryły"
+ ],
+ "promienie": [
+  "oś: wieza_elewacje 130.7 m",
+  "L-dół: woda 14.7 m",
+  "P-dół: woda 14.7 m",
+  "L-góra: niebo",
+  "P-góra: niebo",
+  "dół: woda 10.9 m"
+ ],
+ "udzialy_kadru": {
+  "woda": 0.354,
+  "niebo": 0.289,
+  "budynek": 0.266,
+  "inne": 0.057,
+  "drzewa": 0.034
+ },
+ "zaslona_pierwszego_planu": 0.0,
+ "najblizsza_przeszkoda": {
+  "obiekt": "woda",
+  "odl_m": 1.2
+ },
+ "oko_nad_podlozem_m": 1.2,
+ "podloze": "woda",
+ "budynek_w_kadrze": {
+  "wieża": {
+   "x0": 0.228,
+   "x1": 0.707,
+   "y0": 0.377,
+   "y1": 0.906,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  },
+  "skrzydło": {
+   "x0": -0.106,
+   "x1": 0.651,
+   "y0": 0.373,
+   "y1": 0.6,
+   "rzut_w_kadrze": true,
+   "uciete": [
+    "lewo"
+   ]
+  },
+  "segment": {
+   "x0": 0.041,
+   "x1": 0.243,
+   "y0": 0.382,
+   "y1": 0.679,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  }
+ },
+ "punkty_kluczowe": {
+  "Brama Mostowa – napis (+5,2)": {
+   "w_kadrze": true,
+   "x": 0.667,
+   "y": 0.455,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 135.3
+  },
+  "korona – lamele łuku (+31,7)": {
+   "w_kadrze": true,
+   "x": 0.667,
+   "y": 0.81,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 139.4
+  },
+  "attyka wieży (+37,2)": {
+   "w_kadrze": true,
+   "x": 0.667,
+   "y": 0.883,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 140.8
+  },
+  "cel kamery": {
+   "w_kadrze": true,
+   "x": 0.5,
+   "y": 0.578,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 100.8
+  }
+ },
+ "horyzont_y": 0.35,
+ "pochylenie_deg": 0.0
+}

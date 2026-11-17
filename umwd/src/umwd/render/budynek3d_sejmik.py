@@ -133,15 +133,19 @@ class Sejmik:
         S_wszystkie = unary_union(list(S_pom.values()) + [pustka, schody]).buffer(0)
         sciany = wn.difference(S_wszystkie.buffer(0.005)).buffer(-0.01).buffer(0.01)
         trzony = unary_union([S_pom['C-A'], S_pom['C-B']])
+        hol_strefa = unary_union([hol, pustka, schody]).buffer(0.06)
         for P_ in _czesci(sciany.difference(trzony)):
             if P_.area < 0.02:
                 continue
             pod = P_.intersection(ant_otw)
             reszta = P_.difference(ant_otw)
+            # ściany holu: okładzina dębowa do spodu antresoli (+30,60), wyżej tynk wapienny
+            mat_dol = 'wn_drewno:jasne' if P_.intersects(hol_strefa) else 'wn_tynk'
             for q in _czesci(pod):
-                G.pryzma(q, F, za - 0.30, 'wn_tynk', gora=False, dno=False)
+                G.pryzma(q, F, za - 0.30, mat_dol, gora=False, dno=False)
             for q in _czesci(reszta):
-                G.pryzma(q, F, suf, 'wn_tynk', gora=False, dno=False)
+                G.pryzma(q, F, za - 0.30, mat_dol, gora=False, dno=False)
+                G.pryzma(q, za - 0.30, suf, 'wn_tynk', gora=False, dno=False)
         # trzony pełne (okładzina dębowa)
         for q in _czesci(trzony.intersection(wn)):
             G.pryzma(q, F, suf, 'wn_drewno:jasne', gora=False, dno=False)
