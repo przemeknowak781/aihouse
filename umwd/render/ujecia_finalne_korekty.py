@@ -82,11 +82,11 @@ def fib_word(n):
 
 def lamele_luku(L, w, A, B):
     """Osie lameli na łuku długości L (jak ``tools/elewacje.lamele_luku``): największa liczba lameli mieszcząca się
-    na łuku z zapasem ≥ 0,15 m od krawędzi, rozstawy w ciągu Fibonacciego, układ wyśrodkowany."""
+    na łuku (zapas ≥ 1 cm od krawędzi – rysunek: 21 szt., 2 cm), rozstawy w ciągu Fibonacciego, układ wyśrodkowany."""
     n = 2
     while True:
         p = [A if c == 'A' else B for c in fib_word(n)]
-        if sum(p) + w + 0.30 > L:
+        if sum(p) + w + 0.02 > L:
             break
         n += 1
     p = [A if c == 'A' else B for c in fib_word(n - 1)]
@@ -268,10 +268,10 @@ def tramwaj(sc, cfg):
     # czoła: szyba czołowa i boczne szyby kabiny na fazach
     for (x_n, sg) in ((0.0, 1), (Ltot, -1)):
         x0 = x_n
-        q = [(x0 - sg * 0.012, -0.75, 1.00), (x0 - sg * 0.012, 0.75, 1.00), (x0 + sg * 0.25, 0.70, 2.65),
-             (x0 + sg * 0.25, -0.70, 2.65)]
+        xs_ = x0 - sg * 0.012
+        q = [(xs_, -0.72, 1.00), (xs_, 0.72, 1.00), (xs_, 0.66, 2.70), (xs_, -0.66, 2.70)]
         G.quad(q if sg < 0 else q[::-1], SZK)
-        G.box(min(x0, x0 + sg * 0.6), max(x0, x0 + sg * 0.6), -0.8, 0.8, 0.30, 0.55, GRF)   # zderzak
+        G.box(min(x0, x0 - sg * 0.06), max(x0, x0 - sg * 0.06), -0.72, 0.72, 0.30, 0.55, GRF)   # zderzak
     # pantograf (rama niska + ramiona do ok. 5,5 m nad główką szyny)
     xm = (cz[2][0] + cz[2][1]) / 2
     G.box(xm - 1.0, xm + 1.0, -0.55, 0.55, zd + 0.10, zd + 0.30, MET)
@@ -424,6 +424,8 @@ def _kompozytor(sc, prefix):
     ng = bpy.data.node_groups.new('UJ_komp', 'CompositorNodeTree')
     sc.compositing_node_group = ng
     rl = ng.nodes.new('CompositorNodeRLayers')
+    rl.scene = sc
+    rl.layer = vl.name
     ng.interface.new_socket('Image', in_out='OUTPUT', socket_type='NodeSocketColor')
     go = ng.nodes.new('NodeGroupOutput')
     ng.links.new(rl.outputs['Image'], go.inputs[0])
@@ -433,9 +435,13 @@ def _kompozytor(sc, prefix):
     fo.format.media_type = 'IMAGE'
     fo.format.file_format = 'OPEN_EXR'
     fo.format.color_depth = '32'
-    for nazwa, gniazdo in (('mgla', 'Mist'), ('idx', 'Object Index')):
+    wyj = {o.name: o for o in rl.outputs}
+    for nazwa, gniazda in (('mgla', ('Mist',)), ('idx', ('Object Index', 'IndexOB'))):
+        g = next((wyj[x] for x in gniazda if x in wyj), None)
+        if g is None:
+            raise RuntimeError('RLayers bez passu %s (wyjścia: %s)' % (gniazda, list(wyj)))
         fo.file_output_items.new('FLOAT', nazwa)
-        ng.links.new(rl.outputs[gniazdo], fo.inputs[nazwa])
+        ng.links.new(g, fo.inputs[nazwa])
     return {n: U.PNG_DIR / ('%s%s.exr' % (prefix, n)) for n in ('mgla', 'idx')}
 
 
@@ -521,6 +527,26 @@ U.subprocess = SHIM
 _ru = U.render_ujecia
 
 
+def rzut_dodatkow(sc):
+    """Położenie tramwaju i pieszych na moście w kadrze (x, y ∈ [0, 1], y od dołu) i widoczność środka (promień)."""
+    from bpy_extras.object_utils import world_to_camera_view
+    from mathutils import Vector
+    cam = sc.camera
+    dg = bpy.context.evaluated_depsgraph_get()
+    loc = cam.matrix_world.translation
+    out = {}
+    for ob in [o for o in sc.objects if o.name.startswith(('tramwaj_most', 'czlowiek_most_'))]:
+        pts = [ob.matrix_world @ Vector(c) for c in ob.bound_box]
+        uv = [world_to_camera_view(sc, cam, p) for p in pts]
+        c = sum(pts, Vector()) / 8.0
+        d = c - loc
+        hit, pos, nrm, i_, obh, mx = sc.ray_cast(dg, loc, d.normalized(), distance=d.length + 1.0)
+        out[ob.name] = dict(x0=round(min(v.x for v in uv), 3), x1=round(max(v.x for v in uv), 3),
+                            y0=round(min(v.y for v in uv), 3), y1=round(max(v.y for v in uv), 3),
+                            odl_m=round(d.length, 1), srodek_trafia=(obh.name if hit else None))
+    return out
+
+
 def _render_ujecia_p(sc, k, a, DZ, kat, czasy, out_jpg):
     out_jpg = Path(out_jpg)
     SHIM.cfg = k.get('post_przed')
@@ -535,6 +561,7 @@ def _render_ujecia_p(sc, k, a, DZ, kat, czasy, out_jpg):
         SHIM.cfg = None                  # passy z wycinka – bez kroku wstępnego (kontrola detalu)
     t0 = time.time()
     r = _ru(sc, k, a, DZ, kat, czasy, out_jpg)
+    r['dodatki_w_kadrze'] = rzut_dodatkow(sc)
     r['korekty'] = dict(lamele_korony=dict(RAPORT_LAMEL), oprawy_cieple_moc=r.get('slonce', {}).get('oprawy_cieple'),
                         post_przed=dict(SHIM.raport, cfg=SHIM.cfg), wycinek=ARGS_EXTRA.wycinek,
                         czas_calkowity_s=round(time.time() - t0, 1))

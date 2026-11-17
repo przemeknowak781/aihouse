@@ -45,6 +45,8 @@ context.ustaw_kamere_trawy(kon, cam)
 | `build_building(scene, opts)` | buduje kolekcję `BUDYNEK` z podkolekcjami `wieza`, `skrzydlo`, `segment`, `dachy`, `wnetrza`, `zagospodarowanie_bliskie`. Zwraca `kolekcje`, `info` (czasy etapów, liczby obiektów, pola posadzek, drzewa, liczba ludzi) i obiekt `budynek` (`Budynek`: `spec`, `poly`, `foot`, `DZ`, biegi elewacji) |
 | `swiatlo_dzienne(sc, czas, ekspozycja=None, sila_slonca=1, sila_nieba=1, aerozole=1.6, chmury=0.35, wb=None, odbicia=None, odbicia_sila=12)` | świat Multiple Scattering (`sun_rotation` = azymut kompasowy w siatce, +0,738°), lampa Sun wg kalibracji z metodyki §5.2 (25° → 117 W/m², barwa (1; 0,80; 0,55)), chmury `context.dodaj_chmury`, ekspozycja domyślna −4,3 EV w dzień, jaśniej o zmierzchu (wartość bezwzględna, gdy podana); przy słońcu < 3° zapala tylko ok. 35 % opraw biurowych (węzeł `udzial` materiału `B_wn_lampa`). **`odbicia`** = `'m09_30'`/`'m09_40'`/`'m09_45'` – panorama M.09 jako środowisko **tylko dla promieni glossy** (Light Path → Is Glossy Ray), zmieszana z niebem fizycznym; obrót panoramy z kolumny słońca na zdjęciu (az 183,9° + 0,738°); siła 12 (9 – niewidoczne, 22 – korona jak lustro); o zmierzchu skalowana. Zwraca `az`, `el`, `ekspozycja` |
 | `dodaj_odbicia_panoramy(sc, klucz, sila)` | sama warstwa odbić M.09 (wywoływana przez `swiatlo_dzienne`) |
+| `dodaj_kumulusy(sc, az_siatki, el, pokrycie=0.42, …)` | kumulusy jesienne jak na zdjęciach F.17 (`swiatlo_dzienne(..., niebo='kumulusy', chmury=0.5)`): pole chmur na „zakrzywionej” płaszczyźnie podstawy (widoczne także nisko nad horyzontem), kłęby z szumu + gładkiej komórki Voronoi, jasna krawędź od strony słońca, szare podstawy, mgiełka przy horyzoncie; barwa skalowana luminancją nieba fizycznego. Domyślne `niebo='proc'` – stare chmury `context.dodaj_chmury` (zgodność wstecz) |
+| `budynek3d_otoczenie.samochod(B, coll, poz, kier, z, …)` / `rowerzysta(…)` | samochód osobowy (nadwozie i kabina z pierścieni, koła, lakier z losową barwą) i rowerzysta (rower 28", postać z metaballi) – ożywienie kadrów W4/W5 |
 | `budynek3d_hala.Hala(B)` | Hala Obywatelska z `budynek.json` (wywoływana w `wnetrza()` przy `hala_szczegolowa=True`) |
 | `budynek3d_otoczenie.wozek(B, coll, zf, poz=None, kier=None, nazwa='')` | osoba na wózku aktywnym (koła Ø 0,60, obręcze, kółka, rama; sylwetka siedząca, dłonie na obręczach); domyślnie w podcieniu Bramy Mostowej (kąt łuku `wozek_kat_luku` = 52°, jazda ku drzwiom w osi 45°) |
 | `Spec(path)` | parser `koncepcja.json`: układy (u, v) wieży i (s, d) skrzydła (z wzorów tekstowych w `meta`), kondygnacje dla bryły (oba formaty JSON: `zakres` tekst/lista, `strop_nad.spod_*` lub `strop_wierzch_wzgl`), linie skrzydła, kordon wieży, łuk, lamele, cofnięcia, barwy NCS → sRGB |
@@ -184,6 +186,11 @@ na łuku):
   placu (pas granitu ciemnego 0,60 m + listwa z brązu 0,06 m + tablica); **ogród deszczowy** (obniżenie −0,22 m,
   obrzeże żwirowe, krzewy), **plac zabaw** (piasek, rama drewniana), pergola przy murze kamienic; **10 stojaków
   rowerowych** U przy Wejściu Obywatelskim; ścieżki ogrodu z `PLAN` (szer. 2,2 m).
+* **Ogród wg planszy v1.1** (`tools/zagospodarowanie.py`, stan 17.11): ogród deszczowy 140 m² (dwie niecki przy wsch.
+  granicy), plac zabaw (90,6–96,3; −6,0…−0,6), ścieżki obrzeżem ogródków (szer. 1,8 m), 14 nowych drzew w ogrodzie
+  i 2 u wylotu pasa od bulwaru; **taras ogrodowy** na stropie pasa −1 (u −3,9…21,0, v 0…−5,0 – posadzka
+  granitowa) i **zadaszenie BIPV** (u 0,5–20,5, głęb. 4,0 m, h 4,0 m): słupy stalowe co 4 m, belki, moduły
+  szkło-szkło z ogniwami i prześwitami (cień ażurowy) – `_zadaszenie_bipv`; pergola z wcześniejszej wersji usunięta.
 * **Ludzie** (34 + osoby „scenariuszowe” przy Bramie Mostowej: piesi z mostu ku wejściu): metaballe w kanonie
   7,5 głowy, okrycia w stonowanych barwach (czerń, granat, grafit, wielbłądzi, oliwka, bordo, złamana biel, rdza),
   szal u części osób, dłonie w kolorze skóry (atrybut `sk`), szum tkaniny; pozy: ręce wzdłuż tułowia, dłoń
@@ -208,6 +215,16 @@ Skrypt przed renderem sprawdza położenie kamery (w obrysie budynku? przy pniu 
 | detal_podcien | dodatkowa (kontrola materiałów) | 23.10 09:40 CEST | podcień z napisem, kolumny, okładziny granitowe i ceramiczne z bliska (35 mm) |
 | lot_ptaka | dodatkowa (kontrola) | 29.10.2025 11:40 CET | bryła, dachy BIPV, relacja z mostem |
 | W10 Ogród | JSON – **nowe stanowisko** (decyzja 17.11) | 22.10 13:30 CEST (195°/27°), ekspozycja −3,6 | punkt z JSON stoi pod koronami. Wymóg: ścieżka przy placu zabaw, widok na pn. na elewację pd. wieży, bez drzewa przed obiektywem. Przeszukanie promieni z całego ogrodu (85 punktów lica pd.; mapa widoczności) – zachowane drzewa ogrodu (D776, D777, D778, D774/775, D708…) zasłaniają 75–85 % lica z każdego punktu na pd. od y ≈ 25; jedyny punkt bez roślinności w pierwszych metrach: (97,0; −6,0) przy wsch. krawędzi placu zabaw – wieża w prześwicie koron. Ogród jest w cieniu koron i kamienic przez większość dnia (22.10: ≤ 19 % placu zabaw w słońcu) – ujęcie słabe; do decyzji (inny punkt, np. pn. część ogrodu y ≈ 30 z widokiem z dołu, albo rezygnacja) |
+
+**Ustalenia 17.11 (kadry W1–W5 zatwierdzone):** W3–W5 – jedno popołudnie listopadowe **5.11.2026 13:30 CET**
+(słońce az 209°, el 19° – spójny azymut cieni) i niebo z kumulusami (`NIEBO_W3_W5`); W3 – łuk pod światło,
+ekspozycja +0,6 EV (−3,7). **Ożywienie W4/W5** (`zycie_kadru` w `testy_budynek.py`): 6–7 pieszych w planie średnim
+(9–35 m od obiektywu, w polu widzenia z marginesem 9°, na chodnikach, z dala od drzew i latarń, kierunek wzdłuż
+krawężnika, idący z subtelnym rozmyciem), sylwetki bliżej niż 6 m ukryte, rowerzysta na jezdni, w W5 dwa
+samochody zaparkowane przy zach. krawężniku Mazowieckiej (pozycja przyciągana do krawędzi jezdni, 1,05 m od
+krawężnika, ruch prawostronny). **W10** – druga próba (pn.-wsch. część ogrodu → taras z zadaszeniem BIPV i brama
+ogrodowa, południe) nieudana: zachowane drzewo 3 m przed obiektywem, ogród w cieniu koron – **W10 odrzucona**
+(nie jest wymagana regulaminem). **W6** – wstrzymana do korekty rzutu (oś przekątna ≥ 6,3 m na całej długości).
 
 ## 5a. Fotomatch W1/W2 na zdjęciach F.17.A/B (`render/fotomatch_F17.py`)
 
@@ -292,6 +309,9 @@ Każdy obraz to osobny proces; raport kumuluje się w `build/budynek_test_raport
 ## 7a. Rendery finalne – rozdzielczości i czasy (szacunek; NIE uruchomione)
 
 Pola na planszach 100 × 70 cm eksportowanych w 300 dpi (`tools/eksport.py`); szerokości minimalne wg koordynatora.
+Uruchomienie: `nice -n 5 … testy_budynek.py --kamery W5 --probki 64 --szer 4000 --final` → `img/W5_Maz19_final.jpg`
+(JPG q95 bez limitu, surowy PNG w `build/finaly/`; nazwy z `NAZWY_FINALNE` = nazwy oczekiwane przez
+`plansze_etap2.py`); fotomatch: `fotomatch_F17.py --zdjecie A --probki 96 --final` (sam, przy wolnej pamięci).
 Próbkowanie adaptacyjne (próg 0,02) + OIDN w pełnej rozdzielczości, `nice -n 5`; czasy przy obecnym obciążeniu
 (4 rdzenie współdzielone, średnie obciążenie ~4), z pomiarów testów przeskalowanych liniowo (piksele × próbki).
 
