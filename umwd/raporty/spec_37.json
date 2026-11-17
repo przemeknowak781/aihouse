@@ -1,0 +1,56 @@
+{
+ "nr": 37,
+ "title": "Drone view of the whole ensemble; audit found 8 critical issues → spec v1.3 queued",
+ "stages": [
+  [
+   "Organiser materials ✔ (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register ✔ (184 requirements) + checklists",
+   "done"
+  ],
+  [
+   "Site ✔ (zoning, heritage, survey, geotech, trees, neighbours)",
+   "done"
+  ],
+  [
+   "Law ✔ (WT bridge, fire, accessibility, zero-emission)",
+   "done"
+  ],
+  [
+   "Design research ✔ (trends, visuals, boards, façades, costs)",
+   "done"
+  ],
+  [
+   "Programme ✔ (187 offices, PU ≈ 8,600 m²)",
+   "done"
+  ],
+  [
+   "Concept v1.2 ✔ (Sejmik storey merged, cost 148.99 mln) → open decisions v1.2b (workflow ►)",
+   "running"
+  ],
+  [
+   "Production ►: drawings v1.1 ✔ (verified); plans + tables re-run after v1.2; photomatch W1/W2 tests ✔; extra showcase renders (workflow ►)",
+   "running"
+  ],
+  [
+   "Boards & texts ►: Stage II 8/8 skeletons (vis pending, P7/P8 re-layout); Stage II text 5 × A3 + Stage I text + F.14.A (workflow ►); 300-dpi export ✔",
+   "running"
+  ],
+  [
+   "Audit ►: structural & functional audit ✔ (41 confirmed findings, 8 critical: evacuation, garage ramps, step-free M1) → spec v1.3 queued; texts verified ✔",
+   "running"
+  ]
+ ],
+ "notes": [
+  "Third extra render (your request): drone view from the SW, showing the wing, the tower turned to the bridge, the PV roofs and the courtyard garden.",
+  "Audit: 41 confirmed findings, 8 critical. Spec v1.3 fixing all of them is queued."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/E_dron-4.jpg",
+   "caption": "Extra render E-4: drone view from the south-west (final, 2 000 px)"
+  }
+ ]
+}

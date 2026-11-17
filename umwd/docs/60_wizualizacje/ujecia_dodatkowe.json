@@ -627,17 +627,141 @@
      "kamera bez zmian (11,42; −75,54; Z 115) – J1, J2 (większość); przesunięcie o 12 m na wsch. (J3) nie wdrożone: z tego stanowiska oś obraca się w lewo (az 29°), więc bryła Muzeum w lewym górnym rogu rośnie (4 % kadru), a płaska ortofotomapa zostaje 5 %",
      "cel (88; 38; 8) → (90,5; 48; 8), oś az 34,0° → 32,6°, pochylenie 38,0° → 36,1° – kompromis celów J2 (89,5; 49,4) i J3 (92; 48), wieża bliżej środka (J2, J3): x 0,30–0,62 (śr. 0,456; było 0,30–0,58, śr. 0,439), attyka y 0,86 ≤ 0,88 (J1), portal pd. mostu w kadrze (klucz łuku y ≈ 0,88, hełmy ≈ 0,96 – J2)",
      "obiektyw 35 → 40 mm (J2): wieża większa o ok. 14 %, budynek 16 % kadru (było 13 %); przy 35 mm żaden z celów J1/J3 nie usuwa płaskiej ortofotomapy (rachunek: J1 5,6 %, J3 5,3 %)",
-     "płaska ortofotomapa (J1, J2, J3): z lewego dolnego rogu znika (2,0 % → 0,4 % kadru – skrawek w samym narożniku), łącznie 5,6 % → 2,9 % (< 3 % – J3); reszta to drugi brzeg Odry w prawym górnym rogu (pod zamgleniem); poza światem 0 %",
+     "płaska ortofotomapa (J1, J2, J3): z lewego dolnego rogu znika (2,0 % → 0,4 % kadru – skrawek w samym narożniku); łącznie 5,6 % → 2,9 % (siatka 60 × 40; kontrola ujecia_dodatkowe 24 × 16: 6 % → 3,4 %) – J3 chciał < 3 %, wynik na granicy; reszta to drugi brzeg Odry w prawym górnym rogu, pod zamgleniem; poza światem 0 %",
      "pora 8.10 12:30 bez zmian (J1, J3 – większość): elewacja pd. wieży frontalnie w słońcu (cos 0,82), najkrótsze cienie kamienic w ogrodzie",
      "lekka mgła dla dalszego planu (J3): zamglenie z passu Mist – od 200 m (wieża 190 m – bez zmian) do 30 % barwy zamglenia przy 420 m; portal (245 m) ok. 6 %, Muzeum i drugi brzeg (300–360 m) 14–22 %, niebieskawa barwa o luminancji 80. percentyla kadru, −15 % nasycenia; niebo bez zmian",
      "dach BIPV (J1): szkło osłonowe (coat IOR 1,52, chropowatość 0,05) – odbicie nieba wg Fresnela, ogniwa ciemnogranatowe zamiast czarnych, drobne różnice tonu i nachylenia modułów; w gotowym obrazie dach ma barwę ciemnogranatową z odbiciem nieba zamiast czarnej płyty",
-     "kontrola NCS → sRGB i odcieni posesji (J1): konwersja (algorytm w3color, ±5 jednostek) daje L* 88,3 / 89,9 / 83,6 / 85,6 (M1–M4), ΔE76 sąsiednich posesji 7,5 / 10,0 / 7,7 – barwy są rozróżnialne i NIE są zmieniane (decyzja projektowa). Zlewanie się z drona wynika z oświetlenia: lico uliczne skrzydła (normalna 282°) o 12:30 jest w cieniu (cos −0,21), widziane pod kątem 69° i zacienione od nieba pierzeją naprzeciw – pomiar w obrazie: ΔE ≈ 3 (patrz render_final.ceramika_posesji)"
+     "kontrola NCS → sRGB i odcieni posesji (J1): konwersja (algorytm w3color, ±5 jednostek) daje L* 88,3 / 89,9 / 83,6 / 85,6 (M1–M4), ΔE76 sąsiednich posesji 7,5 / 10,0 / 7,7 – barwy są rozróżnialne i NIE są zmieniane (decyzja projektowa). Zlewanie się z drona wynika z oświetlenia: lico uliczne skrzydła (normalna 282°) o 12:30 jest w cieniu (cos −0,21), widziane pod kątem 69° i zacienione od nieba pierzeją naprzeciw – pomiar w gotowym obrazie: L* 26,4 / 26,5 / 24,6 / 25,2, ΔE76 sąsiednich 3,6 / 3,6 / 2,9 (M2 i M4 cieplejsze, M3 najciemniejsza – kolejność zgodna z NCS, różnice ściśnięte cieniem; patrz render_final.ceramika_posesji)",
+     "render finalny 2000 × 1333, 64 próbki + OIDN, ludzie włączeni (z 190 m – drobne sylwetki na ścieżkach, nie psują kadru), postprodukcja preset lot; scena budowana od zera (koncepcja.json z 07:08)"
     ],
     "nie_wdrozone": [
      "pora 12:30 → 13:10 (J2): o 13:10 słońce ma az 189° (nie 192°), a lico zach. skrzydła (normalna 282,4°) jest nadal w cieniu (cos −0,04) – światło ślizgowe zaczyna się ok. 13:20, czytelne (cos ≥ 0,15) dopiero ok. 14:00, przy dłuższych cieniach w ogrodzie; większość (J1, J3) za 12:30",
      "bryła Muzeum Narodowego całkiem poza kadrem (J1, J2): sprawdzone geometrycznie – przy celu J1 (95; 38) bryła rośnie (4,8 % kadru), przy celu J2 zostaje skrawek (ok. 1,5 %); usunięcie wymagałoby obrotu osi do ok. 37,6° (wieża przesunęłaby się na x 0,21–0,53, wbrew J2/J3) albo dłuższego obiektywu (portal mostu wychodzi górą). Zostaje skrawek przy lewej krawędzi (x ≤ 0,1), cofnięty zamgleniem (J3)",
      "przesunięcie kamery o 12 m na wsch. (J3) – patrz wyżej; kierunek odwrotny do celu (więcej Muzeum)"
     ]
+   },
+   "render_final": {
+    "plik": "docs/60_wizualizacje/img/extra/E_dron-4.jpg",
+    "kontrola": "docs/60_wizualizacje/img/extra/E_dron-4_kontrola.json",
+    "skrypt": "render/final_dron_4.py",
+    "rozdzielczosc": [
+     2000,
+     1333
+    ],
+    "probki": 64,
+    "odszumianie": "OIDN",
+    "ludzie": true,
+    "preset": "lot",
+    "czas_renderu_s": 1426.0,
+    "czas_calkowity_s": 1432.0,
+    "budowa_sceny_s": 22.5,
+    "watki": 2,
+    "obciazenie_maszyny": "ok. 8–9 (równolegle renderowały 2 inne procesy)",
+    "slonce": {
+     "az": 177.23,
+     "el": 32.91
+    },
+    "kamera": {
+     "loc": [
+      11.42,
+      -75.54,
+      115.0
+     ],
+     "cel": [
+      90.5,
+      48.0,
+      8.0
+     ],
+     "lens_mm": 40.0,
+     "pochylenie_deg": -36.11
+    },
+    "udzialy_kadru": {
+     "teren": 0.229,
+     "woda": 0.203,
+     "zabudowa_kontekstu": 0.19,
+     "budynek": 0.161,
+     "drzewa": 0.128,
+     "ortofoto_plaskie": 0.034,
+     "most": 0.031,
+     "dalsze_otoczenie": 0.021,
+     "ulica": 0.003
+    },
+    "budynek_w_kadrze": {
+     "wieża": {
+      "x0": 0.296,
+      "x1": 0.615,
+      "y0": 0.356,
+      "y1": 0.861,
+      "rzut_w_kadrze": true,
+      "uciete": []
+     },
+     "skrzydło": {
+      "x0": 0.279,
+      "x1": 0.497,
+      "y0": 0.046,
+      "y1": 0.629,
+      "rzut_w_kadrze": true,
+      "uciete": []
+     },
+     "segment": {
+      "x0": 0.53,
+      "x1": 0.66,
+      "y0": 0.418,
+      "y1": 0.669,
+      "rzut_w_kadrze": true,
+      "uciete": []
+     }
+    },
+    "zamglenie": {
+     "zamglenie_udzial_kadru_w>0.3": 0.185,
+     "zamglenie_barwa_lin": [
+      0.1792,
+      0.1949,
+      0.2173
+     ],
+     "zamglenie_max_udzial": 0.257
+    },
+    "ceramika_posesji": {
+     "dE76_sasiednie_w_obrazie": {
+      "M1-M2": 3.6,
+      "M2-M3": 3.6,
+      "M3-M4": 2.9
+     },
+     "dE76_sasiednie_ncs": {
+      "M1-M2": 7.5,
+      "M2-M3": 10.0,
+      "M3-M4": 7.7
+     },
+     "srgb_w_obrazie": {
+      "BIPV_dachy": [
+       41.4,
+       54.9,
+       74.5
+      ],
+      "M1": [
+       54.2,
+       63.8,
+       70.4
+      ],
+      "M2": [
+       58.1,
+       63.6,
+       65.3
+      ],
+      "M3": [
+       50.9,
+       59.7,
+       65.4
+      ],
+      "M4": [
+       55.6,
+       60.5,
+       62.7
+      ]
+     }
+    },
+    "uwagi_kontroli": [],
+    "data": "2026-11-17"
    }
   },
   {

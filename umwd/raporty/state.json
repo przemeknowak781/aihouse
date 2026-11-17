@@ -38,14 +38,13 @@
    "running"
   ],
   [
-   "Audit ►: completeness 25/44; structural & functional audit ►; jury later",
+   "Audit ►: structural & functional audit ✔ (41 confirmed findings, 8 critical: evacuation, garage ramps, step-free M1) → spec v1.3 queued; texts verified ✔",
    "running"
   ]
  ],
  "notes": [
-  "Stage II text revised after 4 independent checks (numbers, rules/law, engineering, jury): now exactly 5 A3 pages at ≥ 11 pt, every number bound to the model.",
-  "Stage I studial text: 5 A4 pages of text + 3 annex pages of data tables, as the rules allow.",
-  "F.14.A Stage I cost form generated from the same cost model as F.14.B: 148.98 mln zł net works; service 7.6 mln zł net (limit 8.1)."
+  "Third extra render (your request): drone view from the SW, showing the wing, the tower turned to the bridge, the PV roofs and the courtyard garden.",
+  "Audit: 41 confirmed findings, 8 critical. Spec v1.3 fixing all of them is queued."
  ],
  "images": [
   {
