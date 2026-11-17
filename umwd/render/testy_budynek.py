@@ -1,0 +1,193 @@
+# -*- coding: utf-8 -*-
+"""Rendery testowe budynku UMWD w kontekście 3D (jesień, obszar inwestycji „pusty” + budynek z budynek3d).
+
+Kamery z ``model/koncepcja.json`` (W3 – Brama Mostowa, W4 – relacja z Wybrzeżem Słowackiego 5, W5 – relacja
+z Mazowiecką 19, W9 – latarnia z Mostu Grunwaldzkiego, W10 – Ogród Województwa) + widok kontrolny z lotu ptaka.
+Pora dnia wg specyfikacji kadru. Przed renderem: kontrola położenia kamery (w bryle? w koronie drzewa?
+co zasłania oś widzenia?). Wynik: ``docs/60_wizualizacje/img/budynek_test_<kamera>.jpg`` (≤ 1 MB).
+
+Uruchomienie::
+
+    /home/user/aihouse/.venv-render/bin/python -I /home/user/aihouse/umwd/render/testy_budynek.py \
+        [--kamery W3 W4 ...] [--probki 32] [--szer 1000] [--blend scena.blend] [--bez-ludzi]
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import math
+import sys
+import time
+from pathlib import Path
+
+UMWD = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(UMWD / 'src'))
+
+import bpy  # noqa: E402
+from mathutils import Vector  # noqa: E402
+from shapely.geometry import Point  # noqa: E402
+
+from umwd.render import blib, context, budynek3d  # noqa: E402
+
+OUT = UMWD / 'docs' / '60_wizualizacje' / 'img'
+
+# kamery dodatkowe (nie ma ich w koncepcja.json) – tylko do kontroli bryły
+KAMERY_DODATKOWE = {
+    'plac_mostowy': dict(opis='Plac Mostowy (skwer 9/2) od pn.-zach.: elewacja pn. z podcieniem, łuk, lipy, dziób skrzydła',
+                         kamera_e_n_z=(68.0, 99.0, 1.62), cel_e_n_z=(88.0, 72.0, 12.0), lens_mm=24, shift_y=0.28,
+                         poziom=True, czas='2026-10-23 14:30 CEST'),
+    'lot_ptaka': dict(opis='Kontrolny widok z lotu ptaka od pn.-wsch. (dachy, bryła, relacja z mostem)',
+                      kamera_e_n_z=(178.0, 168.0, 72.0), cel_e_n_z=(88.0, 50.0, 8.0), lens_mm=30, shift_y=0.0,
+                      poziom=False, czas='2025-10-29 11:40 CET'),
+}
+# korekty kadrów (z uzasadnieniem) – stosowane, gdy kamera ze specyfikacji nie pokazuje wymaganej treści
+KOREKTY = {
+    # W3: kamera ze specyfikacji (cel az. 324°) stawia łuk na lewej krawędzi kadru, a podcień z wejściem jest ucięty.
+    # Ta sama pozycja, oś obrócona o 12° w lewo (az. 312°) i większe przesunięcie obiektywu: łuk z podcieniem
+    # i napisem w lewej części kadru, pylon mostu z hełmem po prawej. Korony (+27 m) z odległości ~18 m nie da się
+    # objąć obiektywem ≥ 24 mm – do decyzji: odsunięcie kamery albo kadr pionowy (patrz budynek_3d.md).
+    'W3': dict(cel_e_n_z=(102.7, 80.6, 10.0), shift_y=0.25),
+    # W9: punkt (126; 152) leży na jezdni mostu, 3,8 m od osi – oś widzenia przecina kratownicę pd.-wsch. (krzyżulce
+    # zasłaniają kadr). Ten sam przekrój mostu, chodnik pd.-wsch. poza kratownicą (7,2 m od osi), oko 1,6 m nad
+    # chodnikiem (+4,05). Ekspozycja dla błękitnej godziny dobrana w teście.
+    # Pozycja dobrana przeszukaniem promieniami (oś i 35 promieni kadru bez trafień w konstrukcję mostu ≤ 30 m):
+    # 25 m od portalu pd., 8,6 m od osi (przy kratownicy – oś widzenia przechodzi przez górny trójkąt krzyżulców).
+    # Przesunięcie obiektywu tak, by cel (+26 m) był w środku kadru (kamera pozioma, piony zachowane).
+    'W9': dict(kamera_e_n_z=(120.34, 136.86, 4.05), shift_y=0.385, ekspozycja=0.6),
+    # W10: punkt (78; 17) stoi w ogródkach pod koronami zachowanych drzew (widok zasłonięty w 90 %). Zastępczo:
+    # wejście do ogrodu od bulwaru (pas 4,6 m przy segmencie), widok na zach. przez ogród na elewację pd. wieży.
+    'W10': dict(kamera_e_n_z=(115.5, 37.5, 1.62), cel_e_n_z=(75.6, 35.2, 7.0), lens_mm=24, shift_y=0.12),
+}
+
+
+def kamera_z_json(spec, kid):
+    if kid in KAMERY_DODATKOWE:
+        k = dict(KAMERY_DODATKOWE[kid])
+        k['id'] = kid
+        return k
+    k = next(dict(c) for c in spec.kamery if c['id'] == kid)
+    k.update(KOREKTY.get(kid, {}))
+    k.setdefault('poziom', True)
+    return k
+
+
+def kontrola_kamery(sc, B, kam, k, ctx):
+    """Sprawdza: czy kamera stoi w bryle budynku/kontekstu, w koronie drzewa, co trafia promień osi i narożników
+    kadru (obiekt, odległość). Zwraca listę uwag."""
+    uwagi = []
+    loc = kam.location
+    p = Point(loc.x, loc.y)
+    if B.foot.buffer(0.3).contains(p):
+        uwagi.append('KAMERA W OBRYSIE BUDYNKU')
+    for nm, poly in (('Maz19/sąsiedzi', None),):
+        pass
+    for ob in bpy.data.objects:
+        if ob.instance_type == 'COLLECTION' and ob.instance_collection is not None and (
+                ob.name.startswith('drzewo') or ob.name.startswith('szpaler') or ob.name.startswith('krzew')):
+            d = math.hypot(ob.location.x - loc.x, ob.location.y - loc.y)
+            R = 7.2 * ob.scale[0] if 'duze' in ob.instance_collection.name else 4.0 * ob.scale[0]
+            if d < 0.8:
+                uwagi.append('KAMERA PRZY PNIU %s (%.1f m)' % (ob.name, d))
+            elif d < R * 0.7 and loc.z > ob.location.z + 2.5:
+                uwagi.append('kamera w koronie %s (%.1f m od pnia)' % (ob.name, d))
+    dg = bpy.context.evaluated_depsgraph_get()
+    cd = kam.data
+    W, H = sc.render.resolution_x, sc.render.resolution_y
+    fr = cd.view_frame(scene=sc)
+    M = kam.matrix_world
+    trafienia = []
+    for fx, fy, opis in ((0.5, 0.5, 'oś'), (0.15, 0.2, 'L-dół'), (0.85, 0.2, 'P-dół'), (0.15, 0.8, 'L-góra'),
+                         (0.85, 0.8, 'P-góra'), (0.5, 0.15, 'dół')):
+        # punkt na płaszczyźnie kadru (lokalnie): interpolacja narożników view_frame (z uwzględnieniem shift)
+        a, b, c, d_ = fr        # P-góra, P-dół, L-dół, L-góra
+        top = d_.lerp(a, fx)
+        bot = c.lerp(b, fx)
+        q = bot.lerp(top, fy)
+        kier = (M.to_3x3() @ q).normalized()
+        hit, pos, nrm, idx, ob, mx = sc.ray_cast(dg, M.translation, kier)
+        if hit:
+            trafienia.append('%s: %s %.1f m' % (opis, ob.name if ob else '?', (pos - M.translation).length))
+            if (pos - M.translation).length < 2.0:
+                uwagi.append('BLISKA PRZESZKODA (%s): %s %.1f m' % (opis, ob.name, (pos - M.translation).length))
+        else:
+            trafienia.append('%s: niebo' % opis)
+    return uwagi, trafienia
+
+
+def zapisz_jpg(png, jpg, q=93):
+    from PIL import Image
+    im = Image.open(png).convert('RGB')
+    while True:
+        im.save(jpg, quality=q, optimize=True)
+        if Path(jpg).stat().st_size <= 1_000_000 or q < 50:
+            break
+        q -= 5
+    Path(png).unlink()
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--kamery', nargs='*', default=['W3', 'W4', 'W5', 'W9', 'plac_mostowy', 'lot_ptaka'])
+    ap.add_argument('--probki', type=int, default=32)
+    ap.add_argument('--szer', type=int, default=1000)
+    ap.add_argument('--blend', default=None)
+    ap.add_argument('--bez-ludzi', action='store_true')
+    ap.add_argument('--bez-wnetrz', action='store_true')
+    ap.add_argument('--look', default='AgX - Medium High Contrast')
+    ap.add_argument('--prefix', default='budynek_test_')
+    ap.add_argument('--out', default=str(OUT))
+    ap.add_argument('--tylko-kontrola', action='store_true', help='bez renderu – tylko kontrola kamer')
+    a = ap.parse_args()
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    t0 = time.time()
+    sc = blib.reset()
+    kon = context.build_context(sc, {'pora_roku': 'jesien', 'obszar_inwestycji': 'pusty'})
+    t_kon = time.time() - t0
+    t1 = time.time()
+    bud = budynek3d.build_building(sc, {'kontekst': kon, 'ludzie': not a.bez_ludzi, 'wnetrza': not a.bez_wnetrz})
+    t_bud = time.time() - t1
+    B = bud['budynek']
+    print('[testy] kontekst %.1f s, budynek %.1f s' % (t_kon, t_bud))
+    print(json.dumps(bud['info'], ensure_ascii=False))
+    blib.render_settings(sc, a.szer, int(a.szer * 2 / 3), samples=a.probki, adaptive=0.03, exposure=-4.3,
+                         look=a.look, max_bounces=8, clamp_indirect=8.0)
+    sc.cycles.transparent_max_bounces = 24
+    sc.render.use_persistent_data = True
+    raport = {'kontekst_s': round(t_kon, 1), 'budynek_s': round(t_bud, 1), 'info': bud['info'], 'kamery': {}}
+    for kid in a.kamery:
+        k = kamera_z_json(B.spec, kid)
+        DZ = B.DZ
+        x, y, z = k['kamera_e_n_z']
+        tx, ty, tz = k['cel_e_n_z']
+        cam = blib.camera(sc, (x, y, z + DZ), (tx, ty, tz + DZ), lens_mm=k['lens_mm'], level=k.get('poziom', True),
+                          shift_y=k.get('shift_y', 0.0), name='K_' + kid)
+        cam.data.clip_start = 0.2
+        context.ustaw_kamere_trawy(kon, cam)
+        sw = budynek3d.swiatlo_dzienne(sc, k['czas'], ekspozycja=k.get('ekspozycja'))
+        uwagi, traf = kontrola_kamery(sc, B, cam, k, kon['ctx'])
+        print('[testy] %s  %s  słońce az %.1f° el %.1f°  ekspozycja %.2f' % (kid, k['czas'], sw['az'], sw['el'],
+                                                                             sw['ekspozycja']))
+        print('        uwagi: %s' % ('; '.join(uwagi) or 'brak'))
+        print('        promienie: %s' % ' | '.join(traf))
+        wpis = dict(czas=k['czas'], slonce=sw, uwagi=uwagi, promienie=traf, opis=k.get('opis', ''))
+        if not a.tylko_kontrola:
+            png = out / ('_tmp_%s.png' % kid)
+            sc.render.filepath = str(png)
+            t2 = time.time()
+            bpy.ops.render.render(write_still=True)
+            dt = time.time() - t2
+            jpg = out / ('%s%s.jpg' % (a.prefix, kid))
+            zapisz_jpg(png, jpg)
+            wpis.update(render_s=round(dt, 1), plik=str(jpg))
+            print('[testy] %s: %.1f s → %s' % (kid, dt, jpg))
+        raport['kamery'][kid] = wpis
+    (UMWD / 'build' / 'budynek_test_raport.json').write_text(json.dumps(raport, ensure_ascii=False, indent=1),
+                                                         encoding='utf-8')
+    if a.blend:
+        bpy.ops.wm.save_as_mainfile(filepath=a.blend)
+    print('[testy] razem %.1f s' % (time.time() - t0))
+
+
+if __name__ == '__main__':
+    main()

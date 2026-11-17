@@ -1,0 +1,548 @@
+kondygnacja;numer;nazwa;kod;powierzchnia;osoby
+-2;KW.-2.01;Dźwig A1 1 600 kg;KW;5,35;
+-2;KW.-2.02;Dźwig A2 1 600 kg;KW;5,35;
+-2;KW.-2.03;Dźwig R – dla ekip ratowniczych (PN-EN 81-72) i ewakuacyjny (PN-EN 81-76);KW;5,35;
+-2;KW.-2.04;Przedsionek ppoż. A z MOE (krzesło ewakuacyjne, interkom);KW;15,96;
+-2;KW.-2.05;Klatka schodowa A (biegi 1,60 m);KW;17,51;
+-2;KW.-2.06;Klatka schodowa B (biegi 1,60 m);KW;21,59;
+-2;KW.-2.07;Przedsionek ppoż. B z MOE (krzesło ewakuacyjne, interkom);KW;7,99;
+-2;KW.-2.08;Dźwig T os.-tow. 2 000 kg;KW;6,58;
+-2;KW.-2.09;Dźwig publiczny P1 1 275 kg;KW;5,85;
+-2;KW.-2.10;Dźwig publiczny P2 1 275 kg (przelotowy);KW;5,85;
+-2;PPM.03a;Rampa ↑ −1;PPM;164,71;
+-2;IT.08;Maszynownia gruntowych pomp ciepła z rozdzielaczami;IT;114,92;
+-2;IT.09;Zbiorniki buforowe ciepła / chłodu;IT;25,16;
+-2;IT.06;Agregat prądotwórczy HVO (spaliny szachtem);IT;15,06;
+-2;IT.10;Instalacja tryskaczowa – pompownia i zbiornik;IT;28,21;
+-2;PPM.04a;Filtrowentylacja ukrycia (budowla ochronna);PPM;28,21;
+-2;IT.12;Zbiornik wody deszczowej 50 m³;IT;26,93;
+-2;IT.02a;Punkt dystrybucyjny IT (PD);IT;5,72;
+-2;PHS.01a;WC dostępne (garaż / ukrycie);PHS;5,72;
+-2;PPM.01a;Garaż – stanowiska postojowe i drogi manewrowe (MDS);PPM;751,30;
+-1;KW.-1.01;Dźwig A1 1 600 kg;KW;5,35;
+-1;KW.-1.02;Dźwig A2 1 600 kg;KW;5,35;
+-1;KW.-1.03;Dźwig R – dla ekip ratowniczych (PN-EN 81-72) i ewakuacyjny (PN-EN 81-76);KW;5,35;
+-1;KW.-1.04;Przedsionek ppoż. A z MOE (krzesło ewakuacyjne, interkom);KW;15,96;
+-1;KW.-1.05;Klatka schodowa A (biegi 1,60 m);KW;17,51;
+-1;KW.-1.06;Klatka schodowa B (biegi 1,60 m);KW;21,59;
+-1;KW.-1.07;Przedsionek ppoż. B z MOE (krzesło ewakuacyjne, interkom);KW;7,99;
+-1;KW.-1.08;Dźwig T os.-tow. 2 000 kg;KW;6,58;
+-1;KW.-1.09;Dźwig publiczny P1 1 275 kg;KW;5,85;
+-1;KW.-1.10;Dźwig publiczny P2 1 275 kg (przelotowy);KW;5,85;
+-1;KW.-1.11;Dźwig C1 1 000 kg (drzwi przelotowe – rezerwa połączenia z Maz. 19);KW;5,17;
+-1;KW.-1.12;Przedsionek ppoż. C z MOE;KW;8,46;
+-1;KW.-1.13;Klatka schodowa C;KW;18,30;
+-1;IT.-1.14;Szachty instalacyjne C;IT;7,84;
+-1;PPM.03b;Rampa ↑ parter / ↓ −2 (pod rampą wjazdową);PPM;164,71;
+-1;IT.15;Strefa dostaw – zatoka przy dźwigu T (pojazdy ≤ 2,20 m);IT;33,52;
+-1;IT.14a;Pomieszczenie odpadów komunalnych;IT;45,33;
+-1;IT.13a;Centrale wentylacyjne parteru i Sejmiku;IT;60,28;
+-1;IT.11;Przyłącze wody, pompownia, woda szara (IT.12);IT;22,75;
+-1;PPT.06;Szatnie i prysznice personelu i rowerzystów;PPT;24,36;
+-1;PPT.03;Warsztat konserwacyjny (PPT);PPT;24,36;
+-1;PPM.04b;Magazyn wyposażenia MDS;PPM;14,96;
+-1;PP.07;Pomieszczenie porządkowe z pralnią i suszarnią;PP;11,44;
+-1;IT.02b;Punkt dystrybucyjny IT (PD);IT;5,72;
+-1;PPT.02;Magazyn narzędzi i materiałów;PPT;4,21;
+-1;PHS.01b;WC dostępne (garaż / ukrycie);PHS;5,72;
+-1;PPM.01b;Garaż – stanowiska postojowe i drogi manewrowe (MDS);PPM;1537,77;
+P;KW.P.01;Dźwig A1 1 600 kg;KW;5,35;
+P;KW.P.02;Dźwig A2 1 600 kg;KW;5,35;
+P;KW.P.03;Dźwig R – dla ekip ratowniczych (PN-EN 81-72) i ewakuacyjny (PN-EN 81-76);KW;5,35;
+P;KW.P.04;Przedsionek ppoż. A z MOE (krzesło ewakuacyjne, interkom);KW;15,96;
+P;KW.P.05;Klatka schodowa A (biegi 1,60 m);KW;17,51;
+P;KW.P.06;Klatka schodowa B (biegi 1,60 m);KW;21,59;
+P;KW.P.07;Przedsionek ppoż. B z MOE (krzesło ewakuacyjne, interkom);KW;7,99;
+P;KW.P.08;Dźwig T os.-tow. 2 000 kg;KW;6,58;
+P;KW.P.09;Dźwig publiczny P1 1 275 kg;KW;5,85;
+P;KW.P.10;Dźwig publiczny P2 1 275 kg (przelotowy);KW;5,85;
+P;KW.P.11;Dźwig C1 1 000 kg (drzwi przelotowe – rezerwa połączenia z Maz. 19);KW;5,17;
+P;KW.P.12;Przedsionek ppoż. C z MOE;KW;8,46;
+P;KW.P.13;Klatka schodowa C;KW;18,30;
+P;IT.P.14;Szachty instalacyjne C;IT;7,84;
+P;SW.01a;Wejście Obywatelskie – lobby z kontrolą i szatnią;SW;55,48;
+P;DK.01;Pokój pracowników (3 st.) – Dział Kancelaryjny II (10);DK;24,55;2
+P;DK.02;Pokój pracowników (3 st.) – Dział Kancelaryjny II (10);DK;24,05;2
+P;SW.02;Kancelaria ogólna (3 stanowiska, niski blat);SW;35,96;3
+P;PHS.03;Komfortka (toaleta z możliwością przebierania dorosłych);PHS;21,40;
+P;PHS.02;Toalety ogólnodostępne przy holu (K, M, dostępna, przewijak);PHS;9,26;
+P;SW.04;Centrum monitoringu / ochrona budynku;SW;25,25;2
+P;SW.05;Miejsce socjalne ochrony;SW;14,94;
+P;PPT.05;Szatnie i WC personelu (ochrona, sprzątanie);PPT;22,56;
+P;PR.01;Parking rowerowy – 50 stanowisk (wjazd od dziedzińca);PR;90,27;
+P;SW.01b;Łącznik holu z foyer konferencyjnym (okna na skwer);SW;105,24;
+P;SW.06;Pokój cichy (strefa wyciszenia);SW;16,00;
+P;DW.01;Pokój pracowników (3 st.) – Dział Wsparcia Informatycznego II (11);DW;24,02;2
+P;DW.02;Pokój pracowników (3 st.) – Dział Wsparcia Informatycznego II (11);DW;24,02;2
+P;PPT.01;Pomieszczenie techników (3 stanowiska);PPT;16,80;3
+P;PPT.04;Pomieszczenie socjalne z szatnią – personel techniczny;PPT;20,55;
+P;SK.02;Sala konferencyjna 80 os.;SK;95,90;80
+P;SK.04;Reżyserka AV sali 80 os.;SK;10,00;1
+P;SK.03;Reżyserka AV sali 200 os.;SK;10,00;1
+P;SK.01;Sala konferencyjna 200 os. (ściana mobilna – 2 × 100 os.);SK;205,24;200
+P;SK.07;Szatnia centrum konferencyjnego;SK;25,30;
+P;PHS.04;Toalety strefy konferencyjnej (K, M, dostępna);PHS;37,30;
+P;SK.05;Magazyn mebli i ścianek mobilnych;SK;16,00;
+P;SW.08;Bistro – zaplecze (podgrzewanie, zmywanie);SW;20,42;
+P;SW.07;Bistro – sala konsumpcyjna (taras na skwerze);SW;68,05;60
+P;SK.06;Foyer / kuluary centrum konferencyjnego;SK;98,49;
+P;IT.04;Stacja transformatorowa SN/nn (drzwi od Wybrzeża);IT;20,30;
+P;IT.05;Rozdzielnia główna nn z SZR;IT;16,24;
+P;IT.07;Magazyn energii BESS 250 kWh (EI 120);IT;10,73;
+P;IT.14b;Punkt wystawienia odpadów (przy dźwigu T);IT;3,89;
+P;PPM.03c;Rampa zjazdowa do garażu (≤ 18 %, 2 × 3,0 m);PPM;86,08;
+P;SW.01c;Hol główny – Hala Obywatelska (informacja, poczekalnia, lapidarium);SW;366,29;
+P;KW.P.15;Komunikacja;KW;14,46;
+P;KW.P.16;Komunikacja;KW;22,61;
+1;KW.1.01;Dźwig A1 1 600 kg;KW;5,35;
+1;KW.1.02;Dźwig A2 1 600 kg;KW;5,35;
+1;KW.1.03;Dźwig R – dla ekip ratowniczych (PN-EN 81-72) i ewakuacyjny (PN-EN 81-76);KW;5,35;
+1;KW.1.04;Przedsionek ppoż. A z MOE (krzesło ewakuacyjne, interkom);KW;15,96;
+1;KW.1.05;Klatka schodowa A (biegi 1,60 m);KW;17,51;
+1;KW.1.06;Klatka schodowa B (biegi 1,60 m);KW;21,59;
+1;KW.1.07;Przedsionek ppoż. B z MOE (krzesło ewakuacyjne, interkom);KW;7,99;
+1;KW.1.08;Dźwig T os.-tow. 2 000 kg;KW;6,58;
+1;KW.1.09;Dźwig publiczny P1 1 275 kg;KW;5,85;
+1;KW.1.10;Dźwig publiczny P2 1 275 kg (przelotowy);KW;5,85;
+1;KW.1.11;Dźwig C1 1 000 kg (drzwi przelotowe – rezerwa połączenia z Maz. 19);KW;5,17;
+1;KW.1.12;Przedsionek ppoż. C z MOE;KW;8,46;
+1;KW.1.13;Klatka schodowa C;KW;18,30;
+1;IT.1.14;Szachty instalacyjne C;IT;7,84;
+1;DOS.01;Gabinet dyrektora – Departament Ochrony Środowiska - dyrekcja (2);DOS;24,09;1
+1;DOS.02;Sekretariat – Departament Ochrony Środowiska - dyrekcja (2);DOS;24,10;1
+1;DOS.03;Gabinet dyrektora – Wydział Opłat Środowiskowych - Dyrekcja (2.1);DOS;24,10;1
+1;DOS.04;Pokój zastępcy dyrektora – Wydział Opłat Środowiskowych - Dyrekcja (2.1);DOS;24,09;1
+1;DOS.05;Gabinet dyrektora – Wydział Instrumentów Środowiskowych - Dyrekcja (2.2);DOS;24,09;1
+1;DOS.06;Pokój zastępcy dyrektora – Wydział Instrumentów Środowiskowych - Dyrekcja (2.2);DOS;32,03;1
+1;DOS.07;Pokój pracowników (3 st.) – Dział Opłat Produktowych (2.1.1);DOS;24,70;3
+1;DOS.08;Pokój pracowników (3 st.) – Dział Opłat Produktowych (2.1.1);DOS;24,40;3
+1;DOS.09;Pokój pracowników (3 st.) – Dział Opłat Produktowych (2.1.1);DOS;24,40;3
+1;DOS.10;Pokój pracowników (3 st.) – Dział Opłat Produktowych (2.1.1);DOS;24,70;3
+1;DOS.11;Pokój pracowników (3 st.) – Dział Opłat Produktowych (2.1.1);DOS;24,10;2
+1;DOS.12;Pokój pracowników (3 st.) – Dział Opłat za Korzystanie ze Środowiska i BDO (2.1.2);DOS;24,10;3
+1;DOS.13;Pokój pracowników (3 st.) – Dział Opłat za Korzystanie ze Środowiska i BDO (2.1.2);DOS;24,10;3
+1;DOS.14;Pokój pracowników (3 st.) – Dział Opłat za Korzystanie ze Środowiska i BDO (2.1.2);DOS;24,10;3
+1;DOS.15;Pokój pracowników (3 st.) – Dział Opłat za Korzystanie ze Środowiska i BDO (2.1.2);DOS;24,09;3
+1;DOS.16;Pokój pracowników (3 st.) – Dział Opłat za Korzystanie ze Środowiska i BDO (2.1.2);DOS;28,30;3
+1;PP.01a;Podręczny magazyn dokumentacji (głęboki) – DOS;PP;24,05;
+1;PP.01b;Podręczny magazyn dokumentacji (głęboki) – DOS;PP;24,05;
+1;PP.1.15;Pomieszczenie pomocnicze (wnęka MFP / szafy, okno);PP;10,15;
+1;PP.01c;Podręczny magazyn dokumentacji (głęboki) – DOS;PP;24,05;
+1;SN.01a;Sala narad 30 os.;SN;60,04;30
+1;DOS.17;Pokój pracowników (3 st.) – Dział Opłat za Korzystanie ze Środowiska i BDO (2.1.2);DOS;24,09;3
+1;PP.01d;Podręczny magazyn dokumentacji (głęboki) – DSS;PP;24,05;
+1;DOS.18;Pokój pracowników (3 st.) – Dział Księgowości (2.1.3);DOS;24,09;3
+1;DOS.19;Pokój pracowników (3 st.) – Dział Księgowości (2.1.3);DOS;26,53;3
+1;DOS.20;Pokój pracowników (3 st.) – Dział Emisji do Powietrza (2.2.1);DOS;24,02;3
+1;DOS.21;Pokój pracowników (3 st.) – Dział Emisji do Powietrza (2.2.1);DOS;24,02;3
+1;DOS.22;Pokój pracowników (3 st.) – Dział Emisji do Powietrza (2.2.1);DOS;24,02;3
+1;DOS.23;Pokój pracowników (3 st.) – Dział Gospodarki Wodno-Ściekowej (2.2.2);DOS;24,02;3
+1;DOS.24;Pokój pracowników (3 st.) – Dział Gospodarki Wodno-Ściekowej (2.2.2);DOS;24,02;3
+1;DOS.25;Pokój pracowników (3 st.) – Dział Sprawozdawczości (2.2.3);DOS;25,72;3
+1;DOS.26;Pokój pracowników (3 st.) – Dział Sprawozdawczości (2.2.3);DOS;24,02;2
+1;DOS.27;Pokój pracowników (3 st.) – Dział Sprawozdawczości (2.2.3);DOS;24,02;2
+1;DOS.28;Pokój pracowników (3 st.) – Dział Gospodarki Odpadami (2.2.4);DOS;24,02;3
+1;DOS.29;Pokój pracowników (3 st.) – Dział Gospodarki Odpadami (2.2.4);DOS;24,02;3
+1;DOS.30;Pokój pracowników (3 st.) – Dział Gospodarki Odpadami (2.2.4);DOS;24,02;3
+1;DOS.31;Pokój pracowników (3 st.) – Dział Gospodarki Odpadami (2.2.4);DOS;24,01;3
+1;DOS.32;Pokój pracowników (3 st.) – Dział Gospodarki Odpadami (2.2.4);DOS;24,01;2
+1;DOS.33;Pokój pracowników (3 st.) – Dział Planowania i Koordynacji w Gospodarce Odpadami (2.2.5);DOS;24,01;3
+1;DOS.34;Pokój pracowników (3 st.) – Dział Planowania i Koordynacji w Gospodarce Odpadami (2.2.5);DOS;24,01;3
+1;DOS.35;Pokój pracowników (3 st.) – Dział Planowania i Koordynacji w Gospodarce Odpadami (2.2.5);DOS;24,01;3
+1;DOS.36;Pokój pracowników (3 st.) – Dział Planowania i Koordynacji w Gospodarce Odpadami (2.2.5);DOS;24,01;3
+1;DOS.37;Pokój pracowników (3 st.) – Dział Planowania i Koordynacji w Gospodarce Odpadami (2.2.5);DOS;24,01;3
+1;DOS.38;Pokój pracowników (3 st.) – Dział Planowania i Koordynacji w Gospodarce Odpadami (2.2.5);DOS;25,53;2
+1;PP.1.16;Pokój rezerwowy (rezerwa elewacji, moduł 24 m²);PP;24,60;
+1;PP.1.17;Pomieszczenie pomocnicze (MFP / szafy, okno);PP;16,13;
+1;KW.1.18;Korytarz / hol windowy;KW;349,20;
+1;PHS.01c;WC damskie z kabiną dostępną;PHS;15,00;
+1;PHS.01d;WC męskie z kabiną dostępną;PHS;14,00;
+1;PP.06a;Pomieszczenie porządkowe;PP;6,00;
+1;PP.1.19;Strefa pracy wspólnej / budki do rozmów;PP;28,27;
+1;PS.01a;Pokój socjalny pracowników;PS;24,00;
+1;PP.05a;Wnęka urządzenia wielofunkcyjnego (MFP);PP;5,00;
+1;IT.02c;Punkt dystrybucyjny IT (PD);IT;6,00;
+1;DOS.1.20;Miejsce oczekiwania gości (DOS);DOS;6,00;
+1;PP.1.21;Strefa pracy wspólnej / budki do rozmów;PP;20,36;
+1;IT.13b;Centrala wentylacyjna piętrowa z rekuperacją;IT;25,00;
+1;PS.01b;Pokój socjalny pracowników;PS;24,00;
+1;PS.01c;Pokój socjalny pracowników;PS;24,00;
+1;IT.03;Pomieszczenie UPS;IT;15,45;
+1;IT.01;Serwerownia TIER II;IT;37,71;
+1;PHS.01e;WC damskie z kabiną dostępną (skrzydło);PHS;14,00;
+1;PHS.01f;WC męskie z kabiną dostępną (skrzydło);PHS;13,00;
+1;KW.1.22;Wnęka / szafa;KW;2,01;
+1;PP.05b;Wnęka urządzenia wielofunkcyjnego (MFP, skrzydło);PP;8,54;
+1;PP.06b;Pomieszczenie porządkowe (skrzydło);PP;9,70;
+1;PP.1.23;Strefa pracy wspólnej / budki do rozmów;PP;9,93;
+2;KW.2.01;Dźwig A1 1 600 kg;KW;5,35;
+2;KW.2.02;Dźwig A2 1 600 kg;KW;5,35;
+2;KW.2.03;Dźwig R – dla ekip ratowniczych (PN-EN 81-72) i ewakuacyjny (PN-EN 81-76);KW;5,35;
+2;KW.2.04;Przedsionek ppoż. A z MOE (krzesło ewakuacyjne, interkom);KW;15,96;
+2;KW.2.05;Klatka schodowa A (biegi 1,60 m);KW;17,51;
+2;KW.2.06;Klatka schodowa B (biegi 1,60 m);KW;21,59;
+2;KW.2.07;Przedsionek ppoż. B z MOE (krzesło ewakuacyjne, interkom);KW;7,99;
+2;KW.2.08;Dźwig T os.-tow. 2 000 kg;KW;6,58;
+2;KW.2.09;Dźwig publiczny P1 1 275 kg;KW;5,85;
+2;KW.2.10;Dźwig publiczny P2 1 275 kg (przelotowy);KW;5,85;
+2;KW.2.11;Dźwig C1 1 000 kg (drzwi przelotowe – rezerwa połączenia z Maz. 19);KW;5,17;
+2;KW.2.12;Przedsionek ppoż. C z MOE;KW;8,46;
+2;KW.2.13;Klatka schodowa C;KW;18,30;
+2;IT.2.14;Szachty instalacyjne C;IT;7,84;
+2;DI.01;Gabinet dyrektora – Departament Infrastruktury - Dyrekcja (7);DI;24,09;1
+2;DI.02;Pokój zastępcy dyrektora – Departament Infrastruktury - Dyrekcja (7);DI;24,10;1
+2;DI.03;Sekretariat – Departament Infrastruktury - Dyrekcja (7);DI;24,10;1
+2;DI.04;Gabinet dyrektora – Wydział Transportu - Dyrekcja (7.1);DI;24,09;1
+2;DI.05;Pokój zastępcy dyrektora – Wydział Transportu - Dyrekcja (7.1);DI;24,09;1
+2;DI.06;Pokój samodzielnego stanowiska – Dział Nadzoru Jednostek Certyfikujących (7.1.1);DI;32,03;1
+2;DI.07;Gabinet dyrektora – Wydział Mienia Wojewódzkiego - Dyrekcja (7.2);DI;24,09;1
+2;DI.08;Pokój zastępcy dyrektora – Wydział Mienia Wojewódzkiego - Dyrekcja (7.2);DI;24,09;1
+2;DI.09;Pokój pracowników (3 st.) – Dział Nadzoru Jednostek Certyfikujących (7.1.1);DI;24,70;3
+2;DI.10;Pokój pracowników (3 st.) – Dział Nadzoru Jednostek Certyfikujących (7.1.1);DI;24,40;2
+2;DI.11;Pokój pracowników (3 st.) – Dział Nadzoru Jednostek Certyfikujących (7.1.1);DI;24,40;2
+2;DI.12;Pokój pracowników (3 st.) – Dział Inżynierii Ruchu (7.1.2);DI;24,70;3
+2;DI.13;Pokój pracowników (3 st.) – Dział Inżynierii Ruchu (7.1.2);DI;24,10;3
+2;DI.14;Pokój pracowników (3 st.) – Dział Transportu Autobusowego (7.1.3);DI;24,10;3
+2;DI.15;Pokój pracowników (3 st.) – Dział Transportu Autobusowego (7.1.3);DI;24,10;3
+2;DI.16;Pokój pracowników (3 st.) – Dział Transportu Autobusowego (7.1.3);DI;28,30;2
+2;PP.01e;Podręczny magazyn dokumentacji (głęboki) – DI;PP;24,05;
+2;PP.01f;Podręczny magazyn dokumentacji (głęboki) – DI;PP;24,05;
+2;PP.2.15;Pomieszczenie pomocnicze (wnęka MFP / szafy, okno);PP;10,15;
+2;PP.01g;Podręczny magazyn dokumentacji (głęboki) – DST;PP;24,05;
+2;SN.01b;Sala narad 30 os.;SN;60,04;30
+2;DI.17;Pokój pracowników (3 st.) – Dział Transportu Autobusowego (7.1.3);DI;24,10;2
+2;PP.01h;Podręczny magazyn dokumentacji (głęboki) – DSS;PP;24,05;
+2;PP.01i;Podręczny magazyn dokumentacji (głęboki) – DSS;PP;24,05;
+2;DI.18;Pokój pracowników (3 st.) – Dział Transportu Kolejowego (7.1.4);DI;24,09;3
+2;PP.2.16;Pomieszczenie pomocnicze (wnęka MFP / szafy, okno);PP;10,06;
+2;DI.19;Pokój pracowników (3 st.) – Dział Transportu Kolejowego (7.1.4);DI;24,02;3
+2;DI.20;Pokój pracowników (3 st.) – Dział Transportu Kolejowego (7.1.4);DI;24,02;3
+2;DI.21;Pokój pracowników (3 st.) – Dział Rozwoju Ruchu Rowerowego (7.1.5);DI;24,02;3
+2;DI.22;Pokój pracowników (3 st.) – Dział Zarządzania Nieruchomościami (7.2.1);DI;24,02;3
+2;DI.23;Pokój pracowników (3 st.) – Dział Zarządzania Nieruchomościami (7.2.1);DI;24,02;3
+2;DI.24;Pokój pracowników (3 st.) – Dział Zarządzania Nieruchomościami (7.2.1);DI;25,72;2
+2;DI.25;Pokój pracowników (3 st.) – Dział Sprzedaży Nieruchomości (7.2.2);DI;24,02;3
+2;DST.01;Gabinet dyrektora – Departament Sportu i Turystyki (4);DST;25,53;1
+2;DST.02;Sekretariat – Departament Sportu i Turystyki (4);DST;24,60;1
+2;DST.03;Gabinet dyrektora – Wydział Sportu - Dyrekcja (4.1);DST;24,01;1
+2;DST.04;Pokój zastępcy dyrektora – Wydział Sportu - Dyrekcja (4.1);DST;24,01;1
+2;DST.05;Gabinet dyrektora – Wydział Turystyki - Dyrekcja (4.2);DST;24,01;1
+2;DST.06;Pokój pracowników (3 st.) – Dział Sportu Powszechnego i Szkolenia Sportowego (4.1.1);DST;24,02;3
+2;DST.07;Pokój pracowników (3 st.) – Dział Sportu Powszechnego i Szkolenia Sportowego (4.1.1);DST;24,02;2
+2;DST.08;Pokój pracowników (3 st.) – Dział Sportu Powszechnego i Szkolenia Sportowego (4.1.1);DST;24,02;2
+2;DST.09;Pokój pracowników (3 st.) – Dział Inwestycji i Modernizacji Infrastruktury Sportowej (4.1.2);DST;24,02;3
+2;DST.10;Pokój pracowników (3 st.) – Dział Usług Turystycznych (4.2.1);DST;24,01;2
+2;DST.11;Pokój pracowników (3 st.) – Dział Usług Turystycznych (4.2.1);DST;24,01;2
+2;DST.12;Pokój pracowników (3 st.) – Dział Rozwoju i Promocji Turystyki (4.2.2);DST;24,01;3
+2;DST.13;Pokój pracowników (3 st.) – Dział Rozwoju i Promocji Turystyki (4.2.2);DST;24,01;2
+2;PP.2.17;Pomieszczenie pomocnicze (MFP / szafy, okno);PP;16,13;
+2;KW.2.18;Korytarz / hol windowy;KW;349,20;
+2;PHS.01g;WC damskie z kabiną dostępną;PHS;15,00;
+2;PHS.01h;WC męskie z kabiną dostępną;PHS;14,00;
+2;PP.06c;Pomieszczenie porządkowe;PP;6,00;
+2;PP.2.19;Strefa pracy wspólnej / budki do rozmów;PP;19,76;
+2;PS.01d;Pokój socjalny pracowników;PS;24,00;
+2;PP.05c;Wnęka urządzenia wielofunkcyjnego (MFP);PP;5,00;
+2;IT.02d;Punkt dystrybucyjny IT (PD);IT;6,00;
+2;DI.2.20;Miejsce oczekiwania gości (DI);DI;6,00;
+2;DST.2.21;Miejsce oczekiwania gości (DST);DST;6,00;
+2;PP.2.22;Strefa pracy wspólnej / budki do rozmów;PP;13,62;
+2;IT.13c;Centrala wentylacyjna piętrowa z rekuperacją;IT;25,00;
+2;PS.01e;Pokój socjalny pracowników;PS;24,00;
+2;PP.2.23;Strefa pracy wspólnej / budki do rozmów;PP;40,15;
+2;PS.01f;Pokój socjalny pracowników;PS;37,71;
+2;PHS.01i;WC damskie z kabiną dostępną (skrzydło);PHS;14,00;
+2;PHS.01j;WC męskie z kabiną dostępną (skrzydło);PHS;13,00;
+2;KW.2.24;Wnęka / szafa;KW;2,01;
+2;PP.05d;Wnęka urządzenia wielofunkcyjnego (MFP, skrzydło);PP;8,54;
+2;PP.06d;Pomieszczenie porządkowe (skrzydło);PP;9,70;
+2;PP.2.25;Strefa pracy wspólnej / budki do rozmów;PP;9,93;
+3;KW.3.01;Dźwig A1 1 600 kg;KW;5,35;
+3;KW.3.02;Dźwig A2 1 600 kg;KW;5,35;
+3;KW.3.03;Dźwig R – dla ekip ratowniczych (PN-EN 81-72) i ewakuacyjny (PN-EN 81-76);KW;5,35;
+3;KW.3.04;Przedsionek ppoż. A z MOE (krzesło ewakuacyjne, interkom);KW;15,96;
+3;KW.3.05;Klatka schodowa A (biegi 1,60 m);KW;17,51;
+3;KW.3.06;Klatka schodowa B (biegi 1,60 m);KW;21,59;
+3;KW.3.07;Przedsionek ppoż. B z MOE (krzesło ewakuacyjne, interkom);KW;7,99;
+3;KW.3.08;Dźwig T os.-tow. 2 000 kg;KW;6,58;
+3;KW.3.09;Dźwig publiczny P1 1 275 kg;KW;5,85;
+3;KW.3.10;Dźwig publiczny P2 1 275 kg (przelotowy);KW;5,85;
+3;KW.3.11;Dźwig C1 1 000 kg (drzwi przelotowe – rezerwa połączenia z Maz. 19);KW;5,17;
+3;KW.3.12;Przedsionek ppoż. C z MOE;KW;8,46;
+3;KW.3.13;Klatka schodowa C;KW;18,30;
+3;IT.3.14;Szachty instalacyjne C;IT;7,84;
+3;SN.01c;Sala narad 30 os.;SN;59,87;30
+3;SN.01d;Sala narad 30 os.;SN;59,87;30
+3;GW.01;Pokój zespołu GW (4 st.) – Wojewódzki Ośrodek Dokumentacji Geodezyjnej i Kartograficznej (9.1);GW;32,03;4
+3;GW.02;Gabinet dyrektora – Geodeta Województwa - Wydział Geodezji i Kartografii - Dyrekcja (9);GW;24,10;1
+3;GW.03;Pokój zastępcy dyrektora – Geodeta Województwa - Wydział Geodezji i Kartografii - Dyrekcja (9);GW;24,10;1
+3;GW.04;Sekretariat – Geodeta Województwa - Wydział Geodezji i Kartografii - Dyrekcja (9);GW;24,10;1
+3;GW.05;Pokój zespołu GW (4 st.) – Wojewódzki Ośrodek Dokumentacji Geodezyjnej i Kartograficznej (9.1);GW;32,33;4
+3;PS.01g;Pokój socjalny pracowników;PS;20,07;
+3;GW.06;Pokój zespołu GW (4 st.) – Wojewódzki Ośrodek Dokumentacji Geodezyjnej i Kartograficznej (9.1);GW;32,03;4
+3;PP.01j;Podręczny magazyn dokumentacji (głęboki) – GW;PP;27,67;
+3;GW.07;Pokój zespołu GW (4 st.) – Wojewódzki Ośrodek Dokumentacji Geodezyjnej i Kartograficznej (9.1);GW;32,03;3
+3;GW.08;Pokój zespołu GW (4 st.) – Dział ds. Dolnośląskiej Infrastruktury Informacji Przestrzennej (9.1.1);GW;32,03;4
+3;GW.09;Pokój zespołu GW (4 st.) – Dział ds. Dolnośląskiej Infrastruktury Informacji Przestrzennej (9.1.1);GW;32,03;3
+3;GW.10;Pokój zespołu GW (4 st.) – Dział ds. Ochrony Gruntów Rolnych (9.1.2);GW;32,03;4
+3;GW.11;Pokój zespołu GW (4 st.) – Dział ds. Ochrony Gruntów Rolnych (9.1.2);GW;32,03;4
+3;PP.01k;Podręczny magazyn dokumentacji (głęboki) – DGP;PP;24,05;
+3;PP.3.15;Pomieszczenie pomocnicze (wnęka MFP / szafy, okno);PP;15,86;
+3;DGP.01;Gabinet dyrektora – Departament Gospodarki i Promocji - Dyrekcja (6);DGP;24,09;1
+3;DGP.02;Pokój zastępcy dyrektora – Departament Gospodarki i Promocji - Dyrekcja (6);DGP;24,10;1
+3;DGP.03;Sekretariat – Departament Gospodarki i Promocji - Dyrekcja (6);DGP;24,10;2
+3;DGP.04;Pokój samodzielnego stanowiska – Stanowisko ds. Budżetu Departamentu (6.1);DGP;24,09;1
+3;DGP.05;Gabinet dyrektora – Wydział Rozwoju Regionalnego - Dyrekcja (6.2);DGP;24,09;1
+3;DGP.06;Pokój zastępcy dyrektora – Wydział Rozwoju Regionalnego - Dyrekcja (6.2);DGP;25,53;1
+3;DGP.07;Pokój zastępcy dyrektora – Wydział Rozwoju Regionalnego - Dyrekcja (6.2);DGP;24,01;1
+3;DGP.08;Pokój pracowników (3 st.) – Dział Planowania Strategicznego (6.2.1);DGP;24,02;3
+3;DGP.09;Pokój pracowników (3 st.) – Dział Planowania Strategicznego (6.2.1);DGP;24,02;3
+3;DGP.10;Pokój pracowników (3 st.) – Dział Planowania Strategicznego (6.2.1);DGP;24,02;2
+3;DGP.11;Pokój pracowników (3 st.) – Dział Planowania Strategicznego (6.2.1);DGP;24,02;2
+3;DGP.12;Pokój pracowników (3 st.) – Dział Rewitalizacji i Analiz (6.2.2);DGP;24,02;3
+3;DGP.13;Pokój pracowników (3 st.) – Dział Rewitalizacji i Analiz (6.2.2);DGP;25,72;2
+3;DGP.14;Pokój pracowników (3 st.) – Dział Programu Regionalnego (6.2.3);DGP;24,02;3
+3;DGP.15;Pokój pracowników (3 st.) – Dział Programu Regionalnego (6.2.3);DGP;24,02;3
+3;DGP.16;Pokój pracowników (3 st.) – Dział Programu Regionalnego (6.2.3);DGP;24,02;2
+3;DGP.17;Pokój pracowników (3 st.) – Dział Programów Europejskiej Współpracy Terytorialnej (6.2.4);DGP;24,02;3
+3;DGP.18;Pokój pracowników (3 st.) – Dział Programów Europejskiej Współpracy Terytorialnej (6.2.4);DGP;24,02;3
+3;DGP.19;Pokój pracowników (3 st.) – Dział Innowacji (6.2.5);DGP;24,01;3
+3;DGP.20;Pokój pracowników (3 st.) – Dział Innowacji (6.2.5);DGP;24,01;2
+3;DGP.21;Pokój pracowników (3 st.) – Dział Innowacji (6.2.5);DGP;24,01;2
+3;DGP.22;Pokój pracowników (3 st.) – Dział Współpracy Gospodarczej i Przedsiębiorczości (6.2.6);DGP;24,01;3
+3;DGP.23;Pokój pracowników (3 st.) – Dział Współpracy Gospodarczej i Przedsiębiorczości (6.2.6);DGP;24,01;2
+3;DGP.24;Pokój pracowników (3 st.) – Dział Współpracy Gospodarczej i Przedsiębiorczości (6.2.6);DGP;24,01;2
+3;PP.01l;Podręczny magazyn dokumentacji – DGP;PP;32,03;
+3;PP.01m;Podręczny magazyn dokumentacji – DGP;PP;24,60;
+3;PP.3.16;Pomieszczenie pomocnicze (MFP / szafy, okno);PP;16,13;
+3;KW.3.17;Korytarz / hol windowy;KW;331,71;
+3;PHS.01k;WC damskie z kabiną dostępną;PHS;15,00;
+3;PHS.01l;WC męskie z kabiną dostępną;PHS;14,00;
+3;PP.06e;Pomieszczenie porządkowe;PP;6,00;
+3;PP.3.18;Strefa pracy wspólnej / budki do rozmów;PP;16,21;
+3;PS.01h;Pokój socjalny pracowników;PS;24,00;
+3;PP.05e;Wnęka urządzenia wielofunkcyjnego (MFP);PP;5,00;
+3;IT.02e;Punkt dystrybucyjny IT (PD);IT;6,00;
+3;DGP.3.19;Miejsce oczekiwania gości (DGP);DGP;6,00;
+3;PS.01i;Pokój socjalny pracowników;PS;20,36;
+3;IT.13d;Centrala wentylacyjna piętrowa z rekuperacją;IT;25,00;
+3;PP.03;Archiwum operatów kartograficznych (GW);PP;24,00;
+3;PP.04;Pomieszczenie urządzeń specjalistycznych GW (ploter, skaner);PP;20,90;
+3;PP.02;Archiwum Państwowego Zasobu Geodezyjnego i Kartograficznego (GW);PP;42,85;
+3;PHS.01m;WC damskie z kabiną dostępną (skrzydło);PHS;14,00;
+3;PHS.01n;WC męskie z kabiną dostępną (skrzydło);PHS;13,00;
+3;KW.3.20;Wnęka / szafa;KW;2,01;
+3;PP.06f;Pomieszczenie porządkowe (skrzydło);PP;8,54;
+3;PP.05f;Wnęka urządzenia wielofunkcyjnego (MFP, skrzydło);PP;7,25;
+3;PP.3.21;Strefa pracy wspólnej / budki do rozmów;PP;9,93;
+4;KW.4.01;Dźwig A1 1 600 kg;KW;5,35;
+4;KW.4.02;Dźwig A2 1 600 kg;KW;5,35;
+4;KW.4.03;Dźwig R – dla ekip ratowniczych (PN-EN 81-72) i ewakuacyjny (PN-EN 81-76);KW;5,35;
+4;KW.4.04;Przedsionek ppoż. A z MOE (krzesło ewakuacyjne, interkom);KW;15,96;
+4;KW.4.05;Klatka schodowa A (biegi 1,60 m);KW;17,51;
+4;KW.4.06;Klatka schodowa B (biegi 1,60 m);KW;21,59;
+4;KW.4.07;Przedsionek ppoż. B z MOE (krzesło ewakuacyjne, interkom);KW;7,99;
+4;KW.4.08;Dźwig T os.-tow. 2 000 kg;KW;6,58;
+4;KW.4.09;Dźwig publiczny P1 1 275 kg;KW;5,85;
+4;KW.4.10;Dźwig publiczny P2 1 275 kg (przelotowy);KW;5,85;
+4;KW.4.11;Dźwig C1 1 000 kg (drzwi przelotowe – rezerwa połączenia z Maz. 19);KW;5,17;
+4;KW.4.12;Przedsionek ppoż. C z MOE;KW;8,46;
+4;KW.4.13;Klatka schodowa C;KW;18,30;
+4;IT.4.14;Szachty instalacyjne C;IT;7,84;
+4;CZ.01;Gabinet Członka Zarządu – Członek Zarządu (8);CZ;24,09;1
+4;CZ.02;Pokój samodzielnego stanowiska – Członek Zarządu (8);CZ;24,10;1
+4;CZ.03;Sekretariat – Członek Zarządu (8);CZ;24,09;1
+4;PP.01n;Podręczny magazyn dokumentacji – CZ;PP;24,10;
+4;DKD.01;Gabinet dyrektora – Departament Kultury i Dziedzictwa Kulturowego - Dyrekcja (8.1);DKD;24,09;1
+4;DKD.02;Sekretariat – Departament Kultury i Dziedzictwa Kulturowego - Dyrekcja (8.1);DKD;32,03;1
+4;DKD.03;Gabinet dyrektora – Wydział Kultury - Dyrekcja (8.1.1);DKD;24,70;1
+4;DKD.04;Pokój zastępcy dyrektora – Wydział Kultury - Dyrekcja (8.1.1);DKD;24,40;1
+4;DKD.05;Gabinet dyrektora – Wydział Dziedzictwa Kulturowego (8.1.2);DKD;24,40;1
+4;DKD.06;Pokój pracowników (3 st.) – Dział Instytucji Kultury, Finansów i Inwestycji (8.1.1.1);DKD;24,70;3
+4;DKD.07;Pokój pracowników (3 st.) – Dział Instytucji Kultury, Finansów i Inwestycji (8.1.1.1);DKD;24,10;3
+4;DKD.08;Pokój pracowników (3 st.) – Dział Współpracy ze Środowiskiem Kultury (8.1.1.2);DKD;24,10;3
+4;DKD.09;Pokój pracowników (3 st.) – Dział Współpracy ze Środowiskiem Kultury (8.1.1.2);DKD;24,10;2
+4;DKD.10;Pokój pracowników (3 st.) – Dział Współpracy ze Środowiskiem Kultury (8.1.1.2);DKD;24,10;2
+4;DKD.11;Pokój pracowników (3 st.) – Wydział Dziedzictwa Kulturowego (8.1.2);DKD;24,09;3
+4;DKD.12;Pokój pracowników (3 st.) – Wydział Dziedzictwa Kulturowego (8.1.2);DKD;28,30;2
+4;PP.01o;Podręczny magazyn dokumentacji (głęboki) – DKD;PP;24,05;
+4;PP.01p;Podręczny magazyn dokumentacji (głęboki) – DKD;PP;24,05;
+4;PP.4.15;Pomieszczenie pomocnicze (wnęka MFP / szafy, okno);PP;10,15;
+4;PP.01q;Podręczny magazyn dokumentacji (głęboki) – DZ;PP;24,05;
+4;PP.01r;Podręczny magazyn dokumentacji (głęboki) – DZ;PP;24,05;
+4;SN.01e;Sala narad 30 os.;SN;60,04;30
+4;SN.01f;Sala narad 30 os.;SN;60,04;30
+4;PP.01s;Podręczny magazyn dokumentacji (głęboki) – DZ;PP;24,05;
+4;PP.4.16;Pomieszczenie pomocnicze (wnęka MFP / szafy, okno);PP;12,50;
+4;DZ.01;Gabinet dyrektora – Departament Zdrowia - Dyrekcja (8.2);DZ;25,53;1
+4;DZ.02;Sekretariat – Departament Zdrowia - Dyrekcja (8.2);DZ;24,01;1
+4;DZ.03;Gabinet dyrektora – Wydział Nadzoru Finansowego i Restrukturyzacji - Dyrekcja (8.2.1);DZ;24,01;1
+4;DZ.04;Pokój zastępcy dyrektora – Wydział Nadzoru Finansowego i Restrukturyzacji - Dyrekcja (8.2.1);DZ;24,01;1
+4;DZ.05;Gabinet dyrektora – Wydział Zdrowia - Dyrekcja (8.2.2);DZ;24,02;1
+4;DZ.06;Pokój zastępcy dyrektora – Wydział Zdrowia - Dyrekcja (8.2.2);DZ;24,01;1
+4;DZ.07;Gabinet dyrektora – Wydział Inwestycji (8.2.3);DZ;24,02;1
+4;DZ.08;Sekretariat – Wydział Inwestycji (8.2.3);DZ;24,01;1
+4;DZ.09;Pokój pracowników (3 st.) – Dział Analiz Systemowych i e-zdrowia (8.2.1.1);DZ;24,02;3
+4;DZ.10;Pokój pracowników (3 st.) – Dział Analiz Systemowych i e-zdrowia (8.2.1.1);DZ;24,02;2
+4;DZ.11;Pokój pracowników (3 st.) – Dział Kontrolingu Finansowego (8.2.1.2);DZ;24,02;3
+4;DZ.12;Pokój pracowników (3 st.) – Dział Organizacji i Budżetowania (8.2.1.3);DZ;25,72;3
+4;DZ.13;Pokój pracowników (3 st.) – Dział Zdrowia Publicznego (8.2.2.1);DZ;24,02;3
+4;DZ.14;Pokój pracowników (3 st.) – Dział Zdrowia Publicznego (8.2.2.1);DZ;24,02;3
+4;DZ.15;Pokój pracowników (3 st.) – Dział Organizacji i Nadzoru (8.2.2.2);DZ;24,02;3
+4;DZ.16;Pokój pracowników (3 st.) – Dział Organizacji i Nadzoru (8.2.2.2);DZ;24,02;2
+4;DZ.17;Pokój pracowników (3 st.) – Dział Organizacji i Nadzoru (8.2.2.2);DZ;24,02;2
+4;DZ.18;Pokój pracowników (3 st.) – Wydział Inwestycji (8.2.3);DZ;24,01;3
+4;DZ.19;Pokój pracowników (3 st.) – Wydział Inwestycji (8.2.3);DZ;24,01;2
+4;PP.4.17;Pokój rezerwowy (rezerwa elewacji, moduł 24 m²);PP;24,60;
+4;PP.4.18;Pomieszczenie pomocnicze (MFP / szafy, okno);PP;16,13;
+4;KW.4.19;Korytarz / hol windowy;KW;341,42;
+4;PHS.01o;WC damskie z kabiną dostępną;PHS;15,00;
+4;PHS.01p;WC męskie z kabiną dostępną;PHS;14,00;
+4;PP.06g;Pomieszczenie porządkowe;PP;6,00;
+4;PP.4.20;Strefa pracy wspólnej / budki do rozmów;PP;16,23;
+4;PS.01j;Pokój socjalny pracowników;PS;24,00;
+4;PP.05g;Wnęka urządzenia wielofunkcyjnego (MFP);PP;5,00;
+4;IT.02f;Punkt dystrybucyjny IT (PD);IT;6,00;
+4;CZ.4.21;Miejsce oczekiwania gości (CZ);CZ;6,00;
+4;DKD.4.22;Miejsce oczekiwania gości (DKD);DKD;6,00;
+4;DZ.4.23;Miejsce oczekiwania gości (DZ);DZ;6,00;
+4;PP.05h;Wnęka urządzenia wielofunkcyjnego (MFP, skrzydło);PP;6,97;
+4;IT.13e;Centrala wentylacyjna piętrowa z rekuperacją;IT;25,00;
+4;PS.01k;Pokój socjalny pracowników;PS;24,00;
+4;DRA.4.24;Miejsce oczekiwania gości (DRA);DRA;6,00;
+4;KS.05a;Sala spotkań 20 os. (przeszklona);KS;33,41;
+4;PS.01l;Pokój socjalny pracowników;PS;24,00;
+4;PP.4.25;Strefa pracy wspólnej / budki do rozmów;PP;10,31;
+4;PHS.01q;WC damskie z kabiną dostępną (skrzydło);PHS;14,00;
+4;PHS.01r;WC męskie z kabiną dostępną (skrzydło);PHS;13,00;
+4;KW.4.26;Wnęka / szafa;KW;2,01;
+4;PP.06h;Pomieszczenie porządkowe (skrzydło);PP;8,54;
+4;PP.4.27;Strefa pracy wspólnej / budki do rozmów;PP;9,70;
+4;PP.4.28;Strefa pracy wspólnej / budki do rozmów;PP;9,93;
+5;KW.5.01;Dźwig A1 1 600 kg;KW;5,35;
+5;KW.5.02;Dźwig A2 1 600 kg;KW;5,35;
+5;KW.5.03;Dźwig R – dla ekip ratowniczych (PN-EN 81-72) i ewakuacyjny (PN-EN 81-76);KW;5,35;
+5;KW.5.04;Przedsionek ppoż. A z MOE (krzesło ewakuacyjne, interkom);KW;15,96;
+5;KW.5.05;Klatka schodowa A (biegi 1,60 m);KW;17,51;
+5;KW.5.06;Klatka schodowa B (biegi 1,60 m);KW;21,59;
+5;KW.5.07;Przedsionek ppoż. B z MOE (krzesło ewakuacyjne, interkom);KW;7,99;
+5;KW.5.08;Dźwig T os.-tow. 2 000 kg;KW;6,58;
+5;KW.5.09;Dźwig publiczny P1 1 275 kg;KW;5,85;
+5;KW.5.10;Dźwig publiczny P2 1 275 kg (przelotowy);KW;5,85;
+5;DSS.01;Gabinet dyrektora – Departament Spraw Społecznych i Rynku Pracy - Dyrekcja (3);DSS;24,09;1
+5;DSS.02;Pokój zastępcy dyrektora – Departament Spraw Społecznych i Rynku Pracy - Dyrekcja (3);DSS;26,35;1
+5;DSS.03;Pokój samodzielnego stanowiska – Koordynator (3.2);DSS;24,09;1
+5;DSS.04;Gabinet dyrektora – Wydział Edukacji - Dyrekcja (3.3);DSS;24,10;1
+5;DSS.05;Gabinet dyrektora – Wydział Integracji Społecznej - Dyrekcja (3.4);DSS;24,09;1
+5;DSS.06;Gabinet dyrektora – Wydział Polityki Senioralnej i Projektów Społecznych - Dyrekcja (3.5);DSS;24,10;1
+5;DSS.07;Pokój pracowników (3 st.) – Dział ds. Wdrażania i Realizacji Projektów (3.1);DSS;24,09;3
+5;DSS.08;Pokój pracowników (3 st.) – Dział ds. Wdrażania i Realizacji Projektów (3.1);DSS;24,09;2
+5;DSS.09;Pokój pracowników (3 st.) – Dział ds. Wdrażania i Realizacji Projektów (3.1);DSS;32,03;2
+5;DSS.10;Pokój pracowników (3 st.) – Dział Rozwoju Szkolnictwa (3.3.1);DSS;24,70;3
+5;DSS.11;Pokój pracowników (3 st.) – Dział Rozwoju Szkolnictwa (3.3.1);DSS;24,40;3
+5;DSS.12;Pokój pracowników (3 st.) – Dział Ekonomiczno-Finansowy (3.3.2);DSS;24,40;2
+5;DSS.13;Pokój pracowników (3 st.) – Dział Ekonomiczno-Finansowy (3.3.2);DSS;24,70;2
+5;DSS.14;Pokój pracowników (3 st.) – Wydział Integracji Społecznej - Dyrekcja (3.4);DSS;24,10;3
+5;DSS.15;Pokój pracowników (3 st.) – Wydział Integracji Społecznej - Dyrekcja (3.4);DSS;24,10;3
+5;DSS.16;Pokój pracowników (3 st.) – Wydział Integracji Społecznej - Dyrekcja (3.4);DSS;24,10;2
+5;DSS.5.11;Miejsce oczekiwania gości (DSS);DSS;18,60;
+5;PP.01t;Podręczny magazyn dokumentacji (głęboki) – DSS;PP;24,05;
+5;DSS.17;Pokój pracowników (3 st.) – Wydział Integracji Społecznej - Dyrekcja (3.4);DSS;24,09;2
+5;DSS.18;Pokój pracowników (3 st.) – Wydział Polityki Senioralnej i Projektów Społecznych - Dyrekcja (3.5);DSS;24,09;3
+5;DSS.19;Pokój pracowników (3 st.) – Wydział Polityki Senioralnej i Projektów Społecznych - Dyrekcja (3.5);DSS;24,09;3
+5;DRA.01;Gabinet dyrektora – Wydział Analiz i Rozwoju (5.2);DRA;24,09;1
+5;DRA.02;Pokój pracowników (3 st.) – Wydział Analiz i Rozwoju (5.2);DRA;32,33;3
+5;KW.5.12;Korytarz / hol windowy;KW;220,03;
+5;IT.13f;Centrala wentylacyjna piętrowa z rekuperacją;IT;25,00;
+5;PS.01m;Pokój socjalny pracowników;PS;24,00;
+5;PS.01n;Pokój socjalny pracowników;PS;24,00;
+5;PP.05i;Wnęka urządzenia wielofunkcyjnego (MFP);PP;5,00;
+5;IT.02g;Punkt dystrybucyjny IT (PD);IT;9,81;
+5;PHS.01s;WC damskie z kabiną dostępną;PHS;15,00;
+5;PHS.01t;WC męskie z kabiną dostępną;PHS;14,00;
+5;KW.5.13;Wnęka / szafa;KW;5,72;
+5;PP.06i;Pomieszczenie porządkowe;PP;9,70;
+6;KW.6.01;Dźwig A1 1 600 kg;KW;5,35;
+6;KW.6.02;Dźwig A2 1 600 kg;KW;5,35;
+6;KW.6.03;Dźwig R – dla ekip ratowniczych (PN-EN 81-72) i ewakuacyjny (PN-EN 81-76);KW;5,35;
+6;KW.6.04;Przedsionek ppoż. A z MOE (krzesło ewakuacyjne, interkom);KW;15,96;
+6;KW.6.05;Klatka schodowa A (biegi 1,60 m);KW;17,51;
+6;KW.6.06;Klatka schodowa B (biegi 1,60 m);KW;21,59;
+6;KW.6.07;Przedsionek ppoż. B z MOE (krzesło ewakuacyjne, interkom);KW;7,99;
+6;KW.6.08;Dźwig T os.-tow. 2 000 kg;KW;6,58;
+6;KW.6.09;Dźwig publiczny P1 1 275 kg;KW;5,85;
+6;KW.6.10;Dźwig publiczny P2 1 275 kg (przelotowy);KW;5,85;
+6;KS.07;Gabinet dyrektora – Kancelaria Sejmiku (1);KS;24,09;1
+6;KS.08;Pokój zastępcy dyrektora – Kancelaria Sejmiku (1);KS;26,35;1
+6;KS.09;Pokój zastępcy dyrektora – Kancelaria Sejmiku (1);KS;24,09;1
+6;KS.10;Sekretariat – Kancelaria Sejmiku (1);KS;24,10;2
+6;KS.11;Pokój pracowników (3 st.) – Kancelaria Sejmiku (1);KS;24,09;3
+6;KS.12;Pokój pracowników (3 st.) – Kancelaria Sejmiku (1);KS;24,09;3
+6;KS.13;Pokój pracowników (3 st.) – Kancelaria Sejmiku (1);KS;24,10;3
+6;KS.14;Pokój pracowników (3 st.) – Kancelaria Sejmiku (1);KS;24,09;2
+6;KS.04a;Gabinet Wiceprzewodniczącego Sejmiku;KS;39,90;1
+6;DRA.03;Gabinet dyrektora – Departament Rozwoju Aglomeracji - Dyrekcja (5);DRA;24,09;1
+6;DRA.04;Pokój samodzielnego stanowiska – Departament Rozwoju Aglomeracji - Dyrekcja (5);DRA;24,09;1
+6;KS.03;Pokój asystenta Przewodniczącego;KS;14,50;1
+6;KS.01;Gabinet Przewodniczącego Sejmiku (spotkania do 5 os.);KS;35,27;1
+6;KS.02;Zaplecze sanitarno-socjalne gabinetu Przewodniczącego;KS;6,71;
+6;KS.04b;Gabinet Wiceprzewodniczącego Sejmiku;KS;30,02;1
+6;DRA.05;Pokój samodzielnego stanowiska – Departament Rozwoju Aglomeracji - Dyrekcja (5);DRA;24,09;1
+6;DRA.06;Gabinet dyrektora – Wydział ds. Aglomeracji (5.1);DRA;24,09;1
+6;PS.01o;Pokój socjalny pracowników;PS;18,60;
+6;KS.04c;Gabinet Wiceprzewodniczącego Sejmiku;KS;30,02;1
+6;DRA.07;Gabinet dyrektora – Planowany Wydział (5.3);DRA;24,09;1
+6;DRA.08;Pokój pracowników (3 st.) – Wydział ds. Aglomeracji (5.1);DRA;24,37;2
+6;DRA.09;Pokój pracowników (3 st.) – Planowany Wydział (5.3);DRA;24,07;3
+6;DRA.10;Pokój pracowników (3 st.) – Planowany Wydział (5.3);DRA;24,10;2
+6;DRA.11;Pokój pracowników (3 st.) – Planowany Wydział (5.3);DRA;24,10;2
+6;KW.6.11;Korytarz / hol windowy;KW;222,66;
+6;KS.05b;Sala spotkań 20 os. (przeszklona);KS;44,00;
+6;KS.06;Miejsce oczekiwania gości (Przewodniczący, KS);KS;11,93;
+6;PP.05j;Wnęka urządzenia wielofunkcyjnego (MFP);PP;5,00;
+6;KW.6.12;Wnęka / szafa;KW;5,67;
+6;PHS.01u;WC damskie z kabiną dostępną;PHS;15,00;
+6;PHS.01v;WC męskie z kabiną dostępną;PHS;14,00;
+6;PP.06j;Pomieszczenie porządkowe;PP;6,00;
+6;IT.02h;Punkt dystrybucyjny IT (PD);IT;9,19;
+S;KW.S.01;Dźwig A1 1 600 kg;KW;5,35;
+S;KW.S.02;Dźwig A2 1 600 kg;KW;5,35;
+S;KW.S.03;Dźwig R – dla ekip ratowniczych (PN-EN 81-72) i ewakuacyjny (PN-EN 81-76);KW;5,35;
+S;KW.S.04;Przedsionek ppoż. A z MOE (krzesło ewakuacyjne, interkom);KW;15,96;
+S;KW.S.05;Klatka schodowa A (biegi 1,60 m);KW;17,51;
+S;KW.S.06;Klatka schodowa B (biegi 1,60 m);KW;21,59;
+S;KW.S.07;Przedsionek ppoż. B z MOE (krzesło ewakuacyjne, interkom);KW;7,99;
+S;KW.S.08;Dźwig T os.-tow. 2 000 kg;KW;6,58;
+S;KW.S.09;Dźwig publiczny P1 1 275 kg;KW;5,85;
+S;KW.S.10;Dźwig publiczny P2 1 275 kg (przelotowy);KW;5,85;
+S;SWD.08;Sala komisji 50 os.;SWD;95,42;
+S;SWD.10a;Zaplecze nagrań komisji 50 os.;SWD;9,02;
+S;SWD.10b;Zaplecze nagrań komisji 30 os.;SWD;9,02;
+S;SWD.09;Sala komisji 30 os.;SWD;55,46;
+S;SWD.11a;Sala klubu radnych 30 os. (1);SWD;54,05;
+S;SWD.11b;Sala klubu radnych 30 os. (2);SWD;54,45;
+S;PHS.05c;Przedsionek publiczny przy dźwigu P2 z toaletą dostępną (dla publiczności galerii);PHS;9,94;
+S;SWD.07;Pokój matki z dzieckiem;SWD;11,52;
+S;KW.S.11;Galeria kuluarowa (korytarz Sejmiku, okna na W i E);KW;87,75;
+S;SWD.01a;Sala obrad (płyta);SWD;287,41;70
+S;SWD.04;Reżyserka – nagrywanie i transmisja (okno do sali);SWD;16,17;
+S;PHS.05a;WC męskie z toaletą dostępną;PHS;11,97;
+S;SWD.15;Magazyn podręczny sali;SWD;5,88;
+S;SWD.13;Wspólna sala radnych;SWD;40,23;
+S;SWD.14;Pokój socjalny radnych;SWD;21,28;
+S;PHS.05b;WC damskie z toaletą dostępną;PHS;13,30;
+S;SWD.12a;Sala klubu radnych 15 os. (1);SWD;30,60;
+S;SWD.12b;Sala klubu radnych 15 os. (2);SWD;30,60;
+S;SWD.02;Hol reprezentacyjny (2 kond., narożnik NW) z barem SWD.05 (30 m²) i szatnią SWD.06 (12 m²) jako otwartymi ladami;SWD;79,94;
+S (antresola);KW.A.01;Dźwig A1 1 600 kg;KW;5,35;
+S (antresola);KW.A.02;Dźwig A2 1 600 kg;KW;5,35;
+S (antresola);KW.A.03;Dźwig R – dla ekip ratowniczych (PN-EN 81-72) i ewakuacyjny (PN-EN 81-76);KW;5,35;
+S (antresola);KW.A.04;Przedsionek ppoż. A z MOE (krzesło ewakuacyjne, interkom);KW;15,96;
+S (antresola);KW.A.05;Klatka schodowa A (biegi 1,60 m);KW;17,51;
+S (antresola);KW.A.06;Klatka schodowa B (biegi 1,60 m);KW;21,59;
+S (antresola);KW.A.07;Przedsionek ppoż. B z MOE (krzesło ewakuacyjne, interkom);KW;7,99;
+S (antresola);KW.A.08;Dźwig T os.-tow. 2 000 kg;KW;6,58;
+S (antresola);KW.A.09;Dźwig publiczny P1 1 275 kg;KW;5,85;
+S (antresola);KW.A.10;Dźwig publiczny P2 1 275 kg (przelotowy);KW;5,85;
+S (antresola);SWD.01b;Galeria publiczności: 2 rzędy, 30 miejsc, w tym 3 dla wózków w 1. rzędzie (balustrada szklana 1,10 m);SWD;32,00;30
+S (antresola);SWD.03;Foyer publiczne z ekranami = sala multimedialna/poczekalnia gości SWD.03 (otwarte na kuluar i salę);SWD;37,66;
