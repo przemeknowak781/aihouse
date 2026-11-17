@@ -16,6 +16,7 @@ import matplotlib  # noqa: E402
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.patches import Polygon as MPoly  # noqa: E402
+from shapely.geometry import box as box_  # noqa: E402
 
 IMG = os.path.join(os.path.dirname(os.path.abspath(__file__)), "img")
 os.makedirs(IMG, exist_ok=True)
@@ -69,7 +70,7 @@ def base(ax, title):
 
 fig, axs = plt.subplots(2, 1, figsize=(11.0, 17.0))
 ax = axs[0]
-base(ax, "Kondygnacja S (+27,30) – wariant S-3 „hol z galerią” – v1.2 (trzon A wydłużony na pd. wg I5)")
+base(ax, "Kondygnacja S (+27,30) – wariant S-3 „hol z galerią” – v1.2 (trzon A wg I5; poprawki po weryfikacji scalenia)")
 for k, g in S.items():
     draw(ax, g, COL[cat(k)], z=4)
     if k == "SWD.01":
@@ -106,6 +107,11 @@ for lift, pt, d, levels in M.LIFT_DOORS:
     if any(l.startswith("S") for l in levels):
         ax.annotate("", xy=(pt[0] + d[0] * 0.9, pt[1] + d[1] * 0.9), xytext=pt,
                     arrowprops=dict(arrowstyle="->", lw=0.7, color="#c0392b"), zorder=12)
+draw(ax, M.STAIR, "none", ec="#7a5c00", lw=0.6, z=7, hatch="---")          # cały bieg schodów (górny bieg nad szatnią)
+ax.text(sum(M.STAIR.bounds[0::2]) / 2, M.STAIR_V[1] + 0.25, f"schody ↑ +30,90 ({sum(M.STAIR_STEPS)} st., spocznik {M.STAIR_LAND:.2f})",
+        fontsize=4.6, ha="center", zorder=12, color="#7a5c00")
+draw(ax, box_(M.STAIR_FOOT_U, M.STAIR_V[0], M.HALL_E_WALL_U, M.STAIR_V[1]), "none", ec="#7a5c00", lw=0.4, z=7)
+ax.text(M.STAIR_FOOT_U + 0.75, sum(M.STAIR_V) / 2, f"pole\n{M.HALL_E_WALL_U - M.STAIR_FOOT_U:.2f}", fontsize=4.2, ha="center", va="center", zorder=12)
 ax.text(0.6, -1.3, "■ drzwi  → wyjście z dźwigu  ♿ stanowisko dla wózka; pas 1,35 m przy elewacjach bez antresoli (okna 1,65×4,20/5,00 bez zmian)",
         fontsize=5.5)
 
@@ -118,21 +124,33 @@ label(ax, S["SWD.01"], "pustka sali (h 6,85 m)", fs=6)
 for k, g in A.items():
     draw(ax, g, COL[cat(k)], z=5)
     nm = {"KW.A.01": "hol P1/P2", "KW.A.02": "korytarz publiczny EI 30", "KW.A.03": "prz. A'\nMOE",
-          "SWD.01g": "SWD.01g galeria\n31 + 3 ♿", "SWD.02g": "SWD.02g hol górny"}.get(k, k)
+          "SWD.01g": f"SWD.01g galeria\n{M.GAL_SEATS_N} + {M.GAL_WC_N} ♿", "SWD.02g": "SWD.02g hol górny"}.get(k, k)
     label(ax, g, f"{nm}\n{g.area:.1f}", dy=(-2.2 if k == "SWD.01g" else 0))
-for (u, v, h, t) in M.gallery_seats():
-    ax.plot(u, v, "s" if t == "wozek" else "o", ms=2.6 if t == "wozek" else 1.8,
-            color="#3aa655" if t == "wozek" else "#333", zorder=12)
+GLy = M.gallery_layout()
+draw(ax, M.GAL_PODEST, "#e8d6b3", lw=0.4, z=6)
+ax.text(M.GAL_PODEST.bounds[0] + 0.45, sum(M.GAL_PODEST.bounds[1::2]) / 2, "podest +0,90", fontsize=3.8, rotation=90,
+        ha="center", va="center", zorder=12)
 for g in M.GAL_STEPS:
-    draw(ax, g, "#e0c9a6", lw=0.3, z=6)
+    draw(ax, g, "#cdb38a", lw=0.3, z=6, hatch="||||")
+draw(ax, M.GAL_BAY, "none", ec="#3aa655", lw=0.5, z=7)
+for t, col in (("rzad1", "#555"), ("rzad2", "#8b5a2b"), ("opiekun", "#1f77b4"), ("wozek", "#3aa655")):
+    for (u, v, h, rect) in GLy[t]:
+        draw(ax, rect, col, lw=0.2, z=8, alpha=0.9)
+ax.text(20.5, 22.9, f"zatoka +0,00: {M.GAL_WC_N} ♿ + {M.GAL_COUNTS['opiekun']} opiek.", fontsize=4.2, ha="center", color="#3aa655", zorder=12)
+draw(ax, M.STAIR, "none", ec="#7a5c00", lw=0.6, z=7, hatch="---")
+ax.text(sum(M.STAIR.bounds[0::2]) / 2, sum(M.STAIR_V) / 2, "bieg schodów w pustce", fontsize=4.4, ha="center", va="center", zorder=12)
 for a_, b_, (u, v), w in M.DOORS_ANT:
     ax.plot(u, v, "s", ms=2.2, color="#d35400", zorder=12)
 for lift, pt, d, levels in M.LIFT_DOORS:
     if "ANT" in levels:
         ax.annotate("", xy=(pt[0] + d[0] * 0.9, pt[1] + d[1] * 0.9), xytext=pt,
                     arrowprops=dict(arrowstyle="->", lw=0.7, color="#c0392b"), zorder=12)
+for nm, (room, din, dout) in M.przedsionki().items():
+    r = M.moe_search(room, din, dout)
+    if r and "+30,90" in nm:
+        draw(ax, r["moe"], "none", ec="#1f77b4", lw=0.6, z=9)
 ax.text(0.6, -1.3, "kolor różowy – strefa publiczności (Wejście Obywatelskie → P1/P2 → +30,90), zielony – strefa radnych;"
-        " drogi z galerii: przedsionek A (zach.) i B (korytarz)", fontsize=5.5)
+        " drogi z galerii i korytarza: przedsionek A i B; niebieska ramka – MOE 1,5 × 1,5", fontsize=5.5)
 plt.tight_layout()
 out = os.path.join(IMG, "s2_plan.png")
 plt.savefig(out, dpi=170)
@@ -142,7 +160,7 @@ print("Zapisano", os.path.relpath(out, M.ROOT))
 # Przekrój w płaszczyźnie linii wzroku: galeria (rząd 1 i 2, v 20,0) → prezydium (miejsce skrajne zach.) i mówca
 fig, ax = plt.subplots(figsize=(10, 4.2))
 H = M.Z_ANT - M.Z_S
-v0 = 20.0
+v0 = 17.0
 seats = [(M.GAL_ROWS[0][1], H + M.EYE), (M.GAL_ROWS[1][1], H + M.GAL_ROWS[1][2] + M.EYE)]
 targets = [((M.F[0] - 2.25, 13.25), M.EYE, "prezydium (skrajne zach.)", "#c0392b"), ((M.F[0], M.F[1]), 1.60, "mówca 1,60", "#2c7fb8"),
            ((M.F[0] + 0.75, 13.25), M.EYE, "przewodniczący(a)", "#8e44ad")]
@@ -156,10 +174,12 @@ ax.add_patch(plt.Rectangle((-6.5, 0), 6.5 + 0.55, -0.35, fc="#bbb"))
 ax.add_patch(plt.Rectangle((-6.0, H - 0.3), 6.55, 0.3, fc="#999"))                        # strop antresoli
 ax.add_patch(plt.Rectangle((0.45, H), 0.10, M.GAL_CURB_H, fc="#555"))                      # cokół
 ax.add_patch(plt.Rectangle((0.45, H + M.GAL_CURB_H), 0.04, M.GAL_GLASS_H - M.GAL_CURB_H, fc="#9ecae1", alpha=0.7))  # szkło
-x_r2 = M.GAL_ROWS[1][1] - M.GAL_ROWS[0][1]
-ax.add_patch(plt.Rectangle((x_r2 - 0.45, H), 0.85, M.GAL_ROWS[1][2], fc="#d9c7a6"))    # podest rzędu 2 (+0,90)
+xp0, xp1 = M.GAL_PODEST.bounds[0] - M.GAL_ROWS[0][1], M.GAL_PODEST.bounds[2] - M.GAL_ROWS[0][1]
+ax.add_patch(plt.Rectangle((xp0, H), xp1 - xp0, M.GAL_PODEST_DZ, fc="#d9c7a6"))          # podest rzędu 2 (+0,90) z przejściem tylnym
+ax.add_patch(plt.Rectangle((xp1 - 0.03, H + M.GAL_PODEST_DZ), 0.03, M.GAL_PODEST_BAR_H, fc="#9ecae1", alpha=0.8))   # balustrada 0,70
+ax.text(xp0 + 0.05, H + M.GAL_PODEST_DZ + 0.08, "przejście tylne", fontsize=4.5)
 ax.add_patch(plt.Rectangle((0.25, 0), 0.30, H - 0.3, fc="#999"))                          # ściana sali pod galerią
-ax.text(-3.0, 1.6, "hol dźwigów A1/A2\n(pod galerią, h 3,30)", fontsize=6, ha="center")
+ax.text(-3.0, 1.6, "WC PHS.05 (pod galerią, h 3,30)", fontsize=6, ha="center")
 ax.plot([-6.5, 14], [M.H_SALA, M.H_SALA], "--", color="#777", lw=0.6)
 ax.text(10.5, M.H_SALA + 0.08, "spód kratownic +6,85", fontsize=6)
 for (su, sz), nm in zip(seats, ("rząd 1", "rząd 2")):
@@ -181,8 +201,8 @@ ax.text(-6.3, 0.08, "+27,30 sala", fontsize=6)
 ax.set_xlim(-6.5, 14)
 ax.set_ylim(-0.5, 7.2)
 ax.set_aspect("equal")
-ax.set_title("Przekrój rozwinięty wzdłuż linii wzroku z galerii (miejsca przy v 20,0) – szkło 1,10 m na cokole 0,20 m;"
-             " rząd 2 na +0,90", fontsize=8, loc="left")
+ax.set_title("Przekrój rozwinięty wzdłuż linii wzroku z galerii (miejsca przy v 17,0) – szkło 1,10 m na cokole 0,20 m;"
+             " rząd 2 na podeście +0,90 z balustradą 0,70 m", fontsize=8, loc="left")
 ax.tick_params(labelsize=6)
 plt.tight_layout()
 out2 = os.path.join(IMG, "s2_przekroj.png")

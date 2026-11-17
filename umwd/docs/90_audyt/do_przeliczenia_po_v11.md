@@ -41,3 +41,6 @@
 - [ ] Fryz wklęsły 0,15 × 0,15 m – potwierdzić; dopisać do JSON: pochwyt 1,10, kaseta ZIP 0,18, ΔU 0,020, strop glin QpB 101,8–103,4, spadek dachu skrzydła 2,8 % (kalenica w osi traktu 15,00).
 ### Agent rzutów
 - [ ] budynek.json: 3 okna na licu S-W segmentu (kond. P, 1, 3, 4) – sprzeczne z elewacją (żaluzje agregatu/trafo/dry-coolera, pełny parter); uzgodnić rzuty z elewacją Sg.
+
+## Z raportu agenta 3D (etap 2, 17.11 ok. 06:45) – PRIORYTET dla rzutów v1.2
+- [ ] **Hala Obywatelska – przekątna oś Brama Mostowa → drzwi ogrodowe musi mieć ≥ 6,3 m wolnej szerokości na całej długości** (tak twierdzi opis i koncepcja). Teraz: oś mija narożnik SW.02 o 0,45 m (prześwit 4,6 m), między SW.06 a trzonami 3,9 m, narożnik PHS.04 na osi, koniec osi (84,32; 43,12) w toaletach PHS.04; drzwi ogrodowe przyjęte prowizorycznie w środku ściany ogrodowej (u 15,9–18,3). Poprawić model_pomieszczen (parter) tak, by oś była wolna, a drzwi ogrodowe leżały w osi; potem kamera W6 wraca na oś.

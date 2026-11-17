@@ -495,7 +495,7 @@ def poly_list_en(g, nd=3):
 # Galeria publiczności (+30,90) – v1.2-fix: przekrój 2-rzędowy z zatoką +0,00 dla wózków (pn.) i przejściem tylnym rzędu 2
 # ------------------------------------------------------------------------------------------------
 # Przekrój (wsch. → zach.): balustrada (lico u 22,00; szkło 21,90–22,00) | rząd 1 +0,00 u 20,90–21,90 (siedzisko 0,50 +
-# przejście 0,45 przed kolanami) | podest +0,90 u 19,10–20,90 (miejsca rzędu 2 u 20,00–20,90, przejście tylne 0,90 m) | foyer +0,00.
+# przejście 0,45 przed kolanami) | podest +0,90 u 19,10–20,90 (miejsca rzędu 2 u 20,10–20,90, przejście tylne 1,00 m) | foyer +0,00.
 # Wzdłuż (pd. → pn.): przejście +0,00 do rzędu 1 (0,90) | podest i rząd 1 | zatoka +0,00: 3 × (opiekun + wózek) przy balustradzie.
 GAL = box(15.50, 12.60, 22.00, 22.65)
 GAL_PARAPET_U = (21.90, 22.00)    # balustrada szklana 1,10 m (prześwit ≤ 0,12) na cokole pełnym 0,20 m – lico u 22,00
@@ -508,9 +508,9 @@ GAL_KNEE = 0.45                   # przejście przed kolanami rzędu 1 (WT § 26
 GAL_WC_W, GAL_WC_D = 0.90, 1.40   # miejsce dla wózka (M.13)
 GAL_EYE_OFF = 0.30                # oko siedzącego przed linią oparcia
 GAL_R1_U = (20.90, 21.90)         # rząd 1 (+0,00)
-GAL_R2_U = (20.00, 20.90)         # miejsca rzędu 2 na podeście
+GAL_R2_U = (20.10, 20.90)         # miejsca rzędu 2 na podeście: siedzisko 0,50 + miejsce na nogi 0,30 do krawędzi
 GAL_PODEST_DZ = 0.90
-GAL_PODEST = box(19.10, 13.50, 20.90, 18.30)            # podest +0,90 (przejście tylne u 19,10–20,00)
+GAL_PODEST = box(19.10, 13.50, 20.90, 18.30)            # podest +0,90 (przejście tylne 1,00 m u 19,10–20,10)
 GAL_S_PASS = box(19.10, 12.60, GAL_PARAPET_U[0], 13.50)  # przejście +0,00 foyer → rząd 1 (0,90 m)
 GAL_STEPS = [box(17.30, 13.60, 19.10, 14.60)]           # 6 × 0,15 / 0,30 z foyer na przejście tylne podestu
 GAL_BAY = box(19.10, 18.30, GAL_PARAPET_U[0], 22.65)    # zatoka +0,00 (z foyer bez stopni)
@@ -570,7 +570,7 @@ GAL_ROWS = [  # (nr, u oka, podest wzgl. +30,90, v0, v1, układ) – do linii wz
      f"+0,00: {GAL_COUNTS['rzad1']} miejsc (dostęp przejściem 0,90 od pd. i przejściem 0,45 przed kolanami) + zatoka pn.:"
      f" {GAL_WC_N} miejsca dla wózków 0,90 × 1,40 z {GAL_COUNTS['opiekun']} miejscami opiekunów"),
     (2, GAL_R2_U[0] + GAL_EYE_OFF, GAL_PODEST_DZ, GAL_PODEST.bounds[1], GAL_PODEST.bounds[3],
-     f"podest +0,90: {GAL_COUNTS['rzad2']} miejsc × 0,52 m z przejściem tylnym 0,90 m; 6 stopni 0,15 × 0,30 z foyer;"
+     f"podest +0,90: {GAL_COUNTS['rzad2']} miejsc × 0,52 m z przejściem tylnym 1,00 m; 6 stopni 0,15 × 0,30 z foyer;"
      f" krawędzie podestu – balustrady (przód szkło 0,70 m)"),
 ]
 PROG["SWD.01g"] = (f"Galeria publiczności (część SWD.01): rząd 1 +0,00 – {GAL_COUNTS['rzad1']} miejsc, rząd 2 +0,90 –"

@@ -75,6 +75,8 @@ print("  nachylenia odcinków:", [f"{s * 100:.2f} %" for s in slopes], "→ max"
       "✔" if max(slopes) <= 0.0500001 else "✗")
 print(f"  długość pochylni zach. {aisles['west_ramp'].bounds[3] - aisles['west_ramp'].bounds[1]:.2f} m (< 9 m bez spocznika "
       f"pośredniego: podesty rzędów pełnią rolę spoczników), poręcze obustronne 0,75 i 0,90 m, krawężnik 0,07 m")
+print(f"  przejścia-pochylnie {M.AISLE_W:.2f} m: płaszczyzna ruchu 1,20 m między krawężnikami, poręcze w rozstawie {M.AISLE_HANDRAIL:.2f} m"
+      f" w świetle ({'✔' if 1.0 <= M.AISLE_HANDRAIL <= 1.1 else '✗'} WT § 71 ust. 1: 1,0–1,1 m)")
 
 # -------------------------------------------------------------------------------------------------
 hr("[S2] Linie wzroku radnych (oczy 1,20 m nad podestem; cel: oczy prezydium 1,20 m / mówca 1,20–1,60 m)")
@@ -136,6 +138,9 @@ print("Rzędy na różnych promieniach – stanowiska sąsiednich rzędów nie l
 # -------------------------------------------------------------------------------------------------
 hr("[S3] Galeria publiczności – linie wzroku w przekroju (oczy 1,20 m; balustrada szklana 1,10 m na cokole 0,20 m)")
 gal = M.gallery_seats()
+print(f"Galeria (v1.2-fix): rząd 1 +0,00 – oko u {M.GAL_ROWS[0][1]:.2f}, {M.GAL_COUNTS['rzad1']} miejsc; zatoka +0,00 – {M.GAL_WC_N} miejsca"
+      f" dla wózków (oko u {M.GAL_PARAPET_U[0] - 0.70:.2f}) + {M.GAL_COUNTS['opiekun']} opiekunów; rząd 2 na podeście +0,90 – oko u"
+      f" {M.GAL_ROWS[1][1]:.2f}, {M.GAL_COUNTS['rzad2']} miejsc; razem {M.GAL_SEATS_N} + {M.GAL_WC_N}")
 z_curb = H_ANT + M.GAL_CURB_H              # wierzch cokołu pełnego = 3,80 nad posadzką sali
 z_glass = H_ANT + M.GAL_GLASS_H            # wierzch balustrady szklanej = 4,70
 heads = []                                 # głowy radnych (oko + 0,12)
@@ -177,6 +182,8 @@ def sight(eye, ze, T, zt, front_row):
 
 
 front = {2: (M.GAL_ROWS[0][1], H_ANT + M.GAL_ROWS[0][2] + M.EYE)}
+z_bar = H_ANT + M.GAL_PODEST_DZ + M.GAL_PODEST_BAR_H      # wierzch balustrady szklanej na krawędzi podestu (5,20 nad S)
+u_bar = M.GAL_R2_U[1]
 targets = {"prezydium – przewodniczący(a) i wiceprzew. (2 środkowe miejsca)": (PRES_PTS[1:3], M.EYE),
            "prezydium – miejsca skrajne": ([PRES_PTS[0], PRES_PTS[3]], M.EYE),
            "mówca przy mównicy siedzący / na wózku 1,20": ([F], 1.20),
@@ -184,6 +191,7 @@ targets = {"prezydium – przewodniczący(a) i wiceprzew. (2 środkowe miejsca)"
 G3 = {}
 for nm, (TT, zt) in targets.items():
     curb, cs, clear_between, n_tot, glass_n, hmin = 9, [], 0, 0, 0, 9
+    bar_min, bar_glass = 9, 0
     for (u, v, h, t) in gal:
         row = 1 if abs(u - M.GAL_ROWS[0][1]) < 0.3 else 2
         if t == "wozek":
@@ -191,6 +199,10 @@ for nm, (TT, zt) in targets.items():
         for T in TT:
             ze = h
             cc, gl, c, dmin, hh = sight((u, v), ze, T, zt, front.get(row))
+            if row == 2:
+                hb, _ = h_at_u((u, v), ze, T, zt, u_bar)
+                bar_min = min(bar_min, hb - z_bar)
+                bar_glass += hb < z_bar
             curb = min(curb, cc)
             hmin = min(hmin, hh)
             glass_n += gl
@@ -200,12 +212,14 @@ for nm, (TT, zt) in targets.items():
                 if c >= 0.06 or dmin >= 0.20:
                     clear_between += 1
     n2 = len(cs)
-    G3[nm] = (curb, min(cs), sum(1 for c in cs if c >= 0.06), clear_between, n2, hmin)
+    G3[nm] = (curb, min(cs), sum(1 for c in cs if c >= 0.06), clear_between, n2, hmin, bar_min, bar_glass)
     print(f"  {nm}:")
     print(f"     zapas nad cokołem 0,20 m min {curb * 1000:.0f} mm (linia przez szkło antyrefleksyjne w {glass_n}/{n_tot} przypadków);"
           f" nad głowami radnych ≥ {hmin:.2f} m")
     print(f"     rząd 2 nad rzędem 1: C min {min(cs) * 1000:.0f} mm, C ≥ 60 mm: {sum(1 for c in cs if c >= 0.06)}/{n2};"
           f" C ≥ 60 mm lub linia między głowami (≥ 0,20 m od osi głowy): {clear_between}/{n2}")
+    print(f"     rząd 2 nad balustradą krawędzi podestu ({M.GAL_PODEST_BAR_H:.2f} m, u {u_bar:.2f}): zapas min {bar_min * 1000:.0f} mm"
+          + (f"; linia przez szkło w {bar_glass}/{n2} przypadków" if bar_glass else " – linia nad balustradą we wszystkich przypadkach"))
 ang = []
 for (u, v, h, t) in gal:
     ang.append(math.degrees(math.atan2(abs(u - PRES_C[0]), v - PRES_C[1])))
@@ -326,12 +340,13 @@ for rin in (None, 12.0, 11.0, 10.2):
     n, par = max_rows_seats(rin)
     lab = "bez galerii w łuku" if rin is None else f"galeria w łuku, krawędź R {rin:.1f} m (głęb. {13.5 - rin:.1f} m)"
     print(f"  {lab:45s} → maks. {n:2d} stanowisk {'✔' if n >= 44 else '✗ < 44'}  (F_u, R1) = {par}")
-need = 31 * M.GAL_SEAT_W + 3 * M.GAL_WC_W + 2 * 1.2
+need = M.GAL_SEATS_N * M.GAL_SEAT_W + M.GAL_WC_N * M.GAL_WC_W + 2 * 1.2
 arc_len = math.radians(90 - 10) * (13.5 - 0.6)
-print(f"  Galeria 1-rzędowa w łuku (głęb. 1,5 m): front {arc_len:.1f} m < potrzebne {need:.1f} m (31 miejsc + 3 wózki + 2 wejścia);"
-      " miejsce dla wózka 1,40 m + przejście za rzędem 1,20 m wymaga głęb. ≥ 2,6 m → ≤ 38 stanowisk; dojście z P1/P2"
-      " prowadziłoby nad końcami rzędów (poufność) ✗")
-print("Galeria pd. (v1.0) przykrywa prezydium – wykluczona (I1). Galeria zach. nad holem dźwigów – przyjęta.")
+print(f"  Galeria 1-rzędowa w łuku (głęb. 1,5 m): front {arc_len:.1f} m {'<' if arc_len < need else '≥'} potrzebne {need:.1f} m"
+      f" ({M.GAL_SEATS_N} miejsc + {M.GAL_WC_N} wózki + 2 wejścia), ale miejsce dla wózka 1,40 m + przejście za rzędem 1,20 m"
+      " wymaga głęb. ≥ 2,6 m → ≤ 38 stanowisk radnych < 44; dojście z P1/P2 prowadziłoby nad końcami rzędów (poufność) ✗")
+print("Galeria pd. (v1.0) przykrywa prezydium – wykluczona (I1). Galeria zach. (nad WC K/M i łącznikiem wsch., między trzonem A"
+      " a salą) – przyjęta.")
 
 # -------------------------------------------------------------------------------------------------
 hr("[S7] Prezydium, mównica, PJM – dostępność")
