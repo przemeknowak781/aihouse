@@ -1,0 +1,67 @@
+{
+ "nr": 27,
+ "title": "Spec v1.1 closes all critical findings; first photomatch on the organiser's drone photos",
+ "stages": [
+  [
+   "Organiser materials ✔ (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register ✔ (184 requirements) + checklists",
+   "done"
+  ],
+  [
+   "Site ✔ (zoning, heritage, survey, geotech, trees, neighbours)",
+   "done"
+  ],
+  [
+   "Law ✔ (WT bridge, fire, accessibility, zero-emission)",
+   "done"
+  ],
+  [
+   "Design research ✔ (trends, visuals, boards, façades, costs)",
+   "done"
+  ],
+  [
+   "Programme ✔ (187 offices, PU ≈ 8,600 m²)",
+   "done"
+  ],
+  [
+   "Concept v1.1 ✔ (all critical items closed: parking 110 ≥ 106, cost 149.18 M incl. 5 %, PV 415 kWp, EP 28, trees 36/44 by M.06); Sejmik S-2 ►",
+   "running"
+  ],
+  [
+   "Production ►: drawings → v1.1 (workflow ►); plans re-run after S-2; photomatch tests ✔; extra showcase renders (workflow ►)",
+   "running"
+  ],
+  [
+   "Boards ►: Stage II 8/8 skeletons with true-scale drawings (vis pending); Stage I 2/2; tables F.15/F.14.B ✔ (draft)",
+   "running"
+  ],
+  [
+   "Audit ►: completeness 25/44; structural & functional audit ►; jury later",
+   "running"
+  ]
+ ],
+ "notes": [
+  "Revision v1.1 closed every critical finding with numerical proof: garage redesigned (−2 under the whole footprint except the bay at Maz. 19, −1 raised to 4.20 m, 16 two-level stackers) → 110 spaces vs 106 required; tower column lines moved out of the corridors (v 0 / 8.70 / 16.00 / 23.15).",
+  "Cost 142.08 M + 5 % contingency = 149.18 M PLN net (0.82 M below the cap — tight, honest). PV 415 kWp only with modules η ≥ 22.5 % (BIPV roofs 351 + segment wall 41 + canopy 13 + spandrels 11). Crown lamellas now tone-on-tone with a Fibonacci rhythm (no moiré from the bridge).",
+  "Decisions flagged for the structural/fire audit: sprinklers dropped (not mandatory), 0.60 m diaphragm walls with a deeper −2, generator and dry-cooler inside the segment, 0.60 m sills in the wing with fixed safety glass to 0.90.",
+  "Photomatch on the organiser's drone photos F.17.A/B works geometrically; the building still reads too bright and flat → tonal match, shadows and materials in the finals.",
+  "At the user's request a separate workflow composes 8 extra showcase views (4 photographer strategies → judges → render → critique → refine)."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/W1_F17A_test.jpg",
+   "caption": "Vis 1 test – photomatch on F.17.A (from the east)"
+  },
+  {
+   "path": "umwd/raporty/img/W2_F17B_test.jpg",
+   "caption": "Vis 2 test – photomatch on F.17.B (from the west)"
+  },
+  {
+   "path": "umwd/raporty/img/budynek_test_W3_v3.jpg",
+   "caption": "Vis 3 test – Bridge Gate, new station"
+  }
+ ]
+}

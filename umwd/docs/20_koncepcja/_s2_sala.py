@@ -100,101 +100,126 @@ def c_value(eye, z_eye, target, z_t, row_front):
 
 
 worst = {}
-for tgt_name, tgt, zt in (("prezydium (siedzi)", None, M.EYE), ("mówca stojący", F, 1.60), ("mówca na wózku", F, 1.20)):
-    cs = []
-    cs2 = []
+
+
+def nearest_head_offset(eye, T, row_front):
+    rf = row_front["rc"]
+    for i in range(1, 400):
+        t = i / 400
+        px, py = eye[0] + (T[0] - eye[0]) * t, eye[1] + (T[1] - eye[1]) * t
+        if abs(math.hypot(px - F[0], py - F[1]) - rf) < 0.03:
+            return min(math.hypot(px - hx, py - hy) for hx, hy in row_front["seats"] + [row_front["wc_pt"]])
+    return 9.0
+
+
+for tgt_name, tgt, zt in (("prezydium (siedzi, 1,20)", None, M.EYE), ("mówca stojący 1,60", F, 1.60), ("mówca na wózku 1,20", F, 1.20)):
+    cs, ok, n = [], 0, 0
     for k in range(1, 4):
         r = rows[k]
-        for (sx, sy) in r["seats"]:
-            T = tgt if tgt else min(PRES_PTS, key=lambda p: math.hypot(p[0] - sx, p[1] - sy))
-            c1 = c_value((sx, sy), r["z"] + M.EYE, T, zt, rows[k - 1])
-            if c1 is not None:
+        for (sx, sy) in r["seats"] + [r["wc_pt"]]:
+            for T in ([tgt] if tgt else PRES_PTS):
+                c1 = c_value((sx, sy), r["z"] + M.EYE, T, zt, rows[k - 1])
+                if c1 is None:
+                    continue
+                n += 1
                 cs.append(c1)
-            if k >= 2:
-                c2 = c_value((sx, sy), r["z"] + M.EYE, T, zt, rows[k - 2])
-                if c2 is not None:
-                    cs2.append(c2)
-        if tgt is None:
-            for T in PRES_PTS:
-                pass
-    worst[tgt_name] = (min(cs), min(cs2) if cs2 else None)
-    print(f"  cel {tgt_name}: C (rząd przed) min {min(cs) * 1000:.0f} mm; C (2 rzędy przed, stanowiska przestawione o pół modułu) "
-          f"min {min(cs2) * 1000:.0f} mm")
-print("Stanowiska kolejnych rzędów przesunięte o 0,5 modułu → oko radnego patrzy między głowami rzędu przed;"
-      " linia wolna, gdy C(2 rzędy) ≥ 60 mm.")
+                off = nearest_head_offset((sx, sy), T, rows[k - 1])
+                c2 = c_value((sx, sy), r["z"] + M.EYE, T, zt, rows[k - 2]) if k >= 2 else 1.0
+                if c1 >= 0.06 or (off >= 0.20 and (c2 is None or c2 >= 0.06)):
+                    ok += 1
+    worst[tgt_name] = (min(cs), ok, n)
+    print(f"  cel {tgt_name}: C nad rzędem przed min {min(cs) * 1000:.0f} mm; linii z C ≥ 60 mm lub przechodzących ≥ 0,20 m od"
+          f" głowy w rzędzie przed (i C ≥ 60 mm nad rzędem k−2): {ok}/{n}")
+print("Rzędy na różnych promieniach – stanowiska sąsiednich rzędów nie leżą na jednym promieniu (przestawienie)."
+      " Linie wzroku na prezydium od strony zach. przechodzą przez wolną płytę (studnię) przed rzędem 1.")
 
 # -------------------------------------------------------------------------------------------------
-hr("[S3] Galeria publiczności – linie wzroku w przekroju (oczy 1,20 m; balustrada 0,70 m + część pozioma 0,50 m)")
+hr("[S3] Galeria publiczności – linie wzroku w przekroju (oczy 1,20 m; balustrada szklana 1,10 m na cokole 0,20 m)")
 gal = M.gallery_seats()
-z_par = H_ANT + M.GAL_PARAPET_H            # wierzch balustrady = 4,30 nad posadzką sali
+z_curb = H_ANT + M.GAL_CURB_H              # wierzch cokołu pełnego = 3,80 nad posadzką sali
+z_glass = H_ANT + M.GAL_GLASS_H            # wierzch balustrady szklanej = 4,70
 heads = []                                 # głowy radnych (oko + 0,12)
 for r in rows:
     for p in r["seats"]:
         heads.append((p[0], p[1], r["z"] + M.EYE + 0.12))
     heads.append((r["wc_pt"][0], r["wc_pt"][1], r["z"] + M.EYE + 0.12))
+gal_heads = [(u, v, h + 0.12) for (u, v, h, t) in gal]
 
 
-def line_clear(eye, ze, T, zt):
-    """Zwraca: zapas nad balustradą [m], zapas nad głowami radnych [m] (min), C nad rzędami galerii przed [m]."""
-    ex, ey = eye
-    tx, ty = T
-    L = math.hypot(tx - ex, ty - ey)
-    # balustrada: przekrój linii z płaszczyzną u = GAL_LEDGE_U0 (początek części poziomej) i u = 22,00
-    res_par = 9.0
-    for ub in (M.GAL_LEDGE_U0, M.GAL_PARAPET_U[1]):
-        if tx != ex:
-            t = (ub - ex) / (tx - ex)
-            if 0 < t < 1:
-                res_par = min(res_par, ze + (zt - ze) * t - z_par)
-    # głowy radnych w pasie ±0,25 m od rzutu linii
+def h_at_u(eye, ze, T, zt, u):
+    t = (u - eye[0]) / (T[0] - eye[0])
+    return ze + (zt - ze) * t, t
+
+
+def sight(eye, ze, T, zt, front_row):
+    """zapas nad cokołem [m]; czy linia przechodzi przez szkło (3,80–4,70); C nad rzędem galerii przed [m];
+    odległość rzutu linii od najbliższej głowy rzędu przed [m]; zapas nad głowami radnych [m]."""
+    hc, _ = h_at_u(eye, ze, T, zt, M.GAL_PARAPET_U[1])
+    glass = z_curb < hc < z_glass
+    c = None
+    dmin = None
+    if front_row is not None:
+        ue_f, hf = front_row
+        hl, t = h_at_u(eye, ze, T, zt, ue_f)
+        c = hl - hf
+        vl = eye[1] + (T[1] - eye[1]) * t
+        dmin = min(abs(v - vl) for (u, v, h, tt) in gal if abs(u - ue_f) < 0.3)
     ln = LineString([eye, T])
+    L = ln.length
     res_h = 9.0
     for hx, hy, hz in heads:
-        p = Point(hx, hy)
-        if ln.distance(p) < 0.25:
-            t = ln.project(p) / L
-            if 0.02 < t < 0.98:
-                res_h = min(res_h, ze + (zt - ze) * t - hz)
-    return res_par, res_h
+        pt = Point(hx, hy)
+        if ln.distance(pt) < 0.25:
+            tt = ln.project(pt) / L
+            if 0.02 < tt < 0.98:
+                res_h = min(res_h, ze + (zt - ze) * tt - hz)
+    return hc - z_curb, glass, c, dmin, res_h
 
 
-gal_rows = {n: [(u, v, h, t) for (u, v, h, t) in gal if abs(u - ue) < 0.3] for n, ue, *_ in M.GAL_ROWS}
-summary = []
-for tgt_name, T, zt in (("prezydium (4 os.)", None, M.EYE), ("mówca przy mównicy (siedzi/wózek 1,20)", F, 1.20),
-                        ("mówca stojący 1,60", F, 1.60)):
-    min_par, min_head, min_c = 9, 9, 9
+front = {2: (M.GAL_ROWS[0][1], H_ANT + M.GAL_ROWS[0][2] + M.EYE)}
+targets = {"prezydium – przewodniczący(a) i wiceprzew. (2 środkowe miejsca)": (PRES_PTS[1:3], M.EYE),
+           "prezydium – miejsca skrajne": ([PRES_PTS[0], PRES_PTS[3]], M.EYE),
+           "mówca przy mównicy siedzący / na wózku 1,20": ([F], 1.20),
+           "mówca stojący 1,60": ([F], 1.60)}
+G3 = {}
+for nm, (TT, zt) in targets.items():
+    curb, cs, clear_between, n_tot, glass_n, hmin = 9, [], 0, 0, 0, 9
     for (u, v, h, t) in gal:
-        targets = PRES_PTS if T is None else [T]
-        for TT in targets:
-            ze = h - (0.05 if t == "wozek" else 0.0)
-            p, hh = line_clear((u, v), ze, TT, zt)
-            min_par, min_head = min(min_par, p), min(min_head, hh)
-            # C-value nad rzędem galerii przed: oko rzędu n−1 w tym samym v
-            for n, ue, dz, *_ in M.GAL_ROWS:
-                if abs(u - ue) < 0.3 and n > 1:
-                    ue_f = [x for (nn, x, *_) in M.GAL_ROWS if nn == n - 1][0]
-                    h_f = H_ANT + [d for (nn, x, d, *_) in M.GAL_ROWS if nn == n - 1][0] + M.EYE
-                    tt = (ue_f - u) / (TT[0] - u)
-                    min_c = min(min_c, ze + (zt - ze) * tt - h_f)
-    summary.append((tgt_name, min_par, min_head, min_c))
-    print(f"  cel: {tgt_name:40s} zapas nad balustradą min {min_par * 1000:5.0f} mm | nad głowami radnych min {min_head:5.2f} m"
-          f" | C nad rzędem galerii przed min {min_c * 1000:4.0f} mm  {'✔' if min_par > 0.06 and min_c >= 0.06 else '✗'}")
+        row = 1 if abs(u - M.GAL_ROWS[0][1]) < 0.3 else 2
+        if t == "wozek":
+            row = 1
+        for T in TT:
+            ze = h
+            cc, gl, c, dmin, hh = sight((u, v), ze, T, zt, front.get(row))
+            curb = min(curb, cc)
+            hmin = min(hmin, hh)
+            glass_n += gl
+            n_tot += 1
+            if c is not None:
+                cs.append(c)
+                if c >= 0.06 or dmin >= 0.20:
+                    clear_between += 1
+    n2 = len(cs)
+    G3[nm] = (curb, min(cs), sum(1 for c in cs if c >= 0.06), clear_between, n2, hmin)
+    print(f"  {nm}:")
+    print(f"     zapas nad cokołem 0,20 m min {curb * 1000:.0f} mm (linia przez szkło antyrefleksyjne w {glass_n}/{n_tot} przypadków);"
+          f" nad głowami radnych ≥ {hmin:.2f} m")
+    print(f"     rząd 2 nad rzędem 1: C min {min(cs) * 1000:.0f} mm, C ≥ 60 mm: {sum(1 for c in cs if c >= 0.06)}/{n2};"
+          f" C ≥ 60 mm lub linia między głowami (≥ 0,20 m od osi głowy): {clear_between}/{n2}")
 ang = []
 for (u, v, h, t) in gal:
-    vx, vy = u - PRES_C[0], v - PRES_C[1]
-    ang.append(math.degrees(math.atan2(abs(vx), vy)))
+    ang.append(math.degrees(math.atan2(abs(u - PRES_C[0]), v - PRES_C[1])))
 print(f"Kąt patrzenia na prezydium od osi stołu (0° = na wprost): {min(ang):.0f}°–{max(ang):.0f}° (mediana "
       f"{sorted(ang)[len(ang) // 2]:.0f}°); odległość {min(math.hypot(u - PRES_C[0], v - PRES_C[1]) for u, v, *_ in gal):.1f}–"
       f"{max(math.hypot(u - PRES_C[0], v - PRES_C[1]) for u, v, *_ in gal):.1f} m")
 angs = [math.degrees(math.atan2(abs(u - F[0]), v - F[1])) for u, v, *_ in gal]
 print(f"Kąt patrzenia na mówcę przy mównicy (mówca zwrócony na pn.): {min(angs):.0f}°–{max(angs):.0f}°")
-print("Porównanie: galeria pd. v1.0 – nad prezydium, mówca widoczny od góry (kąt ~180°, brak widoku twarzy);"
+print("Porównanie: galeria pd. v1.0 – nad prezydium (mówca widziany od góry/z tyłu, brak widoku twarzy);"
       " galeria zach. S-2 weryfikatora (u 15,65–21,0 × v 12,45–20,85) przy prezydium w F (29,5; 13,4):")
 s2 = [(u, v) for u in (17.0, 19.0, 20.5) for v in (13.5, 15.5, 17.5, 19.5)]
 a2 = [math.degrees(math.atan2(abs(u - 29.5), v - 13.4)) for u, v in s2]
-print(f"   kąt {min(a2):.0f}°–{max(a2):.0f}° (mediana {sorted(a2)[len(a2) // 2]:.0f}°) – miejsca S-3 skupione w pn. części galerii")
+print(f"   kąt {min(a2):.0f}°–{max(a2):.0f}° (mediana {sorted(a2)[len(a2) // 2]:.0f}°)")
 
-# -------------------------------------------------------------------------------------------------
 hr("[S4] Poufność głosowania – ekrany pulpitów a oczy publiczności (filtr prywatności 4-kierunkowy ±30°)")
 TILT = 15.0       # ekran odchylony od pionu o 15° (normalna 15° nad poziomem, w stronę radnego)
 th_min = 180
@@ -219,12 +244,16 @@ print("Dodatkowo: tryb głosowania tajnego w systemie (terminal nie wyświetla w
 # -------------------------------------------------------------------------------------------------
 hr("[S5] Światło z przodu – radni patrzą na prezydium; okna w polu widzenia ±60°?")
 win = []
-for i in range(0, 91, 3):                                       # szkło łuku (lamele 0,25 × 0,60 co 0,90 przed szkłem)
+ARC_GLASS_FROM = 10      # pierwsze 2,4 m łuku (φ 0°–10°, przy reżyserce) – szkło nieprzezierne za lamelami (spandrel)
+for i in range(ARC_GLASS_FROM, 91, 2):                          # szkło łuku (lamele 0,25 × 0,60 co 0,90 przed szkłem)
     a = math.radians(i)
     win.append(("łuk", (M.C_ARC[0] + 13.5 * math.cos(a), M.C_ARC[1] + 13.5 * math.sin(a))))
 for u in (22.3, 23.65, 25.0):                                   # okna pn. sali (u 22,0–26,0)
     win.append(("pn.", (u, 29.2)))
 mins = []
+worst_open = 0.0
+cnt_side = 0
+LAM_S, LAM_T, LAM_D = 0.90, 0.25, 0.60      # lamele promieniowe: rozstaw, grubość, głębokość
 for r in rows:
     for (sx, sy) in r["seats"] + [r["wc_pt"]]:
         vd = math.atan2(PRES_C[1] - sy, PRES_C[0] - sx)
@@ -233,9 +262,20 @@ for r in rows:
             wd = math.atan2(wy - sy, wx - sx)
             d = abs((math.degrees(wd - vd) + 180) % 360 - 180)
             mm = min(mm, d)
+            if d < 60 and nm == "łuk":
+                cnt_side += 1
+                rad = math.atan2(wy - M.C_ARC[1], wx - M.C_ARC[0])
+                alpha = abs((math.degrees(wd - rad) + 90) % 180 - 90)      # kąt linii wzroku do płaszczyzny lameli
+                op = max(0.0, 1 - LAM_T / LAM_S - (LAM_D / LAM_S) * math.tan(math.radians(alpha)))
+                worst_open = max(worst_open, op)
+            elif d < 60 and nm == "pn.":
+                worst_open = max(worst_open, 1.0)
         mins.append(mm)
-print(f"Radni (47 stanowisk): najmniejszy kąt między kierunkiem patrzenia na prezydium a oknem: {min(mins):.0f}° "
-      f"({'okna poza polem ±60°, światło z tyłu/boku ✔' if min(mins) >= 60 else '✗'}); okno wsch. sali – za reżyserką SWD.04")
+print(f"Radni (47 stanowisk): najmniejszy kąt między kierunkiem patrzenia na prezydium a szkłem: {min(mins):.1f}°"
+      f" → poza polem centralnym ±45° {'✔' if min(mins) >= 44.95 else '✗'}; w polu 45°–60° tylko wsch. odcinek łuku"
+      f" ({cnt_side} par stanowisko–punkt szkła); przez lamele promieniowe widać najwyżej {worst_open * 100:.0f} % szkła"
+      " (reszta przesłonięta), okna pn. poza polem 60°; okno wsch. sali – za reżyserką SWD.04;"
+      f" odcinek łuku φ 0°–{ARC_GLASS_FROM}° – szkło nieprzezierne za lamelami (z zewnątrz bez zmian)")
 mp = []
 for (px, py) in PRES_PTS:
     for nm, (wx, wy) in win:

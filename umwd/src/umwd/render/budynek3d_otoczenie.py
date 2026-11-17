@@ -566,10 +566,14 @@ def wozek(B, coll, zf):
     sp = B.spec
     cx, cy = sp.luk['srodek']
     R11 = sp.podcien_R
-    srodek = math.atan2(*reversed(np.subtract(sp.z_uv(40.0 - 14.0 + 14.0 * math.cos(math.radians(45)),
-                                                         15.7 + 14.0 * math.sin(math.radians(45))), (cx, cy))))
-    kier_n = np.array([math.cos(srodek), math.sin(srodek)])          # na zewnątrz łuku w osi przekątnej
-    p = np.array([cx, cy]) + kier_n * (R11 + 1.5)
+    # pozycja: wsch. część podcienia (kąt łuku 26° od elewacji wsch.), jazda wzdłuż podcienia ku drzwiom (45°)
+    kat = B.o.get('wozek_kat_luku', 26.0)
+    pk = np.subtract(sp.z_uv(26.0 + 14.0 * math.cos(math.radians(kat)), 15.7 + 14.0 * math.sin(math.radians(kat))),
+                     (cx, cy))
+    a_r = math.atan2(pk[1], pk[0])
+    kier_n = np.array([math.cos(a_r), math.sin(a_r)])
+    p = np.array([cx, cy]) + kier_n * (R11 + 1.4)
+    kier_ruchu = np.array([-kier_n[1], kier_n[0]])                   # stycznie, przeciwnie do zegara → ku osi 45°
     z = float(zf([p[0]], [p[1]])[0])
     mat = B.mat('ludzie')
     mm = B.mat('metal')
@@ -652,7 +656,7 @@ def wozek(B, coll, zf):
     me.materials.append(mat)
     os_ = bpy.data.objects.new('osoba_na_wozku', me)
     coll.objects.link(os_)
-    rot = math.atan2(-kier_n[1], -kier_n[0]) - math.pi / 2           # przodem do drzwi (+y lokalnie)
+    rot = math.atan2(kier_ruchu[1], kier_ruchu[0]) - math.pi / 2     # przodem w kierunku jazdy (+y lokalnie)
     for o in (ob, os_):
         o.location = (p[0], p[1], z + B.DZ)
         o.rotation_euler = (0, 0, rot)
@@ -697,6 +701,14 @@ def ludzie(B, ctx, coll, plac, zf):
     n_cel = B.o.get('ludzie_liczba', 34)
     x0, y0, x1, y1 = obszar.bounds
     poz = []
+    # postaci „scenariuszowe”: piesi z mostu ku Bramie Mostowej i wzdłuż podcienia (skala wejścia głównego)
+    cx, cy = B.spec.luk['srodek']
+    for kat, rr in ((12.0, 16.5), (20.0, 15.2), (21.0, 15.8), (38.0, 17.5), (55.0, 15.6), (64.0, 19.0), (80.0, 16.2)):
+        pk = np.subtract(B.spec.z_uv(26.0 + 14.0 * math.cos(math.radians(kat)), 15.7 + 14.0 * math.sin(math.radians(kat))),
+                         (cx, cy))
+        q = (cx + pk[0] / 14.0 * rr, cy + pk[1] / 14.0 * rr)
+        if obszar.buffer(0.5).contains(Point(q)) and all(math.dist(q, w) > 1.2 for w in poz):
+            poz.append(q)
     proby = 0
     while len(poz) < n_cel and proby < 6000:
         proby += 1

@@ -359,17 +359,16 @@ def poly_list_en(g, nd=3):
 # ------------------------------------------------------------------------------------------------
 # Galeria publiczności (+30,90): 3 rzędy równoległe do ściany sali (u 22,0), stopnie 0,45 m
 # ------------------------------------------------------------------------------------------------
-GAL_PARAPET_U = (21.70, 22.00)    # attyka/balustrada: część pionowa 0,70 m + pozioma 0,50 m (WT § 298 ust. 7)
-GAL_LEDGE_U0 = 21.50              # początek części poziomej (u 21,50–22,00) na wys. +0,70
-GAL_PARAPET_H = 0.70
+GAL_PARAPET_U = (21.90, 22.00)    # balustrada szklana 1,10 m (prześwit ≤ 0,12) na cokole 0,20 m – lico u 22,00
+GAL_CURB_H = 0.20                 # cokół pełny
+GAL_GLASS_H = 1.10                # wysokość balustrady (WT § 298 ust. 2)
 GAL_ROWS = [  # (nr, u oka, podest wzgl. +30,90, v0, v1, układ)
-    (1, 20.95, 0.00, 16.10, 22.45, "3 miejsca dla wózków 0,90 × 1,40 + 3 opiekunów + 4 miejsca"),
-    (2, 20.05, 0.45, 16.10, 22.45, "12 miejsc × 0,52 m"),
-    (3, 19.15, 0.90, 16.10, 22.45, "12 miejsc × 0,52 m"),
+    (1, 21.45, 0.00, 12.85, 22.45, "3 miejsca dla wózków 0,90 × 1,40 + 3 opiekunów + 10 miejsc; kolano przy balustradzie"),
+    (2, 20.60, 0.90, 12.85, 22.45, "18 miejsc × 0,52 m na podeście +0,90 (głęb. rzędu 0,85; 6 stopni 0,15 × 0,30 przy końcach)"),
 ]
 GAL_SEAT_W = 0.52
 GAL_WC_W = 0.90
-GAL_STEPS = box(18.70, 15.00, 21.50, 16.05)   # stopnie 0,15 m do rzędów 2–3 (przejście poprzeczne przy wejściu)
+GAL_STEPS = [box(18.35, 12.85, 20.15, 13.85), box(18.35, 21.45, 20.15, 22.45)]   # 6 × 0,15 / 0,30 na podest rzędu 2
 
 
 def gallery_seats():
@@ -378,6 +377,19 @@ def gallery_seats():
     for nr, ue, dz, v0, v1, _ in GAL_ROWS:
         h = (Z_ANT - Z_S) + dz + EYE
         if nr == 1:
+            v = v0 + 2.6                         # miejsca dla wózków w pn. części rzędu (lepszy widok na prezydium)
+            v = v1 - 3 * (GAL_WC_W + GAL_SEAT_W)
+            for i in range(3):                 # wózek + opiekun
+                out.append((ue - 0.25, v + GAL_WC_W / 2, h, "wozek"))
+                v += GAL_WC_W
+                out.append((ue, v + GAL_SEAT_W / 2, h, "opiekun"))
+                v += GAL_SEAT_W
+            v = v0
+            while v + GAL_SEAT_W <= v1 - 3 * (GAL_WC_W + GAL_SEAT_W) + 1e-9:
+                out.append((ue, v + GAL_SEAT_W / 2, h, "miejsce"))
+                v += GAL_SEAT_W
+            continue
+        if False:
             v = v0
             for i in range(3):                 # wózek + opiekun
                 out.append((ue - 0.25, v + GAL_WC_W / 2, h, "wozek"))

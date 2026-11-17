@@ -186,5 +186,17 @@
  "9bd494b3637c7f037f38": {
   "path": "umwd/raporty/img/etap2_P8_v2.png",
   "board": "spec_26"
+ },
+ "39967a5076f80f9b8c85": {
+  "path": "umwd/raporty/img/W1_F17A_test.jpg",
+  "board": "spec_27"
+ },
+ "844dbdf8b1fdefbda6ab": {
+  "path": "umwd/raporty/img/W2_F17B_test.jpg",
+  "board": "spec_27"
+ },
+ "bed0d2b52e6fe7e60ece": {
+  "path": "umwd/raporty/img/budynek_test_W3_v3.jpg",
+  "board": "spec_27"
  }
 }
