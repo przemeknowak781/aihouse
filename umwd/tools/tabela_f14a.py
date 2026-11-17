@@ -26,8 +26,11 @@ Wynik (wyłącznie): build/tabele/F.14.A.xlsx – wzór Organizatora „F.14.A_I
     00_materialy/_rozpak/4.Zalaczniki_Formalne_F.03-F.16_edytowalne/F.14.A_… .xlsx – wzór
 Metoda: roboty = pozycje modelu (mid) + pozycje spoza modelu; koszty stałe budowy = KS × roboty; rezerwa na nieprzewidziane
 = REZ × (roboty + KS) – tak jak w _rewizja_koszt.total() i koncepcja.json["bilans"]. Wartości grup zaokrąglone do 1 000 zł
-(etap studialny – wartości szacunkowe). Kontrole: suma = bilans.koszt_mln_netto (±0,01 mln zł), roboty + KS =
-bilans.koszt_roboty_KS_mln, rezerwa = bilans.rezerwa_mln, suma ≤ 150 mln zł netto, koszt usługi ≤ 5,4 % × 150 mln zł.
+(etap studialny – wartości szacunkowe). Kontrole: suma w mln zł z 2 miejscami po przecinku = bilans.koszt_mln_netto
+(ta sama kwota, którą podaje opis), tak samo roboty + KS = bilans.koszt_roboty_KS_mln i rezerwa = bilans.rezerwa_mln;
+suma ≤ 150 mln zł netto; koszt usługi ≤ 5,4 % planowanego kosztu realizacji (R-051). Gdy kontrola zgodności z bilansem nie
+przechodzi (np. skrypty kosztów zmienione, a koncepcja.json jeszcze nie), pliki NIE są nadpisywane (kod 1) – chyba że --wymus.
+Pozycje spoza modelu o wartości 0 zł (np. szyb C1 – usunięty w v1.2) nie są wymieniane w kolumnie J.
 Podział na 20 grup wzoru F.14.A: grupy 1–16 jak w modelu F.14.B; 17 – woda szara i odzysk ciepła z wody szarej;
 18 – system bezemisyjny (gruntowe pompy ciepła z polem sond, ścianami i palami energetycznymi, PV dachowe, BIPV);
 19 – magazyny energii (elektrycznej, bufory ciepła); 20 – MDS/budowla ochronna, stackery, zapora, zamurowanie okien
@@ -71,7 +74,7 @@ LIMIT_KOSZTU = 150e6            # Reg. R.III ust. 3 pkt 1; Wyj. 20 odp. 74 – n
 LIMIT_USLUGI_PROC = 0.054       # Reg. R.III ust. 4 – koszt usługi ≤ 5,4 % planowanego kosztu realizacji netto (R-051)
 VAT = 0.23                      # stawka podstawowa; wzór F.14.A nie podaje stawek – przyjęto 23 % dla wszystkich grup
 ZAOKR = 1000.0                  # zaokrąglenie wartości grup (etap studialny)
-TOL_MLN = 0.01                  # tolerancja zgodności z koncepcja.json["bilans"] [mln zł]
+TOL_MLN = 0.005                 # zgodność z koncepcja.json["bilans"] [mln zł] – kwota w mln zł z 2 miejscami jak w bilansie
 NBSP = " "
 
 GRUPY = {  # nr wzoru → krótki opis składu (kolumna pomocnicza J i PDF nie zmieniają nazw wzoru)
@@ -83,7 +86,7 @@ GRUPY = {  # nr wzoru → krótki opis składu (kolumna pomocnicza J i PDF nie z
     6: "granit, ceramika, tynk dziedzińcowy, lamele korony, ościeża (bez BIPV – gr. 18)",
     7: "woda, kanalizacja, c.o., wentylacja z odzyskiem, chłód (TABS), rozdział ciepła z pomp ciepła, dry-cooler",
     8: "instalacje elektryczne, serwerownia, BMS/EMS, agregat HVO, UPS (bez magazynu energii – gr. 19)",
-    9: "teletechnika, SSP/DSO, AV sali obrad i konferencji, oddymianie klatek",
+    9: "teletechnika, SSP/DSO, AV sali obrad i konferencji, ochrona klatek i przedsionków przed zadymieniem",
     10: "dźwigi osobowe (w tym ratowniczy) i osobowo-towarowy",
     11: "ścianki, okładziny, malowanie, wyposażenie stałe, sala Sejmiku, lapidarium",
     12: "sufity (biura z odsłoniętym stropem TABS i wyspami akustycznymi)",
@@ -100,7 +103,7 @@ POZA_GRUPY = [  # pozycje spoza modelu (opis z _rewizja_koszt.py / _v12_koszt.py
     (r"budowla ochronna|ukrycie", 20), (r"szyb wyjścia zapasowego|MDS", 20), (r"stacker", 20),
     (r"zapora przeciwpowodziowa", 20), (r"lapidarium", 11), (r"ścianki szklane|SZKLO", 11), (r"TABS|sufit", 12),
     (r"^GPC", 18), (r"dry-cooler", 7), (r"agregat", 8), (r"ościeża", 6), (r"iniekcja|ściany szczelinowej", 1),
-    (r"pale|uskok|rampy|trzon|klatki", 3), (r"szyb C1", 10), (r"ogródków|ścieżki ogrodu", 15),
+    (r"pale|uskok|rampy|trzon|klatki", 3), (r"szyb C1", 10), (r"ogródków|ścieżki ogrodu|pas od bulwaru|drzew", 15),
 ]
 
 
@@ -222,6 +225,8 @@ def compute():
         groups[g]["model"].append(str(lp))
     unmapped = []
     for opis, v in poza.items():
+        if abs(v) < 1e-6:                       # pozycja zerowa (np. szyb C1 usunięty w v1.2) – nie wymieniać w składzie grupy
+            continue
         g, ok = grupa_poza(opis)
         if not ok:
             unmapped.append(opis[:60])
@@ -249,20 +254,26 @@ def compute():
     totF = round(sum(g["F"] for g in groups.values()), 2)
     totH = round(sum(g["H"] for g in groups.values()), 2)
     fee = koszt_dokumentacji(P_KMD.read_text(encoding="utf-8")) if P_KMD.exists() else None
+    def zgodne(x_zl, b_mln):                    # kwota widoczna w mln zł (2 miejsca) = wartość bilansu (to, co podaje opis)
+        return round(x_zl / 1e6, 2) == round(b_mln, 2) and abs(x_zl / 1e6 - b_mln) <= TOL_MLN
+
     checks = [
-        ("suma = bilans.koszt_mln_netto", abs(totF / 1e6 - bil["koszt_mln_netto"]) <= TOL_MLN, f"{totF / 1e6:.4f} vs {bil['koszt_mln_netto']}"),
-        ("roboty + KS = bilans.koszt_roboty_KS_mln", abs((works + ks) / 1e6 - bil["koszt_roboty_KS_mln"]) <= TOL_MLN,
+        ("suma = bilans.koszt_mln_netto (mln zł, 2 miejsca)", zgodne(totF, bil["koszt_mln_netto"]),
+         f"{totF / 1e6:.4f} → {round(totF / 1e6, 2):.2f} vs {bil['koszt_mln_netto']}"),
+        ("roboty + KS = bilans.koszt_roboty_KS_mln", zgodne(works + ks, bil["koszt_roboty_KS_mln"]),
          f"{(works + ks) / 1e6:.4f} vs {bil['koszt_roboty_KS_mln']}"),
-        ("rezerwa = bilans.rezerwa_mln", abs(rez / 1e6 - bil["rezerwa_mln"]) <= TOL_MLN, f"{rez / 1e6:.4f} vs {bil['rezerwa_mln']}"),
+        ("rezerwa = bilans.rezerwa_mln", zgodne(rez, bil["rezerwa_mln"]), f"{rez / 1e6:.4f} vs {bil['rezerwa_mln']}"),
         ("stawka rezerwy = bilans.rezerwa_proc", abs(rez_rate * 100 - bil["rezerwa_proc"]) < 1e-9, f"{rez_rate:.2%} vs {bil['rezerwa_proc']} %"),
         ("suma ≤ limit 150 mln zł netto", totF <= LIMIT_KOSZTU, f"zapas {(LIMIT_KOSZTU - totF) / 1e6:.2f} mln"),
         ("koszt usługi podany", fee is not None, "koncepcja_wybrana.md" if fee else "brak"),
-        ("koszt usługi ≤ 5,4 % × 150 mln", fee is not None and fee <= LIMIT_USLUGI_PROC * LIMIT_KOSZTU + 0.005,
-         f"{(fee or 0) / 1e6:.2f} ≤ {LIMIT_USLUGI_PROC * LIMIT_KOSZTU / 1e6:.2f} mln"),
+        ("koszt usługi ≤ 5,4 % planowanego kosztu realizacji (R-051)",
+         fee is not None and fee <= LIMIT_USLUGI_PROC * min(totF, LIMIT_KOSZTU) + 0.005,
+         f"{(fee or 0) / 1e6:.2f} ≤ {LIMIT_USLUGI_PROC * min(totF, LIMIT_KOSZTU) / 1e6:.2f} mln"),
     ]
+    zgodnosc = all(ok for n, ok, _ in checks[:3])
     return dict(kon=kon, bil=bil, f_in=f_in, groups=groups, works_model=works_model, poza=poza, works=works, ks=ks, rez=rez,
                 total_exact=total_exact, totF=totF, totH=totH, fee=fee, fee_b=round(fee * (1 + VAT), 2) if fee else None,
-                checks=checks, issues=issues, info=[f"wejście modelu: {f_in.relative_to(ROOT)}", info_poza],
+                checks=checks, zgodnosc=zgodnosc, issues=issues, info=[f"wejście modelu: {f_in.relative_to(ROOT)}", info_poza],
                 ks_rate=ks_rate, rez_rate=rez_rate)
 
 
@@ -346,8 +357,11 @@ def build_xlsx(R):
     fmt_zl = ws.cell(T["suma"], 6).number_format
     for g, rr in T["grupy"].items():
         G = R["groups"][g]
-        if ws.cell(rr, 5).value:                          # j.m. „kpl” we wzorze → ilość 1
-            ws.cell(rr, 4).value = 1
+        if not ws.cell(rr, 5).value:                      # wzór bez j.m. w gr. 18–19 → „kpl” jak w pozostałych grupach
+            ws.cell(rr, 5).value = "kpl"
+            ws.cell(rr, 5)._style = copy(ws.cell(T["grupy"][1], 5)._style)
+            ws.cell(rr, 4)._style = copy(ws.cell(T["grupy"][1], 4)._style)
+        ws.cell(rr, 4).value = 1                          # j.m. „kpl” → ilość 1
         ws.cell(rr, 6).value = G["F"]
         ws.cell(rr, 7).value = VAT
         ws.cell(rr, 7).number_format = "0%"
@@ -456,8 +470,8 @@ def render_html(R, X):
     for g in range(1, 21):
         G = R["groups"][g]
         jm = X["jm"][g]
-        p.append(f'<tr><td class="lp">{g}</td><td>{e(X["names"][g])}</td><td class="c">{"1" if jm else ""}</td>'
-                 f'<td class="c">{e(jm)}</td><td class="r">{zl(G["F"])}</td><td class="c">{int(round(VAT * 100))}{NBSP}%</td>'
+        p.append(f'<tr><td class="lp">{g}</td><td>{e(X["names"][g])}</td><td class="c">1</td>'
+                 f'<td class="c">{e(jm or "kpl")}</td><td class="r">{zl(G["F"])}</td><td class="c">{int(round(VAT * 100))}{NBSP}%</td>'
                  f'<td class="r">{zl(G["H"])}</td></tr>')
     a, b = X["texts"]["inne"]
     p.append(f'<tr class="inne"><td class="lp">{e(a)}</td><td>{e(b)}</td><td></td><td></td><td></td><td></td><td></td></tr>')
@@ -534,6 +548,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--bez-pdf", action="store_true")
     ap.add_argument("--json", action="store_true", help="wydruk grup i kontroli jako JSON na stdout")
+    ap.add_argument("--wymus", action="store_true", help="zapisz pliki mimo niezgodności z koncepcja.json[\"bilans\"]")
     a = ap.parse_args(argv)
     OUT.mkdir(parents=True, exist_ok=True)
     R = compute()
@@ -541,6 +556,12 @@ def main(argv=None):
         log("  " + i)
     log(f"  roboty: model {R['works_model'] / 1e6:.3f} + spoza modelu {sum(R['poza'].values()) / 1e6:.3f} = {R['works'] / 1e6:.3f} mln; "
         f"KS {R['ks_rate']:.0%} {R['ks'] / 1e6:.3f}; rezerwa {R['rez_rate']:.0%} {R['rez'] / 1e6:.3f}; razem {R['total_exact'] / 1e6:.4f} mln")
+    if not R["zgodnosc"] and not a.wymus:
+        for name, ok, det in R["checks"][:3]:
+            log(f"  {'✔' if ok else '✖'} {name}: {det}")
+        log("✖ suma F.14.A ≠ koncepcja.json[\"bilans\"] – pliki build/tabele/F.14.A.* NIE zostały nadpisane (najpierw zaktualizować "
+            "bilans koncepcji albo skrypty kosztów; --wymus zapisuje mimo to)")
+        return 1
     X = build_xlsx(R)
     log(f"  {X['path'].relative_to(ROOT)}: suma netto {pl(R['totF'])} zł, brutto {pl(R['totH'])} zł; usługa netto "
         f"{pl(R['fee'] or 0)} zł, brutto {pl(R['fee_b'] or 0)} zł")

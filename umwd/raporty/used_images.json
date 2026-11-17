@@ -302,5 +302,17 @@
  "3b734877b8db3af1eb0e": {
   "path": "umwd/raporty/img/E_zlota-godzina-3.jpg",
   "board": "spec_35"
+ },
+ "2495ff4c0aa2eadc4fcf": {
+  "path": "umwd/raporty/img/opis_etap2_s5.png",
+  "board": "spec_36"
+ },
+ "830782f2d27d0cc6eebd": {
+  "path": "umwd/raporty/img/opis_etap1_s1.png",
+  "board": "spec_36"
+ },
+ "3c700af00269e5aa198f": {
+  "path": "umwd/raporty/img/F14A_p1.png",
+  "board": "spec_36"
  }
 }

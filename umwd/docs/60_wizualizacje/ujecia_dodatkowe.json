@@ -583,7 +583,7 @@
   },
   {
    "id": "dron-4",
-   "opis": "DRON 4 – ogród i dziedziniec od pd.-zach.: dron 115 m nad terenem (Z 115) nad kwartałem pd. od Mazowieckiej 19, oś az 34°, pochylenie 38°. Skrzydło z dachem BIPV prowadzi od dołu kadru (Maz. 19 z czerwonym dachem) do wieży; wieża z oświetloną elewacją pd. (lamele korony) w górnej części kadru, ogród z jesiennymi koronami między skrzydłem a Wybrzeżem Słowackiego 5, w tle portal i łańcuchy Mostu Grunwaldzkiego (lewa góra) oraz Odra (prawa góra); horyzont poza kadrem. 8.10 12:30 (az 177°, el 33°) – słońce z tyłu po prawej, elewacja pd. w pełnym świetle, krótkie cienie (ogród możliwie mało zacieniony przez kamienice od pd.).",
+   "opis": "DRON 4 – ogród i dziedziniec od pd.-zach.: dron 115 m nad terenem (Z 115) nad kwartałem pd. od Mazowieckiej 19, oś az 32,6°, pochylenie 36,1°, 40 mm. Skrzydło z dachem BIPV (szkło z odbiciem nieba) prowadzi od dołu kadru (Maz. 19 z czerwonym dachem) do wieży; wieża z oświetloną elewacją pd. i lamelami korony prawie w środku kadru (x 0,30–0,62), ogród z jesiennymi koronami i dziedziniec między skrzydłem a Wybrzeżem Słowackiego 5 po prawej od skrzydła, plac i trawniki po lewej; w tle portal i łańcuchy Mostu Grunwaldzkiego (lewa góra) oraz Odra (prawa góra), dalszy plan w lekkim zamgleniu; horyzont poza kadrem. 8.10 12:30 (az 177°, el 33°) – słońce z tyłu po prawej, elewacja pd. w pełnym świetle, najkrótsze cienie kamienic w ogrodzie.",
    "cam": {
     "e": 11.42,
     "n": -75.54,
@@ -591,19 +591,54 @@
     "z_od": "scena"
    },
    "target": {
-    "e": 88.0,
-    "n": 38.0,
+    "e": 90.5,
+    "n": 48.0,
     "z": 8.0,
     "z_od": "scena"
    },
-   "lens_mm": 35,
+   "lens_mm": 40,
    "shift_x": 0.0,
    "shift_y": 0.0,
    "aspect": "3:2",
    "czas": "2026-10-08 12:30 CEST",
    "ludzie": true,
    "preset": "lot",
-   "uwaga_render": "Podgląd renderowany przez render/ujecia_poprawki_kontekstu.py (te same argumenty co ujecia_dodatkowe.py) – z drona widać Odrę: nakładka usuwa ścianę 3,8 m w nurcie wzdłuż granicy ramki (e 152,5 / n 148,6) i fałszywą groblę pod Mostem Grunwaldzkim. Po poprawce context.zbuduj_dalsze można renderować wprost."
+   "uwaga_render": "Render przez render/final_dron_4.py (te same argumenty co ujecia_dodatkowe.py; łańcuch: ujecia_finalne_korekty.py → ujecia_poprawki_kontekstu.py → ujecia_dodatkowe.py). Nakładka: warunki wspólne zestawu (lamele korony łuku v1.1, sitodruk 30 %, ciepłe oprawy ×0,12 za dnia), materiał BIPV z szkłem osłonowym (coat IOR 1,52, chropowatość 0,05) i ogniwami ciemnogranatowymi, zamglenie dalszego planu z passu Mist (post_przed.mgla.tryb = 'zamglenie'), pomiar barw posesji M1–M4 i dachu BIPV w gotowym obrazie (raport kontroli: korekty.ceramika_posesji).",
+   "tytul": "Ogród Województwa i dziedziniec z drona od pd.-zach.",
+   "podpis": "Ogród Województwa, dziedziniec i Skrzydło Mazowieckie z dachem fotowoltaicznym, w głębi wieża Sejmiku, Most Grunwaldzki i Odra; widok z wysokości ok. 115 m od pd.-zach., południe 8 października",
+   "post_przed": {
+    "mgla": {
+     "tryb": "zamglenie",
+     "start": 200,
+     "glebokosc": 220,
+     "sila": 0.3,
+     "wykladnik": 1.0,
+     "percentyl": 80,
+     "barwa": [
+      0.8,
+      0.87,
+      0.97
+     ],
+     "desat": 0.15
+    }
+   },
+   "korekty_jury": {
+    "wdrozone": [
+     "kamera bez zmian (11,42; −75,54; Z 115) – J1, J2 (większość); przesunięcie o 12 m na wsch. (J3) nie wdrożone: z tego stanowiska oś obraca się w lewo (az 29°), więc bryła Muzeum w lewym górnym rogu rośnie (4 % kadru), a płaska ortofotomapa zostaje 5 %",
+     "cel (88; 38; 8) → (90,5; 48; 8), oś az 34,0° → 32,6°, pochylenie 38,0° → 36,1° – kompromis celów J2 (89,5; 49,4) i J3 (92; 48), wieża bliżej środka (J2, J3): x 0,30–0,62 (śr. 0,456; było 0,30–0,58, śr. 0,439), attyka y 0,86 ≤ 0,88 (J1), portal pd. mostu w kadrze (klucz łuku y ≈ 0,88, hełmy ≈ 0,96 – J2)",
+     "obiektyw 35 → 40 mm (J2): wieża większa o ok. 14 %, budynek 16 % kadru (było 13 %); przy 35 mm żaden z celów J1/J3 nie usuwa płaskiej ortofotomapy (rachunek: J1 5,6 %, J3 5,3 %)",
+     "płaska ortofotomapa (J1, J2, J3): z lewego dolnego rogu znika (2,0 % → 0,4 % kadru – skrawek w samym narożniku), łącznie 5,6 % → 2,9 % (< 3 % – J3); reszta to drugi brzeg Odry w prawym górnym rogu (pod zamgleniem); poza światem 0 %",
+     "pora 8.10 12:30 bez zmian (J1, J3 – większość): elewacja pd. wieży frontalnie w słońcu (cos 0,82), najkrótsze cienie kamienic w ogrodzie",
+     "lekka mgła dla dalszego planu (J3): zamglenie z passu Mist – od 200 m (wieża 190 m – bez zmian) do 30 % barwy zamglenia przy 420 m; portal (245 m) ok. 6 %, Muzeum i drugi brzeg (300–360 m) 14–22 %, niebieskawa barwa o luminancji 80. percentyla kadru, −15 % nasycenia; niebo bez zmian",
+     "dach BIPV (J1): szkło osłonowe (coat IOR 1,52, chropowatość 0,05) – odbicie nieba wg Fresnela, ogniwa ciemnogranatowe zamiast czarnych, drobne różnice tonu i nachylenia modułów; w gotowym obrazie dach ma barwę ciemnogranatową z odbiciem nieba zamiast czarnej płyty",
+     "kontrola NCS → sRGB i odcieni posesji (J1): konwersja (algorytm w3color, ±5 jednostek) daje L* 88,3 / 89,9 / 83,6 / 85,6 (M1–M4), ΔE76 sąsiednich posesji 7,5 / 10,0 / 7,7 – barwy są rozróżnialne i NIE są zmieniane (decyzja projektowa). Zlewanie się z drona wynika z oświetlenia: lico uliczne skrzydła (normalna 282°) o 12:30 jest w cieniu (cos −0,21), widziane pod kątem 69° i zacienione od nieba pierzeją naprzeciw – pomiar w obrazie: ΔE ≈ 3 (patrz render_final.ceramika_posesji)"
+    ],
+    "nie_wdrozone": [
+     "pora 12:30 → 13:10 (J2): o 13:10 słońce ma az 189° (nie 192°), a lico zach. skrzydła (normalna 282,4°) jest nadal w cieniu (cos −0,04) – światło ślizgowe zaczyna się ok. 13:20, czytelne (cos ≥ 0,15) dopiero ok. 14:00, przy dłuższych cieniach w ogrodzie; większość (J1, J3) za 12:30",
+     "bryła Muzeum Narodowego całkiem poza kadrem (J1, J2): sprawdzone geometrycznie – przy celu J1 (95; 38) bryła rośnie (4,8 % kadru), przy celu J2 zostaje skrawek (ok. 1,5 %); usunięcie wymagałoby obrotu osi do ok. 37,6° (wieża przesunęłaby się na x 0,21–0,53, wbrew J2/J3) albo dłuższego obiektywu (portal mostu wychodzi górą). Zostaje skrawek przy lewej krawędzi (x ≤ 0,1), cofnięty zamgleniem (J3)",
+     "przesunięcie kamery o 12 m na wsch. (J3) – patrz wyżej; kierunek odwrotny do celu (więcej Muzeum)"
+    ]
+   }
   },
   {
    "id": "dron-5",

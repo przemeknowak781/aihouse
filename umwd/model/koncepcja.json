@@ -26,8 +26,93 @@
    "model/site.json"
   ],
   "data_wersji": "17.11.2026",
-  "rejestr_poprawek": "docs/20_koncepcja/rejestr_poprawek_v1_1.md – sekcje v1.0→v1.1 i „v1.2 – scalenie S-3” (dowody: docs/20_koncepcja/_rewizja_*.py, _s2_*.py, _v12_*.py)",
-  "kondygnacja_S_v1_2": "kondygnacja_sejmiku = S-3 „hol z galerią” (docs/20_koncepcja/kondygnacja_S2.md, kondygnacja_S2.json, skrypty _s2_*.py) scalona w v1.2; trzony A, B, C wg poprawki I5 (_v12_trzony.py)"
+  "rejestr_poprawek": "docs/20_koncepcja/rejestr_poprawek_v1_1.md – sekcje v1.0→v1.1, „v1.2 – scalenie S-3” i „v1.2b – decyzje po scaleniu” (dowody: docs/20_koncepcja/_rewizja_*.py, _s2_*.py, _v12_*.py, _v12b_decyzje.py)",
+  "kondygnacja_S_v1_2": "kondygnacja_sejmiku = S-3 „hol z galerią” (docs/20_koncepcja/kondygnacja_S2.md, kondygnacja_S2.json, skrypty _s2_*.py) scalona w v1.2; trzony A, B, C wg poprawki I5 (_v12_trzony.py)",
+  "wersja_v12b": "v1.2b – decyzje po scaleniu S-3 (17.11.2026): M.13 pkt 6 (wnęki pochwytów), MDS 592 os. na −1 z szybem SZ-MDS, oś Hali ze strefą wolną, galeria 20 + 3 zgodna, elewacja Sg, ETICS od dziedzińca, wartości rysunkowe, drzewa w pasie od bulwaru, odstępstwa M.13 (_v12b_decyzje.py)",
+  "odstepstwa": [
+   {
+    "id": "O1",
+    "element": "holy windowe na kondygnacjach biurowych 1–6 (i P2 na parterze)",
+    "wartosc": "A1/A2 – korytarz pn. 2,15 m; P1/P2 – korytarz wsch. 2,20 m (kond. 1–6); P2 na P – 2,20 m do ściany DK II",
+    "wymaganie": "M.13 s. 170 pkt 6: ≥ 3,6 m (miejsce oczekiwania 1,6 × 1,6 + trasa 2,0 m)",
+    "przepisy": "WT § 195: ≥ 1,6 m ✔; § 242 (korytarz ≥ 1,4 m) ✔",
+    "uzasadnienie": "trzony A i B stoją w strefie środkowej wieży, a naprzeciw drzwi dźwigów leżą pokoje elewacyjne (głębokość 6,10 m); hol 3,6 m zabrałby 2 jednostki elewacyjne na każdej z 6 kondygnacji (12 z 218 przy zerowej rezerwie – 187 pokoi programu niewykonalne) albo wymagał powiększenia wieży poza obszar A MPZP. Kompensacja: na poziomach publicznych (P – łącznik ≥ 3,6 m przed A1/A2, hol Wejścia Obywatelskiego przed P1; S i +30,90 – 3,60–3,75 m) wymóg spełniony; na kond. 1–6 korytarz 2,15–2,20 m ≥ trasa wolna 2,0 m, pole manewrowe 1,5 × 1,5 m bez drzwi otwieranych w hol, panele przyzywowe po obu stronach, sygnalizacja kierunku (M.13 pkt 10)"
+   },
+   {
+    "id": "O2",
+    "element": "garaż −1/−2: przedsionki dźwigów",
+    "wartosc": "−2: A1/A2 – przedsionek ppoż. 7,20 × 1,75 m; −1 i −2: P2 (drzwi zach.) – przedsionek B 3,40 m od drzwi",
+    "wymaganie": "M.13 s. 170 pkt 6: ≥ 3,6 m",
+    "przepisy": "WT § 195 ✔; przedsionki ppoż. EI 60 z nadciśnieniem (garaż)",
+    "uzasadnienie": "na −2 (rezerwa ukrycia, bez MDS) pogłębienie do 3,6 m odebrałoby ≈ 15,8 m² strefie filtrowentylacji i WC ukrycia (dostępne 50.0 m², wymagane 45 – po pogłębieniu ≈ 34.2); w przedsionku pole manewrowe 1,5 × 1,5 m ✔, stanowiska OzN przy trzonach A i B; przedsionek B – 3,40 m (−0,20) wynika z szerokości klatki B w obrysie trzonu (ściana trzonu ciągła od fundamentu); na −1 (MDS) przedsionek A1/A2 3,60 m ✔ (U8)"
+   }
+  ],
+  "odstepstwa_usuniete_v12b": [
+   {
+    "id": "U1",
+    "element": "klatki A, B, C – bieg między poręczami",
+    "bylo": "≈ 1,46 m",
+    "jest": "1.61 m",
+    "jak": "pochwyty we wnękach ścian + balustrada środkowa duszy ([D1])",
+    "M13": "Schody pkt 4.1 i 6"
+   },
+   {
+    "id": "U2",
+    "element": "kuluar S przy trzonie A",
+    "bylo": "1,75 m na 7,20 m",
+    "jest": "1.80 m",
+    "jak": "ściana kuluaru od pomieszczeń pd. 0,15 m zamiast 0,20 (pomieszczenia bez zmian)",
+    "M13": "Korytarze pkt 1 (1,8 m)"
+   },
+   {
+    "id": "U3",
+    "element": "łącznik KW.S.03 (S)",
+    "bylo": "1,40 m na 8,55 m",
+    "jest": "1,40 m z polem mijania 1,80 × 2,00 m; przewężenia 3.30 i 3.25 m ≤ 5 m",
+    "jak": "wnęka 0,40 × 2,00 m kosztem PHS.05a (−0,80 m² PU) przed drzwiami przedsionka A",
+    "M13": "Korytarze pkt 2.2 i 3"
+   },
+   {
+    "id": "U4",
+    "element": "dojście do SWD.11b (KW.S.02)",
+    "bylo": "1,60 m (traktowane jako odstępstwo)",
+    "jest": "1,60 × 2.60 m – przewężenie miejscowe ≤ 5 m przy kuluarze 2,25 m (pole mijania)",
+    "jak": "wykładnia M.13 – zgodne",
+    "M13": "Korytarze pkt 2.2"
+   },
+   {
+    "id": "U5",
+    "element": "przystanek P2 na S (hol 1,60 m)",
+    "bylo": "przystanek służbowy S*",
+    "jest": "P2: P, 1–6, ANT (drzwi wsch.) oraz −2, −1 (drzwi zach.) – bez S",
+    "jak": "rezygnacja z przystanku S* – dostawy baru dźwigami A1/A2 (i R) do holu +30,90",
+    "M13": "Wewn. urządzenia transportu pionowego pkt 6"
+   },
+   {
+    "id": "U6",
+    "element": "korytarz skrzydła (kond. 1–4)",
+    "bylo": "1,70 m",
+    "jest": "1,82 m",
+    "jak": "ściana od dziedzińca ETICS 0,40 m (zamiast 0,47) i ściany korytarza GK 0,075 m – pokoje 24,02 m² bez zmian ([D6])",
+    "M13": "Dostępność pomieszczeń (s. 173: trasa ≥ 1,8 m)"
+   },
+   {
+    "id": "U7",
+    "element": "stopnie galerii (6 stopni z foyer na podest +0,90)",
+    "bylo": "1,00 m",
+    "jest": "1,40 m (w świetle poręczy 1,22 m)",
+    "jak": "poszerzenie stopni (_s2_model.GAL_STEPS)",
+    "M13": "Schody pkt 4.3 (≥ 1,2 m)"
+   },
+   {
+    "id": "U8",
+    "element": "−1 (MDS): przedsionek dźwigów A1/A2",
+    "bylo": "7,20 × 1,75 m",
+    "jest": "7,20 × 3,60 m (v 20,85–24,45)",
+    "jak": "sanitariaty MDS 30 m² za przedsionkiem (dostępne 36.7 m²), pralnia MDS 10 m² przy centrali S, porządkowe 8 m² w M1 (_rewizja_parking.py); stanowiska bez zmian (kolizja 0)",
+    "M13": "Wewn. urządzenia transportu pionowego pkt 6"
+   }
+  ]
  },
  "teren": {
   "wieza_2m": [
@@ -704,8 +789,13 @@
    "glebokosc_m": 1.5
   },
   "wneka_wejscia_ogrodowego": {
-   "elewacja": "pd. wieży, u 8,6–11,4",
-   "glebokosc_m": 1.5
+   "elewacja": "pd. wieży, u 10,12–12,92",
+   "glebokosc_m": 1.5,
+   "drzwi_uv": [
+    11.519,
+    1.5
+   ],
+   "uwaga": "v1.2b: przesunięta z u 8,6–11,4 o +1.52 m – drzwi ogrodowe w osi Hali"
   },
   "oscieza": {
    "wieza_m": 0.6,
@@ -931,11 +1021,11 @@
    ],
    "zakres": "−2…S + antresola +30,90",
    "sklad": [
-    "klatka A obudowana REI 60, 3,40 × 5,80 m w świetle: 2 biegi 1,60 m (M.13), stopnie ≤ 17,5 × 28 cm, spoczniki ≥ 1,50 m; kond. −1/P i P/1 – 3 biegi (spocznik kondygnacyjny parteru na końcu pn.); do antresoli +30,90",
-    "przedsionek ppoż. A 3,10 × 5,80 m z MOE 1,5 × 1,5 m (poza torem 1,2 m i polem otwierania skrzydeł – _s2_ewakuacja.py [E6]), krzesłem ewakuacyjnym i interkomem, nadciśnienie; drzwi pd. (kuluar S, korytarz publiczny +30,90, hol strefy środkowej 1–6, Hala P), wsch. (łącznik S, galeria +30,90, garaż); przedsionek A' 2,50 × 3,00 m (antresola radnych) przy ścianie zach. klatki, drzwi do klatki 1,0 m przy spoczniku",
+    "klatka A obudowana REI 60, 3,40 × 5,80 m w świetle: 2 biegi 1,60 m, stopnie ≤ 17,5 × 28 cm, spoczniki ≥ 1,50 m; kond. −1/P i P/1 – 3 biegi (spocznik kondygnacyjny parteru na końcu pn.); do antresoli +30,90; v1.2b: pochwyty Ø 40 przyścienne we wnękach 0,10 × 0,30 m ścian 0,25 m i obustronne na balustradzie środkowej duszy 0,20 m – w świetle poręczy 1,61 m ≥ 1,60 (M.13 pkt 6; _v12_trzony.py [T7])",
+    "przedsionek ppoż. A 3,05 × 5,80 m z MOE 1,5 × 1,5 m (poza torem 1,2 m i polem otwierania skrzydeł – _s2_ewakuacja.py [E6]), krzesłem ewakuacyjnym i interkomem, nadciśnienie; drzwi pd. (kuluar S, korytarz publiczny +30,90, hol strefy środkowej 1–6, Hala P), wsch. (łącznik S, galeria +30,90, garaż); przedsionek A' 2,50 × 3,00 m (antresola radnych) przy ścianie zach. klatki, drzwi do klatki 1,0 m przy spoczniku",
     "dźwigi A1, A2 1 600 kg, kabiny 1,5 × 2,1 m, szyby 2,25 × 2,55 m, drzwi pn. na wszystkich kondygnacjach (S-3): hol S i +30,90 – wolna głębokość od lica trzonu min. 3,75 m (A1, do biegu schodów / otworu nad biegiem; M.13 3,6 m, zapas 0,15 m), łącznik pn. P, korytarz pn. kond. 1–6 2,15 m, przedsionek dźwigów −1/−2 (pas 7,20 × 1,75 m)",
     "dźwig R dla ekip ratowniczych PN-EN 81-72 i ewakuacyjny PN-EN 81-76, 1 000 kg, kabina 1,1 × 2,1 m, szyb 1,80 × 2,55 m REI 60, drzwi pd. do przedsionka A",
-    "v1.2 (I5): trzon wydłużony o 0,60 m na pd. (v 12,45 → 11,85; ściana pd. 0,20 m) – kosztem holu strefy środkowej (kond. 1–6), Hali (P) i kuluaru S (2,20 → 1,75 m przy trzonie)"
+    "v1.2 (I5): trzon wydłużony o 0,60 m na pd. (v 12,45 → 11,85; ściana pd. 0,20 m) – kosztem holu strefy środkowej (kond. 1–6), Hali (P) i kuluaru S (przy trzonie 1,80 m po v1.2b – ściana kuluaru od pd. 0,15 m)"
    ],
    "pow_m2": 64.8,
    "uklad_uv": {
@@ -1021,11 +1111,11 @@
       17.85
      ],
      [
-      12.15,
+      12.2,
       17.85
      ],
      [
-      12.15,
+      12.2,
       12.05
      ]
     ]
@@ -1346,9 +1436,9 @@
    ],
    "zakres": "−2…S + antresola +30,90",
    "sklad": [
-    "klatka B obudowana REI 60, 3,40 × 6,64 m w świetle: 2 biegi 1,60 m na każdej kondygnacji (P: 2 × 14 stopni 17,14 × 28 cm), spoczniki ≥ 1,50 m; do antresoli +30,90",
+    "klatka B obudowana REI 60, 3,40 × 6,64 m w świetle: 2 biegi 1,60 m na każdej kondygnacji (P: 2 × 14 stopni 17,14 × 28 cm), spoczniki ≥ 1,50 m; do antresoli +30,90; v1.2b: pochwyty we wnękach ścian 0,25 m (szyby P1/P2 i szacht przesunięte o 0,05 m na wsch., ściana wsch. trzonu 0,20 m) i na balustradzie środkowej – w świetle poręczy 1,61 m",
     "przedsionek ppoż. B 3,40 × 2,06 m z MOE 1,5 × 1,5 m w narożu SW (poza torem 1,2 m i polem otwierania skrzydła; drzwi N w u 27,80 – _s2_ewakuacja.py [E6]) i interkomem, nadciśnienie (v1.2: ściana klatka/przedsionek przesunięta o 0,29 m)",
-    "dźwigi publiczne P1, P2 1 600 kg, kabiny 1,5 × 2,1 m, szyby 2,15 × 2,65 m, drzwi wsch.; P1 – przystanki P, 1–6, ANT; P2 przelotowy – −2, −1 (drzwi zach. do przedsionka B), P, 1–6, S (służbowy, na klucz), ANT",
+    "dźwigi publiczne P1, P2 1 600 kg, kabiny 1,5 × 2,1 m, szyby 2,15 × 2,65 m, drzwi wsch.; P1 – przystanki P, 1–6, ANT; P2 przelotowy – −2, −1 (drzwi zach. do przedsionka B), P, 1–6, ANT (v1.2b: bez przystanku służbowego na S – dostawy baru dźwigami A1/A2/R)",
     "szacht 2,15 × 3,20 m (po dźwigu T): przewód spalin agregatu, wyrzut wentylacji i oddymiania garażu, piony centrali S → lamele korony od pd."
    ],
    "pow_m2": 58.75,
@@ -1391,55 +1481,55 @@
     ],
     "szachty_B": [
      [
-      30.85,
+      30.9,
       0.75
      ],
      [
-      30.85,
+      30.9,
       3.95
      ],
      [
-      28.7,
+      28.75,
       3.95
      ],
      [
-      28.7,
+      28.75,
       0.75
      ]
     ],
     "P1": [
      [
-      30.85,
+      30.9,
       4.15
      ],
      [
-      30.85,
+      30.9,
       6.8
      ],
      [
-      28.7,
+      28.75,
       6.8
      ],
      [
-      28.7,
+      28.75,
       4.15
      ]
     ],
     "P2": [
      [
-      30.85,
+      30.9,
       7.0
      ],
      [
-      30.85,
+      30.9,
       9.65
      ],
      [
-      28.7,
+      28.75,
       9.65
      ],
      [
-      28.7,
+      28.75,
       7.0
      ]
     ]
@@ -1485,15 +1575,14 @@
       "4",
       "5",
       "6",
-      "S*",
       "ANT"
      ],
-     "uwaga": "drzwi wsch.; S* – przystanek służbowy (klucz)"
+     "uwaga": "drzwi wsch.; v1.2b: bez przystanku na S"
     },
     {
      "dzwig": "P2",
      "uv": [
-      28.7,
+      28.75,
       8.325
      ],
      "kierunek": [
@@ -1743,8 +1832,9 @@
    "zakres": "−1…4",
    "sklad": [
     "klatka C obudowana REI 60, 5,80 × 3,40 m w świetle (biegi wzdłuż s): 2 biegi 1,60 m (M.13; MDS 260 os. → 1,56 m), kond. −1/P i P/1 – 3 biegi",
-    "przedsionek ppoż. C 5,80 × 2,00 m z MOE 1,5 × 1,5 m (koniec przeciwny do drzwi klatki) i interkomem, nadciśnienie; drzwi z korytarza (lico d 8,40)",
-    "szachty 1,60 × 5,60 m (nadciśnienie, piony)",
+    "przedsionek ppoż. C 5,80 × 2,00 m z MOE 1,5 × 1,5 m (koniec przeciwny do drzwi klatki) i interkomem, nadciśnienie; drzwi z korytarza (lico d 8,40; ściana od korytarza 0,20 m, ściana klatki 0,25 m z wnęką pochwytu – v1.2b)",
+    "v1.2b: pochwyty we wnękach i na balustradzie środkowej – w świetle poręczy 1,61 m (M.13 pkt 6)",
+    "szachty 1,60 × 5,65 m (nadciśnienie, piony)",
     "v1.2 (I5): rezygnacja z szybu rezerwowego C1 (nie mieścił się obok klatki 3,40 m; ściana przy Maz. 19 REI 120 bez otworów) – skrzydło obsługują A1/A2 przez ciągłe korytarze kond. 1–4"
    ],
    "uklad_sd": {
@@ -1769,25 +1859,25 @@
     "przedsionek_C": [
      [
       6.55,
-      8.65
+      8.6
      ],
      [
       6.55,
-      10.65
+      10.6
      ],
      [
       0.75,
-      10.65
+      10.6
      ],
      [
       0.75,
-      8.65
+      8.6
      ]
     ],
     "szachty_C": [
      [
       8.35,
-      8.65
+      8.6
      ],
      [
       8.35,
@@ -1799,7 +1889,7 @@
      ],
      [
       6.75,
-      8.65
+      8.6
      ]
     ]
    },
@@ -1824,26 +1914,26 @@
     ],
     "przedsionek_C": [
      [
-      57.451,
-      8.556
+      57.402,
+      8.567
      ],
      [
-      59.404,
-      8.126
+      59.355,
+      8.137
      ],
      [
-      60.651,
-      13.79
+      60.602,
+      13.801
      ],
      [
-      58.698,
-      14.22
+      58.649,
+      14.231
      ]
     ],
     "szachty_C": [
      [
-      58.741,
-      14.416
+      58.692,
+      14.426
      ],
      [
       64.21,
@@ -1854,8 +1944,8 @@
       14.774
      ],
      [
-      59.085,
-      15.978
+      59.036,
+      15.989
      ]
     ]
    },
@@ -2007,7 +2097,81 @@
     "dźwig T osobowo-towarowy 2 000 kg, kabina 1,5 × 2,7 m – narożnik SE segmentu (P-I5); parter: drzwi od Wybrzeża, punkt wystawienia odpadów"
    ]
   },
-  "odleglosc_klatek_A_B_uwaga": "między środkami klatek 19.8 m (v1.1: 20,0); najmniejsza między obudowami 13.95 m – sposób pomiaru „2 klatki ≥ 15 m” (MDS −2, rozp. 2025 poz. 932 § 6) do potwierdzenia"
+  "odleglosc_klatek_A_B_uwaga": "między środkami klatek 19.8 m (v1.1: 20,0); najmniejsza między obudowami 13.95 m – v1.2b: bez znaczenia dla MDS (wyjścia zapasowe poza strefą prognozowanego zagruzowania – szyb podwójny SZ-MDS, rozp. 2025 poz. 932 § 6 ust. 4; ust. 5 nie jest stosowany – _v12b_decyzje.py [D2])",
+  "klatki_M13_pkt6": {
+   "decyzja": "M.13 pkt 6 spełniony bez odstępstwa: pochwyty przyścienne we wnękach ścian klatek i pochwyty od duszy na balustradzie środkowej; klatki 3,40 m bez zmian obrysów trzonów",
+   "pochwyt": {
+    "srednica_m": 0.04,
+    "odstep_od_plaszczyzny_m": 0.05,
+    "wysokosci_m": [
+     0.75,
+     0.9
+    ]
+   },
+   "wneka": {
+    "glebokosc_m": 0.1,
+    "wysokosc_m": 0.3,
+    "pas_nad_krawedzia_stopni_m": [
+     0.68,
+     0.98
+    ]
+   },
+   "balustrada_duszy": {
+    "plaszczyzna_max_m": 0.02,
+    "wysokosc_m": 1.1,
+    "szczelina_bieg_balustrada_m": 0.09
+   },
+   "klatki": {
+    "A": {
+     "szerokosc_klatki_m": 3.4,
+     "bieg_konstrukcyjny_m": 1.6,
+     "w_swietle_poreczy_m": 1.61,
+     "sciany_wzdluz_biegow_m": [
+      0.25,
+      0.25
+     ],
+     "zelbet_w_pasie_wneki_m": 0.15,
+     "przejscia_kondygnacyjne": 10
+    },
+    "B": {
+     "szerokosc_klatki_m": 3.4,
+     "bieg_konstrukcyjny_m": 1.6,
+     "w_swietle_poreczy_m": 1.61,
+     "sciany_wzdluz_biegow_m": [
+      0.25,
+      0.25
+     ],
+     "zelbet_w_pasie_wneki_m": 0.15,
+     "przejscia_kondygnacyjne": 10
+    },
+    "C": {
+     "szerokosc_klatki_m": 3.4,
+     "bieg_konstrukcyjny_m": 1.6,
+     "w_swietle_poreczy_m": 1.61,
+     "sciany_wzdluz_biegow_m": [
+      0.25,
+      0.25
+     ],
+     "zelbet_w_pasie_wneki_m": 0.15,
+     "przejscia_kondygnacyjne": 5
+    }
+   },
+   "schody_reprezentacyjne_w_swietle_m": 1.82,
+   "stopnie_galerii": {
+    "szerokosc_m": 1.4,
+    "w_swietle_poreczy_m": 1.22
+   },
+   "warianty_odrzucone": "poszerzenie klatek do 3,69 m (B i C wymagają zmiany obrysów trzonów; C – przedsionek < 2,0 m); odstępstwo",
+   "wymagania_dla_rzutow": [
+    "ściany klatek A, B, C wzdłuż biegów 0,25 m (żelbet C30/37); we wnękach 0,10 × 0,30 m (pas 0,68–0,98 m nad linią krawędzi stopni, ciągły wzdłuż biegów i spoczników oraz na przedłużeniach 0,30 m) pochwyty Ø 40 mm na 0,75 i 0,90 m, 5 cm od tła wnęki, mocowane od dołu – krawędź pochwytu 1 cm za licem ściany",
+    "dusza 0,20 m: balustrada środkowa (płaszczyzna ≤ 20 mm – pręty pionowe Ø 12 co ≤ 0,12 m lub szkło VSG 2 × 8 mm, wys. 1,10 m), słupki kotwione bocznie w czołach płyt biegów; pochwyty obustronne Ø 40 na wspornikach od dołu, 5 cm od płaszczyzny balustrady – krawędź pochwytu w linii krawędzi biegu; szczelina bieg–balustrada 0,09 m ≤ 0,12",
+    "przedsionek A u 12.20–15.25 (3,05 × 5,80 m; MOE – _s2_ewakuacja.py [E6])",
+    "trzon B: szacht i szyby P1, P2 u 28.75–30.90 (+0,05 m na wsch.), ściana wsch. trzonu 0,20 m (drzwi P1/P2 w licu u 31,10 bez zmian; drzwi zach. P2 na −2/−1 w ścianie 0,25 m)",
+    "trzon C: przedsionek d 8,60–10,60 (5,80 × 2,00 m), ściana klatka/przedsionek 0,25 m, ściana od korytarza 0,20 m, szachty d 8,60–14,25",
+    "spoczniki pośrednie: pochwyt od duszy ciągły (zawinięty wokół końca duszy); przyścienny we wnękach ścian podłużnych – na ścianie czołowej spocznika (długość 3,40 m > 3,0 m, M.13 pkt 5) dopuszczalna przerwa"
+   ],
+   "dowod": "_v12_trzony.py [T7]; _s2_ewakuacja.py [E6] (MOE w przedsionku A 3,05 m)"
+  }
  },
  "siatka": {
   "wieza": {
@@ -2033,14 +2197,15 @@
    "okno_m": "1,65 × 2,45 (dwuskrzydłowe, słupek w osi modułu)",
    "strop": "płyta sprężona 0,28 m z aktywacją termiczną (TABS), rozpiętości ≤ 8,70 m",
    "dach_S": "ruszt stalowy (kratownice 1,60 m, rozpiętość 19,5 m) + płyta zespolona; słupy wewnętrzne kończą się na stropie S",
-   "uwaga_osie_v": "v1.1: słupy poza drogami garażu i w licach ścian korytarzy (v 8,70 i 23,15 jako 0,60 × 0,35 m); dodatkowa oś v 16,00 w strefie środkowej; rozpiętości 8,70 / 7,30 / 7,15 / 6,55 m"
+   "uwaga_osie_v": "v1.1: słupy poza drogami garażu i w licach ścian korytarzy (v 8,70 i 23,15 jako 0,60 × 0,35 m); dodatkowa oś v 16,00 w strefie środkowej; rozpiętości 8,70 / 7,30 / 7,15 / 6,55 m",
+   "luk_v12b": "słupy promieniowe co 15° na R 13,5 i R 7,0 z wyjątkiem: R 7,0 – 30°, 45°, 60° (przęsło 7,0 m nad osią Hali), R 13,5 – 45° (przęsło Bramy Mostowej 6,99 m); w hali parteru słupy okrągłe Ø 0,45 m"
   },
   "skrzydlo": {
    "os_okien_m": 2.025,
    "slupy": "w filarach obu elewacji co 4,05 m (2 osie okienne), rozpiętość 14,20 m bez słupów pośrednich",
    "strop": "płyta sprężona 0,40 m (TABS)",
    "modul_m": 1.35,
-   "trakt_m": "15,00 = 0,47 + 6,08 + 0,10 + 1,70 + 0,10 + 6,08 + 0,47"
+   "trakt_m": "15,00 = 0,47 + 6,08 + 0,075 + 1,82 + 0,075 + 6,08 + 0,40 (v1.2b: od dziedzińca ETICS 0,40 m, ściany korytarza GK 0,075 m → korytarz 1,82 m ≥ 1,80 – M.13)"
   },
   "segment": {
    "slupy": "w elewacjach co 4,05 m + ściana pd. żelbetowa",
@@ -2056,7 +2221,11 @@
     "poziom_obliczeniowy_npm": 117.0,
     "wyjatkowy_npm": 119.0
    },
-   "sondy_GPC": "58 × 91 m pod płytą −2 (siatka 6,0 × 6,0 m), dno 19,9 m n.p.m. ≤ 99,5 m p.p.t. (poza art. 86 PGiG)"
+   "sondy_GPC": "58 × 91 m pod płytą −2 (siatka 6,0 × 6,0 m), dno 19,9 m n.p.m. ≤ 99,5 m p.p.t. (poza art. 86 PGiG)",
+   "strop_glin_QpB_npm": [
+    101.8,
+    103.4
+   ]
   }
  },
  "kondygnacja_sejmiku": {
@@ -2084,7 +2253,7 @@
    },
    "krawedz_otwarta_na_hol_m": 21.77,
    "krawedz_galerii_na_sale_m": 10.15,
-   "balustrady_podestu_galerii_mb": 12.2,
+   "balustrady_podestu_galerii_mb": 11.8,
    "wycofanie_od_elewacji_m": 1.35,
    "wys_w_swietle_pod_m": 3.3,
    "wys_w_swietle_nad_m": 3.25
@@ -3819,11 +3988,11 @@
      ],
      [
       19.1,
-      14.6
+      15.0
      ],
      [
       17.3,
-      14.6
+      15.0
      ],
      [
       17.3,
@@ -3932,6 +4101,17 @@
     "obsluga": 4,
     "PJM": 2,
     "prezydium": 4
+   },
+   "zgodnosc_programu": {
+    "brzmienie": "M.01 s. 6: sala „przeznaczona dla maksymalnie 100 osób”; strefy radnych, prezydium, zarządu, gości, mediów, obsługi (PJM); publiczność z oddzielnym wejściem, może być odseparowana – bez liczby miejsc publiczności",
+    "plyta": 77,
+    "galeria": 23,
+    "razem": 100,
+    "maks_programu": 100,
+    "wozki_galeria": 3,
+    "M13_s218": "≥ 3 na 100 miejsc widowni ✔",
+    "wniosek": "zgodne; „25 publiczność” w program.md to podział proponowany przez zespół (wniosek), nie wymóg",
+    "dowod": "_v12b_decyzje.py [D4]; _s2_sala.py [S1]–[S7]; _s2_geometria.py [G2]"
    }
   },
   "pomieszczenia": {
@@ -4437,7 +4617,7 @@
     ]
    },
    "KW.S.02": {
-    "nazwa": "Dojście do SWD.11b, przystanek służbowy P2",
+    "nazwa": "Dojście do SWD.11b",
     "kategoria": "kom",
     "poziom": "S",
     "pow_m2": 4.16,
@@ -4590,7 +4770,7 @@
     "nazwa": "Kuluar – korytarz Sejmiku (droga ewakuacyjna EI 30, oddymiany; okna W i E)",
     "kategoria": "kom",
     "poziom": "S",
-    "pow_m2": 83.81,
+    "pow_m2": 85.45,
     "program_m2": null,
     "zakres_m2": null,
     "obrys_uv": [
@@ -4605,11 +4785,11 @@
       ],
       [
        24.85,
-       10.1
+       10.05
       ],
       [
        0.5,
-       10.1
+       10.05
       ],
       [
        0.5,
@@ -4637,11 +4817,11 @@
       ],
       [
        39.5,
-       10.1
+       10.05
       ],
       [
        31.1,
-       10.1
+       10.05
       ]
      ]
     ],
@@ -4656,12 +4836,12 @@
        56.26
       ],
       [
-       96.357,
-       56.454
+       96.369,
+       56.406
       ],
       [
-       72.7,
-       50.687
+       72.712,
+       50.638
       ],
       [
        72.179,
@@ -4688,12 +4868,12 @@
        62.061
       ],
       [
-       110.59,
-       59.924
+       110.602,
+       59.875
       ],
       [
-       102.429,
-       57.934
+       102.441,
+       57.886
       ]
      ]
     ]
@@ -4849,10 +5029,10 @@
     ]
    },
    "KW.S.03": {
-    "nazwa": "Łącznik wschodni: kuluar ↔ hol, drzwi przedsionka A",
+    "nazwa": "Łącznik wschodni: kuluar ↔ hol, drzwi przedsionka A (1,40 m z polem mijania 1,80 × 2,00 m)",
     "kategoria": "kom",
     "poziom": "S",
-    "pow_m2": 11.97,
+    "pow_m2": 12.77,
     "program_m2": null,
     "zakres_m2": null,
     "obrys_uv": [
@@ -4862,16 +5042,32 @@
        12.3
       ],
       [
+       15.5,
+       12.3
+      ],
+      [
+       15.5,
+       20.85
+      ],
+      [
        16.9,
        20.85
       ],
       [
-       15.5,
-       20.85
+       16.9,
+       17.6
       ],
       [
-       15.5,
-       12.3
+       17.3,
+       17.6
+      ],
+      [
+       17.3,
+       15.6
+      ],
+      [
+       16.9,
+       15.6
       ]
      ]
     ],
@@ -4882,16 +5078,32 @@
        56.709
       ],
       [
-       86.087,
-       65.015
+       86.752,
+       56.377
       ],
       [
        84.727,
        64.684
       ],
       [
-       86.752,
-       56.377
+       86.087,
+       65.015
+      ],
+      [
+       86.857,
+       61.858
+      ],
+      [
+       87.245,
+       61.953
+      ],
+      [
+       87.719,
+       60.01
+      ],
+      [
+       87.33,
+       59.915
       ]
      ]
     ]
@@ -4900,46 +5112,78 @@
     "nazwa": "WC damskie: kabina dostępna 2,2 × 2,5 m + 2 kabiny + umywalki",
     "kategoria": "zamk",
     "poziom": "S",
-    "pow_m2": 18.37,
+    "pow_m2": 17.57,
     "program_m2": null,
     "zakres_m2": null,
     "obrys_uv": [
      [
       [
-       19.3,
-       12.5
+       17.1,
+       20.85
       ],
       [
        19.3,
        20.85
       ],
       [
-       17.1,
-       20.85
+       19.3,
+       12.5
       ],
       [
        17.1,
        12.5
+      ],
+      [
+       17.1,
+       15.6
+      ],
+      [
+       17.5,
+       15.6
+      ],
+      [
+       17.5,
+       17.6
+      ],
+      [
+       17.1,
+       17.6
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       90.396,
-       57.471
+       86.281,
+       65.063
       ],
       [
        88.419,
        65.584
       ],
       [
-       86.281,
-       65.063
+       90.396,
+       57.471
       ],
       [
        88.259,
        56.95
+      ],
+      [
+       87.525,
+       59.962
+      ],
+      [
+       87.913,
+       60.057
+      ],
+      [
+       87.44,
+       62.0
+      ],
+      [
+       87.051,
+       61.905
       ]
      ]
     ]
@@ -7325,11 +7569,11 @@
       17.85
      ],
      [
-      12.15,
+      12.2,
       17.85
      ],
      [
-      12.15,
+      12.2,
       12.05
      ]
     ]
@@ -7373,55 +7617,55 @@
     ],
     "szachty_B": [
      [
-      30.85,
+      30.9,
       0.75
      ],
      [
-      30.85,
+      30.9,
       3.95
      ],
      [
-      28.7,
+      28.75,
       3.95
      ],
      [
-      28.7,
+      28.75,
       0.75
      ]
     ],
     "P1": [
      [
-      30.85,
+      30.9,
       4.15
      ],
      [
-      30.85,
+      30.9,
       6.8
      ],
      [
-      28.7,
+      28.75,
       6.8
      ],
      [
-      28.7,
+      28.75,
       4.15
      ]
     ],
     "P2": [
      [
-      30.85,
+      30.9,
       7.0
      ],
      [
-      30.85,
+      30.9,
       9.65
      ],
      [
-      28.7,
+      28.75,
       9.65
      ],
      [
-      28.7,
+      28.75,
       7.0
      ]
     ]
@@ -7482,7 +7726,6 @@
       0
      ],
      "przystanki": [
-      "S*",
       "ANT"
      ]
     }
@@ -7847,15 +8090,15 @@
   },
   "bilans": {
    "wnetrze_S_m2": 1080.19,
-   "pomieszczenia_S_m2": 791.85,
-   "komunikacja_S_m2": 120.97,
+   "pomieszczenia_S_m2": 791.05,
+   "komunikacja_S_m2": 123.41,
    "trzony_m2": 123.55,
-   "sciany_wewn_m2": 43.82,
+   "sciany_wewn_m2": 42.18,
    "antresola_m2": 293.01,
    "program_suma_m2": 1106,
-   "projekt_suma_m2": 1006.04,
+   "projekt_suma_m2": 1005.24,
    "hol_razem_m2": 156.64,
-   "PHS05_razem_m2": 42.24
+   "PHS05_razem_m2": 41.44
   },
   "uklad_uv": "uv wieży: e = 74,606 + 0,97155·u − 0,23684·v; n = 40,756 + 0,23684·u + 0,97155·v",
   "ewakuacja": {
@@ -7863,9 +8106,9 @@
    "osoby_plyta": 77,
    "osoby_galeria": 23,
    "strefa_ZL_I_m2": 1438.8,
-   "kuluar_szer_m": 2.2,
+   "kuluar_szer_m": 2.25,
    "kuluar_wymagane_m": 2.1,
-   "kuluar_przy_trzonie_A_m": 1.75,
+   "kuluar_przy_trzonie_A_m": 1.8,
    "klatki_do_antresoli": [
     "A",
     "B"
@@ -7880,29 +8123,30 @@
    "dojscia_jednokierunkowe_ponad_10m": {},
    "dojscia_jednokierunkowe_9_10m": {
     "SWD.04": 9.75,
-    "SWD.07": 9.9,
+    "SWD.07": 9.85,
     "SWD.11a": 9.15,
-    "SWD.11b": 9.4,
-    "SWD.12a": 9.85
+    "SWD.11b": 9.35,
+    "SWD.12a": 9.9,
+    "SWD.14": 9.25
    },
    "dojscia_2_kierunki": {
     "PHS.05b": {
-     "B": 28.75,
-     "A": 31.6,
-     "wspolny": 5.3
+     "B": 28.35,
+     "A": 31.65,
+     "wspolny": 5.1
     },
     "SWD.06": {
-     "A": 19.3,
+     "A": 19.7,
      "B": 36.9,
      "wspolny": 4.65
     },
     "SWD.12b": {
      "B": 31.8,
-     "A": 17.1,
+     "A": 17.5,
      "wspolny": 1.0
     },
     "SWD.15": {
-     "A": 18.3,
+     "A": 18.7,
      "B": 35.9,
      "wspolny": 3.65
     }
@@ -7915,15 +8159,15 @@
    },
    "MOE_przedsionki": {
     "A (S)": [
-     12.15,
-     15.6,
-     13.65,
-     17.1
+     12.2,
+     15.65,
+     13.7,
+     17.15
     ],
     "A (+30,90)": [
-     12.15,
+     12.2,
      15.0,
-     13.65,
+     13.7,
      16.5
     ],
     "A' (+30,90)": [
@@ -8424,11 +8668,11 @@
    }
   },
   "wymagane_MPZP": {
-   "PU_m2": 8869.03,
+   "PU_m2": 8868.23,
    "PU_gastronomia_m2": 88.47,
    "wymagane": 106,
    "odczyt_ostrozny": 108,
-   "wzor": "12/1000 × (PU − PU_gastr.) + 6/1000 × PU_gastr. = 105,90 → 106"
+   "wzor": "12/1000 × (PU − PU_gastr.) + 6/1000 × PU_gastr. = 105,89 → 106"
   },
   "stackery": {
    "typ": "zależne 2-poziomowe bez zagłębienia, jednostki podwójne 5,0 m",
@@ -8438,11 +8682,115 @@
    "rzedy": "−1: skrzydło zach., R1, R2, R3, R4 (pracownicy z przydziałem parami)"
   },
   "MDS": {
-   "pojemnosc_os": 560,
+   "pojemnosc_os": 592,
+   "MDS_-1_os": 592,
    "ukrycie_-2_os": 300,
-   "MDS_-1_os": 260,
-   "wyjscia": "−2: klatki A, B (środki klatek 19,8 m; obudowy 13,95 m – pomiar do potwierdzenia); −1: klatka C (bieg 1,60 m), rampa, szyb wyjścia zapasowego (91,75; 32,00) + tunel 7,6 m",
-   "sanitariaty": "−1 pn. od trzonu A 30 m² z WC dostępnym; −2 WC ukrycia 15 m²"
+   "podstawa_prawna": "art. 94 ust. 1 pkt 1 ustawy z 5.12.2024 o ochronie ludności i obronie cywilnej (Dz.U. 2024 poz. 1907; brzmienie Dz.U. 2026 poz. 646, w/ż 29.05.2026); wymagania – rozp. MSWiA z 9.07.2025 (Dz.U. 2025 poz. 932) § 6–10; budowla ochronna – art. 93, 95a (rezerwa na −2)",
+   "wzor": "PU 8 868,23 m² / 15 m² = 591.22 → 592 (garaż: 2 × 110 = 220 – mniej; górna granica 75 % pow. netto / 1,5 = 2047)",
+   "ukrycie_-2": "rezerwa budowli ochronnej (art. 93; ukrycie z filtrowentylacją, projektowo do 300 os.) – pojemność i kategoria wg postanowienia organu (art. 95a ust. 3); w reżimie MDS −2 może przyjąć dodatkowe osoby (wyjście zapasowe przez rampę wewnętrzną do szybu SZ-MDS; w reżimie § 6 ust. 5 ≤ V/30)",
+   "wyjscia": "−1: wyjścia ewakuacyjne klatki A, B, C (w świetle poręczy 1.61 m; wymagane 3, szerokość ≥ 2.37 m) + rampa; 2 wyjścia zapasowe – szyb podwójny SZ-MDS (en 90.02; 26.09) z tunelem podwójnym 12.2 m, poza strefą zagruzowania (≥ 12.84 m od ścian); −2 (rezerwa ukrycia): klatki A, B i rampa wewnętrzna do −1",
+   "sanitariaty": "sanitariaty MDS −1 30 m² za przedsionkiem dźwigów A1/A2 (3 miski w tym WC dostępne, umywalka zbiorcza 8 st.), magazyn MDS 20 m² (5 ustępów suchych), pralnia MDS 10 m² przy centrali S; −2: WC ukrycia 15 m² – 8 umywalek + 8 misek/ustępów (§ 8 ust. 2 pkt 2)",
+   "pojemnosc_wg_powierzchni": {
+    "-1": {
+     "wolna_m2": 972.0,
+     "wys_m": 3.65,
+     "maks_os": 641,
+     "kubatura_netto_m3": 5527
+    },
+    "-2": {
+     "wolna_m2": 1358.1,
+     "wys_m": 2.65,
+     "maks_os": 896,
+     "kubatura_netto_m3": 4165
+    }
+   },
+   "metoda_powierzchni": "wnętrze kondygnacji (od lica ścian szczelinowych) − rdzenie, słupy, rampy − strefy pomieszczeń technicznych − stackery (pod platformą < 2,0 m, § 9 ust. 2) − pas 20 m od bramy garażu (§ 7 ust. 3); 1,5 m²/os., 3 % osób na wózkach × 2,0 m² (§ 9 ust. 4)",
+   "wyjscia_ewakuacyjne": {
+    "wymagane": 3,
+    "zapewnione": [
+     "klatka A",
+     "klatka B",
+     "klatka C",
+     "rampa (dodatkowo)"
+    ],
+    "szerokosc_wymagana_m": 2.37,
+    "klatki_w_swietle_m": 1.61
+   },
+   "wyjscia_zapasowe": {
+    "wymagane": 2,
+    "szyb": "SZ-MDS – szyb podwójny (2 przedziały = 2 wyjścia zapasowe), włazy 0,8 × 0,8 m",
+    "srodek_uv": [
+     11.5,
+     -17.9
+    ],
+    "srodek_en": [
+     90.018,
+     26.089
+    ],
+    "obrys_en": [
+     [
+      88.842,
+      25.004
+     ],
+     [
+      91.562,
+      25.668
+     ],
+     [
+      91.195,
+      27.173
+     ],
+     [
+      88.475,
+      26.51
+     ]
+    ],
+    "tunel": {
+     "wylot_uv": [
+      13.1,
+      -5.0
+     ],
+     "dlugosc_m": 12.22,
+     "przekroj": "2 × 0,90 × 1,50 m",
+     "os_en": [
+      [
+       88.518,
+       39.001
+      ],
+      [
+       90.018,
+       26.089
+      ]
+     ]
+    },
+    "odleglosc_od_scian_m": {
+     "wieża": 17.13,
+     "skrzydło": 19.91,
+     "segment": 12.87
+    },
+    "strefa_zagruzowania_m": 12.54,
+    "zastepuje": "szyb P-I6 (91,75; 32,00) – 8,42 m od segmentu, w strefie przy wykładni ścisłej"
+   },
+   "dwie_klatki_15m": "bez znaczenia – § 6 ust. 5 nie jest stosowany (wyjścia zapasowe poza strefą); środki klatek A–B 19.8 m, obudowy 13.95 m; szyb ≥ 25.3 m od klatek",
+   "sanitariaty_szczegoly": {
+    "wymagane": "8 umywalek + 8 misek/ustępów (§ 8 ust. 2 pkt 2)",
+    "miski_ustepowe": 3,
+    "ustepy_suche": 5,
+    "umywalki": 8,
+    "rozmieszczenie": "sanitariaty MDS −1 30 m² za przedsionkiem dźwigów A1/A2 (3 miski w tym WC dostępne, umywalka zbiorcza 8 st.), magazyn MDS 20 m² (5 ustępów suchych), pralnia MDS 10 m² przy centrali S; −2: WC ukrycia 15 m²"
+   },
+   "wentylacja": {
+    "min_m3_h_os": 1.02,
+    "przyjeto_m3_h_os": 3.0,
+    "strumien_m3_h": 1776,
+    "zasilanie": "szyna odbiorów krytycznych: agregat HVO + BESS 100 kWh; 48 h",
+    "energia_48h_kWh": 594
+   },
+   "instalacje_par8": "woda pitna (przyłącza w sanitariatach), ścieki (przepompownia), wentylacja 48 h, energia, oświetlenie ≥ 50 lx, ogrzewanie (przyłącza), odwodnienie (pompownia), odbiór radia (antena/DAS), odcięcie prądu i wody przy wejściach; bez instalacji gazowej",
+   "konstrukcja_zal1": "Ad: 10 kN/m² poza budynkiem; 25.0 pod wieżą; 17.5 pod skrzydłem/segmentem – z systemem podpór tymczasowych (punkty mocowania w stropie, elementy ≤ 50 kg, rozstaw ≥ 2,5 m)",
+   "oznakowanie": "§ 7 ust. 3 – część dla osób ≥ 20 m od bramy, linie 0,08–0,10 m zielona / pomarańczowa; znak OC i napis „MIEJSCE DORAŹNEGO SCHRONIENIA” (§ 10 pkt 6)",
+   "koszt": "_v12_koszt.py POZA12B (szyb + tunel, pojemność 592)",
+   "dowod": "_v12b_decyzje.py [D2]"
   },
   "technika": {
    "-1": "warsztat PPT, odpady, magazyn MDS (M1); sanitariaty MDS, pralnia (pn. od trzonu A); centrala S (wsch. od trzonu B); woda szara MBR (łuk); przyłącze wody (pod rampą); korytarz do dźwigu T",
@@ -8528,7 +8876,21 @@
    "gzyms": {
     "wysieg_lica_przy_granicy_m": 0.0,
     "wysieg_dziedziniec_m": 0.3,
-    "fryz_wklesly_m": 0.15
+    "fryz_wklesly_m": 0.15,
+    "fryz_wklesly_glebokosc_m": 0.15,
+    "fryz_wklesly": "0,15 × 0,15 m (wys. × głęb.), 139,30–139,45 m n.p.m., tło z blachy Al RAL 8019"
+   },
+   "pochwyt_ochronny_m": 1.1,
+   "pochwyt_ochronny": "stal nierdzewna Ø 40 mm w świetle ościeży, 1,10 m nad posadzką (okna z parapetem 0,60 i kwaterą stałą do 0,90)",
+   "kaseta_ZIP_m": 0.18,
+   "dach": {
+    "spadek_proc": 2.8,
+    "spadek_obliczony_proc": 2.84,
+    "kalenica": "w osi traktu 15,00 m (d = 7,50)",
+    "pokrycie_npm": [
+     139.5,
+     139.7
+    ]
    }
   },
   "wieza": {
@@ -8573,8 +8935,243 @@
   "U_scian": {
    "wieza": 0.147,
    "skrzydlo_segment": 0.144,
-   "opis": "wełna 260 λ 0,033 (wieża) / 240 λ 0,031 (skrzydło), konsole nierdzewne z przekładką"
-  }
+   "opis": "wełna 260 λ 0,033 (wieża) / 240 λ 0,031 (skrzydło, segment), konsole nierdzewne z przekładką (ΔU 0,020); od dziedzińca ETICS: tynk mineralny 10 / wełna 240 λ 0,031 / żelbet 150 = 0,40 m, U ≈ 0,13",
+   "dziedziniec_ETICS": 0.13,
+   "dU_konsole": 0.02
+  },
+  "segment_lico_SW": {
+   "lico": "S-W segmentu (od dziedzińca)",
+   "od_en": [
+    95.02,
+    45.681
+   ],
+   "do_en": [
+    96.694,
+    38.813
+   ],
+   "dlugosc_m": 7.07,
+   "osie_s_m": [
+    1.51,
+    3.535,
+    5.56
+   ],
+   "otwory": {
+    "P": [],
+    "1": [
+     {
+      "typ": "żaluzja powietrza agregatu HVO (≈ 8 m²)",
+      "s": [
+       0.91,
+       4.135
+      ],
+      "z_nad_posadzka": [
+       0.45,
+       2.95
+      ],
+      "en": [
+       [
+        95.235,
+        44.797
+       ],
+       [
+        95.999,
+        41.664
+       ]
+      ],
+      "z_wzgl": [
+       5.25,
+       7.75
+      ]
+     },
+     {
+      "typ": "żaluzja wentylacji trafo (≈ 1,5 m², kanał z parteru)",
+      "s": [
+       4.96,
+       6.16
+      ],
+      "z_nad_posadzka": [
+       1.7,
+       2.95
+      ],
+      "en": [
+       [
+        96.195,
+        40.862
+       ],
+       [
+        96.479,
+        39.696
+       ]
+      ],
+      "z_wzgl": [
+       6.5,
+       7.75
+      ]
+     }
+    ],
+    "2": [
+     {
+      "typ": "okno 1,20 × 2,35 (parapet 0,60, kwatera stała do 0,90)",
+      "s": [
+       0.91,
+       2.11
+      ],
+      "z_nad_posadzka": [
+       0.6,
+       2.95
+      ],
+      "en": [
+       [
+        95.235,
+        44.797
+       ],
+       [
+        95.52,
+        43.631
+       ]
+      ],
+      "z_wzgl": [
+       9.15,
+       11.5
+      ]
+     },
+     {
+      "typ": "okno 1,20 × 2,35 (parapet 0,60, kwatera stała do 0,90)",
+      "s": [
+       2.935,
+       4.135
+      ],
+      "z_nad_posadzka": [
+       0.6,
+       2.95
+      ],
+      "en": [
+       [
+        95.715,
+        42.829
+       ],
+       [
+        95.999,
+        41.664
+       ]
+      ],
+      "z_wzgl": [
+       9.15,
+       11.5
+      ]
+     },
+     {
+      "typ": "okno 1,20 × 2,35 (parapet 0,60, kwatera stała do 0,90)",
+      "s": [
+       4.96,
+       6.16
+      ],
+      "z_nad_posadzka": [
+       0.6,
+       2.95
+      ],
+      "en": [
+       [
+        96.195,
+        40.862
+       ],
+       [
+        96.479,
+        39.696
+       ]
+      ],
+      "z_wzgl": [
+       9.15,
+       11.5
+      ]
+     }
+    ],
+    "3": [
+     {
+      "typ": "żaluzja akustyczna dry-coolera (≈ 12 m²)",
+      "s": [
+       0.91,
+       6.16
+      ],
+      "z_nad_posadzka": [
+       0.6,
+       2.9
+      ],
+      "en": [
+       [
+        95.235,
+        44.797
+       ],
+       [
+        96.479,
+        39.696
+       ]
+      ],
+      "z_wzgl": [
+       12.9,
+       15.2
+      ]
+     }
+    ],
+    "4": [
+     {
+      "typ": "żaluzja akustyczna dry-coolera (≈ 12 m²)",
+      "s": [
+       0.91,
+       6.16
+      ],
+      "z_nad_posadzka": [
+       0.4,
+       2.7
+      ],
+      "en": [
+       [
+        95.235,
+        44.797
+       ],
+       [
+        96.479,
+        39.696
+       ]
+      ],
+      "z_wzgl": [
+       16.45,
+       18.75
+      ]
+     }
+    ]
+   },
+   "okna_na_kondygnacjach": {
+    "P": 0,
+    "1": 0,
+    "2": 3,
+    "3": 0,
+    "4": 0
+   },
+   "zasada": "P, 1, 3, 4 – bez okien (P pełny; 1 – żaluzje agregatu i trafo; 3–4 – żaluzje akustyczne dry-coolera); 2 – 3 okna",
+   "zrodlo": "tools/elewacje.py segment_faces() – elewacja Sg (build/rysunki/elewacja_Sg_1-200.svg)",
+   "wymaganie_dla_rzutow": "budynek.json: usunąć okna z lica S-W segmentu na kond. P, 1, 3, 4 (model ma 3 okna); na kond. 1, 3, 4 w licu S-W tylko żaluzje wg listy; kond. 2 – 3 okna w osiach s"
+  },
+  "przegrody": [
+   {
+    "przegroda": "ściana wieży (filar / płycina)",
+    "warstwy": "granit 40 / pustka 40 / wełna 260 λ 0,033 / żelbet; płycina Al 3 / pustka 40 / wełna 260 / żelbet 200",
+    "U": 0.147,
+    "ogien": "A1"
+   },
+   {
+    "przegroda": "ściana skrzydła i segmentu od ulic",
+    "warstwy": "ceramika ekstrudowana 40 / pustka 40 / wełna 240 λ 0,031 / żelbet 150; konsole nierdzewne punktowe (ΔU 0,020) = 0,47 m",
+    "U": 0.144,
+    "ogien": "A1"
+   },
+   {
+    "przegroda": "ściana skrzydła i segmentu od dziedzińca (ETICS)",
+    "warstwy": "tynk mineralny cienkowarstwowy 10 / wełna mineralna fasadowa 240 λ 0,031 (klejona + łączniki z zaślepką) / żelbet 150 = 0,40 m",
+    "U": 0.13,
+    "ogien": "A2-s1,d0 (NRO)"
+   }
+  ]
  },
  "zagospodarowanie": {
   "drzewa_usuniete": [
@@ -8623,24 +9220,205 @@
   ],
   "drzewa_chronione_opis": "nr 78 M.06 (= I881): wygrodzenie korona + 1 m, odkrywki ręczne, nadzór arborysty; bez palisady",
   "zachowane_po_usunieciach_sanitarnych": 26,
-  "sciezki": "poza poligonem ogródków (obrzeżem); w ogródkach tylko istniejące ścieżki"
+  "sciezki": "poza poligonem ogródków (obrzeżem); w ogródkach tylko istniejące ścieżki",
+  "szyb_MDS": {
+   "srodek_en": [
+    90.018,
+    26.089
+   ],
+   "obrys_en": [
+    [
+     88.842,
+     25.004
+    ],
+    [
+     91.562,
+     25.668
+    ],
+    [
+     91.195,
+     27.173
+    ],
+    [
+     88.475,
+     26.51
+    ]
+   ],
+   "tunel_os_en": [
+    [
+     88.518,
+     39.001
+    ],
+    [
+     90.018,
+     26.089
+    ]
+   ],
+   "uwaga": "v1.2b: zastępuje szyb (91,75; 32,00); 2 płaskie włazy w trawniku; ogród deszczowy, ścieżki i drzewa nowe ≥ 1,0 m od obrysu (drzewo (87,5; 26,75) i niecka pn. ogrodu deszczowego do korekty na PZT); wykop tunelu w strefie Z3 drzewa nr 8 – ochrona"
+  },
+  "pas_od_bulwaru": {
+   "pas_en": [
+    [
+     115.987,
+     39.799
+    ],
+    [
+     99.434,
+     38.972
+    ],
+    [
+     96.694,
+     38.813
+    ],
+    [
+     96.959,
+     34.242
+    ],
+    [
+     116.244,
+     35.361
+    ]
+   ],
+   "pas_m2": 87.34,
+   "drzewa": [
+    {
+     "id": "D1",
+     "en": [
+      101.08,
+      35.78
+     ],
+     "gatunek": "grab pospolity 'Fastigiata' / klon polny 'Elsrijk'",
+     "korona_m": 3.0
+    },
+    {
+     "id": "D2",
+     "en": [
+      106.07,
+      36.07
+     ],
+     "gatunek": "grab pospolity 'Fastigiata' / klon polny 'Elsrijk'",
+     "korona_m": 3.0
+    }
+   ],
+   "strefy_korzeniowe_en": [
+    [
+     [
+      99.246,
+      34.525
+     ],
+     [
+      103.04,
+      34.744
+     ],
+     [
+      102.901,
+      37.14
+     ],
+     [
+      99.107,
+      36.921
+     ]
+    ],
+    [
+     [
+      104.238,
+      34.814
+     ],
+     [
+      108.032,
+      35.034
+     ],
+     [
+      107.893,
+      37.429
+     ],
+     [
+      104.099,
+      37.21
+     ]
+    ]
+   ],
+   "strefy_korzeniowe_m2": [
+    9.12,
+    9.12
+   ],
+   "system": "komory strukturalne (np. typu soil cell) wypełnione gruntem, 1,0 m głęb., pod nawierzchnią przepuszczalną; bariera korzeniowa wzdłuż granicy dojazdu",
+   "skrzynki_en": [
+    [
+     103.09,
+     34.748
+    ],
+    [
+     104.188,
+     34.812
+    ],
+    [
+     104.046,
+     37.257
+    ],
+    [
+     107.94,
+     37.482
+    ],
+    [
+     108.081,
+     35.038
+    ],
+    [
+     116.085,
+     35.503
+    ],
+    [
+     115.845,
+     39.642
+    ],
+    [
+     99.442,
+     38.822
+    ],
+    [
+     96.852,
+     38.672
+    ],
+    [
+     97.1,
+     34.4
+    ],
+    [
+     99.196,
+     34.522
+    ],
+    [
+     99.055,
+     36.968
+    ],
+    [
+     102.948,
+     37.193
+    ]
+   ],
+   "skrzynki_m2": 61.18,
+   "skrzynki_retencja_m3": 66.8,
+   "uwaga": "drzewa liczone w 26 nowych nasadzeniach (zamiast 2 „u wylotu pasa”); ława granitowa przy licu segmentu bez kolizji",
+   "dowod": "_v12b_decyzje.py [D8]"
+  }
  },
  "bilans": {
   "PZ_m2": 2165.8,
   "PC_nadziemna_m2": 14387.8,
   "PC_podziemna_m2": 4365.2,
-  "PU_m2": 8869.03,
-  "PU_definicja": "PN-ISO 9836 – pomieszczenia kategorii PU (model pomieszczeń, F.15.A: 8 850,37 m²) skorygowane o kondygnację S-3 (+18,66 m² wobec bazy zamrożonej S + ANT modelu v1.1: _v12_koszt.py [K0]); bez RU, US, PG",
+  "PU_m2": 8868.23,
+  "PU_definicja": "PN-ISO 9836 – pomieszczenia kategorii PU (model pomieszczeń, F.15.A: 8 850,37 m²) skorygowane o kondygnację S-3 (+17,86 m² wobec bazy zamrożonej S + ANT modelu v1.1: _v12_koszt.py [K0]); bez RU, US, PG",
   "KW_m3": 81408,
   "PBC_m2": 1185,
-  "koszt_mln_netto": 148.99,
+  "koszt_mln_netto": 149.4,
   "koszt_model_F14B_mid_mln": 143.3,
-  "koszt_roboty_KS_mln": 141.89,
+  "koszt_roboty_KS_mln": 142.28,
   "rezerwa_proc": 5,
-  "rezerwa_mln": 7.09,
-  "zapas_do_limitu_mln": 1.01,
-  "zl_m2_PC": 7945,
-  "zl_m2_PU": 16799,
+  "rezerwa_mln": 7.11,
+  "zapas_do_limitu_mln": 0.6,
+  "zl_m2_PC": 7967,
+  "zl_m2_PU": 16847,
   "EP_kWh_m2": 28.0,
   "EPB_kWh_m2": 23.9,
   "koszt_wejscie_modelu": "docs/20_koncepcja/_rewizja_koszt_wejscie_v1_2.json",
@@ -8912,11 +9690,418 @@
       71.566
      ],
      "do": [
+      85.442,
+      44.941
+     ],
+     "lico_pd_en": [
       84.321,
       43.124
      ],
-     "dl_m": 33.4,
-     "min_szer_m": 6.3
+     "od_uv": [
+      33.779,
+      23.478
+     ],
+     "do_uv": [
+      11.519,
+      1.5
+     ],
+     "azymut_deg": 211.7,
+     "dl_m": 31.3,
+     "min_szer_m": 6.3,
+     "strefa_wolna_uv": [
+      [
+       14.99,
+       0.5
+      ],
+      [
+       12.919,
+       0.5
+      ],
+      [
+       12.919,
+       1.8
+      ],
+      [
+       10.119,
+       1.8
+      ],
+      [
+       10.119,
+       0.5
+      ],
+      [
+       6.023,
+       0.5
+      ],
+      [
+       31.223,
+       25.381
+      ],
+      [
+       31.539,
+       25.204
+      ],
+      [
+       31.828,
+       25.029
+      ],
+      [
+       32.111,
+       24.846
+      ],
+      [
+       32.444,
+       24.615
+      ],
+      [
+       32.714,
+       24.413
+      ],
+      [
+       32.926,
+       24.246
+      ],
+      [
+       33.185,
+       24.029
+      ],
+      [
+       33.387,
+       23.85
+      ],
+      [
+       33.634,
+       23.62
+      ],
+      [
+       33.826,
+       23.43
+      ],
+      [
+       34.059,
+       23.187
+      ],
+      [
+       34.285,
+       22.936
+      ],
+      [
+       34.503,
+       22.678
+      ],
+      [
+       34.672,
+       22.468
+      ],
+      [
+       34.835,
+       22.253
+      ],
+      [
+       35.032,
+       21.979
+      ],
+      [
+       35.183,
+       21.755
+      ],
+      [
+       35.365,
+       21.47
+      ],
+      [
+       35.538,
+       21.181
+      ],
+      [
+       35.679,
+       20.927
+      ]
+     ],
+     "strefa_wolna_en": [
+      [
+       104.313,
+       69.538
+      ],
+      [
+       104.116,
+       69.751
+      ],
+      [
+       103.88,
+       69.991
+      ],
+      [
+       103.636,
+       70.225
+      ],
+      [
+       103.436,
+       70.406
+      ],
+      [
+       103.18,
+       70.626
+      ],
+      [
+       102.97,
+       70.796
+      ],
+      [
+       102.756,
+       70.961
+      ],
+      [
+       102.484,
+       71.159
+      ],
+      [
+       102.205,
+       71.35
+      ],
+      [
+       101.92,
+       71.531
+      ],
+      [
+       101.689,
+       71.67
+      ],
+      [
+       101.395,
+       71.835
+      ],
+      [
+       101.156,
+       71.961
+      ],
+      [
+       100.853,
+       72.11
+      ],
+      [
+       100.607,
+       72.223
+      ],
+      [
+       100.297,
+       72.355
+      ],
+      [
+       99.919,
+       72.501
+      ],
+      [
+       99.6,
+       72.611
+      ],
+      [
+       99.278,
+       72.712
+      ],
+      [
+       98.929,
+       72.81
+      ],
+      [
+       80.339,
+       42.668
+      ],
+      [
+       84.319,
+       43.638
+      ],
+      [
+       84.011,
+       44.901
+      ],
+      [
+       86.731,
+       45.565
+      ],
+      [
+       87.039,
+       44.301
+      ],
+      [
+       89.051,
+       44.792
+      ]
+     ],
+     "strefa_wolna_m2": 201.4,
+     "drzwi_ogrodowe": {
+      "srodek_uv": [
+       11.519,
+       1.5
+      ],
+      "srodek_en": [
+       85.442,
+       44.941
+      ],
+      "szerokosc_m": 1.8,
+      "skrzydla": "2 × 0,90 m",
+      "plaszczyzna": "tył wnęki (lico zewn. v 1,50; ściana 0,30)"
+     },
+     "trzony_od_osi_m": {
+      "A": 4.57,
+      "B": 3.39
+     },
+     "slupy_w_strefie": [
+      {
+       "uv": [
+        16.2,
+        8.7
+       ],
+       "s_m": 1.83,
+       "przekroj": "okrągły Ø 0,45 m"
+      },
+      {
+       "uv": [
+        24.3,
+        16.0
+       ],
+       "s_m": 1.34,
+       "przekroj": "okrągły Ø 0,45 m"
+      }
+     ],
+     "pas_bez_slupow_m": 4.26,
+     "slupy_usuniete": [
+      "R 7.0 / 30°",
+      "R 7.0 / 45°",
+      "R 7.0 / 60°",
+      "R 13.5 / 45°"
+     ],
+     "wymagania_dla_rzutow": [
+      "strefa wolna (wielokąt parter.wieza[Hala].os.strefa_wolna_uv/en, 201.4 m²) – bez ścian, przegród, pomieszczeń i wyposażenia stałego (lada informacji, witryny lapidarium, siedziska poczekalni, stojaki) – ściany pomieszczeń przyległych ≥ 0,10 m poza strefą",
+      "drzwi ogrodowe: środek w u 11.52, v 1.50 (tył wnęki), 2 × 0,90 m; wnęka wejścia ogrodowego u 10.12–12.92 (cofniecia_wneki.wneka_wejscia_ogrodowego)",
+      "PHS.04 przenieść do bloku foyer skrzydła (s 39,75–50) – ≥ 40 m²; w wieży na osi nie może być toalet",
+      "pokój cichy (w modelu SW.06) – przy elewacji ogrodowej u 20,00–24,65 × v 0,50–5,30 (lub w części NW pod klatką A, poza strefą); poczekalnia 40 m² (program SW.06) i informacja 8 m² jako strefy otwarte poza strefą wolną",
+      "kancelaria SW.02 ≥ 30 m² (program 30–45) poza strefą: ścięcie wzdłuż krawędzi strefy (lada niska na ukosie), poszerzenie ku łukowi nad DK II (v ≥ 15,85), początek u ≥ 28,60 (drzwi przedsionka B u 27,80 otwarte do holu); przykład: przyklady_uv.SW.02",
+      "blok WC/komfortka u 15,65–21,0 × v 12,05–20,85 ze ścięciem wzdłuż strefy (przykład przyklady_uv.PHS.02+PHS.03); na P bez drzwi przedsionka A od wsch. (drzwi pd. do Hali)",
+      "rowerownia PR.01 – ścięcie naroża SE (przy drzwiach ogrodowych) wzdłuż strefy",
+      "słupy w hali: okrągłe Ø 0,45 m; w łuku bez słupów R 7,0 na 30°, 45°, 60° i bez słupa R 13,5 na 45° (Brama); w strefie dopuszczone wyłącznie słupy siatki (16,20; 8,70) i (24,30; 16,00)",
+      "SW.02, SW.06/pokój cichy, PHS.02/03, PR.01, trzony A i B – poza strefą (kontrola: pole przecięcia z wielokątem = 0)"
+     ],
+     "przyklady_uv": {
+      "PR.01": [
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.5,
+        12.3
+       ],
+       [
+        8.15,
+        12.3
+       ],
+       [
+        8.15,
+        2.741
+       ],
+       [
+        5.88,
+        0.5
+       ]
+      ],
+      "PHS.02+PHS.03": [
+       [
+        15.65,
+        12.05
+       ],
+       [
+        15.65,
+        20.85
+       ],
+       [
+        21.0,
+        20.85
+       ],
+       [
+        21.0,
+        15.428
+       ],
+       [
+        17.578,
+        12.05
+       ]
+      ],
+      "PHS.03": [
+       [
+        18.65,
+        16.85
+       ],
+       [
+        18.65,
+        20.85
+       ],
+       [
+        15.65,
+        20.85
+       ],
+       [
+        15.65,
+        16.85
+       ]
+      ],
+      "SW.02": [
+       [
+        33.869,
+        19.0
+       ],
+       [
+        35.6,
+        19.0
+       ],
+       [
+        35.6,
+        15.85
+       ],
+       [
+        33.25,
+        15.85
+       ],
+       [
+        33.25,
+        10.05
+       ],
+       [
+        28.6,
+        10.05
+       ],
+       [
+        28.6,
+        13.798
+       ]
+      ],
+      "SW.06p": [
+       [
+        20.0,
+        0.5
+       ],
+       [
+        20.0,
+        5.3
+       ],
+       [
+        24.65,
+        5.3
+       ],
+       [
+        24.65,
+        0.5
+       ]
+      ]
+     },
+     "przyklady_m2": {
+      "PR.01": 87.7,
+      "PHS.02+PHS.03": 41.3,
+      "PHS.03": 12.0,
+      "SW.02": 35.3,
+      "SW.06p": 22.3
+     },
+     "dowod": "_v12b_decyzje.py [D3]"
     }
    },
    {
@@ -8998,7 +10183,38 @@
       97.807,
       63.807
      ]
-    ]
+    ],
+    "obrys_uv_v12b": [
+     [
+      33.869,
+      19.0
+     ],
+     [
+      35.6,
+      19.0
+     ],
+     [
+      35.6,
+      15.85
+     ],
+     [
+      33.25,
+      15.85
+     ],
+     [
+      33.25,
+      10.05
+     ],
+     [
+      28.6,
+      10.05
+     ],
+     [
+      28.6,
+      13.798
+     ]
+    ],
+    "uwaga_v12b": "prostokąt „uv” koliduje z osią Hali – obowiązuje obrys_uv_v12b lub inny poza strefą wolną (≥ 30 m²)"
    },
    {
     "strefa": "WC ogólnodostępne 19 m² + komfortka 12 m² (3,0×4,0)",
@@ -9025,7 +10241,30 @@
       84.873,
       64.719
      ]
-    ]
+    ],
+    "obrys_uv_v12b": [
+     [
+      15.65,
+      12.05
+     ],
+     [
+      15.65,
+      20.85
+     ],
+     [
+      21.0,
+      20.85
+     ],
+     [
+      21.0,
+      15.428
+     ],
+     [
+      17.578,
+      12.05
+     ]
+    ],
+    "uwaga_v12b": "blok WC + komfortka u 15,65–21,0 × v 12,05–20,85 ze ścięciem wzdłuż strefy wolnej (PHS.02 ≥ 24, PHS.03 12)"
    },
    {
     "strefa": "Centrum monitoringu 24 + socjal ochrony 10 + szatnie/WC personelu",
@@ -9079,7 +10318,30 @@
       72.179,
       52.824
      ]
-    ]
+    ],
+    "obrys_uv_v12b": [
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.5,
+      12.3
+     ],
+     [
+      8.15,
+      12.3
+     ],
+     [
+      8.15,
+      2.741
+     ],
+     [
+      5.88,
+      0.5
+     ]
+    ],
+    "uwaga_v12b": "ścięcie naroża SE przy drzwiach ogrodowych (strefa wolna osi Hali)"
    },
    {
     "strefa": "Łącznik do foyer skrzydła (okna na skwer)",
@@ -9467,5 +10729,17 @@
    "WC_m2_min": 380
   },
   "centrale_pietrowe": "25 m² w strefie środkowej wieży na kond. 1–5 (kond. 5 obsługuje 5 i 6) + centrala parteru na kond. 1 (pas zach.); centrala S na −1 przy trzonie B; czerpnia: płyciny elewacji pd. kond. P/1 i 1/2 (u 2–12, 17 m²); wyrzutnia: lamele korony od pd."
+ },
+ "decyzje_v12b": {
+  "V12B-M13": "M.13 pkt 6 spełniony bez odstępstwa: pochwyty przyścienne we wnękach ścian klatek i pochwyty od duszy na balustradzie środkowej; klatki 3,40 m bez zmian obrysów trzonów",
+  "V12B-MDS": "MDS 592 os. na −1 (art. 94); szyb podwójny SZ-MDS poza strefą zagruzowania; „2 klatki ≥ 15 m” bez znaczenia",
+  "V12B-HALA": "oś Hali ze strefą wolną 6,30 m (wielokąt), drzwi ogrodowe w osi (wnęka przesunięta), PHS.04 do foyer skrzydła, słupy R 7,0 / 30–60° i R 13,5 / 45° usunięte",
+  "V12B-GAL": "galeria 20 + 3, płyta 77 – razem 100 = maksimum programu; bez zmian",
+  "V12B-SG": "lico S-W segmentu: bez okien na P, 1, 3, 4; kond. 2 – 3 okna",
+  "V12B-ETICS": "od dziedzińca ETICS 0,40 m, U 0,13; koszt bez zmian (ujęty od v1.1)",
+  "V12B-RYS": "pochwyt 1,10; ZIP 0,18; ΔU 0,020; QpB 101,8–103,4; spadek 2,8 %; fryz 0,15 × 0,15",
+  "V12B-PAS": "2 drzewa w pasie od bulwaru, strefy korzeniowe 2 × 9,12 m², skrzynki 61,2 m²",
+  "V12B-ODST": "usunięte U1–U7; pozostałe O1 (holy windowe 1–6), O2 (przedsionki dźwigów w garażu)",
+  "skrypt": "docs/20_koncepcja/_v12b_decyzje.py"
  }
 }

@@ -255,7 +255,7 @@ print(f"  „2 klatki ≥ 15 m” (§ 6 ust. 5 pkt 1b): środki klatek A–B {kA
 n_um = math.ceil(N_MDS / 75)
 SAN = {"miski_ustepowe": 3, "ustepy_suche": n_um - 3, "umywalki": n_um}
 print(f"  § 8 ust. 2 (> 200 os.): na 75 os. umywalka i miska/ustęp suchy → {n_um} + {n_um}: sanitariaty MDS −1 30 m² – 3 miski (w tym WC"
-      f" dostępne) + umywalka zbiorcza 6 stanowisk; pralnia 10 m² – 2 stanowiska; magazyn MDS – {SAN['ustepy_suche']} ustępów suchych"
+      f" dostępne; za przedsionkiem dźwigów A1/A2) + umywalka zbiorcza 8 stanowisk; magazyn MDS – {SAN['ustepy_suche']} ustępów suchych"
       f" (≤ 3 × 3 {ok('D2', 'ustępy suche ≤ 3:1', SAN['ustepy_suche'] <= 3 * SAN['miski_ustepowe'])}); kabiny ≥ 0,9 m, pole 0,6 × 0,9 przed miską"
       f" (§ 8 ust. 4); kanalizacja z przepompownią ścieków na zasilaniu awaryjnym")
 # ---- wentylacja 48 h (§ 8 ust. 1 pkt 3)
@@ -304,8 +304,9 @@ DATA["D2"] = {
     "dwie_klatki_15m": f"bez znaczenia – § 6 ust. 5 nie jest stosowany (wyjścia zapasowe poza strefą); środki klatek A–B"
                        f" {kA.centroid.distance(kB.centroid):.1f} m, obudowy {kA.distance(kB):.2f} m; szyb ≥ {min(dA, dB):.1f} m od klatek",
     "sanitariaty": {"wymagane": f"{n_um} umywalek + {n_um} misek/ustępów (§ 8 ust. 2 pkt 2)", **SAN,
-                    "rozmieszczenie": "sanitariaty MDS −1 30 m² (3 miski w tym WC dostępne, umywalka zbiorcza 6 st.), pralnia 10 m² (2 st.),"
-                                      f" magazyn MDS 20 m² ({SAN['ustepy_suche']} ustępów suchych); −2: WC ukrycia 15 m²"},
+                    "rozmieszczenie": "sanitariaty MDS −1 30 m² za przedsionkiem dźwigów A1/A2 (3 miski w tym WC dostępne, umywalka"
+                                      f" zbiorcza 8 st.), magazyn MDS 20 m² ({SAN['ustepy_suche']} ustępów suchych), pralnia MDS 10 m²"
+                                      " przy centrali S; −2: WC ukrycia 15 m²"},
     "wentylacja": {"min_m3_h_os": round(max(q_co2, q_o2), 2), "przyjeto_m3_h_os": 3.0, "strumien_m3_h": round(Q),
                    "zasilanie": "szyna odbiorów krytycznych: agregat HVO + BESS 100 kWh; 48 h",
                    "energia_48h_kWh": round(P_kw * 48)},
@@ -679,9 +680,10 @@ n1 = S2.KW_S03_BAY.bounds[1] - b03[1]
 n2 = b03[3] - S2.KW_S03_BAY.bounds[3]
 b02 = Sx["KW.S.02"].bounds
 p2_stops = next(x for x in S2.LIFT_DOORS if x[0] == "P2")[3]
-lob = rect_uv(8.30, 20.85, 15.50, 20.85 + 3.60)
-lost = sum(1 for st in PRES["-1"]["stalls"] if st.intersection(lob).area > 0.5)
-lost2 = sum(1 for st in PRES["-2"]["stalls"] if st.intersection(lob).area > 0.5)
+lob1 = RP.LOBBY_A["-1"]
+lost1 = sum(1 for st in PRES["-1"]["stalls"] if st.intersection(lob1).area > 0.05)
+san1 = next(v for k, v in PRES["-1"]["plant"].items() if k.startswith("sanitariaty MDS"))
+fil2 = next(v for k, v in PRES["-2"]["plant"].items() if k.startswith("filtrowentylacja"))
 USUNIETE = [
     {"id": "U1", "element": "klatki A, B, C – bieg między poręczami", "bylo": "≈ 1,46 m", "jest": f"{min(v['swiatlo'] for v in T.RES_T7.values()):.2f} m",
      "jak": "pochwyty we wnękach ścian + balustrada środkowa duszy ([D1])", "M13": "Schody pkt 4.1 i 6"},
@@ -692,13 +694,16 @@ USUNIETE = [
     {"id": "U4", "element": "dojście do SWD.11b (KW.S.02)", "bylo": "1,60 m (traktowane jako odstępstwo)",
      "jest": f"1,60 × {b02[3] - b02[1]:.2f} m – przewężenie miejscowe ≤ 5 m przy kuluarze 2,25 m (pole mijania)", "jak": "wykładnia M.13 – zgodne",
      "M13": "Korytarze pkt 2.2"},
-    {"id": "U5", "element": "przystanek P2 na S (hol 1,60 m)", "bylo": "przystanek służbowy S*", "jest": f"P2: przystanki {p2_stops} + P, 1–6, −2, −1",
+    {"id": "U5", "element": "przystanek P2 na S (hol 1,60 m)", "bylo": "przystanek służbowy S*", "jest": "P2: P, 1–6, ANT (drzwi wsch.) oraz −2, −1 (drzwi zach.) – bez S",
      "jak": "rezygnacja z przystanku S* – dostawy baru dźwigami A1/A2 (i R) do holu +30,90", "M13": "Wewn. urządzenia transportu pionowego pkt 6"},
     {"id": "U6", "element": "korytarz skrzydła (kond. 1–4)", "bylo": "1,70 m", "jest": "1,82 m",
      "jak": "ściana od dziedzińca ETICS 0,40 m (zamiast 0,47) i ściany korytarza GK 0,075 m – pokoje 24,02 m² bez zmian ([D6])",
      "M13": "Dostępność pomieszczeń (s. 173: trasa ≥ 1,8 m)"},
     {"id": "U7", "element": "stopnie galerii (6 stopni z foyer na podest +0,90)", "bylo": "1,00 m", "jest": "1,40 m (w świetle poręczy 1,22 m)",
      "jak": "poszerzenie stopni (_s2_model.GAL_STEPS)", "M13": "Schody pkt 4.3 (≥ 1,2 m)"},
+    {"id": "U8", "element": "−1 (MDS): przedsionek dźwigów A1/A2", "bylo": "7,20 × 1,75 m", "jest": "7,20 × 3,60 m (v 20,85–24,45)",
+     "jak": f"sanitariaty MDS 30 m² za przedsionkiem (dostępne {san1[0]:.1f} m²), pralnia MDS 10 m² przy centrali S, porządkowe 8 m² w M1"
+            f" (_rewizja_parking.py); stanowiska bez zmian (kolizja {lost1})", "M13": "Wewn. urządzenia transportu pionowego pkt 6"},
 ]
 POZOSTALE = [
     {"id": "O1", "element": "holy windowe na kondygnacjach biurowych 1–6 (i P2 na parterze)",
@@ -712,11 +717,12 @@ POZOSTALE = [
                      " na kond. 1–6 korytarz 2,15–2,20 m ≥ trasa wolna 2,0 m, pole manewrowe 1,5 × 1,5 m bez drzwi otwieranych w hol,"
                      " panele przyzywowe po obu stronach, sygnalizacja kierunku (M.13 pkt 10)"},
     {"id": "O2", "element": "garaż −1/−2: przedsionki dźwigów",
-     "wartosc": "A1/A2 – przedsionek ppoż. 7,20 × 1,75 m; P2 (drzwi zach.) – przedsionek B 3,40 m od drzwi",
+     "wartosc": "−2: A1/A2 – przedsionek ppoż. 7,20 × 1,75 m; −1 i −2: P2 (drzwi zach.) – przedsionek B 3,40 m od drzwi",
      "wymaganie": "M.13 s. 170 pkt 6: ≥ 3,6 m", "przepisy": "WT § 195 ✔; przedsionki ppoż. EI 60 z nadciśnieniem (garaż)",
-     "uzasadnienie": f"przedsionek A1/A2 zamyka ślepy koniec drogi A2; pogłębienie do 3,6 m (v 20,85–24,45) zajmuje stanowiska rzędu R4:"
-                     f" −1 {lost}, −2 {lost2} (zapas miejsc 4 – MPZP § 13); w przedsionku pole manewrowe 1,5 × 1,5 m ✔, stanowiska OzN przy"
-                     " trzonach A i B, dźwig R i klatka A dostępne z przedsionka A; przedsionek B – 3,40 m (−0,20) wynika z szerokości klatki B"},
+     "uzasadnienie": f"na −2 (rezerwa ukrycia, bez MDS) pogłębienie do 3,6 m odebrałoby ≈ 15,8 m² strefie filtrowentylacji i WC ukrycia"
+                     f" (dostępne {fil2[0]:.1f} m², wymagane {fil2[1]} – po pogłębieniu ≈ {fil2[0] - 15.8:.1f}); w przedsionku pole manewrowe"
+                     " 1,5 × 1,5 m ✔, stanowiska OzN przy trzonach A i B; przedsionek B – 3,40 m (−0,20) wynika z szerokości klatki B w obrysie"
+                     " trzonu (ściana trzonu ciągła od fundamentu); na −1 (MDS) przedsionek A1/A2 3,60 m ✔ (U8)"},
 ]
 for u_ in USUNIETE:
     print(f"  usunięte {u_['id']}: {u_['element']}: {u_['bylo']} → {u_['jest']} ({u_['jak']})")
@@ -725,7 +731,9 @@ for o_ in POZOSTALE:
 ok("D9", "kuluar ≥ 1,80", kul_w >= 1.80 - 1e-9)
 ok("D9", "przewężenia KW.S.03 ≤ 5 m", n1 <= 5.0 and n2 <= 5.0)
 ok("D9", "P2 bez przystanku S*", "S*" not in p2_stops)
-ok("D9", "garaż: pogłębienie przedsionka kosztuje stanowiska", lost + lost2 >= 1)
+ok("D9", "−1: przedsionek 3,60 bez utraty stanowisk", lost1 == 0)
+ok("D9", "−1: sanitariaty MDS mieszczą się za przedsionkiem", san1[2])
+ok("D9", "−1: pomieszczenia techniczne mieszczą się", all(v[2] for v in PRES["-1"]["plant"].values()))
 DATA["D9"] = {"usuniete": USUNIETE, "pozostale": POZOSTALE,
               "R013": "uzasadnienie odstępstw w części opisowej (R-013) – teksty w meta.odstepstwa"}
 

@@ -155,6 +155,53 @@ def pomiar_barw(sc, jpg, krok=2):
                 krok_px=krok)
 
 
+# ============================================================================================== (3) zamglenie
+_pp = FK.post_przed
+
+
+def _post_przed_p(png, passy, cfg, raport):
+    """``post_przed.mgla.tryb == 'zamglenie'``: perspektywa powietrzna przez zmieszanie z barwą zamglenia (spadek
+    kontrastu dalszego planu, jak w powietrzu), a nie samo rozjaśnienie (FK.post_przed – biała bryła zostaje biała).
+    w = Mist (0 przy ``start`` m, 1 przy ``start + glebokosc`` m) ** wykladnik, niebo bez zmian; udział zamglenia
+    ``sila`` · w; barwa zamglenia (lekko niebieskawa) o luminancji percentyla ``percentyl`` luminancji kadru."""
+    mg = (cfg or {}).get('mgla') or {}
+    if mg.get('tryb') != 'zamglenie':
+        return _pp(png, passy, cfg, raport)
+    import shutil
+    from PIL import Image
+    from scipy import ndimage
+    png = Path(png)
+    shutil.copyfile(png, png.with_name(png.stem + '_surowy.png'))
+    a = np.asarray(Image.open(png).convert('RGB'), dtype=np.float32) / 255.0
+    lin = FK._s2l(a)
+    mist = FK._wczytaj_exr(passy['mgla'])
+    idx = FK._wczytaj_exr(passy['idx'])
+    if mist.shape != a.shape[:2]:
+        raise RuntimeError('passy %s ≠ obraz %s' % (mist.shape, a.shape[:2]))
+    niebo = (mist > 0.9999) & (idx < 0.5)
+    w = np.clip(mist, 0, 1) ** float(mg.get('wykladnik', 1.0))
+    w = np.where(niebo, 0.0, w)
+    w = ndimage.gaussian_filter(w, 0.8)
+    L = FK._lum(lin)
+    barwa = np.array(mg.get('barwa', [0.80, 0.87, 0.97]), dtype=np.float32)
+    lh = float(np.percentile(L, float(mg.get('percentyl', 80))))
+    haze = barwa / float(FK._lum(barwa[None, None, :])[0, 0]) * lh
+    al = float(mg.get('sila', 0.25)) * w
+    lin = lin * (1.0 - al[..., None]) + al[..., None] * haze[None, None, :]
+    ds = float(mg.get('desat', 0.0))
+    if ds:
+        Lm = FK._lum(lin)[..., None]
+        lin = Lm + (lin - Lm) * (1.0 - ds * w[..., None])
+    out = (FK._l2s(lin) * 255 + 0.5).astype(np.uint8)
+    Image.fromarray(out).save(png)
+    raport.update({'zamglenie_udzial_kadru_w>0.3': round(float((w > 0.3).mean()), 3),
+                   'zamglenie_barwa_lin': [round(float(x), 4) for x in haze],
+                   'zamglenie_max_udzial': round(float(al.max()), 3)})
+    print('[dron-4] zamglenie: w>0,3 na %.1f %% kadru, barwa %s' % (100 * (w > 0.3).mean(), haze.round(3)))
+
+
+FK.post_przed = _post_przed_p
+
 _ru = U.render_ujecia
 
 

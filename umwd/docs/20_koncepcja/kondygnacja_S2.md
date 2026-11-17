@@ -1,7 +1,8 @@
 # Kondygnacja Sejmiku S-2 (+27,30) z antresolą (+30,90) – wariant „hol z galerią”
 
 **Opracowanie scalone w v1.2 z `koncepcja_wybrana.md` (rozdz. 7) i `model/koncepcja.json["kondygnacja_sejmiku"]`** · 17.11.2026
-**v1.2 (scalenie):** trzony wg poprawki I5 (`_v12_trzony.py`): trzon A wydłużony o 0,60 m na pd. (v 11,85–20,85; klatka A 3,40 × 5,80 m, przedsionek A 3,10 × 5,80 m; kuluar przy trzonie A 1,75 m), klatka B 3,40 × 6,64 m i przedsionek B 3,40 × 2,06 m; ewakuacja przeliczona bez tryskaczy (v1.1: nieprojektowane). Liczby niżej – stan po scaleniu (wydruki `_s2_*.py` po zmianie `_s2_model.py`).
+**v1.2 (scalenie):** trzony wg poprawki I5 (`_v12_trzony.py`): trzon A wydłużony o 0,60 m na pd. (v 11,85–20,85; klatka A 3,40 × 5,80 m, przedsionek A 3,05 × 5,80 m; kuluar przy trzonie A 1,80 m), klatka B 3,40 × 6,64 m i przedsionek B 3,40 × 2,06 m; ewakuacja przeliczona bez tryskaczy (v1.1: nieprojektowane). Liczby niżej – stan po scaleniu (wydruki `_s2_*.py` po zmianie `_s2_model.py`).
+**v1.2b (decyzje po scaleniu, `_v12b_decyzje.py`, `koncepcja_wybrana.md` rozdz. 17):** ściany klatek wzdłuż biegów 0,25 m z wnękami pochwytów (M.13 pkt 6 – 1,61 m w świetle poręczy; przedsionek A 3,05 m, szyby P1/P2 +0,05 m); ściana kuluaru od pd. 0,15 m (kuluar 2,25 m, przy trzonie A 1,80 m); łącznik KW.S.03 z polem mijania 1,80 × 2,00 m przed drzwiami przedsionka A (PHS.05a −0,80 m²); P2 bez przystanku na S; stopnie galerii 1,40 m.
 **v1.2 – poprawki po weryfikacji scalenia (17.11.2026):** schody reprezentacyjne w całości w pustce holu (otwór w antresoli, spocznik 1,50, pole 1,53 m przed stopą; test prześwitu [G2]); galeria z zatoką +0,00 dla wózków i podestem rzędu 2 z przejściem tylnym (20 + 3 miejsca; test kolizji i osiągalności [G2], linie wzroku [S3]); dojścia ewakuacyjne liczone dla wszystkich drzwi, bez zwiększeń (drzwi przedsionka B w u 27,80, zamiana PP.06 ↔ SWD.07, drzwi SWD.12a w u 5,70, toaleta publiczności na końcu korytarza, korytarz publiczny do przedsionka A, hol jako komunikacja ogólna – [E2]); przedsionek A' 2,50 × 3,00 m i test MOE [E6]; pełny otwór drzwi w [G3]. Rejestr: sekcja „v1.2 – poprawki po weryfikacji scalenia”.
 Przedmiot: usunięcie błędów K1, K2, K3, I1, I4 (oraz D1, D6, D9, D13, D14 i części I3, I5) z `weryfikacja_program.md`.
 Poprawkę weryfikatora „S-2” potraktowano jako hipotezę, sprawdzono ją i porównano z wariantami (rozdz. 2). Przyjęto wariant **S-3 „hol z galerią”**: zachowuje szkielet S-2, ale inaczej rozwiązuje galerię, górny hol i rozdzielenie publiczności od radnych.
@@ -59,7 +60,7 @@ Wszystkie liczby w tekście pochodzą z tych wydruków (shapely 2.2, układ uv w
 5. **Elewacje bez zmian.** Antresola jest wszędzie odsunięta ≥ 1,35 m od lica elewacji; w pasie przyelewacyjnym jest jej 0,00 m² [G6]. Okna 1,65 × 4,20 m (pd., zach.) i 1,65 × 5,00 m (pn.) zachowują pełną wysokość.
    * Jedyna zmiana jest niewidoczna z zewnątrz: pierwsze 2,4 m łuku przy reżyserce (φ 0–10°) dostaje szkło nieprzezierne za lamelami [S5].
 6. **Trzony (v1.2, I5):** trzon A wydłużony o 0,60 m na pd. (v 11,85–20,85), trzon B bez zmiany obrysu. Układ wewnętrzny:
-   * trzon A: dźwigi A1/A2 (1 600 kg, kabina 1,5 × 2,1) w pasie pn. z drzwiami na pn.; dźwig R z drzwiami do przedsionka A; klatka A 3,40 × 5,80 m i przedsionek A 3,10 × 5,80 m w pasie pd.;
+   * trzon A: dźwigi A1/A2 (1 600 kg, kabina 1,5 × 2,1) w pasie pn. z drzwiami na pn.; dźwig R z drzwiami do przedsionka A; klatka A 3,40 × 5,80 m i przedsionek A 3,05 × 5,80 m w pasie pd. (v1.2b: ściana klatki 0,25 m z wnęką pochwytu);
    * trzon B: dźwig T przeniesiony do segmentu, P1/P2 (1 600 kg) z drzwiami wsch., szachty w miejscu T; klatka B 3,40 × 6,64 m, przedsionek B 3,40 × 2,06 m.
 
    Biegi i spoczniki na wszystkich kondygnacjach – `_v12_trzony.py`; rozdz. 9.
@@ -80,7 +81,7 @@ Wszystkie liczby w tekście pochodzą z tych wydruków (shapely 2.2, układ uv w
 | Dostęp do baru/hol górny | – | tylko dźwig lub klatka ppoż. | schody reprezentacyjne w pustce holu (cały bieg pod otwartą przestrzenią) + A1/A2 | [G2], rys. |
 | Płyta nad klubami zach. a okna 4,20 m | – | płyta do elewacji (kolizja z oknami) | wycofanie 1,35 m, okna bez zmian | [G6] |
 | Hol (bez szatni i baru) | 5,8 m² realnie | 139,6 m² (70,3 + 69,3) | **156,6 m²** (77,6 + 79,1) | [G4] |
-| WC na S | 25,3 m² + PHS.05c bez wyjścia | 40 m² | **42,2 m²**: K 18,4 + M 18,4 (kabiny dostępne 2,2 m) + publiczna 5,5 | [G4] |
+| WC na S | 25,3 m² + PHS.05c bez wyjścia | 40 m² | **41,4 m²**: K 17,6 (v1.2b: wnęka pola mijania łącznika) + M 18,4 (kabiny dostępne 2,2 m) + publiczna 5,5 | [G4] |
 | Ściany wewn. – średnio | 0,151 m | 47 m² (szac.) | **0,222 m** (100 % ≥ 0,18 m; ściany sali 0,30 m) | [G5] |
 | M.13: 3,6 m przed dźwigami | nie | „nie da się” | **A1/A2 ≥ 3,75 m (A2 7,00–8,35 m); P1/P2 na +30,90 3,60 m** – od lica trzonu, bez biegu schodów | [E5] |
 
@@ -120,24 +121,24 @@ S-3 usuwa te słabości. Kosztem jest większa antresola (rozdz. 9, pkt 3).
 | SWD.13 | Wspólna sala radnych (okno pn. – Ostrów Tumski) | S | 36,2 | 48 | 36–60 ✔ | −11,8 |
 | SWD.14 | Pokój socjalny radnych (aneks kuchenny, okno pn.) | S | 20,0 | 24 | 20–30 ✔ | −4,0 |
 | SWD.15 | Magazyn podręczny (pod spocznikiem i górnym biegiem schodów, h 1,7–2,6 m) | S | 6,0 | 10 | 6–15 ✔ | −4,0 |
-| PHS.05a | WC damskie: kabina dostępna 2,2 × 2,5 + 2 kabiny + umywalki | S | 18,4 | | | |
+| PHS.05a | WC damskie: kabina dostępna 2,2 × 2,5 + 2 kabiny + umywalki | S | 17,6 | | | |
 | PHS.05b | WC męskie: kabina dostępna 2,2 × 2,5 + kabina + 2 pisuary + umywalki | S | 18,4 | | | |
 | PHS.05c | Toaleta dostępna publiczności (wsch. koniec korytarza publicznego, przy holu P1/P2) | ANT | 5,5 | | | |
-| **PHS.05** | **razem** | | **42,2** | 45 | 35–60 ✔ | −2,8 |
+| **PHS.05** | **razem** | | **41,4** | 45 | 35–60 ✔ | −3,6 |
 | PP.06 | Pomieszczenie porządkowe (1,60 × 2,60 m) | S | 4,2 | 6 | 4–8 ✔ | −1,8 |
 | IT.02 | Punkt dystrybucyjny IT (przy zapleczach nagrań) | S | 4,8 | 6 | 4–10 ✔ | −1,2 |
-| | **Suma programu (SWD + PHS.05 + PP.06 + IT.02)** | | **1 006,0** | 1 106 | min 928 | **+78,0 nad minimum** |
+| | **Suma programu (SWD + PHS.05 + PP.06 + IT.02)** | | **1 005,2** | 1 106 | min 928 | **+77,2 nad minimum** |
 
-Wszystkie pozycje mieszczą się w zakresach programu (SWD.01 i SWD.02 liczone łącznie z częścią na antresoli). Projekt jest o 100,0 m² poniżej sumy wartości środkowych programu i o 78,0 m² nad sumą dolnych granic. S-2 miało przy wszystkich minimach zapas 0,6 m².
+Wszystkie pozycje mieszczą się w zakresach programu (SWD.01 i SWD.02 liczone łącznie z częścią na antresoli). Projekt jest o 100,8 m² poniżej sumy wartości środkowych programu i o 77,2 m² nad sumą dolnych granic. S-2 miało przy wszystkich minimach zapas 0,6 m².
 
 **Bilans poziomu S [G5]:**
 
 | Składnik | m² |
 |---|---:|
-| Pomieszczenia (z salą, holem i szatnią) | 791,8 |
-| Komunikacja: kuluar 83,8 + pasaż 15,4 + łącznik 12,0 + dojście 4,2 + dolny bieg schodów 5,6 | 121,0 |
+| Pomieszczenia (z salą, holem i szatnią) | 791,0 |
+| Komunikacja: kuluar 85,5 + pasaż 15,4 + łącznik 12,8 + dojście 4,2 + dolny bieg schodów 5,6 | 123,4 |
 | Trzony (A 64,8 – v1.2; B 58,8) | 123,6 |
-| Ściany wewnętrzne | 43,8 |
+| Ściany wewnętrzne | 42,2 |
 | **Wnętrze od lica wewnętrznego** | **1 080,2** |
 | Ściany zewnętrzne | 65,6 |
 | **PC poziomu S** | **1 145,8** |
@@ -165,10 +166,10 @@ Pod antresolą jest 3,30 m w świetle (kluby, WC, pasaż, sala wspólna, pokój 
 * **Pas pd. (okna 1,65 × 4,20 m):**
   * SWD.08 i SWD.09 z zapleczami nagrań SWD.10a/b (okna do sal, drzwi do kuluaru) oraz PD przy zapleczach;
   * klub SWD.11a przy trzonie B;
-  * w narożu SE klub SWD.11b z dojściem 1,6 m z kuluaru (na nie otwiera się też służbowy przystanek P2), obok pomieszczenie porządkowe (1,60 × 2,60 m) i pokój matki z dzieckiem (4,80 × 2,45 m, okna wsch.) – drzwi obu przy zach. końcu (u 33,70 i 35,20), dojście do przedsionka B ≤ 10 m.
-* **Kuluar 2,20 m** (przy trzonie A 1,75 m na 7,20 m – v1.2) łączy klatki A i B i jest drogą chronioną (EI 30, drzwi S, oddymianie). Jego końce zach. i wsch. mają pełną wysokość z oknami; środkowa część (u 12,15–34,70) ma 3,30 m pod korytarzem publicznym, a odcinek u 34,90–37,40 – pod toaletą publiczności.
+  * w narożu SE klub SWD.11b z dojściem 1,6 × 2,6 m z kuluaru (przewężenie miejscowe ≤ 5 m – M.13; v1.2b: P2 bez przystanku na S), obok pomieszczenie porządkowe (1,60 × 2,60 m) i pokój matki z dzieckiem (4,80 × 2,45 m, okna wsch.) – drzwi obu przy zach. końcu (u 33,70 i 35,20), dojście do przedsionka B ≤ 10 m.
+* **Kuluar 2,25 m** (przy trzonie A 1,80 m na 7,20 m – v1.2b: ściana od pd. 0,15 m) łączy klatki A i B i jest drogą chronioną (EI 30, drzwi S, oddymianie). Jego końce zach. i wsch. mają pełną wysokość z oknami; środkowa część (u 12,15–34,70) ma 3,30 m pod korytarzem publicznym, a odcinek u 34,90–37,40 – pod toaletą publiczności.
 * **Pas zach.:** kluby 15 os. z oknami zach. (drzwi SWD.12a w u 5,70 – przy wsch. końcu ściany pd.) oraz pasaż 1,8 m wzdłuż trzonu A (kuluar ↔ hol).
-* **Między trzonem A a salą:** łącznik 1,4 m (kuluar ↔ hol, drzwi przedsionka A) oraz WC K i WC M, oba z drzwiami do holu.
+* **Między trzonem A a salą:** łącznik 1,4 m z polem mijania 1,80 × 2,00 m przed drzwiami przedsionka A (v1.2b; przewężenia 3,30 i 3,25 m ≤ 5 m) oraz WC K i WC M, oba z drzwiami do holu.
 * **Pas pn.:** pokój socjalny i wspólna sala radnych z oknami 1,65 × 5,0 m. Dalej na zachód hol: w narożu NW pustka 2-kond. z oknami pn. i zach., szatnia, schody reprezentacyjne (cały bieg w pustce, stopa u 10,92 z płaskim polem 1,53 m), a pod spocznikiem i górnym biegiem magazyn.
 * **Hol dźwigów A1/A2:** drzwi pn. dźwigów otwierają się wprost do holu (kadr W7); wolna głębokość od lica trzonu przed A1 3,75 m (do biegu schodów), przed A2 8,35 m [E5].
 * **Sala:** wejście główne radnych i gości z holu (NW, 1,6 m); wyjścia SW (1,2 m) i SE (1,6 m) do kuluaru; drzwi prezydium (1,0 m) za stołem. Reżyserka zajmuje naroże SE sali i ma przeszklenie na prezydium i na twarze radnych.
@@ -215,7 +216,7 @@ Galeria jest przedzielona od baru ścianą (v 22,65–22,85) i jest otwarta tylk
   Rzędy leżą na różnych promieniach, więc stanowiska są przestawione względem siebie, a linie na prezydium przechodzą przez wolną płytę. Pozostałe przypadki (C 39–60 mm) to linie skośne przy skrajnym stanowisku sąsiada. Uzupełnieniem są ekrany na pulpitach (standard systemu obrad).
 * **Galeria – układ (v1.2 po weryfikacji, [G2]):** od balustrady (lico u 22,00; szkło 1,10 m na cokole pełnym 0,20 m):
   * **rząd 1 na +0,00** (u 20,90–21,90): 8 miejsc × 0,52 m, siedzisko 0,50 + przejście 0,45 m przed kolanami; dostęp przejściem 0,90 m od pd. (v 12,60–13,50) z foyer – rząd z dostępem z jednej strony ma ≤ 8 miejsc (zasada § 261);
-  * **podest +0,90** (u 19,10–20,90 × v 13,50–18,30): rząd 2 – 9 miejsc (siedzisko 0,50 + 0,30 na nogi) i przejście tylne 1,00 m; 6 stopni 0,15 × 0,30 z foyer; na krawędzi podestu przed rzędem 2 balustrada szklana 0,70 m (WT § 298 ust. 7), na bokach i z tyłu – balustrady (razem 12,2 mb); prześwit nad podestem do spodu kratownic 2,35 m;
+  * **podest +0,90** (u 19,10–20,90 × v 13,50–18,30): rząd 2 – 9 miejsc (siedzisko 0,50 + 0,30 na nogi) i przejście tylne 1,00 m; 6 stopni 0,15 × 0,30 z foyer, szer. 1,40 m (v1.2b; w świetle poręczy 1,22 ≥ 1,20 – M.13); na krawędzi podestu przed rzędem 2 balustrada szklana 0,70 m (WT § 298 ust. 7), na bokach i z tyłu – balustrady (razem 11,8 mb); prześwit nad podestem do spodu kratownic 2,35 m;
   * **zatoka +0,00 na pn. końcu** (v 18,30–22,65): 3 miejsca dla wózków 0,90 × 1,40 przy balustradzie, każde z miejscem opiekuna obok i polem manewrowym 1,5 × 1,5 m, połączona z foyer bez stopni.
   * Test [G2]: miejsca +0,00 ∩ podest/stopnie 0,0000 m²; wszystkie miejsca osiągalne od obu drzwi galerii (rząd 1 przejściem ≥ 0,45 m – 8/8; opiekunowie 3/3; wózki – pole manewrowe wolne i przejście ≥ 0,90 m bez stopni 3/3; rząd 2 z przejścia tylnego 9/9). Wcześniejszy układ (v1.2 przed weryfikacją: podest rzędu 2 na całej długości, wózki i rząd 1 za nim) dawał kolizje 0,45 m² na każde miejsce dla wózka i rząd 1 bez dojścia – usunięty.
 * **Galeria – linie wzroku [S3]:** oczy 1,20 m; oko rzędu 1 i wózków u 21,20, rzędu 2 u 20,40 (+0,90).
@@ -237,7 +238,7 @@ Galeria jest przedzielona od baru ścianą (v 22,65–22,85) i jest otwarta tylk
 
 ## 6. Ewakuacja, strefy, dźwigi [E1]–[E6]
 
-* **Osoby i szerokości:** maks. 350 os. (płyta 77 i galeria 23 – z rzędów i miejsc modelu) → biegi 0,6 × 3,50 = 2,10 m ≤ 2 × 1,60 m ✔; kuluar 2,10 m ≤ 2,20 m ✔ (zapas 0,10 m); przy trzonie A 1,75 m (przepustowość 292 os.; odcinek obsługuje ≈ 84 os. z części zach.) ✔.
+* **Osoby i szerokości:** maks. 350 os. (płyta 77 i galeria 23 – z rzędów i miejsc modelu) → biegi 0,6 × 3,50 = 2,10 m ≤ 2 × 1,60 m ✔; kuluar 2,10 m ≤ 2,25 m ✔ (zapas 0,15 m); przy trzonie A 1,80 m (przepustowość 300 os.; odcinek obsługuje ≈ 84 os. z części zach.) ✔.
 * **Sala:** 3 wyjścia + drzwi prezydium, odstęp ≥ 5 m, drzwi otwierane na zewnątrz.
 * **Strefa ZL I:** S + antresola = 1 145,8 + 293,0 = **1 438,8 m² ≤ 2 500 m²** ✔.
 * **Strefy dymowe [E3]:**
@@ -247,7 +248,7 @@ Galeria jest przedzielona od baru ścianą (v 22,65–22,85) i jest otwarta tylk
 
   Przedsionki A, A', B – nadciśnienie (§ 246 ust. 2). Oddymianie dróg jest wymagane przez § 247 ust. 1, ale nie służy do wydłużenia dojść.
 * **Przedsionki i MOE [E6]** – MOE 1,5 × 1,5 m poza torem ewakuacji 1,2 m (prosta od drzwi wejściowych do drzwi klatki) i poza polem otwierania skrzydeł (test geometryczny, siatka 0,05 m):
-  * A 3,10 × 5,80 m (S i +30,90; drzwi pd., wsch., R, klatka) – MOE w narożu NW (S: u 12,15–13,65 × v 15,60–17,10);
+  * A 3,05 × 5,80 m (S i +30,90; drzwi pd., wsch., R, klatka) – MOE w narożu NW (S: u 12,20–13,70 × v 15,65–17,15);
   * A' **2,50 × 3,00 m** (u 5,80–8,30; kosztem SWD.03: 33,8 → 32,3 m²) – drzwi pn. 1,2 m w u 7,70, drzwi do klatki 1,0 m w v 12,55–13,55 (przy spoczniku v 12,05–13,55) – MOE u 5,80–7,30 × v 12,50–14,00;
   * B 3,40 × 2,06 m – drzwi z kuluaru (S) i korytarza (+30,90) w **u 27,80**, drzwi do klatki w u 27,80 – MOE w narożu SW (u 25,10–26,60 × v 7,59–9,09).
 
@@ -272,7 +273,7 @@ Galeria jest przedzielona od baru ścianą (v 22,65–22,85) i jest otwarta tylk
 | WC M PHS.05b / szatnia SWD.06 / magazyn SWD.15 (z holu) | 8,1 / 4,4 / 2,2 | A 31,60 i B 28,75 (5,30) / A 19,30 i B 36,90 (4,65) / A 18,30 i B 35,90 (3,65) | 2 kierunki |
 | SWD.09, SWD.10a/b, IT.02, SWD.11a, SWD.13, SWD.14, WC K PHS.05a | ≤ 10,7 | 2,60–8,85 | ≤ 10 |
 
-**Wynik [E2]:** 17 pomieszczeń z dojściem ≤ 10 m (1 kierunek wystarcza), 5 z dwoma kierunkami do różnych klatek (PHS.05b, SWD.06, SWD.12b, SWD.15, antresola radnych); **0 dojść jednokierunkowych > 10 m, 0 wymagających zwiększeń, 0 niezgodnych**. Najdłuższe dojścia jednokierunkowe: SWD.07 9,90; SWD.12a 9,85; SWD.04 9,75; SWD.11b 9,40 m. Obie ślepe części kuluaru oceniono jedną regułą. Poprzednia wersja (ręczna lista dróg) pomijała SWD.07, SWD.04, SWD.12a i SWD.12b i opierała trzy dojścia na zwiększeniu +50 %; usunięto to przesunięciem drzwi przedsionka B (u 27,0 → 27,80), zamianą PP.06 ↔ SWD.07, przeniesieniem drzwi SWD.12a (u 3,4 → 5,70) i toalety publiczności na wsch. koniec korytarza oraz przedłużeniem korytarza publicznego do przedsionka A (drugi kierunek na +30,90).
+**Wynik [E2]:** 17 pomieszczeń z dojściem ≤ 10 m (1 kierunek wystarcza), 5 z dwoma kierunkami do różnych klatek (PHS.05b, SWD.06, SWD.12b, SWD.15, antresola radnych); **0 dojść jednokierunkowych > 10 m, 0 wymagających zwiększeń, 0 niezgodnych**. Najdłuższe dojścia jednokierunkowe: SWD.12a 9,90; SWD.07 9,85; SWD.04 9,75; SWD.11b 9,35 m (v1.2b). Obie ślepe części kuluaru oceniono jedną regułą. Poprzednia wersja (ręczna lista dróg) pomijała SWD.07, SWD.04, SWD.12a i SWD.12b i opierała trzy dojścia na zwiększeniu +50 %; usunięto to przesunięciem drzwi przedsionka B (u 27,0 → 27,80), zamianą PP.06 ↔ SWD.07, przeniesieniem drzwi SWD.12a (u 3,4 → 5,70) i toalety publiczności na wsch. koniec korytarza oraz przedłużeniem korytarza publicznego do przedsionka A (drugi kierunek na +30,90).
 
 Galeria (osoby na wózkach) ma MOE w przedsionku A z dźwigiem ewakuacyjnym R (przystanek +30,90) oraz MOE w przedsionku B.
 
@@ -293,7 +294,7 @@ Kabina P1/P2 z v1.0 (1 275 kg, 1,4 × 2,4 = 3,36 m² > 2,95 m²) była niezgodna
 | A1 / A2 | S | 3,75 m (do biegu schodów) / 8,35 m | M.13 3,6 m ✔ (zapas 0,15) |
 | A1 / A2 | +30,90 | 3,75 m (do otworu nad biegiem) / 7,00 m | M.13 3,6 m ✔ (zapas 0,15) |
 | P1/P2 | +30,90 | 3,60 m | M.13 3,6 m ✔ |
-| P2 | S (służbowy, na klucz: zaplecze baru i dostawy po przeniesieniu T) | 1,60 m | WT § 195 ✔ |
+| P2 | – (v1.2b: bez przystanku na S; dostawy baru dźwigami A1/A2/R) | – | – |
 
 Poprzednia wartość „5,95 m” była górnym limitem pętli pomiarowej (119 × 0,05) z biegiem schodów wliczonym do wolnej podłogi – poprawiono w `_s2_ewakuacja.py` [E5]. P1 nie zatrzymuje się na S. Publiczność nie może wysiąść w strefie radnych.
 
@@ -326,7 +327,7 @@ Razem 84,31 m² = 28,8 % antresoli (w części publicznej 76,81 z 142,14 m² = 5
 | **K3** | 44 stanowisk się nie mieści | 4 rzędy, 47 stanowisk (43 + 4 dla wózków). Przejścia 5,0 % / ≤ 4,61 %. Media i goście mają miejsca. | [S1] |
 | **I1** | Galeria nad prezydium – brak widoku; radni pod światło | Galeria zach. nad WC i łącznikiem, 2 strome rzędy i zatoka dla wózków: C ≥ 158 mm do całego prezydium i mówcy, kąt mediana 64°. Prezydium na tle pełnej ściany, radni z oknami za plecami (min. 51°). Galeria w łuku sprawdzona i odrzucona. | [S3], [S5], [S6] |
 | **I4** | Otwarte schody w kuluarze; antresola otwarta na kuluar | Schody usunięte z kuluaru. Kuluar EI 30, korytarz publiczny nad nim zamknięty. Schody reprezentacyjne tylko w pustce holu (osobna strefa dymowa; cały bieg pod otwartą przestrzenią). Klatki A i B przedłużone do +30,90 (przedsionki A, A', B). | [E2], [E3], [E6] |
-| I3 (część S) | WC na S za małe | 42,2 m² (K 18,4 + M 18,4 + publiczna 5,5), kabiny dostępne w K i M | [G4] |
+| I3 (część S) | WC na S za małe | 41,4 m² (K 17,6 + M 18,4 + publiczna 5,5), kabiny dostępne w K i M | [G4] |
 | I5 (część S) | Kabiny i holy windowe; trzony za małe | 1 600 kg / 1,5 × 2,1 m (A1, A2, P1, P2). Holy A1/A2 ≥ 3,75 m (od lica trzonu, bez biegu schodów), P1/P2 3,60 m. Dźwig T w segmencie. v1.2: klatka A 3,40 × 5,80 m (trzon A wydłużony o 0,60 m na pd.), klatka B 3,40 × 6,64 m – 2 lub 3 biegi na kondygnacji, stopnie ≤ 17,5 × 28 cm | [E4], [E5], `_v12_trzony.py` |
 | D1 | Ściany za cienkie | Ściany sali 0,30 m (pd. i zach., pod kratownice), przegrody 0,20 m; średnio 0,222 m | [G5] |
 | D6 | Jedna mównica 0,75–0,80 | Mównica regulowana 0,75–1,20 m, pod blatem 0,90 × 0,67 × 0,60 m | [S7] |
@@ -342,7 +343,7 @@ Razem 84,31 m² = 28,8 % antresoli (w części publicznej 76,81 z 142,14 m² = 5
 
 1. **Układ trzonu A (I5) – rozwiązany w v1.2** (`_v12_trzony.py` [T2]): obrys 7,20 × 9,00 m (wydłużenie o 0,60 m na pd.);
    * pas pn.: A1, A2, R (drzwi A1/A2 na pn. na wszystkich kondygnacjach – zmiana względem `budynek.json`, gdzie dźwigi otwierają się na pd.; na kond. 1–6 przed nimi korytarz pn. 2,15 m);
-   * pas pd.: klatka A 3,40 × 5,80 m + przedsionek 3,10 × 5,80 m z drzwiami pd. (kuluar) i wsch. (łącznik; na +30,90 galeria).
+   * pas pd.: klatka A 3,40 × 5,80 m + przedsionek 3,05 × 5,80 m z drzwiami pd. (kuluar) i wsch. (łącznik; na +30,90 galeria).
 
    Klatka dwubiegowa na kondygnacjach 3,75 m (22 st. 17,05 × 28 cm) wymaga 5,80 m; na −1/P i P/1 – 3 biegi (spocznik parteru na końcu pn.). Na parterze hol A1/A2 trafia do łącznika pn. (u 0,5–13,35 × v 21–29,2).
 2. **Trzon B (I5):** dźwig T w segmencie, drzwi wsch. P1/P2 na P i +30,90; v1.2 – klatka B 3,40 × 6,64 m (2 biegi także na P, 2 × 14 st.), przedsionek B 3,40 × 2,06 m.
@@ -351,11 +352,7 @@ Razem 84,31 m² = 28,8 % antresoli (w części publicznej 76,81 z 142,14 m² = 5
    * Zamknięte przegrodami są dojścia publiczności (hol P1/P2, korytarz), toaleta i przedsionek A' – 84,31 m² = 28,8 % antresoli [G6]. Wykładnię WT § 3 pkt 19 warto przedstawić jako uzgodnienie z rzeczoznawcą ppoż.
 4. **Płyta sali ma 232,0 m²** (z galerią 297,3 m²), czyli 3,3 m² na osobę płyty. Jest wystarczająca, ale ciasna. Trzecie przejście czy dodatkowe miejsca dla mediów nie są możliwe bez utraty stanowisk.
 5. **Linie wzroku radnych do siedzącego prezydium:** 31 ze 156 linii ma C 39–60 mm (linie skośne przy sąsiednim stanowisku). Akceptowalne przy ekranach na pulpitach; lepszy wynik dałoby przewyższenie 0,10 m przy rozstawie 2,0 m, ale kosztem ≈ 3–5 stanowisk.
-6. **Szerokości wg M.13 (1,8 m)** nie są spełnione w czterech miejscach (WT spełnione):
-   * łącznik wsch. 1,40 m – druga droga z holu;
-   * dojście do SWD.11b 1,60 m;
-   * przystanek służbowy P2 1,60 m;
-   * kuluar przy wydłużonym trzonie A 1,75 m (v1.2).
+6. **Szerokości wg M.13 (1,8 m) – v1.2b:** kuluar przy trzonie A 1,80 m (ściana 0,15 m); łącznik wsch. 1,40 m z polem mijania 1,80 × 2,00 m (przewężenia ≤ 5 m – M.13 korytarze pkt 2.2–3); dojście do SWD.11b 1,60 × 2,60 m – przewężenie miejscowe ≤ 5 m; przystanek służbowy P2 usunięty. Na S nie ma odstępstw od M.13 (pozostałe odstępstwa budynku: `koncepcja_wybrana.md` rozdz. 17).
 7. **Szczegóły branżowe:**
    * strefa multimedialna otwarta – głośniki kierunkowe, ustroje na suficie antresoli;
    * plenum nawiewu (D7);

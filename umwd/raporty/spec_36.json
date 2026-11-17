@@ -1,0 +1,65 @@
+{
+ "nr": 36,
+ "title": "Descriptive texts after verification: Stage II 5 × A3, Stage I 5 × A4 + annex; F.14.A cost form",
+ "stages": [
+  [
+   "Organiser materials ✔ (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register ✔ (184 requirements) + checklists",
+   "done"
+  ],
+  [
+   "Site ✔ (zoning, heritage, survey, geotech, trees, neighbours)",
+   "done"
+  ],
+  [
+   "Law ✔ (WT bridge, fire, accessibility, zero-emission)",
+   "done"
+  ],
+  [
+   "Design research ✔ (trends, visuals, boards, façades, costs)",
+   "done"
+  ],
+  [
+   "Programme ✔ (187 offices, PU ≈ 8,600 m²)",
+   "done"
+  ],
+  [
+   "Concept v1.2 ✔ (Sejmik storey merged, cost 148.99 mln) → open decisions v1.2b (workflow ►)",
+   "running"
+  ],
+  [
+   "Production ►: drawings v1.1 ✔ (verified); plans + tables re-run after v1.2; photomatch W1/W2 tests ✔; extra showcase renders (workflow ►)",
+   "running"
+  ],
+  [
+   "Boards & texts ►: Stage II 8/8 skeletons (vis pending, P7/P8 re-layout); Stage II text 5 × A3 + Stage I text + F.14.A (workflow ►); 300-dpi export ✔",
+   "running"
+  ],
+  [
+   "Audit ►: completeness 25/44; structural & functional audit ►; jury later",
+   "running"
+  ]
+ ],
+ "notes": [
+  "Stage II text revised after 4 independent checks (numbers, rules/law, engineering, jury): now exactly 5 A3 pages at ≥ 11 pt, every number bound to the model.",
+  "Stage I studial text: 5 A4 pages of text + 3 annex pages of data tables, as the rules allow.",
+  "F.14.A Stage I cost form generated from the same cost model as F.14.B: 148.98 mln zł net works; service 7.6 mln zł net (limit 8.1)."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/opis_etap2_s5.png",
+   "caption": "Stage II text, page 5/5 (greenery, cost, operation)"
+  },
+  {
+   "path": "umwd/raporty/img/opis_etap1_s1.png",
+   "caption": "Stage I studial text, page 1/5"
+  },
+  {
+   "path": "umwd/raporty/img/F14A_p1.png",
+   "caption": "F.14.A Stage I cost form"
+  }
+ ]
+}

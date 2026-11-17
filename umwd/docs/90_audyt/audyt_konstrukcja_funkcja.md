@@ -1089,3 +1089,188 @@ Wniosek: pakiet przekracza zapas 1,01 mln przy rezerwie 5 %. Przy rezerwie 4 % (
 - dźwignię rezerwową (filary pd. wieży w ceramice −0,23);
 - oddymianie zamiast tryskaczy;
 - K-15 iii zamiast R2 (szyb awaryjny, 0,27).
+
+---
+
+## 6. Luki do sprawdzenia (krytyk kompletności)
+
+**Zakres i metoda.** Krytyk kompletności porównał zakres rozdz. 1–5 z regulaminem (R-040, R-044, R-212, kryterium 1a), umową F.01, specyfikacją v1.2 (rozdz. 5, 7, 9, 10, 12, 16), opracowaniami terenu (`geotechnika.md`, `mpzp.md`, `dendrologia.md`, `sasiedzi.md`) oraz z rzutem S (`docs/20_koncepcja/img/s2_plan.png`) i przekrojami 1:200. Lista obejmuje obszary, których audyt nie sprawdził albo sprawdził powierzchownie, w tym jedno ustalenie odrzucone w rozdz. 4 (F3-garaz-technika-11). Nie powtarza ustaleń z rozdz. 1–4 ani problemów znanych z weryfikacji, rejestru v1.1/v1.2 i `kondygnacja_S2.md`.
+
+Liczby policzono skryptami w `/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/audyt_kf/krytyk/`: `k1_szyb_mds.py`, `k2_luk_akustyka.py`, `k3_plac_budowy.py`, `k4_podcien_kraweznik.py`, `k5_etapowanie_kratownice.py`, `k6_drycooler_akustyka.py`.
+
+Luki nie przeszły podwójnej weryfikacji z rozdz. 1. Są to pytania kontrolne dla soczewek, a „ocena” mówi, jak prawdopodobny jest problem. Integralność: jak w całym audycie, bez informacji o wynikach konkursu i pracach konkursowych.
+
+| Nr | Obszar | Status w audycie | Prawdopodobny problem | Do sprawdzenia przez |
+|---|---|---|---|---|
+| L-01 | Woda powierzchniowa: rzędne otworów podziemia | F3-11 odrzucone; poprawka F1-10 obniża M1 | **TAK** – opis wewnętrznie sprzeczny; MDS narażone | rewizja_spec |
+| L-02 | Szyb i tunel wyjścia zapasowego MDS poza obudową | nie sprawdzono | **TAK** – wykop w wodzie poza wanną; koszt zaniżony | rewizja_spec |
+| L-03 | Etapowanie realizacji (umowa F.01) | nie sprawdzono | **TAK** – brak koncepcji etapów; podziemie skrzydła bez nadziemia nie spełnia warunku wyporu | rewizja_spec |
+| L-04 | Technologia i organizacja budowy podziemia | S2-posadowienie-02 odrzucone jako znane | **TAK** – pale CFA sprzeczne z wykopem rozpartym stropami; przeszkody w nasypach; brak miejsca na zaplecze | rewizja_spec |
+| L-05 | Akustyka sali obrad i ściany mobilnej sali 200 | nie sprawdzono | **TAK** – wklęsły szklany łuk skupia odbicia na prezydium | kondygnacja_S2, rewizja_spec |
+| L-06 | Drgania i hałas od tramwaju; tunel pod Mazowiecką | nie sprawdzono (spec. rozdz. 16 pkt 9) | **RYZYKO średnie** | rewizja_spec |
+| L-07 | Odporność na oddziaływania wyjątkowe; podcień Bramy Mostowej | nie sprawdzono | **PRAWDOPODOBNY** – brak klasy konsekwencji, więzi, sprawdzenia uderzenia pojazdu i usunięcia słupa | rewizja_spec |
+| L-08 | Rezerwy w szachtach, trasach i na tarasach technicznych (R-044) | nie sprawdzono (S3-ppoz-07 bilansuje tylko szachty ppoż.) | **TAK** – rezerwa zerowa albo nieopisana | rewizja_spec |
+| L-09 | Technika segmentu: dry-cooler i agregat | F3-07 dotyczy tylko agregatu | **TAK** – przepływ przez żaluzje 2–3 razy większy niż w opisie; recyrkulacja; hałas nocny przy oknie WS 5 | rewizja_spec |
+| L-10 | Dzień sesji: ewakuacja OzN z galerii i płyty, stanowisko KDR, kontrola gości | częściowo (F1-05, F1-07, S2 [E6]) | **ŚREDNI** – mniej pól MOE niż miejsc dla wózków | kondygnacja_S2 |
+
+#### L-01 – Woda powierzchniowa: rzędne otworów podziemia niespójne z każdą przyjętą rzędną
+
+- **Status w audycie.** F3-garaz-technika-11 odrzucono z uzasadnieniem „poziom miarodajny ok. 119,0, teren poza Q10/Q1/Q0,2 %”. Otworów łączących się z podziemiem nie zestawiono jednak z żadną rzędną.
+- **Dowód.**
+  - Spec. rozdz. 5 mówi: „wszystkie otwory podziemia ≥ 120,30”. Zapora do 120,30 jest tylko we wnęce bramy garażu. Jest to „rzędna zapór +1,00” z `weryfikacja_koszt_eko.md`, a nie wynik analizy.
+  - Z podziemiem łączą się na poziomie terenu:
+    - klatki A i B oraz szyby A1, A2, R, P1 i P2 – posadzka P 119,30, czyli 0,00–0,20 m nad terenem przy wejściach (pikiety 119,10–119,36; wejścia bez progów – rozdz. 11);
+    - szyb T (−2…4) z drzwiami od Wybrzeża;
+    - klatka C (−1…4) w M1;
+    - szyb wyjścia zapasowego MDS – „płaska klapa w trawniku” na terenie 118,93–118,96 (pikiety przy (91,75; 32,00), `k1_szyb_mds.py`).
+  - Po poprawce F1-komunikacja-10 posadzka M1 leży na 118,82–118,85. Klatka C prowadzi z niej na −1 (MDS 260 os.), więc otwór podziemia leży poniżej poziomu 119,0, który audyt sam przyjął w F3-11. Poniżej 119,0 leży też klapa MDS.
+  - Przy rzędnej 120,30 z rozdz. 5 poniżej leży cały parter 119,30. Zapora w samej bramie garażu nie chroni wtedy podziemia, bo woda zejdzie klatkami i szybami.
+  - `geotechnika.md` K-02: opinia M.05 (s. 7) mówi „obszar narażony na niebezpieczeństwo powodzi (rzeczne)”, a PIG wskazuje strefę podtopień. ISOK sprawdzono na mapach II cyklu, ważnych do 21.12.2025. Granica Q0,2 % biegnie 10–20 m od krawędzi obszaru inwestycji.
+- **Wymaganie.** Spójność z zasadą rozdz. 5; zalecenie `geotechnika.md` K-02 (zabezpieczyć zjazdy i otwory podziemia); funkcja MDS (F.01 zał. 3 pkt 2 ppkt 2 lit. b, pkt 3 ppkt 10).
+- **Ocena.** TAK. Naprawa może być tania (decyzja o rzędnej, progi albo zamknięcia wodoszczelne przy klatce C i T, klapa MDS w podniesionej obudowie). Dziś jednak opis jest sprzeczny, a F1-10 pogarsza stan.
+- **Pytanie kontrolne.** Jaka jest miarodajna rzędna wody powierzchniowej według aktualnych map zagrożenia (po 21.12.2025) i opinii M.05? Czy wszystkie połączenia z podziemiem leżą powyżej niej albo mają zamknięcia: klatki A, B i C, szyby A1, A2, R, P1, P2 i T, klapa MDS, czerpnie? Przy 119,0 poniżej leżą klapa MDS (ok. 118,95) i M1 po F1-10 (118,82–118,85). Przy 120,30 poniżej leży cały parter.
+
+#### L-02 – Szyb i tunel wyjścia zapasowego MDS poza ścianą szczelinową, poniżej zwierciadła wody
+
+- **Status w audycie.** Nie sprawdzono. `weryfikacja_program.md` wymienia szyb tylko jako element programu MDS i kosztu.
+- **Dowód.**
+  - Według P-I6 szyb stoi w (91,75; 32,00), a tunel ma 7,6 m od lica −1, czyli leży poza ścianami szczelinowymi (`k1_szyb_mds.py`: 7,57 m). Posadzka −1 ma 115,10, więc dno wykopu tunelu wypada na ok. 114,5, ok. 4,5 m pod terenem.
+  - Otwór O-06 (94,85; 34,70) leży 4,1 m od szybu: nasyp do 3,50 m, ZWG ustabilizowane 115,28, pod spodem piaski holoceńskie połączone z rzeką. Dno wykopu wypada 0,8 m pod zwierciadłem z wiercenia, ok. 2,0 m pod ZWG maks. 116,45 i 2,5 m pod obliczeniowym 117,0.
+  - Klapa leży 4,05 m od granicy obszaru, 10,8 m od budynku WS 5 i 7,3 m od najbliższego drzewa (spec.: 7,1 m od drzewa M.06).
+  - Spec. rozdz. 5 przyjmuje „odwodnienie tylko wewnątrz obudowy, bez obniżania zwierciadła poza wykopem (ochrona Maz. 19, WS 5–6 i drzew)”. Tunelu poza obudową nie da się więc wykonać w wykopie odwadnianym. Potrzebna jest osobna szczelna obudowa do stropu glin 101,8–103,4 (ok. 16–17 m), np. ok. 25 m obwodu × 16,5 m ≈ 410 m² palisady, albo korek iniekcyjny w dnie. Potrzebne jest też szczelne przejście przez ścianę szczelinową, która jest jednocześnie absorberem GPC.
+  - Rozdz. 12 wycenia „szyb MDS” na 0,25 mln zł. Sama palisada przy 1 000–1 500 zł/m² kosztuje ok. 0,4–0,6 mln zł (szacunek krytyka). Wariant ryzyka R2 (szyb awaryjny z −2, +0,27 mln) byłby jeszcze głębszy: posadzka 112,10, ok. 5 m pod ZWG obliczeniowym.
+- **Wymaganie.** Zasada rozdz. 5; PN-EN 1997-1 p. 2.4.7.4–2.4.7.5 (UPL i HYD dna wykopu i tunelu); wyjście awaryjne budowli ochronnej (rozdz. 16 pkt 16).
+- **Ocena.** TAK. Element jest wykonalny, ale obecny opis nie podaje technologii ani obudowy i zaniża koszt.
+- **Pytanie kontrolne.** Jaką technologią i w jakiej obudowie wykonuje się szyb i tunel 7,6 m z dnem ok. 114,5 poza ścianą szczelinową, skoro odwodnienie poza obudową jest wykluczone? Jak uszczelnia się przejście przez ścianę energetyczną? Czy 0,25 mln zł obejmuje obudowę szczelną do glin? Czy klapa na 118,95 jest wodoszczelna przy rzędnej z L-01?
+
+#### L-03 – Etapowanie realizacji wymagane umową F.01: brak koncepcji, a konstrukcja go nie dopuszcza bez środków tymczasowych
+
+- **Status w audycie.** Nie sprawdzono. Spec. nie zawiera żadnego zapisu o etapowaniu (przeszukano `koncepcja_wybrana.md`, `koncepcja.json` i `kondygnacja_S2.md`).
+- **Wymaganie.** Umowa F.01 wymaga:
+  - w Etapie 1 umowy – „koncepcji etapowej realizacji inwestycji” (§ 3 ust. 1 pkt 1 lit. a; zał. 3 pkt 2);
+  - PB i PW „umożliwiających etapowanie realizacji inwestycji” (§ 3 ust. 1 pkt 2 lit. a, pkt 4).
+
+  Źródło: `formularze_tabele.md` rozdz. 9.
+- **Dowód.**
+  - Podziemie to jedna wanna ze ścian szczelinowych na całym obwodzie, wykop rozparty stropami, „bez dylatacji w poziomie stropów; wspólna płyta fundamentowa” (rozdz. 5).
+  - Skrzydło nie ma własnego dźwigu: szyb C1 usunięto, obsługują je A1/A2 z wieży. Rampa, trafo, rozdzielnia, BESS, agregat i dry-cooler są w segmencie. Etapowanie jest więc możliwe tylko w kolejności: całe podziemie z wieżą i segmentem, potem nadziemie skrzydła.
+  - W takim wariancie podziemie skrzydła stoi bez nadziemia. Pod skrzydłem jest 661 m² kondygnacji −2, a spód płyty leży na ok. 111,10. Ciężar stały samego podziemia wynosi ok. 47 kPa, czyli 0,9 G ≈ 42 kPa. Wypór wynosi 59 kPa przy 117,0 i 79 kPa przy 119,0. Niedobór to ok. 17 / 37 kPa, czyli ok. 11 / 24 MN (`k5_etapowanie_kratownice.py`).
+  - Spec. sprawdza wypór z ciężarem ok. 110 kPa, który obejmuje nadziemie P+4. Model krytyka odtwarza tę wartość (ok. 110 kPa).
+  - MDS na −1 (260 os.) wychodzi m.in. klatką C, która należy do skrzydła. W etapie 1 traci jedno z trzech wyjść.
+  - Centrum konferencyjne (sale 200 i 80, foyer) i M1 leżą w skrzydle, więc w etapie 1 ich nie ma.
+- **Ocena.** TAK. To wymaganie umowy, a brak schematu etapów i rozwiązania balastu tymczasowego to luka opisu konstrukcji (R-117 b). Zalecenia pokonkursowe i wytyczne Zamawiającego wchodzą do umowy (R-150).
+- **Pytanie kontrolne.** Jaki podział na etapy przewiduje koncepcja? Jeśli skrzydło ma być etapem 2, czym przeniesie się niedobór wyporu ok. 11 MN (117,0) albo 24 MN (119,0) pod 661 m² kondygnacji −2 (PN-EN 1997-1 p. 2.4.7.4): balastem, kotwami czy pompowaniem? Którędy w etapie 1 wychodzi MDS bez klatki C?
+
+#### L-04 – Technologia i organizacja budowy podziemia: pale CFA, słupy wstępne, przeszkody w nasypach, zaplecze
+
+- **Status w audycie.** S2-posadowienie-02 odrzucono jako znane (G-I-3: „wykop rozparty stropami”). G-I-3 wprowadza jednak tylko metodę. Jej skutków dla pali, słupów i zaplecza nikt nie sprawdził, choć audyt sam podaje w F3-08 wysokość roboczą ok. 3,9 m pod stropem −1.
+- **Dowód.**
+  - Pod płytą wieży (spód 110,90) przewidziano 36 pali CFA Ø 0,8 m o długości L ≈ 14 m (rozdz. 5). Standardowy pal CFA wymaga ciągłego świdra o długości pala, czyli ponad 14 m wysokości roboczej. Pod stropami (3,9 m) zostają technologie niskiej wysokości: świdry sekcyjne albo pale wiercone w rurach. Spec. ich nie przewiduje. Druga możliwość to wiercenie z terenu (ok. 119,0): pal ma wtedy ok. 22 m z pustym odcinkiem ok. 8 m.
+  - W metodzie stropowej stropy P i −1 nad wykopem opierają się na słupach osadzonych wcześniej z poziomu terenu. Dotyczy to wieży i segmentu: 12 słupów siatki ciągłych −2…6 oraz trzonów A i B. Słupów stalowych nie osadza się z wymaganą tolerancją w palach CFA. Zwykle stosuje się pale wiercone w rurze albo barety. W skrzydle problemu nie ma, bo płyty 14,2 m opierają się na ścianach.
+  - Pozycja „pale CFA 0,55” mln zł (rozdz. 12) nie obejmuje słupów wstępnych ani pustych odcinków pali.
+  - Nasypy mają 2,8–3,8 m i zawierają gruz. Przy O-01 (63,25; 68,75), w narożu NW obrysu −1, CPTu ma odmowę na 3,4 m („prawdopodobny relikt fundamentu lub piwnicy przedwojennej kamienicy”, `geotechnika.md`). Linia ścian biegnie śladem pierzei z 1934 r. Przeszkody trzeba usunąć przed wykonaniem ścian prowadzących, przy licu 0,15 m od granicy i przy chodniku Mazowieckiej. Rozdz. 16 pkt 6 wymienia tylko archeologię i harmonogram.
+  - Poza obrysem −1, strefami ochrony drzew i ogródkami zostaje 742 m² terenu (`k3_plac_budowy.py`). Strefa ochrony to korona + 1 m, a M.06 rozdz. 6 zakazuje w niej składowania, postoju i obiektów tymczasowych przez całą budowę podziemia. Z tych 742 m² tylko ok. 390 m² leży w kawałkach o szerokości ≥ 6 m (232 i 153 m²), a 89 m² w kawałkach o szerokości ≥ 10 m.
+  - Węzeł bentonitowy, montaż koszy zbrojeniowych 19 m i żuraw muszą więc stać w obrysie wykopu (praca w fazach) albo w pasach drogowych. Zajęcie Mazowieckiej, skweru 9/2 i Wybrzeża potrwa dłużej niż wykonanie ścian prowadzących, które wymienia rozdz. 16 pkt 12.
+  - Ciężar i transport kratownic dachu S nie są problemem. Przy rozpiętości 17,25–19,5 m i rozstawie 5,4 m (założenie krytyka) pas ma ok. 38–49 cm², a kratownica waży ok. 2,8–3,2 t, co mieści się w udźwigu typowego żurawia wieżowego na wysięgu ok. 40 m.
+- **Wymaganie.** PN-EN 1536 (pale wiercone), PN-EN 1538 (ściany szczelinowe: ściany prowadzące, przeszkody), PN-EN 1997-1 p. 2.4; M.06 rozdz. 6; spójność rozdz. 5 i 12.
+- **Ocena.** TAK. Opis „pale CFA” jest sprzeczny z „wykopem rozpartym stropami”, a układ słupów wstępnych nie jest wyceniony. Zaplecze budowy to ryzyko organizacyjne, które trzeba opisać.
+- **Pytanie kontrolne.** Z jakiego poziomu i jaką technologią wykonuje się pale wieży i słupy wstępne pod stropami P i −1, skoro pod stropem −1 zostaje ok. 3,9 m? Czy koszt obejmuje pale wiercone w rurach albo barety i puste odcinki? Jak usuwa się przeszkody w nasypach w linii ścian 0,15 m od granicy? Gdzie w poszczególnych fazach stoją węzeł bentonitowy, żuraw i składowisko koszy?
+
+#### L-05 – Akustyka sali obrad (ognisko łuku szklanego) i ściany mobilnej sali 200
+
+- **Status w audycie.** Nie sprawdzono. W rozdz. 1–3 nie pada słowo „pogłos”. Akustyka pojawia się tylko jako „lekka przegroda akustyczna” w S1-01 i przyłącze ścianki w F2-03.
+- **Dowód.**
+  - Sala obrad od pn.-wsch. ma szklany łuk korony na R 13,4 (`koncepcja.json`, `bryly.luk.R_szyb_korony`). W sali zajmuje on ok. 144 m² na pełnej wysokości 6,85 m.
+  - Środek krzywizny łuku ma we współrzędnych uv (26,0; 15,7) (`bryly.luk.srodek` i dopasowanie okręgu, `k2_luk_akustyka.py`). Leży 1,6 m od ogniska rzędów i mównicy F (27,50; 15,20), w strefie prezydium (`s2_plan.png`).
+  - Wklęsła, odbijająca powierzchnia skupia więc dźwięk mówcy z powrotem na mównicy i prezydium. Droga odbicia wynosi ok. 2R = 27–28 m, co daje opóźnienie ok. 78–82 ms, powyżej progu słyszalnego echa (ok. 50 ms).
+  - Pełna ściana pd. za prezydium zamyka promieniowy tor powtarzanych odbić (echo trzepoczące). Mikrofony prezydium i mównicy zbierają skupione odbicie, co grozi podbarwieniem i sprzężeniem nagłośnienia.
+  - Sala z galerią ma ok. 1 800 m³. Czas pogłosu dla mowy wynosi ok. 0,87 s wg DIN 18041:2016, grupa A3, albo 0,71 s w grupie A4 (sale z udziałem osób słabosłyszących; sala ma pętlę i napisy). Wymaga to ok. 330–410 m² chłonności, czyli średniego α ≈ 0,34–0,42 przy ok. 970 m² powierzchni wewnętrznych. Szkło łuku (α ≈ 0,04) daje ok. 6 m². Spec. nie opisuje żadnych ustrojów: strop to ruszt stalowy z płytą zespoloną, a ściana pd. jest pełna, z godłem.
+  - Sala 200 os. jest dzielona ścianą mobilną na 2 × 103 m² (4,25 m w świetle, płyta sprężona 0,40 m na 14,2 m bez belek). Spec. nie podaje izolacyjności ściany ani dróg bocznych: słupka elewacji z F2-03, sufitu podwieszanego w sali, posadzki. Tor ściany wisi pod płytą o ugięciu długotrwałym rzędu L/500 ≈ 28 mm w środku rozpiętości.
+- **Wymaganie.** PN-B-02151-4:2015 (warunki pogłosowe i zrozumiałość mowy), PN-B-02151-3:2015 (izolacyjność przegród wewnętrznych); DIN 18041:2016 jako metoda; R-117 b; program: nagrywanie i transmisja w sali obrad (PU s. 6–7).
+- **Ocena.** TAK dla ogniska łuku, bo wynika ono z geometrii i nie usunie go żaden sufit. Potrzebne są ustroje na łuku (zasłony, lamele pochłaniające, pochylenie albo fasetowanie szkła). Dotyka to idei „Latarni” i kadru W8.
+- **Pytanie kontrolne.** Jak usunięto skupienie odbić od wklęsłego łuku szklanego R ≈ 13,4 m, którego środek krzywizny leży 1,6 m od mównicy? Jaki jest obliczony czas pogłosu sali (V ≈ 1 800 m³, cel 0,7–0,9 s) i jakie ustroje go dają? Jaką izolacyjność ma ściana mobilna sali 200 (Rw ściany, DnT,w między połowami) i jak ograniczono przenoszenie boczne?
+
+#### L-06 – Drgania i hałas od tramwaju; przyszły tunel pod Mazowiecką
+
+- **Status w audycie.** Nie sprawdzono. Spec. rozdz. 16 pkt 9 wymienia „wibroizolację sali obrad, izolacyjność elewacji pn. i zach.” jako ryzyko resztkowe, bez obliczeń, rozwiązania i pozycji w koszcie.
+- **Dowód.**
+  - MPZP przewiduje (§ 34 i § 37; `mpzp.md` K-02):
+    - torowisko w 1KDG od Mostu Grunwaldzkiego do 3KDL/1;
+    - torowisko w Mazowieckiej (3KDL/1);
+    - podziemną ulicę główną pod Mazowiecką z rampami.
+  - Dziś tory na moście leżą ok. 50 m od wieży i skrzydła (site.json, `k4_podcien_kraweznik.py`). Po realizacji planu tor znajdzie się w pasie 3KDL/1, którego jezdnia leży ok. 9–15 m od elewacji skrzydła (rozdz. 9 spec.; site.json). Przed wieżą poprowadzi go łuk przy narożu NW, za skwerem 9/2 o głębokości ok. 9 m.
+  - W skrzydle są sale 200 i 80 na parterze oraz biura na kond. 1–4. Ściana szczelinowa stoi 0,15 m od granicy z dz. 8/8, więc drgania gruntu przechodzą wprost w konstrukcję.
+  - MPZP § 7 pkt 3 zakazuje ekranów akustycznych. Ochronę zapewnią więc tylko środki budowlane (`mpzp.md` poz. 37).
+  - „Wibroizolacja sali obrad” kłóci się z ustrojem z S1-konstrukcja-01. Ściana pd. sali jest nośną tarczą (reakcje ok. 2,1 MN), a kratownice dachu opierają się na słupach łuku. Odizolować da się tylko posadzkę (podłoga pływająca), a nie ściany i strop.
+  - Założenia obudowy (rozdz. 5) nie obejmują przyszłego wykopu tunelu w 3KDL/1 przy ścianie szczelinowej, której lico leży 0,15 m od granicy.
+- **Wymaganie.** PN-B-02171:2017 (wpływ drgań na ludzi w budynkach), PN-B-02170:2016 (wpływ drgań na budynki), PN-B-02151-2:2018 (dopuszczalne poziomy dźwięku w pomieszczeniach), PN-B-02151-3:2015 (izolacyjność elewacji); MPZP § 7 pkt 2–3, § 34, § 37.
+- **Ocena.** RYZYKO średnie. Przekroczenia nie da się dziś wykazać. Planowany tor w Mazowieckiej leży jednak blisko sal konferencyjnych i biur, a deklarowane rozwiązanie (wibroizolacja sali) nie pasuje do konstrukcji.
+- **Pytanie kontrolne.** Czy wykonano prognozę drgań i dźwięku materiałowego dla sal parteru i biur skrzydła przy torowisku w 3KDL/1 (ok. 9–15 m) i w 1KDG oraz dla sali obrad przy torach na moście (50 m)? Jak „wibroizolacja sali obrad” ma działać przy tarczy nośnej z S1-01 i czy jest w koszcie? Czy ściany szczelinowe przy Mazowieckiej zaprojektowano na stan po wykonaniu wykopu tunelu z § 37?
+
+#### L-07 – Odporność na oddziaływania wyjątkowe: podcień Bramy Mostowej, cięgno tarczy, ochrona wejścia
+
+- **Status w audycie.** Nie sprawdzono. S1 sprawdza drogę obciążeń, stateczność i klasę B. Nie ustala klasy konsekwencji, więzi ani skutków usunięcia słupa.
+- **Dowód.**
+  - Budynek ma 8 kondygnacji nadziemnych (biura powyżej 4), więc należy co najmniej do klasy CC2b (PN-EN 1991-1-7 zał. A, tabl. A.1). Sala obrad i centrum konferencyjne przyjmują publiczność, co przemawia za CC3.
+  - Słupy łuku R 13,5 stoją wolno w podcieniu Bramy Mostowej, bo szyba parteru leży na R 11,0 (`koncepcja.json`, `bryly.luk`). Słupy 0°–45° stoją 3,8–5,0 m od krawężnika jezdni przy przyczółku (`k4_podcien_kraweznik.py`). PN-EN 1991-1-7 p. 4.3 wymaga wtedy uwzględnienia uderzenia pojazdu (tabl. 4.1, wartości orientacyjne dla obszaru miejskiego: 500 / 250 kN).
+  - Po S1-konstrukcja-03 przęsło podcienia 30°–60° ma 6,99 m. Usunięcie sąsiedniego słupa (zał. A, p. A.5.1) daje cięciwę 10,33 m pod 6 kondygnacjami, koroną i kratownicami dachu. Spec. nie opisuje więzi ani elementów kluczowych.
+  - Cięgno tarczy sali (ok. 2,4 MN, „12 Ø25 albo 2 kable” – S1-01) jest jedyną drogą obciążeń dachu i antresoli, czyli elementem kluczowym w rozumieniu zał. A.
+  - Wejście główne siedziby organu samorządu, od strony jezdni głównej, nie ma opisanej ochrony przed wjazdem pojazdu (słupki, ławy).
+- **Wymaganie.** PN-EN 1990 zał. B (klasy konsekwencji); PN-EN 1991-1-7 p. 3.3, 4.3 i zał. A; PN-EN 1992-1-1 p. 9.10 (systemy więzi).
+- **Ocena.** PRAWDOPODOBNY. Nie wiadomo, czy konstrukcja zawodzi. Wolnostojące słupy przy jezdni pod 7 kondygnacjami bez sprawdzenia wyjątkowej sytuacji obliczeniowej to jednak luka, którą konstruktor-weryfikator podniesie w pierwszej kolejności.
+- **Pytanie kontrolne.** Jaką klasę konsekwencji przyjęto? Czy słupy podcienia na R 13,5 sprawdzono na uderzenie pojazdu (p. 4.3) albo osłonięto? Czy po usunięciu jednego słupa przy przęśle 6,99 m stropy i korona przeniosą cięciwę 10,33 m (A.5.1)? Czy cięgno tarczy sali zaprojektowano jako element kluczowy?
+
+#### L-08 – Rezerwy w szachtach, trasach i na tarasach technicznych (R-044, kryterium 1a)
+
+- **Status w audycie.** Nie sprawdzono. S3-ppoz-07 bilansuje tylko szachty ppoż.
+- **Dowód.**
+  - R-044 (R.III ust. 1 pkt 9, ZALECANE) wymaga „rezerw w szachtach, trasach instalacyjnych i na tarasach technicznych”. To samo mówi program (PU s. 3–4). Kryterium 1a (`kryteria_oceny.md` 4.1) wymienia „elastyczność i rezerwy instalacyjne” w kryterium pierwszorzędnym.
+  - Trzon A ma 0 m² szachtów, a szacht B jest przeciążony (S3-ppoz-07). Nowy szacht SZ-1 (ok. 5 m²) zwymiarowano dokładnie na wentylację pożarową 2,0 m² i wyrzutnię 2,8 m². Po poprawce rezerwa szachtów wynosi 0 %.
+  - Piony w strefie środkowej (2,7 + 1,4 + 3,5 m² na kondygnację, rozdz. 10) nie mają bilansu ani rezerwy. Strefa środkowa jest pełna (F2-04, F2-07, K-12).
+  - Tarasów technicznych nie ma, bo MPZP § 6 pkt 13 zakazuje urządzeń na dachach. Jedyne pomieszczenia techniczne z powietrzem zewnętrznym to kond. 1 i 4 segmentu (L-09) i nie mieszczą drugiego urządzenia.
+  - Biura nie mają sufitów podwieszanych (TABS), a warstwa podłogi ma 0,15 m. Trasy poziome biegną więc tylko w korytarzach.
+  - Tryskaczy nie projektuje się. Zmiana strategii ppoż. (D-2 b albo żądanie rzeczoznawcy) wymaga pionów, pompowni i zbiornika (+45 m³ – K-6), na które nie ma miejsca.
+- **Wymaganie.** R-044; F.01 zał. 3 pkt 2 ppkt 1 lit. g (WPK: szachty, przestrzenie instalacyjne).
+- **Ocena.** TAK. To nie przepis, ale kryterium oceny. Dziś każda rezerwa jest zerowa albo nieopisana.
+- **Pytanie kontrolne.** Ile m² szachtów i jaki przekrój tras ma każda kondygnacja wobec potrzeb: 5 central po 7 000 m³/h, centrala parteru, centrala S, instalacja wod-kan, elektryczna, IT i oddymianie? Jaka rezerwa zostaje po S3-ppoz-07, podana liczbowo (R-044 nie podaje wartości; w praktyce 10–20 %)? Gdzie zmieści się przyszłe urządzenie bez tarasu technicznego?
+
+#### L-09 – Technika segmentu: dry-cooler i agregat (przepływ, recyrkulacja, hałas nocny, drgania)
+
+- **Status w audycie.** F3-garaz-technika-07 dotyczy tylko agregatu. Dry-coolera nie sprawdzono, a F3-07 przenosi na jego żaluzje chłodnicę agregatu.
+- **Dowód.**
+  - Dry-cooler hybrydowy 2 × 150 kW stoi na kond. 4 segmentu (2,87 m w świetle) za żaluziami akustycznymi 2 × 12 m² w licu zach. na kond. 3–4 (rozdz. 6, 10).
+  - E-I-1 podaje „≈ 1,1 m/s”, czyli strumień podzielony przez łączne 24 m². Wlot i wylot przenoszą jednak każdy pełny strumień. 300 kW przy ΔT 8–10 K to 26–32 m³/s (weryfikacja I-1: 25–30 m³/s). Na 12 m² każdego kierunku daje to 2,2–2,7 m/s, a przy ΔT 6 K 3,6 m/s. To 2–3 razy więcej, niż podaje opis (`k6_drycooler_akustyka.py`).
+  - Wlot i wylot są w tym samym licu, kilka metrów od siebie, w pomieszczeniu o wysokości 2,87 m, więc grozi recyrkulacja ciepłego powietrza. Typowe dry-coolery hybrydowe mają wentylatory osiowe do pracy bez oporów zewnętrznych, a żaluzje akustyczne z tłumikami przy 2–3 m/s dają dziesiątki Pa spadku ciśnienia.
+  - Dry-cooler pracuje także w nocy: regeneruje grunt (nadwyżka 166 MWh/rok) i współpracuje z przesunięciem TABS (rozdz. 10).
+  - Okno pokoju lok. 6 w WS 5 (parapet ok. 124,0, chronione – W-004) leży ok. 11–15 m od żaluzji (szacunek krytyka; segment – WS 5: 10,58 m). Dopuszczalny poziom nocny dla instalacji w strefie śródmiejskiej miast > 100 tys. mieszkańców wynosi LAeq,N 45 dB (rozp. MŚ z 14.06.2007, t.j. Dz.U. 2014 poz. 112, tab. 1 poz. 4).
+  - Pokoje biurowe segmentu (od Wybrzeża) leżą na tych samych kondygnacjach co agregat (kond. 1) i dry-cooler (kond. 4). Stoją na płycie 0,28 m ciągłej z wieżą (bez dylatacji – rozdz. 5). Spec. nie przewiduje fundamentów pływających ani izolacji drgań.
+- **Wymaganie.** Rozp. MŚ z 14.06.2007 (t.j. Dz.U. 2014 poz. 112) tab. 1; PN-B-02151-2:2018 (hałas instalacyjny w biurach); wymagania producentów (ciśnienie dyspozycyjne, rozdział wlotu i wylotu); W-004.
+- **Ocena.** TAK. Opis zaniża przepływ 2–3 razy. Możliwe skutki: większe żaluzje na elewacji dziedzińcowej, inny typ urządzeń, hałas nocny przy chronionym oknie.
+- **Pytanie kontrolne.** Jaki strumień i jaką ΔT przyjęto dla 2 × 150 kW? Jakie są prędkości i spadek ciśnienia na żaluziach, osobno dla wlotu i wylotu? Jak rozdzielono wlot od wylotu? Jaki jest LAeq,N przy oknie lok. 6 WS 5 i jak odizolowano urządzenia od płyty 0,28 m pod biurami segmentu?
+
+#### L-10 – Dzień sesji: ewakuacja OzN z galerii i płyty, stanowisko KDR, kontrola gości i mediów
+
+- **Status w audycie.** Częściowo: F1-05 (strefowanie dźwigów), F1-07 (matryca dostępu), S2 [E6] (geometria MOE). Liczby pól MOE nie zestawiono z liczbą miejsc dla wózków, a lokalizacji stanowiska KDR nie sprawdzono.
+- **Dowód.**
+  - Miejsca dla wózków to 4 stanowiska radnych na płycie (rozdz. 7.3) i 3 miejsca w zatoce galerii na +30,90. Pól MOE 1,5 × 1,5 m jest po jednym w przedsionku:
+    - na S – w przedsionkach A i B (2 pola);
+    - na +30,90 od strony publiczności – w przedsionkach A i B (2 pola); przedsionek A' jest dostępny tylko od strony radnych; `kondygnacja_S2.md` przypisuje galerii MOE w przedsionkach A i B.
+  - Trzecia osoba na wózku z galerii oraz trzecia i czwarta z płyty nie mają więc pola poza drogą ewakuacyjną. Narusza to R-040 („niezawężające drogi ewakuacyjnej”), chyba że opis strategii przewiduje ewakuację dźwigiem R w trybie PN-EN 81-76, z podanym czasem. Poradnik przywołany w M.13 zaleca MOE o wymiarach co najmniej 1,5 × 2,5 m (`dostepnosc.md` pkt 8).
+  - Interkomy z MOE prowadzą „do ochrony i KDR” (rozdz. 11, R-040), ale spec. nie wskazuje stanowiska KDR. Centrum monitoringu leży w łączniku od skweru, a dojście straży do dźwigu R prowadzi przez Bramę Mostową i Halę (43 m).
+  - Goście (12) i media (8) z płyty dochodzą do holu Sejmiku (Z4) dźwigami A1/A2 z Hali. Do Hali prowadzą wejścia bez kontroli: Brama Mostowa, skwer, ogród i foyer po G1. Kontrola jest tylko w lobby Wejścia Obywatelskiego przy P1/P2.
+  - Program wymaga w dniu sesji identyfikatorów gościa w Z2 (program rozdz. 7). Na drodze gości i mediów nie ma miejsca, w którym się je wydaje i sprawdza.
+- **Wymaganie.** R-040; R-212 (oddzielne wejście publiczności); program rozdz. 7 (Z2, Z4); PN-EN 81-76.
+- **Ocena.** ŚREDNI. Da się to usunąć w obrysie: drugie pole MOE w przedsionku A (3,05 × 5,80 m), stanowisko KDR przy Bramie Mostowej, punkt identyfikatorów w Hali. Dziś jednak nic z tego nie wykazano.
+- **Pytanie kontrolne.** Ile pól MOE przypada na S i na +30,90 wobec 4 + 3 miejsc dla wózków? Czy strategia ewakuacji opiera się na dźwigu R (PN-EN 81-76) i z jakim czasem? Gdzie stoi stanowisko KDR, do którego prowadzą interkomy? Gdzie goście i media z płyty przechodzą kontrolę i dostają identyfikatory, zanim wejdą do A1/A2?
+
+**Obszary ze zlecenia sprawdzone przez krytyka bez osobnej luki**
+
+- **Ciężar i transport kratownic dachu S.** Ok. 2,8–3,2 t na kratownicę przy rozpiętości 17,25–19,5 m. Mieści się w udźwigu żurawia wieżowego (L-04).
+- **Ewakuacja publiczności z galerii.** Dojścia, przejścia i rzędy (8 miejsc z dostępem z jednej strony, 9 z przejściem tylnym) sprawdzono w S2 [E2] i [G2]. Nowa jest tylko liczba pól MOE (L-10).
+- **Ruch VIP i prasy.** Strefy Z2/Z4 opisano w spec. 7.4. Luka dotyczy tylko punktu kontroli (L-10), a brak miejsca zatrzymania wozu transmisyjnego zawiera się w F3-06.
+
+**Powiązania z rozdz. 5**
+
+- L-01 i L-02 trzeba rozstrzygnąć przed decyzją D-4: kompensacja na −2 pod M1, K-15 iii (klatka C do −2 zamiast szybu R2) i poprawka F1-10.
+- L-05 i L-07 dotyczą tych samych elementów co D-5 i S1-03: tarczy, cięgna i słupów łuku.
+- L-03 i L-04 zmieniają koszt w rozdz. 5.6 (słupy wstępne, obudowa szybu MDS, balast tymczasowy).

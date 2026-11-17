@@ -132,10 +132,12 @@ LEVELS = {
                                    ("uv", (8.4, 14.8), (-4.05, 0.7))],      # stopa rampy ulicznej → A1
         "rows": COMMON_ROWS + [("uv", (-3.3, 8.1), (-4.4, 0.6), "P", True)],  # R1 – pas pod dziedzińcem
         "plant": {
-            "warsztat PPT 40 + odpady 24 + magazyn MDS 20 (M1, przy trzonie C)": (rect_sd(1.25, 0.75, 12.0, 14.4), 84),
-            "sanitariaty MDS / WC dostępne garażu 30 + pralnia 10 + porządkowe 8 (pn. od trzonu A)": (rect_uv(8.30, 21.0, 16.0, 29.1), 48),
-            "centrala wentylacyjna S 40 (wsch. od trzonu B, piony w szachcie po dźwigu T); centrala P – kond. 1, pas zach.":
-                (rect_uv(31.1, 0.6, 34.6, 16.6), 40),
+            "warsztat PPT 40 + odpady 24 + magazyn MDS 20 + porządkowe 8 (M1, przy trzonie C; v1.2b: + porządkowe)":
+                (rect_sd(1.25, 0.75, 12.0, 14.4), 92),
+            "sanitariaty MDS / WC dostępne garażu 30 (pn. od trzonu A, za przedsionkiem dźwigów A1/A2 3,60 m – v1.2b)":
+                (rect_uv(8.30, 21.0, 16.0, 29.1), 30),
+            "centrala wentylacyjna S 40 + pralnia MDS 10 (wsch. od trzonu B, piony w szachcie po dźwigu T; v1.2b: + pralnia); centrala P"
+            " – kond. 1, pas zach.": (rect_uv(31.1, 0.6, 34.6, 16.6), 50),
             "woda szara – kompaktowa stacja podczyszczania (MBR) 27 (łuk NE, pn. od A2)": (rect_uv(30.0, 22.6, 39.4, 29.1), 27),
             "przyłącze wody i wodomierz 20 (pod wierzchem rampy ulicznej, h ≥ 2,3 m)": (rect_uv(33.4, -4.05, 39.3, -0.15), 20),
             "korytarz obsługi do dźwigu T, szer. ≥ 1,5 m (segment pd.)": (rect_uv(22.6, -6.4, 36.8, -4.25), 20),
@@ -225,13 +227,17 @@ def stacker_bonus(stalls):
     return bonus, len(used) // 2
 
 
+# v1.2b: przedsionki ppoż. dźwigów A1/A2 (drzwi pn.) – na −1 (MDS) pogłębiony do 3,60 m (M.13), na −2 1,75 m (ślepy koniec drogi A2)
+LOBBY_A = {"-1": rect_uv(8.30, 20.85, 15.50, 24.45), "-2": rect_uv(8.30, 20.85, 15.50, 22.60)}
+
+
 def run(png=False):
     res = {}
     cols = columns()
     for lvl, L in (("-1", level_m1()), ("-2", level_m2())):
         I = L.buffer(-DW, join_style=2)
         cores = [c for k, c in CORES.items() if not (lvl == "-2" and k == "C")]
-        obst = unary_union(cores + cols + [internal_ramp(lvl)] + ([street_ramp()] if lvl == "-1" else []))
+        obst = unary_union(cores + cols + [internal_ramp(lvl), LOBBY_A[lvl]] + ([street_ramp()] if lvl == "-1" else []))
         spec = LEVELS[lvl]
         st, au = layout(I, obst, spec)
         plant_ok = {}

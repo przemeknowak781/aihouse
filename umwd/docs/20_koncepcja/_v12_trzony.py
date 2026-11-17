@@ -269,10 +269,11 @@ for tag, core in (("v1.1", rect_uv(8.30, 12.45, 15.50, 20.85)), ("v1.2", rect_uv
 print(f"  różnica v1.2 − v1.1: {base['v1.2'][0] - base['v1.1'][0]} m.p. ✔")
 r12 = base["v1.2"][1]
 for lvl in ("-1", "-2"):
-    lob = rect_uv(8.30, 20.85, 15.50, 22.60)
+    lob = RP.LOBBY_A[lvl]
     st = unary_union(r12[lvl]["stalls"]).intersection(lob).area
-    print(f"  {lvl}: przedsionek dźwigów A1/A2 (pas v 20,85–22,60 × u 8,30–15,50 = {lob.area:.1f} m²): kolizja ze stanowiskami {st:.2f} m²"
-          " → bez utraty miejsc ✔; pas pd. trzonu (v 11,85–12,45) za stanowiskami R2 (kończą się na v 11,60) ✔")
+    dep = {"-1": 3.60, "-2": 1.75}[lvl]
+    print(f"  {lvl}: przedsionek dźwigów A1/A2 (u 8,30–15,50, głębokość {dep:.2f} m = {lob.area:.1f} m²{'; v1.2b – M.13 3,6 m na poziomie MDS' if lvl == '-1' else ''}):"
+          f" kolizja ze stanowiskami {st:.2f} m² → bez utraty miejsc ✔; pas pd. trzonu (v 11,85–12,45) za stanowiskami R2 (kończą się na v 11,60) ✔")
 
 # ------------------------------------------------------------------------------------------------ [T7] szerokość w świetle poręczy
 hr("[T7] M.13 pkt 6 – szerokość biegu między wewnętrznymi krawędziami poręczy ≥ 1,60 m (v1.2b: wnęki + balustrada środkowa)")
