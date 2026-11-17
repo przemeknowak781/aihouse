@@ -110,9 +110,9 @@ def level_m1():
     return g
 
 
-def level_m2(s_from=12.15):
-    """−2 v1.1: wieża + segment + pas 5 m + skrzydło od s = s_from (bez M1 przy Maz. 19)."""
-    wing2 = M.intersection(rect_sd(s_from, OFF_88, 80.0, 40.0))
+def level_m2(s_from=12.15, s_to=80.0):
+    """−2 v1.1: wieża + segment + pas 5 m + skrzydło od s = s_from (bez M1 przy Maz. 19); s_to – opcjonalne przycięcie dzioba."""
+    wing2 = M.intersection(rect_sd(s_from, OFF_88, s_to, 40.0))
     g = unary_union([wing2, W, SEG, strip()]).buffer(0.1, join_style=2).buffer(-0.1, join_style=2)
     return g
 

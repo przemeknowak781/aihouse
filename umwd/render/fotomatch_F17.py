@@ -52,9 +52,9 @@ WYNIK = {'A': 'W1_F17A_test.jpg', 'B': 'W2_F17B_test.jpg'}
 GRADING = {
     # cien_min – jasność pełnego cienia względem słońca na zdjęciu (obróbka Shadows +50 rozjaśnia cienie; pomiar
     # na cieniach istniejących budynków ≈ 0,40–0,45); cien_barwa – ile chłodnej barwy cienia z passu zachować
-    'A': dict(p_jasne=0.92, cel_jasne=0.76, nasycenie=1.18, czern=0.03, mgla=0.05, mgla_kolor=(0.70, 0.76, 0.84),
+    'A': dict(p_jasne=0.92, cel_jasne=0.76, nasycenie=1.10, czern=0.0, mgla=0.05, mgla_kolor=(0.70, 0.76, 0.84),
               wyostrz=70, klarownosc=45, ziarno=0.012, cien_min=0.42, cien_barwa=0.35),
-    'B': dict(p_jasne=0.92, cel_jasne=0.80, nasycenie=1.20, czern=0.03, mgla=0.025, mgla_kolor=(0.72, 0.78, 0.85),
+    'B': dict(p_jasne=0.92, cel_jasne=0.80, nasycenie=1.10, czern=0.0, mgla=0.025, mgla_kolor=(0.72, 0.78, 0.85),
               wyostrz=70, klarownosc=45, ziarno=0.012, cien_min=0.42, cien_barwa=0.35),
 }
 
@@ -139,6 +139,43 @@ def kompozytor(sc, katalog, prefix):
         fo.file_output_items.new('RGBA', 'cien')
         ng.links.new(rl.outputs['Shadow Catcher'], fo.inputs['cien'])
     return ng
+
+
+# próbki do kalibracji tonalnej: elewacja sąsiada o tej samej orientacji i w tym samym oświetleniu (zdjęcie)
+# oraz odpowiadająca jej elewacja budynku (render). Punkty 3D: (e, n) końce lica, zakres Z (= H − 119,25).
+KALIBRACJA = {
+    # F.17.B: front Mazowieckiej 19 (cień, elewacja zach.) ↔ front skrzydła przy Mazowieckiej (ta sama płaszczyzna)
+    'B': dict(ref=((48.84, 9.68), (44.64, -8.38), (0.25, 0.75), (4.0, 14.0)),
+              cg=((48.84, 9.68), (61.25, 66.05), (0.06, 0.20), (6.0, 15.0)), wspolczynnik=1.00,
+              # lico w słońcu: elewacja pd. wieży nad skrzydłem → jasność jasnej elewacji w słońcu na zdjęciu
+              # (Urząd Wojewódzki ≈ 217/209/196, luma ≈ 0,82; ceramika/granit nieco jaśniejsze)
+              cg_slonce=((74.61, 40.76), (113.47, 50.23), (0.12, 0.45), (22.0, 34.0)), cel_slonce=0.84),
+    # F.17.A: front Wybrzeża Słowackiego 5 (cień, elewacja wsch.) ↔ elewacja wsch. segmentu i wieży
+    'A': dict(ref=((118.55, 11.5), (118.25, 28.5), (0.2, 0.8), (4.0, 15.0)),
+              cg=((115.98, 39.93), (109.75, 65.48), (0.10, 0.70), (6.0, 18.0)), wspolczynnik=1.00),
+}
+
+
+def probka_pikseli(sc, cam, spec, W, H):
+    """Wielokąt (piksele) obejmujący rzut fragmentu lica: spec = (p0, p1, (f0, f1), (z0, z1))."""
+    from shapely.geometry import MultiPoint
+    p0, p1, (f0, f1), (z0, z1) = spec
+    pts = []
+    for f in np.linspace(f0, f1, 6):
+        x = p0[0] + (p1[0] - p0[0]) * f
+        y = p0[1] + (p1[1] - p0[1]) * f
+        for z in np.linspace(z0, z1, 5):
+            c = world_to_camera_view(sc, cam, Vector((x, y, z)))
+            pts.append((c.x * W, (1 - c.y) * H))
+    return MultiPoint(pts).convex_hull
+
+
+def maska_wielokata(poly, W, H):
+    from PIL import ImageDraw
+    m = Image.new('L', (W, H), 0)
+    if poly.geom_type == 'Polygon':
+        ImageDraw.Draw(m).polygon(list(poly.exterior.coords), fill=255)
+    return np.asarray(m) > 0
 
 
 def maska_roslinnosci(foto_srgb):
@@ -271,12 +308,41 @@ def main():
     # budynek: kolor prosty, ekspozycja z percentyla jasnych powierzchni, nasycenie, czerń, mgiełka
     rgb = kol[..., :3] / np.maximum(alfa[..., None], 1e-4)
     sel = alfa > 0.98
-    Lc = lum(rgb)[sel]
-    gain = 1.0
-    if Lc.size > 200:
-        pj = np.quantile(Lc, G['p_jasne'])
-        gain = srgb_lin(np.array(G['cel_jasne'])) / max(pj, 1e-5)
-    cg = lin_srgb(rgb * gain)
+    gain, wb, k_kompr = 1.0, np.ones(3, np.float32), 0.0
+    kal = KALIBRACJA.get(a.zdjecie)
+    m_ref = maska_wielokata(probka_pikseli(sc, cam, kal['ref'], Ww, Hh), Ww, Hh)
+    m_cg = maska_wielokata(probka_pikseli(sc, cam, kal['cg'], Ww, Hh), Ww, Hh) & sel
+    if m_ref.sum() > 100 and m_cg.sum() > 100:
+        ref_l = float(np.quantile(lum(f_s)[m_ref], 0.70))          # sRGB zdjęcia – lico ściany (bez okien)
+        cg_l = float(np.quantile(lum(rgb)[m_cg], 0.70))            # liniowo renderu – lico ściany
+        cel = min(0.90, ref_l * kal['wspolczynnik'])
+        gain = float(srgb_lin(np.array(cel)) / max(cg_l, 1e-6))
+        # krzywa dwupunktowa y = t/(1 + k·t), t = g·x (cienie liniowe, światła kompresowane jak w obróbce zdjęcia):
+        # lico w cieniu → cel (sąsiad), lico w słońcu → cel_slonce; bez próbki słońca k = 0 (sama ekspozycja)
+        k_kompr = 0.0
+        y_s = float(srgb_lin(np.array(cel)))
+        if 'cg_slonce' in kal:
+            m_s = maska_wielokata(probka_pikseli(sc, cam, kal['cg_slonce'], Ww, Hh), Ww, Hh) & sel
+            if m_s.sum() > 100:
+                cs_l = float(np.quantile(lum(rgb)[m_s], 0.70))
+                y_h = float(srgb_lin(np.array(kal['cel_slonce'])))
+                r_, q_ = cs_l / cg_l, y_h / y_s
+                if r_ > q_ * 1.02:
+                    k_kompr = (r_ - q_) / (y_h * (r_ - 1.0))
+        gain = y_s / (cg_l * max(1.0 - k_kompr * y_s, 0.05))
+        # balans bieli: barwa sąsiada (zdjęcie, liniowo) vs barwa lica budynku (render) – częściowo (60 %)
+        r_ref = f_l[m_ref].mean(0)
+        r_cg = rgb[m_cg].mean(0)
+        wb = ((r_ref / lum(r_ref[None])[0]) / (r_cg / lum(r_cg[None])[0])) ** 0.6
+        wb = (wb / lum(wb[None])[0]).astype(np.float32)
+        print('[foto] kalibracja: sąsiad sRGB %.3f → cel %.3f; gain %.4f, k %.3f; WB %s' % (ref_l, cel, gain, k_kompr,
+                                                                                    np.round(wb, 3)))
+    elif Lc_ok := (lum(rgb)[sel].size > 200):
+        pj = np.quantile(lum(rgb)[sel], G['p_jasne'])
+        gain = float(srgb_lin(np.array(G['cel_jasne'])) / max(pj, 1e-5))
+    t = rgb * gain * wb
+    Lt = np.maximum(lum(t), 1e-6)[..., None]
+    cg = lin_srgb(t / (1.0 + k_kompr * Lt))
     Lg = lum(cg)[..., None]
     cg = Lg + (cg - Lg) * G['nasycenie']
     cg = G['czern'] + cg * (1.0 - G['czern'])
@@ -311,7 +377,8 @@ def main():
     ys = int((1 - y1) * Hh), int((1 - y0) * Hh)
     img.crop((xs[0], ys[0], xs[1], ys[1])).save(BUILD / (pre + 'wycinek.jpg'), quality=90)
     raport = dict(zdjecie=a.zdjecie, rozdzielczosc=[Ww, Hh], skala=a.skala, probki=a.probki, slonce=sw,
-                  ramka=[x0, x1, y0, y1], ekspozycja_gain=float(gain), czas_budowy_s=round(t_bud, 1),
+                  ramka=[x0, x1, y0, y1], ekspozycja_gain=float(gain), balans_bieli=[float(x) for x in wb],
+                  czas_budowy_s=round(t_bud, 1),
                   czas_renderu_s=round(t_r, 1), czas_masek_s=round(t_m, 1), wynik=str(out),
                   udzial_zaslon_drzew=float((zasl * alfa).sum() / max(alfa.sum(), 1)))
     (BUILD / (pre + 'raport.json')).write_text(json.dumps(raport, ensure_ascii=False, indent=1), encoding='utf-8')

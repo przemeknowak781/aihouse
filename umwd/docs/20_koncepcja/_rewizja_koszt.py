@@ -71,7 +71,7 @@ def main():
     tC, _, _ = total(dict(kor, fas_kamien=kor["fas_kamien"] + rw, fas_went=kor["fas_went"] + rm), ex)
     print(f"  v1.0 odtworzona {t0:.2f}; korekta weryfikatora C (ościeża, pale, uskok, dry-cooler, GPC) {tC:.2f} mln")
 
-    print("== 1. v1.1 – ilości (geometria v1.1, garaż 106 m.p.)")
+    print("== 1. v1.1 – ilości (geometria v1.1, garaż 110 m.p.)")
     A_nad = 14151.2 + 5 * 2.66 + 110.0      # + skrzydło wg tab. 4.1 (P–4) + rezerwa na antresolę S do ≈ 180 m² (kondygnacja_S2)
     dw_area = g["dw_len"] * 19.0
     P = dict(sp)
@@ -83,6 +83,7 @@ def main():
         "fas_kamien": 1810 - 147,              # granit: bez cokołu skrzydła (→ ceramika); lico filarów bez węgarów (ościeża Al)
         "okna": 2167, "fas_bipv": 82 + 295 + 80, "przeslony": 240, "dach": 2163, "stal_kg": 73000,
         "kwp_dach": 351, "kwh_bess": 150, "mb_odw": 58 * 91, "t_ziel": 630, "drzewa": 26, "t_kam": 500,
+        "dach_int": 135.3,                     # taras segmentu = dach zielony intensywny wg modelu pomieszczeń (D.*), ujednolicone
     })
     POZA = {
         # pozycja: (kwota zł netto robót, uzasadnienie)
@@ -96,7 +97,7 @@ def main():
         "dry-cooler hybrydowy 2 × 150 kW + żaluzje akustyczne i tłumiki": (0.45e6, "weryfikator [Z]"),
         "GPC: wiercenie 58 otworów z dna wykopu (3 000 zł/otw.) + kolektory podpłytowe i 2 przejścia szczelne": (58 * 3000 + 0.15e6, "[Z]"),
         "GPC: absorbery w ścianach szczelinowych (60 zł/m²) i 36 palach (80 zł/mb)": (dw_area * 60 + 504 * 80, "[Z]"),
-        "stackery zależne 2-poziomowe: 15 jednostek podwójnych × 70 000 zł": (15 * 70000, "[Z] katalogowe"),
+        "stackery zależne 2-poziomowe: 16 jednostek podwójnych × 70 000 zł": (16 * 70000, "[Z] katalogowe"),
         "zapora przeciwpowodziowa samoczynna w bramie 4,0 m + sygnalizacja wahadłowa ramp": (0.12e6 + 0.04e6, "[Z]"),
         "szyb wyjścia zapasowego MDS + tunel 8 m (P-I6)": (0.25e6, "[Z]"),
         "agregat w segmencie: wzmocnienie stropu + przewód spalin do korony 35 m": (0.11e6, "[Z]"),
@@ -113,11 +114,9 @@ def main():
     # elewacje dziedzińcowe skrzydła i segmentu: tynk cienkowarstwowy mineralny na wełnie w tonie ceramiki posesji
     P["fas_went"] -= 410
     P["fas_tynk"] = 410
-    # −2 bez dzioba skrzydła s > 52 (brak stanowisk; ≈ 60 m²)
-    P["A_pod"] = round(P["A_pod"] - 60.0, 1)
     ex11 = sum(v[0] for v in POZA.values())
     t11, wk11, r11 = total(P, ex11)
-    print(f"  A_nad {P['A_nad']}, A_pod {P['A_pod']} (−1 {g['L1']:.1f} + −2 {g['L2'] - 60:.1f}), obwód ścian {P['obw_pod']} m × 19 m, "
+    print(f"  A_nad {P['A_nad']}, A_pod {P['A_pod']} (−1 {g['L1']:.1f} + −2 {g['L2']:.1f}), obwód ścian {P['obw_pod']} m × 19 m, "
           f"wykop śr. {P['h_wyk']} m, płyta zastępcza {P['t_plyty']} m, wypór poza obrysem {P['fp_wypor']} m²")
     for k, (v, why) in POZA.items():
         print(f"     + {k}: {v * 1.0815 / 1e6:+.3f} mln (z KS i rezerwą; {why})")
@@ -138,7 +137,6 @@ def main():
         ("dźwig C1 – szyb rezerwowy bez urządzenia", dict(), -0.6e6),
         ("lapidarium 0,5 → 0,3 mln", dict(), -0.2e6),
         ("rampy jednopasowe (poz. 3.14)", dict(), -0.6 * 0.28 * 0.8e6),
-        ("−2 bez dzioba skrzydła (60 m²)", dict(), None),
     ]
     k = (1 + km.KS[1]) * (1 + km.REZ[1])
     for name, _, v in levers:
@@ -159,7 +157,7 @@ def main():
     t4, _, _ = total(P, ex11, rez=0.04)
     print(f"  wariant kontrolny: rezerwa 4,0 % → {t4:.2f} mln (zapas {LIMIT - t4:.2f})")
     pc = P["A_nad"] + P["A_pod"]
-    pu = 8400.0
+    pu = 8850.37         # PU wg PN-ISO 9836 – model pomieszczeń (F.15.A/C I.12)
     print(f"  wskaźniki: {t11 * 1e6 / pc:,.0f} zł/m² PC (PC {pc:,.0f} m²); {t11 * 1e6 / P['A_nad']:,.0f} zł/m² PC nadziemnej; "
           f"{t11 * 1e6 / pu:,.0f} zł/m² PU (PU {pu:,.0f}); PC/PU {pc / pu:.2f}")
     print("  pasma (koszty_benchmarki.md): 7 400–9 300 zł/m² PC; 11 400–14 900 zł/m² PU (B1/B2/B6) – PU v1.1 POWYŻEJ pasma "

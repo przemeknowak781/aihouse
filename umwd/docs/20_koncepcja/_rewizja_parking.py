@@ -23,11 +23,13 @@ sys.path.insert(0, __import__("os").path.dirname(__file__))
 from _rewizja_wspolne import (uv2en, sd2en, rect_uv, rect_sd, poly_uv, level_m1, level_m2, W, SEG, M, DW, fmt)
 
 # --------------------------------------------------------------------------- wymagana liczba miejsc (MPZP § 13)
-PU = 8400.0          # m² PU wg PN-ISO 9836 (bez powierzchni ruchu i usługowej; spec. rozdz. 12)
-PU_GASTRO = 92.0     # m² PU bistro (6 m.p./1000 m²)
+PU = 8850.37        # m² PU wg PN-ISO 9836 = suma pomieszczeń kategorii PU modelu pomieszczeń (F.15.A / F.15.C I.12;
+                     # bez powierzchni ruchu RU 4 342, usługowej US 590 i garażowej PG 2 334 m²) – build/tabele/kontrola.md
+PU_GASTRO = 88.47    # m² PU bistro (SW.07 68,05 + SW.08 20,42) – 6 m.p./1000 m²
 PU_PROGRAM = 8582.0  # m² PU programu M.01 (kontrola)
 REQ = math.ceil(12 / 1000 * (PU - PU_GASTRO) + 6 / 1000 * PU_GASTRO)
 REQ_PROG = math.ceil(12 / 1000 * (PU_PROGRAM - PU_GASTRO) + 6 / 1000 * PU_GASTRO)
+REQ_CONS = math.ceil(12 / 1000 * PU) + math.ceil(6 / 1000 * PU_GASTRO)   # odczyt ostrożny: całe PU × 12 + bistro osobno
 
 # --------------------------------------------------------------------------- konstrukcja
 U_COLS = [0.0, 8.10, 16.20, 24.30, 32.40, 40.0]
@@ -87,6 +89,7 @@ COMMON_AISLES = [("uv", (-9.0, 24.6), (0.6, 6.6)),        # A1 – pd. (pas pod 
                  ("uv", (-6.0, 37.6), (16.6, 22.6)),      # A2 – pn. (przy trzonie A tylko 1,75 m – brak przejazdu)
                  ("sd", (12.2, 52.0), (5.75, 11.75))]     # A3 – skrzydło
 COMMON_ROWS = [("uv", (0.3, 24.6), (6.6, 11.6), "P", True),     # R2 – do A1
+               ("uv", (22.5, 31.1), (11.6, 16.6), "P", True),   # R3 wsch. – do A2 (na −2 strefa GPC – odrzucane)
                ("uv", (0.3, 8.3), (11.6, 16.6), "P", True),     # R3 zach. – do A2
                ("uv", (22.5, 34.4), (11.6, 16.6), "P", True),   # R3 wsch. – do A2
                ("uv", (-6.0, 37.6), (22.6, 27.6), "P", True),   # R4 – do A2 (łuk przycina)
@@ -98,7 +101,8 @@ STACK_ROWS_M1 = [("sd", (12.2, 54.0), (0.75, 5.75)),     # skrzydło, rząd zach
                  ("uv", (-6.0, 37.6), (22.6, 27.6)),     # R4 – w przęśle 8,10 m: 1 jednostka 5,0 m + 1 stanowisko zwykłe
                  ("uv", (0.3, 24.6), (6.6, 11.6)),       # R2 – jw.
                  ("uv", (-3.3, 8.1), (-4.4, 0.6)),       # R1 – pas pod dziedzińcem, jw.
-                 ("uv", (0.3, 8.3), (11.6, 16.6))]       # R3 zach. – jw.
+                 ("uv", (0.3, 8.3), (11.6, 16.6)),       # R3 zach. – jw.
+                 ("uv", (22.5, 31.1), (11.6, 16.6))]     # R3 wsch. – jw.
 STACK_UNIT_W = 5.0   # szerokość systemu 2 platform obok siebie (2 × 2,30 m + słupki) – wartość katalogowa typowa [Z]
 
 # ------------------------------------------------------------------- układ stanowisk: rzędy i drogi (współrzędne układów)
@@ -108,6 +112,7 @@ COMMON_AISLES = [("uv", (-9.0, 24.6), (0.6, 6.6)),        # A1 – pd. (pas pod 
                  ("uv", (-6.0, 37.6), (16.6, 22.6)),      # A2 – pn. (przy trzonie A tylko 1,75 m – brak przejazdu)
                  ("sd", (12.2, 52.0), (5.75, 11.75))]     # A3 – skrzydło
 COMMON_ROWS = [("uv", (0.3, 24.6), (6.6, 11.6), "P", True),     # R2 – do A1
+               ("uv", (22.5, 31.1), (11.6, 16.6), "P", True),   # R3 wsch. – do A2 (na −2 strefa GPC – odrzucane)
                ("uv", (0.3, 8.3), (11.6, 16.6), "P", True),     # R3 zach. – do A2
                ("uv", (-6.0, 37.6), (22.6, 27.6), "P", True),   # R4 – do A2 (łuk przycina)
                ("sd", (12.2, 54.0), (0.75, 5.75), "P", False),  # skrzydło, rząd zach. 90°
@@ -122,7 +127,8 @@ LEVELS = {
         "plant": {
             "warsztat PPT 40 + odpady 24 + magazyn MDS 20 (M1, przy trzonie C)": (rect_sd(1.25, 0.75, 12.0, 14.4), 84),
             "sanitariaty MDS / WC dostępne garażu 30 + pralnia 10 + porządkowe 8 (pn. od trzonu A)": (rect_uv(8.30, 21.0, 16.0, 29.1), 48),
-            "centrale wentylacyjne P i S 80 (przy trzonie B, piony w szachcie po dźwigu T)": (unary_union([rect_uv(24.85, 9.9, 34.6, 16.6), rect_uv(31.1, 0.6, 34.6, 9.9)]), 80),
+            "centrala wentylacyjna S 40 (wsch. od trzonu B, piony w szachcie po dźwigu T); centrala P – kond. 1, pas zach.":
+                (rect_uv(31.1, 0.6, 34.6, 16.6), 40),
             "woda szara – kompaktowa stacja podczyszczania (MBR) 27 (łuk NE, pn. od A2)": (rect_uv(30.0, 22.6, 39.4, 29.1), 27),
             "przyłącze wody i wodomierz 20 (pod wierzchem rampy ulicznej, h ≥ 2,3 m)": (rect_uv(33.4, -4.05, 39.3, -0.15), 20),
             "korytarz obsługi do dźwigu T, szer. ≥ 1,5 m (segment pd.)": (rect_uv(22.6, -6.4, 36.8, -4.25), 20),
@@ -280,7 +286,8 @@ def main():
     n_ozn = 6
     net = tot - math.ceil(n_ozn / 2)
     print(f"RAZEM pozycji: {tot}; po wydzieleniu {n_ozn} stanowisk OzN 3,60 m (2 OzN w miejsce 3 zwykłych): {net} m.p.")
-    print(f"wymagane {REQ} (PU {PU:.0f}) / {REQ_PROG} (PU programu) → zapas {net - REQ} / {net - REQ_PROG}")
+    print(f"wymagane {REQ} (PU {PU:.2f}, bistro {PU_GASTRO}) / ostrożnie {REQ_CONS} / PU programu {REQ_PROG} → zapas "
+          f"{net - REQ} / {net - REQ_CONS} / {net - REQ_PROG}")
     conv = sum(len(r["stalls"]) for r in res.values()) - math.ceil(n_ozn / 2)
     print(f"bez stackerów (sama posadzka): {conv} m.p.; w stackerach (poziom górny platform): {tot - sum(len(r['stalls']) for r in res.values())}")
     return res

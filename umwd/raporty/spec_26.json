@@ -1,0 +1,70 @@
+{
+ "nr": 26,
+ "title": "All 8 Stage II boards populated with true-scale drawings; organiser tables generated with cross-checks",
+ "stages": [
+  [
+   "Organiser materials ✔ (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register ✔ (184 requirements) + checklists",
+   "done"
+  ],
+  [
+   "Site ✔ (zoning, heritage, survey, geotech, trees, neighbours)",
+   "done"
+  ],
+  [
+   "Law ✔ (WT bridge, fire, accessibility, zero-emission)",
+   "done"
+  ],
+  [
+   "Design research ✔ (trends, visuals, boards, façades, costs)",
+   "done"
+  ],
+  [
+   "Programme ✔ (187 offices, PU ≈ 8,600 m²)",
+   "done"
+  ],
+  [
+   "Concept → 3 verifiers ✔ → revision v1.1 ► (spec + Sejmik S-2)",
+   "running"
+  ],
+  [
+   "Production ►: all drawings ✔ incl. 12 plans 1:200; 3D tests ✔; finals after v1.1",
+   "running"
+  ],
+  [
+   "Boards ►: Stage II 8/8 skeletons with true-scale drawings (vis pending); Stage I 2/2; tables F.15/F.14.B ✔ (draft)",
+   "running"
+  ],
+  [
+   "Audit ►: completeness 25/44; structural & functional audit ►; jury later",
+   "running"
+  ]
+ ],
+ "notes": [
+  "All 8 Stage II boards now hold the real drawings at true scale: tight 1:200 plans (4 typical floors fit board 4 with a narrow legend; ground floor with surroundings + −1 + −2 on board 3; tower floors + roof on board 5), sections, elevations, 1:50 façade section, schemes.",
+  "Organiser tables generated from live data (F.15.A/B/C, F.14.B in xlsx + PDF, metadata stripped). Cross-checks found: usable area from rooms 8,850 m² (not 8,400) → parking minimum rises to ≈ 107; 5 programme items without a room; core areas double-counted on the mezzanine; garden paths over 101 m² of preserved allotments; '.OCZ' room numbers.",
+  "These and the plans agent's structural findings (column lines in corridors, wing tract, storeys 5–6 capacity, garage ≤ 92 spaces) are queued for the v1.1 re-run (docs/90_audyt/do_przeliczenia_po_v11.md).",
+  "Still running: structural & functional audit (6 lenses × 2 verifiers), spec revision v1.1, Sejmik storey S-2, 3D (photomatch, reflections, interior of the Citizens' Hall)."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/etap2_P4_v2.png",
+   "caption": "Board 4: floors 1–4 at 1:200 + legend"
+  },
+  {
+   "path": "umwd/raporty/img/etap2_P3_v2.png",
+   "caption": "Board 3: ground floor with surroundings, −1, −2"
+  },
+  {
+   "path": "umwd/raporty/img/etap2_P5_v2.png",
+   "caption": "Board 5: floors 5, 6, S, mezzanine, roof (vis 7–8 pending)"
+  },
+  {
+   "path": "umwd/raporty/img/etap2_P8_v2.png",
+   "caption": "Board 8: façade section 1:50, eco scheme, vis 4–5 (tests)"
+  }
+ ]
+}

@@ -34,7 +34,7 @@
    "running"
   ],
   [
-   "Boards ►: Stage I 2/2 drafts, Stage II 5/8 drafts; tables ►",
+   "Boards ►: Stage II 8/8 skeletons with true-scale drawings (vis pending); Stage I 2/2; tables F.15/F.14.B ✔ (draft)",
    "running"
   ],
   [
@@ -43,11 +43,10 @@
   ]
  ],
  "notes": [
-  "User asked to keep structural and functional correctness in focus → a dedicated multi-agent audit runs: structure & load paths, foundations & groundwater, fire & evacuation, circulation & lift capacity, office programme, garage & building services; each finding verified by a skeptic and an engineer.",
-  "Plans 1:200 for all 12 levels with axes, dimension chains, room numbers & areas, section lines, legends; all 187 offices placed (179 × 24 m² + 8 × 32 m²), accessible WC and refuge areas on every storey.",
-  "Hard problem confirmed by the plans agent: even an ideal layout of the current underground gives ≤ ≈ 92 parking spaces vs ≥ 101 required by the local plan (12/1000 m² PU). Causes are structural (tower column grid, central cores, ramps, plant rooms) → garage redesign is now a hard item of revision v1.1.",
-  "Also from the plans: column lines v 8.10 / 21.60 fall in corridors (shift ≈ 0.5 m), the 15.0 m wing tract cannot fit corridor walls, storeys 5–6 are over capacity by 2 units.",
-  "3D: full building model with granite, 4-tone ceramics, BIPV roofs, context and people; honest assessment: test renders are clean but not yet competition-grade (flat light, monotone stone, weak glass reflections). Next: photomatch on F.17.A/B, reflections from the organiser's site panoramas, interior of the Citizens' Hall, wheelchair user in vis 3."
+  "All 8 Stage II boards now hold the real drawings at true scale: tight 1:200 plans (4 typical floors fit board 4 with a narrow legend; ground floor with surroundings + −1 + −2 on board 3; tower floors + roof on board 5), sections, elevations, 1:50 façade section, schemes.",
+  "Organiser tables generated from live data (F.15.A/B/C, F.14.B in xlsx + PDF, metadata stripped). Cross-checks found: usable area from rooms 8,850 m² (not 8,400) → parking minimum rises to ≈ 107; 5 programme items without a room; core areas double-counted on the mezzanine; garden paths over 101 m² of preserved allotments; '.OCZ' room numbers.",
+  "These and the plans agent's structural findings (column lines in corridors, wing tract, storeys 5–6 capacity, garage ≤ 92 spaces) are queued for the v1.1 re-run (docs/90_audyt/do_przeliczenia_po_v11.md).",
+  "Still running: structural & functional audit (6 lenses × 2 verifiers), spec revision v1.1, Sejmik storey S-2, 3D (photomatch, reflections, interior of the Citizens' Hall)."
  ],
  "images": [
   {

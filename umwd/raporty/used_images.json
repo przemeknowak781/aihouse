@@ -170,5 +170,21 @@
  "4c54b1ff16a782252fc6": {
   "path": "umwd/raporty/img/budynek_test_lot_ptaka_v2.jpg",
   "board": "spec_25"
+ },
+ "7228a3f4e4b1162f24c5": {
+  "path": "umwd/raporty/img/etap2_P4_v2.png",
+  "board": "spec_26"
+ },
+ "a82104ce69ce510ac9bf": {
+  "path": "umwd/raporty/img/etap2_P3_v2.png",
+  "board": "spec_26"
+ },
+ "396a35156cbef02b4501": {
+  "path": "umwd/raporty/img/etap2_P5_v2.png",
+  "board": "spec_26"
+ },
+ "9bd494b3637c7f037f38": {
+  "path": "umwd/raporty/img/etap2_P8_v2.png",
+  "board": "spec_26"
  }
 }
