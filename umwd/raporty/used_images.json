@@ -154,5 +154,21 @@
  "1888d981708ac815661b": {
   "path": "umwd/raporty/img/etap2_P7_szkic.png",
   "board": "spec_24"
+ },
+ "9c7a77c939d66f29382a": {
+  "path": "umwd/raporty/img/rzut_P_1-200.png",
+  "board": "spec_25"
+ },
+ "d3764ae33f0de0c7b433": {
+  "path": "umwd/raporty/img/rzut_1_1-200.png",
+  "board": "spec_25"
+ },
+ "e0f231fc297a8f9d729e": {
+  "path": "umwd/raporty/img/budynek_test_detal_podcien.jpg",
+  "board": "spec_25"
+ },
+ "4c54b1ff16a782252fc6": {
+  "path": "umwd/raporty/img/budynek_test_lot_ptaka_v2.jpg",
+  "board": "spec_25"
  }
 }

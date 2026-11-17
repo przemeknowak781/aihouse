@@ -2,52 +2,52 @@
  "title": "Winning concept specified: 'GATE AND LANTERN' (K5 + grafts) — all 26 juror objections resolved; Sejmik storey now fits with a lobby corridor; 14,151 m² GFA, 146.2 M PLN incl. 5 % reserve",
  "stages": [
   [
-   "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
+   "Organiser materials ✔ (results files deliberately EXCLUDED)",
    "done"
   ],
   [
-   "Rules register (184 requirements, 14 conflicts) + checklists ✔ verified",
+   "Rules register ✔ (184 requirements) + checklists",
    "done"
   ],
   [
-   "Site ✔: zoning, heritage, 1934 overlay, DWG survey, geotech, dendrology (44 trees, keep-classes), neighbours (window positions & sills)",
+   "Site ✔ (zoning, heritage, survey, geotech, trees, neighbours)",
    "done"
   ],
   [
-   "Law ✔ (verified): WT 2002 expired 20.09.2026 → art. 102a Building Law bridge; fire ✔; accessibility ✔; zero-emission ✔",
+   "Law ✔ (WT bridge, fire, accessibility, zero-emission)",
    "done"
   ],
   [
-   "Design research ✔ (verified): trends, visual craft, boards, façades, Wrocław context, cost model",
+   "Design research ✔ (trends, visuals, boards, façades, costs)",
    "done"
   ],
   [
-   "Programme ✔: 193 rooms, 187 offices (24/32 m², 1.35 m module), PU ≈ 8,600 m², GFA ≈ 14,000 m² above ground",
+   "Programme ✔ (187 offices, PU ≈ 8,600 m²)",
    "done"
   ],
   [
-   "Concept ✔ → 3 verifiers ✔ (7 critical + 20 important findings) → revision v1.1 ► (2 agents: geometry/cost/energy; Sejmik storey S-2)",
+   "Concept → 3 verifiers ✔ → revision v1.1 ► (spec + Sejmik S-2)",
    "running"
   ],
   [
-   "Production ►: all required drawings except 1:200 plans ✔ (site, 5 elevations, 2 sections, 1:50, axo, shading, eco, accessibility, idea diagrams); plans + 3D renders (agents ►)",
+   "Production ►: all drawings ✔ incl. 12 plans 1:200; 3D tests ✔; finals after v1.1",
    "running"
   ],
   [
-   "Boards ►: Stage I 2/2 drafted (F.16 layout); Stage II 5/8 drafted (P3–P5 await plans); tables F.15/F.14.B generator ►; model spec ✔",
+   "Boards ►: Stage I 2/2 drafts, Stage II 5/8 drafts; tables ►",
    "running"
   ],
   [
-   "Jury simulation & compliance audit → iterate until no open issues",
-   "todo"
+   "Audit ►: completeness 25/44; structural & functional audit ►; jury later",
+   "running"
   ]
  ],
  "notes": [
-  "Container restart killed the revision workflow before it wrote anything; relaunched as two parallel agents with disjoint files (spec v1.1 / Sejmik storey S-2). 3D and plans agents resumed from their transcripts.",
-  "Cost/energy verifier added 2 hard failures: corrected mid cost 150.8–151.7 M PLN (> 150 cap) and real on-site PV ≈ 328 kWp (< 400 kWp required by M.12) — both are hard constraints in the revision brief, with numerical proof required.",
-  "New drawings: eco scheme on a section through the garden (PV, retention, GSHP, TABS, ventilation, biodiversity, KPIs), accessibility scheme with a storey matrix counted live from the room model (WC, refuge areas, lifts, induction loops — all storeys now complete), four idea axonometries for board 1.",
-  "Board drafts at true scale revealed layout issues early: 1:200 elevations had to be cropped to visible content (4 now fit one board); façade section 1:50 and eco scheme collide on board 8 — final allocation after plans arrive.",
-  "Shared post-processing (tools/postprodukcja.py): subtle presets that keep exposure; first aggressive version was rejected because it muddied shadows."
+  "User asked to keep structural and functional correctness in focus → a dedicated multi-agent audit runs: structure & load paths, foundations & groundwater, fire & evacuation, circulation & lift capacity, office programme, garage & building services; each finding verified by a skeptic and an engineer.",
+  "Plans 1:200 for all 12 levels with axes, dimension chains, room numbers & areas, section lines, legends; all 187 offices placed (179 × 24 m² + 8 × 32 m²), accessible WC and refuge areas on every storey.",
+  "Hard problem confirmed by the plans agent: even an ideal layout of the current underground gives ≤ ≈ 92 parking spaces vs ≥ 101 required by the local plan (12/1000 m² PU). Causes are structural (tower column grid, central cores, ramps, plant rooms) → garage redesign is now a hard item of revision v1.1.",
+  "Also from the plans: column lines v 8.10 / 21.60 fall in corridors (shift ≈ 0.5 m), the 15.0 m wing tract cannot fit corridor walls, storeys 5–6 are over capacity by 2 units.",
+  "3D: full building model with granite, 4-tone ceramics, BIPV roofs, context and people; honest assessment: test renders are clean but not yet competition-grade (flat light, monotone stone, weak glass reflections). Next: photomatch on F.17.A/B, reflections from the organiser's site panoramas, interior of the Citizens' Hall, wheelchair user in vis 3."
  ],
  "images": [
   {
