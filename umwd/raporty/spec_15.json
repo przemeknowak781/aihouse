@@ -1,0 +1,63 @@
+{
+ "nr": 15,
+ "title": "All 5 concepts complete (K4 'Garden of the Voivodeship' added); 5 jurors now scoring in parallel; drone photo cameras solved — test blocks sit on the photos within 0.3 % of frame width",
+ "stages": [
+  [
+   "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register (184 requirements, 14 conflicts) + checklists ✔ verified",
+   "done"
+  ],
+  [
+   "Site ✔: zoning, heritage, 1934 overlay, DWG survey, geotech, dendrology (44 trees, keep-classes), neighbours (window positions & sills)",
+   "done"
+  ],
+  [
+   "Law ✔ (verified): WT 2002 expired 20.09.2026 → art. 102a Building Law bridge; fire ✔; accessibility ✔; zero-emission ✔",
+   "done"
+  ],
+  [
+   "Design research ✔ (verified): trends, visual craft, boards, façades, Wrocław context, cost model",
+   "done"
+  ],
+  [
+   "Programme ✔: 193 rooms, 187 offices (24/32 m², 1.35 m module), PU ≈ 8,600 m², GFA ≈ 14,000 m² above ground",
+   "done"
+  ],
+  [
+   "Concept panel: K1 ✔ K2 ✔ K3 ✔ K4 ✔ K5 ✔ → 5 jurors scoring ► → synthesis",
+   "running"
+  ],
+  [
+   "3D/visuals: engines ✔; photomatch F.17.A/B ✔ (PnP + tie points, Blender cameras); 3D context ► (refining street-level detail)",
+   "running"
+  ],
+  [
+   "Stage I study (2 boards) + Stage II entry (≤8 boards 100×70 per clarif. 20), 5×A3 text, F.14.B/F.15 tables, white model 1:250",
+   "todo"
+  ],
+  [
+   "Jury simulation & compliance audit → iterate until no open issues",
+   "todo"
+  ]
+ ],
+ "notes": [
+  "Photomatch: F.17 frames are crops of an in-drone stitched panorama (×1.25), located by phase correlation of 77 patches; pinhole cameras solved by least squares (A: 4 manual + 57 tie points; B: 13 manual points + horizon). Blender cameras reproduce the solution to 0.02 px; test blocks of the neighbours align with the photos (right).",
+  "Independent check: camera height difference 37.7 m vs 37.1 m from drone telemetry; heading matches flight yaw within 1–1.4°. Sun for the montages: az ≈ 181–186°, el ≈ 25° (29.10.2025, 11:38 / 11:57).",
+  "K4 'Garden of the Voivodeship': U-shaped block around a 1,520 m² public garden keeping 29 trees, through-route Mazowiecka → boulevard, tower over the whole zone A with lantern to +42.2 m; timber-concrete slabs in the wings honestly flagged as needing a fire-safety derogation; 13,808 m² GFA; 146.3 M PLN.",
+  "Recovery: the container restarted once — all data on disk survived; interrupted agents (K4, photomatch, 3D context) were resumed from their transcripts; only the site-team's final verification pass was lost (will be covered by the final compliance audit).",
+  "Next: jury scores → synthesis of the winning concept → parametric model → drawings & photoreal renders."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/pm_A.jpg",
+   "caption": "F.17.A photomatch test: neighbour blocks + site boundary rendered onto the photo"
+  },
+  {
+   "path": "umwd/raporty/img/pm_B.jpg",
+   "caption": "F.17.B photomatch test (view from west)"
+  }
+ ]
+}

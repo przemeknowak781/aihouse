@@ -1,5 +1,5 @@
 {
- "title": "Four of five concepts in (K1, K2, K3 'Civic Forum', K5 'Bands & Lantern'); 3D context scene of the bridgehead renders in Blender (bridge pylons, river, autumn trees, neighbours)",
+ "title": "All 5 concepts complete (K4 'Garden of the Voivodeship' added); 5 jurors now scoring in parallel; drone photo cameras solved — test blocks sit on the photos within 0.3 % of frame width",
  "stages": [
   [
    "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
@@ -26,11 +26,11 @@
    "done"
   ],
   [
-   "Concept panel ►: K1 ✔ K2 ✔ K3 ✔ K5 ✔, K4 finishing → 5 jurors in parallel → synthesis",
+   "Concept panel: K1 ✔ K2 ✔ K3 ✔ K4 ✔ K5 ✔ → 5 jurors scoring ► → synthesis",
    "running"
   ],
   [
-   "3D/visuals: engines ✔; 3D context scene ✔ (first test renders, refining); photomatch F.17.A/B solve ►",
+   "3D/visuals: engines ✔; photomatch F.17.A/B ✔ (PnP + tie points, Blender cameras); 3D context ► (refining street-level detail)",
    "running"
   ],
   [
@@ -43,20 +43,20 @@
   ]
  ],
  "notes": [
-  "K3 'Civic Forum': open forum court (≈620 m² + 120 m² arcade) crossed by two public axes (bridge → garden, Mazowiecka → Oława boulevard); separate Citizens' Entrance with 2 lifts straight to the public gallery; 'Sejmik Window' in a granite frame facing the forum; 13,683 m² GFA, 146.6 M PLN; 38 of 44 trees kept.",
-  "K5 'Bands & Lantern': one rounded corner (R 14 m, as on the 1934 plan) is both the arched entrance portico and, at the top, the Sejmik hall panorama over the Odra & Ostrów Tumski; horizontal bands on wings vs granite pilasters on the tower; 13,090 m² GFA, 146.5 M PLN; 40 of 46 trees kept (all garden trees).",
-  "All four comply on paper with MPZP height bands, §13 for Słowackiego 5 (tower 18–22 m away vs 16.7–17.5 m required) and the budget (146.5–148.6 M PLN) — the jury will test the numbers independently.",
-  "Common risk flagged by every author: the mezzanine on the Sejmik storey (must be argued as part of the same storey under WT §3); zone-A line digitised ±0.3 m.",
-  "Context scene (right): official survey DTM, bridge with restored pylon helmets, river, existing trees in autumn colour, neighbouring blocks — ready to receive the chosen design."
+  "Photomatch: F.17 frames are crops of an in-drone stitched panorama (×1.25), located by phase correlation of 77 patches; pinhole cameras solved by least squares (A: 4 manual + 57 tie points; B: 13 manual points + horizon). Blender cameras reproduce the solution to 0.02 px; test blocks of the neighbours align with the photos (right).",
+  "Independent check: camera height difference 37.7 m vs 37.1 m from drone telemetry; heading matches flight yaw within 1–1.4°. Sun for the montages: az ≈ 181–186°, el ≈ 25° (29.10.2025, 11:38 / 11:57).",
+  "K4 'Garden of the Voivodeship': U-shaped block around a 1,520 m² public garden keeping 29 trees, through-route Mazowiecka → boulevard, tower over the whole zone A with lantern to +42.2 m; timber-concrete slabs in the wings honestly flagged as needing a fire-safety derogation; 13,808 m² GFA; 146.3 M PLN.",
+  "Recovery: the container restarted once — all data on disk survived; interrupted agents (K4, photomatch, 3D context) were resumed from their transcripts; only the site-team's final verification pass was lost (will be covered by the final compliance audit).",
+  "Next: jury scores → synthesis of the winning concept → parametric model → drawings & photoreal renders."
  ],
  "images": [
   {
-   "path": "umwd/docs/60_wizualizacje/img/context_test_lot_ptaka_pnwsch.jpg",
-   "caption": "3D context test render — bridgehead from NE (site = lawn in the centre)"
+   "path": "umwd/raporty/img/pm_A.jpg",
+   "caption": "F.17.A photomatch test: neighbour blocks + site boundary rendered onto the photo"
   },
   {
-   "path": "umwd/render/studia/massing_K1_K2.jpg",
-   "caption": "K1 / K2 approximate massing"
+   "path": "umwd/raporty/img/pm_B.jpg",
+   "caption": "F.17.B photomatch test (view from west)"
   }
  ]
 }

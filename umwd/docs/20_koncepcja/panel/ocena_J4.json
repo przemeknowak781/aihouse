@@ -1,0 +1,82 @@
+{
+  "juror": "J4",
+  "oceny": [
+    {
+      "id": "K1",
+      "a_funkcja": 6,
+      "b_tkanka": 6,
+      "c_atrakcyjnosc": 7,
+      "d_ekologia": 8,
+      "e_dostepnosc": 8,
+      "f_ekonomia": 6,
+      "mocne": "Czytelna i godna idea: latarnia Sejmiku z oknem 20 × 8 m w łuku R 13 m nad mostem, sala obrad 320 m², hol Sejmiku dwukondygnacyjny. Najlepszy bilans biur: 187 pokoi sprawdzonych w module 1,35 m (21 pokoi w pierścieniu wieży + 20 w skrzydle, 222 jedn. przy potrzebie 220), wszystkie 20 magazynków przy elewacji, czyli rzeczywiście zamienne na biura (PU s. 9). Wieża w całości w A (0,00 m² poza A), dachy w pasmach: skrzydło 19,2–24,5 m, wieża 36,4–38,5 m. § 13 wobec okna lokalu 6-6A z dużym zapasem (wieża ok. 22 m, wymagane 16,7–17,5 m). Winda publiczna L1 jedzie bez zatrzymań na galerię. Jasna ceramika, granit i brąz to trwała, mineralna paleta. PV 0,41 MWp spełnia minimum z M.12. Brak zjazdu z 1KDG.",
+      "slabe": "Antresola (416 m², 38 % rzutu) mieści ok. 250 m² pomieszczeń ZAMKNIĘTYCH: kluby 15 os., salę radnych, pokój socjalny radnych, salę multimedialną, reżyserkę i pokój matki. WT § 3 pkt 19 definiuje antresolę jako »niezamkniętą przegrodami od strony wnętrza«, więc organ może ją uznać za odrębną kondygnację. Wtedy upada zgodność z Wyj. 21/85 (cały Sejmik na kondygnacji sali) i z PU s. 5 (sala na najwyższym piętrze). Pierzeja Wybrzeża zostaje niedomknięta, linię zastępuje tylko rama bramna h 4,80 m. PU przewiduje tu skrzydło przy Wybrzeżu. Kondygnacja attykowa cofnięta zaledwie 1,5 m do +23,60 jest widoczna z ulicy i rozmywa gzyms 21 m. Do tego pokoje attyki mają przed oknem parapet ok. 1,7 m. Sala 200 os. ma pod belkami transferowymi tylko 3,6–4,2 m w świetle. 18 m.p. na platformach typu puzzle oznacza awarie i serwis. Zjazd do garażu w S1 przy Maz. 19, tuż obok publicznej Bramy Ogrodowej, daje konflikt pieszy–samochód, hałas dla mieszkańców i kolizję z planowanym tramwajem lub tunelem w Mazowieckiej. Odwierty 120 m przekraczają reżim ≤ 100 m (formalności geologiczne). Wieża ma elewację niemal kwadratową 40 × 38 m, więc jest masywna. Rezerwa budżetu 2,0 %.",
+      "bledy_dyskwalifikujace": "Brak bezwzględnie dyskwalifikujących. Do korekty: (1) skrzydło dochodzi do lica wieży, które leży 0,3 m w głębi A. Wg mojego przeliczenia ok. 9,8 m² dachu skrzydła na +19,45 wypada wewnątrz A, a MPZP § 26 ust. 2 pkt 3 wymaga tam min. 35 m (autor sam sygnalizuje problem styku). (2) Pomieszczenia zamknięte na antresoli to istotne ryzyko niezgodności z Wyj. 21/85."
+    },
+    {
+      "id": "K2",
+      "a_funkcja": 6,
+      "b_tkanka": 6,
+      "c_atrakcyjnosc": 7,
+      "d_ekologia": 7,
+      "e_dostepnosc": 7,
+      "f_ekonomia": 4,
+      "mocne": "Najsilniejsza tożsamość materiałowa: jasna cegła, granit i brąz, w dialogu z klinkierowo-granitowymi pylonami mostu. Dwukondygnacyjna Arkada Obywatelska (7,5 m w świetle) to czytelny, gościnny gest u stóp mostu. Obrys U domyka kwartał: segment SE w linii WS 5 przy zachowaniu § 13 (12,55 m przy wymaganych ok. 8,2 m, wieża ok. 20,4 m). Gzyms i attyka dokładnie w liniach Maz. 19. Wieża zajmuje 98 % A∩OI, wszystkie dachy w pasmach, kampanila 44,37 m (≤ 45). Ogród 1 571 m² od południa, 38 drzew. Zjazd wyłącznie od 6KDB/2. Cegła z gruzu kamienic i budki dla jerzyków. PV 0,40 MWp spełnia minimum z M.12. 8 dźwigów, publiczny dojazd bezpośrednio na galerię.",
+      "slabe": "Budżet na krawędzi: 148,6 mln przy rezerwie 0,9 % i wskaźnikach z dolnego kwartyla (8 750 / 5 300 zł/m²). To nie przystaje do ręcznie formowanej cegły, kampanili, arkady i 8 dźwigów. Autor sam podaje ok. 158 mln przy realnych stawkach, a przy nieprzekraczalnym limicie (Wyj. 20/74) to dla Zamawiającego czerwona flaga. Największa PC nadziemna z pięciu prac (14 161 m²). Kampanila to druga pionowa dominanta wewnątrz A. Konkuruje z hełmami pylonów i przeczy wytycznej DWKZ: jedna dominanta o spokojnym zwieńczeniu. Cegła w kwartale historycznie tynkowanym może nie zyskać akceptacji DWKZ. Na antresoli zamknięte sala multimedialna i reżyserka (ryzyko wobec Wyj. 21/85). Sejmik netto ok. 1 057 m², poniżej ok. 1 094 m² z programu. Głęboka wieża (30 m): 6 sal narad i 16 z 20 magazynków w środku, bez światła i bez możliwości konwersji. Zjazd z rampą 20 % ok. 12 m od szczytu WS 5. Pochylnie 8 % w sali obrad.",
+      "bledy_dyskwalifikujace": "Formalnie brak. Poważne: centrala wentylacyjna Sejmiku, wentylatory oddymiające oraz czerpnia i wyrzutnia w ażurze kampanili na +36,6–44,0 m od strony 1KDG i Mazowieckiej. Bardzo prawdopodobna kolizja z MPZP § 6 pkt 13 (zakaz urządzeń na elewacjach od ulic). Przy stawkach, które sam autor uznaje za realne, koszt przekracza limit 150 mln."
+    },
+    {
+      "id": "K3",
+      "a_funkcja": 6,
+      "b_tkanka": 6,
+      "c_atrakcyjnosc": 6,
+      "d_ekologia": 5,
+      "e_dostepnosc": 8,
+      "f_ekonomia": 6,
+      "mocne": "Dobra idea obywatelska: Forum (620 m² + podcień 120 m²) przecięte dwiema publicznymi osiami oraz osobne Wejście Obywatelskie z forum z dwoma dźwigami wprost na galerię. To najczytelniejsza separacja publiczności, uzupełniona filtrami prywatności pulpitów. Kondygnacja Sejmiku obszerna (ok. 1 230 m² netto, sala 320 m², komisje 100 i 60 m²). Wieża 37,6 m spokojna, w A (0,10 m² poza A to błąd rastra), wszystkie dachy w pasmach. § 13 spełniony z zapasem ok. 4 m. Dwie kondygnacje podziemne zgodnie z M.01 (106 m.p., 54 punkty EV). Program 187 pokoi rozpisany per kondygnacja. Bezpieczna, mineralna paleta: granit i prefabrykat z kruszywem granitowym.",
+      "slabe": "Brak skrzydła przy Wybrzeżu i 21-metrowe otwarcie pierzei na bulwar. To odejście od formy z PU (dwa skrzydła i dominanta) i od ciągłości pierzei wymaganej przez DWKZ. Okno Sejmiku patrzy na dziedziniec (pd.), a nie na most i Odrę, więc wizerunek regionu od strony mostu jest słabszy. Dostawy wjeżdżają do zatoki w forum, czyli ruch serwisowy trafia do przestrzeni obywatelskiej. Forum otwarte całą dobę to dla Zamawiającego stały koszt ochrony, monitoringu, sprzątania i ryzyko dewastacji. Antresola 440 m² mieści zamknięte salę radnych, pokój socjalny, kluby 15 os., salę multimedialną i reżyserkę (ryzyko wobec Wyj. 21/85). 2 z 6 sal narad bez światła dziennego (§ 57, sanepid), 13 z 20 magazynków bez możliwości konwersji. Klin skrzydła NW ma tylko 5,9–8,6 m głębokości. Najsłabsza ekologia: EP ≈ 55 kWh/m²·rok, PV 0,35 MWp (poniżej 0,4 z M.12) pokrywa ok. 37 % zapotrzebowania. Zjazd z Mazowieckiej 6–12 m od Maz. 19. Podziemie 4 072 m² w wodzie liczone po niskim 5 400 zł/m².",
+      "bledy_dyskwalifikujace": "Brak. Ryzyka: antresola z pomieszczeniami zamkniętymi (Wyj. 21/85, WT § 3 pkt 19); PV poniżej minimum M.12; sale narad bez doświetlenia wymagają zgody sanepidu."
+    },
+    {
+      "id": "K4",
+      "a_funkcja": 6,
+      "b_tkanka": 7,
+      "c_atrakcyjnosc": 7,
+      "d_ekologia": 8,
+      "e_dostepnosc": 9,
+      "f_ekonomia": 7,
+      "mocne": "Najmocniejsza narracja obywatelska i proekologiczna: nieogrodzony Ogród Województwa 1 520 m² z zachowanymi 29 drzewami ogródków, forum 8,8 m z drewnianym pawilonem kancelarii, stropy HBV w skrzydłach (ok. 800 t CO₂ zmagazynowane), retencja 137 m³ (zero odpływu deszczu miarodajnego), EP ≈ 31. Sala 200 os. ma 6,5 m w świetle, najlepiej z pięciu prac. Obsługa skupiona w segmencie E od 6KDB/2, w ogrodzie nie ma samochodów. Kwartał domknięty: gzyms +20,94 = attyka Maz. 19, kondygnacja cofnięta 6,75 m, niewidoczna z ulicy. Wieża w A (98 % A∩OI), dach główny 35,2 m, latarnia 42,9 m (≤ 45). § 13 spełniony: segment E 10,75 m przy wymaganych ok. 8,7 m, wieża ok. 20,4 m. Dostępność najpełniejsza: każdy rząd sali dostępny pochyleniem ≤ 5 %, pokój cichy, ścieżki dotykowe od przystanków. Najrzetelniejszy kosztorys, sprawdzony dwiema metodami (146,3 / 143,8 mln) z listą rezerw.",
+      "slabe": "Kondygnacja Sejmiku ciasna i bez zapasu: komisja 50 os. ok. 75 m² (1,5 m²/os.), komisja 30 os. 50 m², kluby 30 os. po 50 m², kluby 15 os. po 25 m². To poniżej standardu pracy radnych i godności siedziby, a program netto ok. 1 040 m² nie dociąga do ok. 1 094 m². Forum 8,8 m zabiera wieży całą kondygnację biurową (P1 to kładka 22 m²). Dwustopniowe zwieńczenie (dach 35,35 m + latarnia do 42,5 m) jest mniej spokojne niż zalecane przez DWKZ 36–40 m. Stropy HBV w budynku wysokim nie spełniają wprost wymogu NRO. Potrzebne rozwiązanie zamienne (KW PSP, WKZ), czyli 3–6 miesięcy procedury i ryzyko odbioru społecznego. PV 0,35 MWp poniżej 0,4 z M.12. 15 z 20 magazynków wewnątrz. Dach P5 skrzydła ma zapas tylko 0,18 m wobec 25 m. Brama garażu w elewacji od bulwaru.",
+      "bledy_dyskwalifikujace": "Brak dyskwalifikujących. Do rozstrzygnięcia: NRO dla odsłoniętego CLT w budynku W (autor podaje ścieżki awaryjne: kapsułowanie +0,6 mln albo stropy filigranowe ±0); minimalny zapas wysokości P5 (0,18 m); PV poniżej minimum M.12."
+    },
+    {
+      "id": "K5",
+      "a_funkcja": 7,
+      "b_tkanka": 8,
+      "c_atrakcyjnosc": 8,
+      "d_ekologia": 8,
+      "e_dostepnosc": 8,
+      "f_ekonomia": 8,
+      "mocne": "Najpewniejsze rozwiązanie kluczowego konfliktu programu. Kondygnacja Sejmiku 12 m w pełnym rzucie wieży (1 146 m²): wszystkie pomieszczenia zamknięte na poziomie głównym, na antresoli tylko otwarta galeria i foyer. To najczystsza zgodność z Wyj. 21/85, WT § 3 pkt 19 i PU s. 5, a Kancelaria Sejmiku jest piętro niżej. Najsilniejszy znak władzy regionu: sala obrad z prezydium przed 33-metrową panoramą na Odrę, portal mostu i Ostrów Tumski, a nad nią Brama Mostowa (podcień) i Hala Obywatelska jako pasaż do nieogrodzonego ogrodu. Wrocławski modernizm lat 20.–30. to genius loci, a nie import. Najzwartsza i najtańsza bryła: PC nadziemna 13 090 m² (najmniej), PC/PU ok. 1,53, wieża tylko 7 kondygnacji i 36,8 m (najniższa, najspokojniejsza). Podziemie liczone po ostrożnych 5 800 zł/m²; w modelu parametrycznym zespołu pozycja wypada najkorzystniej, ok. 139–140 mln w wariancie mid. Wieża w całości w A (0,00 m² poza A i OI), dachy w pasmach: skrzydło 19,7–21,8 m, wieża 35,4–36,8 m. § 13 spełniony z zapasem: segment SE ok. 10,9 m przy wymaganych 8,1 m, wieża 20,4 m przy 15,8 m. Kondygnacja −2 jako budowla ochronna (art. 93) to realna wartość dla bezpieczeństwa. Departamenty nie są dzielone między kondygnacje. PV 0,40 MWp spełnia M.12, EP ≈ 28, woda −42 %. Prezydium i mównica na poziomie podłogi, osobne wejście publiczności od Wybrzeża.",
+      "slabe": "Bilans poziomu głównego Sejmiku jest przeładowany. Autor wpisuje ok. 1 106 m² netto (sala 330, hol 175, pas pd. 349, pas zach. 82, trzon 170) w 1 146 m² PC, czyli bez realnego miejsca na ściany, konstrukcję i komunikację do pasm pd. i zach. Brakuje ok. 70–100 m²; trzeba odchudzić hol albo kluby, nie przenosząc pomieszczeń na antresolę. Szkła w koronie jest dużo (ok. 650 m², panorama 33 × 10,2 m od NE): olśnienie, koszty mycia i chłodzenia. Kubatura kondygnacji 12 m może razić. Jury i trendy każą ostrożnie ze szkłem. Ślepa ściana pd. segmentu SE widoczna z bulwaru. 3 z 6 sal narad bez światła dziennego. Deklaracja 20 magazynków »zamiennych na biura« jest niespójna z rezerwą elewacyjną 8 jedn. (209 przy potrzebie 201), więc większość jest wewnątrz. Na rzędy sali prowadzi podnośnik zamiast pochylni. Poziome okna-wstęgi (ok. 45 %) wymagają dyscypliny detalu wobec postulatu segmentacji »posesji«.",
+      "bledy_dyskwalifikujace": "Brak. Do korekty: naroże pd.-zach. segmentu SE (101,14; 37,45) wg mojego przeliczenia leży 2,96 m od granicy dz. 10/2. Ściana bez otworów wymaga 3 m (WT § 12) albo usytuowania przy granicy, jeśli MPZP to dopuszcza, więc wystarczy drobne przesunięcie. Trzeba też zbilansować poziom główny Sejmiku."
+    }
+  ],
+  "ranking": [
+    "K5",
+    "K4",
+    "K1",
+    "K2",
+    "K3"
+  ],
+  "przeszczepy": [
+    "Z K4 do K5: rzędy sali obrad dostępne bocznymi pochyleniami ≤ 5 % (stanowisko dla wózka w każdym rzędzie) zamiast podnośnika, a do tego pokój cichy przy hali i ścieżki dotykowe od przystanków tramwajowych na przyczółku.",
+    "Z K4 do K5: retencja ok. 137 m³ (zbiornik + skrzynki rozsączające + ogród deszczowy) dla zerowego odpływu deszczu miarodajnego oraz narracja »Ogrodu Województwa« (ogród nieogrodzony, z drewnianym meblem obywatelskim, tarasy na dachach skrzydeł jako miejsca pracy i przerw).",
+    "Z K4 do K5: kontrola kosztu dwiema niezależnymi metodami (wskaźnikowo i modelem F.14.B) z jawną listą optymalizacji, a także rozważenie stropów HBV w skrzydłach poniżej 25 m z gotową ścieżką awaryjną (filigran ±0 zł).",
+    "Z K1 do K5: wszystkie magazynki przy elewacji, czyli faktycznie zamienne na biura (PU s. 9), oraz analiza § 13 dla każdego możliwego położenia okna wzdłuż całego szczytu WS 5, pokazana na planszy.",
+    "Z K3 do K5: filtry prywatności pulpitów (poufność głosowania widoczna z galerii) i czytelnie nazwane »Wejście Obywatelskie« z własnym lobby w dni sesji; 54 punkty ładowania EV z rezerwą mocy.",
+    "Z K2 do K5: cegła i kamień z gruzu kamienic odzyskane z wykopu w posadzkach hali i w »ścianie pamięci« przy lapidarium, napis »Sejmik Województwa Dolnośląskiego« wykuty w granitowym nadprożu Bramy Mostowej, budki dla jerzyków w kasetach elewacji dziedzińcowych.",
+    "Z K1 i K2 do K5: zamiast ślepej ściany segmentu SE od bulwaru relief ceramiczny w rytmie posesji (K2) albo pionowy porządek filarów (K1), bez otworów, z zachowaniem 3 m od granicy dz. 10/2."
+  ],
+  "uzasadnienie": "Oceniam z perspektywy Zamawiającego (Marszałek i Sekretarz Województwa): godność siedziby Sejmiku, wygoda pracy radnych i urzędu, bezpieczeństwo, nieprzekraczalny limit 150 mln zł netto, trwałość i koszty eksploatacji, wizerunek regionu, dostępność dla mieszkańców. Sprawdziłem geometrię na site.json (shapely). Wszystkie wieże leżą w A (odchyłki ≤ 0,1 m² to raster), wszystkie dachy mieszczą się w pasmach 18–25 m i 35–45 m przy ostrożnym odniesieniu do terenu (118,33 / 118,88 / 119,44). Żadna praca nie ma zjazdu z 1KDG. § 13 wobec okna lokalu 6-6A (parapet 124,0, sektor ±30°, e 109,5–111,5) spełniają wszystkie: najmniejszy zapas ma K4 (ok. 2,1 m), największy K1 (ok. 5,3 m). Bilans 187 pokoi 24/32 m² w module 1,35 m mieści się we wszystkich pracach; najlepiej w K1, gdzie 20 magazynków jest przy elewacji. Rozstrzygają więc trzy kwestie. (1) Kondygnacja Sejmiku. Tylko K5 i K4 trzymają wszystkie pomieszczenia zamknięte na poziomie sali, z antresolą rzeczywiście otwartą (WT § 3 pkt 19). K1 i K3 mają na antresoli ok. 250 m² pokoi zamkniętych, a K2 salę multimedialną i reżyserkę. To realne ryzyko podważenia zgodności z Wyj. 21/85 na etapie PnB. K4 płaci za zgodność ciasnymi komisjami i klubami, a K5 przeładowanym bilansem poziomu głównego, który da się jednak naprawić kosztem holu. (2) Budżet. K2 deklaruje 148,6 mln przy rezerwie 0,9 % i sama przyznaje ok. 158 mln przy realnych stawkach, więc dla Zamawiającego to praca nie do przyjęcia bez głębokiej przebudowy. Moje przeliczenie modelem parametrycznym zespołu (poziom mid, z rezerwą 5 %) daje ok. 140 mln (K1), 144 (K2), 138 (K3), 141,5 (K4) i 139,5 mln (K5); K2 po waloryzacji +5 % przekracza limit. K5 ma najmniejszą PC nadziemną (13 090 m²) i liczy podziemie ostrożnie, K4 jest najrzetelniej udokumentowana. (3) Wizerunek i tkanka. K5 łączy domknięty kwartał (gzyms w linii Maz. 19, segment w linii WS 5, łuk R 14 z podcieniem) z najsilniejszym znakiem regionu: Sejmik obraduje przed panoramą Odry i Ostrowa Tumskiego, w języku wrocławskiego modernizmu. Do tego dochodzi budowla ochronna na −2. K4 daje najlepszy ogród, ekologię i dostępność, ale Sejmik jest za ciasny jak na siedzibę władzy regionu, a HBV w budynku wysokim to ryzyko proceduralne. K1 jest solidna i godna, lecz zostawia otwarte Wybrzeże, ma widoczną attykę, platformy parkingowe, zjazd przy Maz. 19 i antresolę z pokojami. K2 jest najbardziej wyrazista, ale dwie dominanty, urządzenia w ażurze kampanili od ulic i budżet na krawędzi przesądzają o jej miejscu. K3 ma dobrą ideę forum, ale otwiera pierzeję Wybrzeża, kieruje Okno Sejmiku na dziedziniec, wprowadza dostawy do forum i ma najsłabszą ekologię (EP 55, PV 0,35 MWp). Rekomenduję K5 do dalszej pracy z warunkami: zbilansować poziom Sejmiku bez zamykania antresoli, ograniczyć szkło korony lub udowodnić komfort letni, dać pochylnie na rzędy sali, odsunąć naroże segmentu SE na ≥ 3 m od dz. 10/2 i opracować elewację segmentu od bulwaru."
+}

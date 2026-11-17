@@ -610,30 +610,51 @@ class Materialy:
         nb.output(self.mgla_shader(nb, b, D=4500.0, moc=0.15))
 
     # ---------------------------------------------------------------- elewacje
-    def m_tynk(self, m, hexcol='a0a0a0', brud='0.25', bonio='0'):
-        """Tynk: kolor bazowy (hex sRGB), brud (zacieki pionowe, plamy), opcjonalne boniowanie (rozstaw w m)."""
+    def m_tynk(self, m, hexcol='a0a0a0', brud='0.25', bonio='0', laty='0'):
+        """Tynk: kolor bazowy (hex sRGB), brud (zacieki pionowe, plamy, strefa rozbryzgów przy cokole),
+        boniowanie (rozstaw boni w m, 0 – brak), łaty (udział naprawianych płatów tynku – ściany szczytowe)."""
         c = tuple((int(hexcol[i:i + 2], 16) / 255.0) ** 2.2 for i in (0, 2, 4))
         brud = float(brud)
         bon = float(bonio)
+        lat = float(laty)
         nb = NodeBuilder(m)
         uv = self.uv_sciana(nb)
         n1 = nb.n('ShaderNodeTexNoise', Scale=0.6, Detail=6.0, Roughness=0.55)
         nb.l(uv, n1.inputs['Vector'])
-        dk = tuple(x * 0.82 for x in c)
-        lt = tuple(min(1.0, x * 1.08) for x in c)
+        dk = tuple(x * 0.84 for x in c)
+        lt = tuple(min(1.0, x * 1.07) for x in c)
         col = self._ramp(nb, n1.outputs['Fac'], dk, lt, 0.3, 0.7)
+        # duże płaty tonalne
+        n0 = nb.n('ShaderNodeTexNoise', Scale=0.07, Detail=3.0)
+        nb.l(uv, n0.inputs['Vector'])
+        col = nb.mix(nb.math('MULTIPLY', n0.outputs['Fac'], 0.5), col, tuple(x * 0.8 for x in c), blend='MIX')
+        if lat > 0:
+            vo = nb.n('ShaderNodeTexVoronoi', Scale=0.22)
+            nb.l(uv, vo.inputs['Vector'])
+            sep = nb.n('ShaderNodeSeparateColor')
+            nb.l(vo.outputs['Color'], sep.inputs[0])
+            fl = nb.math('GREATER_THAN', sep.outputs[0], 1.0 - lat)
+            lc = nb.mix(sep.outputs[1], tuple(min(1, x * 1.12) for x in c), (0.36, 0.35, 0.33))
+            col = nb.mix(nb.math('MULTIPLY', fl, 0.85), col, lc)
         # zacieki: szum rozciągnięty w pionie
-        mp = nb.n('ShaderNodeMapping', Scale=(1.0, 0.08, 1.0))
+        mp = nb.n('ShaderNodeMapping', Scale=(1.6, 0.07, 1.0))
         nb.l(uv, mp.inputs['Vector'])
-        n2 = nb.n('ShaderNodeTexNoise', Scale=2.0, Detail=4.0)
+        n2 = nb.n('ShaderNodeTexNoise', Scale=2.2, Detail=5.0)
         nb.l(mp.outputs[0], n2.inputs['Vector'])
-        st = nb.math('MULTIPLY', nb.math('MAXIMUM', nb.math('SUBTRACT', n2.outputs['Fac'], 0.5), 0.0), 2.0 * brud)
-        col = nb.mix(st, col, tuple(x * 0.55 for x in c))
+        st = nb.math('MINIMUM', nb.math('MULTIPLY', nb.math('MAXIMUM', nb.math('SUBTRACT', n2.outputs['Fac'], 0.52), 0.0),
+                                         3.5 * brud), 0.9)
+        col = nb.mix(st, col, tuple(x * 0.5 for x in c))
         n3 = nb.n('ShaderNodeTexNoise', Scale=0.35, Detail=6.0)
         nb.l(uv, n3.inputs['Vector'])
-        pl = nb.math('MULTIPLY', nb.math('GREATER_THAN', n3.outputs['Fac'], 0.66), brud * 0.8)
-        col = nb.mix(pl, col, tuple(x * 0.7 for x in c))
-        rough = 0.88
+        pl = nb.math('MULTIPLY', nb.math('GREATER_THAN', n3.outputs['Fac'], 0.64), brud * 0.9)
+        col = nb.mix(pl, col, tuple(x * 0.68 for x in c))
+        # strefa rozbryzgów / zawilgocenia przy terenie (Z < 0,6 m ≈ do 1,3 m nad chodnikiem)
+        geo = nb.n('ShaderNodeNewGeometry')
+        sz = nb.n('ShaderNodeSeparateXYZ')
+        nb.l(geo.outputs['Position'], sz.inputs[0])
+        spl = nb.math('MULTIPLY', nb.math('MINIMUM', nb.math('MAXIMUM', nb.math('DIVIDE', nb.math('SUBTRACT', 0.6, sz.outputs[2]),
+                                                                                1.2), 0.0), 1.0), 0.55 * min(1.0, brud * 2))
+        col = nb.mix(spl, col, tuple(x * 0.55 for x in c))
         nf = nb.n('ShaderNodeTexNoise', Scale=70.0, Detail=3.0)
         nb.l(uv, nf.inputs['Vector'])
         h = nb.math('MULTIPLY', nf.outputs['Fac'], 0.3)
@@ -646,7 +667,8 @@ class Materialy:
             h = nb.math('SUBTRACT', h, nb.math('MULTIPLY', gro, 1.0))
         bmp = nb.n('ShaderNodeBump', Strength=0.35, Distance=0.02)
         nb.l(h, bmp.inputs['Height'])
-        nb.output(self._bsdf(nb, col, rough, spec=0.35, normal=bmp.outputs['Normal']))
+        rgh = nb.math('ADD', nb.math('MULTIPLY', n1.outputs['Fac'], 0.1), 0.82)
+        nb.output(self._bsdf(nb, col, rgh, spec=0.35, normal=bmp.outputs['Normal']))
 
     def m_szklo(self, m):
         """Szyba okienna widziana z zewnątrz: ciemne wnętrze + odbicia; atrybut 'rnd' → firanki / rolety."""
@@ -1422,7 +1444,6 @@ def kamienica_maz19(ctx, g):
     for u in ax:                                                            # III p.: naczółki trójkątne
         o = Otwor(u, 1.04, 12.47, 14.22)
         obramienie(g, R, o, 0.11, 0.05, T_M)
-        plycina(g, R, o.u0 - 0.05, o.u1 + 0.05, 11.70 - 0.0 + 0.5, 12.30, T_M, b=0.04)
         naczolek(g, R, o, 'tr', T_M, wys=0.62, nad=0.36)
     R.profil(g, 0, R.L, 15.40, _pas(0.08, 0.20), T_M)
     for u in ax:                                                            # IV p.: opaski
@@ -1450,7 +1471,7 @@ def kamienica_maz19(ctx, g):
                 ot.append(Otwor(uc * k, 0.55, vc - 0.32, vc + 0.32, szpr='2', d=0.2))
         for vc, w, h in ((16.95, 0.6, 0.45), (13.58, 0.6, 0.65), (9.98, 0.5, 0.55), (6.53, 0.5, 0.6)):
             ot.append(Otwor(8.36 * k, w, vc - h / 2, vc + h / 2, szpr='none', d=0.2))
-    sciana(g, R, 0, R.L, vb, TOP, ot, [(vb, TOP + 1, 'tynk:b9b2a6:0.45:0')], rng)
+    sciana(g, R, 0, R.L, vb, TOP, ot, [(vb, TOP + 1, 'tynk:a9a296:0.7:0:0.35')], rng)
     R.profil(g, R.L - 0.7, R.L, 20.33, [(0, 0), (0.3, 0.1), (0.62, 0.4), (0.62, 0.65), (0, 0.65)], T_M)
     R.box(g, -0.05, R.L + 0.05, TOP, TOP + 0.06, -0.05, 0.05, 'blacha')
     # pozostałość muru dawnej zabudowy przy szczycie (wys. ok. 5,4 m, „fragment muru”, s. 13)
@@ -1538,7 +1559,7 @@ def kamienica_ws5(ctx, g):
     vb = -0.9
     T_G = 'tynk:cfcfc9:0.25:0'           # jasnoszary tynk pięter (zdjęcie F.17.A)
     T_P = 'tynk:aaa595:0.3:0.55'         # boniowany parter, beżowoszary
-    T_T = 'tynk:a9a59c:0.45:0'           # elewacja tylna / szczyt
+    T_T = 'tynk:a39f96:0.6:0:0.3'        # elewacja tylna / szczyt (łaty napraw tynku)
     TOP = 19.8
     # ---- front (wsch.) od pd. do pn.
     R = Ramka(SE, NE, zr)
