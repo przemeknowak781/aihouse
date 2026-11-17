@@ -218,7 +218,7 @@ for lvl, D, doors, circ in (("S", S, M.DOORS_S, CIRC_S), ("ANT", A, M.DOORS_ANT,
 print("Pomieszczenia bez drzwi na komunikację:", miss if miss else "brak (K1 usunięte)")
 n_open = len(M.DOORS_S) + len(M.DOORS_ANT) + len(M.DOORS_KLATKA)
 print(f"Pełny otwór w ścianie wspólnej (sonda ± 0,32 m w {13} punktach otworu): {n_open - len(bad_open)}/{n_open} drzwi ✔"
-      + (f"; błędne: {bad_open}" if bad_open else " (w tym drzwi przedsionków do klatek A, B i A' → klatka A 1,0 m w v 12,55–13,55)"))
+      + (f"; błędne: {bad_open}" if bad_open else " (w tym drzwi przedsionków do klatek: A 1,15 m w v 12,05–13,20, B, A' → klatka A 1,0 m w v 12,55–13,55)"))
 print("Uwaga: SWD.01 (sala) – 4 drzwi: NW do holu 1,6 m, SW 1,2 m i SE 1,6 m do kuluaru, drzwi prezydium 1,0 m;"
       " galeria – drzwi z korytarza publicznego i drzwi przedsionka A; korytarz publiczny – drzwi przedsionków A i B (+30,90).")
 
@@ -350,7 +350,7 @@ def entry(k, g, lvl):
 
 pom = {}
 for k, g in CORES.items():
-    pom[k] = {"nazwa": "Trzon A (v1.2: wydłużony na pd. do v 11,85 wg I5; klatka A 3,40×5,80 + przedsionek 3,10×5,80 z MOE, A1/A2 1 600 kg kab. 1,5×2,1 drzwi pn., R 1 000 kg drzwi pd.)"
+    pom[k] = {"nazwa": "Trzon A (v1.2: wydłużony na pd. do v 11,85 wg I5; klatka A 3,40×5,80 + przedsionek 3,05×5,80 z MOE, A1/A2 1 600 kg kab. 1,5×2,1 drzwi pn., R 1 000 kg drzwi pd.)"
               if k == "C-A" else "Trzon B (obrys bez zmian; klatka B 3,40×6,64 + przedsionek 3,40×2,06 z MOE, P1/P2 1 600 kg kab. 1,5×2,1 drzwi wsch., szachty po dźwigu T)",
               "kategoria": "trzon", "poziom": "S+ANT", "pow_m2": round(g.area, 2), "program_m2": None, "zakres_m2": None,
               "obrys_uv": M.poly_list_uv(g), "obrys_en": M.poly_list_en(g)}

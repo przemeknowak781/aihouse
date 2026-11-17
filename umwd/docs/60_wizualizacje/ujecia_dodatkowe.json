@@ -380,7 +380,7 @@
   },
   {
    "id": "zlota-godzina-5",
-   "opis": "ZŁOTA GODZINA 5 – teleobiektyw z prawego brzegu od pd.-wsch. (230 m): wieża i Most Grunwaldzki w spłaszczonej perspektywie, szeroka tafla Odry z odbiciami. Pierwsze 45 min po wschodzie – słońce 6° nad horyzontem, elewacje wsch. i pd. w pełnym, pomarańczowym świetle.",
+   "opis": "ZŁOTA GODZINA 5 – teleobiektyw z prawego brzegu od pd.-wsch. (230 m): wieża i Most Grunwaldzki w spłaszczonej perspektywie, szeroka tafla Odry z odbiciami, barki z detalem przy nabrzeżu, gmach DUW za mostem (LOD2) cofnięty poranną mgiełką, piesi na bulwarze przy lewej krawędzi. Pierwsze 45 min po wschodzie – słońce 6° nad horyzontem, elewacje wsch. i pd. w pełnym, pomarańczowym świetle.",
    "cam": {
     "e": 301.0,
     "n": -40.0,
@@ -394,12 +394,23 @@
    },
    "lens_mm": 70,
    "shift_x": 0.0,
-   "shift_y": 0.05,
+   "shift_y": 0.09,
    "aspect": "3:2",
    "czas": "2026-10-20 08:07 CEST",
-   "ludzie": false,
+   "ludzie": true,
    "preset": "dzien",
-   "uwaga_render": "Podgląd renderowany przez render/ujecia_poprawki_kontekstu.py (te same argumenty co ujecia_dodatkowe.py): usuwa artefakty context.py widoczne z wody – ścianę 3,8 m w nurcie wzdłuż granicy ramki (e 152,5 / n 148,6) i fałszywą groblę z ortofotomapy pod Mostem Grunwaldzkim. Po poprawce context.zbuduj_dalsze można renderować wprost."
+   "uwaga_render": "Render finalny: render/final_zlota_godzina_5.py (nakładka na render/final_zlota_godzina_3.py → ujecia_finalne_korekty.py → ujecia_poprawki_kontekstu.py → ujecia_dodatkowe.py; te same argumenty). Warunki wspólne zestawu: lamele korony łuku v1.1 (21 szt.), sitodruk 30 % na szkle korony, oprawy ciepłe w dzień ×0,12. Poprawki ujęcia: barka-restauracja z detalem (model zlota-godzina-3) i dom pływający z dachem PV (145; 27) wg zdjęcia F.17.A zamiast białych pudeł; gmach DUW w LOD2 zamiast prostego bloku (tynk, cokół, 6 rzędów okien we wnękach, fryz i gzyms, dach spłaszczony z blachy tytan-cynk); 3 pieszych na bulwarze za ogrodzeniem skarpy (lewa krawędź); zmarszczka wody i wyrównany uskok muru jak w zlota-godzina-3; perspektywa powietrzna (post_przed.mgla, tryb „zamglenie_poranne” – mieszanie z barwą nieba nad linią zabudowy wg passu Mist, od 270 m). Podglądy: render/ujecia_poprawki_kontekstu.py.",
+   "post_przed": {
+    "mgla": {
+     "tryb": "zamglenie_poranne",
+     "start": 270,
+     "glebokosc": 260,
+     "sila": 0.6,
+     "wykladnik": 0.8,
+     "desat": 0.2
+    }
+   },
+   "poprawki": "v0 (podgląd): 70 mm, oś 302°, shift 0,05 – attyka y 0,88 (narożnik 0,93, 7 % nieba nad wieżą), woda 41 %, barki – białe pudła, gmach DUW za mostem – płaski blok, bez pieszych. v1 (final, korekty jury, głosowanie 2 : 1 jak w zlota-godzina-3): stanowisko (301; −40; oko 1,65 m) i 70 mm bez zmian (jurorzy 2 i 3; 80 mm jurora 1 odrzucone – wycinałby DUW, ale dwa głosy za 70 mm), oś 302° bez zmian (2 i 3; topola bulwaru poza kadrem), shift_y 0,05 → 0,09 (jurorzy 1 i 3; wartość jurora 3 – 0,11 jurora 1 była liczona dla 80 mm): wieża x 0,07–0,43, attyka łuku y 0,82, narożnik y 0,87 (13 % nieba nad wieżą), horyzont 0,365, woda 32 %, niebo 33 %; portal z hełmami x 0,72–0,85 – mieści się; kadr 3 : 2 (bez 16 : 9) i pora 20.10 08:07 bez zmian (wszyscy). Wdrożone: perspektywa powietrzna od ~270 m (1 i 3; wieża 230 m i portal 265–280 m ostre), DUW w LOD2 z dachem, gzymsem i siatką okien, tynk ciemniejszy od granitu wieży (2 i 3), barki z detalem jak w zlota-godzina-3 (2), 3 pieszych na bulwarze przy lewej krawędzi (2), render po poprawce lamel (2)."
   },
   {
    "id": "zmierzch-detal-1",
@@ -440,22 +451,138 @@
    "uwaga_render": "Render finalny: render/final_zmierzch_detal_1.py (nakładka na wspólną nakładkę finałową render/ujecia_finalne_korekty.py → ujecia_poprawki_kontekstu.py → ujecia_dodatkowe.py; te same argumenty). Warunek wspólny zestawu: lamele korony łuku v1.1 (21 szt. 0,35 × 0,60 m, rozstawy 1,35/0,675 m w ciągu Fibonacciego) i sitodruk 30 % na szkle korony łuku. Klucze sila_nieba, oprawy_cieple_mnoznik i liscie_drobne obsługuje tylko ta nakładka – ekspozycja −2,3 jest dobrana do nieba ×6,5 (render samym ujecia_dodatkowe.py wyjdzie ok. 2,7 EV za ciemny).",
    "korekty_jury": {
     "wdrozone": [
-     "lamele korony łuku (wszyscy, warunek renderu): 21 szt. 0,35 × 0,60 m (R 13,40–14,00) w rozstawach 1,35 / 0,675 m w ciągu Fibonacciego, wyśrodkowane, wg koncepcja.json v1.1 i tools/elewacje.py; sitodruk 30 % na szkle korony łuku. budynek3d.Spec daje dziś 16 lamel – podmiana w nakładce render/ujecia_finalne_korekty.py (pliki wspólne nieruszane). Przy krawędzi łuku lamele zachodzą na siebie i korona „domyka się” – rytm czyta się jako ciemne pionowe żebra na ciepłym tle",
+     "lamele korony łuku (wszyscy, warunek renderu): 21 szt. 0,35 × 0,60 m (R 13,40–14,00) w rozstawach 1,35 / 0,675 m w ciągu Fibonacciego, wyśrodkowane (zapas 2 cm), wg koncepcja.json v1.1 i tools/elewacje.py; sitodruk 30 % na szkle korony łuku. budynek3d.Spec bierze dziś „R 13,40” z opisu jako rozstaw (lamela = 0,35 / 0,60 / 13,40) – lamele ze Spec przechwycone i podmienione w nakładce render/ujecia_finalne_korekty.py (pliki wspólne nieruszane). Przy krawędzi łuku lamele zachodzą na siebie i korona „domyka się” – rytm czyta się jako ciemne pionowe żebra na ciepłym tle drewnianych bafli",
      "stanowisko (64; 120; oko 1,65 m nad chodnikiem), cel (104,59; 75,15), oś 137,8°, 50 mm, shift 0,55 i kadr 4:5 bez zmian (J1, J2; J3 – kamera i ogniskowa)",
      "pora 16:42 → 16:38 CET (J1; mediana propozycji 16:35 / 16:38 / 16:42): słońce az 249,1°, el −3,5°; przy tej samej ekspozycji niebo ok. +0,7 EV jaśniejsze niż o 16:42 – więcej chłodnego światła na granicie",
      "kopuła nieba ×6,5 jak w W9 (J3) i ekspozycja −2,3 EV (bezwzględna, przy niebie ×6,5): niebo u góry kadru 0,014 → 0,035 (luminancja liniowa obrazu, +1,3 EV razem z porą; J2: +0,3 EV, J3: dolna połowa nie może być czarna), granit 2,1 EV pod medianą nieba – filary i pasma ceramiki czytelne w chłodnym świetle",
-     "ciepłe oprawy korony, holu i podcienia ×4 (emisja 30 → 120) – kompensacja lamel i sitodruku: przy tym samym świetle suma ciepłych pikseli pasa korony spadła po poprawce lamel ok. 6× (0,56 → 0,09), a przy samym niebie ×6,5 korona byłaby tylko 1,1 EV nad granitem i ciemniejsza od okien biur. Pomiar w obrazie (promienie przez siatkę 96 × 120 → klasy materiałów): szkło korony 1,6 EV (mediana) – 3,7 EV (p90) nad medianą granitu, środek ok. 2,6 EV (J2: 2–3 EV, J3: ok. 2 EV); szkło korony p90 2,1 EV nad oknami biur – latarnia jedynym ciepłym i najjaśniejszym akcentem (J1)",
-     "drobne liście (J3: gęściej, liść z maską alfa zamiast płaskich kart; J2: liście mniejsze względem wieży): w drzewach i krzewach, których korona wchodzi w kadr do 32 m od kamery (61 instancji: E09, E10, E13, krzewy skweru; 6 prototypów), każda karta 0,23 m zastąpiona 6 liśćmi z maską alfa (owal zaostrzony z ogonkiem, dł. ok. 0,10 m – ok. 2,2× mniejsze względem wieży, J2 chciał −15 %), karty ściągnięte ku sąsiadom (liście w kępach przy gałązkach, bez pojedynczych liści „w powietrzu”), pole liści ≈ 1,2 × pole kart",
-     "korona E10 czarna, bez rozjaśniania w postprodukcji (J1): preset zmierzch bez podnoszenia cieni (lift 0); mediana luminancji drzew 0,001 – 5,4 EV pod niebem (sylweta)",
+     "ciepłe oprawy korony, holu i podcienia ×4 (emisja 30 → 120) – kompensacja lamel i sitodruku: przy tym samym świetle suma ciepłych pikseli pasa korony spadła po poprawce lamel ok. 6× (0,56 → 0,09), a przy samym niebie ×6,5 korona byłaby tylko 1,1 EV nad granitem i ciemniejsza od okien biur. Pomiar w obrazie finalnym (promienie przez siatkę 96 × 120 → klasy materiałów, luminancja liniowa JPG): szkło korony 1,6 EV (mediana) – 3,7 EV (p90) nad medianą granitu, środek ok. 2,7 EV (J2: 2–3 EV, J3: ok. 2 EV); szkło korony p90 2,2 EV nad oknami biur – latarnia jedynym ciepłym i najjaśniejszym akcentem (J1)",
+     "drobne liście (J3: gęściej, liść z maską alfa zamiast płaskich kart; J2: liście mniejsze względem wieży): w drzewach i krzewach, których korona wchodzi w kadr do 32 m od kamery (61 instancji: E09, E10, E13, krzewy skweru; 7 prototypów), każda karta 0,23 m zastąpiona 6 liśćmi z maską alfa (owal zaostrzony z ogonkiem, dł. ok. 0,10 m – ok. 2,3× mniejsze (E10: karta 0,235 → liść 0,103 m) względem wieży, J2 chciał −15 %), karty ściągnięte ku sąsiadom (liście w kępach przy gałązkach, bez pojedynczych liści „w powietrzu”), pole liści ≈ 1,2 × pole kart",
+     "korona E10 czarna, bez rozjaśniania w postprodukcji (J1): preset zmierzch bez podnoszenia cieni (lift 0); mediana luminancji drzew 0,0006 – 6,1 EV pod niebem (sylweta)",
      "ludzie włączeni (zlecenie): kontrola rzutu sylwetek – w kadrze nie ma żadnej osoby (napis i podcień zasłaniają krzewy, zamierzone), ujęcie bez zmian"
     ],
     "nie_wdrozone": [
-     "udział opraw biur 0,20 (J1) i 0,45 (J2) – kierunki przeciwne, J3 bez zmian; mediana 0,35 zostaje. Cel J1 (okna nie konkurują z latarnią) osiągnięty niebem ×6,5 i jasnością korony: okna biur 2,1 EV pod koroną",
+     "udział opraw biur 0,20 (J1) i 0,45 (J2) – kierunki przeciwne, J3 bez zmian; mediana 0,35 zostaje. Cel J1 (okna nie konkurują z latarnią) osiągnięty niebem ×6,5 i jasnością korony: okna biur 2,2 EV pod koroną",
      "obrót osi 137,8° → 141° (J3): J1 i J2 – kadr bez zmian. Kontrola wariantu: łuk na x 0,44 (środek kadru zamiast prawej tercji), drzewa 39 → 31 %, budynek 35 → 44 % – rama z gałęzi i przekątna prowadząca do latarni słabną",
      "wariant J2 – kamera 4 m dalej (61,3; 123,0) z 55 mm: sprawdzony kontrolą – kadr prawie ten sam (drzewa 38 %, attyka y 0,75 zamiast 0,72), karty liści względem wieży −16 %; J1 i J3 – stanowisko i 50 mm bez zmian, a drobne liście zmniejszają je względem wieży ok. 2× – wariant zbędny",
      "pora 16:35 (J3) i 16:42 (J2) – przyjęta mediana 16:38 (J1)",
      "kopuła nieba ×6,5 bez kompensacji korony (J3 dosłownie) – pomiar: korona 1,1 EV nad granitem, poniżej celu „ok. 2 EV” tego samego jurora; stąd ciepłe oprawy ×4"
     ]
+   },
+   "render_final": {
+    "plik": "docs/60_wizualizacje/img/extra/E_zmierzch-detal-1.jpg",
+    "kontrola": "docs/60_wizualizacje/img/extra/E_zmierzch-detal-1_kontrola.json",
+    "skrypt": "render/final_zmierzch_detal_1.py",
+    "rozdzielczosc": [
+     2000,
+     2500
+    ],
+    "probki": 64,
+    "odszumianie": "OIDN",
+    "ludzie": true,
+    "ludzie_w_kadrze": 0,
+    "preset": "zmierzch",
+    "czas_renderu_s": 3525.0,
+    "czas_calkowity_s": 3563.8,
+    "watki": 2,
+    "obciazenie_maszyny": "ok. 6–8 (równolegle 2 inne rendery finalne)",
+    "slonce": {
+     "az": 249.07,
+     "el": -3.49
+    },
+    "swiatlo": {
+     "sila_nieba": 6.5,
+     "ekspozycja": -2.3,
+     "udzial_opraw": 0.35,
+     "oprawy_cieple_emisja": 120.0,
+     "latarnie": 22
+    },
+    "lamele_korony": {
+     "luk_L_m": 21.991,
+     "lamele_szt": 21,
+     "szer_m": 0.35,
+     "glab_m": 0.6,
+     "rozstawy": "LkLLkLkLLkLLkLkLLkLk",
+     "zapas_krawedzi_m": 0.021,
+     "przechwycone_ze_Spec": 16,
+     "spec_pierwotna": [
+      0.35,
+      0.6,
+      13.4
+     ]
+    },
+    "udzialy_kadru": {
+     "drzewa": 0.385,
+     "budynek": 0.352,
+     "niebo": 0.263
+    },
+    "wieza_w_kadrze": {
+     "x0": 0.526,
+     "x1": 1.861,
+     "y0": -0.178,
+     "y1": 1.122,
+     "rzut_w_kadrze": true,
+     "uciete": [
+      "prawo",
+      "dół"
+     ]
+    },
+    "pomiar_luminancji_EV": {
+     "szklo_korony(p90) − granit(mediana)": 3.71,
+     "szklo_korony(mediana) − granit(mediana)": 1.61,
+     "niebo − drzewa (mediany)": 6.14,
+     "niebo − granit (mediany)": 2.12,
+     "szklo_korony(p90) − szklo_biur(p90)": 2.17
+    },
+    "niebo_gora_luminancja": 0.0347,
+    "liscie_drobne": {
+     "instancje": 61,
+     "prototypy": {
+      "proto_duze_11": {
+       "karty": 44200,
+       "liscie": 265200,
+       "rozmiar_karty_m": 0.276,
+       "dlugosc_liscia_m": 0.122
+      },
+      "proto_srednie_22": {
+       "karty": 27200,
+       "liscie": 163200,
+       "rozmiar_karty_m": 0.235,
+       "dlugosc_liscia_m": 0.103
+      },
+      "proto_duze_12": {
+       "karty": 44200,
+       "liscie": 265200,
+       "rozmiar_karty_m": 0.276,
+       "dlugosc_liscia_m": 0.121
+      },
+      "proto_krzew_61": {
+       "karty": 7650,
+       "liscie": 45900,
+       "rozmiar_karty_m": 0.143,
+       "dlugosc_liscia_m": 0.063
+      },
+      "proto_krzew_62": {
+       "karty": 7650,
+       "liscie": 45900,
+       "rozmiar_karty_m": 0.143,
+       "dlugosc_liscia_m": 0.063
+      },
+      "proto_male_31": {
+       "karty": 7650,
+       "liscie": 45900,
+       "rozmiar_karty_m": 0.153,
+       "dlugosc_liscia_m": 0.067
+      },
+      "proto_male_32": {
+       "karty": 7650,
+       "liscie": 45900,
+       "rozmiar_karty_m": 0.153,
+       "dlugosc_liscia_m": 0.067
+      }
+     }
+    },
+    "ocena": "obejrzany w pełnej rozdzielczości: rytm 21 lamel na łuku czytelny (ciemne żebra na ciepłych baflach), granit filarów i pasma ceramiki czytelne w chłodnym świetle, korona E10 i krzewy czarne, liście w kępach bez efektu konfetti (na obrzeżu korony pojedyncze kępy bez widocznych gałązek – ograniczenie generatora drzew), brak szumu i artefaktów",
+    "data": "2026-11-17"
    }
   },
   {

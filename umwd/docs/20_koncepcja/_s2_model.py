@@ -256,11 +256,15 @@ DOORS_ANT = [
     ("przedsionek_A", "KW.A.02", (13.70, 11.85), 1.2),   # v1.2-fix: korytarz publiczny → klatka A (drugi kierunek na +30,90)
     ("przedsionek_B", "KW.A.02", (27.80, 9.9), 1.2),   # korytarz publiczny → klatka B
     ("KW.A.03", "SWD.02g", (7.70, 15.5), 1.2),         # przedsionek A' – 2. droga z górnego holu (v1.2-fix: u 7,70)
-    ("klatka_A", "KW.A.03", (8.43, 13.05), 1.0),       # v1.2-fix: 1,0 m w v 12,55–13,55 (spocznik v 12,05–13,55, A' od v 12,50)
+    ("klatka_A", "KW.A.03", (8.43, 13.05), 1.0),       # v1.2-fix: 1,0 m w v 12,55–13,55 (spocznik v 12,05–13,55, A' od v 12,50);
+                                                        # v1.2b-fix: na +30,90 w pasie zach. brak biegu → brak przedłużenia pochwytu
 ]
 # Drzwi przedsionków do klatek (ściana wspólna; spocznik kondygnacyjny) – do testu MOE ([E6]) i [G3]
 DOORS_KLATKA = {
-    "przedsionek_A": ((12.05, 12.80), 1.2),    # ściana klatka A / przedsionek A (u 11,95–12,15), spocznik v 12,05–13,55
+    # v1.2b-fix: otwór v 12,05–13,20 (1,15 m z ościeżnicą narożną; w świetle ≥ 1,05 m = 0,6 m/100 os. × 175 os. – § 239 ust. 3) w ścianie
+    # klatka A / przedsionek A (u 11,95–12,20); bieg przychodzący na S i +30,90 w pasie wsch. – przedłużenie pochwytu przyściennego
+    # 0,30 m (M.13 Balustrady pkt 6) v 13,25–13,55 (S) / 13,53–13,83 (+30,90) bez kolizji z otworem (_v12_trzony.py [T7])
+    "przedsionek_A": ((12.075, 12.625), 1.15),
     "przedsionek_B": ((27.80, 7.49), 1.2),     # ściana klatka B / przedsionek B (v 7,39–7,59), spocznik przy przedsionku
     "KW.A.03": ((8.43, 13.05), 1.0),           # A' → klatka A (+30,90)
 }

@@ -57,7 +57,9 @@
   "budynek_s": 12.1,
   "zrodlo_sceny": "budowa od zera",
   "scena_s": 24.4,
-  "kontrola_s": 1.7
+  "kontrola_s": 1.7,
+  "render_s": 3525.0,
+  "postprodukcja_s": 3.3
  },
  "uwagi": [],
  "info": [],
@@ -151,5 +153,575 @@
   }
  },
  "horyzont_y": -0.05,
- "pochylenie_deg": 0.0
+ "pochylenie_deg": 0.0,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/E_zmierzch-detal-1.png",
+ "jpg": "docs/60_wizualizacje/img/extra/E_zmierzch-detal-1.jpg",
+ "dodatki_w_kadrze": {},
+ "korekty": {
+  "lamele_korony": {
+   "luk_L_m": 21.991,
+   "lamele_szt": 21,
+   "szer_m": 0.35,
+   "glab_m": 0.6,
+   "rozstawy": "LkLLkLkLLkLLkLkLLkLk",
+   "zapas_krawedzi_m": 0.021,
+   "przechwycone_ze_Spec": 16,
+   "spec_pierwotna": [
+    0.35,
+    0.6,
+    13.4
+   ]
+  },
+  "oprawy_cieple_moc": 120.0,
+  "post_przed": {
+   "cfg": null
+  },
+  "wycinek": null,
+  "czas_calkowity_s": 3530.2
+ },
+ "ludzie_w_kadrze": [],
+ "liscie_drobne": {
+  "cfg": {
+   "promien_m": 32,
+   "k": 6,
+   "f": 0.45,
+   "szer": 0.55,
+   "skupienie": 0.45,
+   "rozrzut": 0.4,
+   "margines_deg": 4
+  },
+  "drzewa": [
+   {
+    "obiekt": "drzewo_E09",
+    "prototyp": "proto_duze_11",
+    "odl_m": 21.3,
+    "kat_od_osi_deg": -37.2,
+    "R_korony_m": 8.3
+   },
+   {
+    "obiekt": "drzewo_E10",
+    "prototyp": "proto_srednie_22",
+    "odl_m": 13.9,
+    "kat_od_osi_deg": -19.1,
+    "R_korony_m": 5.2
+   },
+   {
+    "obiekt": "drzewo_E13",
+    "prototyp": "proto_duze_12",
+    "odl_m": 18.1,
+    "kat_od_osi_deg": -28.2,
+    "R_korony_m": 8.4
+   },
+   {
+    "obiekt": "krzew_0",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 18.6,
+    "kat_od_osi_deg": 7.8,
+    "R_korony_m": 1.6
+   },
+   {
+    "obiekt": "krzew_1",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 16.3,
+    "kat_od_osi_deg": 0.0,
+    "R_korony_m": 2.0
+   },
+   {
+    "obiekt": "krzew_10",
+    "prototyp": "proto_male_31",
+    "odl_m": 19.0,
+    "kat_od_osi_deg": -18.0,
+    "R_korony_m": 2.6
+   },
+   {
+    "obiekt": "krzew_11",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 24.7,
+    "kat_od_osi_deg": -8.0,
+    "R_korony_m": 2.5
+   },
+   {
+    "obiekt": "krzew_12",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 25.0,
+    "kat_od_osi_deg": -10.0,
+    "R_korony_m": 2.2
+   },
+   {
+    "obiekt": "krzew_13",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 28.1,
+    "kat_od_osi_deg": -6.8,
+    "R_korony_m": 2.4
+   },
+   {
+    "obiekt": "krzew_14",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 27.3,
+    "kat_od_osi_deg": -12.1,
+    "R_korony_m": 1.8
+   },
+   {
+    "obiekt": "krzew_15",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 25.7,
+    "kat_od_osi_deg": -14.0,
+    "R_korony_m": 2.4
+   },
+   {
+    "obiekt": "krzew_16",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 23.7,
+    "kat_od_osi_deg": -19.0,
+    "R_korony_m": 2.9
+   },
+   {
+    "obiekt": "krzew_17",
+    "prototyp": "proto_male_32",
+    "odl_m": 23.2,
+    "kat_od_osi_deg": -21.2,
+    "R_korony_m": 3.0
+   },
+   {
+    "obiekt": "krzew_19",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 30.3,
+    "kat_od_osi_deg": -10.9,
+    "R_korony_m": 2.0
+   },
+   {
+    "obiekt": "krzew_2",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 21.6,
+    "kat_od_osi_deg": 9.0,
+    "R_korony_m": 2.6
+   },
+   {
+    "obiekt": "krzew_20",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 29.7,
+    "kat_od_osi_deg": -13.2,
+    "R_korony_m": 2.0
+   },
+   {
+    "obiekt": "krzew_21",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 27.8,
+    "kat_od_osi_deg": -16.1,
+    "R_korony_m": 1.5
+   },
+   {
+    "obiekt": "krzew_22",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 27.0,
+    "kat_od_osi_deg": -21.1,
+    "R_korony_m": 1.8
+   },
+   {
+    "obiekt": "krzew_23",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 25.5,
+    "kat_od_osi_deg": -23.7,
+    "R_korony_m": 1.8
+   },
+   {
+    "obiekt": "krzew_25",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 31.7,
+    "kat_od_osi_deg": -11.7,
+    "R_korony_m": 2.4
+   },
+   {
+    "obiekt": "krzew_26",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 31.8,
+    "kat_od_osi_deg": -15.0,
+    "R_korony_m": 3.0
+   },
+   {
+    "obiekt": "krzew_27",
+    "prototyp": "proto_male_32",
+    "odl_m": 29.4,
+    "kat_od_osi_deg": -20.3,
+    "R_korony_m": 2.6
+   },
+   {
+    "obiekt": "krzew_28",
+    "prototyp": "proto_male_31",
+    "odl_m": 29.1,
+    "kat_od_osi_deg": -22.2,
+    "R_korony_m": 2.3
+   },
+   {
+    "obiekt": "krzew_3",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 20.4,
+    "kat_od_osi_deg": 4.0,
+    "R_korony_m": 1.8
+   },
+   {
+    "obiekt": "krzew_31",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 30.7,
+    "kat_od_osi_deg": -21.2,
+    "R_korony_m": 1.5
+   },
+   {
+    "obiekt": "krzew_4",
+    "prototyp": "proto_male_31",
+    "odl_m": 22.0,
+    "kat_od_osi_deg": -1.0,
+    "R_korony_m": 2.8
+   },
+   {
+    "obiekt": "krzew_5",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 21.6,
+    "kat_od_osi_deg": -3.0,
+    "R_korony_m": 2.0
+   },
+   {
+    "obiekt": "krzew_6",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 25.6,
+    "kat_od_osi_deg": -0.9,
+    "R_korony_m": 1.8
+   },
+   {
+    "obiekt": "krzew_61",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 20.1,
+    "kat_od_osi_deg": 12.1,
+    "R_korony_m": 2.2
+   },
+   {
+    "obiekt": "krzew_62",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 18.0,
+    "kat_od_osi_deg": 7.0,
+    "R_korony_m": 2.9
+   },
+   {
+    "obiekt": "krzew_63",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 15.9,
+    "kat_od_osi_deg": 1.7,
+    "R_korony_m": 2.0
+   },
+   {
+    "obiekt": "krzew_64",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 21.9,
+    "kat_od_osi_deg": 5.1,
+    "R_korony_m": 1.9
+   },
+   {
+    "obiekt": "krzew_65",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 18.0,
+    "kat_od_osi_deg": -2.6,
+    "R_korony_m": 2.7
+   },
+   {
+    "obiekt": "krzew_66",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 23.7,
+    "kat_od_osi_deg": 4.6,
+    "R_korony_m": 1.6
+   },
+   {
+    "obiekt": "krzew_67",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 21.6,
+    "kat_od_osi_deg": 1.3,
+    "R_korony_m": 2.6
+   },
+   {
+    "obiekt": "krzew_68",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 21.1,
+    "kat_od_osi_deg": -1.0,
+    "R_korony_m": 2.6
+   },
+   {
+    "obiekt": "krzew_69",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 19.1,
+    "kat_od_osi_deg": -10.7,
+    "R_korony_m": 2.6
+   },
+   {
+    "obiekt": "krzew_7",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 24.3,
+    "kat_od_osi_deg": -2.4,
+    "R_korony_m": 1.5
+   },
+   {
+    "obiekt": "krzew_70",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 18.2,
+    "kat_od_osi_deg": -11.3,
+    "R_korony_m": 2.0
+   },
+   {
+    "obiekt": "krzew_71",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 22.8,
+    "kat_od_osi_deg": -9.0,
+    "R_korony_m": 1.4
+   },
+   {
+    "obiekt": "krzew_72",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 21.5,
+    "kat_od_osi_deg": -10.3,
+    "R_korony_m": 2.5
+   },
+   {
+    "obiekt": "krzew_73",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 19.4,
+    "kat_od_osi_deg": -14.8,
+    "R_korony_m": 2.1
+   },
+   {
+    "obiekt": "krzew_74",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 24.9,
+    "kat_od_osi_deg": -10.5,
+    "R_korony_m": 2.4
+   },
+   {
+    "obiekt": "krzew_75",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 23.2,
+    "kat_od_osi_deg": -15.3,
+    "R_korony_m": 1.9
+   },
+   {
+    "obiekt": "krzew_76",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 21.9,
+    "kat_od_osi_deg": -19.3,
+    "R_korony_m": 2.1
+   },
+   {
+    "obiekt": "krzew_77",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 28.7,
+    "kat_od_osi_deg": -6.5,
+    "R_korony_m": 1.5
+   },
+   {
+    "obiekt": "krzew_78",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 27.1,
+    "kat_od_osi_deg": -11.2,
+    "R_korony_m": 2.0
+   },
+   {
+    "obiekt": "krzew_79",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 25.5,
+    "kat_od_osi_deg": -13.3,
+    "R_korony_m": 1.4
+   },
+   {
+    "obiekt": "krzew_8",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 22.8,
+    "kat_od_osi_deg": -7.8,
+    "R_korony_m": 2.3
+   },
+   {
+    "obiekt": "krzew_80",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 25.1,
+    "kat_od_osi_deg": -19.3,
+    "R_korony_m": 1.6
+   },
+   {
+    "obiekt": "krzew_81",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 23.8,
+    "kat_od_osi_deg": -23.3,
+    "R_korony_m": 2.4
+   },
+   {
+    "obiekt": "krzew_82",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 29.4,
+    "kat_od_osi_deg": -9.0,
+    "R_korony_m": 2.0
+   },
+   {
+    "obiekt": "krzew_83",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 28.9,
+    "kat_od_osi_deg": -12.7,
+    "R_korony_m": 2.3
+   },
+   {
+    "obiekt": "krzew_84",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 28.2,
+    "kat_od_osi_deg": -16.2,
+    "R_korony_m": 2.3
+   },
+   {
+    "obiekt": "krzew_85",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 26.9,
+    "kat_od_osi_deg": -19.4,
+    "R_korony_m": 2.3
+   },
+   {
+    "obiekt": "krzew_86",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 25.8,
+    "kat_od_osi_deg": -23.1,
+    "R_korony_m": 2.8
+   },
+   {
+    "obiekt": "krzew_89",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 30.8,
+    "kat_od_osi_deg": -17.0,
+    "R_korony_m": 2.8
+   },
+   {
+    "obiekt": "krzew_9",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 21.5,
+    "kat_od_osi_deg": -10.7,
+    "R_korony_m": 1.5
+   },
+   {
+    "obiekt": "krzew_90",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 30.1,
+    "kat_od_osi_deg": -18.0,
+    "R_korony_m": 2.9
+   },
+   {
+    "obiekt": "krzew_91",
+    "prototyp": "proto_krzew_62",
+    "odl_m": 28.8,
+    "kat_od_osi_deg": -20.7,
+    "R_korony_m": 2.5
+   },
+   {
+    "obiekt": "krzew_96",
+    "prototyp": "proto_krzew_61",
+    "odl_m": 31.4,
+    "kat_od_osi_deg": -20.1,
+    "R_korony_m": 2.5
+   }
+  ],
+  "prototypy": {
+   "proto_duze_11": {
+    "karty": 44200,
+    "liscie": 265200,
+    "rozmiar_karty_m": 0.276,
+    "dlugosc_liscia_m": 0.122
+   },
+   "proto_srednie_22": {
+    "karty": 27200,
+    "liscie": 163200,
+    "rozmiar_karty_m": 0.235,
+    "dlugosc_liscia_m": 0.103
+   },
+   "proto_duze_12": {
+    "karty": 44200,
+    "liscie": 265200,
+    "rozmiar_karty_m": 0.276,
+    "dlugosc_liscia_m": 0.121
+   },
+   "proto_krzew_61": {
+    "karty": 7650,
+    "liscie": 45900,
+    "rozmiar_karty_m": 0.143,
+    "dlugosc_liscia_m": 0.063
+   },
+   "proto_krzew_62": {
+    "karty": 7650,
+    "liscie": 45900,
+    "rozmiar_karty_m": 0.143,
+    "dlugosc_liscia_m": 0.063
+   },
+   "proto_male_31": {
+    "karty": 7650,
+    "liscie": 45900,
+    "rozmiar_karty_m": 0.153,
+    "dlugosc_liscia_m": 0.067
+   },
+   "proto_male_32": {
+    "karty": 7650,
+    "liscie": 45900,
+    "rozmiar_karty_m": 0.153,
+    "dlugosc_liscia_m": 0.067
+   }
+  },
+  "czas_s": 2.3
+ },
+ "pomiar_luminancji": {
+  "drzewa": {
+   "udzial": 0.389,
+   "mediana": 0.0006,
+   "p90": 0.0214
+  },
+  "niebo": {
+   "udzial": 0.253,
+   "mediana": 0.0423,
+   "p90": 0.0819
+  },
+  "granit": {
+   "udzial": 0.118,
+   "mediana": 0.0097,
+   "p90": 0.0114
+  },
+  "szklo_biur_parteru": {
+   "udzial": 0.1,
+   "mediana": 0.0047,
+   "p90": 0.0282
+  },
+  "lamele_korony": {
+   "udzial": 0.049,
+   "mediana": 0.0055,
+   "p90": 0.0122
+  },
+  "metal": {
+   "udzial": 0.037,
+   "mediana": 0.0009,
+   "p90": 0.0044
+  },
+  "ceramika": {
+   "udzial": 0.031,
+   "mediana": 0.0124,
+   "p90": 0.0155
+  },
+  "szklo_korony": {
+   "udzial": 0.017,
+   "mediana": 0.0297,
+   "p90": 0.1267
+  },
+  "inne:roleta": {
+   "udzial": 0.005,
+   "mediana": 0.0005,
+   "p90": 0.0008
+  },
+  "inne:k_stal_lakier": {
+   "udzial": 0.0,
+   "mediana": 0.0165,
+   "p90": 0.0165
+  },
+  "_EV": {
+   "szklo_korony(p90) − granit(mediana)": 3.71,
+   "szklo_korony(mediana) − granit(mediana)": 1.61,
+   "niebo − drzewa (mediany)": 6.14,
+   "niebo − granit (mediany)": 2.12,
+   "szklo_korony(p90) − szklo_biur(p90)": 2.17
+  }
+ }
 }

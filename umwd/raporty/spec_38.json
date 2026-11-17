@@ -1,0 +1,60 @@
+{
+ "nr": 38,
+ "title": "First board final (vis 5) — people must be replaced; blue-hour extra render",
+ "stages": [
+  [
+   "Organiser materials ✔ (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register ✔ (184 requirements) + checklists",
+   "done"
+  ],
+  [
+   "Site ✔ (zoning, heritage, survey, geotech, trees, neighbours)",
+   "done"
+  ],
+  [
+   "Law ✔ (WT bridge, fire, accessibility, zero-emission)",
+   "done"
+  ],
+  [
+   "Design research ✔ (trends, visuals, boards, façades, costs)",
+   "done"
+  ],
+  [
+   "Programme ✔ (187 offices, PU ≈ 8,600 m²)",
+   "done"
+  ],
+  [
+   "Concept v1.2 ✔ (Sejmik storey merged, cost 148.99 mln) → open decisions v1.2b (workflow ►)",
+   "running"
+  ],
+  [
+   "Production ►: drawings v1.1 ✔ (verified); plans + tables re-run after v1.2; photomatch W1/W2 tests ✔; extra showcase renders (workflow ►)",
+   "running"
+  ],
+  [
+   "Boards & texts ►: Stage II 8/8 skeletons (vis pending, P7/P8 re-layout); Stage II text 5 × A3 + Stage I text + F.14.A (workflow ►); 300-dpi export ✔",
+   "running"
+  ],
+  [
+   "Audit ►: structural & functional audit ✔ (41 confirmed findings, 8 critical: evacuation, garage ramps, step-free M1) → spec v1.3 queued; texts verified ✔",
+   "running"
+  ]
+ ],
+ "notes": [
+  "First board final: vis 5 (Maz. 19, 4 000 px). Light and sky are good; mannequin people and the box car get replaced with photo cut-outs, then re-rendered after v1.3.",
+  "Extra render E-5: lantern at blue hour."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/W5_final_v12.jpg",
+   "caption": "Vis 5 final v1.2 — relation to Mazowiecka 19 (people to be replaced)"
+  },
+  {
+   "path": "umwd/raporty/img/E_zmierzch-detal-1.jpg",
+   "caption": "Extra render E-5: lantern at blue hour"
+  }
+ ]
+}

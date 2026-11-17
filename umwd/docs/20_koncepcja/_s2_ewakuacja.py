@@ -33,8 +33,12 @@ OCC = {"SWD.01 płyta": N_PLYTA, "SWD.01g galeria": N_GAL, "SWD.08": 50, "SWD.09
 N = sum(OCC.values())
 print("Osoby:", OCC, "→ razem", N, f"(płyta i galeria z rzędów i miejsc modelu: {N_PLYTA} + {N_GAL})")
 print(f"Wymagana łączna szerokość biegów: 0,6 × {N / 100:.2f} = {0.6 * N / 100:.2f} m; projekt: klatki A i B po 1,60 m = 3,20 m ✔")
-print(f"Kuluar (droga pozioma): 0,6 × {N / 100:.2f} = {0.6 * N / 100:.2f} m ≤ 2,20 m ✔ (zapas {2.20 - 0.6 * N / 100:.2f} m;"
-      f" min. WT 1,40 m; M.13 1,80 m)")
+KUL_W = round(S["KUL"].bounds[3] - M.KUL_V0, 3)                          # v1.2b-fix: szerokość z geometrii (v 10,05–12,30 = 2,25 m)
+KUL_WA = round(M.CORE_A.bounds[1] - M.KUL_V0, 3)                         # przy trzonie A (v 10,05–11,85 = 1,80 m)
+assert 0.6 * N / 100 <= KUL_W + 1e-9 and KUL_WA >= 1.80 - 1e-9
+print(f"Kuluar (droga pozioma): 0,6 × {N / 100:.2f} = {0.6 * N / 100:.2f} m ≤ {KUL_W:.2f} m ✔ (zapas {KUL_W - 0.6 * N / 100:.2f} m;"
+      f" min. WT 1,40 m; M.13 1,80 m); przy trzonie A {KUL_WA:.2f} m – odcinek u 8,30–15,50 obsługuje drogi do klatki A"
+      f" (≤ {N / 2:.0f} os. → {0.6 * N / 200:.2f} m ✔)")
 print("Sala (> 50 os., > 300 m² z galerią): wyjścia 3 + drzwi prezydium; odstęp ≥ 5 m; drzwi otwierane na zewnątrz ✔ (§ 238, § 239)")
 
 # -------------------------------------------------------------------------------------------------
