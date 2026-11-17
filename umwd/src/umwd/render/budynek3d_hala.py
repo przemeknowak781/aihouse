@@ -342,6 +342,9 @@ class Hala:
         if self.H.contains(Point((a + b) / 2 + nrm * 0.8)) is False:
             nrm = -nrm
         L = float(np.linalg.norm(b - a))
+        # wielokąty pomieszczeń są „w świetle ścian” – lico od strony holu leży o grubość ściany dalej
+        t_sc = float(self.H.distance(Point((a + b) / 2)))
+        a, b = a + nrm * t_sc, b + nrm * t_sc
         szary = 'wn_piaskowiec:szary'
         akcent = []
         # rozmieszczenie wzdłuż ściany (od a): pozycja s, głębokość od ściany
@@ -435,7 +438,7 @@ class Hala:
                 G.pryzma(self.prostokat(c + t * e, t, 0.08, 0.44), 0.0, 0.40, 'metal')
         self.info['poczekalnia'] = 'ławy przy przeszkleniu ogrodowym'
 
-    def napis_scienny(self, G, tekst, p0, kier, nrm, z, h=0.16, mat='mosiadz', odstep=1.25):
+    def napis_scienny(self, G, tekst, p0, kier, nrm, z, h=0.16, mat='mosiadz', odstep=1.25, do_konca=False):
         """Litery z mosiądzu (gr. 12 mm, 8 mm od ściany) – tekst od p0 wzdłuż ``kier``, lico ściany ``nrm``."""
         from pathlib import Path
         cu = bpy.data.curves.new('napis_sc', 'FONT')
@@ -454,6 +457,9 @@ class Hala:
         bpy.data.curves.remove(cu)
         k = np.asarray(kier, float) / np.linalg.norm(kier)
         n = np.asarray(nrm, float)
+        if do_konca and len(me.vertices):
+            # p0 = koniec tekstu (wyrównanie do prawej)
+            p0 = np.asarray(p0, float) - k * max(v.co.x for v in me.vertices)
         V = []
         for v in me.vertices:
             q = np.asarray(p0, float) + k * v.co.x + n * (0.014 + v.co.z)
@@ -486,19 +492,33 @@ class Hala:
                     n = -n
                 if not self.H.contains(Point(mid + n * 0.5)):
                     continue
-                d = float(np.linalg.norm(mid - self.od))
-                if best is None or d < best[0]:
-                    best = (d, a, b, k, n, L)
+                do_od = self.od - mid
+                dd = float(np.linalg.norm(do_od))
+                if dd > 14.0 or float(n @ do_od) < 0.5 * dd:
+                    continue                          # ściana nie zwrócona ku wejściu
+                if best is None or L > best[0]:
+                    best = (L, a, b, k, n, L)
         if best is None:
             return
         _, a, b, k, n, L = best
         # tekst czytany od lewej patrząc na ścianę: kierunek k tak, by (k, n) był prawoskrętny względem patrzącego
         if k[0] * n[1] - k[1] * n[0] > 0:
             a, b, k = b, a, -k
-        a = a - n * 0.15                              # z bufora 0,15 z powrotem na lico
-        self.napis_scienny(G, 'HALA OBYWATELSKA', a + k * 0.6, k, n, 2.55, h=0.22)
-        self.napis_scienny(G, 'INFORMACJA  ·  KANCELARIA  ·  LAPIDARIUM  ·  OGRÓD', a + k * 0.6, k, n, 2.18, h=0.10,
-                           odstep=1.15)
+        a, b = a - n * 0.15, b - n * 0.15             # z bufora 0,15 na lico wewnętrzne pomieszczenia
+        t_sc = float(self.H.distance(Point((a + b) / 2)))
+        a, b = a + n * t_sc, b + n * t_sc             # lico od strony holu (wielokąty „w świetle ścian”)
+        L = float(np.linalg.norm(b - a))
+        # okładzina z listew dębowych 0,05 × 0,04 co 0,10 m (ciągłość z sufitem lamelowym), tło ciemne
+        z_top = self.suf - 0.26
+        G.pryzma(self.prostokat((a + b) / 2 + n * 0.006, k, L - 0.02, 0.012), 0.10, z_top, 'wn_ciemne', gora=False,
+                 dno=False)
+        for x in np.arange(0.05, L - 0.04, 0.09):
+            c = a + k * x + n * 0.032
+            G.pryzma(self.prostokat(c, k, 0.06, 0.04), 0.10, z_top, 'wn_drewno:jasne', gora=False, dno=False)
+        # napisy wyrównane do narożnika od strony przejścia (koniec b), 0,7 m od narożnika
+        self.napis_scienny(G, 'HALA OBYWATELSKA', b - k * 0.7 + n * 0.054, k, n, 2.62, h=0.24, do_konca=True)
+        self.napis_scienny(G, 'INFORMACJA · KANCELARIA · LAPIDARIUM · OGRÓD', b - k * 0.7 + n * 0.054, k, n,
+                           2.26, h=0.10, odstep=1.12, do_konca=True)
         self.info['informacja_mosiezna'] = 'litery mosiężne na ścianie bloku SW.02/DK.02 (h 0,22 / 0,10 m)'
 
     # ------------------------------------------------------------------ rośliny i ludzie

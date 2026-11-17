@@ -230,5 +230,21 @@
  "084718698b64cbb414a0": {
   "path": "umwd/raporty/img/W6_hol_test.jpg",
   "board": "spec_29"
+ },
+ "cbb3f51e5e01f412b62f": {
+  "path": "umwd/raporty/img/scout_zg5.jpg",
+  "board": "spec_30"
+ },
+ "bdd12c28c7f0d292143b": {
+  "path": "umwd/raporty/img/scout_zg2.jpg",
+  "board": "spec_30"
+ },
+ "cd84f0e6598da0c9ecdd": {
+  "path": "umwd/raporty/img/scout_ul1.jpg",
+  "board": "spec_30"
+ },
+ "0d433023b495c2683a50": {
+  "path": "umwd/raporty/img/W6_hol_test_v2.jpg",
+  "board": "spec_30"
  }
 }

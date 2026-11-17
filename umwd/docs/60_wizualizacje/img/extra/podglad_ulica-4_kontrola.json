@@ -1,0 +1,140 @@
+{
+ "id": "ulica-4",
+ "opis": "Ogród Województwa od pd. – z placu zabaw, wzdłuż pergoli przy murze kamienic (linia prowadząca); jesienne korony drzew ogródków jako rama, elewacja pd. wieży z koroną i lamelami w prześwicie koron. Wczesne popołudnie – słońce z pd.-zach. na elewacji pd. (166°) i w ogrodzie.",
+ "preset": "dzien",
+ "czas": "2026-10-21 12:45 CEST",
+ "slonce": {
+  "az": 182.39,
+  "el": 28.11,
+  "ekspozycja": -4.3,
+  "czas": "2026-10-21T12:45:00+02:00",
+  "udzial_opraw": 1.0,
+  "latarnie": 0
+ },
+ "kamera": {
+  "loc": [
+   96.5,
+   -1.5,
+   1.081
+  ],
+  "cel": [
+   93.4,
+   58.4,
+   10.05
+  ],
+  "z_wzgl_kamery": 1.031,
+  "lens_mm": 28.0,
+  "shift_x": 0.0,
+  "shift_y": 0.2,
+  "poziom": true,
+  "rozdzielczosc": [
+   480,
+   600
+  ],
+  "sensor_fit": "AUTO (36 mm na dłuższym boku)"
+ },
+ "ludzie": false,
+ "probki": 16,
+ "czasy_s": {
+  "wczytanie_blend_s": 0.4,
+  "zrodlo_sceny": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/scena2.blend",
+  "scena_s": 0.4,
+  "kontrola_s": 0.9,
+  "render_s": 56.7,
+  "postprodukcja_s": 0.3
+ },
+ "uwagi": [],
+ "info": [],
+ "promienie": [
+  "oś: srednie_21_liscie 23.3 m",
+  "L-dół: krzew_62_liscie 8.7 m",
+  "P-dół: srednie_21_galezie 10.0 m",
+  "L-góra: srednie_22_liscie 9.9 m",
+  "P-góra: srednie_21_liscie 7.6 m",
+  "dół: teren_trawnik 8.7 m"
+ ],
+ "udzialy_kadru": {
+  "drzewa": 0.599,
+  "teren": 0.188,
+  "budynek": 0.104,
+  "zagospodarowanie": 0.044,
+  "niebo": 0.036,
+  "zabudowa_kontekstu": 0.026,
+  "ulica": 0.003
+ },
+ "zaslona_pierwszego_planu": 0.0,
+ "najblizsza_przeszkoda": {
+  "obiekt": "teren_trawnik",
+  "odl_m": 1.65
+ },
+ "oko_nad_podlozem_m": 1.65,
+ "podloze": "teren_trawnik",
+ "budynek_w_kadrze": {
+  "wieża": {
+   "x0": 0.058,
+   "x1": 0.876,
+   "y0": 0.281,
+   "y1": 0.949,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  },
+  "skrzydło": {
+   "x0": -2.853,
+   "x1": 0.161,
+   "y0": 0.217,
+   "y1": 1.892,
+   "rzut_w_kadrze": true,
+   "uciete": [
+    "lewo"
+   ]
+  },
+  "segment": {
+   "x0": 0.52,
+   "x1": 1.02,
+   "y0": 0.28,
+   "y1": 0.683,
+   "rzut_w_kadrze": true,
+   "uciete": [
+    "prawo"
+   ]
+  }
+ },
+ "punkty_kluczowe": {
+  "Brama Mostowa – napis (+5,2)": {
+   "w_kadrze": true,
+   "x": 0.642,
+   "y": 0.343,
+   "widoczny": false,
+   "zaslania": "male_31_liscie",
+   "odl_m": 76.4
+  },
+  "korona – lamele łuku (+31,7)": {
+   "w_kadrze": true,
+   "x": 0.642,
+   "y": 0.616,
+   "widoczny": false,
+   "zaslania": "srednie_21_liscie",
+   "odl_m": 82.2
+  },
+  "attyka wieży (+37,2)": {
+   "w_kadrze": true,
+   "x": 0.642,
+   "y": 0.673,
+   "widoczny": false,
+   "zaslania": "duze_11_liscie",
+   "odl_m": 84.4
+  },
+  "cel kamery": {
+   "w_kadrze": true,
+   "x": 0.5,
+   "y": 0.416,
+   "widoczny": false,
+   "zaslania": "srednie_21_liscie",
+   "odl_m": 60.6
+  }
+ },
+ "horyzont_y": 0.3,
+ "pochylenie_deg": 0.0,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/podglad_ulica-4.png",
+ "jpg": "/home/user/aihouse/umwd/docs/60_wizualizacje/img/extra/podglad_ulica-4.jpg"
+}

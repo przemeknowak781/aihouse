@@ -43,6 +43,10 @@ KAMERY_DODATKOWE = {
                       kamera_e_n_z=(178.0, 168.0, 72.0), cel_e_n_z=(88.0, 50.0, 8.0), lens_mm=30, shift_y=0.0,
                       poziom=False, czas='2025-10-29 11:40 CET'),
 }
+# proporcje kadrów = proporcje pól na planszach (tools/plansze_etap2.py, b.add(...) w mm) – plansza nie przycina
+# obrazu; szerokości minimalne wersji finalnych (300 dpi planszy) wg koordynatora 17.11
+PROPORCJE_PLANSZ = {'W3': 578 / 400, 'W6': 578 / 196, 'W4': 480 / 256, 'W5': 464 / 338.67}
+SZEROKOSC_FINALNA = {'W3': 5800, 'W6': 5000, 'W4': 4000, 'W5': 4000, 'W1': 5800, 'W2': 4000}
 # korekty kadrów (z uzasadnieniem) – stosowane, gdy kamera ze specyfikacji nie pokazuje wymaganej treści
 KOREKTY = {
     # W3 (decyzja koordynatora 17.11): stanowisko z poziomu człowieka ≥ 30 m od lica łuku, z którego widać Bramę
@@ -50,9 +54,10 @@ KOREKTY = {
     # posadzka podcienia → attyka (+37,2) mieści się dopiero z ≥ 38 m – tam oś przecinają istniejące krzewy
     # przyczółka mostu (krzew_61/62, poza granicą opracowania, zostają). Przeszukanie promieni (drzwi, kolumny, napis
     # w 9 kierunkach łuku + attyka) dało czyste stanowisko na skraju chodnika przy schodach przyczółka (109,0; 107,5),
-    # 33,1 m od lica łuku; ogniskowa 19 mm z przesunięciem 0,267 (piony zachowane, ~3 m nieba nad attyką).
+    # 33,1 m od lica łuku. Kadr w proporcji pola planszy 578 × 400 mm (1,445 : 1): ogniskowa 20 mm z przesunięciem
+    # 0,276 (piony zachowane, posadzka podcienia z zapasem, ~2,5 m nieba nad attyką).
     # Wariant 24 mm z 37 m (107,5; 112,3; shift 0,26) – krzewy zasłaniają prawą część podcienia (patrz budynek_3d.md).
-    'W3': dict(kamera_e_n_z=(109.0, 107.5, 2.67), cel_e_n_z=(103.4, 74.1, 16.0), lens_mm=19, shift_y=0.267),
+    'W3': dict(kamera_e_n_z=(109.0, 107.5, 2.67), cel_e_n_z=(103.4, 74.1, 16.0), lens_mm=20, shift_y=0.276),
     # W9: punkt (126; 152) leży na jezdni mostu, 3,8 m od osi; z chodnika widok przecinają krzyżulce kratownicy
     # (płaszczyzny ±9,6 m). Pozycja dobrana przeszukaniem promieni na drzewie BVH mostu (117 promieni kadru bez trafień w kratownicę,
     # łańcuchy i wieszaki): 38 m od portalu pd. (JSON: 35 m), 9,3 m od osi – tuż przy płaszczyźnie kratownicy
@@ -65,7 +70,8 @@ KOREKTY = {
     # Z punktu koncepcji (na osi) przeszklenie ogrodowe widać tylko przez szczelinę – stanowisko przesunięto
     # o 3 m w prawo od osi (a = 3 m od drzwi Bramy Mostowej), kadr na środek ściany ogrodowej holu (x 87,3–94,9):
     # całe przeszklenie ogrodowe i drzewa ogrodu widoczne przez przejście.
-    'W6': dict(kamera_e_n_z=(97.73, 70.59, 1.60), cel_e_n_z=(91.10, 45.30, 1.60), lens_mm=20, shift_y=0.05,
+    # Pole planszy 578 × 196 mm (2,95 : 1) – panorama prostoliniowa 16 mm (97° w poziomie), piony zachowane.
+    'W6': dict(kamera_e_n_z=(97.73, 70.59, 1.60), cel_e_n_z=(89.90, 45.60, 1.60), lens_mm=16, shift_y=0.04,
                wnetrze=True, preset='wnetrze', ekspozycja=-0.35, plik='W6_hol_test.jpg'),
     # W10 – widok ogrodowy (decyzja koordynatora 17.11, zamiast kadru z koncepcja.json: punkt (78; 17) stoi pod
     # koronami zachowanych drzew). Stanowisko przy wsch. krawędzi placu zabaw (97,0; −6,0), w obszarze inwestycji,
@@ -198,6 +204,9 @@ def main():
         cam = blib.camera(sc, (x, y, z + DZ), (tx, ty, tz + DZ), lens_mm=k['lens_mm'], level=k.get('poziom', True),
                           shift_y=k.get('shift_y', 0.0), name='K_' + kid)
         cam.data.clip_start = 0.2
+        prop = k.get('proporcje', PROPORCJE_PLANSZ.get(kid, 1.5))
+        sc.render.resolution_x = a.szer
+        sc.render.resolution_y = int(round(a.szer / prop))
         context.ustaw_kamere_trawy(kon, cam)
         sw = budynek3d.swiatlo_dzienne(sc, k['czas'], ekspozycja=k.get('ekspozycja'),
                                        odbicia=None if a.odbicia == 'brak' else a.odbicia)

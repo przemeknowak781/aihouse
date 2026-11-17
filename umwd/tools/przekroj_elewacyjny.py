@@ -7,7 +7,13 @@ filar – granit 40 / pustka 40 / wełna 260 λ 0,033 / żelbet; płycina – Al
 nierdzewne z przekładką (U 0,147); ościeża 0,45 m z blachy Al (granit wyłącznie na licu filara); okna z parapetem 0,55
 i nadprożem 3,00 (kaseta ZIP do +3,18 pod stropem +3,32); bez jakiegokolwiek wysięgu poza lico (czapa attyki, obróbki, parapety).
 
-Wynik: build/rysunki/przekroj_elewacyjny_1-50[_korona].svg + docs/70_rysunki/podglady/przekroj_elewacyjny_1-50[_korona].html
+Wariant UMWD_FRAG=skrzydlo (v1.1, P7 „wieża i skrzydło”): przekrój przez oś okna skrzydła od ul. Mazowieckiej (kond. 4
+i zwieńczenie: ceramika 40 / pustka 40 / wełna 240 λ 0,031 / żelbet 150 = 0,47 m, U 0,144; okno 1,20 × 2,35, parapet 0,60,
+kwatera stała do 0,90, pochwyt 1,10, nadproże 2,95, ZIP do 3,13, ościeże 0,35 Al; gzyms-attyka 0,70 m bez wysięgu z fryzem
+wklęsłym 0,15 m), fragment elewacji na styku posesji M1 | M2 oraz detal zwieńczenia od dziedzińca (tynk, wysięg 0,30 m).
+
+Wynik: build/rysunki/przekroj_elewacyjny_1-50[_korona].svg + docs/70_rysunki/podglady/przekroj_elewacyjny_1-50[_korona].html;
+UMWD_FRAG=skrzydlo → build/rysunki/przekroj_elewacyjny_skrzydlo_1-50.svg + docs/70_rysunki/podglady/przekroj_elewacyjny_skrzydlo_1-50.html
 """
 import sys, json, re
 from pathlib import Path
@@ -58,6 +64,381 @@ X6_INS, X6_RC = REC6 + 0.04 + WOOL, REC6 + 0.04 + WOOL + 0.20
 
 def fz(z):
     return ("+" if z >= 0 else "−") + f"{abs(z):.2f}".replace(".", ",")
+
+
+# ------------------------------------------------------------------ wariant „skrzydło” (UMWD_FRAG=skrzydlo)
+FRAG = os.environ.get("UMWD_FRAG", "").strip().lower()
+
+
+def przekroj_skrzydla():
+    """Przekrój elewacyjny 1:50 skrzydła (v1.1; rozdz. 8 – porządek kamieniczny, tabela przegród; P7 „wieża i skrzydło”).
+    A – przekrój przez oś okna M1 od ul. Mazowieckiej, kond. 4 i zwieńczenie: ceramika 40 / pustka 40 / wełna 240 λ 0,031 /
+        żelbet 150 = 0,47 m (U 0,144); okno 1,20 × 2,35 nad parapetem 0,60, kwatera stała do 0,90, pochwyt 1,10, nadproże
+        2,95, kaseta ZIP do 3,13, ościeże 0,35 z blachy Al; gzyms-attyka granitowy 0,70 m (139,45–140,15) bez wysięgu
+        (lico na granicy obszaru) z fryzem wklęsłym 0,15 m;
+    B – fragment elewacji od ulicy na styku posesji M1 | M2 (fuga 0,20 m, relief M2 0,08 m, ceramika ryflowana co 0,135 m);
+    C – detal zwieńczenia od dziedzińca: tynk mineralny cienkowarstwowy na wełnie (rozdz. 8, materiały), gzyms z wysięgiem 0,30 m.
+    Dane: koncepcja.json `elewacje.skrzydlo`, `elewacje.U_scian`, `elewacje.materialy`, `kondygnacje`, `bryly.M.dach`."""
+    sys.path.insert(0, str(ROOT / "tools"))
+    import elewacje as EL                     # odcienie ceramiki i tynku jak w elewacjach 1:200
+    ESK = K["elewacje"]["skrzydlo"]
+    LIN, GZ = ESK["linie"], ESK["gzyms"]
+    Z_GZ0, Z_GZ1 = LIN["spod_gzymsu_npm"] - Z0, LIN["attyka_npm"] - Z0             # +20,15 / +20,85
+    FRYZ, WYS_GR, WYS_DZ = float(GZ["fryz_wklesly_m"]), float(GZ["wysieg_lica_przy_granicy_m"]), float(GZ["wysieg_dziedziniec_m"])
+    Z_FR0 = Z_GZ0 - FRYZ                                                            # fryz 139,30–139,45
+    WIN_S = tuple(float(x) for x in ESK["okno_m"])                                  # 1,20 × 2,35
+    PAR_S, KW_S, NADPR_S, OSC_S = (float(ESK[k]) for k in ("parapet_m", "kwatera_stala_do_m", "nadproze_m", "osciez_m"))
+    OS_S, FIL_S = float(ESK["os_m"]), float(ESK["filar_m"])                         # 2,025 / 0,825
+    REL = {k: float(v) for k, v in ESK["relief_filarow_m"].items()}
+    POCHWYT = 1.10                                           # pochwyt ochronny w świetle ościeży (rozdz. 8, WT § 301)
+    ZIP_S = 0.18                                             # kaseta ZIP: nadproże 2,95 → 3,13 (E-I-5)
+    F3, F4 = float(KOND["3"]["posadzka_wzgl"]), float(KOND["4"]["posadzka_wzgl"])
+    ST3, SB3 = float(KOND["3"]["strop_nad"]["wierzch"]), float(KOND["3"]["strop_nad"]["spod_skrzydlo"])   # +15,90 / +15,50
+    FLOOR_S = round(F4 - ST3, 3)                                                    # podłoga 0,15
+    S4 = KOND["4"]["strop_nad"]
+    Z_DS, Z_DW = float(S4["dach_skrzydla_spod"]), float(S4["dach_skrzydla_wierzch"])    # +19,40 / +19,80
+    DM = {b["id"]: b for b in K["bryly"]}["M"]["dach"]
+    Z_PK0, Z_PK1 = float(DM["najnizszy_pkt_pokrycia"]["wzgl"]), float(DM["najwyzszy_pkt_pokrycia"]["wzgl"])   # +20,20 / +20,40
+    U_S = float(K["elewacje"]["U_scian"]["skrzydlo_segment"])                       # 0,144
+    m = re.search(r"/\s*(\d+)\s*λ\s*(\d+[,.]\d+)\s*\(skrzydło\)", K["elewacje"]["U_scian"].get("opis", ""))
+    WOOL_S, LAM_S = ((int(m.group(1)) / 1000.0, m.group(2).replace(".", ",")) if m else (0.24, "0,031"))
+    # warstwy od lica (X = 0 = lico filarów = obrys; X < 0 do wnętrza)
+    XCL, XCV = 0.04, 0.08                                     # ceramika 40 / pustka 40
+    XI = XCV + WOOL_S                                       # wełna 240 → −0,32
+    XR = XI + 0.15                                          # żelbet 150 → −0,47 (razem 0,47 m – trakt 15,00)
+    if abs(XR - 0.47) > 0.005:
+        print(f"  [przekroj_elewacyjny] uwaga: ściana skrzydła {XR:.3f} m ≠ 0,47 m (rozdz. 6/8)", file=sys.stderr)
+    T_D, XI_D = 0.01, 0.01 + WOOL_S                         # od dziedzińca: tynk 10 na wełnie 240 / żelbet 150
+    XR_D = XI_D + 0.15
+    C_M1, C_M2 = EL.col(EL.NCS_C["M1"]), EL.col(EL.NCS_C["M2"])
+    C_TY = EL.tynk(C_M1)
+    SEP = 0.135                                              # ryflowanie M2 co 0,135 m
+    SLOPE = (Z_PK1 - Z_PK0) / (15.0 / 2 - XR)                # spadek pokrycia od kalenicy w osi traktu 15,00 m
+
+    ZB_S, ZT_S, ZD0 = 14.95, 21.35, 19.25                    # zakres A i B; C od +19,25 (nad kasetą ZIP)
+    W_S = 490.0
+    OY_S = 40.0 + (ZT_S - ZB_S) * SC
+    H_S = OY_S + 38.0
+    s = Svg(W_S, H_S)
+    OXA, XA_IN = 140.0, -3.0                                 # A: lico w x = 140 mm, przerwanie wnętrza 3,0 m
+    EXA = 2.35                                               # B: początek fragmentu 2,35 m za licem A
+    OXC, XC_IN = 326.0, -1.9                                 # C: lico w x = 326 mm
+    LX = 362.0
+
+    def PA(X, Z):
+        return (OXA + X * SC, OY_S - (Z - ZB_S) * SC)
+
+    def PC(X, Z):
+        return (OXC + X * SC, OY_S - (Z - ZB_S) * SC)
+
+    def E(u, z):
+        return (OXA + (EXA + u) * SC, OY_S - (z - ZB_S) * SC)
+
+    def R(P, x0, z0, x1, z1, fill="none", stroke=INK, sw=0.18, extra=""):
+        s.poly([P(x0, z0), P(x1, z0), P(x1, z1), P(x0, z1)], fill=fill, stroke=stroke, sw=sw, extra=extra)
+
+    hc = s.hatch("beton", spacing=0.9, angle=45, stroke="#9c978f", sw=0.08, bg=CONC)
+    hg = s.hatch("granit", spacing=0.6, angle=-30, stroke=GRAN_H, sw=0.08, bg=GRAN)
+    hi = s.hatch("welna", spacing=0.7, angle=90, stroke="#d9cfa9", sw=0.1, bg=INS)
+    hk = s.hatch("ceramika", spacing=0.45, angle=0, stroke="#b8a48c", sw=0.07, bg=C_M1)
+    calls = []
+
+    def call(P, n, X, Z, dx=0.0):
+        calls.append((P, n, X, Z, dx))
+
+    def okno(P, zs, zh, x_out, fixed_to=None, kap=-0.004):
+        """Okno Al: rama X = x_out … x_out − 0,10; parapet zewn. Al ze spadkiem i kapinosem w X = kap; kaseta ZIP nad nadprożem."""
+        R(P, x_out - 0.10, zs, x_out, zs + 0.08, MET, MET)
+        R(P, x_out - 0.10, zh - 0.08, x_out, zh, MET, MET)
+        for dx in (-0.025, -0.05, -0.075):
+            s.line(P(x_out + dx, zs + 0.08), P(x_out + dx, zh - 0.08), stroke=GLASS, sw=0.22)
+        if fixed_to:
+            R(P, x_out - 0.10, fixed_to - 0.04, x_out, fixed_to + 0.04, MET, MET)
+        s.poly([P(kap, zs - 0.035), P(x_out, zs + 0.015), P(x_out, zs - 0.015), P(kap, zs - 0.065)], fill=MET, stroke=MET, sw=0.1)
+        R(P, kap - 0.008, zs - 0.10, kap, zs - 0.035, MET, MET, sw=0.08)
+        R(P, x_out - 0.30, zs, x_out - 0.10, zs + 0.03, "#cfc8bc", sw=0.08)
+        R(P, x_out - 0.12, zh, x_out + 0.015, zh + ZIP_S, hi, sw=0.08)                   # wełna nad ramą (za kasetą)
+        R(P, x_out + 0.015, zh, x_out + 0.165, zh + ZIP_S, "#6b645e", INK, sw=0.1)
+        R(P, x_out, zh - 0.012, 0.0, zh, MET, MET, sw=0.08)
+
+    def osciez(P, z0, z1, x_out):
+        R(P, x_out, z0, 0.0, z1, MET_V, "#6b645e", sw=0.1, extra='fill-opacity="0.38"')
+        s.line(P(0.0, z0), P(0.0, z1), stroke="#6b645e", sw=0.14)
+
+    def konsole(P, x_in, x_out, zs):
+        for z in zs:
+            s.line(P(x_in, z), P(x_out, z), stroke="#6b645e", sw=0.3)
+
+    def strop(P, x_in, zb, zt, x_edge, podloga=None):
+        R(P, x_in, zb, x_edge, zt, hc, sw=0.25)
+        for q in range(1, 30):                                   # rury TABS
+            x = x_in + q * 0.18
+            if x < x_edge - 0.12:
+                s.circle(P(x, zb + 0.08), 0.35, fill="none", stroke="#a8483a", sw=0.08)
+        if podloga:
+            x_pp, zf = podloga
+            R(P, x_in, zt, x_pp, zf, "#ffffff", sw=0.12)
+            for q in range(1, 12):
+                x = x_in + q * 0.35
+                if x < x_pp - 0.05:
+                    s.line(P(x, zt), P(x, zf - 0.03), stroke="#8a857e", sw=0.08)
+
+    def dach(P, x_in, x_rc, ups=0.10):
+        """Dach skrzydła od wewnętrznego lica attyki (X = −x_rc) do przerwania: paroizolacja, wełna w spadku, membrana, BIPV."""
+        z_ins0 = Z_PK0 - 0.10                                   # wierzch wełny przy attyce (pokrycie +20,20 na licu attyki)
+        zi = lambda x: z_ins0 + SLOPE * (-x_rc - x)
+        s.line(P(x_in, Z_DW + 0.008), P(-x_rc, Z_DW + 0.008), stroke=INK, sw=0.18)
+        s.poly([P(x_in, Z_DW + 0.015), P(-x_rc - ups, Z_DW + 0.015), P(-x_rc - ups, zi(-x_rc - ups)), P(x_in, zi(x_in))], fill=hi, stroke=INK, sw=0.15)
+        R(P, -x_rc - ups, Z_DW + 0.015, -x_rc, Z_GZ1 - 0.12, hi, sw=0.12)                 # wełna na wewn. licu attyki
+        s.poly([P(x_in, zi(x_in) + 0.006), P(-x_rc - ups - 0.006, zi(-x_rc - ups) + 0.006), P(-x_rc - ups - 0.006, Z_GZ1 - 0.12)],
+               fill="none", stroke=INK, sw=0.3, close=False)                                          # membrana wywinięta pod czapę
+        x = x_in + 0.05
+        while x < -x_rc - ups - 0.75:                            # moduły BIPV szkło-szkło na ruszcie
+            xa, xb = x, x + 0.62
+            s.poly([P(xa, zi(xa) + 0.07), P(xb, zi(xb) + 0.07), P(xb, zi(xb) + 0.10), P(xa, zi(xa) + 0.10)], fill="#2e3a48", stroke=INK, sw=0.08)
+            for xx in (xa + 0.08, xb - 0.08):
+                s.line(P(xx, zi(xx) + 0.01), P(xx, zi(xx) + 0.07), stroke="#6b645e", sw=0.12)
+            x += 0.70
+
+    def czapa(P, x_front, x_back):
+        """Czapa granitowa gzymsu-attyki (wierzch 140,15 w licu, spadek do dachu) i obróbka Al membrany pod nią."""
+        s.poly([P(x_front, Z_GZ1 - 0.12), P(x_back, Z_GZ1 - 0.12), P(x_back, Z_GZ1 - 0.06), P(x_front, Z_GZ1)], fill=hg, stroke=INK, sw=0.2)
+        R(P, x_back, Z_GZ1 - 0.42, x_back + 0.006, Z_GZ1 - 0.10, MET, MET, sw=0.08)
+
+    # ============================================================== A: przekrój od ul. Mazowieckiej (oś okna M1, relief 0,00)
+    a0 = len(s.parts)
+    P = PA
+    zs3, zh3 = F3 + PAR_S, F3 + NADPR_S
+    zs4, zh4 = F4 + PAR_S, F4 + NADPR_S
+    strop(P, XA_IN, SB3, ST3, -XI, podloga=(-(XR + 0.16), F4))       # strop nad kond. 3 (0,40) + podłoga 0,15
+    strop(P, XA_IN, Z_DS, Z_DW, -XI)                                  # strop dachu (0,40)
+    R(P, -XR, zh3 + ZIP_S, -XI, SB3, hc, sw=0.2)                       # nadproże kond. 3
+    R(P, -XR, ST3, -XI, zs4, hc, sw=0.2)                               # ściana podokienna kond. 4
+    R(P, -XR, zh4 + ZIP_S, -XI, Z_DS, hc, sw=0.2)                      # nadproże kond. 4
+    R(P, -XR, Z_DW, -XI, Z_GZ1 - 0.12, hc, sw=0.2)                     # attyka żelbetowa
+    okno(P, zs3, zh3, -OSC_S, fixed_to=F3 + KW_S)
+    osciez(P, zs3, zh3, -OSC_S)
+    for z0, z1 in ((zh3, zs4), (zh4, Z_FR0)):                           # pasy w licu: ceramika 40 / pustka / wełna 240
+        R(P, -XCL, z0, 0.0, z1, hk, sw=0.15)
+        R(P, -XI, z0, -XCV, z1, hi, sw=0.12)
+    konsole(P, -XI, -XCL, (zh3 + 0.35, zs4 - 0.25, zh4 + 0.45))
+    okno(P, zs4, zh4, -OSC_S, fixed_to=F4 + KW_S)
+    osciez(P, zs4, zh4, -OSC_S)
+    s.circle(P(-0.18, F4 + POCHWYT), 0.45, fill=MET, stroke=INK, sw=0.08)                  # pochwyt Ø 40 w świetle ościeży
+    # fryz wklęsły 0,15 m pod gzymsem (lico bez wysięgu): tło z blachy Al, zamknięcie okładziny i podniebienie granitu
+    R(P, -XI, Z_FR0, -(FRYZ + 0.006), Z_GZ0, hi, sw=0.12)
+    R(P, -(FRYZ + 0.006), Z_FR0, -FRYZ, Z_GZ0, MET, MET, sw=0.08)
+    R(P, -FRYZ, Z_FR0 - 0.006, 0.0, Z_FR0, MET, MET, sw=0.08)
+    R(P, -FRYZ, Z_GZ0, 0.0, Z_GZ0 + 0.03, hg, sw=0.15)
+    # gzyms-attyka: granit 40 w licu (0,70 m z czapą), pustka, wełna, attyka żelbetowa
+    R(P, -XCL, Z_GZ0 + 0.03, 0.0, Z_GZ1 - 0.12, hg, sw=0.2)
+    R(P, -XI, Z_GZ0, -XCV, Z_GZ1 - 0.12, hi, sw=0.12)
+    konsole(P, -XI, -XCL, (Z_GZ0 + 0.15, Z_GZ1 - 0.25))
+    dach(P, XA_IN, XR)
+    czapa(P, 0.0, -(XR + 0.11))
+    s.line(P(XA_IN, ZB_S), P(XA_IN, ZT_S - 0.2), stroke=INK, sw=0.15, dash="1.5,0.8")
+    a1 = len(s.parts)
+    call(P, 1, -0.02, zh4 + 0.55, 0.75)
+    call(P, 2, -0.20, zh3 + 0.55, 0.75)
+    call(P, 3, -0.40, ST3 + 0.30, 1.45)
+    call(P, 4, -OSC_S - 0.05, F4 + 2.0, 1.45)
+    call(P, 5, -OSC_S - 0.05, F4 + KW_S, 0.75)
+    call(P, 6, -OSC_S + 0.09, zh4 + 0.09, 1.45)
+    call(P, 7, -0.18, F4 + POCHWYT, 1.45)
+    call(P, 8, -OSC_S / 2, F4 + 1.55, 0.75)
+    call(P, 9, -0.02, Z_GZ0 + 0.40, 0.75)
+    call(P, 10, -FRYZ / 2, Z_FR0 + FRYZ / 2, 1.45)
+    call(P, 11, -0.004, zs4 - 0.05, 1.45)
+    call(P, 12, -1.55, SB3 + 0.20, -0.0)
+    call(P, 13, -2.25, ST3 + 0.08, -0.0)
+    call(P, 14, -1.45, Z_DW + 0.25, -0.0)
+    # łańcuch wysokości okna od posadzki kond. 4 (po stronie wnętrza)
+    xc = XA_IN + 0.40
+    ticks = [(F4, ""), (zs4, "0,60 parapet"), (F4 + KW_S, "0,90 kwatera stała"), (F4 + POCHWYT, "1,10 pochwyt"),
+             (zh4, "2,95 nadproże"), (zh4 + ZIP_S, "3,13 kaseta ZIP"), (Z_DS, f"{Z_DS - F4:.2f} spód stropu dachu".replace(".", ","))]
+    s.line(P(xc, F4), P(xc, Z_DS), stroke=INK, sw=0.12)
+    for z, lab in ticks:
+        x, y = P(xc, z)
+        s.line((x - 0.8, y + 0.8), (x + 0.8, y - 0.8), stroke=INK, sw=0.22)
+        if lab:
+            s.text((x + 1.6, y + (2.2 if z >= Z_DS - 0.01 else 0.7)), lab, size=1.75, fill="#2f2b28")
+    x, y = P(XA_IN + 0.25, SB3 - 0.17)
+    s.text((x, y), f"kond. 1–3: ZIP {NADPR_S + ZIP_S:.2f} < spód stropu {SB3 - F3:.2f}".replace(".", ","), size=1.6, fill="#2f2b28")
+
+    # ============================================================== B: fragment elewacji od ulicy – styk posesji M1 | M2
+    b0 = len(s.parts)
+    UF, UE = OS_S, 2 * OS_S                                  # fuga posesji w osi filara; koniec fragmentu
+    c1, c2 = UF - OS_S / 2, UF + OS_S / 2                    # osie okien M1 i M2
+    hw = WIN_S[0] / 2
+    rel2 = REL.get("M2", 0.08)
+
+    def erect(u0, z0, u1, z1, fill, stroke=INK, sw=0.15, extra=""):
+        s.poly([E(u0, z0), E(u1, z0), E(u1, z1), E(u0, z1)], fill=fill, stroke=stroke, sw=sw, extra=extra)
+
+    def ewin(a, b, z0, z1):
+        erect(a, z0, b, z1, "#7b8792", sw=0.12)
+        erect(a, z0 + KW_S - PAR_S - 0.03, b, z0 + KW_S - PAR_S + 0.03, MET, stroke="none")          # poprzeczka kwatery stałej
+        s.line(E(a, z0 + POCHWYT - PAR_S), E(b, z0 + POCHWYT - PAR_S), stroke="#9a948c", sw=0.3)      # pochwyt 1,10
+        sh = min(OSC_S * 0.75, (z1 - z0) * 0.3)
+        erect(a, z1 - sh, b, z1, INK, stroke="none", extra='fill-opacity="0.32"')
+        erect(a, z0, a + OSC_S * 0.6, z1 - sh, INK, stroke="none", extra='fill-opacity="0.24"')
+        erect(a - 0.02, z0 - 0.05, b + 0.02, z0, MET, stroke="none")                                 # parapet Al w licu
+
+    erect(0, ZB_S, UF, Z_FR0, C_M1, stroke="none")
+    erect(UF, ZB_S, UE, Z_FR0, C_M2, stroke="none")
+    q = UF + SEP / 2
+    while q < UE:                                            # M2: ceramika ryflowana co 0,135 m
+        s.line(E(q, ZB_S), E(q, Z_FR0), stroke=EL.mix(C_M2, INK, 0.16), sw=0.07)
+        q += SEP
+    erect(c2 - hw, ZB_S, c2 + hw, Z_FR0, INK, stroke="none", extra=f'fill-opacity="{0.035 + rel2 * 0.25:.3f}"')   # relief M2
+    erect(c2 - hw, ZB_S, c2 - hw + rel2 * 0.9, Z_FR0, INK, stroke="none", extra='fill-opacity="0.13"')
+    for c in (c1, c2):
+        ewin(c - hw, c + hw, zs3, zh3)
+        ewin(c - hw, c + hw, zs4, zh4)
+    erect(UF - 0.10, ZB_S, UF + 0.10, Z_FR0, MET, stroke="none")                                      # fuga 0,20 (cofnięta 0,15)
+    erect(UF - 0.10, ZB_S, UF - 0.10 + 0.15 * 0.6, Z_FR0, INK, stroke="none", extra='fill-opacity="0.35"')
+    erect(0, Z_FR0, UE, Z_GZ0, MET, stroke=INK, sw=0.1)                                               # fryz wklęsły 0,15 (tło Al
+    erect(0, Z_FR0, UE, Z_GZ0, INK, stroke="none", extra='fill-opacity="0.45"')                       #  w cieniu gzymsu)
+    erect(0, Z_GZ0, UE, Z_GZ1, EL.G, sw=0.18)                                                         # gzyms-attyka 0,70
+    s.line(E(0, Z_GZ1 - 0.12), E(UE, Z_GZ1 - 0.12), stroke=GRAN_H, sw=0.12)
+    for u in (OS_S / 2, OS_S, 1.5 * OS_S):
+        s.line(E(u, Z_GZ0), E(u, Z_GZ1 - 0.12), stroke=GRAN_H, sw=0.12)
+    erect(0, ZB_S, UE, Z_GZ1, "none", sw=0.2)
+    b1 = len(s.parts)
+
+    # ============================================================== C: detal zwieńczenia od dziedzińca (tynk, wysięg 0,30)
+    c0_ = len(s.parts)
+    P = PC
+    strop(P, XC_IN, Z_DS, Z_DW, -XI_D)
+    R(P, -XR_D, ZD0 - 0.5, -XI_D, Z_DS, hc, sw=0.2)                    # nadproże
+    R(P, -XR_D, Z_DW, -XI_D, Z_GZ1 - 0.12, hc, sw=0.2)                 # attyka żelbetowa
+    R(P, -XI_D, ZD0 - 0.5, -T_D, Z_GZ1 - 0.12, hi, sw=0.12)            # wełna 240 (ETICS)
+    R(P, -T_D, ZD0 - 0.5, 0.0, Z_GZ0, C_TY, INK, sw=0.12)               # tynk mineralny 10
+    # gzyms granitowy z wysięgiem 0,30 m: płyta czołowa i podniebienie z kapinosem na konsolach nierdzewnych
+    R(P, WYS_DZ - 0.04, Z_GZ0 + 0.04, WYS_DZ, Z_GZ1 - 0.12, hg, sw=0.2)
+    R(P, 0.0, Z_GZ0, WYS_DZ, Z_GZ0 + 0.04, hg, sw=0.2)
+    R(P, WYS_DZ - 0.075, Z_GZ0, WYS_DZ - 0.06, Z_GZ0 + 0.015, "#ffffff", "#ffffff", sw=0.02)       # kapinos (wrąb)
+    R(P, -T_D, Z_GZ0, 0.0, Z_GZ1 - 0.12, hi, sw=0.08)
+    konsole(P, -XI_D, WYS_DZ - 0.04, (Z_GZ0 + 0.10, Z_GZ1 - 0.22))
+    s.line(P(WYS_DZ - 0.06, Z_GZ0 + 0.04), P(WYS_DZ - 0.06, Z_GZ1 - 0.12), stroke="#6b645e", sw=0.3)
+    dach(P, XC_IN, XR_D)
+    czapa(P, WYS_DZ, -(XR_D + 0.11))
+    s.line(P(XC_IN, ZD0), P(XC_IN, ZT_S - 0.2), stroke=INK, sw=0.15, dash="1.5,0.8")
+    c1_ = len(s.parts)
+    call(P, 15, -T_D / 2, ZD0 + 0.35, 1.0)
+    call(P, 16, WYS_DZ - 0.02, Z_GZ0 + 0.40, 0.7)
+    call(P, 17, WYS_DZ - 0.07, Z_GZ0 + 0.005, 0.7)
+
+    # ---- przycięcie: A i B do +ZB, C do +ZD0 (bez resztek poniżej linii urwania)
+    yA, yC = OY_S + 0.2, PC(0, ZD0)[1] + 0.2
+    s.defs.append(f'<clipPath id="nad_zb_s"><rect x="0" y="0" width="{W_S:.3f}" height="{yA:.3f}"/></clipPath>')
+    s.defs.append(f'<clipPath id="nad_zd"><rect x="{PC(XC_IN, 0)[0]:.3f}" y="0" width="{W_S:.3f}" height="{yC:.3f}"/></clipPath>')
+    parts = s.parts
+    s.parts = (parts[:a0] + ['<g clip-path="url(#nad_zb_s)">'] + parts[a0:b1] + ['</g>']
+               + ['<g clip-path="url(#nad_zd)">'] + parts[c0_:c1_] + ['</g>'] + parts[c1_:])
+    for P_, x0, x1, z in ((PA, XA_IN - 0.1, 0.4, ZB_S), (PC, XC_IN - 0.1, WYS_DZ + 0.3, ZD0)):
+        s.line(P_(x0, z + 0.01), P_(x1, z + 0.01), stroke=INK, sw=0.15, dash="1.5,0.8")
+    s.line(E(-0.15, ZB_S + 0.01), E(UE + 0.15, ZB_S + 0.01), stroke=INK, sw=0.15, dash="1.5,0.8")
+
+    # ---- rzędne (z lewej strony A)
+    for z, lab in ((Z_GZ1, f"{fz(Z_GZ1)} gzyms-attyka = {Z_GZ1 + Z0:.2f}".replace(".", ",")),
+                   (Z_GZ0, f"{fz(Z_GZ0)} spód gzymsu = {Z_GZ0 + Z0:.2f}".replace(".", ",")),
+                   (Z_DW, f"{fz(Z_DW)} strop dachu skrzydła"), (F4, f"{fz(F4)} posadzka 4 = {F4 + Z0:.2f}".replace(".", ","))):
+        x, y = PA(XA_IN - 0.4, z)
+        s.poly([(x, y), (x - 1.3, y - 1.5), (x + 1.3, y - 1.5)], fill=INK, stroke="none")
+        s.line((x - 2.5, y), (x + 4, y), stroke=INK, sw=0.12)
+        s.text((x - 3, y - 0.4), lab, size=2.1, anchor="end")
+
+    # ---- odnośniki
+    for P_, n, X, Z, dx in calls:
+        x, y = P_(X, Z)
+        bx = x + dx * SC
+        if dx:
+            s.line((x, y), (bx, y), stroke=INK, sw=0.12)
+        cx = bx + (2.2 if dx > 0 else -2.2 if dx < 0 else 0)
+        s.circle((cx, y), 2.2, fill="#ffffff", stroke="#a8483a", sw=0.25)
+        s.text((cx, y + 0.8), str(n), size=2.2, anchor="middle", weight=700, fill="#a8483a")
+
+    # ---- wymiary pod fragmentem B
+    yd = OY_S + 6.5
+    edges = [0.0, c1 - hw, c1 + hw, c2 - hw, c2 + hw, UE]
+    for i, (u0, u1) in enumerate(zip(edges[:-1], edges[1:])):
+        x0, x1 = E(u0, 0)[0], E(u1, 0)[0]
+        s.line((x0, yd), (x1, yd), stroke=INK, sw=0.12)
+        for x in (x0, x1):
+            s.line((x - 0.8, yd + 0.8), (x + 0.8, yd - 0.8), stroke=INK, sw=0.2)
+        t = {1: f"{WIN_S[0]:.2f}", 2: f"{FIL_S:.3f}", 3: f"{WIN_S[0]:.2f}"}.get(i, "")
+        if t:
+            s.text(((x0 + x1) / 2, yd - 1.0), t.replace(".", ","), size=1.9, anchor="middle")
+    x0, x1 = E(c1, 0)[0], E(c2, 0)[0]
+    s.line((x0, yd + 4.5), (x1, yd + 4.5), stroke=INK, sw=0.12)
+    for x in (x0, x1):
+        s.line((x - 0.8, yd + 5.3), (x + 0.8, yd + 3.7), stroke=INK, sw=0.2)
+    s.text(((x0 + x1) / 2, yd + 3.6), f"oś {OS_S:.3f} (1,5 modułu 1,35)".replace(".", ",", 1), size=1.9, anchor="middle")
+    s.text((E(c1, 0)[0], yd + 9.5), f"M1 · {EL.NCS_C['M1']} · gładka · relief {REL.get('M1', 0.0):.2f}".replace(".", ","),
+           size=1.8, anchor="middle", fill="#4d4842")
+    s.text((E(c2, 0)[0], yd + 9.5), f"M2 · {EL.NCS_C['M2']} · ryflowana co {SEP:.3f} · relief {rel2:.2f}".replace(".", ","),
+           size=1.8, anchor="middle", fill="#4d4842")
+    s.text((E(UF, 0)[0], yd + 13.0), "fuga posesji 0,20 m z ciemnego metalu cofnięta 0,15 m · gzyms i fryz wspólne", size=1.8, anchor="middle", fill="#4d4842")
+
+    # ---- tytuły kolumn
+    for xy, t in (((PA(-1.3, 0)[0], PA(0, ZT_S)[1] - 2), "A · PRZEKRÓJ PRZEZ OŚ OKNA – UL. MAZOWIECKA"),
+                  ((E(UE / 2, 0)[0], PA(0, ZT_S)[1] - 2), "B · FRAGMENT ELEWACJI – STYK POSESJI M1 | M2"),
+                  ((PC(-0.6, 0)[0], PA(0, ZT_S)[1] - 2), "C · ZWIEŃCZENIE OD DZIEDZIŃCA")):
+        s.text(xy, t, size=2.4, anchor="middle", weight=600)
+
+    # ---- legenda warstw (rozdz. 8, tabela przegród 1:50 – „Ściana skrzydła i segmentu”)
+    u_txt = f"{U_S:.3f}".replace(".", ",")
+    w_mm = int(round(WOOL_S * 1000))
+    LEG = [
+        f"1  ceramika glazurowana półmatowa, profile ekstrudowane 40 mm (A1), odcień posesji – M1 {EL.NCS_C['M1']}",
+        f"2  pustka wentylowana 40 / wełna mineralna λ {LAM_S} – {w_mm} mm; konsole nierdzewne punktowe",
+        f"    z przekładką (ΔU 0,020) → U = {u_txt} W/(m²K); całość A1 (NRO)",
+        f"3  ściana żelbetowa 150; ściana razem {XR:.2f} m – trakt 15,00 = 2 × {XR:.2f} + 2 × 6,08 + 2 × 0,10 + 1,70".replace(".", ","),
+        f"4  okno Al {WIN_S[0]:.2f} × {WIN_S[1]:.2f} m, pakiet 3-szybowy 54 mm, Uw ≤ 0,80, g = 0,33; parapet {PAR_S:.2f}, nadproże {NADPR_S:.2f}".replace(".", ","),
+        f"5  dolna kwatera stała ze szkła bezpiecznego do {KW_S:.2f} m nad posadzką (WT § 301)".replace(".", ","),
+        f"6  kaseta rolety ZIP w nadprożu do {NADPR_S + ZIP_S:.2f} m (kond. 1–3 spód stropu {SB3 - F3:.2f}; kond. 4 – {Z_DS - F4:.2f}),".replace(".", ","),
+        "    tkanina poliestrowa (≤ 25 m)",
+        f"7  pochwyt ochronny ze stali nierdzewnej Ø 40 na {POCHWYT:.2f} m w świetle ościeży".replace(".", ","),
+        f"8  ościeże {OSC_S:.2f} m: blacha Al lakierowana proszkowo RAL 8019 na wełnie".replace(".", ","),
+        f"9  gzyms-attyka: granit strzegomski płomieniowany {EL.MAT['G']['NCS']}, {Z_GZ1 - Z_GZ0:.2f} m ({Z_GZ0 + Z0:.2f}–{Z_GZ1 + Z0:.2f}),".replace(".", ","),
+        "    czapa granitowa ze spadkiem do dachu; w linii attyki Mazowieckiej 19 (140,24)",
+        f"10 lico na granicy obszaru (ul. Mazowiecka, skwer, Maz. 19): wysięg {WYS_GR:.2f} – cień daje".replace(".", ","),
+        f"    fryz wklęsły {FRYZ:.2f} m pod gzymsem ({Z_FR0 + Z0:.2f}–{Z_GZ0 + Z0:.2f}), tło z blachy Al RAL 8019".replace(".", ","),
+        "11 parapet zewnętrzny Al ze spadkiem, kapinos w licu – nic poza obrysem (G-K-1)",
+        "12 strop sprężony 400 (14,20 m bez słupów) z aktywacją termiczną (TABS), sufit odsłonięty + wyspy",
+        f"13 podłoga podniesiona {FLOOR_S * 1000:.0f} (instalacje); biura {K['wysokosci_w_swietle']['biura_skrzydlo']:.2f} m w świetle".replace(".", ","),
+        "14 dach: BIPV szkło-szkło BROOF(t1) / membrana / spadki / wełna mineralna 300 / paroizolacja /",
+        f"    płyta; U ≤ 0,12; pokrycie {fz(Z_PK0)}…{fz(Z_PK1)} ({Z_PK0 + Z0:.2f}–{Z_PK1 + Z0:.2f}) za gzymsem-attyką".replace(".", ","),
+        f"15 od dziedzińca: tynk mineralny cienkowarstwowy 10 mm na wełnie {w_mm} λ {LAM_S} (A2-s1,d0)",
+        "    w tonie ceramiki posesji / żelbet 150",
+        f"16 gzyms od dziedzińca: wysięg {WYS_DZ:.2f} m – granit na konsolach nierdzewnych, cień rzucany".replace(".", ","),
+        "17 kapinos (wrąb) w podniebieniu gzymsu",
+    ]
+    s.text((LX, 34), "WARSTWY (od zewnątrz)", size=2.4, weight=600)
+    for i, t in enumerate(LEG):
+        t = (" " * 6 + t.lstrip()) if t.startswith("    ") else t
+        s.text((LX, 40 + i * 3.45), t, size=1.85, fill="#2f2b28")
+    s.text((20.0, 12.0), "PRZEKRÓJ ELEWACYJNY I FRAGMENT ELEWACJI – SKRZYDŁO", size=4.4, weight=600)
+    s.text((20.0, 18.0), "porządek kamieniczny: kond. 4 i zwieńczenie od ul. Mazowieckiej (wysięg 0,00, fryz wklęsły) "
+                         "i od dziedzińca (wysięg 0,30, tynk) · 1:50", size=2.4, fill="#4d4842")
+    sx, sy = 20.0, H_S - 8
+    for i in range(4):
+        s.poly([(sx + i * 0.5 * SC, sy), (sx + (i + 1) * 0.5 * SC, sy), (sx + (i + 1) * 0.5 * SC, sy + 1.2), (sx + i * 0.5 * SC, sy + 1.2)],
+               fill=INK if i % 2 == 0 else "#fff", stroke=INK, sw=0.12)
+    s.text((sx + 2 * SC + 4, sy + 1.2), "0–2 m · 1:50", size=2.2, weight=600)
+
+    out = ROOT / "build" / "rysunki" / "przekroj_elewacyjny_skrzydlo_1-50.svg"
+    out.write_text(s.render(), encoding="utf-8")
+    html = ROOT / "docs" / "70_rysunki" / "podglady" / "przekroj_elewacyjny_skrzydlo_1-50.html"
+    html.write_text(f'<!doctype html><html><head><meta charset="utf-8"><style>@page{{size:{W_S + 10:.0f}mm {H_S + 10:.0f}mm;margin:0}}'
+                    f'body{{margin:0;padding:5mm}}</style></head><body>{s.render()}</body></html>', encoding="utf-8")
+    print(f"{W_S + 10:.0f} {H_S + 10:.0f}")
+
+
+if FRAG in ("skrzydlo", "skrzydło"):
+    przekroj_skrzydla()
+    raise SystemExit(0)
 
 
 W_MM, H_MM = 480.0, (ZT - ZB) * SC + 60

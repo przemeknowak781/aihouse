@@ -1,0 +1,139 @@
+{
+ "id": "zlota-godzina-4",
+ "opis": "ZŁOTA GODZINA 4 – elewacja nadrzeczna z przeciwległego brzegu (Wybrzeże Wyspiańskiego), 155 m, niemal na wprost elewacji wsch. wieży: panorama 2:1 – Wybrzeże Słowackiego 5, segment z tarasem, wieża (wielki porządek, kordon, pas cienia, korona), łuk; Odra na pierwszym planie. Poranek, słońce zza lewego ramienia.",
+ "preset": "dzien",
+ "czas": "2026-10-20 08:50 CEST",
+ "slonce": {
+  "az": 123.01,
+  "el": 11.58,
+  "ekspozycja": -3.9,
+  "czas": "2026-10-20T08:50:00+02:00",
+  "udzial_opraw": 1.0,
+  "latarnie": 0
+ },
+ "kamera": {
+  "loc": [
+   265.0,
+   40.0,
+   1.675
+  ],
+  "cel": [
+   165.55,
+   50.45,
+   15.05
+  ],
+  "z_wzgl_kamery": 1.625,
+  "lens_mm": 50.0,
+  "shift_x": 0.0,
+  "shift_y": 0.11,
+  "poziom": true,
+  "rozdzielczosc": [
+   480,
+   240
+  ],
+  "sensor_fit": "AUTO (36 mm na dłuższym boku)"
+ },
+ "ludzie": false,
+ "probki": 16,
+ "czasy_s": {
+  "wczytanie_blend_s": 0.4,
+  "zrodlo_sceny": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/zg/scena_akt.blend",
+  "scena_s": 0.7,
+  "kontrola_s": 0.8,
+  "render_s": 12.5,
+  "postprodukcja_s": 0.3
+ },
+ "uwagi": [],
+ "info": [
+  "kamera poza ramką mapy (e 11–152, n -36–148): z tej strony teren to ortofotomapa, zabudowa – proste bryły"
+ ],
+ "promienie": [
+  "oś: wieza_elewacje 154.3 m",
+  "L-dół: barki 117.9 m",
+  "P-dół: barki 141.2 m",
+  "L-góra: niebo",
+  "P-góra: niebo",
+  "dół: woda 116.0 m"
+ ],
+ "udzialy_kadru": {
+  "niebo": 0.328,
+  "woda": 0.24,
+  "budynek": 0.206,
+  "drzewa": 0.125,
+  "zabudowa_kontekstu": 0.081,
+  "teren": 0.016,
+  "ulica": 0.003,
+  "most": 0.003
+ },
+ "zaslona_pierwszego_planu": 0.0,
+ "najblizsza_przeszkoda": {
+  "obiekt": "teren_dalszy_ortofoto",
+  "odl_m": 1.65
+ },
+ "oko_nad_podlozem_m": 1.65,
+ "podloze": "teren_dalszy_ortofoto",
+ "budynek_w_kadrze": {
+  "wieża": {
+   "x0": 0.36,
+   "x1": 0.651,
+   "y0": 0.25,
+   "y1": 0.931,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  },
+  "skrzydło": {
+   "x0": 0.116,
+   "x1": 0.561,
+   "y0": 0.256,
+   "y1": 0.562,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  },
+  "segment": {
+   "x0": 0.344,
+   "x1": 0.448,
+   "y0": 0.25,
+   "y1": 0.64,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  }
+ },
+ "punkty_kluczowe": {
+  "Brama Mostowa – napis (+5,2)": {
+   "w_kadrze": true,
+   "x": 0.647,
+   "y": 0.341,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 165.1
+  },
+  "korona – lamele łuku (+31,7)": {
+   "w_kadrze": true,
+   "x": 0.647,
+   "y": 0.789,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 167.7
+  },
+  "attyka wieży (+37,2)": {
+   "w_kadrze": true,
+   "x": 0.647,
+   "y": 0.882,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 168.8
+  },
+  "cel kamery": {
+   "w_kadrze": true,
+   "x": 0.5,
+   "y": 0.652,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 100.9
+  }
+ },
+ "horyzont_y": 0.28,
+ "pochylenie_deg": 0.0,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/podglad_zlota-godzina-4.png",
+ "jpg": "/home/user/aihouse/umwd/docs/60_wizualizacje/img/extra/podglad_zlota-godzina-4.jpg"
+}

@@ -10,16 +10,20 @@ granicy (fryz wklęsły 0,15 m), wysięg 0,30 m tylko od dziedzińca; czerpnia z
 (u 2–12), czerpnia nadciśnienia klatek ≥ 5 m od niej, płyciny wieży od dziedzińca ≤ 25 m jako BIPV, zadaszenie BIPV tarasu
 ogrodowego (u 0,5–20,5, głęb. 4,0 m, h ≈ 4,0 m); lamele korony łuku 0,35 × 0,60 m w rozstawach Fibonacciego (21 szt.,
 S 4005-Y20R, szkło z sitodrukiem na R 13,40); segment: ściana pd. BIPV w rysunku osi 2,025 m, attyka pd. 139,10 z balustradą
-szklaną cofniętą 1,5 m, żaluzje agregatu i dry-coolera w licu zach.
+szklaną cofniętą 1,5 m, żaluzje agregatu i dry-coolera w licu zach. (parter lica zach. pełny – za nim rampa garażu i trafo).
 
-Wynik: build/rysunki/elewacja_{E,N,W,S,Sd}_1-{SKALA}.svg + docs/70_rysunki/podglady/elewacje_1-{SKALA}.html (podgląd zbiorczy).
+Widoki: E, N, W, S (elewacje od ulic i ogrodu), Sd – elewacja wsch. skrzydła w przekroju przez ogród, Sg – elewacja zach.
+(dziedzińcowa) segmentu i wieży, rzut prostopadły do lica S-W (oś u wieży), w przekroju przez skrzydło 1,0 m przed licem
+zach. wieży – jedyny widok, w którym lico S-W nie jest zasłonięte przez skrzydło (W) ani widziane krawędzią (S).
+
+Wynik: build/rysunki/elewacja_{E,N,W,S,Sd,Sg}_1-{SKALA}.svg + docs/70_rysunki/podglady/elewacje_1-{SKALA}.html (podgląd zbiorczy).
 """
 import sys, json, math, re, random
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from umwd.svg import Svg
-from umwd.facade_elev import Face, draw_faces, u_of, INK
+from umwd.facade_elev import Face, draw_faces, u_of, INK, frame
 from umwd.siteplan import load_site, poly_of
 from umwd.runs import ccw
 
@@ -376,7 +380,15 @@ def segment_faces():
     zaluzja(Wf, cs[2] - hw, cs[2] + hw, f1 + 1.70, f1 + 2.95)                 # kond. 1: wentylacja trafo 1,5 m² (kanał z parteru)
     zaluzja(Wf, cs[0] - hw, cs[2] + hw, f3 + 0.60, f3 + 2.90, pitch=0.23, akust=True)   # kond. 3: dry-cooler 12 m²
     zaluzja(Wf, cs[0] - hw, cs[2] + hw, f4 + 0.40, f4 + 2.70, pitch=0.23, akust=True)   # kond. 4: dry-cooler 12 m²
-    cokol(Wf, m, Wf.L - m, -0.35, anchor="lo")
+    # parter pełny (za licem: rampa garażu wzdłuż ściany pn. i pas trafo / rozdzielni / BESS – rozdz. 6): tynk w tonie
+    # segmentu, cokół granitowy 0,70 m (S 3502-Y) i kordon 0,35 m na 124,10 jak na pozostałych licach
+    zg, z_k0 = -0.35, Z_KORDON - 0.35
+    Wf.rect(0, Wf.L, zg, z_k0, fill=tynk(C["SEG"]), stroke="none")
+    for j in range(3):            # płyciny ślepe w osiach okien (cień 0,02 m) – rytm 2,025 m kontynuowany na parterze
+        Wf.rect(cs[j] - hw, cs[j] + hw, zg + 0.70 + 0.35, z_k0 - 0.45, fill=mix(tynk(C["SEG"]), INK, 0.05), stroke=mix(tynk(C["SEG"]), INK, 0.25), sw=0.04)
+    Wf.rect(0, Wf.L, zg, zg + 0.70, fill=GC, stroke=INK, sw=0.06)
+    Wf.rect(0, Wf.L, z_k0, Z_KORDON, fill=G, stroke=INK, sw=0.09)
+    Wf.rect(0, Wf.L, z_k0 - 0.15, z_k0, fill=INK, op=0.18)
     gzyms(Wf, 0, Wf.L, WYS_DZ)
     # ---- ściana pd. (od dz. 10/2, nie ulica, ≤ 25 m): BIPV satynowane w tonie ceramiki w rysunku osi 2,025 m,
     #      pilastry płytkie 0,12 m, fugi ciemnego metalu; parter – cokół z pnączami; attyka 139,10 = poziom tarasu
@@ -731,7 +743,8 @@ def elevation(name, title, sub, view_az, faces, ground_pts, mpzp, levels, u_pad=
     # ground
     gp = ground_profile(view_az, ground_pts)
     gp = [(u0, gp[0][1])] + gp + [(u1, gp[-1][1])]
-    poly = [P(u, z) for u, z in gp] + [P(u1, -4.0), P(u0, -4.0)]
+    z_wh = LEV["-1"] - 0.3                                   # biel terenu do spodu pasma kond. −1 z przekroju (bez resztki −4,0…−4,2)
+    poly = [P(u, z) for u, z in gp] + [P(u1, z_wh), P(u0, z_wh)]
     svg.poly(poly, fill="#ffffff", stroke="none")
     hp = svg.hatch("grunt", spacing=0.9, angle=45, stroke="#9a948c", sw=0.07)
     band = [P(u, z) for u, z in gp] + [P(u, z - 0.9) for u, z in reversed(gp)]
@@ -821,6 +834,23 @@ def main():
                          ours + neighbour_faces({"Mazowiecka 19"}),
                          [(64.0, -8.0, 118.53), (63.5, 6.49, 118.70), (70.84, 39.84, 118.95), (74.0, 45.0, 118.95), (90.0, 46.0, 119.0)],
                          [], LEVELS, cut=-80.0, debug=DEBUG))
+    # Sg – elewacja zach. segmentu od dziedzińca (v1.1: żaluzje powietrza agregatu 8 m² na kond. 1, wentylacja trafo,
+    # żaluzje akustyczne dry-coolera 2 × 12 m² na kond. 3–4, tynk w tonie ceramiki, gzyms z wysięgiem 0,30 m).
+    # Kierunek patrzenia = oś +u wieży (lico S-W ⟂ do patrzącego, wymiary w prawdziwej wielkości); płaszczyzna przekroju
+    # u = −1,0 (1,0 m przed licem zach. wieży) przecina skrzydło przy wieży i odcina je w całości – w W lico S-W zasłania
+    # skrzydło, w S jest widziane krawędzią. Teren wzdłuż płaszczyzny z pikiet NMT (site.json).
+    e1, n1 = uv(1.0, 0.0)
+    e0, n0 = uv(0.0, 0.0)
+    az = math.degrees(math.atan2(e1 - e0, n1 - n0)) % 360          # ≈ 76,3°
+    U_CUT = -1.0
+    dd = frame(az)[0]
+    pc = uv(U_CUT, 0.0)
+    res.append(elevation("Sg", "ELEWACJA SEGMENTU OD DZIEDZIŃCA",
+                         "elewacja zachodnia segmentu i wieży (żaluzje agregatu, trafo i dry-coolera) · przekrój przez skrzydło 1,0 m przed licem wieży",
+                         az, ours,
+                         [(*uv(U_CUT, 34.0), 119.45), (*uv(U_CUT, 29.7), 119.43), (*uv(U_CUT, 0.0), 119.00), (*uv(U_CUT, -4.0), 118.87),
+                          (*uv(U_CUT, -8.0), 118.90), (*uv(U_CUT, -12.0), 118.80)],
+                         [], LEVELS, cut=pc[0] * dd[0] + pc[1] * dd[1], debug=DEBUG))
     # combined preview
     total_h = sum(s.h_mm for s, _ in res) + 10
     max_w = max(s.w_mm for s, _ in res)

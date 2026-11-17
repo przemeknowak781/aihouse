@@ -1,6 +1,6 @@
 {
  "id": "zlota-godzina-1",
- "opis": "ZŁOTA GODZINA 1 – sylweta z osi Mostu Grunwaldzkiego od strony pl. Grunwaldzkiego: kamera na pomoście tuż za portalem pn. (s 123 m od portalu pd., 3 m na lewo od osi), obiektyw w osi mostu przesunięty w lewo (shift_x) – perspektywa jednozbieżna: tory i kratownice zbiegają do portalu pd., wieża z koroną zamyka widok po lewej. Poranek, słońce z lewej z tyłu.",
+ "opis": "ZŁOTA GODZINA 1 – sylweta z osi Mostu Grunwaldzkiego od strony pl. Grunwaldzkiego: kamera na pomoście tuż za portalem pn. (s 121 m od portalu pd., 3 m na lewo od osi), obiektyw w osi mostu przesunięty w lewo (shift_x) – perspektywa jednozbieżna: tory i kratownice zbiegają do portalu pd., wieża z koroną zamyka widok po lewej. Poranek, słońce z lewej z tyłu.",
  "preset": "dzien",
  "czas": "2026-10-20 08:40 CEST",
  "slonce": {
@@ -13,16 +13,16 @@
  },
  "kamera": {
   "loc": [
-   211.01,
-   175.09,
-   4.253
+   209.08,
+   174.41,
+   4.313
   ],
   "cel": [
-   116.8,
-   141.54,
+   114.87,
+   140.86,
    10.05
   ],
-  "z_wzgl_kamery": 4.203,
+  "z_wzgl_kamery": 4.263,
   "lens_mm": 40.0,
   "shift_x": -0.33,
   "shift_y": 0.1,
@@ -36,33 +36,32 @@
  "ludzie": false,
  "probki": 16,
  "czasy_s": {
-  "kontekst_s": 10.3,
-  "budynek_s": 8.7,
-  "zrodlo_sceny": "budowa od zera",
-  "zapis_blend": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/zg/scena_akt.blend",
-  "scena_s": 19.6,
-  "kontrola_s": 0.6,
-  "render_s": 15.2,
-  "postprodukcja_s": 0.3
+  "wczytanie_blend_s": 0.4,
+  "zrodlo_sceny": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/zg/scena_akt.blend",
+  "scena_s": 0.7,
+  "kontrola_s": 0.9,
+  "render_s": 20.1,
+  "postprodukcja_s": 0.4
  },
  "uwagi": [],
  "info": [
   "kamera poza ramką mapy (e 11–152, n -36–148): z tej strony teren to ortofotomapa, zabudowa – proste bryły"
  ],
  "promienie": [
-  "oś: skrzydlo_elewacje 180.1 m",
-  "L-dół: woda 104.6 m",
-  "P-dół: most_pomost_lancuchy 14.2 m",
+  "oś: skrzydlo_elewacje 179.6 m",
+  "L-dół: most_pomost_lancuchy 12.5 m",
+  "P-dół: most_pomost_lancuchy 14.4 m",
   "L-góra: niebo",
   "P-góra: niebo",
   "dół: most_pomost_lancuchy 10.8 m"
  ],
  "udzialy_kadru": {
-  "most": 0.503,
-  "niebo": 0.333,
-  "budynek": 0.104,
-  "drzewa": 0.034,
-  "woda": 0.026
+  "most": 0.466,
+  "niebo": 0.357,
+  "budynek": 0.109,
+  "drzewa": 0.039,
+  "woda": 0.026,
+  "zabudowa_kontekstu": 0.003
  },
  "zaslona_pierwszego_planu": 0.0,
  "najblizsza_przeszkoda": {
@@ -73,26 +72,26 @@
  "podloze": "most_pomost_lancuchy",
  "budynek_w_kadrze": {
   "wieża": {
-   "x0": 0.125,
-   "x1": 0.496,
-   "y0": 0.297,
-   "y1": 0.766,
+   "x0": 0.114,
+   "x1": 0.492,
+   "y0": 0.295,
+   "y1": 0.772,
    "rzut_w_kadrze": true,
    "uciete": []
   },
   "skrzydło": {
-   "x0": 0.209,
-   "x1": 0.508,
-   "y0": 0.309,
-   "y1": 0.513,
+   "x0": 0.202,
+   "x1": 0.504,
+   "y0": 0.308,
+   "y1": 0.514,
    "rzut_w_kadrze": true,
    "uciete": []
   },
   "segment": {
-   "x0": 0.044,
-   "x1": 0.226,
-   "y0": 0.298,
-   "y1": 0.557,
+   "x0": 0.031,
+   "x1": 0.218,
+   "y0": 0.296,
+   "y1": 0.56,
    "rzut_w_kadrze": true,
    "uciete": []
   }
@@ -100,32 +99,32 @@
  "punkty_kluczowe": {
   "Brama Mostowa – napis (+5,2)": {
    "w_kadrze": true,
-   "x": 0.346,
+   "x": 0.338,
    "y": 0.362,
-   "widoczny": true,
-   "zaslania": null,
-   "odl_m": 147.2
+   "widoczny": false,
+   "zaslania": "most_pomost_lancuchy",
+   "odl_m": 145.3
   },
   "korona – lamele łuku (+31,7)": {
    "w_kadrze": true,
-   "x": 0.346,
-   "y": 0.69,
+   "x": 0.338,
+   "y": 0.694,
    "widoczny": true,
    "zaslania": null,
-   "odl_m": 149.8
+   "odl_m": 147.9
   },
   "attyka wieży (+37,2)": {
    "w_kadrze": true,
-   "x": 0.346,
-   "y": 0.758,
+   "x": 0.338,
+   "y": 0.763,
    "widoczny": true,
    "zaslania": null,
-   "odl_m": 150.9
+   "odl_m": 149.0
   },
   "cel kamery": {
    "w_kadrze": true,
    "x": 0.83,
-   "y": 0.447,
+   "y": 0.446,
    "widoczny": true,
    "zaslania": null,
    "odl_m": 100.2

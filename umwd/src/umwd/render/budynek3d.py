@@ -1011,7 +1011,7 @@ class Materialy:
         nb.l(nb.math('MULTIPLY', sp.outputs[0], 1.0), cmb.inputs[0])
         nb.l(nb.math('MULTIPLY', sp.outputs[1], 1.0), cmb.inputs[1])
         nb.l(nb.math('MULTIPLY', sp.outputs[2], 14.0), cmb.inputs[2])
-        wv = nb.n('ShaderNodeTexWave', {'wave_type': 'BANDS'}, Scale=3.0, Distortion=6.0, Detail=3.0)
+        wv = nb.n('ShaderNodeTexWave', {'wave_type': 'BANDS'}, Scale=3.0, Distortion=2.5, Detail=3.0)
         nb.l(cmb.outputs[0], wv.inputs['Vector'])
         c0, c1 = ((0.30, 0.17, 0.08), (0.46, 0.29, 0.14)) if wariant != 'jasne' else ((0.42, 0.29, 0.17), (0.58, 0.42, 0.26))
         col = nb.mix(wv.outputs['Fac'], c0, c1)

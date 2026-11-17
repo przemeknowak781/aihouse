@@ -1,0 +1,143 @@
+{
+ "id": "zlota-godzina-5",
+ "opis": "ZŁOTA GODZINA 5 – teleobiektyw z prawego brzegu od pd.-wsch. (230 m): wieża i Most Grunwaldzki w spłaszczonej perspektywie, szeroka tafla Odry z odbiciami. Pierwsze 45 min po wschodzie – słońce 6° nad horyzontem, elewacje wsch. i pd. w pełnym, pomarańczowym świetle.",
+ "preset": "dzien",
+ "czas": "2026-10-20 08:07 CEST",
+ "slonce": {
+  "az": 114.14,
+  "el": 5.74,
+  "ekspozycja": -3.9,
+  "czas": "2026-10-20T08:07:00+02:00",
+  "udzial_opraw": 1.0,
+  "latarnie": 0
+ },
+ "kamera": {
+  "loc": [
+   301.0,
+   -40.0,
+   1.671
+  ],
+  "cel": [
+   216.2,
+   12.99,
+   10.05
+  ],
+  "z_wzgl_kamery": 1.621,
+  "lens_mm": 70.0,
+  "shift_x": 0.0,
+  "shift_y": 0.05,
+  "poziom": true,
+  "rozdzielczosc": [
+   480,
+   320
+  ],
+  "sensor_fit": "AUTO (36 mm na dłuższym boku)"
+ },
+ "ludzie": false,
+ "probki": 16,
+ "czasy_s": {
+  "wczytanie_blend_s": 0.4,
+  "zrodlo_sceny": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/zg/scena_akt.blend",
+  "scena_s": 0.7,
+  "kontrola_s": 0.9,
+  "render_s": 17.4,
+  "postprodukcja_s": 0.3
+ },
+ "uwagi": [],
+ "info": [
+  "kamera poza ramką mapy (e 11–152, n -36–148): z tej strony teren to ortofotomapa, zabudowa – proste bryły"
+ ],
+ "promienie": [
+  "oś: duze_11_liscie 316.9 m",
+  "L-dół: woda 71.6 m",
+  "P-dół: woda 71.6 m",
+  "L-góra: wieza_szklo 230.3 m",
+  "P-góra: niebo",
+  "dół: woda 57.7 m"
+ ],
+ "udzialy_kadru": {
+  "woda": 0.411,
+  "niebo": 0.271,
+  "budynek": 0.125,
+  "drzewa": 0.076,
+  "most": 0.042,
+  "dalsze_otoczenie": 0.031,
+  "zabudowa_kontekstu": 0.023,
+  "teren": 0.01,
+  "ulica": 0.008,
+  "zagospodarowanie": 0.003
+ },
+ "zaslona_pierwszego_planu": 0.0,
+ "najblizsza_przeszkoda": {
+  "obiekt": "teren_dalszy_ortofoto",
+  "odl_m": 1.65
+ },
+ "oko_nad_podlozem_m": 1.65,
+ "podloze": "teren_dalszy_ortofoto",
+ "budynek_w_kadrze": {
+  "wieża": {
+   "x0": 0.074,
+   "x1": 0.433,
+   "y0": 0.402,
+   "y1": 0.927,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  },
+  "skrzydło": {
+   "x0": -0.244,
+   "x1": 0.266,
+   "y0": 0.404,
+   "y1": 0.673,
+   "rzut_w_kadrze": true,
+   "uciete": [
+    "lewo"
+   ]
+  },
+  "segment": {
+   "x0": 0.125,
+   "x1": 0.285,
+   "y0": 0.401,
+   "y1": 0.706,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  }
+ },
+ "punkty_kluczowe": {
+  "Brama Mostowa – napis (+5,2)": {
+   "w_kadrze": true,
+   "x": 0.435,
+   "y": 0.471,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 228.2
+  },
+  "korona – lamele łuku (+31,7)": {
+   "w_kadrze": true,
+   "x": 0.435,
+   "y": 0.81,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 230.1
+  },
+  "attyka wieży (+37,2)": {
+   "w_kadrze": true,
+   "x": 0.435,
+   "y": 0.88,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 230.9
+  },
+  "cel kamery": {
+   "w_kadrze": true,
+   "x": 0.5,
+   "y": 0.669,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 100.3
+  }
+ },
+ "horyzont_y": 0.425,
+ "pochylenie_deg": 0.0,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/podglad_zlota-godzina-5.png",
+ "jpg": "/home/user/aihouse/umwd/docs/60_wizualizacje/img/extra/podglad_zlota-godzina-5.jpg"
+}

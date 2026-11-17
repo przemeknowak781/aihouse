@@ -37,7 +37,7 @@
   },
   {
    "id": "ulica-1",
-   "opis": "Brama Mostowa od strony mostu – z bulwaru u stóp schodów z Mostu Grunwaldzkiego, przy parapecie nabrzeża (oko 1,65 m nad chodnikiem). Łuk R 14 z napisem nad podcieniem, korona za lamelami, oświetlona elewacja wsch. i segment po lewej, Plac Mostowy ze śladem 1934 po prawej. Poranne słońce z pd.-wsch. – terminator na łuku (modelowanie walca).",
+   "opis": "Brama Mostowa od strony mostu – z bulwaru u stóp schodów z Mostu Grunwaldzkiego, przy parapecie nabrzeża (oko 1,65 m nad chodnikiem, 2,31 m nad ±0). Łuk R 14 na osi kadru z napisem nad podcieniem i koroną za lamelami, elewacja wsch. i segment po lewej, krzewy skweru jako rama w prawym dolnym rogu. Pierwsze słońce 1.10 08:05 (az 109°, 10°): ciepłe światło ślizgowe na lewej połowie łuku (sektor 25–76°), prawa w chłodnym cieniu, zapalone biura – modelowanie walca. Kamera pozioma, shift 0,32 (piony proste).",
    "cam": {
     "e": 109.4,
     "n": 104.0,
@@ -53,13 +53,13 @@
    "shift_x": 0.0,
    "shift_y": 0.32,
    "aspect": "4:5",
-   "czas": "2026-10-21 09:15 CEST",
+   "czas": "2026-10-01 08:05 CEST",
    "ludzie": true,
    "preset": "dzien"
   },
   {
    "id": "ulica-2",
-   "opis": "Pierzeja Mazowieckiej od pd. – z zach. chodnika: Maz. 19 (repoussoir po prawej), skrzydło M1–M4 z gzymsem w linii Maz. 19, wieża zamykająca oś ulicy na lewej linii trójpodziału; bruk i krawężniki zbiegają się do punktu zbiegu. Popołudniowe słońce z pd.-zach. (skośne na elewacji zach. 282°).",
+   "opis": "Pierzeja Mazowieckiej od pd. – z zach. chodnika: Maz. 19 jako rama po prawej, skrzydło M1–M4 z gzymsem w linii Maz. 19, wieża zamykająca oś ulicy na lewej linii trójpodziału; bruk i krawężniki zbiegają się do punktu zbiegu. Popołudnie 21.10 16:10 (az 234°, 13°) – skośne, ciepłe światło na elewacji zach. (282°) i zach. ścianie wieży.",
    "cam": {
     "e": 27.5,
     "n": -12.0,
@@ -81,7 +81,7 @@
   },
   {
    "id": "ulica-3",
-   "opis": "Wybrzeże i wieża nad rzeką – z zewnętrznej krawędzi pomostu Mostu Grunwaldzkiego, 25 m od pylonu pd. (poza płaszczyzną kratownicy; oko 1,65 m nad chodnikiem mostu = 4,9 m nad ±0). Odra i barki w pierwszym planie, nabrzeże z WS 6, WS 5 i segmentem zbiegające się w lewo, wieża z łukiem i koroną na prawej linii trójpodziału. Poranne słońce z pd.-wsch. (boczne).",
+   "opis": "Wybrzeże i wieża nad rzeką – z zewnętrznej krawędzi pomostu Mostu Grunwaldzkiego, 25 m od pylonu pd., poza płaszczyzną kratownicy (oko 1,65 m nad chodnikiem mostu = 4,88 m nad ±0; kratownica, łańcuchy i pylon poza kadrem). Odra i barka w pierwszym planie, nabrzeże z drzewami, WS 5 i segment zbiegające się w lewo, wieża z łukiem i koroną na prawej linii trójpodziału, jesienne krzewy skweru po prawej. 1.10 08:10 (az 110°, 11°) – boczne poranne słońce na elewacji wsch. i lewej połowie łuku.",
    "cam": {
     "e": 120.91,
     "n": 135.26,
@@ -97,13 +97,13 @@
    "shift_x": 0.0,
    "shift_y": 0.13,
    "aspect": "3:2",
-   "czas": "2026-10-21 10:00 CEST",
+   "czas": "2026-10-01 08:10 CEST",
    "ludzie": true,
    "preset": "dzien"
   },
   {
    "id": "ulica-4",
-   "opis": "Ogród Województwa od pd. – z placu zabaw, wzdłuż pergoli przy murze kamienic (linia prowadząca); jesienne korony drzew ogródków jako rama, elewacja pd. wieży z koroną i lamelami w prześwicie koron. Wczesne popołudnie – słońce z pd.-zach. na elewacji pd. (166°) i w ogrodzie.",
+   "opis": "Ogród Województwa od pd. – z placu zabaw, wzdłuż pergoli przy murze kamienic (linia prowadząca) i ścieżki; jesienne korony drzew ogródków jako rama, elewacja pd. wieży z koroną i lamelami w prześwicie koron, nad pomarańczowym drzewem. Południe 21.10 12:45 (az 182°, 28°) – słońce wpada przez prześwit między WS 9 a WS 7 na trawnik i ścieżkę, elewacja pd. (166°) w pełnym świetle.",
    "cam": {
     "e": 96.5,
     "n": -1.5,
@@ -119,22 +119,22 @@
    "shift_x": 0.0,
    "shift_y": 0.2,
    "aspect": "4:5",
-   "czas": "2026-10-21 14:45 CEST",
+   "czas": "2026-10-21 12:45 CEST",
    "ludzie": true,
    "preset": "dzien"
   },
   {
    "id": "zlota-godzina-1",
-   "opis": "ZŁOTA GODZINA 1 – sylweta z osi Mostu Grunwaldzkiego od strony pl. Grunwaldzkiego: kamera na pomoście tuż za portalem pn. (s 123 m od portalu pd., 3 m na lewo od osi), obiektyw w osi mostu przesunięty w lewo (shift_x) – perspektywa jednozbieżna: tory i kratownice zbiegają do portalu pd., wieża z koroną zamyka widok po lewej. Poranek, słońce z lewej z tyłu.",
+   "opis": "ZŁOTA GODZINA 1 – sylweta z osi Mostu Grunwaldzkiego od strony pl. Grunwaldzkiego: kamera na pomoście tuż za portalem pn. (s 121 m od portalu pd., 3 m na lewo od osi), obiektyw w osi mostu przesunięty w lewo (shift_x) – perspektywa jednozbieżna: tory i kratownice zbiegają do portalu pd., wieża z koroną zamyka widok po lewej. Poranek, słońce z lewej z tyłu.",
    "cam": {
-    "e": 211.01,
-    "n": 175.09,
+    "e": 209.08,
+    "n": 174.41,
     "z": 1.65,
     "z_od": "teren"
    },
    "target": {
-    "e": 116.8,
-    "n": 141.54,
+    "e": 114.87,
+    "n": 140.86,
     "z": 10.0
    },
    "lens_mm": 40,
@@ -143,20 +143,21 @@
    "aspect": "3:2",
    "czas": "2026-10-20 08:40 CEST",
    "ludzie": true,
-   "preset": "dzien"
+   "preset": "dzien",
+   "uwaga_render": "Podgląd renderowany przez render/ujecia_poprawki_kontekstu.py (te same argumenty co ujecia_dodatkowe.py): usuwa artefakty context.py widoczne z wody – ścianę 3,8 m w nurcie wzdłuż granicy ramki (e 152,5 / n 148,6) i fałszywą groblę z ortofotomapy pod Mostem Grunwaldzkim. Po poprawce context.zbuduj_dalsze można renderować wprost."
   },
   {
    "id": "zlota-godzina-2",
-   "opis": "ZŁOTA GODZINA 2 – „Brama i Latarnia” znad Odry od pn.-wsch.: z 12 m nad prawym brzegiem (taras / okno przy pl. Grunwaldzkim albo dron), 187 m od wieży; łańcuchy i kratownica mostu biegną pod podstawą wieży, portal pd. z hełmami 6° na prawo od wieży, woda na pierwszym planie. Poranek, światło boczne z lewej.",
+   "opis": "ZŁOTA GODZINA 2 – „Brama i Latarnia” znad Odry od pn.-wsch.: z 12 m nad prawym brzegiem (taras / okno przy pl. Grunwaldzkim albo dron), 180 m od wieży; łańcuchy i kratownica mostu biegną pod podstawą wieży, portal pd. z hełmami 6° na prawo od wieży, woda na pierwszym planie. Poranek, światło boczne z lewej.",
    "cam": {
-    "e": 202.0,
-    "n": 216.0,
+    "e": 198.0,
+    "n": 226.0,
     "z": 12.0,
     "z_od": "teren"
    },
    "target": {
-    "e": 133.8,
-    "n": 142.86,
+    "e": 134.06,
+    "n": 149.12,
     "z": 10.0
    },
    "lens_mm": 55,
@@ -165,7 +166,8 @@
    "aspect": "3:2",
    "czas": "2026-10-20 08:35 CEST",
    "ludzie": false,
-   "preset": "dzien"
+   "preset": "dzien",
+   "uwaga_render": "Podgląd renderowany przez render/ujecia_poprawki_kontekstu.py (te same argumenty co ujecia_dodatkowe.py): usuwa artefakty context.py widoczne z wody – ścianę 3,8 m w nurcie wzdłuż granicy ramki (e 152,5 / n 148,6) i fałszywą groblę z ortofotomapy pod Mostem Grunwaldzkim. Po poprawce context.zbuduj_dalsze można renderować wprost."
   },
   {
    "id": "zlota-godzina-3",
@@ -187,7 +189,8 @@
    "aspect": "4:5",
    "czas": "2026-10-20 08:45 CEST",
    "ludzie": false,
-   "preset": "dzien"
+   "preset": "dzien",
+   "uwaga_render": "Podgląd renderowany przez render/ujecia_poprawki_kontekstu.py (te same argumenty co ujecia_dodatkowe.py): usuwa artefakty context.py widoczne z wody – ścianę 3,8 m w nurcie wzdłuż granicy ramki (e 152,5 / n 148,6) i fałszywą groblę z ortofotomapy pod Mostem Grunwaldzkim. Po poprawce context.zbuduj_dalsze można renderować wprost."
   },
   {
    "id": "zlota-godzina-4",
@@ -199,17 +202,18 @@
     "z_od": "teren"
    },
    "target": {
-    "e": 111.6,
-    "n": 57.9,
+    "e": 165.55,
+    "n": 50.45,
     "z": 15.0
    },
-   "lens_mm": 55,
+   "lens_mm": 50,
    "shift_x": 0.0,
-   "shift_y": 0.15,
+   "shift_y": 0.11,
    "aspect": "2:1",
    "czas": "2026-10-20 08:50 CEST",
    "ludzie": false,
-   "preset": "dzien"
+   "preset": "dzien",
+   "uwaga_render": "Podgląd renderowany przez render/ujecia_poprawki_kontekstu.py (te same argumenty co ujecia_dodatkowe.py): usuwa artefakty context.py widoczne z wody – ścianę 3,8 m w nurcie wzdłuż granicy ramki (e 152,5 / n 148,6) i fałszywą groblę z ortofotomapy pod Mostem Grunwaldzkim. Po poprawce context.zbuduj_dalsze można renderować wprost."
   },
   {
    "id": "zlota-godzina-5",
@@ -221,8 +225,8 @@
     "z_od": "teren"
    },
    "target": {
-    "e": 214.4,
-    "n": 10.0,
+    "e": 216.2,
+    "n": 12.99,
     "z": 10.0
    },
    "lens_mm": 70,
@@ -231,7 +235,8 @@
    "aspect": "3:2",
    "czas": "2026-10-20 08:07 CEST",
    "ludzie": false,
-   "preset": "dzien"
+   "preset": "dzien",
+   "uwaga_render": "Podgląd renderowany przez render/ujecia_poprawki_kontekstu.py (te same argumenty co ujecia_dodatkowe.py): usuwa artefakty context.py widoczne z wody – ścianę 3,8 m w nurcie wzdłuż granicy ramki (e 152,5 / n 148,6) i fałszywą groblę z ortofotomapy pod Mostem Grunwaldzkim. Po poprawce context.zbuduj_dalsze można renderować wprost."
   }
  ]
 }

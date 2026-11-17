@@ -39,7 +39,9 @@
   "wczytanie_blend_s": 0.4,
   "zrodlo_sceny": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/scena2.blend",
   "scena_s": 0.4,
-  "kontrola_s": 0.8
+  "kontrola_s": 0.8,
+  "render_s": 26.6,
+  "postprodukcja_s": 0.5
  },
  "uwagi": [],
  "info": [],
@@ -130,5 +132,7 @@
   }
  },
  "horyzont_y": 0.275,
- "pochylenie_deg": 0.0
+ "pochylenie_deg": 0.0,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/podglad_ulica-2.png",
+ "jpg": "/home/user/aihouse/umwd/docs/60_wizualizacje/img/extra/podglad_ulica-2.jpg"
 }

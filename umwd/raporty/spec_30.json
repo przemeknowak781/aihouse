@@ -1,0 +1,70 @@
+{
+ "nr": 30,
+ "title": "Extra showcase views scouted (golden hour, river, bridge); interior pass 2; 300-dpi export ready",
+ "stages": [
+  [
+   "Organiser materials ✔ (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register ✔ (184 requirements) + checklists",
+   "done"
+  ],
+  [
+   "Site ✔ (zoning, heritage, survey, geotech, trees, neighbours)",
+   "done"
+  ],
+  [
+   "Law ✔ (WT bridge, fire, accessibility, zero-emission)",
+   "done"
+  ],
+  [
+   "Design research ✔ (trends, visuals, boards, façades, costs)",
+   "done"
+  ],
+  [
+   "Programme ✔ (187 offices, PU ≈ 8,600 m²)",
+   "done"
+  ],
+  [
+   "Concept v1.1 ✔ + Sejmik storey S-3 ✔ → merge into v1.2 with stair-A fix and cost check (workflow ►)",
+   "running"
+  ],
+  [
+   "Production ►: drawings → v1.1 (workflow ►); plans re-run after S-2; photomatch tests ✔; extra showcase renders (workflow ►)",
+   "running"
+  ],
+  [
+   "Boards ►: Stage II 8/8 skeletons with true-scale drawings (vis pending); Stage I 2/2; tables F.15/F.14.B ✔ (draft)",
+   "running"
+  ],
+  [
+   "Audit ►: completeness 25/44; structural & functional audit ►; jury later",
+   "running"
+  ]
+ ],
+ "notes": [
+  "Extra showcase renders (your request): ~9 camera stations scouted at low resolution: golden hour from the Oder, Most Grunwaldzki, low corner view of the lantern. The best are going to full-quality renders.",
+  "Vis 6 hall pass 2: axis to the garden, slat ceiling, lapidarium. Still too dark, with schematic figures → another pass.",
+  "300-dpi export ready (11 811 × 8 268 px, ≈ 9 MB). Final renders must be ≥ 4 000–5 800 px wide.",
+  "Texts (Stage II 5 × A3, Stage I + F.14.A): being drafted, then 4 independent checks."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/scout_zg5.jpg",
+   "caption": "Scouting: from the Oder at golden hour (preview)"
+  },
+  {
+   "path": "umwd/raporty/img/scout_zg2.jpg",
+   "caption": "Scouting: from Most Grunwaldzki (preview)"
+  },
+  {
+   "path": "umwd/raporty/img/scout_ul1.jpg",
+   "caption": "Scouting: low corner view of the lantern (preview)"
+  },
+  {
+   "path": "umwd/raporty/img/W6_hol_test_v2.jpg",
+   "caption": "Vis 6 hall — pass 2 (still too dark)"
+  }
+ ]
+}

@@ -2,12 +2,12 @@
  "id": "ulica-1",
  "opis": "Brama Mostowa od strony mostu – z bulwaru u stóp schodów z Mostu Grunwaldzkiego, przy parapecie nabrzeża (oko 1,65 m nad chodnikiem). Łuk R 14 z napisem nad podcieniem, korona za lamelami, oświetlona elewacja wsch. i segment po lewej, Plac Mostowy ze śladem 1934 po prawej. Poranne słońce z pd.-wsch. – terminator na łuku (modelowanie walca).",
  "preset": "dzien",
- "czas": "2026-10-21 09:15 CEST",
+ "czas": "2026-10-01 08:05 CEST",
  "slonce": {
-  "az": 128.64,
-  "el": 14.46,
-  "ekspozycja": -4.3,
-  "czas": "2026-10-21T09:15:00+02:00",
+  "az": 108.48,
+  "el": 10.43,
+  "ekspozycja": -3.9,
+  "czas": "2026-10-01T08:05:00+02:00",
   "udzial_opraw": 1.0,
   "latarnie": 0
  },
@@ -36,14 +36,12 @@
  "ludzie": false,
  "probki": 16,
  "czasy_s": {
-  "kontekst_s": 9.1,
-  "budynek_s": 8.7,
-  "zrodlo_sceny": "budowa od zera",
-  "zapis_blend": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/scena2.blend",
-  "scena_s": 18.2,
-  "kontrola_s": 0.6,
-  "render_s": 32.2,
-  "postprodukcja_s": 0.5
+  "wczytanie_blend_s": 0.4,
+  "zrodlo_sceny": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/scena2.blend",
+  "scena_s": 0.4,
+  "kontrola_s": 0.8,
+  "render_s": 30.4,
+  "postprodukcja_s": 0.3
  },
  "uwagi": [],
  "info": [],

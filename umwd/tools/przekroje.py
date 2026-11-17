@@ -23,7 +23,7 @@ import elewacje as EL
 K = json.loads((ROOT / "model" / "koncepcja.json").read_text(encoding="utf-8"))
 BM = json.loads((ROOT / "model" / "budynek.json").read_text(encoding="utf-8"))
 S = load_site()
-Z0 = 119.30
+Z0 = float(K["meta"]["zero"]["wzgl_0_00_m_npm"])          # ±0,00 = 119,30 m n.p.m.
 import os
 SCALE = int(os.environ.get('UMWD_SCALE', '200'))
 k = 1000.0 / SCALE
@@ -57,6 +57,12 @@ Z_ATT_SPD = float(DS_["attyka"]["sciana_pd_npm"]) - Z0                          
 BAL_H, BAL_COF = 1.10, 1.5                                 # balustrada szklana 1,10 m cofnięta 1,5 m od lica pd. (140,20)
 PD = KOND["-2"]["plyta_denna"]                             # płyta denna: wierzch −7,30, spód −8,40 (wieża 1,10 / poza 0,90)
 POS = K["siatka"]["posadowienie"]
+WODA = POS["woda"]                                         # ZWG średnie / maks. / poziom obliczeniowy (m n.p.m.)
+# strop glin zwałowych QpB: 101,8–103,4 m n.p.m. (rozdz. 5 „Posadowienie”, geotechnika.md) – linia na średniej 102,6
+QPB_LO, QPB_HI = 101.8, 103.4
+QPB = (QPB_LO + QPB_HI) / 2
+Z_LO_DEF = round(QPB_LO - Z0 - 0.1, 2)                    # −17,60: strop glin w ramce; ściany szczelinowe (−19,55) i pale z linią urwania
+Z_HI_DEF = round(float(B["W"]["dach"]["attyka"]["wzgl"]) + 0.8, 2)   # +38,00 (attyka +37,20)
 
 
 def _num(txt, pat, dflt):
@@ -151,8 +157,12 @@ def tree(svg, P, u, zg, h=11.0, r=3.2, op=0.22):
     svg.circle((x, y - (h - r) * k), r * k, fill="#9db28a", stroke="#7d8f6a", sw=0.12, extra=f'fill-opacity="{op}"')
 
 
-def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=(), notes=(), u_rng=None, z_lo=-13.0, z_hi=40.0, places=(), mode="full", pad=(40, 70, 24, 16)):
-    """z_lo default −13: diaphragm walls and piles are cut by the frame (break line)."""
+def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=(), notes=(), u_rng=None, z_lo=None, z_hi=None, places=(), mode="full", pad=(40, 70, 20, 13)):
+    """z_lo domyślnie tuż pod stropem glin QpB (101,8 m n.p.m. → −17,60), z_hi 0,80 m nad attyką wieży; ściany szczelinowe
+    (stopa −19,55) i pale przecina rama rysunku (linia urwania). Wysokość 1:200 ≈ 311 mm – A-A + B-B mieszczą się na P6."""
+    z_lo = Z_LO_DEF if z_lo is None else z_lo
+    z_hi = Z_HI_DEF if z_hi is None else z_hi
+    side_labels = []        # podpisy na prawym marginesie – rysowane po białych pasach marginesów
     ex, ey = p1[0] - p0[0], p1[1] - p0[1]
     Ln = math.hypot(ex, ey)
     r = (ex / Ln, ey / Ln)
@@ -178,9 +188,12 @@ def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=()
     svg.poly(soil, fill="#f4f1ec", stroke="none")
     hp = svg.hatch("soil", spacing=2.2, angle=45, stroke="#ddd6cb", sw=0.06)
     svg.poly(soil, fill=hp, stroke="none")
-    # geology: top of glacial till QpB ≈ 102,6 m n.p.m. (101,8–103,4)
-    svg.line(P(u0, 102.6 - Z0), P(u1, 102.6 - Z0), stroke="#b9ab97", sw=0.15, dash="0.6,0.8")
-    svg.text((P(u1, 102.6 - Z0)[0] + 2, P(u1, 102.6 - Z0)[1] + 0.7), "strop glin zwałowych QpB ≈ 102,6", size=1.7, fill="#7d7266")
+    # geologia: strop glin zwałowych QpB 101,8–103,4 (pas) i linia średnia 102,6 – tylko gdy mieści się w ramce
+    if QPB - Z0 >= z_lo:
+        zb_lo, zb_hi = max(QPB_LO - Z0, z_lo), QPB_HI - Z0
+        svg.poly([P(u0, zb_lo), P(u1, zb_lo), P(u1, zb_hi), P(u0, zb_hi)], fill="#e6dccb", stroke="none", extra='fill-opacity="0.55"')
+        svg.line(P(u0, QPB - Z0), P(u1, QPB - Z0), stroke="#9c8c74", sw=0.18, dash="0.6,0.8")
+        side_labels.append((QPB - Z0, f"strop glin zwałowych QpB {QPB_LO:.1f}–{QPB_HI:.1f} (≈ {QPB:.1f})".replace(".", ","), "#7d7266"))
 
     # ---- elevation beyond the plane (our façades + neighbours)
     faces = EL.tower_faces() + [EL.wing_west()] + EL.wing_east() + EL.segment_faces() + EL.neighbour_faces(set(beyond_names))
@@ -364,11 +377,12 @@ def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=()
         while x < b - 1.5:
             svg.poly([P(x, z_pal), P(x + D_PAL, z_pal), P(x + D_PAL, z_pal_bot), P(x, z_pal_bot)], fill="#ffffff", stroke="#3a3632", sw=0.15, extra='stroke-dasharray="0.8,0.5"')
             x += 4.05
-    # groundwater
-    for zabs, lab, col in ((117.0, "poziom obliczeniowy wód 117,00", "#3f74a0"), (116.45, "ZWG maks. 116,45", "#5b8db5"), (115.5, "ZWG średnie 115,50", "#8fb3cf")):
+    # wody gruntowe (siatka.posadowienie.woda)
+    for zabs, lab, col in ((float(WODA["poziom_obliczeniowy_npm"]), "poziom obliczeniowy wód", "#3f74a0"),
+                           (float(WODA["ZWG_max_npm"]), "ZWG maks.", "#5b8db5"), (float(WODA["ZWG_srednie_npm"]), "ZWG średnie", "#8fb3cf")):
         y = P(0, zabs - Z0)[1]
         svg.line((P(u0, 0)[0], y), (P(u1, 0)[0], y), stroke=col, sw=0.22, dash="2.4,1.0")
-        svg.text((P(u1, 0)[0] + 2, y + 0.7), lab, size=1.7, fill=col)
+        side_labels.append((zabs - Z0, f"{lab} {zabs:.2f}".replace(".", ",").replace("maks,", "maks.") + f" ({fz(zabs - Z0)})", col))
     # neighbour cuts (light poché + floors)
     for nb in neighbours:
         g = Polygon(nb["pts"]).buffer(0)
@@ -395,6 +409,22 @@ def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=()
         svg.text(P(u, z), short, size=1.55, anchor="middle", fill="#3a3632")
     svg.poly([(0, 0), (pad_l - 1, 0), (pad_l - 1, H), (0, H)], fill="#ffffff", stroke="none")
     svg.poly([(W - pad_r + 1, 0), (W, 0), (W, H), (W - pad_r + 1, H)], fill="#ffffff", stroke="none")
+    # podpisy ZWG i stropu glin na prawym marginesie (po białym pasie) – rozsunięte w małej skali, z odnośnikiem
+    xr, y_prev = P(u1, 0)[0], -1e9
+    for z, lab, col in sorted(side_labels, key=lambda q: -q[0]):
+        y = P(0, z)[1]
+        yt = max(y + 0.6, y_prev + 2.1)
+        if yt - (y + 0.6) > 0.3:
+            svg.line((xr, y), (xr + 1.4, yt - 0.6), stroke=col, sw=0.12)
+        svg.line((xr, y), (xr + 1.4, y if yt - (y + 0.6) <= 0.3 else yt - 0.6), stroke=col, sw=0.12)
+        svg.text((xr + 2, yt), lab, size=1.7, fill=col)
+        y_prev = yt
+    # stopa ścian szczelinowych poniżej ramki – opis przy prawej ścianie
+    dw = intervals(UG_K, line, U)
+    if dw and Z_DW_TOP - H_DW < z_lo:
+        xw = dw[-1][1]
+        svg.text((P(xw, 0)[0] + 1.5, P(0, z_lo)[1] - 1.0), f"ściany szczelinowe do {fz(Z_DW_TOP - H_DW)} ({Z_DW_TOP - H_DW + Z0:.2f})".replace(".", ","),
+                 size=1.5, fill="#3a3632")
     for (pu, pz, lab) in places:
         svg.text(P(pu, pz), lab, size=2.0, anchor="middle", fill="#4d4842", weight=600)
     # level marks (left)

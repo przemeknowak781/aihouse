@@ -1,0 +1,140 @@
+{
+ "id": "ulica-3",
+ "opis": "Wybrzeże i wieża nad rzeką – z zewnętrznej krawędzi pomostu Mostu Grunwaldzkiego, 25 m od pylonu pd. (poza płaszczyzną kratownicy; oko 1,65 m nad chodnikiem mostu = 4,9 m nad ±0). Odra i barki w pierwszym planie, nabrzeże z WS 6, WS 5 i segmentem zbiegające się w lewo, wieża z łukiem i koroną na prawej linii trójpodziału. Poranne słońce z pd.-wsch. (boczne).",
+ "preset": "dzien",
+ "czas": "2026-10-01 08:10 CEST",
+ "slonce": {
+  "az": 109.51,
+  "el": 11.17,
+  "ekspozycja": -3.9,
+  "czas": "2026-10-01T08:10:00+02:00",
+  "udzial_opraw": 1.0,
+  "latarnie": 0
+ },
+ "kamera": {
+  "loc": [
+   120.91,
+   135.26,
+   4.93
+  ],
+  "cel": [
+   106.36,
+   66.79,
+   10.05
+  ],
+  "z_wzgl_kamery": 4.88,
+  "lens_mm": 28.0,
+  "shift_x": 0.0,
+  "shift_y": 0.13,
+  "poziom": true,
+  "rozdzielczosc": [
+   480,
+   320
+  ],
+  "sensor_fit": "AUTO (36 mm na dłuższym boku)"
+ },
+ "ludzie": false,
+ "probki": 16,
+ "czasy_s": {
+  "wczytanie_blend_s": 0.4,
+  "zrodlo_sceny": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/scena2.blend",
+  "scena_s": 0.4,
+  "kontrola_s": 0.7,
+  "render_s": 14.9,
+  "postprodukcja_s": 0.3
+ },
+ "uwagi": [],
+ "info": [
+  "oko 8.68 m nad podłożem (woda) – typowo 1,5–1,7 m"
+ ],
+ "promienie": [
+  "oś: wieza_elewacje 67.6 m",
+  "L-dół: barki 59.7 m",
+  "P-dół: krzew_62_liscie 39.2 m",
+  "L-góra: niebo",
+  "P-góra: wieza_elewacje 85.3 m",
+  "dół: nabrzeze 37.3 m"
+ ],
+ "udzialy_kadru": {
+  "niebo": 0.375,
+  "budynek": 0.299,
+  "woda": 0.18,
+  "drzewa": 0.081,
+  "teren": 0.031,
+  "dalsze_otoczenie": 0.013,
+  "ortofoto_plaskie": 0.008,
+  "zabudowa_kontekstu": 0.008,
+  "zagospodarowanie": 0.005
+ },
+ "zaslona_pierwszego_planu": 0.0,
+ "najblizsza_przeszkoda": {
+  "obiekt": "most_pomost_lancuchy",
+  "odl_m": 0.71
+ },
+ "oko_nad_podlozem_m": 8.68,
+ "podloze": "woda",
+ "budynek_w_kadrze": {
+  "wieża": {
+   "x0": 0.405,
+   "x1": 0.898,
+   "y0": 0.214,
+   "y1": 0.907,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  },
+  "skrzydło": {
+   "x0": 0.666,
+   "x1": 0.932,
+   "y0": 0.229,
+   "y1": 0.552,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  },
+  "segment": {
+   "x0": 0.376,
+   "x1": 0.556,
+   "y0": 0.238,
+   "y1": 0.525,
+   "rzut_w_kadrze": true,
+   "uciete": []
+  }
+ },
+ "punkty_kluczowe": {
+  "Brama Mostowa – napis (+5,2)": {
+   "w_kadrze": true,
+   "x": 0.553,
+   "y": 0.311,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 63.2
+  },
+  "korona – lamele łuku (+31,7)": {
+   "w_kadrze": true,
+   "x": 0.553,
+   "y": 0.801,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 68.7
+  },
+  "attyka wieży (+37,2)": {
+   "w_kadrze": true,
+   "x": 0.553,
+   "y": 0.903,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 71.0
+  },
+  "cel kamery": {
+   "w_kadrze": true,
+   "x": 0.5,
+   "y": 0.39,
+   "widoczny": false,
+   "zaslania": "wieza_elewacje",
+   "odl_m": 70.2
+  }
+ },
+ "horyzont_y": 0.305,
+ "pochylenie_deg": 0.0,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/podglad_ulica-3.png",
+ "jpg": "/home/user/aihouse/umwd/docs/60_wizualizacje/img/extra/podglad_ulica-3.jpg"
+}

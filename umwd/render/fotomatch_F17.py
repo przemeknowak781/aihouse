@@ -47,6 +47,9 @@ KAMERY = UMWD / 'model' / 'kamery_F17.json'
 OUT_IMG = UMWD / 'docs' / '60_wizualizacje' / 'img'
 BUILD = UMWD / 'build' / 'fotomatch'
 WYNIK = {'A': 'W1_F17A_test.jpg', 'B': 'W2_F17B_test.jpg'}
+WYNIK_FINAL = {'A': 'W1_F17A_final.jpg', 'B': 'W2_F17B_final.jpg'}
+# proporcje pól na planszach (tools/plansze_etap2.py): W1 578 × 340 mm, W2 366 × 206 mm – kadr przycinany do pola
+PROPORCJE_POLA = {'A': 578 / 340, 'B': 366 / 206}
 
 # dopasowanie tonalne CG do zdjęcia (zdjęcia: Dehaze +24/+29, Saturation +17/+24, Vibrance +7/+9, Shadows +50)
 GRADING = {
@@ -200,6 +203,8 @@ def main():
     ap.add_argument('--skala', type=float, default=1 / 3)
     ap.add_argument('--probki', type=int, default=64)
     ap.add_argument('--bez-postprodukcji', action='store_true')
+    ap.add_argument('--final', action='store_true', help='wersja finalna: pełna rozdzielczość zdjęcia, *_final.jpg')
+    ap.add_argument('--bez-kadrowania', action='store_true', help='bez przycięcia do proporcji pola planszy')
     a = ap.parse_args()
     t0 = time.time()
     K = json.load(open(KAMERY, encoding='utf-8'))
@@ -227,6 +232,8 @@ def main():
         o.visible_camera = False
         o.visible_glossy = False
         o.visible_shadow = False
+    if a.final:
+        a.skala = 1.0                                  # pełna rozdzielczość pliku zdjęcia
     cam = ustaw_kamere(sc, kam, a.skala)
     bpy.context.view_layer.update()
     sw = budynek3d.swiatlo_dzienne(sc, kam['exif']['czas'], chmury=0)
@@ -363,25 +370,39 @@ def main():
     img = Image.fromarray((np.clip(wyn2, 0, 1) * 255 + 0.5).astype(np.uint8))
     surowy = BUILD / (pre + 'kompozycja.png')
     img.save(surowy)
-    if not a.bez_postprodukcji:
-        import postprodukcja
-        img = postprodukcja.process(img, postprodukcja.PRESETS['lot'])
-    out = OUT_IMG / WYNIK[a.zdjecie]
-    q = 92
-    while True:
-        img.save(out, quality=q, optimize=True)
-        if out.stat().st_size <= 1_500_000 or q < 60:
-            break
-        q -= 5
     # wycinek kontrolny 1:1 (obszar budynku)
     xs = int(x0 * Ww), int(x1 * Ww)
     ys = int((1 - y1) * Hh), int((1 - y0) * Hh)
     img.crop((xs[0], ys[0], xs[1], ys[1])).save(BUILD / (pre + 'wycinek.jpg'), quality=90)
+    # kadrowanie do proporcji pola planszy (środek na budynku, w granicach zdjęcia)
+    kadr = [0, 0, Ww, Hh]
+    if not a.bez_kadrowania:
+        pr = PROPORCJE_POLA[a.zdjecie]
+        cx, cy = (xs[0] + xs[1]) / 2, (ys[0] + ys[1]) / 2
+        if Ww / Hh > pr:
+            w2 = int(round(Hh * pr))
+            l0 = int(min(max(cx - w2 / 2, 0), Ww - w2))
+            kadr = [l0, 0, l0 + w2, Hh]
+        else:
+            h2 = int(round(Ww / pr))
+            t0 = int(min(max(cy - h2 / 2, 0), Hh - h2))
+            kadr = [0, t0, Ww, t0 + h2]
+        img = img.crop(tuple(kadr))
+    if not a.bez_postprodukcji:
+        import postprodukcja
+        img = postprodukcja.process(img, postprodukcja.PRESETS['lot'])
+    out = OUT_IMG / (WYNIK_FINAL if a.final else WYNIK)[a.zdjecie]
+    q = 93 if a.final else 92
+    while True:
+        img.save(out, quality=q, optimize=True)
+        if a.final or out.stat().st_size <= 1_500_000 or q < 60:
+            break
+        q -= 5
     raport = dict(zdjecie=a.zdjecie, rozdzielczosc=[Ww, Hh], skala=a.skala, probki=a.probki, slonce=sw,
                   ramka=[x0, x1, y0, y1], ekspozycja_gain=float(gain), balans_bieli=[float(x) for x in wb],
                   czas_budowy_s=round(t_bud, 1),
                   czas_renderu_s=round(t_r, 1), czas_masek_s=round(t_m, 1), wynik=str(out),
-                  udzial_zaslon_drzew=float((zasl * alfa).sum() / max(alfa.sum(), 1)))
+                  udzial_zaslon_drzew=float((zasl * alfa).sum() / max(alfa.sum(), 1)), kadr_px=kadr)
     (BUILD / (pre + 'raport.json')).write_text(json.dumps(raport, ensure_ascii=False, indent=1), encoding='utf-8')
     print('[foto]', json.dumps(raport, ensure_ascii=False))
 
