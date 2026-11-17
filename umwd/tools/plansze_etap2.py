@@ -27,7 +27,7 @@ BOT = H - M
 
 
 def svg_size(name):
-    p = ROOT / "build" / "rysunki" / name
+    p = (ROOT / "build" / name[3:]) if name.startswith("../") else (ROOT / "build" / "rysunki" / name)
     if not p.exists():
         return None
     m = re.search(r'width="([\d.]+)mm" height="([\d.]+)mm"', p.read_text(encoding="utf-8")[:600])
@@ -39,7 +39,8 @@ def drawing(name, s=1.0):
     if not sz:
         return None, 0, 0
     w, h = sz
-    return f'<img src="{R}{name}" style="width:{w * s:.2f}mm;height:{h * s:.2f}mm;display:block">', w * s, h * s
+    src = name if name.startswith("../") else R + name
+    return f'<img src="{src}" style="width:{w * s:.2f}mm;height:{h * s:.2f}mm;display:block">', w * s, h * s
 
 
 def vis(*cands):
@@ -100,23 +101,57 @@ def p1():
 
 def p2():
     b = Board(2, 8, TITLE, MOTTO).header()
-    b.add(M, TOP, 578, 420, vis("W3_wejscie_final.jpg", "budynek_test_W3.jpg"))
-    b.add(M, TOP + 422, 578, 10, label("3", "Brama Mostowa – główna strefa wejściowa", "wizualizacja nr 3 z poziomu człowieka"))
+    b.add(M, TOP, 578, 400, vis("W3_wejscie_final.jpg", "budynek_test_W3.jpg"))
+    b.add(M, TOP + 402, 578, 10, label("3", "Brama Mostowa – główna strefa wejściowa", "wizualizacja nr 3 z poziomu człowieka"))
+    b.add(M, TOP + 420, 578, 196, vis("W6_hol_final.jpg", "W6_hol_test.jpg"))
+    b.add(M, TOP + 618, 578, 10, label("6", "Hala Obywatelska – hol główny", "wizualizacja nr 6"))
     b.add(612, TOP, 366, 206, vis("W2_F17B_final.jpg", "photomatch_F17B_nakladka.jpg"))
     b.add(612, TOP + 208, 366, 10, label("2", "Widok z lotu ptaka od zachodu", "wizualizacja nr 2 na zdjęciu F.17.B"))
     sz = svg_size("aksonometria_funkcjonalna.svg")
     s = min(366 / sz[0], (BOT - TOP - 226) / sz[1])
     put(b, "aksonometria_funkcjonalna.svg", 612 + (366 - sz[0] * s) / 2, BOT, s, anchor="bl")
-    b.add(M, TOP + 440, 578, 170, '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;column-gap:8mm" class="small">'
-          '<div><h3>Strefa publiczna</h3><p>Parter otwarty na plac i ogród: Hala Obywatelska z informacją i kancelarią, centrum konferencyjne 200 + 80 os., bistro z tarasem na placu; galeria publiczności Sejmiku osiągana dźwigami publicznymi z Wejścia Obywatelskiego.</p></div>'
-          '<div><h3>Urząd</h3><p>Kondygnacje 1–5 w powtarzalnym module 1,35 m: pokoje 24 m² i 32 m² wzdłuż elewacji, departamenty niedzielone, sale narad na każdej kondygnacji, rezerwa elastyczności bez zmian konstrukcji.</p></div>'
-          '<div><h3>Sejmik</h3><p>Kondygnacja 6 – Prezydium i Kancelaria Sejmiku; korona S – sala obrad, komisje, kluby i hol reprezentacyjny na jednej kondygnacji w strefie A, z oddzielnym dojściem radnych i publiczności.</p></div></div>')
     return b
 
 
-def p_plans(n, title, ids):
-    b = Board(n, 8, TITLE, MOTTO).header()
-    b.add(M, TOP, W - 2 * M, BOT - TOP, placeholder(f"{title}<br>rzuty 1:200 z numerami, nazwami i powierzchniami pomieszczeń – generuje agent rzutów ({', '.join(ids)})"))
+PL = "../rzuty/plansza/"
+
+
+def p3():
+    b = Board(3, 8, TITLE, MOTTO).header()
+    w, h = put(b, PL + "rzut_P_1-200_tight.svg", M, TOP)
+    put(b, PL + "legenda_P3_pas.svg", M, BOT, anchor="bl")
+    x2 = M + w + 12
+    w1, h1 = put(b, PL + "rzut_m1_1-200_tight.svg", x2, TOP)
+    sz = svg_size(PL + "rzut_m2_1-200_tight.svg")
+    put(b, PL + "rzut_m2_1-200_tight.svg", x2 + w1 - sz[0], TOP + h1 + 6)
+    b.add(x2 + w1 + 10, TOP, W - M - (x2 + w1 + 10), 300, label("", "Parter z otoczeniem · −1 · −2", "rzuty 1:200; numer i powierzchnia netto każdego pomieszczenia (PN-ISO 9836), nazwy bloków; nawierzchnie, mała architektura, oświetlenie; wejścia w poziomie chodnika, komfortka przy wejściu głównym, ścieżki dotykowe i tyflomapa w hali"))
+    return b
+
+
+def p4():
+    b = Board(4, 8, TITLE, MOTTO).header()
+    sz = svg_size(PL + "rzut_1_1-200_tight.svg")
+    for i, lid in enumerate(("1", "2", "3", "4")):
+        put(b, PL + f"rzut_{lid}_1-200_tight.svg", M + (i % 2) * (sz[0] + 8), TOP + (i // 2) * (sz[1] + 6))
+    xl = M + 2 * sz[0] + 16
+    put(b, PL + "legenda_P4_waska.svg", xl, TOP)
+    return b
+
+
+def p5():
+    b = Board(5, 8, TITLE, MOTTO).header()
+    sz = svg_size(PL + "rzut_5_1-200_tight.svg")
+    for i, lid in enumerate(("5", "6", "S", "S_antresola")):
+        put(b, PL + f"rzut_{lid}_1-200_tight.svg", M + i * (sz[0] + 6), TOP)
+    y2 = TOP + sz[1] + 8
+    wr, hr = put(b, PL + "rzut_dach_1-200_tight.svg", M, y2)
+    wl, hl = put(b, PL + "legenda_P5.svg", M + wr + 10, y2)
+    xr = M + wr + 10 + wl + 10
+    b.add(xr, y2, W - M - xr, hl - 12, vis("W7_hol_sejmiku_final.jpg"))
+    b.add(xr, y2 + hl - 10, W - M - xr, 10, label("7", "Hol sali Sejmiku", "wizualizacja nr 7"))
+    y3 = y2 + hl + 6
+    b.add(M + wr + 10, y3, W - M - (M + wr + 10), BOT - y3 - 12, vis("W8_sala_sejmiku_final.jpg"))
+    b.add(M + wr + 10, BOT - 10, W - M - (M + wr + 10), 10, label("8", "Sala obrad Sejmiku z galerią publiczności", "wizualizacja nr 8"))
     return b
 
 
@@ -141,14 +176,12 @@ def p7():
 def p8():
     b = Board(8, 8, TITLE, MOTTO).header()
     w, h = put(b, "przekroj_elewacyjny_1-50_korona.svg", M, TOP, 1.0)
-    put(b, "schemat_eko_1-250.svg", M, BOT, 1.0, anchor="bl")
-    xr = M + 498
-    b.add(xr, TOP, W - M - xr, 150, vis("W4_WS5_final.jpg", "budynek_test_W4.jpg"))
-    b.add(xr, TOP + 152, W - M - xr, 10, label("4", "Relacja z kamienicą Wybrzeże J. Słowackiego 5", "wizualizacja nr 4"))
-    b.add(xr, TOP + 168, W - M - xr, 150, vis("W5_Maz19_final.jpg", "budynek_test_W5.jpg"))
-    b.add(xr, TOP + 320, W - M - xr, 10, label("5", "Relacja z kamienicą Mazowiecka 19", "wizualizacja nr 5"))
-    b.add(xr + 40, TOP + 340, W - M - xr - 40, 230, vis("W6_hol_final.jpg"))
-    b.add(xr + 40, TOP + 572, W - M - xr - 40, 10, label("6", "Hala Obywatelska – hol główny", "wizualizacja nr 6"))
+    b.add(M, TOP + h + 6, w, BOT - (TOP + h + 6) - 12, vis("W4_WS5_final.jpg", "budynek_test_W4.jpg"))
+    b.add(M, BOT - 10, w, 10, label("4", "Relacja z kamienicą Wybrzeże J. Słowackiego 5", "wizualizacja nr 4"))
+    xr = M + w + 12
+    we, he = put(b, "schemat_eko_1-300.svg", xr, TOP, min(1.0, (W - M - xr) / svg_size("schemat_eko_1-300.svg")[0]))
+    b.add(xr, TOP + he + 6, W - M - xr, BOT - (TOP + he + 6) - 12, vis("W5_Maz19_final.jpg", "budynek_test_W5.jpg"))
+    b.add(xr, BOT - 10, W - M - xr, 10, label("5", "Relacja z kamienicą Mazowiecka 19", "wizualizacja nr 5"))
     return b
 
 
@@ -163,8 +196,6 @@ def render(b, name):
 
 if __name__ == "__main__":
     which = sys.argv[1:] or ["1", "2", "3", "4", "5", "6", "7", "8"]
-    boards = {"1": p1, "2": p2, "3": lambda: p_plans(3, "PARTER Z OTOCZENIEM · −1 · −2", ["P", "-1", "-2"]),
-              "4": lambda: p_plans(4, "KONDYGNACJE 1–4", ["1", "2", "3", "4"]),
-              "5": lambda: p_plans(5, "KONDYGNACJE 5, 6, S, ANTRESOLA, DACH", ["5", "6", "S", "ANT", "D"]), "6": p6, "7": p7, "8": p8}
+    boards = {"1": p1, "2": p2, "3": p3, "4": p4, "5": p5, "6": p6, "7": p7, "8": p8}
     for k in which:
         print(render(boards[k](), f"etap2_P{k}"))

@@ -12,7 +12,7 @@
 | G-K-1 | KRYT. | (w toku) | | | ⏳ |
 | G-K-2 | KRYT. | (w toku) | | | ⏳ |
 | G-I-1 | IST. | (w toku) | | | ⏳ |
-| G-I-2 | IST. | (w toku) | | | ⏳ |
+| G-I-2 | IST. | Bilans wg **numeracji i położeń M.06** (położenia z wektorów PDF załącznika, georeferencja do D701/D702, ±0,5–1 m). Pas −1 pod dziedzińcem **7,0 → 5,0 m** (wierzchołki (72,001; 34,975), (96,193; 40,872)). Nr 58 (Z1): 5,45 m od lica −1 ≥ 4,2 + 1,0 ✔ – zachowany. **Nr 60 (Z2) – usuwany (kolizja)**, nasadzenie zastępcze; lica skrzydła nie przesuwamy (traktu 15,0 m nie da się zwęzić bez utraty pokoi 24 m²). Nr 78 (Z1) – zachowany z ochroną (2,99 m; wejście w strefę 0,11 m). **Usuwane kolizyjnie 8:** 1, 2 (obszar A), 60, 61 (1,3 m od ściany szczelinowej), 67 (Z1 = D897), 79, 80, 81 (Z2, w obrysie skrzydła = D867/D868/D882); **przesadzana 1:** 72 (P); **sanitarnie (U, martwe/zamierające, decyzja arborysty – niezależnie od inwestycji) 10:** 5, 13, 18, 19, 20, 38, 53, 57, 59, 62; **zachowane w miejscu 25** (w tym wszystkie Z1 poza 67 i wszystkie Z2 poza 60, 79–81). Zachowane 36 z 44 (82 %) bez usunięć sanitarnych / 26 z 44 (59 %) po usunięciach sanitarnych. **Nowe nasadzenia 26** (4 lipy – skwer, 6 – szpaler Wybrzeża, 2 – pas 4,6 m, 14 – ogród na gruncie rodzimym, poza stropem garażu) | `_rewizja_drzewa.py` (wynik: `_rewizja_drzewa_wynik.json`) | plan zagospodarowania 1:500, rozdz. 9, 10, JSON `zagospodarowanie` | ✅ |
 | G-I-3 | IST. | (w toku) | | | ⏳ |
 | G-I-4 | IST. | (w toku) | | | ⏳ |
 | G-I-5 | IST. | (w toku) | | | ⏳ |
