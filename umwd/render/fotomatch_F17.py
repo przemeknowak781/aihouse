@@ -150,9 +150,9 @@ KALIBRACJA = {
               # lico w słońcu: elewacja pd. wieży nad skrzydłem → jasność jasnej elewacji w słońcu na zdjęciu
               # (Urząd Wojewódzki ≈ 217/209/196, luma ≈ 0,82; ceramika/granit nieco jaśniejsze)
               cg_slonce=((74.61, 40.76), (113.47, 50.23), (0.12, 0.45), (22.0, 34.0)), cel_slonce=0.84),
-    # F.17.A: front Wybrzeża Słowackiego 5 (cień, elewacja wsch.) ↔ elewacja wsch. segmentu i wieży
+    # F.17.A: front Wybrzeża Słowackiego 5 (cień, elewacja wsch.) ↔ elewacja wsch. segmentu (ten sam porządek)
     'A': dict(ref=((118.55, 11.5), (118.25, 28.5), (0.2, 0.8), (4.0, 15.0)),
-              cg=((115.98, 39.93), (109.75, 65.48), (0.10, 0.70), (6.0, 18.0)), wspolczynnik=1.00),
+              cg=((115.98, 39.93), (113.48, 50.18), (0.15, 0.85), (6.0, 18.0)), wspolczynnik=1.00),
 }
 
 
@@ -334,7 +334,8 @@ def main():
         r_ref = f_l[m_ref].mean(0)
         r_cg = rgb[m_cg].mean(0)
         wb = ((r_ref / lum(r_ref[None])[0]) / (r_cg / lum(r_cg[None])[0])) ** 0.6
-        wb = (wb / lum(wb[None])[0]).astype(np.float32)
+        wb = (wb / lum(wb[None])[0])
+        wb = np.clip(wb, 0.92, 1.08).astype(np.float32)          # tylko lekka korekta barwy
         print('[foto] kalibracja: sąsiad sRGB %.3f → cel %.3f; gain %.4f, k %.3f; WB %s' % (ref_l, cel, gain, k_kompr,
                                                                                     np.round(wb, 3)))
     elif Lc_ok := (lum(rgb)[sel].size > 200):
