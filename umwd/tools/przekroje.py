@@ -83,7 +83,7 @@ def tree(svg, P, u, zg, h=11.0, r=3.2, op=0.22):
     svg.circle((x, y - (h - r) * k), r * k, fill="#9db28a", stroke="#7d8f6a", sw=0.12, extra=f'fill-opacity="{op}"')
 
 
-def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=(), notes=(), u_rng=None, z_lo=-24.0, z_hi=40.0, places=()):
+def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=(), notes=(), u_rng=None, z_lo=-24.0, z_hi=40.0, places=(), mode="full", pad=(40, 70, 24, 16)):
     ex, ey = p1[0] - p0[0], p1[1] - p0[1]
     Ln = math.hypot(ex, ey)
     r = (ex / Ln, ey / Ln)
@@ -93,7 +93,7 @@ def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=()
     cut = p0[0] * d[0] + p0[1] * d[1]
     line = LineString([p0, p1])
     u0, u1 = (u_rng if u_rng else (0.0, Ln))
-    pad_l, pad_r, pad_t, pad_b = 40, 70, 24, 16
+    pad_l, pad_r, pad_t, pad_b = pad
     W = pad_l + (u1 - u0) * k + pad_r
     H = pad_t + (z_hi - z_lo) * k + pad_b
     svg = Svg(W, H)
@@ -118,7 +118,7 @@ def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=()
     for f in faces:   # mute the beyond-view: everything is drawn, then washed with a white veil
         pass
     draw_faces(svg, faces, view_az, P, cut=cut + 0.3)
-    svg.poly([P(u0, z_hi), P(u1, z_hi), P(u1, -0.5), P(u0, -0.5)], fill="#ffffff", stroke="none", extra='fill-opacity="0.45"')
+    svg.poly([P(u0, z_hi), P(u1, z_hi), P(u1, -0.5), P(u0, -0.5)], fill="#ffffff", stroke="none", extra='fill-opacity="%s"' % ("0.45" if mode == "full" else "0.75"))
     # trees beyond (garden), light
     for t in S["zielen"]["drzewa"]:
         if t["nr"] in set(K["zagospodarowanie"]["drzewa_usuniete"]):
@@ -285,7 +285,7 @@ def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=()
     for (u, z) in [(gp[1][0] + 4, gp[1][1])]:
         person(svg, P, u, z)
     # room labels
-    for (u, z, txt, w, num) in room_labels:
+    for (u, z, txt, w, num) in (room_labels if mode == "full" else []):
         short = txt.split("(")[0].strip()
         if len(short) > 26:
             short = short[:24].rstrip() + "…"
@@ -312,8 +312,10 @@ def section(name, title, sub, p0, p1, ground_pts, neighbours=(), beyond_names=()
     for i in range(5):
         svg.poly([(sx + i * 2 * k, sy), (sx + (i + 1) * 2 * k, sy), (sx + (i + 1) * 2 * k, sy + 1.2), (sx + i * 2 * k, sy + 1.2)], fill=INK if i % 2 == 0 else "#fff", stroke=INK, sw=0.12)
     svg.text((sx + 10 * k + 6, sy + 1.2), "0–10 m · 1:200", size=2.0, weight=600)
-    out = ROOT / "build" / "rysunki" / f"przekroj_{name}_1-200.svg"
-    out.write_text(svg.render(), encoding="utf-8")
+    svg.P, svg.U, svg.uv_range = P, U, (u0, u1)
+    if mode == "full":
+        out = ROOT / "build" / "rysunki" / f"przekroj_{name}_1-200.svg"
+        out.write_text(svg.render(), encoding="utf-8")
     return svg
 
 
