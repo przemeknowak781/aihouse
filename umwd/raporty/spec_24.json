@@ -1,0 +1,71 @@
+{
+ "nr": 24,
+ "title": "Idea diagrams, eco and accessibility schemes, first true-scale board drafts — revision relaunched after a container restart",
+ "stages": [
+  [
+   "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register (184 requirements, 14 conflicts) + checklists ✔ verified",
+   "done"
+  ],
+  [
+   "Site ✔: zoning, heritage, 1934 overlay, DWG survey, geotech, dendrology (44 trees, keep-classes), neighbours (window positions & sills)",
+   "done"
+  ],
+  [
+   "Law ✔ (verified): WT 2002 expired 20.09.2026 → art. 102a Building Law bridge; fire ✔; accessibility ✔; zero-emission ✔",
+   "done"
+  ],
+  [
+   "Design research ✔ (verified): trends, visual craft, boards, façades, Wrocław context, cost model",
+   "done"
+  ],
+  [
+   "Programme ✔: 193 rooms, 187 offices (24/32 m², 1.35 m module), PU ≈ 8,600 m², GFA ≈ 14,000 m² above ground",
+   "done"
+  ],
+  [
+   "Concept ✔ → 3 verifiers ✔ (7 critical + 20 important findings) → revision v1.1 ► (2 agents: geometry/cost/energy; Sejmik storey S-2)",
+   "running"
+  ],
+  [
+   "Production ►: all required drawings except 1:200 plans ✔ (site, 5 elevations, 2 sections, 1:50, axo, shading, eco, accessibility, idea diagrams); plans + 3D renders (agents ►)",
+   "running"
+  ],
+  [
+   "Boards ►: Stage I 2/2 drafted (F.16 layout); Stage II 5/8 drafted (P3–P5 await plans); tables F.15/F.14.B generator ►; model spec ✔",
+   "running"
+  ],
+  [
+   "Jury simulation & compliance audit → iterate until no open issues",
+   "todo"
+  ]
+ ],
+ "notes": [
+  "Container restart killed the revision workflow before it wrote anything; relaunched as two parallel agents with disjoint files (spec v1.1 / Sejmik storey S-2). 3D and plans agents resumed from their transcripts.",
+  "Cost/energy verifier added 2 hard failures: corrected mid cost 150.8–151.7 M PLN (> 150 cap) and real on-site PV ≈ 328 kWp (< 400 kWp required by M.12) — both are hard constraints in the revision brief, with numerical proof required.",
+  "New drawings: eco scheme on a section through the garden (PV, retention, GSHP, TABS, ventilation, biodiversity, KPIs), accessibility scheme with a storey matrix counted live from the room model (WC, refuge areas, lifts, induction loops — all storeys now complete), four idea axonometries for board 1.",
+  "Board drafts at true scale revealed layout issues early: 1:200 elevations had to be cropped to visible content (4 now fit one board); façade section 1:50 and eco scheme collide on board 8 — final allocation after plans arrive.",
+  "Shared post-processing (tools/postprodukcja.py): subtle presets that keep exposure; first aggressive version was rejected because it muddied shadows."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/schematy_idei.png",
+   "caption": "Idea: memory of the block · frontages · lantern · gate & garden"
+  },
+  {
+   "path": "umwd/raporty/img/schemat_eko.png",
+   "caption": "Eco scheme on a section through the garden"
+  },
+  {
+   "path": "umwd/raporty/img/schemat_dostepnosci.png",
+   "caption": "Accessibility scheme + storey matrix from the room model"
+  },
+  {
+   "path": "umwd/raporty/img/etap2_P7_szkic.png",
+   "caption": "Stage II board 7 draft: 4 elevations 1:200 at true scale"
+  }
+ ]
+}

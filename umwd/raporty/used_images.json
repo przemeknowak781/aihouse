@@ -138,5 +138,21 @@
  "c88c7826a38b47170ead": {
   "path": "umwd/raporty/img/naslonecznienie_rownonoc.png",
   "board": "spec_23"
+ },
+ "b74fca13ed2bf956256a": {
+  "path": "umwd/raporty/img/schematy_idei.png",
+  "board": "spec_24"
+ },
+ "9d40f1cc0c40eb19c90e": {
+  "path": "umwd/raporty/img/schemat_eko.png",
+  "board": "spec_24"
+ },
+ "9492d4306fd460de13c8": {
+  "path": "umwd/raporty/img/schemat_dostepnosci.png",
+  "board": "spec_24"
+ },
+ "1888d981708ac815661b": {
+  "path": "umwd/raporty/img/etap2_P7_szkic.png",
+  "board": "spec_24"
  }
 }
