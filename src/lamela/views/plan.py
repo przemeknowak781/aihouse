@@ -1148,6 +1148,9 @@ class PlanBuilder:
     # ------------------------------------------------------------------ przekroje
     def section_marks(self, axb):
         vp, k = self.vp, self.vp.k
+        # opcja (domyślnie true): false — rzuty bez śladów przekrojów (zestaw arkuszy bez rysunków przekrojów)
+        if not self.opts.get("przekroje_na_rzutach", self.ctx.opt("przekroje_na_rzutach", True)):
+            return
         for sid, sec in self.ctx.sections.items():
             p1, p2, look = section_line(sec, axb, 3.0 * k)
             S.section_mark(vp, p1, p2, str(sec.get("litera", sid)), look=look)

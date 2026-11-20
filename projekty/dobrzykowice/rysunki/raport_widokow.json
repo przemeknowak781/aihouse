@@ -1,0 +1,556 @@
+{
+  "model": "projekty/dobrzykowice/model/budynek.yaml",
+  "dzialka": null,
+  "arkusze_cfg": "projekty/dobrzykowice/model/arkusze.yaml",
+  "wyposazenie": "projekty/dobrzykowice/model/wyposazenie.yaml",
+  "walidacja": "Walidacja: 0 błędów, 6 ostrzeżeń, 0 informacji\n  [OSTRZEZENIE] budynek.yaml: sciany[6] (S0-05): ściana zewnętrzna z 'wnetrze: srodek' — warstwy rozłożone symetrycznie od listy\n  [OSTRZEZENIE] budynek.yaml: sciany[29] (S0-16): ściana zewnętrzna z 'wnetrze: srodek' — warstwy rozłożone symetrycznie od listy\n  [OSTRZEZENIE] budynek.yaml: otwory[2] (O0-03): otwór koliduje z połączeniem ściany S0-04 (węzeł w s=0.00 m)\n  [OSTRZEZENIE] budynek.yaml: otwory[2] (O0-03): otwór koliduje z połączeniem ściany S0-06 (węzeł w s=0.00 m)\n  [OSTRZEZENIE] budynek.yaml: otwory[17] (O0-11): otwór koliduje z połączeniem ściany S0-15 (węzeł w s=0.00 m)\n  [OSTRZEZENIE] budynek.yaml: otwory[17] (O0-11): otwór koliduje z połączeniem ściany S0-17 (węzeł w s=0.00 m)",
+  "przekroje": {
+    "A": {
+      "o": [
+        0.0,
+        4.301
+      ],
+      "patrz": [
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "arkusze": [
+    {
+      "nr": "PK-AR-01",
+      "tytul": "RZUT PARTERU",
+      "format": "420×700",
+      "typ": [
+        "rzut"
+      ],
+      "skala": "1:50",
+      "widoki": [
+        "RZUT PARTERU"
+      ],
+      "qa_kind": null,
+      "wymiary_mm": [
+        420.0,
+        700.0
+      ],
+      "pole_m2": 0.294,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          125.0,
+          230.0
+        ],
+        "zgiecia_poziome": [
+          297.0,
+          594.0
+        ],
+        "pasy": [
+          125.0,
+          105.0,
+          190.0
+        ],
+        "rzedy": [
+          297.0,
+          297.0,
+          106.0
+        ],
+        "n_pasow": 3,
+        "n_rzedow": 3,
+        "warstwy": 9,
+        "ocena": "poprawne",
+        "ocena_pion": "dobre",
+        "ocena_poziom": "poprawne",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "górny rząd 106 mm (niepełny)"
+        ]
+      },
+      "uklad": {
+        "format": "420×700",
+        "wymiary_mm": [
+          420.0,
+          700.0
+        ],
+        "pole_m2": 0.294,
+        "standardowy": false,
+        "tryb": "ekonomiczny",
+        "koszt": 0.3181,
+        "wypelnienie_szac": 0.767,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            125.0,
+            230.0
+          ],
+          "zgiecia_poziome": [
+            297.0,
+            594.0
+          ],
+          "pasy": [
+            125.0,
+            105.0,
+            190.0
+          ],
+          "rzedy": [
+            297.0,
+            297.0,
+            106.0
+          ],
+          "n_pasow": 3,
+          "n_rzedow": 3,
+          "warstwy": 9,
+          "ocena": "poprawne",
+          "ocena_pion": "dobre",
+          "ocena_poziom": "poprawne",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "górny rząd 106 mm (niepełny)"
+          ]
+        },
+        "czesci_uwag": 1,
+        "kolejnosc_czytania": false,
+        "znaki_rezerwowane": true,
+        "kandydaci": [
+          {
+            "format": "420×700",
+            "wymiary_mm": [
+              420,
+              700
+            ],
+            "koszt": 0.3181,
+            "pole_m2": 0.294,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "594×520",
+            "wymiary_mm": [
+              594,
+              520
+            ],
+            "koszt": 0.3309,
+            "pole_m2": 0.3089,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "610×520",
+            "wymiary_mm": [
+              610,
+              520
+            ],
+            "koszt": 0.3398,
+            "pole_m2": 0.3172,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "360×891",
+            "wymiary_mm": [
+              360,
+              891
+            ],
+            "koszt": 0.3436,
+            "pole_m2": 0.3208,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "570×594",
+            "wymiary_mm": [
+              570,
+              594
+            ],
+            "koszt": 0.3487,
+            "pole_m2": 0.3386,
+            "skladanie": "dobre"
+          },
+          {
+            "format": "400×841",
+            "wymiary_mm": [
+              400,
+              841
+            ],
+            "koszt": 0.3604,
+            "pole_m2": 0.3364,
+            "skladanie": "poprawne"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              230.0,
+              10.0,
+              410.0,
+              113.0
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              230.0,
+              118.0,
+              407.0,
+              148.1
+            ]
+          ],
+          [
+            "rooms",
+            [
+              47.0,
+              110.5,
+              224.0,
+              192.5
+            ]
+          ],
+          [
+            "hatch + lines",
+            [
+              230.0,
+              155.9,
+              407.0,
+              203.0
+            ]
+          ],
+          [
+            "uwagi[1–11]",
+            [
+              47.0,
+              42.3,
+              224.0,
+              105.5
+            ]
+          ]
+        ],
+        "kolizje": [],
+        "znaki_centrujace": {
+          "g": 10.0,
+          "d": 10.0,
+          "l": 10.0,
+          "p": 10.0
+        }
+      },
+      "pliki": {
+        "pdf": "projekty/dobrzykowice/rysunki/PK-AR-01_rzut_parteru.pdf",
+        "png": "projekty/dobrzykowice/rysunki/PK-AR-01_rzut_parteru.png",
+        "dxf": "projekty/dobrzykowice/rysunki/PK-AR-01_rzut_parteru.dxf"
+      },
+      "qa": {
+        "ok": true,
+        "errors": [],
+        "warnings": [
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
+        ],
+        "stats": {
+          "prymitywy": 3236,
+          "napisy": 624,
+          "sprawdzone_lancuchy": 16
+        }
+      },
+      "czas_s": 12.4,
+      "png_kontrola": {
+        "px": [
+          2481,
+          4134
+        ],
+        "dpi_eff": [
+          150.0,
+          150.0
+        ],
+        "dpi_meta": [
+          150.01239999999999,
+          150.01239999999999
+        ],
+        "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.926,
+        "wypelnienie_rys": 0.92,
+        "wypelnienie_skl": 0.766,
+        "wypelnienie_kontur": 0.68,
+        "pole_arkusza_m2": 0.294,
+        "pole_ramki_m2": 0.2652,
+        "pusty_prostokat_mm": [
+          66,
+          484
+        ],
+        "przyciety_mm": [
+          412,
+          692
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
+      }
+    },
+    {
+      "nr": "PK-AR-02",
+      "tytul": "RZUT PIĘTRA",
+      "format": "420×700",
+      "typ": [
+        "rzut"
+      ],
+      "skala": "1:50",
+      "widoki": [
+        "RZUT PIĘTRA"
+      ],
+      "qa_kind": null,
+      "wymiary_mm": [
+        420.0,
+        700.0
+      ],
+      "pole_m2": 0.294,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          125.0,
+          230.0
+        ],
+        "zgiecia_poziome": [
+          297.0,
+          594.0
+        ],
+        "pasy": [
+          125.0,
+          105.0,
+          190.0
+        ],
+        "rzedy": [
+          297.0,
+          297.0,
+          106.0
+        ],
+        "n_pasow": 3,
+        "n_rzedow": 3,
+        "warstwy": 9,
+        "ocena": "poprawne",
+        "ocena_pion": "dobre",
+        "ocena_poziom": "poprawne",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "górny rząd 106 mm (niepełny)"
+        ]
+      },
+      "uklad": {
+        "format": "420×700",
+        "wymiary_mm": [
+          420.0,
+          700.0
+        ],
+        "pole_m2": 0.294,
+        "standardowy": false,
+        "tryb": "ekonomiczny",
+        "koszt": 0.3181,
+        "wypelnienie_szac": 0.773,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            125.0,
+            230.0
+          ],
+          "zgiecia_poziome": [
+            297.0,
+            594.0
+          ],
+          "pasy": [
+            125.0,
+            105.0,
+            190.0
+          ],
+          "rzedy": [
+            297.0,
+            297.0,
+            106.0
+          ],
+          "n_pasow": 3,
+          "n_rzedow": 3,
+          "warstwy": 9,
+          "ocena": "poprawne",
+          "ocena_pion": "dobre",
+          "ocena_poziom": "poprawne",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "górny rząd 106 mm (niepełny)"
+          ]
+        },
+        "czesci_uwag": 1,
+        "kolejnosc_czytania": false,
+        "znaki_rezerwowane": true,
+        "kandydaci": [
+          {
+            "format": "420×700",
+            "wymiary_mm": [
+              420,
+              700
+            ],
+            "koszt": 0.3181,
+            "pole_m2": 0.294,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "594×520",
+            "wymiary_mm": [
+              594,
+              520
+            ],
+            "koszt": 0.3309,
+            "pole_m2": 0.3089,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "610×520",
+            "wymiary_mm": [
+              610,
+              520
+            ],
+            "koszt": 0.3398,
+            "pole_m2": 0.3172,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "570×594",
+            "wymiary_mm": [
+              570,
+              594
+            ],
+            "koszt": 0.3487,
+            "pole_m2": 0.3386,
+            "skladanie": "dobre"
+          },
+          {
+            "format": "370×891",
+            "wymiary_mm": [
+              370,
+              891
+            ],
+            "koszt": 0.3531,
+            "pole_m2": 0.3297,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "400×841",
+            "wymiary_mm": [
+              400,
+              841
+            ],
+            "koszt": 0.3604,
+            "pole_m2": 0.3364,
+            "skladanie": "poprawne"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              230.0,
+              10.0,
+              410.0,
+              113.0
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              230.0,
+              118.0,
+              407.0,
+              148.1
+            ]
+          ],
+          [
+            "rooms",
+            [
+              47.0,
+              100.5,
+              224.0,
+              192.5
+            ]
+          ],
+          [
+            "hatch + lines",
+            [
+              230.0,
+              155.9,
+              407.0,
+              203.0
+            ]
+          ],
+          [
+            "uwagi[1–11]",
+            [
+              47.0,
+              32.3,
+              224.0,
+              95.5
+            ]
+          ]
+        ],
+        "kolizje": [],
+        "znaki_centrujace": {
+          "g": 10.0,
+          "d": 10.0,
+          "l": 10.0,
+          "p": 10.0
+        }
+      },
+      "pliki": {
+        "pdf": "projekty/dobrzykowice/rysunki/PK-AR-02_rzut_pietra.pdf",
+        "png": "projekty/dobrzykowice/rysunki/PK-AR-02_rzut_pietra.png",
+        "dxf": "projekty/dobrzykowice/rysunki/PK-AR-02_rzut_pietra.dxf"
+      },
+      "qa": {
+        "ok": true,
+        "errors": [],
+        "warnings": [
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
+        ],
+        "stats": {
+          "prymitywy": 3827,
+          "napisy": 706,
+          "sprawdzone_lancuchy": 16
+        }
+      },
+      "czas_s": 13.5,
+      "png_kontrola": {
+        "px": [
+          2481,
+          4134
+        ],
+        "dpi_eff": [
+          150.0,
+          150.0
+        ],
+        "dpi_meta": [
+          150.01239999999999,
+          150.01239999999999
+        ],
+        "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.933,
+        "wypelnienie_rys": 0.928,
+        "wypelnienie_skl": 0.764,
+        "wypelnienie_kontur": 0.689,
+        "pole_arkusza_m2": 0.294,
+        "pole_ramki_m2": 0.2652,
+        "pusty_prostokat_mm": [
+          64,
+          484
+        ],
+        "przyciety_mm": [
+          412,
+          692
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
+      }
+    }
+  ],
+  "problemy": [],
+  "tom": "projekty/dobrzykowice/rysunki/tom_widoki.pdf",
+  "papier": {
+    "arkuszy": 2,
+    "pole_m2": 0.588,
+    "a4_ekw": 9.4,
+    "warstwy_a4": 18,
+    "skladanie": {
+      "dobre": 0,
+      "poprawne": 2,
+      "słabe": 0
+    },
+    "wypelnienie_wazone": 0.929
+  },
+  "czas_s": 28.9
+}

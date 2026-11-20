@@ -1,0 +1,308 @@
+# PLIK GENEROWANY (buduj_model.py) — wyposażenie wg DWG (symbole silnika lamela.views.plan).
+wyposazenie:
+- kond: P0
+  typ: blat
+  linia:
+  - [5.96, 2.47]
+  - [5.96, 0.12]
+  - [10.06, 0.12]
+  gl: 0.6
+  strona: 1
+  gorne: false
+- kond: P0
+  typ: blat
+  linia:
+  - [7.81, 1.74]
+  - [10.1, 1.74]
+  gl: 0.65
+  strona: 1
+  gorne: false
+- kond: P0
+  typ: stol
+  xy: [8.815, 4.38]
+  obrot: 0
+  wym: [1.68, 0.93]
+  krzesla: 6
+- kond: P0
+  typ: sofa
+  xy: [8.635, 8.625]
+  obrot: 270
+  wym: [2.33, 0.94]
+- kond: P0
+  typ: sofa
+  xy: [10.12, 6.86]
+  obrot: 180
+  wym: [1.34, 1.02]
+- kond: P0
+  typ: szafa
+  xy: [5.96, 6.695]
+  obrot: 0
+  wym: [1.47, 0.42]
+- kond: P0
+  typ: wc
+  xy: [4.86, 0.12]
+  obrot: 90
+  wym: [0.45, 0.65]
+- kond: P0
+  typ: umywalka
+  xy: [5.72, 1.095]
+  obrot: 180
+  wym: [0.6, 0.43]
+- kond: P0
+  typ: szafa
+  xy: [2.795, 1.962]
+  obrot: 90
+  wym: [1.49, 0.56]
+- kond: P1
+  typ: wanna
+  xy: [0.12, 1.24]
+  obrot: 0
+  wym: [2.16, 0.9]
+- kond: P1
+  typ: wc
+  xy: [2.523, 0.97]
+  obrot: 180
+  wym: [0.45, 0.65]
+- kond: P1
+  typ: pralka
+  xy: [2.523, 2.015]
+  obrot: 180
+  wym: [0.6, 0.6]
+- kond: P1
+  typ: umywalka_blat
+  xy: [2.523, 3.01]
+  obrot: 180
+  wym: [1.38, 0.61]
+- kond: P1
+  typ: wc
+  xy: [2.643, 0.965]
+  obrot: 0
+  wym: [0.45, 0.65]
+- kond: P1
+  typ: umywalka
+  xy: [3.855, 0.12]
+  obrot: 90
+  wym: [0.81, 0.42]
+- kond: P1
+  typ: prysznic
+  xy: [4.87, 0.12]
+  obrot: 90
+  wym: [0.88, 1.28]
+- kond: P1
+  typ: lozko
+  xy: [8.375, 0.12]
+  obrot: 90
+  wym: [1.6, 2.0]
+- kond: P1
+  typ: biurko
+  xy: [5.472, 0.86]
+  obrot: 0
+  wym: [0.92, 0.51]
+- kond: P1
+  typ: szafa
+  xy: [2.643, 2.63]
+  obrot: 0
+  wym: [1.06, 0.53]
+- kond: P1
+  typ: szafa
+  xy: [3.905, 3.745]
+  obrot: 270
+  wym: [2.41, 0.54]
+- kond: P1
+  typ: szafa
+  xy: [3.54, 5.885]
+  obrot: 90
+  wym: [1.46, 0.54]
+- kond: P1
+  typ: biurko
+  xy: [0.795, 8.625]
+  obrot: 270
+  wym: [1.19, 0.53]
+- kond: P1
+  typ: lozko
+  xy: [4.3, 8.15]
+  obrot: 180
+  wym: [0.82, 1.96]
+- kond: P1
+  typ: biurko
+  xy: [9.37, 3.423]
+  obrot: 90
+  wym: [1.22, 0.53]
+- kond: P1
+  typ: sofa
+  xy: [9.145, 5.765]
+  obrot: 270
+  wym: [1.85, 0.66]
+- kond: P1
+  typ: biurko
+  xy: [9.135, 5.885]
+  obrot: 90
+  wym: [1.21, 0.56]
+- kond: P1
+  typ: lozko
+  xy: [10.12, 8.14]
+  obrot: 180
+  wym: [0.9, 2.0]
+- kond: P1
+  typ: szafa
+  xy: [4.42, 7.915]
+  obrot: 0
+  wym: [1.31, 0.57]
+- kond: P1
+  typ: szafa
+  xy: [5.475, 8.625]
+  obrot: 270
+  wym: [0.83, 0.35]
+- kond: P0
+  typ: blat
+  linia:
+  - [5.96, 15.26]
+  - [5.96, 17.61]
+  - [10.06, 17.61]
+  gl: 0.6
+  strona: -1
+  gorne: false
+- kond: P0
+  typ: blat
+  linia:
+  - [7.81, 15.99]
+  - [10.1, 15.99]
+  gl: 0.65
+  strona: -1
+  gorne: false
+- kond: P0
+  typ: stol
+  xy: [8.815, 13.35]
+  obrot: 0
+  wym: [1.68, 0.93]
+  krzesla: 6
+- kond: P0
+  typ: sofa
+  xy: [8.635, 9.105]
+  obrot: 90
+  wym: [2.33, 0.94]
+- kond: P0
+  typ: sofa
+  xy: [10.12, 10.87]
+  obrot: 180
+  wym: [1.34, 1.02]
+- kond: P0
+  typ: szafa
+  xy: [5.96, 11.035]
+  obrot: 0
+  wym: [1.47, 0.42]
+- kond: P0
+  typ: wc
+  xy: [4.86, 17.61]
+  obrot: 270
+  wym: [0.45, 0.65]
+- kond: P0
+  typ: umywalka
+  xy: [5.72, 16.635]
+  obrot: 180
+  wym: [0.6, 0.43]
+- kond: P0
+  typ: szafa
+  xy: [2.795, 15.768]
+  obrot: 270
+  wym: [1.49, 0.56]
+- kond: P1
+  typ: wanna
+  xy: [0.12, 16.49]
+  obrot: 0
+  wym: [2.16, 0.9]
+- kond: P1
+  typ: wc
+  xy: [2.523, 16.76]
+  obrot: 180
+  wym: [0.45, 0.65]
+- kond: P1
+  typ: pralka
+  xy: [2.523, 15.715]
+  obrot: 180
+  wym: [0.6, 0.6]
+- kond: P1
+  typ: umywalka_blat
+  xy: [2.523, 14.72]
+  obrot: 180
+  wym: [1.38, 0.61]
+- kond: P1
+  typ: wc
+  xy: [2.643, 16.765]
+  obrot: 0
+  wym: [0.45, 0.65]
+- kond: P1
+  typ: umywalka
+  xy: [3.855, 17.61]
+  obrot: 270
+  wym: [0.81, 0.42]
+- kond: P1
+  typ: prysznic
+  xy: [4.87, 17.61]
+  obrot: 270
+  wym: [0.88, 1.28]
+- kond: P1
+  typ: lozko
+  xy: [8.375, 17.61]
+  obrot: 270
+  wym: [1.6, 2.0]
+- kond: P1
+  typ: biurko
+  xy: [5.472, 16.87]
+  obrot: 0
+  wym: [0.92, 0.51]
+- kond: P1
+  typ: szafa
+  xy: [2.643, 15.1]
+  obrot: 0
+  wym: [1.06, 0.53]
+- kond: P1
+  typ: szafa
+  xy: [3.905, 13.985]
+  obrot: 90
+  wym: [2.41, 0.54]
+- kond: P1
+  typ: szafa
+  xy: [3.54, 11.845]
+  obrot: 270
+  wym: [1.46, 0.54]
+- kond: P1
+  typ: biurko
+  xy: [0.795, 9.105]
+  obrot: 90
+  wym: [1.19, 0.53]
+- kond: P1
+  typ: lozko
+  xy: [4.3, 9.58]
+  obrot: 180
+  wym: [0.82, 1.96]
+- kond: P1
+  typ: biurko
+  xy: [9.37, 14.307]
+  obrot: 270
+  wym: [1.22, 0.53]
+- kond: P1
+  typ: sofa
+  xy: [9.145, 11.965]
+  obrot: 90
+  wym: [1.85, 0.66]
+- kond: P1
+  typ: biurko
+  xy: [9.135, 11.845]
+  obrot: 270
+  wym: [1.21, 0.56]
+- kond: P1
+  typ: lozko
+  xy: [10.12, 9.59]
+  obrot: 180
+  wym: [0.9, 2.0]
+- kond: P1
+  typ: szafa
+  xy: [4.42, 9.815]
+  obrot: 0
+  wym: [1.31, 0.57]
+- kond: P1
+  typ: szafa
+  xy: [5.475, 9.105]
+  obrot: 90
+  wym: [0.83, 0.35]

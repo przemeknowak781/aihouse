@@ -1,0 +1,34 @@
+# Arkusze rzutów bliźniaka w Dobrzykowicach (lamela.views.sheets; uruchomienie: projekty/dobrzykowice/README.md).
+# Tylko układ arkuszy i tabliczka — geometria, materiały i wyposażenie pochodzą z budynek.yaml i wyposazenie.yaml.
+wspolne:
+  tytul_tomu: "Koncepcja — rzuty kondygnacji (przerysowanie z pliku DWG)"
+  pracownia: "PRACOWNIA PROJEKTOWA — nazwa do uzupełnienia"
+  pracownia_adres: "adres pracowni do uzupełnienia"
+  inwestor: "(do uzupełnienia)"
+  obiekt: "Budynek mieszkalny jednorodzinny w zabudowie bliźniaczej (2 lokale) — koncepcja"
+  lokalizacja: "dz. nr ewid. 341/318, obręb 0004 Dobrzykowice, jedn. ewid. 022301_2 Czernica — gmina"
+  kategoria: "I"
+  stadium: "PK"
+  branza: "ARCHITEKTURA (AR)"
+  prefiks_nr: "PK-AR"
+  data: "2026-11-20"
+  rewizja: "0"
+  rewizje: [["0", "Przerysowanie rzutów z DWG (koncepcja z 15.10.2026)", "2026-11-20"]]
+  skala: 50
+  format: auto
+  numeracja_pomieszczen: iso
+  wysokosc_ciecia: 1.10
+  glebokosc_widoku: 1.5
+  wymiary_wewnetrzne: true
+  przekroje_na_rzutach: false     # zestaw bez rysunków przekrojów (silnik nie obsługuje dachu dwuspadowego budynku)
+  uwagi:
+    - "Rysunek przerysowany z pliku Projekt_wersja_15_10_2026.dwg (koncepcja z 15.10.2026): geometria ścian, otworów, schodów i wyposażenia wg DWG (rysunek w cm, przeliczony na m)."
+    - "W DWG brak opisów: materiały ścian, wykończenia, funkcje pomieszczeń i część wysokości otworów PRZYJĘTO (wysokości okien wg elewacji tylnej) — do weryfikacji przez projektanta."
+    - "Lokale lustrzane: pomieszczenia x.0y — lokal 1 (od szczytu NW), x.1y — lokal 2 (od szczytu SE)."
+    - "Dodano elementy nieobecne w DWG: drzwi do garażu i do pom. gospodarczego, balustrady otworu schodowego na piętrze."
+    - "Rzędna ±0,000 przyjęta orientacyjnie (teren ok. 121,1 m n.p.m. wg mapy do celów projektowych PZK-GZ.430.7408.2025)."
+przekroje:
+  - {id: A, y: 4.30, patrz: N}    # wymagane przez silnik do kontekstu; na rzutach nie rysowane (przekroje_na_rzutach: false)
+arkusze:
+  - {nr: PK-AR-01, tytul: "RZUT PARTERU", typ: rzut, kond: P0}
+  - {nr: PK-AR-02, tytul: "RZUT PIĘTRA", typ: rzut, kond: P1}
