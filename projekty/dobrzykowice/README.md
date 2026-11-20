@@ -6,8 +6,8 @@ z archiwum `projekt_Dobrzykowice_15_10_2026.zip`) do modelu `budynek.yaml` i wyg
 
 | Plik | Zawartość |
 |---|---|
-| `rysunki/PK-AR-01_rzut_parteru.{pdf,png,dxf}` | rzut parteru 1:50, arkusz 420×700 |
-| `rysunki/PK-AR-02_rzut_pietra.{pdf,png,dxf}` | rzut piętra 1:50, arkusz 420×700 |
+| `rysunki/PK-AR-01_rzut_parteru.{dwg,pdf,png,dxf}` | rzut parteru 1:50, arkusz 420×700 |
+| `rysunki/PK-AR-02_rzut_pietra.{dwg,pdf,png,dxf}` | rzut piętra 1:50, arkusz 420×700 |
 | `rysunki/tom_widoki.pdf` | tom ze spisem rysunków; `raport_widokow.json` — raport QA silnika |
 | `model/budynek.yaml`, `model/wyposazenie.yaml` | **generowane** przez `narzedzia/buduj_model.py` (nie edytować ręcznie) |
 | `model/arkusze.yaml` | układ arkuszy, tabliczka, uwagi |
@@ -24,6 +24,16 @@ PYTHONPATH=src python3 tools/generuj_widoki.py --budynek projekty/dobrzykowice/m
     --arkusze projekty/dobrzykowice/model/arkusze.yaml --wyposazenie projekty/dobrzykowice/model/wyposazenie.yaml \
     --out projekty/dobrzykowice/rysunki
 ```
+
+### DWG
+Pliki `*.dwg` (format AutoCAD 2018, AC1032) powstają z arkuszy DXF darmowym **ODA File Converter 27.10**
+(Open Design Alliance) z audytem: `narzedzia/eksport_dwg.sh <katalog_ODAFileConverter>`.
+Przestrzeń modelu w **metrach** (`$INSUNITS = 6`; DWG źródłowy był w cm), arkusz „Arkusz PK-AR-0x” w przestrzeni papieru
+z rzutnią 1:50, ramką, tabliczką, legendami i zestawieniem; warstwy w standardzie aihouse (`A-SCIANY-KONSTR`,
+`A-SCIANY-IZOL`, `A-SCIANY-DZIAL`, `A-DRZWI`, `A-OKNA`, `A-SCHODY`, `A-MEBLE`, `A-SANITARNE`, `A-WYMIARY`, `A-OSIE`,
+`A-OPISY`, `A-POMIESZCZENIA`, `R-RAMKA`, `R-TABLICZKA` …).
+Kontrola (20.11.2026): konwersja zwrotna DWG → DXF daje identyczne liczby obiektów modelu według typu i warstwy
+(parter 3037, piętro 3658), identyczne teksty (377 / 447) i zasięg; niezależny odczyt LibreDWG — 0 nieznanych encji.
 
 ## Metoda
 * Odczyt DWG: LibreDWG (build WASM `@mlightcad/libredwg-web` 0.8.4) → JSON; współrzędne linii ścian, bloków drzwi,
